@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Зачем я добавил фактчекера в свой AI-workflow | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Как я наступил на грабли с устаревшими версиями моделей и добавил четвёртого критика в deaify-text workflow. Практический кейс.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="AI workflow, fact-checking, deaify, Claude Code, LLM, версии моделей">
+  <link rel="canonical" href="https://sereja.tech/blog/fact-checker-in-ai-workflow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Зачем я добавил фактчекера в свой AI-workflow">
+  <meta property="og:description" content="Как я наступил на грабли с устаревшими версиями моделей и добавил четвёртого критика.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/fact-checker-in-ai-workflow">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-11T00:00:00+00:00">
+  <meta property="article:section" content="AI">
+  <meta property="article:tag" content="AI workflow">
+  <meta property="article:tag" content="fact-checking">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Зачем я добавил фактчекера в свой AI-workflow">
+  <meta name="twitter:description" content="Как я наступил на грабли с устаревшими версиями моделей.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Зачем я добавил фактчекера в свой AI-workflow",
+    "description": "Как я наступил на грабли с устаревшими версиями моделей и добавил четвёртого критика в deaify-text workflow.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-11",
+    "dateModified": "2026-01-11",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/fact-checker-in-ai-workflow"
+    },
+    "wordCount": 750,
+    "articleSection": "AI",
+    "keywords": ["AI workflow", "fact-checking", "deaify", "Claude Code"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    blockquote {
+      border-left: 3px solid #000;
+      margin: 20px 0;
+      padding-left: 16px;
+      color: #333;
+    }
+
+    ul { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>Зачем я добавил фактчекера в свой AI-workflow</h1>
+    <p class="author">Сережа Рис · 11 января 2026</p>
+
+    <p class="intro">Писал статью про LLM coding workflow.</p>
+    <p class="intro">Упомянул Gemini 2.0 Flash как хороший арбитр между моделями.</p>
+    <p class="intro">Проблема: Gemini 2.0 Flash — это декабрь 2024, а сейчас январь 2026. Модель устарела на год.</p>
+
+    <h2>Как я это пропустил</h2>
+
+    <p>У меня есть workflow для текстов — deaify-text. Три параллельных критика: один ищет generic AI-фразы, второй анализирует ритм, третий проверяет где добавить конкретику.</p>
+
+    <p>Они работают. Убирают "важно отметить". Варьируют длину предложений. Добавляют примеры из личного опыта.</p>
+
+    <p>Но ни один не проверяет факты. Версии, даты, названия моделей — всё проходит мимо. В той же статье я написал про o1 и o3 как актуальные reasoning-модели. GPT-5 их заменил ещё в августе 2025.</p>
+
+    <h2>Почему это случается</h2>
+
+    <p>AI-модели обучены на данных с cutoff date. Claude знает мир до какой-то точки, Gemini — до своей. Когда модель генерирует текст про "актуальные инструменты", она тащит из knowledge base. А там Gemini 2.0 Flash ещё был свежим.</p>
+
+    <p>Я не первый кто на это наступил. EMULATE, ClaimCheck, MAD-Fact — фреймворки для автоматического фактчекинга. Академики давно поняли проблему. Но в моём локальном workflow этого не было.</p>
+
+    <h2>Решение: Critic D</h2>
+
+    <p>Добавил четвёртого критика в параллель с остальными:</p>
+
+    <pre><code>Critic D — Fact Checker:
+- Извлекает версии, даты, названия моделей
+- Флагует подозрительное (модели старше 6 месяцев)
+- Формат: [CLAIM] + [FLAG]</code></pre>
+
+    <p>После того как Critic D вернёт флаги — web search через Exa для каждого. Сравниваю claim с результатом. Устарело — добавляю правку в агрегат перед rewrite.</p>
+
+    <h2>Конкретный пример</h2>
+
+    <p>Было:</p>
+    <blockquote>Gemini 2.0 Flash хорош как арбитр</blockquote>
+
+    <p>Critic D флагует:</p>
+    <blockquote>[CLAIM]: "Gemini 2.0 Flash" [FLAG]: AI model older than 6 months</blockquote>
+
+    <p>Web search находит: Gemini 3 Flash вышел 17 декабря 2025.</p>
+
+    <p>Стало:</p>
+    <blockquote>Gemini 3 Flash (декабрь 2025) работает арбитром — быстрый и дешёвый</blockquote>
+
+    <p>То же с o1/o3. Они не deprecated в строгом смысле — но GPT-5 теперь имеет встроенный thinking mode, и это рекомендуемый путь.</p>
+
+    <h2>Что изменилось</h2>
+
+    <p>Было 3 критика, стало 4. Все запускаются параллельно через Task tool — время не увеличилось.</p>
+
+    <p>Добавился sequential шаг: web verification. 2-3 секунды на claim. Для статьи с 5-10 техническими упоминаниями — 20 секунд сверху. По-моему, эти 20 секунд экономят часы позже. Нет стыдных коммитов "fix: update outdated Gemini reference" через неделю.</p>
+
+    <h2>Паттерны которые теперь ловлю</h2>
+
+    <ul>
+      <li>GPT-4, GPT-4o заменены на GPT-5.2</li>
+      <li>Claude 3 → Claude 4 (Opus, Sonnet)</li>
+      <li>Gemini эволюционирует: 2.0 → 3 Flash/Pro</li>
+      <li>o1, o3 теперь в режиме thinking у GPT-5</li>
+      <li>React, Node — проверять LTS статус</li>
+    </ul>
+
+    <div class="callout insight">
+      <strong>Вывод</strong>
+      <p>AI меняется быстро. То что было актуально полгода назад — уже история. Фактчекер в workflow — не опция, а необходимость.</p>
+    </div>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://arxiv.org/html/2505.16576v2" target="_blank">EMULATE: Multi-Agent Framework for Claim Verification</a></li>
+        <li><a href="https://aclanthology.org/2025.knowledgenlp-1.26/" target="_blank">ClaimCheck: Automatic Fact-Checking</a></li>
+        <li><a href="https://arxiv.org/html/2510.22967v1" target="_blank">MAD-Fact: Multi-Agent Debate for Factuality</a></li>
+        <li><a href="https://skywork.ai/blog/how-to-avoid-hallucinations-ai-writing-fact-check-guide/" target="_blank">Fact-Check Techniques for AI Writing — Skywork</a></li>
+        <li><a href="https://parallel.ai/blog/cerebras-fact-checker" target="_blank">Build a real-time fact checker — Parallel.ai</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+</body>
+</html>
