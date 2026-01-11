@@ -10,6 +10,14 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/multi-agent-text-deaify</loc>
+    <lastmod>2026-01-11</lastmod>
+  </url>
+  <url>
+    <loc>https://sereja.tech/blog/tailwind-layoffs-ai-impact</loc>
+    <lastmod>2026-01-10</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/seo-for-ai-era</loc>
     <lastmod>2026-01-10</lastmod>
   </url>

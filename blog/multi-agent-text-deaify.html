@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как убрать аишность из текста: параллельные критики вместо одного rewriter | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Один агент раздувает текст и оставляет AI-маркеры. Три параллельных критика + rewriter с hard rules — и текст становится человечным.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="AI text, humanize, деаишнивание, multi-agent, LLM, Claude Code, субагенты">
+  <link rel="canonical" href="https://sereja.tech/blog/multi-agent-text-deaify">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Как убрать аишность из текста: параллельные критики">
+  <meta property="og:description" content="Три критика находят разные проблемы. Один rewriter их чинит. Текст не раздувается.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/multi-agent-text-deaify">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-11T00:00:00+00:00">
+  <meta property="article:section" content="AI">
+  <meta property="article:tag" content="AI">
+  <meta property="article:tag" content="multi-agent">
+  <meta property="article:tag" content="Claude Code">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Как убрать аишность из текста: параллельные критики">
+  <meta name="twitter:description" content="Три критика находят разные проблемы. Один rewriter их чинит.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как убрать аишность из текста: параллельные критики вместо одного rewriter",
+    "description": "Один агент раздувает текст и оставляет AI-маркеры. Три параллельных критика + rewriter с hard rules — текст становится человечным.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-11",
+    "dateModified": "2026-01-11",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/multi-agent-text-deaify"
+    },
+    "wordCount": 700,
+    "articleSection": "AI",
+    "keywords": ["AI text", "humanize", "multi-agent", "Claude Code", "субагенты"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    .ascii {
+      font-family: monospace;
+      font-size: 13px;
+      background: #fff;
+      padding: 16px;
+      margin: 24px 0;
+      text-align: center;
+      border: 2px solid #000;
+    }
+
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>Как убрать аишность из текста: параллельные критики вместо одного rewriter</h1>
+    <p class="author">Сережа Рис · 11 января 2026</p>
+
+    <p class="intro">Попросил Claude переписать текст "более человечно".</p>
+    <p class="intro">Получил на 50% длиннее с теми же AI-маркерами.</p>
+
+    <h2>Почему один rewriter не работает</h2>
+
+    <p>Когда просишь AI "сделать текст человечнее", он раздувает контент и заменяет одни паттерны на другие.</p>
+
+    <p>Протестировал на статье о Tailwind. Оригинал — 320 слов, после "humanize" — 500+. При этом остались фразы типа "И эта нога — хрупкая" и равномерные абзацы по 3-4 предложения.</p>
+
+    <p>AI-детекторы ищут perplexity (предсказуемость слов) и burstiness (ритм предложений). Один rewriter не фиксит ни то, ни другое — он просто перефразирует.</p>
+
+    <h2>Мульти-агентный подход</h2>
+
+    <p>Три критика находят разные проблемы, rewriter их чинит по списку.</p>
+
+    <div class="ascii">
+Текст → 3 параллельных критика → агрегация → rewriter с hard rules
+    </div>
+
+    <p><strong>Generic Detector</strong> ищет "важно понимать", "это не X — это Y", абстрактные claims без примеров.</p>
+
+    <p><strong>Rhythm Analyzer</strong> находит монотонные списки, предложения одинаковой длины, повторяющиеся начала.</p>
+
+    <p>Третий критик показывает где добавить личный опыт, дату, имя, мнение.</p>
+
+    <p>Критиков запускаю параллельно через Task tool в Claude Code. Три haiku-агента работают одновременно — ~500 input tokens на критика, ~300 на выходе. Вся критика за 10 секунд вместо последовательных минут.</p>
+
+    <h2>Hard rules для rewriter</h2>
+
+    <p>После агрегации критики rewriter получает конкретные ограничения:</p>
+
+    <p>Длина должна остаться ≤ оригинала. Без этого правила AI добавит "ценный контекст".</p>
+
+    <p>Каждую помеченную generic-фразу надо убить. Не перефразировать — убить.</p>
+
+    <p>Один личный touch обязателен. Варьировать длину предложений — от коротких до развёрнутых.</p>
+
+    <h2>Результат на реальном тексте</h2>
+
+    <table>
+      <tr>
+        <th>Метрика</th>
+        <th>Один rewriter</th>
+        <th>3 критика + rewriter</th>
+      </tr>
+      <tr>
+        <td>Длина</td>
+        <td>+50% (раздул)</td>
+        <td>-10% (сократил)</td>
+      </tr>
+      <tr>
+        <td>"Это не X — это Y"</td>
+        <td>Остались</td>
+        <td>Убраны</td>
+      </tr>
+      <tr>
+        <td>Личный опыт</td>
+        <td>Нет</td>
+        <td>"Я сам перестал..."</td>
+      </tr>
+      <tr>
+        <td>Имена/даты</td>
+        <td>Нет</td>
+        <td>Adam Wathan, конец 2024</td>
+      </tr>
+    </table>
+
+    <h2>Как повторить</h2>
+
+    <p>Сделал это скиллом для Claude Code в начале января. Триггеры: "деаишь", "убери аишность", "humanize".</p>
+
+    <pre><code>~/.claude/skills/deaify-text/SKILL.md</code></pre>
+
+    <p>Внутри — промпты для трёх критиков, hard rules для rewriter, таблица рационализаций (почему нельзя "просто один раз переписать").</p>
+
+    <p>Паттерн переносится на любой workflow где нужна критика: code review, редактура документации, проверка спецификаций. Разделяй анализ на независимых агентов, агрегируй, применяй с ограничениями.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://arxiv.org/html/2601.03359v1" target="_blank">Multi-Agentic Workflow for Prompt Instructions Optimization (2026)</a></li>
+        <li><a href="https://medium.com/@yadavdivy296/7-multi-agent-patterns-every-developer-needs-in-2026-and-how-to-pick-the-right-one-e8edcd99c96a" target="_blank">7 Multi-Agent Patterns Every Developer Needs in 2026</a></li>
+        <li><a href="https://addyo.substack.com/p/my-llm-coding-workflow-going-into" target="_blank">Addy Osmani — My LLM coding workflow going into 2026</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script src="https://unpkg.com/prismjs@1.29.0/prism.min.js"></script>
+</body>
+</html>
