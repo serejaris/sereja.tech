@@ -80,11 +80,13 @@
     }
     a { color: #0000EE; text-decoration: underline; }
     a:visited { color: #551A8B; }
-    h1 { font-size: 24px; margin-bottom: 10px; line-height: 1.3; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h1 code { background: none; border: none; padding: 0; font-size: inherit; }
     h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
     p { margin-bottom: 15px; }
-    .intro { color: #666; }
-    .author { color: #666; font-size: 14px; margin-bottom: 30px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
 
     /* Callouts */
     .callout {
@@ -97,16 +99,50 @@
     .callout strong { display: block; margin-bottom: 4px; }
     .callout p { margin-bottom: 0; }
 
-    /* Code */
-    pre[class*="language-"] {
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      padding: 12px;
-      overflow-x: auto;
-      font-size: 14px;
-      margin: 20px 0;
+    /* Code blocks */
+    .code-block {
+      margin: 24px 0;
+      border: 2px solid #000;
     }
-    code { font-family: monospace; background: #f5f5f5; padding: 2px 4px; }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .code-block-title { font-weight: normal; }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    .copy-btn:hover { background: #333; }
+    .code-block pre {
+      margin: 0;
+      border: none;
+      background: #f8f8f8;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
     pre code { background: none; padding: 0; }
 
     /* Table */
@@ -119,20 +155,21 @@
     /* ASCII diagrams */
     .ascii {
       font-family: monospace;
-      background: #f5f5f5;
-      padding: 12px;
-      margin: 20px 0;
+      font-size: 13px;
+      background: #fff;
+      padding: 16px;
+      margin: 24px 0;
       text-align: center;
-      border: 1px solid #ddd;
+      border: 2px solid #000;
     }
 
-    ul { margin: 15px 0 15px 20px; }
-    li { margin-bottom: 8px; }
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
 
-    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
-    .sources h3 { font-size: 14px; color: #666; margin-bottom: 10px; }
-    .sources ul { list-style: none; margin-left: 0; }
-    .sources li { font-size: 14px; margin-bottom: 6px; }
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
 
     footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
   </style>
@@ -206,7 +243,12 @@
 /readme → диспетчер → Task tool → Haiku-агент работает отдельно
     </div>
 
-    <pre><code class="language-markdown"># ~/.claude/commands/readme.md
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">~/.claude/commands/readme.md</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code># ~/.claude/commands/readme.md
 ---
 description: Генерация README через Haiku
 ---
@@ -220,6 +262,7 @@ description: Генерация README через Haiku
 **Правила:**
 1. Сам ничего не генерируй
 2. Только запусти агента и верни результат</code></pre>
+    </div>
 
     <p>Сам агент лежит в <code>.claude/agents/readme-writer.md</code>. Там уже написано что делать и как. Команда просто его триггерит.</p>
 
@@ -255,8 +298,14 @@ description: Генерация README через Haiku
       Январь 2026
     </footer>
   </article>
-  <script src="https://unpkg.com/prismjs@1.29.0/prism.min.js"></script>
-  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
-  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+  <script>
+  function copyCode(btn) {
+    const code = btn.closest('.code-block').querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copied!';
+      setTimeout(() => btn.textContent = 'copy', 1500);
+    });
+  }
+  </script>
 </body>
 </html>

@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/seo-for-ai-era</loc>
+    <lastmod>2026-01-10</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/slash-commands-subagents</loc>
     <lastmod>2026-01-09</lastmod>
   </url>
