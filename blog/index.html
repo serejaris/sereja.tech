@@ -42,99 +42,29 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0a0f14;
-      --bg-card: #111820;
-      --text: #e8f0e8;
-      --text-muted: #6b8068;
-      --accent: #4ade80;
-      --border: #2a3a2a;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      max-width: 680px;
+      font-family: monospace;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 64px 24px;
-      line-height: 1.8;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
     }
-
-    h1 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .intro {
-      color: var(--text-muted);
-      margin-bottom: 48px;
-    }
-
-    .back {
-      display: inline-block;
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-bottom: 32px;
-      font-size: 14px;
-    }
-
-    .back:hover { color: var(--accent); }
-
-    .posts {
-      list-style: none;
-    }
-
-    .posts li {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .posts a {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      padding: 20px 0;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .posts a:hover .title {
-      color: var(--accent);
-    }
-
-    .date {
-      color: var(--text-muted);
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    .title {
-      color: var(--text);
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .empty {
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    @media (max-width: 480px) {
-      .posts a {
-        flex-direction: column;
-        gap: 4px;
-      }
-    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 10px; }
+    .intro { color: #666; margin-bottom: 30px; }
+    .posts { list-style: none; padding: 0; }
+    .posts li { margin-bottom: 12px; }
+    .posts a { display: block; }
+    .date { color: #666; font-size: 14px; }
+    .title { display: block; }
   </style>
 </head>
 <body>
-  <a href="/" class="back">&larr; sereja.tech</a>
+  <p><a href="/">&larr; sereja.tech</a></p>
   <h1>Блог</h1>
   <p class="intro">Статьи про вайбкодинг, Claude Code и AI-инструменты</p>
 
@@ -142,8 +72,8 @@
     <!-- POSTS_START -->
     <li>
       <a href="/blog/slash-commands-subagents">
-        <span class="title">Почему model: в slash-командах — это ловушка</span>
         <span class="date">9 янв 2026</span>
+        <span class="title">Почему model: в slash-командах — это ловушка</span>
       </a>
     </li>
     <!-- POSTS_END -->
