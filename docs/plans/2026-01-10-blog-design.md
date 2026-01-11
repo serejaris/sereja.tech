@@ -61,7 +61,61 @@ sereja.tech/
 - Sources (обязательно)
 - Footer
 
-**Стиль:** dark theme из ai-whisper/blog/slash-commands-subagents.html
+**Стиль:** Brutalist-гибрид (как главная страница)
+
+## Visual Style (v2)
+
+Минималистичный стиль, совпадающий с главной страницей.
+
+### База
+
+```css
+body {
+  font-family: monospace;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  background: #fff;
+  color: #000;
+}
+
+a { color: #0000EE; text-decoration: underline; }
+a:visited { color: #551A8B; }
+```
+
+### Callouts (минималистичные)
+
+```css
+.callout {
+  border: 1px solid #000;
+  padding: 12px 16px;
+  margin: 20px 0;
+}
+.callout.warning { border-left: 3px solid #c00; }
+.callout.insight { border-left: 3px solid #060; }
+.callout strong { display: block; margin-bottom: 4px; }
+```
+
+### Подсветка синтаксиса
+
+Prism.js с минималистичной темой:
+```html
+<link href="https://unpkg.com/prismjs/themes/prism.css" rel="stylesheet">
+<script src="https://unpkg.com/prismjs"></script>
+```
+
+### Код
+
+```css
+pre {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 12px;
+  overflow-x: auto;
+}
+code { font-family: monospace; }
+```
 
 ## blog/index.html
 
