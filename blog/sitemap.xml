@@ -10,6 +10,18 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/midi-obs-claude-code</loc>
+    <lastmod>2026-01-11</lastmod>
+  </url>
+  <url>
+    <loc>https://sereja.tech/blog/midi-obs-scene-switching</loc>
+    <lastmod>2026-01-11</lastmod>
+  </url>
+  <url>
+    <loc>https://sereja.tech/blog/ai-writing-pipelines</loc>
+    <lastmod>2026-01-11</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/fact-checker-in-ai-workflow</loc>
     <lastmod>2026-01-11</lastmod>
   </url>

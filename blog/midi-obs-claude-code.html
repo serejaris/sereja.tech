@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Как я настроил MIDI-контроллер для переключения сцен в OBS и написал LED-индикатор с помощью Claude Code. Полный разбор: velocity, SysEx, EventClient.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="MIDI, OBS, Claude Code, вайбкодинг, Arturia MiniLab, obs-midi-mg, Python, стриминг">
+  <link rel="canonical" href="https://sereja.tech/blog/midi-obs-claude-code">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа">
+  <meta property="og:description" content="Настроил MIDI-контроллер для OBS с LED-индикатором. Claude Code написал весь код.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/midi-obs-claude-code">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-11T00:00:00+00:00">
+  <meta property="article:section" content="Вайбкодинг">
+  <meta property="article:tag" content="MIDI">
+  <meta property="article:tag" content="OBS">
+  <meta property="article:tag" content="Claude Code">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа">
+  <meta name="twitter:description" content="Настроил MIDI-контроллер для OBS с LED-индикатором. Claude Code написал весь код.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа",
+    "description": "Как я настроил MIDI-контроллер для переключения сцен в OBS и написал LED-индикатор с помощью Claude Code.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-11",
+    "dateModified": "2026-01-11",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/midi-obs-claude-code"
+    },
+    "wordCount": 1800,
+    "articleSection": "Вайбкодинг",
+    "keywords": ["MIDI", "OBS", "Claude Code", "вайбкодинг", "Python"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+    .code-block {
+      margin: 24px 0;
+      border: 2px solid #000;
+    }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .code-block-title { font-weight: normal; }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    .copy-btn:hover { background: #333; }
+    .code-block pre {
+      margin: 0;
+      border: none;
+      background: #f8f8f8;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+    .timeline {
+      border-left: 2px solid #000;
+      padding-left: 20px;
+      margin: 24px 0;
+    }
+    .timeline-item {
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      left: -26px;
+      top: 4px;
+    }
+    .timeline-time {
+      font-size: 12px;
+      color: #666;
+    }
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа</h1>
+    <p class="author">Сережа Рис · 11 января 2026</p>
+
+    <p class="intro">У меня лежал Arturia MiniLab 3. Использовал только для музыки.</p>
+    <p class="intro">Подумал — почему бы не переключать им сцены в OBS во время стримов?</p>
+    <p class="intro">Три часа с Claude Code. Результат: пэды переключают сцены, активная сцена подсвечивается.</p>
+
+    <h2>Задача</h2>
+
+    <p>Хотел простую вещь: нажимаю Pad 1 — включается сцена "Десктоп". Pad 2 — камера. Pad 3 — телефон. Без мыши, без горячих клавиш.</p>
+
+    <p>Бонус: чтобы пэд активной сцены светился зелёным. Раньше переключался мышкой во время стрима — терял фокус, пару раз нажимал не туда. С пэдами переключаюсь вслепую.</p>
+
+    <h2>Хронология</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00</div>
+        <div>Описал задачу Claude Code. Он провёл исследование через Exa, нашёл obs-midi-mg как лучший вариант для macOS.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15</div>
+        <div>Плагин установлен. Устройство видит. Создал биндинг через UI — не работает.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:30</div>
+        <div>Claude Code предложил поставить MIDI Monitor. Оказалось — пэды отправляют разную velocity при каждом ударе.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:45</div>
+        <div>Нашли решение: velocity ignore mode. Дважды кликнуть на "Velocity" в настройках биндинга. Заработало.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:00</div>
+        <div>Попросил добавить третий пэд программно. Claude Code прочитал JSON-конфиг, добавил биндинг, перезапустил OBS.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:30</div>
+        <div>Захотел LED-индикатор. Claude Code нашёл SysEx-коды для MiniLab 3, написал Python-скрипт.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:00</div>
+        <div>Светятся не пэды, а кнопки Shift/Hold. Оказалось — пэды начинаются с индекса 4, не 0. Исправили.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:30</div>
+        <div>Индикатор работает, но иногда пропускает. Переписали с polling на EventClient. Мгновенная реакция.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">3:00</div>
+        <div>Не получает события. Оказалось — в obsws-python callback должен называться on_current_program_scene_changed. Исправили. Работает.</div>
+      </div>
+    </div>
+
+    <h2>Главные грабли</h2>
+
+    <h3>1. Velocity</h3>
+
+    <p>Пэды MiniLab чувствительны к силе удара. Каждое нажатие — разное значение: 21, 45, 67. Плагин записывает конкретное значение при настройке. Ударил чуть сильнее — биндинг молчит.</p>
+
+    <div class="callout warning">
+      <strong>Решение</strong>
+      <p>Дважды кликнуть на "Velocity" в настройках биндинга. Значение станет прочерком — плагин будет игнорировать velocity.</p>
+    </div>
+
+    <p>В JSON это выглядит так:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">velocity ignore</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-json">"velocity": {"state": 2, "index": 0, "min": 0, "max": 127}</code></pre>
+    </div>
+
+    <p><code>state: 2</code> — игнорировать. <code>state: 0</code> — фиксированное значение.</p>
+
+    <h3>2. LED индексы MiniLab 3</h3>
+
+    <p>Отправил цвет на индекс 0 — загорелась кнопка Shift. Индекс 1 — Oct-. Индекс 2 — Hold.</p>
+
+    <p>Пэды начинаются с индекса 4:</p>
+
+    <table>
+      <tr><th>Элемент</th><th>LED Index</th></tr>
+      <tr><td>Shift</td><td>0</td></tr>
+      <tr><td>Oct -</td><td>1</td></tr>
+      <tr><td>Hold</td><td>2</td></tr>
+      <tr><td>Oct +</td><td>3</td></tr>
+      <tr><td>Pad 1</td><td>4</td></tr>
+      <tr><td>Pad 2</td><td>5</td></tr>
+      <tr><td>Pad 3</td><td>6</td></tr>
+      <tr><td>...</td><td>...</td></tr>
+    </table>
+
+    <h3>3. obsws-python callback naming</h3>
+
+    <p>Написал функцию <code>_on_scene_change</code>. EventClient её игнорирует. Никаких ошибок, просто молчит.</p>
+
+    <div class="callout insight">
+      <strong>Правило obsws-python</strong>
+      <p>Имя callback функции = <code>on_</code> + snake_case имя события. Для CurrentProgramSceneChanged нужно <code>on_current_program_scene_changed</code>.</p>
+    </div>
+
+    <h2>Роль Claude Code</h2>
+
+    <p>Я не писал ни строчки кода. Вот что делал Claude Code:</p>
+
+    <ul>
+      <li><strong>Исследование</strong> — нашёл obs-midi-mg через Exa, сравнил с альтернативами</li>
+      <li><strong>Установка</strong> прошла быстро: pkg, установщик, готово</li>
+      <li>С <strong>диагностикой</strong> повозились: MIDI Monitor показал проблему с velocity</li>
+      <li><strong>Конфигурация</strong> — JSON напрямую, без UI</li>
+      <li>Python-скрипт для <strong>LED индикатора</strong> — с нуля</li>
+      <li><strong>Отладка</strong>: индексы пэдов оказались не 0-7, а 4-11</li>
+      <li>Всё <strong>задокументировал</strong> в правила для следующих сессий</li>
+    </ul>
+
+    <p>Это и есть вайбкодинг: описываешь что хочешь, агент делает.</p>
+
+    <h2>Итоговый стек</h2>
+
+    <table>
+      <tr><th>Компонент</th><th>Назначение</th></tr>
+      <tr><td>obs-midi-mg</td><td>Переключение сцен по MIDI</td></tr>
+      <tr><td>scene_indicator.py</td><td>LED индикатор активной сцены</td></tr>
+      <tr><td>obsws-python</td><td>WebSocket события от OBS</td></tr>
+      <tr><td>mido + python-rtmidi</td><td>Отправка SysEx на MiniLab</td></tr>
+    </table>
+
+    <h2>Код индикатора</h2>
+
+    <p>Ключевые части:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">SysEx для цвета пэда</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-python">def set_pad_color(led_index, r, g, b):
+    # F0 00 20 6B 7F 42 02 02 16 [led] [r] [g] [b] F7
+    data = [0x00, 0x20, 0x6B, 0x7F, 0x42,
+            0x02, 0x02, 0x16, led_index, r, g, b]
+    port.send(mido.Message('sysex', data=data))</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">EventClient callback</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-python"># Имя функции ДОЛЖНО соответствовать событию
+def on_current_program_scene_changed(self, data):
+    scene_name = data.scene_name
+    self._update_pads(scene_name)</code></pre>
+    </div>
+
+    <h2>Запуск</h2>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">bash</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-bash"># Установка
+cd ~/Documents/GitHub/obs-midi
+uv venv && uv pip install -r requirements.txt
+
+# Тесты
+source .venv/bin/activate
+python scene_indicator.py --test
+
+# Запуск
+python scene_indicator.py</code></pre>
+    </div>
+
+    <p>Не забудь включить OBS WebSocket: Tools → WebSocket Server Settings → Enable.</p>
+
+    <h2>Выводы</h2>
+
+    <p>Три часа — от "хочу переключать сцены пэдами" до работающего решения с LED-индикатором. Без написания кода вручную.</p>
+
+    <p>Claude Code не просто генерирует код — он ставит MIDI Monitor, читает логи, правит конфиг. Я описывал проблему ("не работает"), он находил причину и исправлял.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://github.com/nhielost/obs-midi-mg" target="_blank">obs-midi-mg на GitHub</a></li>
+        <li><a href="https://github.com/aatikturk/obsws-python" target="_blank">obsws-python — WebSocket клиент</a></li>
+        <li><a href="https://gist.github.com/Janiczek/04a87c2534b9d1435a1d8159c742d260" target="_blank">MiniLab 3 SysEx коды</a></li>
+        <li><a href="https://www.axios.com/2026/01/07/anthropics-claude-code-vibe-coding" target="_blank">Axios: Claude Code и вайбкодинг</a></li>
+        <li><a href="https://craftbettersoftware.com/p/the-vibe-coding-stack-for-2026" target="_blank">The Vibe Coding Stack for 2026</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script src="https://unpkg.com/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-python.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-json.min.js"></script>
+  <script>
+  function copyCode(btn) {
+    const code = btn.closest('.code-block').querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copied!';
+      setTimeout(() => btn.textContent = 'copy', 1500);
+    });
+  }
+  </script>
+</body>
+</html>
