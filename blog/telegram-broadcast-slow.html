@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Как я отправил 717 сообщений за 8 минут | Сережа Рис</title>
+  <title>Как мой AI-агент отправил 717 сообщений за 8 минут | Сережа Рис</title>
 
   <!-- SEO -->
-  <meta name="description" content="Почему синхронный код для Telegram рассылки работает в 16 раз медленнее asyncio. Реальный кейс: 8 минут вместо 30 секунд на 717 получателей.">
+  <meta name="description" content="Попросил Claude Code сделать рассылку — он использовал синхронный скрипт и ждали 8 минут вместо 30 секунд. Как AI-агенты учатся на своих ошибках.">
   <meta name="author" content="Сережа Рис">
-  <meta name="keywords" content="Telegram Bot API, asyncio, aiohttp, rate limiting, broadcast, рассылка, python">
+  <meta name="keywords" content="Telegram Bot API, asyncio, aiohttp, Claude Code, AI agents, broadcast, рассылка, python">
   <link rel="canonical" href="https://sereja.tech/blog/telegram-broadcast-slow">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Как я отправил 717 сообщений за 8 минут">
-  <meta property="og:description" content="Почему синхронный код для Telegram рассылки работает в 16 раз медленнее asyncio.">
+  <meta property="og:title" content="Как мой AI-агент отправил 717 сообщений за 8 минут">
+  <meta property="og:description" content="Попросил Claude Code сделать рассылку — синхронный скрипт работал 8 минут вместо 30 секунд.">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:url" content="https://sereja.tech/blog/telegram-broadcast-slow">
@@ -27,8 +27,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Как я отправил 717 сообщений за 8 минут">
-  <meta name="twitter:description" content="Почему синхронный код для Telegram рассылки работает в 16 раз медленнее asyncio.">
+  <meta name="twitter:title" content="Как мой AI-агент отправил 717 сообщений за 8 минут">
+  <meta name="twitter:description" content="Попросил Claude Code сделать рассылку — синхронный скрипт работал 8 минут вместо 30 секунд.">
   <meta name="twitter:creator" content="@riiiiiiiiss">
 
   <!-- JSON-LD Schema -->
@@ -36,8 +36,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Как я отправил 717 сообщений за 8 минут (и почему это плохо)",
-    "description": "Почему синхронный код для Telegram рассылки работает в 16 раз медленнее asyncio.",
+    "headline": "Как мой AI-агент отправил 717 сообщений за 8 минут (и почему это плохо)",
+    "description": "Попросил Claude Code сделать рассылку — синхронный скрипт работал 8 минут вместо 30 секунд.",
     "author": {
       "@type": "Person",
       "name": "Сережа Рис",
@@ -56,7 +56,7 @@
     },
     "wordCount": 450,
     "articleSection": "Python",
-    "keywords": ["Telegram Bot API", "asyncio", "aiohttp", "rate limiting", "broadcast"],
+    "keywords": ["Telegram Bot API", "asyncio", "aiohttp", "Claude Code", "AI agents", "broadcast"],
     "inLanguage": "ru-RU"
   }
   </script>
@@ -146,14 +146,16 @@
 <body>
   <p><a href="/blog/">&larr; Блог</a></p>
   <article>
-    <h1>Как я отправил 717 сообщений за 8 минут</h1>
+    <h1>Как мой AI-агент отправил 717 сообщений за 8 минут</h1>
     <p class="author">Сережа Рис · 13 января 2026</p>
 
-    <p class="intro">Запустил рассылку в Telegram-боте. 717 получателей.</p>
+    <p class="intro">Попросил Claude Code сделать рассылку в Telegram-боте. 717 получателей.</p>
     <p class="intro">Смотрю на прогресс — обновляется каждые 25 сообщений. Медленно.</p>
-    <p class="intro">8 минут на то, что должно было занять полминуты.</p>
+    <p class="intro">8 минут на то, что должно было занять полминуты. Спрашиваю агента: почему так долго?</p>
 
-    <h2>Код, который делал это</h2>
+    <h2>Что агент использовал</h2>
+
+    <p>Claude запустил скрипт broadcast.py, который я когда-то написал для небольших рассылок:</p>
 
     <div class="code-block">
       <div class="code-block-header">
@@ -169,24 +171,28 @@
 
     <p>Синхронный запрос — ждём ответа — следующий запрос. Пауза каждые 25, "чтобы не получить 429".</p>
 
-    <p>Число 25 я выбрал произвольно. Показалось безопасным. На 50 получателях работало нормально. На 717 — нет.</p>
+    <p>Число 25 было выбрано произвольно. На 50 получателях работало нормально. На 717 — нет.</p>
 
-    <h2>Цифры</h2>
+    <h2>Что выяснил агент</h2>
+
+    <p>Спросил Claude, почему так долго. Он полез искать через Exa MCP — нашёл документацию по rate limits.</p>
 
     <p>Telegram Bot API позволяет ~30 сообщений в секунду при отправке в разные чаты.</p>
 
     <p>717 ÷ 30 = 24 секунды. С буфером на сеть — 30-40 секунд.</p>
 
-    <p>Мой код делал так:</p>
+    <p>Синхронный скрипт делал так:</p>
     <ul>
       <li>29 пауз по секунде (717 ÷ 25)</li>
       <li>requests.post блокирует на 100-300мс каждый раз</li>
       <li>Итого: 487 секунд</li>
     </ul>
 
-    <p>Разница в 16 раз.</p>
+    <p>Разница в 16 раз. Claude сразу предложил переписать на asyncio.</p>
 
-    <h2>Как надо</h2>
+    <h2>Как агент должен был сделать</h2>
+
+    <p>Claude показал правильный подход:</p>
 
     <div class="code-block">
       <div class="code-block-header">
@@ -206,24 +212,24 @@
 
     <h2>Реальный результат</h2>
 
-    <p>Итог рассылки:</p>
+    <p>Итог рассылки (несмотря на медленность):</p>
     <ul>
       <li>576 доставлено</li>
       <li>141 заблокировали бота</li>
       <li>80% доставляемость</li>
     </ul>
 
-    <p>Норма для Telegram. Но ждать 8 минут ради этого — не норма.</p>
+    <p>Норма для Telegram. Но ждать 8 минут — не норма. В следующий раз попрошу агента сначала переписать скрипт.</p>
 
     <h2>Если получил 429</h2>
 
-    <p>Telegram возвращает <code>retry_after</code> — сколько секунд ждать:</p>
+    <p>Claude также напомнил про обработку ошибок. Telegram возвращает <code>retry_after</code> — сколько секунд ждать:</p>
 
     <pre><code class="language-python">if error_code == 429:
     retry_after = data['parameters']['retry_after']
     await asyncio.sleep(retry_after)</code></pre>
 
-    <p>python-telegram-bot имеет встроенный AIORateLimiter. aiogram тоже. Своё писать не надо.</p>
+    <p>python-telegram-bot имеет встроенный AIORateLimiter. aiogram тоже. Своё писать не надо — агент знает про эти библиотеки.</p>
 
     <h2>Итог</h2>
 
@@ -242,7 +248,9 @@
       </tr>
     </table>
 
-    <p>Синхронный код проще писать. Но на 700+ получателях разница раздражает. Переписывать надо было раньше — когда аудитория была 100 человек, а не 700.</p>
+    <p>Работая с AI-агентом, легко забыть проверить качество старого кода. Агент выполнит что дали. Переписывать скрипт надо было раньше — когда аудитория была 100 человек, а не 700.</p>
+
+    <p>Урок: перед запуском больших операций — просить агента сначала проанализировать, потом делать.</p>
 
     <div class="sources">
       <h3>Источники</h3>
