@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как трекать прогресс студентов на онлайн-курсе с помощью AI | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Опыт персонализации курса по вайбкодингу с помощью LLM. Почему rich profile важнее оценок, и как skills дают доступ к данным студентов.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="AI образование, персонализация обучения, LLM, Claude, онлайн-курсы, трекинг студентов">
+  <link rel="canonical" href="https://sereja.tech/blog/ai-student-progress-tracking">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Как трекать прогресс студентов на онлайн-курсе с помощью AI">
+  <meta property="og:description" content="Опыт персонализации курса по вайбкодингу с помощью LLM. Rich profile вместо grading.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/ai-student-progress-tracking">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-12T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-01-12T00:00:00+00:00">
+  <meta property="article:section" content="Онлайн-образование">
+  <meta property="article:tag" content="AI">
+  <meta property="article:tag" content="LLM">
+  <meta property="article:tag" content="онлайн-курсы">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Как трекать прогресс студентов на онлайн-курсе с помощью AI">
+  <meta name="twitter:description" content="Опыт персонализации курса по вайбкодингу с помощью LLM.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как трекать прогресс студентов на онлайн-курсе с помощью AI",
+    "description": "Опыт персонализации курса по вайбкодингу с помощью LLM. Почему rich profile важнее оценок.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-12",
+    "dateModified": "2026-01-12",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/ai-student-progress-tracking"
+    },
+    "wordCount": 1200,
+    "articleSection": "Онлайн-образование",
+    "keywords": ["AI", "LLM", "персонализация", "онлайн-курсы", "трекинг прогресса"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    /* Callouts */
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    /* Code blocks */
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>Как трекать прогресс студентов на онлайн-курсе с помощью AI</h1>
+    <p class="author">Сережа Рис · 12 января 2026</p>
+
+    <p class="intro">Веду курс по вайбкодингу. 20 человек, восьмой поток.</p>
+    <p class="intro">Везде продают LMS с дашбордами, грейдингом, аналитикой вовлечённости.</p>
+    <p class="intro">Мне не нужно. Нужно знать КТО студент, а не СКОЛЬКО баллов.</p>
+
+    <h2>Почему не LMS</h2>
+
+    <p>EdTech-платформы строятся под тысячи пользователей. Автопроверка тестов, алгоритмы рекомендаций, адаптивные траектории.</p>
+
+    <p>Но у меня 20 человек. Каждого знаю по имени. Каждому готовлю примеры под его проект. Moodle или iSpring тут — оверкилл.</p>
+
+    <p>Вместо этого: SQLite с профилями студентов + Claude Code для генерации материалов.</p>
+
+    <h2>Что хранить про студента</h2>
+
+    <p>Не оценки. Контекст.</p>
+
+    <ul>
+      <li><strong>Сфера</strong> — маркетинг, продакт, HR, фрилансер</li>
+      <li><strong>Роль</strong> — руководитель, исполнитель, основатель</li>
+      <li><strong>Опыт с AI</strong> — от "первый раз вижу" до "использую каждый день"</li>
+      <li><strong>Цель на курс</strong> — автоматизировать рутину, создать продукт, сменить карьеру</li>
+      <li><strong>Идея проекта</strong> — что хотят построить к концу курса</li>
+    </ul>
+
+    <p>Этого хватает для персонализации. Перед уроком прошу Claude сгенерировать примеры под каждого: маркетологу — про рекламные кампании, HR-у — про воронку найма.</p>
+
+    <div class="callout insight">
+      <strong>Профиль важнее оценок</strong>
+      <p>Миша — продакт из финтеха, хочет автоматизировать отчёты. Это полезнее, чем "средний балл 78%".</p>
+    </div>
+
+    <h2>Технически</h2>
+
+    <p>Одна таблица. Текстовые поля. Без ORM.</p>
+
+    <pre><code>CREATE TABLE students (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  cohort_id INTEGER,
+  domain TEXT,      -- сфера: маркетинг, HR, продукт
+  role TEXT,        -- руководитель / исполнитель
+  ai_experience TEXT,
+  goal TEXT,
+  project_idea TEXT
+);</code></pre>
+
+    <p>Поверх — skill для Claude Code. Команда <code>/lesson-prep</code> достаёт данные студентов и генерирует материал.</p>
+
+    <h2>Как работает skill</h2>
+
+    <p>Skill — markdown-файл с инструкциями. Запускаю <code>/lesson-prep</code>, Claude получает контекст: данные студентов, тему, формат.</p>
+
+    <p>Что он делает:</p>
+
+    <ul>
+      <li>Генерирует примеры под проект каждого</li>
+      <li>Подбирает сложность под уровень</li>
+      <li>Создаёт стартовые промпты для практики</li>
+    </ul>
+
+    <p>Ничего сложного. Но на Coursera такого нет — там все получают одинаковые примеры.</p>
+
+    <h2>Что трекаю</h2>
+
+    <p>Автопроверки домашек нет. На курсе по вайбкодингу студенты не пишут код — они дают промпты AI. Как это грейдить? Да никак.</p>
+
+    <p>Трекаю три вещи:</p>
+
+    <ul>
+      <li><strong>Сдал / не сдал</strong> — бинарно, без баллов</li>
+      <li><strong>Активность</strong> — кто спрашивает, кто молчит</li>
+      <li><strong>Проект</strong> — на каком этапе</li>
+    </ul>
+
+    <p>Аня не сдала вторую домашку — пишу в личку. Паша молчит третью неделю — спрашиваю, всё ли ок. Это работает лучше любого дашборда.</p>
+
+    <div class="callout warning">
+      <strong>Оценки создают иллюзию контроля</strong>
+      <p>"Средний балл 85%" ничего не говорит о понимании материала. Личный разговор — говорит.</p>
+    </div>
+
+    <h2>Где AI помогает</h2>
+
+    <p>Персонализация материалов. Типичный запрос:</p>
+
+    <pre><code>Сгенерируй практические задания по теме "API интеграции"
+для студентов потока 8. Каждому — пример под его проект.
+Профили в контексте.</code></pre>
+
+    <p>Claude достаёт профили, генерирует 20 разных заданий. Тратит токены, экономит мне 2-3 часа подготовки.</p>
+
+    <p>Генерация стартовых промптов тоже хорошо работает. Студент говорит "хочу сделать бота для записи на маникюр" — запускаю skill, получаю промпт под его уровень.</p>
+
+    <h2>Где AI не справляется</h2>
+
+    <p>Оценка качества работы. LLM может сказать "код работает". Но не скажет "этот промпт ведёт в тупик".</p>
+
+    <p>Обратную связь даю сам. Смотрю проекты, комментирую подход. AI генерирует, я проверяю.</p>
+
+    <h2>Про масштаб</h2>
+
+    <p>До 30-40 человек — легко. Дальше не хватит времени на личную обратную связь.</p>
+
+    <p>И это нормально. 20 человек — сообщество, не конвейер. Мне не нужно 500 студентов. Нужны 20, которых знаю по имени.</p>
+
+    <h2>Итого</h2>
+
+    <p>Что работает:</p>
+
+    <ol>
+      <li>Профиль студента вместо оценок — знать контекст человека</li>
+      <li>Бинарный трекинг — сдал/не сдал, без баллов</li>
+      <li>LLM для персонализации — генерировать примеры под каждого</li>
+    </ol>
+
+    <p>Сложные LMS — для Coursera. Для когорт в 20 человек хватает SQLite и умения писать в личку.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2503.13340" target="_blank">LearnMate: LLM-Powered Personalized Learning Plans</a> — исследование MIT про персонализацию через LLM</li>
+        <li><a href="https://link.springer.com/article/10.1007/s43621-025-01094-z" target="_blank">LLMs in Personalized Learning: Systematic Review</a> — обзор применения LLM в образовании</li>
+        <li><a href="https://habr.com/ru/articles/889836" target="_blank">Перспективы персонализированного обучения с ИИ</a> — русскоязычный обзор трендов</li>
+        <li><a href="https://vc.ru/marketing/2293251-trendy-onlajn-obrazovaniya-2025-goda" target="_blank">Тренды онлайн-образования 2025</a> — что меняется на рынке</li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
