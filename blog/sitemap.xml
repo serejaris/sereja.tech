@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/structured-output-llm</loc>
+    <lastmod>2026-01-13</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/personalized-teaching-student-data</loc>
     <lastmod>2026-01-13</lastmod>
   </url>
