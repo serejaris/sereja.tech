@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Один источник правды: почему копировать данные в документацию — плохая идея | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Скопировал информацию о студентах в README.md. Теперь у меня два источника: база данных и файл. Single Source of Truth — принцип, который я нарушил.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="Single Source of Truth, SSOT, DRY, документация, README, база данных">
+  <link rel="canonical" href="https://sereja.tech/blog/ssot-documentation">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Один источник правды: почему копировать данные в документацию — плохая идея">
+  <meta property="og:description" content="Скопировал информацию о студентах в README.md. Теперь у меня два источника. Как не попасть в эту ловушку.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/ssot-documentation">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-12T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-01-12T00:00:00+00:00">
+  <meta property="article:section" content="Документация">
+  <meta property="article:tag" content="SSOT">
+  <meta property="article:tag" content="документация">
+  <meta property="article:tag" content="DRY">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Один источник правды: почему копировать данные в документацию — плохая идея">
+  <meta name="twitter:description" content="Скопировал информацию о студентах в README.md. Теперь у меня два источника.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Один источник правды: почему копировать данные в документацию — плохая идея",
+    "description": "Скопировал информацию о студентах в README.md. Теперь у меня два источника: база данных и файл. Single Source of Truth — принцип, который я нарушил.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-12",
+    "dateModified": "2026-01-12",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/ssot-documentation"
+    },
+    "wordCount": 750,
+    "articleSection": "Документация",
+    "keywords": ["Single Source of Truth", "SSOT", "DRY", "документация", "README"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    /* Callouts */
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    /* Code blocks */
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    /* ASCII diagrams */
+    .ascii {
+      font-family: monospace;
+      font-size: 13px;
+      background: #fff;
+      padding: 16px;
+      margin: 24px 0;
+      text-align: center;
+      border: 2px solid #000;
+    }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>Один источник правды: почему копировать данные в документацию — плохая идея</h1>
+    <p class="author">Сережа Рис · 12 января 2026</p>
+
+    <p class="intro">Скопировал список студентов из базы в README.md.</p>
+    <p class="intro">На восьмой день данные разъехались.</p>
+
+    <h2>Что случилось</h2>
+
+    <p>У меня платформа для курсов. Студенты — в SQLite: имена, цели, прогресс.</p>
+
+    <p>Решил сделать README в папке когорты. Скопировал туда имена и цели. Открываешь папку — сразу видно кто есть кто. Красота.</p>
+
+    <p>Потом Аня обновила цели через интерфейс. База обновилась. README — нет.</p>
+
+    <p>Два источника. Разные данные. Какой правильный?</p>
+
+    <div class="callout warning">
+      <strong>Дублирование = рассинхронизация</strong>
+      <p>Не вопрос "если". Вопрос "когда".</p>
+    </div>
+
+    <h2>Single Source of Truth</h2>
+
+    <p>Один факт — одно место хранения. Остальные ссылаются или генерируются автоматически.</p>
+
+    <div class="ascii">
+База данных (источник) → README генерируется → актуален
+    </div>
+
+    <p>Примеры:</p>
+
+    <ul>
+      <li>Версия пакета живёт в <code>package.json</code>. README её не дублирует.</li>
+      <li>API эндпоинты генерируются из кода</li>
+      <li>Документация функций — из docstrings</li>
+    </ul>
+
+    <p>DRY применяют к коду, но к документации тоже работает. Дублирование — это долг. Платить придётся рассинхроном.</p>
+
+    <h2>Что делать</h2>
+
+    <p><strong>Не дублировать.</strong> Нужна информация — открой базу. Звучит радикально, но работает.</p>
+
+    <p><strong>Ссылаться.</strong> В README пишешь «студенты: см. интерфейс» и даёшь ссылку. Указатель вместо копии.</p>
+
+    <p><strong>Генерировать.</strong> Скрипт читает базу, обновляет README. Или GitHub Action при каждом коммите.</p>
+
+    <p>По-моему, второй вариант — самый реальный. Генерация требует поддержки, а "не дублировать" неудобно для быстрого доступа.</p>
+
+    <h2>Инструменты для генерации</h2>
+
+    <p>Если всё-таки выбрал автоматизацию:</p>
+
+    <p><strong>markdown-autodocs</strong> — GitHub Action. Ставишь маркеры, указываешь источник — при коммите секция обновляется.</p>
+
+    <pre><code>&lt;!-- AUTO-GENERATED-CONTENT:START (CODE:src=./data.json) --&gt;
+&lt;!-- AUTO-GENERATED-CONTENT:END --&gt;</code></pre>
+
+    <p><strong>mdat</strong> — CLI для шаблонов. Комментарии превращаются в контент.</p>
+
+    <p><strong>Свой скрипт.</strong> Иногда 15 строк на Python проще универсального инструмента. У меня такой есть для статистики атомов — читает SQLite, пишет markdown.</p>
+
+    <div class="callout insight">
+      <strong>Правило</strong>
+      <p>Копируешь данные — автоматизируй. Ручное копирование устаревает к вечеру.</p>
+    </div>
+
+    <h2>Где ещё работает</h2>
+
+    <ul>
+      <li><strong>Конфигурация</strong> — env-переменные в одном <code>.env</code>, не разбросаны</li>
+      <li><strong>API-документация</strong> — из OpenAPI схемы, не вручную</li>
+      <li><strong>Дизайн-токены</strong> — цвета в одном файле, компоненты импортируют</li>
+    </ul>
+
+    <p>В корпорациях это Data Governance. В маленьких проектах — просто не плодить копии.</p>
+
+    <h2>Что я сделал</h2>
+
+    <p>README удалил. Вместо него — ссылка на интерфейс.</p>
+
+    <p>Если понадобится красивый обзор в markdown — напишу скрипт. Но пока ссылки хватит.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://atlassian.com/work-management/knowledge-sharing/documentation/building-a-single-source-of-truth-ssot-for-your-team" target="_blank">Atlassian: Building a Single Source of Truth</a></li>
+        <li><a href="https://www.thoughtspot.com/data-trends/best-practices/single-source-of-truth" target="_blank">ThoughtSpot: Single Source of Truth — What It Is and Why It Matters</a></li>
+        <li><a href="https://github.com/dineshsonachalam/markdown-autodocs" target="_blank">markdown-autodocs — GitHub Action для автогенерации</a></li>
+        <li><a href="https://github.com/kitschpatrol/mdat" target="_blank">mdat — Markdown Autophagic Templates</a></li>
+        <li><a href="https://levelup.gitconnected.com/the-case-against-code-comments-11f105aec37f" target="_blank">The Case Against Code Comments: Why DRY applies to more than just code</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
