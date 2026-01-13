@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React-презентация без сборки: Editorial Brutalism на CDN | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Как сделать презентацию для курса на React без webpack и npm. Editorial Brutalism, grain-текстуры через SVG, анимации skew. Архитектура и примеры кода.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="React, презентация, CDN, Babel, Editorial Brutalism, web design, вайбкодинг">
+  <link rel="canonical" href="https://sereja.tech/blog/react-presentation-no-build">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="React-презентация без сборки: Editorial Brutalism на CDN">
+  <meta property="og:description" content="Как сделать презентацию для курса на React без webpack и npm. Editorial Brutalism, grain-текстуры, анимации.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/react-presentation-no-build">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-13T00:00:00+00:00">
+  <meta property="article:section" content="Вайбкодинг">
+  <meta property="article:tag" content="React">
+  <meta property="article:tag" content="презентация">
+  <meta property="article:tag" content="brutalism">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="React-презентация без сборки: Editorial Brutalism на CDN">
+  <meta name="twitter:description" content="Как сделать презентацию для курса на React без webpack и npm.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "React-презентация без сборки: Editorial Brutalism на CDN",
+    "description": "Как сделать презентацию для курса на React без webpack и npm. Editorial Brutalism, grain-текстуры через SVG, анимации skew.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-13",
+    "dateModified": "2026-01-13",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/react-presentation-no-build"
+    },
+    "wordCount": 1200,
+    "articleSection": "Вайбкодинг",
+    "keywords": ["React", "презентация", "CDN", "Babel", "brutalism"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    /* Callouts */
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    /* Code blocks */
+    .code-block {
+      margin: 24px 0;
+      border: 2px solid #000;
+    }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .code-block-title { font-weight: normal; }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    .copy-btn:hover { background: #333; }
+    .code-block pre {
+      margin: 0;
+      border: none;
+      background: #f8f8f8;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>React-презентация без сборки: Editorial Brutalism на CDN</h1>
+    <p class="author">Сережа Рис · 13 января 2026</p>
+
+    <p class="intro">Презентация для первого урока. 8й поток курса по вайбкодингу.</p>
+    <p class="intro">19 человек — дизайнеры, юристы, психолог, директор парков развлечений. PowerPoint не годился.</p>
+    <p class="intro">За вечер собрал React-презентацию с grain-текстурой и пульсирующей картой мира. Без npm.</p>
+
+    <h2>Почему не PowerPoint</h2>
+
+    <p>Курс про создание вещей с помощью AI. Показывать скучные слайды — странно. Студенты сразу видят: преподаватель сам не пользуется тем, чему учит.</p>
+
+    <p>Хотелось grain-текстуру поверх всего. Skew при смене слайдов. Пульсирующие точки на карте — участники из 9 городов. В PowerPoint такое не соберёшь. В Keynote тоже. А в Claude Code — за час.</p>
+
+    <h2>React без сборки</h2>
+
+    <p>Весь setup — три CDN-ссылки в HTML:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">index.html</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-html">&lt;script src="https://unpkg.com/react@18/umd/react.development.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <p>Babel компилирует JSX прямо в браузере. Да, это медленнее. Для презентации на 11 слайдов — без разницы.</p>
+
+    <div class="callout insight">
+      <strong>Когда это работает</strong>
+      <p>Прототипы. Демо для клиента. Презентации. Когда нужно показать через 10 минут, а не через 10 коммитов.</p>
+    </div>
+
+    <p>Компоненты лежат в отдельных JSX-файлах и подключаются через <code>type="text/babel"</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">index.html</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-html">&lt;script type="text/babel" src="components/layouts/TitleSlide.jsx"&gt;&lt;/script&gt;
+&lt;script type="text/babel" src="components/layouts/StatsSlide.jsx"&gt;&lt;/script&gt;
+&lt;script type="text/babel" src="components/App.jsx"&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <h2>Архитектура: данные отдельно</h2>
+
+    <p>Контент слайдов живёт в JS-файлах, не в компонентах. Это позволяет менять тексты без правки кода.</p>
+
+    <table>
+      <tr>
+        <th>Файл</th>
+        <th>Что хранит</th>
+      </tr>
+      <tr>
+        <td><code>data/cohort.js</code></td>
+        <td>Данные о потоке: участники, города, статистика</td>
+      </tr>
+      <tr>
+        <td><code>data/slides.js</code></td>
+        <td>Массив слайдов с типами и контентом</td>
+      </tr>
+      <tr>
+        <td><code>components/layouts/</code></td>
+        <td>Компоненты для каждого типа слайда</td>
+      </tr>
+    </table>
+
+    <p>App.jsx — диспетчер. Смотрит на тип слайда, рендерит нужный компонент:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">App.jsx</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-javascript">const SLIDE_COMPONENTS = {
+    title: TitleSlide,
+    stats: StatsSlide,
+    profiles: ProfilesSlide,
+    list: ListSlide,
+    // ...
+};
+
+const SlideComponent = SLIDE_COMPONENTS[slideConfig.type];
+return &lt;SlideComponent num={slideNum} data={slideConfig.data} /&gt;;</code></pre>
+    </div>
+
+    <h2>Editorial Brutalism: что это</h2>
+
+    <p>Не путать с обычным брутализмом — тот про сырой HTML и Comic Sans ради шока. Editorial Brutalism берёт типографику из журналов и добавляет бруталистские акценты. Вдохновлялся сайтами Bloomberg и The Outline (RIP).</p>
+
+    <p>Три шрифта. <strong>Unbounded</strong> — жирный display для заголовков, геометричный. <strong>Cormorant Garamond</strong> — элегантный serif для текста. И <strong>Space Mono</strong> для всего технического: меток, кода, счётчика слайдов.</p>
+
+    <p>Цвета — тёмная база с яркими акцентами:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">main.css</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-css">:root {
+    --bg-primary: #0d0d0d;
+    --text-primary: #f5f5f0;
+    --accent: #ff3d00;        /* оранжевый */
+    --highlight: #e8ff00;     /* жёлтый */
+}</code></pre>
+    </div>
+
+    <h2>Grain-текстура через SVG</h2>
+
+    <p>Плёночный шум. Обычно для этого тащат PNG-файл. Но есть способ лучше — SVG с feTurbulence генерирует шум прямо в браузере:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">main.css</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-css">body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+}</code></pre>
+    </div>
+
+    <p><code>opacity: 0.03</code> — почти невидимо. Но убери — и сразу чувствуется, что чего-то не хватает.</p>
+
+    <h2>Анимация skew при переходах</h2>
+
+    <p>Слайды появляются с перекосом в 2 градуса и выпрямляются. Мелочь, но без неё переходы кажутся плоскими:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">main.css</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-css">@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) skewY(2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) skewY(0);
+    }
+}</code></pre>
+    </div>
+
+    <p>Секрет — <code>cubic-bezier(0.16, 1, 0.3, 1)</code>. Быстрый старт, плавное торможение.</p>
+
+    <h2>Карта с пульсирующими маркерами</h2>
+
+    <p>19 участников из 9 городов — от Буэнос-Айреса до Екатеринбурга. Просто список городов — скучно. Карта — сразу понятно.</p>
+
+    <p>SVG с упрощёнными континентами. Города — круги с pulse-анимацией:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">StatsSlide.jsx</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-javascript">const CITY_COORDS = [
+    { name: 'Москва', x: 62, y: 28, count: 8 },
+    { name: 'Берлин', x: 46, y: 31, count: 1 },
+    { name: 'Буэнос-Айрес', x: 24, y: 82, count: 1 },
+    // ...
+];</code></pre>
+    </div>
+
+    <p>Каждый маркер пульсирует со своей задержкой. Москва с 8 участниками — крупнее остальных:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">main.css</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-css">.city-marker:nth-child(1) .pulse-ring { animation-delay: 0s; }
+.city-marker:nth-child(2) .pulse-ring { animation-delay: 0.15s; }
+.city-marker:nth-child(3) .pulse-ring { animation-delay: 0.3s; }
+/* ... */</code></pre>
+    </div>
+
+    <h2>Навигация с клавиатуры</h2>
+
+    <p>Стрелки, Space, Home/End. Без этого — не презентация:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">App.jsx</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-javascript">useEffect(() =&gt; {
+    const handleKeyDown = (e) =&gt; {
+        switch (e.key) {
+            case 'ArrowRight':
+            case ' ':
+                goNext();
+                break;
+            case 'ArrowLeft':
+                goPrev();
+                break;
+            case 'Home':
+                goToSlide(0);
+                break;
+        }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () =&gt; window.removeEventListener('keydown', handleKeyDown);
+}, [goNext, goPrev]);</code></pre>
+    </div>
+
+    <h2>Что получилось</h2>
+
+    <p>11 слайдов. Запускается через <code>npx serve .</code> или любой локальный сервер. Работает в любом браузере.</p>
+
+    <p>Структура папок:</p>
+
+    <pre><code>presentation/
+├── index.html
+├── styles/main.css
+├── data/
+│   ├── cohort.js
+│   └── slides.js
+└── components/
+    ├── App.jsx
+    ├── Controls.jsx
+    └── layouts/
+        ├── TitleSlide.jsx
+        ├── StatsSlide.jsx
+        └── ...</code></pre>
+
+    <div class="callout warning">
+      <strong>Ограничения</strong>
+      <p>Требует локальный сервер — браузер не загрузит JSX напрямую из файловой системы. Нет hot reload. Для production нужна сборка.</p>
+    </div>
+
+    <p>Для курсовой презентации — хватает. Сел в 8 вечера, к 9 уже прогонял слайды.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://www.nngroup.com/articles/neobrutalism/" target="_blank">Neobrutalism: Definition and Best Practices — NN/G</a></li>
+        <li><a href="https://bejamas.com/blog/neubrutalism-web-design-trend" target="_blank">Neubrutalism — UI Design Trend — Bejamas</a></li>
+        <li><a href="https://babeljs.io/docs/babel-standalone" target="_blank">@babel/standalone — Babel Documentation</a></li>
+        <li><a href="https://blog.jim-nielsen.com/2020/react-without-build-tools/" target="_blank">React Without Build Tools — Jim Nielsen</a></li>
+        <li><a href="https://mediusware.com/blog/using-react-via-cdn" target="_blank">React via CDN: Fast, Simple, and Perfect for Prototypes</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script src="https://unpkg.com/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/components/prism-css.min.js"></script>
+  <script>
+  function copyCode(btn) {
+    const code = btn.closest('.code-block').querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copied!';
+      setTimeout(() => btn.textContent = 'copy', 1500);
+    });
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
