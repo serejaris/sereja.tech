@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/telegram-api-vs-json-export</loc>
+    <lastmod>2026-01-13</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/app-types-guide</loc>
     <lastmod>2026-01-13</lastmod>
   </url>
