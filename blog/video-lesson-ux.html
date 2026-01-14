@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX видео-уроков: что реально работает | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Исследовал best practices для страниц видео-уроков. Что говорит NN/g про таймкоды, почему табы лучше скролла, и как не потерять студента на первых секундах.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="UX, видео-уроки, e-learning, таймкоды, онлайн-курсы, дизайн">
+  <link rel="canonical" href="https://sereja.tech/blog/video-lesson-ux">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="UX видео-уроков: что реально работает">
+  <meta property="og:description" content="Исследовал best practices для страниц видео-уроков. Что говорит NN/g про таймкоды и табы.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/video-lesson-ux">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-13T00:00:00+00:00">
+  <meta property="article:section" content="UX">
+  <meta property="article:tag" content="UX">
+  <meta property="article:tag" content="e-learning">
+  <meta property="article:tag" content="видео">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UX видео-уроков: что реально работает">
+  <meta name="twitter:description" content="Исследовал best practices для страниц видео-уроков.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "UX видео-уроков: что реально работает",
+    "description": "Исследовал best practices для страниц видео-уроков. Что говорит NN/g про таймкоды, почему табы лучше скролла.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-13",
+    "dateModified": "2026-01-13",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/video-lesson-ux"
+    },
+    "wordCount": 650,
+    "articleSection": "UX",
+    "keywords": ["UX", "e-learning", "видео-уроки", "таймкоды"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>UX видео-уроков: что реально работает</h1>
+    <p class="author">Сережа Рис · 13 января 2026</p>
+
+    <p class="intro">Делал шаблон страницы для воркшопа.</p>
+    <p class="intro">Сначала взял код из проекта mentor — там уже была страница сессии с видео.</p>
+    <p class="intro">Через два часа понял: надо с нуля.</p>
+
+    <h2>Что нужно было</h2>
+
+    <p>Страница для записи воркшопа: YouTube-видео, таймкоды, конспект, задания, ссылки. Вроде просто — видеоплеер слева, список справа, внизу текст.</p>
+
+    <p>Полез проверить в исследования. И хорошо что полез.</p>
+
+    <h2>NN/g про видео</h2>
+
+    <p>У Nielsen Norman Group есть статья <a href="https://www.nngroup.com/articles/instructional-video-guidelines/">«Videos as Instructional Content»</a>. Оттуда:</p>
+
+    <p><strong>Видео справа — мёртвая зона.</strong> Называется «right-rail blindness». Пользователи научились игнорировать правую колонку — там обычно реклама. Один участник исследования нашёл видео только когда модератор показал пальцем. И разозлился: «Спрятали как будто».</p>
+
+    <p><strong>Длительность — до клика.</strong> Не внутри плеера, а рядом с превью. Пять секунд на решение «смотреть или нет». Если человек не знает что видео короткое — скорее пропустит.</p>
+
+    <p><strong>Таймкоды — как якорные ссылки.</strong> Для записей длиннее 10 минут без них никак. Кликнул — прыгнул. Это база.</p>
+
+    <div class="callout insight">
+      <strong>💡 Про «слепоту правого рельса»</strong>
+      <p>Я сам ставил видео в правую колонку три года. Теперь понимаю почему engagement был низким.</p>
+    </div>
+
+    <h2>Про табы</h2>
+
+    <p>Когнитивная нагрузка — если на странице сразу видео, конспект, задания и ссылки, глаз не знает куда смотреть. Tabbed interface решает это: показываешь одно, остальное прячешь.</p>
+
+    <p>Ещё важно: прогресс виден всегда. Человек хочет знать сколько осталось — progress bar на виду.</p>
+
+    <h2>Что сделал</h2>
+
+    <p>Четыре таба:</p>
+    <ul>
+      <li><strong>Запись</strong> — видео слева, таймкоды справа. Кликаешь по таймкоду — перематывает. Активный таймкод подсвечивается по мере просмотра.</li>
+      <li><strong>Конспект</strong> — markdown, ключевые моменты.</li>
+      <li><strong>Задания</strong> — чекбоксы, состояние в localStorage.</li>
+      <li><strong>Материалы</strong> — карточки со ссылками.</li>
+    </ul>
+
+    <div class="callout warning">
+      <strong>⚠️ Про чужой код</strong>
+      <p>Шаблон из другого проекта — антипаттерн. Тот код писали под другие задачи. Лучше свой, заточенный под конкретный use case. Я потратил два часа на адаптацию прежде чем это понял.</p>
+    </div>
+
+    <h2>Коротко</h2>
+
+    <ol>
+      <li>Видео наверху и крупно. Таймкоды рядом.</li>
+      <li>Контент по табам. Не километровый скролл.</li>
+      <li>Состояние сохраняется между сессиями.</li>
+    </ol>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://www.nngroup.com/articles/instructional-video-guidelines/" target="_blank">NN/g: Videos as Instructional Content</a></li>
+        <li><a href="https://www.nngroup.com/articles/fight-right-rail-blindness/" target="_blank">NN/g: Fight Right-Rail Blindness</a></li>
+        <li><a href="https://viartisan.com/2025/05/27/elearning-ui-ux-design/" target="_blank">Viartisan: eLearning UI/UX Design Guide 2025</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

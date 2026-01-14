@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/video-lesson-ux</loc>
+    <lastmod>2026-01-13</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/react-presentation-no-build</loc>
     <lastmod>2026-01-13</lastmod>
   </url>
