@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/mapreduce-subagents</loc>
+    <lastmod>2026-01-14</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/video-pipeline-claude-code</loc>
     <lastmod>2026-01-14</lastmod>
   </url>

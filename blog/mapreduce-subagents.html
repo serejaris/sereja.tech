@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MapReduce для субагентов: как обработать 12800 строк и не потерять контекст | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Контекст закончился на середине файла. Решение — разбить работу между субагентами параллельно. Паттерн MapReduce для Claude Code.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="Claude Code, субагенты, MapReduce, контекст, параллельная обработка, Task tool">
+  <link rel="canonical" href="https://sereja.tech/blog/mapreduce-subagents">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MapReduce для субагентов: как обработать 12800 строк и не потерять контекст">
+  <meta property="og:description" content="Контекст закончился на середине файла. Решение — разбить работу между субагентами.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/mapreduce-subagents">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-14T00:00:00+00:00">
+  <meta property="article:section" content="Claude Code">
+  <meta property="article:tag" content="Claude Code">
+  <meta property="article:tag" content="субагенты">
+  <meta property="article:tag" content="вайбкодинг">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MapReduce для субагентов">
+  <meta name="twitter:description" content="Контекст закончился на середине файла. Решение — разбить работу между субагентами.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "MapReduce для субагентов: как обработать 12800 строк и не потерять контекст",
+    "description": "Контекст закончился на середине файла. Решение — разбить работу между субагентами параллельно.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-14",
+    "dateModified": "2026-01-14",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/mapreduce-subagents"
+    },
+    "wordCount": 900,
+    "articleSection": "Claude Code",
+    "keywords": ["Claude Code", "субагенты", "MapReduce", "Task tool", "контекст"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    .code-block {
+      margin: 24px 0;
+      border: 2px solid #000;
+    }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .code-block-title { font-weight: normal; }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    .copy-btn:hover { background: #333; }
+    .code-block pre {
+      margin: 0;
+      border: none;
+      background: #f8f8f8;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+
+    .ascii {
+      font-family: monospace;
+      font-size: 12px;
+      background: #fff;
+      padding: 16px;
+      margin: 24px 0;
+      border: 2px solid #000;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>MapReduce для субагентов: как обработать 12800 строк и не потерять контекст</h1>
+    <p class="author">Сережа Рис · 14 января 2026</p>
+
+    <p class="intro">Файл субтитров — 12 тысяч строк. Читаю кусками по тысяче.</p>
+    <p class="intro">На восьмом куске — Context limit reached.</p>
+    <p class="intro">А я ещё не начал генерировать конспект.</p>
+
+    <h2>Проблема: контекст — жёсткий лимит</h2>
+
+    <p>У Opus 4.5 окно в 200 тысяч токенов. Звучит много — пока не начнёшь читать большие файлы.</p>
+
+    <p>Мне нужно было сделать конспект двухчасового урока по вайбкодингу. Файл субтитров — 12800 строк. Каждое чтение по тысяче строк съедает процентов десять контекста. Плюс системный промпт, история чата, инструменты.</p>
+
+    <p>Восемь чтений — и 185k из 200k занято. Работа не начата, а данные уже не влезают.</p>
+
+    <h2>Идея: каждый субагент — это отдельные 200k</h2>
+
+    <p>Task tool запускает субагента в изолированном процессе. У него свой контекст. Свои 200 тысяч токенов.</p>
+
+    <div class="callout insight">
+      <strong>💡 Ключевое наблюдение</strong>
+      <p>Anthropic в своей research-системе обнаружили: разбивать работу между субагентами и потом собирать результаты — эффективнее, чем запихивать всё в один большой контекст. Даже если модель технически вмещает.</p>
+    </div>
+
+    <p>Три субагента — это три отдельных контекста по 200k. Каждый читает свой кусок файла, делает свою часть работы, возвращает результат. Главный агент только собирает.</p>
+
+    <h2>Паттерн MapReduce</h2>
+
+    <p>Название из распределённых вычислений: Map раздаёт задачи, Reduce собирает результаты.</p>
+
+    <div class="ascii">
+[subtitles.srt — 12800 строк]
+            │
+    ┌───────┼───────┐
+    ▼       ▼       ▼
+[Agent 1] [Agent 2] [Agent 3]
+Ch. 1-9   Ch. 10-18 Ch. 19-26
+    │       │       │
+    ▼       ▼       ▼
+[Summary] [Summary] [Summary]
+    └───────┼───────┘
+            ▼
+    [Main: объединить]
+            │
+            ▼
+    [summary.md готов]</div>
+
+    <p>Каждый субагент читает только свой диапазон — не знает про остальных и возвращает готовый кусок. Главный агент не читает файл вообще, только координирует.</p>
+
+    <h2>Как это выглядит в Claude Code</h2>
+
+    <p>Запускаю три Task tool параллельно:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">Параллельный запуск субагентов</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>Task(
+  subagent_type: "general-purpose",
+  prompt: "Прочитай subtitles.srt строки 1-4000.
+           Сгенерируй конспект для глав 1-9.
+           Формат: ### Глава + тезис + детали + цитата."
+)
+
+Task(
+  subagent_type: "general-purpose",
+  prompt: "Прочитай subtitles.srt строки 4000-8000.
+           Сгенерируй конспект для глав 10-18."
+)
+
+Task(
+  subagent_type: "general-purpose",
+  prompt: "Прочитай subtitles.srt строки 8000-12800.
+           Сгенерируй конспект для глав 19-26."
+)</code></pre>
+    </div>
+
+    <p>Три вызова в одном сообщении — Claude Code запускает их параллельно. Каждый субагент работает в своём контексте, читает свой кусок, генерирует свою часть.</p>
+
+    <p>Результат — три блока текста, которые склеиваю в один файл.</p>
+
+    <h2>Что получилось</h2>
+
+    <table>
+      <tr>
+        <th>Метрика</th>
+        <th>Последовательно</th>
+        <th>MapReduce</th>
+      </tr>
+      <tr>
+        <td>Контекст главного агента</td>
+        <td>100% (переполнен)</td>
+        <td>~30%</td>
+      </tr>
+      <tr>
+        <td>Время выполнения</td>
+        <td>Не завершилось</td>
+        <td>~3 минуты</td>
+      </tr>
+      <tr>
+        <td>Результат</td>
+        <td>Обрыв на середине</td>
+        <td>26 глав конспекта</td>
+      </tr>
+    </table>
+
+    <p>Последовательное чтение упёрлось в лимит. Параллельное — работает.</p>
+
+    <h2>Когда использовать</h2>
+
+    <p>Подходит:</p>
+    <ul>
+      <li>Файл больше 5000 строк</li>
+      <li>Задача разбивается на независимые куски</li>
+      <li>Результаты можно склеить без потери смысла</li>
+    </ul>
+
+    <p>Не подходит:</p>
+    <ul>
+      <li>Куски зависят друг от друга</li>
+      <li>Нужен общий контекст между частями</li>
+      <li>Файл маленький — overhead не окупится</li>
+    </ul>
+
+    <div class="callout warning">
+      <strong>⚠️ Overhead</strong>
+      <p>Каждый субагент стоит ~20k токенов на запуск. Три субагента — 60k. На маленьких задачах это может быть дороже, чем просто прочитать файл.</p>
+    </div>
+
+    <h2>Почему это работает</h2>
+
+    <p>Принцип из Go: «Share memory by communicating, don't communicate by sharing memory». Не пытайся впихнуть всё в один контекст. Раздай работу, собери результаты.</p>
+
+    <p>Anthropic пишут, что в их research-системе субагенты — это способ сжатия. Каждый исследует свой кусок, возвращает только важное. Главный агент не тонет в деталях.</p>
+
+    <p>То же самое с файлами. В моём случае: 12800 строк субтитров превратились в 460 строк конспекта. Компрессия примерно 28:1.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank">How we built our multi-agent research system</a> — Anthropic Engineering</li>
+        <li><a href="https://developers.googleblog.com/developers-guide-to-multi-agent-patterns-in-adk/" target="_blank">Developer's guide to multi-agent patterns in ADK</a> — Google Developers</li>
+        <li><a href="https://www.philschmid.de/context-engineering-part-2" target="_blank">Context Engineering for AI Agents: Part 2</a> — Phil Schmid</li>
+        <li><a href="https://zachwills.net/how-to-use-claude-code-subagents-to-parallelize-development/" target="_blank">How to Use Claude Code Subagents to Parallelize Development</a> — Zach Wills</li>
+        <li><a href="https://medium.com/@codecentrevibe/claude-code-multi-agent-parallel-coding-83271c4675fa" target="_blank">Multi-agent parallel coding with Claude Code</a> — Cuong Tham</li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script>
+  function copyCode(btn) {
+    const code = btn.closest('.code-block').querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copied!';
+      setTimeout(() => btn.textContent = 'copy', 1500);
+    });
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
