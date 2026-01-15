@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zoxide + fzf: как перестать печатать пути в терминале | Сережа Рис</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Практический гайд по настройке zoxide и fzf для быстрой навигации в терминале. Типичные ошибки, интерактивный выбор директорий, frecency-алгоритм.">
+  <meta name="author" content="Сережа Рис">
+  <meta name="keywords" content="zoxide, fzf, терминал, навигация, cd, frecency, zsh, macOS">
+  <link rel="canonical" href="https://sereja.tech/blog/zoxide-fzf-terminal-navigation">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="zoxide + fzf: как перестать печатать пути в терминале">
+  <meta property="og:description" content="Практический гайд по настройке zoxide и fzf для быстрой навигации. Типичные ошибки и как их избежать.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://sereja.tech/blog/zoxide-fzf-terminal-navigation">
+  <meta property="og:site_name" content="Сережа Рис">
+  <meta property="article:author" content="Сережа Рис">
+  <meta property="article:published_time" content="2026-01-15T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-01-15T00:00:00+00:00">
+  <meta property="article:section" content="Терминал">
+  <meta property="article:tag" content="zoxide">
+  <meta property="article:tag" content="fzf">
+  <meta property="article:tag" content="терминал">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="zoxide + fzf: как перестать печатать пути в терминале">
+  <meta name="twitter:description" content="Практический гайд по настройке zoxide и fzf. Типичные ошибки и как их избежать.">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "zoxide + fzf: как перестать печатать пути в терминале",
+    "description": "Практический гайд по настройке zoxide и fzf для быстрой навигации в терминале.",
+    "author": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Сережа Рис",
+      "url": "https://sereja.tech"
+    },
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-01-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://sereja.tech/blog/zoxide-fzf-terminal-navigation"
+    },
+    "wordCount": 750,
+    "articleSection": "Терминал",
+    "keywords": ["zoxide", "fzf", "терминал", "навигация", "cd"],
+    "inLanguage": "ru-RU"
+  }
+  </script>
+
+  <link href="https://unpkg.com/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fff;
+      color: #000;
+    }
+    a { color: #0000EE; text-decoration: underline; }
+    a:visited { color: #551A8B; }
+    h1 { font-size: 24px; margin-bottom: 8px; line-height: 1.3; }
+    h2 { font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+    p { margin-bottom: 15px; }
+    .author { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .intro { color: #666; margin-bottom: 8px; }
+    .intro:last-of-type { margin-bottom: 24px; }
+
+    .callout {
+      border: 1px solid #000;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+    .callout.warning { border-left: 3px solid #c00; }
+    .callout.insight { border-left: 3px solid #060; }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p { margin-bottom: 0; }
+
+    .code-block {
+      margin: 24px 0;
+      border: 2px solid #000;
+    }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .code-block-title { font-weight: normal; }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    .copy-btn:hover { background: #333; }
+    .code-block pre {
+      margin: 0;
+      border: none;
+      background: #f8f8f8;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    pre {
+      background: #f8f8f8;
+      border: 2px solid #000;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 24px 0;
+    }
+    code { font-family: monospace; background: #eee; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+
+    ul, ol { margin: 12px 0; padding: 0 0 0 1.2em; }
+    li { margin-bottom: 4px; }
+
+    .sources { margin-top: 40px; padding-top: 20px; border-top: 1px solid #000; }
+    .sources h3 { font-size: 14px; margin-bottom: 8px; }
+    .sources ul { list-style: none; padding: 0; }
+    .sources li { margin-bottom: 4px; }
+
+    footer { margin-top: 30px; text-align: center; font-size: 13px; color: #666; }
+  </style>
+</head>
+<body>
+  <p><a href="/blog/">&larr; Блог</a></p>
+  <article>
+    <h1>zoxide + fzf: как перестать печатать пути в терминале</h1>
+    <p class="author">Сережа Рис · 15 января 2026</p>
+
+    <p class="intro">Установил zoxide. Не работает.</p>
+    <p class="intro">Полчаса искал причину — оказалось, сам сломал одной строкой.</p>
+    <p class="intro">Починил, добавил fzf. Теперь <code>z hsl</code> вместо <code>cd ~/Documents/GitHub/hsl-dashboard</code>.</p>
+
+    <h2>Что такое zoxide</h2>
+
+    <p>Умный <code>cd</code>. Запоминает куда ты ходишь и потом прыгает туда по ключевому слову.</p>
+
+    <p>Написан на Rust, работает быстрее autojump в 10 раз. Стартует за 5ms против 50ms у autojump. На практике разница незаметна, но приятно.</p>
+
+    <p>Алгоритм называется frecency — комбинация частоты и свежести. Директория куда ходил вчера весит больше, чем та куда заглядывал месяц назад. Со временем старые пути опускаются вниз рейтинга.</p>
+
+    <h2>Установка</h2>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">macOS</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>brew install zoxide</code></pre>
+    </div>
+
+    <p>Потом добавить в <code>~/.zshrc</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">~/.zshrc</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>eval "$(zoxide init zsh)"</code></pre>
+    </div>
+
+    <p>Перезапустить терминал. Всё.</p>
+
+    <h2>Как я сломал zoxide одной строкой</h2>
+
+    <p>У меня в конфиге было:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">~/.zshrc (плохо)</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>eval "$(zoxide init zsh)"
+alias z='cd'</code></pre>
+    </div>
+
+    <p>Видишь проблему? Alias перезаписывает функцию <code>z</code>, которую создаёт zoxide. Вместо умного прыгуна получаем обычный cd.</p>
+
+    <p>Хуже того — ломается hook. zoxide записывает пути в базу через функцию <code>__zoxide_hook</code>, которая вызывается при каждой смене директории. Alias убивает эту связь.</p>
+
+    <div class="callout warning">
+      <strong>⚠️ Не перезаписывай z</strong>
+      <p>Если хочешь заменить cd на zoxide целиком — используй <code>--cmd cd</code> при инициализации, а не alias.</p>
+    </div>
+
+    <p>Удалил строку с alias. Заработало.</p>
+
+    <h2>Как пользоваться</h2>
+
+    <p>Сначала база пустая. Ходишь по директориям через cd — zoxide запоминает каждый переход.</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">Обучение</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>cd ~/Documents/GitHub/my-project
+cd ~/Downloads
+cd /etc/nginx</code></pre>
+    </div>
+
+    <p>Дня за два-три база заполнится. Дальше прыгаешь:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">Прыжки</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>z my-project    # → ~/Documents/GitHub/my-project
+z down          # → ~/Downloads
+z nginx         # → /etc/nginx</code></pre>
+    </div>
+
+    <p>Можно комбинировать слова: <code>z git my</code> найдёт что-то типа <code>~/Documents/GitHub/my-project</code>.</p>
+
+    <h2>Добавляем fzf для интерактивного выбора</h2>
+
+    <p>Tab-completion для zoxide требует fzf. Без него <code>z foo&lt;TAB&gt;</code> работает только для локальных директорий.</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">Установка fzf</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>brew install fzf</code></pre>
+    </div>
+
+    <p>После этого открываются два режима:</p>
+
+    <table>
+      <tr>
+        <th>Ввод</th>
+        <th>Что делает</th>
+      </tr>
+      <tr>
+        <td><code>z foo&lt;TAB&gt;</code></td>
+        <td>Completion локальных директорий</td>
+      </tr>
+      <tr>
+        <td><code>z foo &lt;TAB&gt;</code></td>
+        <td>Интерактивный выбор из базы zoxide</td>
+      </tr>
+      <tr>
+        <td><code>zi foo</code></td>
+        <td>То же самое — fzf-выбор</td>
+      </tr>
+    </table>
+
+    <p>Обрати внимание на пробел. <code>z foo&lt;TAB&gt;</code> и <code>z foo &lt;TAB&gt;</code> — разные вещи. С пробелом открывается fzf со списком всех путей из базы.</p>
+
+    <div class="callout insight">
+      <strong>💡 zi — быстрый доступ к fzf</strong>
+      <p>Если не хочешь помнить про пробел — используй <code>zi</code>. Это alias для интерактивного режима. <code>zi git</code> сразу откроет fzf с фильтром.</p>
+    </div>
+
+    <h2>Полезные команды</h2>
+
+    <table>
+      <tr>
+        <th>Команда</th>
+        <th>Что делает</th>
+      </tr>
+      <tr>
+        <td><code>zoxide query -ls</code></td>
+        <td>Показать всю базу с весами</td>
+      </tr>
+      <tr>
+        <td><code>zoxide add /path</code></td>
+        <td>Добавить путь вручную</td>
+      </tr>
+      <tr>
+        <td><code>zoxide remove /path</code></td>
+        <td>Удалить путь из базы</td>
+      </tr>
+    </table>
+
+    <h2>Альтернативы</h2>
+
+    <p>Есть autojump, оригинальный z, fasd. Я выбрал zoxide.</p>
+
+    <p>Rust. Быстрее autojump в 10 раз — 5ms на старт против 50ms. На практике не замечаешь, но на слабых машинах разница есть.</p>
+
+    <p>fzf-интеграция из коробки. 32K звёзд на GitHub, активная разработка.</p>
+
+    <p>autojump работает, но медленнее. Оригинальный z — shell-скрипт, fuzzy search нет. fasd заархивирован в 2022.</p>
+
+    <h2>Итого</h2>
+
+    <p>Две команды:</p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-block-title">Всё что нужно</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code>brew install zoxide fzf
+echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc</code></pre>
+    </div>
+
+    <p>У меня в базе 120 путей за месяц. Чаще всего: <code>z hsl</code>, <code>z whisper</code>, <code>z claude</code>. Секунды на каждом переходе — за день набегает.</p>
+
+    <div class="sources">
+      <h3>Источники</h3>
+      <ul>
+        <li><a href="https://github.com/ajeetdsouza/zoxide" target="_blank">zoxide на GitHub</a></li>
+        <li><a href="https://zoxide.org/blog/" target="_blank">Официальный блог zoxide</a></li>
+        <li><a href="https://zoxide.org/blog/zoxide-vs-autojump/" target="_blank">zoxide vs autojump — сравнение производительности</a></li>
+        <li><a href="https://batsov.com/articles/2025/06/12/zoxide-tips-and-tricks/" target="_blank">zoxide: tips and tricks — Bozhidar Batsov</a></li>
+        <li><a href="https://github.com/junegunn/fzf" target="_blank">fzf на GitHub</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      Январь 2026
+    </footer>
+  </article>
+  <script>
+  function copyCode(btn) {
+    const code = btn.closest('.code-block').querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copied!';
+      setTimeout(() => btn.textContent = 'copy', 1500);
+    });
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

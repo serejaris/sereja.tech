@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/zoxide-fzf-terminal-navigation</loc>
+    <lastmod>2026-01-15</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/claude-code-logs-stack</loc>
     <lastmod>2026-01-15</lastmod>
   </url>
