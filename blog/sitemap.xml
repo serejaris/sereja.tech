@@ -10,6 +10,10 @@
   </url>
   <!-- SITEMAP_POSTS_START -->
   <url>
+    <loc>https://sereja.tech/blog/modular-rules-claude-md</loc>
+    <lastmod>2026-01-17</lastmod>
+  </url>
+  <url>
     <loc>https://sereja.tech/blog/claude-code-skills-distribution</loc>
     <lastmod>2026-01-16</lastmod>
   </url>
