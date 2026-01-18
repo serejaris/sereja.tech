@@ -5,7 +5,7 @@
 (function() {
   // Config
   const POSTHOG_KEY = 'phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN';
-  const POSTHOG_HOST = 'https://eu.i.posthog.com'; // EU or US
+  const POSTHOG_HOST = 'https://us.i.posthog.com';
 
   // State
   let maxScroll = 0;
