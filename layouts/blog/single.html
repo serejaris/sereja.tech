@@ -1,0 +1,28 @@
+{{ define "main" }}
+<p><a href="/blog/">&larr; Блог</a></p>
+<article>
+  <h1>{{ .Title }}</h1>
+  <p class="author">{{ .Site.Params.author }} · {{ .Date.Format "2 January 2006" }}</p>
+
+  {{ with .Params.intro }}
+  <p class="intro">{{ . }}</p>
+  {{ end }}
+
+  {{ .Content }}
+
+  {{ with .Params.sources }}
+  <div class="sources">
+    <h3>Источники</h3>
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .url }}" target="_blank">{{ .title }}</a>{{ with .note }} — {{ . }}{{ end }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  <footer>
+    {{ .Date.Format "January 2006" }}
+  </footer>
+</article>
+{{ end }}
