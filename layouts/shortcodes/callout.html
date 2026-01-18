@@ -1,0 +1,5 @@
+{{ $type := .Get 0 | default "default" }}
+<div class="callout {{ $type }}">
+  {{ if .Get 1 }}<strong>{{ .Get 1 }}</strong>{{ end }}
+  {{ .Inner | markdownify }}
+</div>
