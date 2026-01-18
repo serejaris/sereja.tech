@@ -4,7 +4,7 @@ title = 'Сережа Рис'
 defaultContentLanguage = 'ru'
 
 [permalinks]
-  blog = '/blog/:filename'
+  blog = '/blog/:contentbasename'
 
 [params]
   author = 'Сережа Рис'
@@ -22,7 +22,7 @@ defaultContentLanguage = 'ru'
     style = 'github'
 
 [outputs]
-  home = ['HTML']
+  home = []
   section = ['HTML', 'RSS']
 
 [sitemap]

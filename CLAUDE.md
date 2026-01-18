@@ -1,46 +1,50 @@
-# CLAUDE.md
+# sereja.tech
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Персональный сайт и блог на Hugo.
 
-## Project Overview
-
-Персональный сайт-визитка sereja.tech — статическая страница без билд-процесса.
-
-## Development
+## Commands
 
 ```bash
-python3 -m http.server 8000
-# или
-npx serve .
+hugo server -D          # Dev с черновиками
+hugo build              # Production → public/
+python3 -m http.server  # Статика без Hugo
 ```
 
 ## Architecture
 
-- `index.html` — главная страница (monospace-дизайн, inline CSS)
-- `vercel.json` — cleanUrls для URL без .html
-- `blog/` — SEO-блог
-  - `index.html` — список статей между `<!-- POSTS_START/END -->`
-  - `sitemap.xml` — карта сайта между `<!-- SITEMAP_POSTS_START/END -->`
-  - `{slug}.html` — статьи (light theme, monospace, Prism.js для кода)
+| Path | Purpose |
+|------|---------|
+| `content/blog/*.md` | Статьи в markdown |
+| `layouts/` | Hugo шаблоны |
+| `static/` | Статические файлы (JS, images) |
+| `public/` | Собранный сайт (gitignored) |
+| `docs/plans/` | Планы реализации |
+| `docs/research/` | Research notes |
+| `index.html` | Legacy главная (вне Hugo) |
 
 ## Blog
 
-Статьи создаются через скилл `blog-post`. При добавлении статьи обновлять:
-1. `blog/index.html` — добавить `<li>` внутри POSTS маркеров
-2. `blog/sitemap.xml` — добавить `<url>` внутри SITEMAP_POSTS маркеров
+Статьи создаются через скилл `blog-post`:
+1. Создаёт `content/blog/{slug}.md` с frontmatter
+2. `hugo build` генерирует HTML в `public/`
 
-Шаблон статьи: monospace font, JSON-LD schema, Open Graph мета-теги, секция Sources.
-Референс: `blog/slash-commands-subagents.html`
+Frontmatter: title, date, description, tags.
+
+## Hugo Config
+
+- Permalinks: `/blog/:filename`
+- Syntax highlighting: github style
+- RSS: только для blog section
 
 ## Deployment
 
-GitHub Pages при пуше в main.
+Vercel собирает Hugo при пуше в main.
 
 ## Related Skills
 
-| Skill | Триггер | Назначение |
-|-------|---------|------------|
-| `blog-post` | "статья", "блог" | Создание статей для блога |
-| `deaify-text` | "убери аишность", "humanize" | Убрать AI-паттерны из текста |
-| `claude-md-writer` | "создай CLAUDE.md" | Создание/рефакторинг CLAUDE.md |
-| `readme-generator` | "напиши README" | Генерация README.md |
+| Skill | Триггер |
+|-------|---------|
+| `blog-post` | "статья", "блог" |
+| `deaify-text` | "убери аишность" |
+| `claude-md-writer` | "обнови CLAUDE.md" |
+| `readme-generator` | "напиши README" |
