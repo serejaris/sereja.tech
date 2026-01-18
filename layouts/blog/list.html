@@ -1,0 +1,14 @@
+{{ define "main" }}
+<p><a href="/">&larr; sereja.tech</a></p>
+<h1>Блог</h1>
+<p class="intro">{{ .Site.Params.description }}</p>
+
+<ul class="posts">
+  {{ range .Pages.ByDate.Reverse }}
+  <li>
+    <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
