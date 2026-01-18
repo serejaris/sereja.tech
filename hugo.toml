@@ -1,0 +1,30 @@
+baseURL = 'https://sereja.tech/'
+languageCode = 'ru'
+title = 'Сережа Рис'
+defaultContentLanguage = 'ru'
+
+[permalinks]
+  blog = '/blog/:filename'
+
+[params]
+  author = 'Сережа Рис'
+  description = 'Статьи про вайбкодинг, Claude Code и AI-инструменты'
+  twitter = '@riiiiiiiiss'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    style = 'github'
+
+[outputs]
+  home = ['HTML']
+  section = ['HTML', 'RSS']
+
+[sitemap]
+  changefreq = 'weekly'
+  priority = 0.5
