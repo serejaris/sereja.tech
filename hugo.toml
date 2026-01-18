@@ -2,6 +2,7 @@ baseURL = 'https://sereja.tech/'
 languageCode = 'ru'
 title = 'Сережа Рис'
 defaultContentLanguage = 'ru'
+enableRobotsTXT = true
 
 [permalinks]
   blog = '/blog/:contentbasename'
@@ -10,6 +11,20 @@ defaultContentLanguage = 'ru'
   author = 'Сережа Рис'
   description = 'Статьи про вайбкодинг, Claude Code и AI-инструменты'
   twitter = '@riiiiiiiiss'
+
+  # Social links for JSON-LD sameAs
+  [[params.social]]
+    name = 'twitter'
+    url = 'https://x.com/riiiiiiiiss'
+  [[params.social]]
+    name = 'telegram'
+    url = 'https://t.me/ris_ai'
+  [[params.social]]
+    name = 'youtube'
+    url = 'https://www.youtube.com/@serejaris'
+  [[params.social]]
+    name = 'community'
+    url = 'https://t.me/vibecod3rs'
 
 [markup]
   [markup.goldmark]
