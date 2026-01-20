@@ -48,6 +48,8 @@ hugo build
 ## Ссылки
 
 - **Блог:** https://sereja.tech
+- **Школа вайбкодинга:** https://vibecoding.phd
+- **AI-студия HSL:** https://hsl.sh
 - **Telegram:** https://t.me/ris_ai (личные заметки)
 - **Комьюнити:** https://t.me/vibecod3rs (вайбкодеры)
 - **YouTube:** https://www.youtube.com/@serejaris
@@ -60,9 +62,7 @@ hugo build
 | Скилл | Триггер | Что делает |
 |-------|---------|-----------|
 | `blog-post` | "статья", "блог" | Создаёт новую статью с frontmatter |
-| `deaify-text` | "убери аишность" | Делает текст более человечным |
 | `claude-md-writer` | "обнови CLAUDE.md" | Обновляет инструкции для Claude |
-| `readme-generator` | "напиши README" | Генерирует README |
 
 ## Разработка
 
