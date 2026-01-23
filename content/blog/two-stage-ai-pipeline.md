@@ -34,59 +34,26 @@ Pro получает готовый список из 10-15 тем вместо 
 
 ## Реализация
 
-```python
-EXTRACTION_MODEL = "gemini-3-flash-preview"  # Fast & cheap
-GENERATION_MODEL = "gemini-3-pro-preview"    # Quality output
+Написал Claude Code на Opus 4.5:
 
-async def generate(self, messages: list[dict]) -> DigestResult:
-    # Stage 1: Extract topics (Flash)
-    topics, extraction_tokens = await self._extract_topics(messages_json)
+{{< callout type="insight" >}}
+Раздели генерацию дайджеста на два этапа. Stage 1: Flash извлекает темы из сообщений и возвращает JSON с категориями (resource, solution, insight, tool). Stage 2: Pro получает готовые темы и пишет финальный текст. Используй Pydantic-схему для structured output.
+{{< /callout >}}
 
-    # Stage 2: Generate digest (Pro)
-    response = await self.client.generate_text(
-        model=GENERATION_MODEL,
-        prompt=DIGEST_PROMPT.format(topics_json=topics_json),
-    )
-```
+Агент сделал:
+1. Создал `TopicsResponse` схему с полями category, title, summary, url
+2. Настроил Gemini API с `response_schema` — JSON гарантированно валидный
+3. Разделил `DigestGenerator` на `_extract_topics()` и финальную генерацию
 
-Схема для structured output:
+## Retry с эскалацией
 
-```python
-class Topic(BaseModel):
-    category: str  # resource|solution|insight|tool
-    title: str
-    summary: str
-    url: str | None
-    message_link: str | None
+Flash иногда обрезает JSON на больших входах. Попросил добавить retry:
 
-class TopicsResponse(BaseModel):
-    topics: list[Topic]
-```
+{{< callout type="insight" >}}
+Добавь эскалацию лимитов при обрезке: 16K → 32K → 65K токенов. Если TokenLimitExceeded — повтори с бóльшим лимитом.
+{{< /callout >}}
 
-Gemini API с параметром `response_schema` гарантирует валидный JSON. Никакого парсинга регулярками.
-
-## Retry с эскалацией лимитов
-
-Flash иногда обрезает JSON на больших входах. Лечится эскалацией:
-
-```python
-token_limits = [16384, 32768, 65536]
-
-for attempt, max_tokens in enumerate(token_limits):
-    try:
-        result = await self.client.generate_structured(
-            model=EXTRACTION_MODEL,
-            response_schema=TopicsResponse,
-            max_tokens=max_tokens,
-        )
-        return result
-    except TokenLimitExceeded:
-        if attempt < len(token_limits) - 1:
-            continue
-        raise
-```
-
-16K → 32K → 65K. За месяц работы бота (31 дайджест) retry сработал 2 раза. Оба на 32K — 65K не понадобился.
+За месяц (31 дайджест) retry сработал дважды. Оба раза хватило 32K.
 
 ## Результат
 
