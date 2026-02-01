@@ -98,6 +98,18 @@ Issues остаются в своих репозиториях, но все ви
 
 **CLI-интерфейс.** Всё через команды: создать issue, обновить статус, добавить комментарий. Программируемо и повторяемо.
 
+## Это не только Claude Code
+
+GitHub становится стандартным интерфейсом для AI-агентов. Не случайность — закономерность.
+
+**GitHub Copilot Coding Agent** — можно назначить issue прямо на Copilot. Буквально: открываешь issue, в assignees выбираешь Copilot, и он начинает работать. Читает описание задачи, пишет код, создаёт PR. Issue как промпт.
+
+**Claude Code + GitHub Actions** — агент запускается автоматически при создании issue или комментарии. Интеграция через CI/CD.
+
+**CLAUDE.md** — файл в корне репозитория, который Claude Code читает при старте. Там архитектура проекта, conventions, команды для запуска. Агент "обучается" контексту репо ещё до того, как ты что-то спросишь.
+
+Cursor, Windsurf, Devin — все движутся в эту сторону. GitHub как единый источник правды: код, задачи, документация, контекст для агента.
+
 ## Что нужно
 
 1. **GitHub CLI** — `brew install gh` на маке
@@ -116,3 +128,5 @@ Issues остаются в своих репозиториях, но все ви
 
 - [GitHub CLI](https://cli.github.com/manual/) — официальная документация
 - [GitHub Projects API](https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects) — автоматизация через API
+- [GitHub Copilot Coding Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/assign-copilot-to-an-issue) — назначение issues на Copilot
+- [Claude Code GitHub Actions](https://docs.claude.com/en/docs/claude-code/github-actions) — интеграция с CI/CD
