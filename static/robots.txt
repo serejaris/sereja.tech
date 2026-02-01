@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# AI Crawlers - explicitly allowed for GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://sereja.tech/sitemap.xml
