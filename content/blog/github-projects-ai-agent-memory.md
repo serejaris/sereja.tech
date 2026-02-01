@@ -100,15 +100,41 @@ Issues остаются в своих репозиториях, но все ви
 
 ## Это не только Claude Code
 
-GitHub становится стандартным интерфейсом для AI-агентов. Не случайность — закономерность.
+GitHub становится стандартным интерфейсом для всех AI-агентов. В 2026 году почти каждый серьёзный coding agent умеет работать с репозиториями и issues.
 
-**GitHub Copilot Coding Agent** — можно назначить issue прямо на Copilot. Буквально: открываешь issue, в assignees выбираешь Copilot, и он начинает работать. Читает описание задачи, пишет код, создаёт PR. Issue как промпт.
+### Назначение задач через issues
 
-**Claude Code + GitHub Actions** — агент запускается автоматически при создании issue или комментарии. Интеграция через CI/CD.
+**GitHub Copilot Coding Agent** — открываешь issue, в assignees выбираешь Copilot. Он читает описание, пишет код, создаёт PR. Issue буквально становится промптом.
 
-**CLAUDE.md** — файл в корне репозитория, который Claude Code читает при старте. Там архитектура проекта, conventions, команды для запуска. Агент "обучается" контексту репо ещё до того, как ты что-то спросишь.
+**Google Jules** — асинхронный агент на Gemini 2.5 Pro. Подключаешь репозиторий через Jules GitHub App, ставишь задачу через API или jules-action в GitHub Actions. Агент работает в фоне, возвращает PR когда готово.
 
-Cursor, Windsurf, Devin — все движутся в эту сторону. GitHub как единый источник правды: код, задачи, документация, контекст для агента.
+**Amazon Q Developer** — добавляешь лейбл "Amazon Q development agent" на issue или пишешь `/q dev` в комментарии. Агент берёт задачу в работу и создаёт PR.
+
+**Devin** — интегрируется с GitHub, Linear, Jira. Можно назначить issue прямо на Devin или написать ему в Slack.
+
+### Файлы контекста репозитория
+
+Каждый агент читает специальный файл в корне репо:
+
+| Агент | Файл контекста |
+|-------|----------------|
+| Claude Code | `CLAUDE.md` |
+| OpenAI Codex | `AGENTS.md` |
+| Devin | `AGENTS.md` |
+| Windsurf | `AGENTS.md` |
+| Cursor | `.cursorrules` |
+
+В этих файлах — архитектура проекта, conventions, команды для запуска тестов. Агент "обучается" контексту репо ещё до первого вопроса.
+
+### CI/CD интеграции
+
+**Claude Code + GitHub Actions** — агент запускается автоматически при создании issue или комментарии.
+
+**jules-action** — Google Jules как шаг в GitHub workflow.
+
+**Amazon Q** — GitHub App с автоматическим триггером на лейблы.
+
+Паттерн один: GitHub как единый источник правды. Код, задачи, документация, контекст — всё в одном месте. Агенты подключаются к этому хабу и работают с теми же данными, что и люди.
 
 ## Что нужно
 
@@ -130,3 +156,7 @@ Cursor, Windsurf, Devin — все движутся в эту сторону. Gi
 - [GitHub Projects API](https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects) — автоматизация через API
 - [GitHub Copilot Coding Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/assign-copilot-to-an-issue) — назначение issues на Copilot
 - [Claude Code GitHub Actions](https://docs.claude.com/en/docs/claude-code/github-actions) — интеграция с CI/CD
+- [Google Jules](https://blog.google/technology/google-labs/jules/) — асинхронный coding agent
+- [jules-action](https://github.com/google-labs-code/jules-action) — GitHub Action для Jules
+- [Amazon Q Developer for GitHub](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/amazon-q-for-github.html) — интеграция с GitHub
+- [Devin GitHub Integration](https://docs.devin.ai/integrations/gh) — настройка Devin
