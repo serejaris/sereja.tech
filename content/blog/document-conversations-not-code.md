@@ -73,9 +73,9 @@ tags: ["вайбкодинг", "claude-code", "блоггинг"]
 └─────────────────────┘
 ```
 
-SpecStory ввёл термин "intent layer" — документирование намерений вместо кода. Cursor добавил shared transcripts для шаринга диалогов с агентами. Simon Willison в декабре 2025 выпустил claude-code-transcripts — экспорт сессий Claude Code в читаемый формат. Rasa использует "conversation-driven development" ещё с 2020 года.
+[SpecStory](https://docs.specstory.com/) ввёл термин "intent layer" — документирование намерений вместо кода. [Cursor](https://cursor.com/docs/shared-transcripts) добавил shared transcripts для шаринга диалогов с агентами. [Simon Willison](https://simonwillison.net/2025/Dec/25/claude-code-transcripts/) в декабре 2025 выпустил claude-code-transcripts — экспорт сессий Claude Code в читаемый формат. [Rasa](https://rasa.com/blog/conversation-driven-development-a-better-approach-to-building-ai-assistants/) использует "conversation-driven development" ещё с 2020 года.
 
-А "vibe coding" — термин Андрея Карпатого из февраля 2025: описываешь что хочешь на естественном языке, агент пишет код.
+А "vibe coding" — термин [Андрея Карпатого](https://twitter.com/karpathy/status/1756819463267340289) из февраля 2025: описываешь что хочешь на естественном языке, агент пишет код.
 
 Первичный артефакт теперь — диалог.
 
@@ -148,13 +148,3 @@ SpecStory ввёл термин "intent layer" — документирован�
 5. **Разговорные промпты.** Как объясняешь другу, не API-спецификация.
 
 Традиционные блоги показывают код. Вайбкодеры код не пишут — разговаривают с агентами.
-
----
-
-## Источники
-
-- [SpecStory: Intent Layer](https://docs.specstory.com/) — документирование намерений
-- [Cursor Shared Transcripts](https://cursor.com/docs/shared-transcripts) — шаринг диалогов
-- [Simon Willison: claude-code-transcripts](https://simonwillison.net/2025/Dec/25/claude-code-transcripts/) — экспорт сессий CC
-- [Rasa: Conversation-Driven Development](https://rasa.com/blog/conversation-driven-development-a-better-approach-to-building-ai-assistants/) — CDD с 2020
-- [Andrej Karpathy: Vibe Coding](https://twitter.com/karpathy/status/1756819463267340289) — происхождение термина
