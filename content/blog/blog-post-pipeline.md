@@ -106,20 +106,61 @@ Research: {результат Phase 2}
 
 ## Phase 4: Deaify
 
-Самая интересная фаза. Черновик проходит через skill `deaify-text`, который запускает четырёх параллельных критиков:
+Самая интересная фаза. Черновик проходит через skill `deaify-text`, который запускает четырёх параллельных критиков. Все четыре работают одновременно через Task API — [parallelization pattern](https://www.anthropic.com/engineering/building-effective-agents) из гайда Anthropic.
 
-1. **Generic Phrases Critic** — находит шаблонные фразы: "революционный подход", "инновационное решение", "позволяет реализовать"
-2. **Rhythm Critic** — анализирует длину предложений, однообразный ритм, слишком гладкий текст
-3. **Specifics Critic** — проверяет конкретику: есть ли примеры, цифры, детали вместо абстракций
-4. **Fact Checker** — верифицирует версии библиотек, даты релизов, ссылки
-
-Все четыре критика работают одновременно через Task API — [parallelization pattern](https://www.anthropic.com/engineering/building-effective-agents) из гайда Anthropic по агентам. Каждый смотрит на текст со своей стороны, находит разные проблемы.
-
-После критики основной агент переписывает текст с учётом замечаний. Обычно хватает одного прохода.
+### Critic A — Generic Detector
 
 {{< callout type="insight" >}}
-Деаификация обязательна. Без неё текст звучит как AI даже если промпты хорошие. Критики ловят паттерны, которые я сам не замечаю.
+Find AI-typical phrases in this text:
+- "важно понимать", "следует отметить", "в заключение"
+- "Это не X — это Y" dramatic contrasts
+- Sentences without specific names/numbers/dates
+- Abstract claims without examples
+
+Output: numbered list with exact quotes and line references.
 {{< /callout >}}
+
+### Critic B — Rhythm Analyzer
+
+{{< callout type="insight" >}}
+Analyze text rhythm:
+- Find 3+ consecutive sentences of similar length
+- Find paragraphs where all sentences start similarly
+- Check burstiness: ratio of shortest to longest sentence
+
+EXCEPTION: Do NOT flag sequential/step lists. They help readers scan.
+
+Output: specific locations that need rhythm variation.
+{{< /callout >}}
+
+### Critic C — Specificity Checker
+
+{{< callout type="insight" >}}
+Where could author add:
+- Personal experience ("I tried this and...")
+- Specific number or statistic
+- Name/company/date reference
+- Opinion marker ("я думаю", "по-моему")
+
+Output: 3-5 specific suggestions with WHERE to insert.
+{{< /callout >}}
+
+### Critic D — Fact Checker
+
+{{< callout type="insight" >}}
+Extract all verifiable claims from this text:
+- Software/model versions (GPT-4, Claude 3, React 18)
+- Release dates and timelines
+- Statistics, percentages, numbers
+
+For each claim, flag if:
+- Model/version might be outdated (AI models older than 6 months)
+- Statistic seems made up (round numbers, no source)
+
+Output: "[CLAIM]: {exact quote}" + "[FLAG]: {why suspicious}"
+{{< /callout >}}
+
+После критики основной агент переписывает текст с учётом замечаний. Обычно хватает одного прохода.
 
 ## Phase 5: Deploy + Telegram
 
@@ -127,10 +168,33 @@ Research: {результат Phase 2}
 
 1. Сохраняет markdown в `content/blog/{slug}.md`
 2. Проверяет frontmatter (title ≤60, description ≤160)
-3. Коммитит и пушит в git: `git commit && git push`
-4. Генерирует превью для Telegram через третьего субагента (Haiku)
-5. Добавляет пост в очередь: `python3 queue.py add`
+3. Коммитит и пушит в git
+4. Генерирует превью для Telegram
+5. Добавляет пост в очередь
 6. Сообщает мне дату публикации
+
+Превью генерирует субагент на Haiku — быстрая и дешёвая модель для простых задач:
+
+{{< callout type="insight" >}}
+Напиши превью статьи для Telegram канала.
+
+URL: https://sereja.tech/blog/{slug}
+
+ФОРМАТ:
+&lt;b&gt;Hook — цепляющая фраза про боль/результат&lt;/b&gt;
+
+Тезис — что получит читатель, 1-2 предложения.
+
+→ &lt;a href="URL"&gt;Читать&lt;/a&gt;
+
+ПРАВИЛА:
+- МАКСИМУМ 5 строк
+- HTML теги: &lt;b&gt; для заголовка, &lt;a href&gt; для ссылки
+- НИКАКИХ emoji, хештегов, markdown
+- Личный тон (я сделал, я понял)
+
+Верни ТОЛЬКО готовый HTML текст.
+{{< /callout >}}
 
 Посты публикуются в [@sereja_tech](https://t.me/sereja_tech) автоматически в 19:00 МСК — по одному в день из очереди. Пишу несколько статей подряд, они встают в очередь и выходят равномерно. Очередь управляется через launchd на маке — планировщик запускает скрипт по расписанию.
 
