@@ -6,9 +6,7 @@ tags: ["claude-code", "ai-agents", "вайбкодинг", "opus"]
 image: "/images/blog/agent-teams-opus-4-6-preview.png"
 ---
 
-{{< callout type="insight" >}}
-Этот пост — конспект [стрима про Opus 4.6 и Agent Teams](https://youtube.com/live/vVpmc-C1yrM).
-{{< /callout >}}
+{{< youtube vVpmc-C1yrM >}}
 
 Сегодня Anthropic выпустил [Claude Opus 4.6](https://www.anthropic.com/news/claude-opus-4-6). Главная фича — Agent Teams. Один агент делал всё сам, теперь можно собрать команду из нескольких, которые работают параллельно и общаются между собой. Даёшь один промпт — три агента расходятся проверять разные гипотезы одновременно.
 
