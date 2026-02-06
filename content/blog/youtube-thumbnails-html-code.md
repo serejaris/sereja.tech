@@ -1,5 +1,5 @@
 ---
-title: "YouTube-обложки без Canva и Figma"
+title: "YouTube-обложки генерирует LLM, не Midjourney"
 date: 2026-02-06
 description: "Как генерировать обложки для видео через HTML-шаблоны, Playwright и YouTube API. Без графических редакторов."
 tags: ["youtube", "playwright", "вайбкодинг", "обложки", "claude-code"]
