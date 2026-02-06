@@ -1,12 +1,12 @@
 ---
-title: "YouTube-обложки через HTML вместо Canva"
+title: "YouTube-обложки без Canva и Figma"
 date: 2026-02-06
 description: "Как генерировать обложки для видео через HTML-шаблоны, Playwright и YouTube API. Без графических редакторов."
 tags: ["youtube", "playwright", "вайбкодинг", "обложки", "claude-code"]
 image: "/images/blog/youtube-thumbnails-html-code-preview.png"
 ---
 
-Каждую неделю новый урок. Каждому уроку — обложка. Открывать Canva и менять текст на "Неделя 3" — не то, ради чего я веду [курс](https://youtube.com/@serejaris).
+Каждую неделю новый урок. Каждому уроку — обложка. Попросил LLM делать их вместо меня — теперь Canva не открываю. Вот как это работает на моём [канале](https://youtube.com/@serejaris).
 
 Сделал через код.
 
