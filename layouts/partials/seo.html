@@ -2,14 +2,14 @@
 <meta name="description" content="{{ .Description | default .Site.Params.description }}">
 <meta name="author" content="{{ .Site.Params.author }}">
 {{ with .Keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
-<link rel="canonical" href="{{ .Permalink }}">
+<link rel="canonical" href="{{ .Permalink | strings.TrimSuffix "/" }}">
 
 <!-- Open Graph -->
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:url" content="{{ .Permalink | strings.TrimSuffix "/" }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 {{ with .Params.image }}
 <meta property="og:image" content="{{ . | absURL }}">
@@ -54,7 +54,7 @@
   "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "{{ .Permalink }}"
+    "@id": "{{ .Permalink | strings.TrimSuffix "/" }}"
   },
   "wordCount": {{ .WordCount }},
   {{ with .Params.section }}"articleSection": "{{ . }}",{{ end }}
@@ -69,7 +69,7 @@
   "@type": "Blog",
   "name": "{{ .Title }}",
   "description": "{{ .Site.Params.description }}",
-  "url": "{{ .Permalink }}",
+  "url": "{{ .Permalink | strings.TrimSuffix "/" }}",
   "author": {
     "@type": "Person",
     "name": "{{ .Site.Params.author }}",
