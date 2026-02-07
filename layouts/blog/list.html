@@ -3,6 +3,8 @@
 <h1>Блог</h1>
 <p class="intro">{{ .Site.Params.description }}</p>
 
+<p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
+
 <ul class="posts">
   {{ range .Pages.ByDate.Reverse }}
   <li>
@@ -11,10 +13,4 @@
   </li>
   {{ end }}
 </ul>
-
-<div class="subscribe">
-  <strong>Подписаться на обновления</strong>
-  <p>Новые статьи и заметки про вайбкодинг — в Telegram-канале.</p>
-  <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a>
-</div>
 {{ end }}
