@@ -14,6 +14,8 @@ image: "/images/blog/seo-audit-hugo-vercel-checklist-preview.png"
 
 Захотел понять, индексирует ли Google мой блог нормально. Зашёл в Search Console. Увидел пустоту.
 
+Написал Claude Code на Opus 4.6:
+
 {{< callout insight >}}
 Мне нужно сабмитить sitemap? Проведи комплексное исследование лучших практик для этой проблемы, используя Exa MCP.
 {{< /callout >}}
