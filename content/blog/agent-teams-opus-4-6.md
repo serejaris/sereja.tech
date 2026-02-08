@@ -4,6 +4,7 @@ date: 2026-02-05
 description: "Opus 4.6 принёс Agent Teams — несколько агентов работают параллельно над одной задачей. Как включить, когда использовать и как я собрал чат на стриме за 15 минут двумя агентами."
 tags: ["claude-code", "ai-agents", "вайбкодинг", "opus"]
 image: "/images/blog/agent-teams-opus-4-6-preview.png"
+youtube_id: "vVpmc-C1yrM"
 ---
 
 {{< youtube vVpmc-C1yrM >}}

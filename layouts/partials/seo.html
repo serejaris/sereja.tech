@@ -59,9 +59,32 @@
   "wordCount": {{ .WordCount }},
   {{ with .Params.section }}"articleSection": "{{ . }}",{{ end }}
   "keywords": [{{ range $i, $tag := .Params.tags }}{{ if $i }}, {{ end }}"{{ $tag }}"{{ end }}],
-  "inLanguage": "ru-RU"
+  "inLanguage": "ru-RU"{{ with .Params.youtube_id }},
+  "video": {
+    "@type": "VideoObject",
+    "name": "{{ $.Title }}",
+    "description": "{{ $.Description }}",
+    "thumbnailUrl": "https://img.youtube.com/vi/{{ . }}/maxresdefault.jpg",
+    "uploadDate": "{{ $.Date.Format "2006-01-02" }}",
+    "contentUrl": "https://www.youtube.com/watch?v={{ . }}",
+    "embedUrl": "https://www.youtube.com/embed/{{ . }}"
+  }{{ end }}
 }
 </script>
+{{ with .Params.youtube_id }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ $.Title }}",
+  "description": "{{ $.Description }}",
+  "thumbnailUrl": "https://img.youtube.com/vi/{{ . }}/maxresdefault.jpg",
+  "uploadDate": "{{ $.Date.Format "2006-01-02" }}",
+  "contentUrl": "https://www.youtube.com/watch?v={{ . }}",
+  "embedUrl": "https://www.youtube.com/embed/{{ . }}"
+}
+</script>
+{{ end }}
 {{ else }}
 <script type="application/ld+json">
 {
