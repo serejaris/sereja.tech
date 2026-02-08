@@ -1,7 +1,7 @@
 ---
-title: "Починка метрики: почему GitHub обогнал Codex"
+title: "Почему AI неправильно понимает длинные тексты"
 date: 2026-02-06
-description: "concentration_score ранжировал entities по упоминаниям. GitHub с 22 mentions доминировал, хотя Codex активно использовали 30% видео. Переписали формулу."
+description: "AI генерировал описание стрима и поставил GitHub в заголовок вместо Codex. Потому что считал упоминания, а не глубину. Починил формулу."
 tags: ["ai", "youtube", "claude-code", "метрики", "вайбкодинг"]
 image: "/images/blog/youtube-metadata-relevance-fix-preview.png"
 ---
