@@ -1,84 +1,52 @@
 # sereja.tech
 
-**Персональный блог про вайбкодинг, Claude Code и AI-инструменты.**
+**Блог про вайбкодинг и Claude Code.**
 
-Сайт с 30+ статьями о разработке с AI, автоматизации рабочего процесса и инженерии многоагентных систем. Собирается Hugo, деплоится на Vercel.
-
-## Что внутри
-
-- **Статьи про Claude Code** — как использовать Claude Code для реальных задач, примеры скиллов
-- **AI-рабочие процессы** — video pipelines, RAG с embeddings, Telegram боты, многоагентные системы
-- **Инженерия** — автоматизация, видеобработка, MIDI-контроль, навигация в терминале
-- **Практические решения** — от SEO для AI-эры до health checks для скриптов
+55+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Быстрый старт
 
 ```bash
-# Разработка с черновиками
+git clone https://github.com/serejaris/sereja.tech.git
+cd sereja.tech
 hugo server -D
-
-# Открыть http://localhost:1313
-
-# Production build
-hugo build
-
-# Собранный сайт в public/
+# → http://localhost:1313/blog
 ```
+
+## Что внутри
+
+- **Claude Code** — скиллы, хуки, воркфлоу
+- **Пайплайны** — видео, RAG, Telegram боты
+- **Автоматизация** — MIDI-контроль OBS, терминал, CI/CD
+- **Практика** — SEO, health checks, многоагентные системы
 
 ## Структура
 
-| Путь | Назначение |
-|------|-----------|
-| `content/blog/*.md` | Статьи в markdown |
-| `layouts/` | Hugo шаблоны и компоненты |
-| `static/` | JS, CSS, изображения |
-| `public/` | Собранный сайт (gitignored) |
-| `hugo.toml` | Конфиг Hugo |
+```
+sereja.tech/
+├── content/blog/    # Статьи (Markdown)
+├── layouts/         # Hugo шаблоны
+├── static/          # JS, картинки
+└── hugo.toml        # Конфиг
+```
 
-## Технология
+## Стек
 
-| Слой | Стек |
-|------|------|
-| SSG | Hugo 0.154.5 |
+| Компонент | Технология |
+|-----------|------------|
+| SSG | Hugo |
 | Хостинг | Vercel |
-| Синтаксис | GitHub style highlighting |
-| Фид | RSS для blog section |
-| SEO | robots.txt, Open Graph, JSON-LD |
+| SEO | JSON-LD, Open Graph |
 
 ## Ссылки
 
-- **Блог:** https://sereja.tech
-- **Школа вайбкодинга:** https://vibecoding.phd
-- **AI-студия HSL:** https://hsl.sh
-- **Telegram:** https://t.me/ris_ai (личные заметки)
-- **Комьюнити:** https://t.me/vibecod3rs (вайбкодеры)
-- **YouTube:** https://www.youtube.com/@serejaris
-- **Twitter:** https://x.com/riiiiiiiiss
-
-## Скиллы Claude Code
-
-Для быстрой работы с сайтом используй эти скиллы в Claude Code:
-
-| Скилл | Триггер | Что делает |
-|-------|---------|-----------|
-| `blog-post` | "статья", "блог" | Создаёт новую статью с frontmatter |
-| `deaify-text` | "убери аишность" | Делает текст более человечным |
-
-## Разработка
-
-```bash
-# Локальный сервер с hot reload
-hugo server -D
-
-# Только статика (без Hugo)
-python3 -m http.server
-
-# Собрать для production
-hugo build
-```
-
-Статьи пишутся в `content/blog/` markdown-ом. Hugo автоматически генерирует HTML с путями `/blog/:filename`.
+| Ресурс | URL |
+|--------|-----|
+| Блог | [sereja.tech](https://sereja.tech) |
+| Telegram | [@ris_ai](https://t.me/ris_ai) |
+| Комьюнити | [@vibecod3rs](https://t.me/vibecod3rs) |
+| YouTube | [@serejaris](https://youtube.com/@serejaris) |
 
 ## Лицензия
 
-MIT
+Контент © Сережа Рис. Код — MIT.

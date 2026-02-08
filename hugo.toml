@@ -41,5 +41,5 @@ enableRobotsTXT = true
   section = ['HTML', 'RSS']
 
 [sitemap]
-  changefreq = 'weekly'
-  priority = 0.5
+  changefreq = ''
+  priority = -1
