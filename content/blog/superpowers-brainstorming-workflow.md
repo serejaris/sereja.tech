@@ -23,6 +23,8 @@ tags: ["claude-code", "superpowers", "brainstorming", "вайбкодинг", "w
 
 Главный воркфлоу: **brainstorming → design → plan → execute**. Каждый этап — отдельный скилл. Каждый заканчивается артефактом, который передаётся дальше.
 
+Установка — 10 секунд. В Claude Code набираешь `/plugin`, открываешь вкладку Discover, ищешь "superpowers", ставишь. Перезапускаешь Claude Code — в логе появится "SessionStart:startup hook succeeded". Всё, скиллы активны.
+
 [Trevor Lasn](https://www.trevorlasn.com/blog/superpowers-claude-code-skills) обновил проект до Next.js 16 через Superpowers и не пропустил ни одного файла. Его слова: агент не бросается писать код, а сначала выясняет, что ты на самом деле хочешь сделать.
 
 Именно это мне было нужно.
