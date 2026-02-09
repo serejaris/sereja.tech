@@ -1,6 +1,6 @@
 ---
 title: "Claude Code — напарник, Codex — исполнитель"
-date: 2026-02-10
+date: 2026-02-09
 description: "703 промпта в Claude Code, 94 в Codex CLI. Разобрал по логам, где каждый инструмент сильнее, и почему я использую оба."
 tags: ["claude-code", "codex-cli", "вайбкодинг", "ai-tools", "сравнение"]
 ---
