@@ -25,6 +25,9 @@ enableRobotsTXT = true
   [[params.social]]
     name = 'community'
     url = 'https://t.me/vibecod3rs'
+  [[params.social]]
+    name = 'github'
+    url = 'https://github.com/serejaris'
 
 [markup]
   [markup.goldmark]

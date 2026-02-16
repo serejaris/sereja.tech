@@ -1,0 +1,19 @@
+{{ define "main" }}
+<p><a href="/blog/">&larr; Блог</a></p>
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ .Site.Params.author }}",
+  "url": "{{ .Site.BaseURL }}",
+  "jobTitle": "Вайбкодер",
+  "description": "{{ .Description }}",
+  "sameAs": [{{ range $i, $s := .Site.Params.social }}{{ if $i }}, {{ end }}"{{ $s.url }}"{{ end }}]
+}
+</script>
+{{ end }}
