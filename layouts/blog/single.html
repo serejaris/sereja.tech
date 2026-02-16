@@ -21,6 +21,18 @@
   </div>
   {{ end }}
 
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  {{ with $related }}
+  <div class="related-posts">
+    <h3>Читайте также</h3>
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
   <p class="author-link"><a href="/about/">Об авторе</a></p>
 
   <p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
