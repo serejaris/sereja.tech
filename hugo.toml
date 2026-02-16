@@ -4,6 +4,8 @@ title = 'Сережа Рис'
 defaultContentLanguage = 'ru'
 enableRobotsTXT = true
 
+[taxonomies]
+
 [permalinks]
   blog = '/blog/:contentbasename'
 
