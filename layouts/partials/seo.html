@@ -85,6 +85,46 @@
 }
 </script>
 {{ end }}
+{{/* FAQPage schema */}}
+{{ with .Params.faq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $i, $item := . }}{{ if $i }},{{ end }}
+    {
+      "@type": "Question",
+      "name": "{{ $item.q | htmlEscape }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ $item.a | htmlEscape }}"
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{/* HowTo schema */}}
+{{ with .Params.howto }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{{ .name | htmlEscape }}",
+  "step": [
+    {{ range $i, $step := .steps }}{{ if $i }},{{ end }}
+    {
+      "@type": "HowToStep",
+      "text": "{{ $step | htmlEscape }}"
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
 {{ else }}
 <script type="application/ld+json">
 {
