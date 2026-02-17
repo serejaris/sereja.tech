@@ -1,0 +1,21 @@
+{{ define "main" }}
+<h1>{{ .Site.Params.author }}</h1>
+<p>{{ .Site.Params.description }}</p>
+
+<p>
+  <a href="https://t.me/ris_ai" target="_blank">Telegram @ris_ai</a> ·
+  <a href="https://t.me/vibecod3rs" target="_blank">Комьюнити @vibecod3rs</a> ·
+  <a href="https://www.youtube.com/@serejaris" target="_blank">YouTube</a>
+</p>
+
+<h2><a href="/blog/">Статьи</a></h2>
+<ul class="posts">
+  {{ range first 5 (where .Site.RegularPages "Section" "blog") }}
+  <li>
+    <span class="date">{{ .Date.Format "02.01.2006" }}</span>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+<p><a href="/blog/">Все статьи →</a></p>
+{{ end }}
