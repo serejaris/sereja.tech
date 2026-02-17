@@ -1,0 +1,21 @@
+{{ define "main" }}
+<h1>{{ .Site.Title }}</h1>
+<p class="intro">{{ .Site.Params.description }}</p>
+
+<p>
+  Telegram: <a href="https://t.me/ris_ai">@ris_ai</a> —
+  комьюнити вайбкодеров: <a href="https://t.me/vibecod3rs">@vibecod3rs</a>
+</p>
+
+<h2>Статьи</h2>
+<ul class="posts">
+  {{ range first 5 (where .Site.RegularPages "Section" "blog") }}
+  <li>
+    <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+
+<p><a href="/blog">Все статьи →</a></p>
+{{ end }}
