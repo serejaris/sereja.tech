@@ -352,12 +352,12 @@ body {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg: #0a0a0a;
-        --color-text: #ffffff;
-        --color-text-muted: #a3a3a3;
-        --color-border: #262626;
-        --color-card: #171717;
-        --color-hover: #262626;
+        --color-bg: #212121;
+        --color-text: #d1d5db;
+        --color-text-muted: #9b9b9b;
+        --color-border: #3a3a3a;
+        --color-card: #2f2f2f;
+        --color-hover: #3a3a3a;
     }
 }
 

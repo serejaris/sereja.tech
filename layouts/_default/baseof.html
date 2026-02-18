@@ -93,6 +93,25 @@
     .posts { list-style: none; padding: 0; }
     .posts li { margin-bottom: 12px; }
     .date { color: #666; font-size: 13px; margin-right: 8px; }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      body { background: #212121; color: #d1d5db; }
+      a { color: #7ab0ff; }
+      a:visited { color: #c4a6f5; }
+      .author, .intro, figcaption, footer, .date { color: #9b9b9b; }
+      .callout { border-color: #3a3a3a; }
+      .callout.cta { background: #2f2f2f; border-color: #4a4a4a; }
+      .callout.insight { border-left-color: #34d399; }
+      pre { background: #2f2f2f !important; border-color: #3a3a3a; }
+      code { background: #2f2f2f; }
+      pre code { background: none; }
+      .highlight pre { background-color: #2f2f2f !important; }
+      th { background: #2f2f2f; }
+      th, td { border-color: #3a3a3a; }
+      blockquote { border-left-color: #3a3a3a; background: #2f2f2f; }
+      .sources, .related-posts { border-top-color: #3a3a3a; }
+    }
   </style>
 </head>
 <body>
