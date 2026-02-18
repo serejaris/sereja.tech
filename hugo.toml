@@ -42,7 +42,7 @@ enableRobotsTXT = true
     style = 'github'
 
 [outputs]
-  home = ["HTML"]
+  home = ['HTML', 'RSS']
   section = ['HTML', 'RSS']
 
 [sitemap]

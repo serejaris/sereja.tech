@@ -125,6 +125,17 @@
 }
 </script>
 {{ end }}
+{{ else if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ .Site.Params.author }}",
+  "jobTitle": "Вайбкодер, строю AI-агентные системы через Claude Code",
+  "url": "{{ .Site.BaseURL }}",
+  "sameAs": [{{ range $i, $s := .Site.Params.social }}{{ if $i }}, {{ end }}"{{ $s.url }}"{{ end }}]
+}
+</script>
 {{ else }}
 <script type="application/ld+json">
 {
