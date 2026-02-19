@@ -16,6 +16,7 @@
 |------|---------|
 | Dev | `hugo server -D` |
 | Build | `hugo build` |
+| OG preview | `./scripts/og-preview/generate.sh --title "..." --output static/images/blog/{slug}-preview.png` |
 | Static preview | `python3 -m http.server` |
 
 ## Architecture
@@ -25,6 +26,7 @@
 | `content/blog/*.md` | Статьи |
 | `layouts/` | Hugo шаблоны |
 | `static/` | JS, images |
+| `scripts/og-preview/` | OG-превью генератор (HTML → Playwright → PNG 1200×630) |
 | `hugo.toml` | Конфиг Hugo |
 | `index.html` | Legacy главная (вне Hugo) |
 
@@ -32,10 +34,13 @@
 
 Статьи через skill `blog-post`:
 1. `content/blog/{slug}.md` + frontmatter
-2. `hugo build` → `public/`
+2. OG-превью: `./scripts/og-preview/generate.sh --title "..." [--command "..." --tools "a,b,c" --subtitle "..."] --output static/images/blog/{slug}-preview.png`
+3. `hugo build` → `public/`
 
-Frontmatter: title, date, description, tags.
+Frontmatter: title, date, description, tags, image.
 SEO: title ≤60 chars, description ≤160 chars.
+
+OG Preview: всегда генерировать через `scripts/og-preview/generate.sh`. Опции: `--title` (обязательно), `--subtitle`, `--command`, `--tools` (через запятую), `--visual` (эмодзи). Результат: 1200×630 PNG.
 
 Permalinks: `/blog/:filename`. RSS только для blog.
 

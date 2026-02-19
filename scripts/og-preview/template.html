@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #08090c;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 64px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Glitch title */
+  .title-wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  .title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    position: relative;
+  }
+
+  /* Glitch — pink only on top slice, cyan on bottom, both subtle */
+  .title::before,
+  .title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    overflow: hidden;
+  }
+  .title::before {
+    color: rgba(255, 20, 147, 0.4);
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+    transform: translate(-2px, -1px);
+    z-index: -1;
+  }
+  .title::after {
+    color: rgba(0, 255, 255, 0.3);
+    clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+    transform: translate(2px, 1px);
+    z-index: -1;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: #445;
+    margin-top: 14px;
+    line-height: 1.4;
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Terminal — neutral */
+  .terminal {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 18px 22px;
+    font-size: 19px;
+    line-height: 1.5;
+    color: #556;
+    margin-top: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .terminal .prompt { color: #5a6; }
+  .terminal .cmd { color: #99a; }
+  .terminal .progress-bar {
+    margin-top: 8px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+    width: 50%;
+  }
+  .terminal .progress-fill {
+    height: 100%;
+    width: 87%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+
+  /* Tool badges — neutral */
+  .tools {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+  .tool {
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #667;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .visual {
+    font-size: 64px;
+    margin-bottom: 16px;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Domain — THE accent, deeppink */
+  .domain {
+    position: absolute;
+    bottom: 30px;
+    left: 64px;
+    font-size: 18px;
+    color: deeppink;
+    font-weight: 700;
+    z-index: 3;
+    letter-spacing: 0.5px;
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+  <div class="visual hidden" id="visual">{{VISUAL}}</div>
+  <div class="title-wrap">
+    <div class="title" id="title" data-text="{{TITLE}}">{{TITLE}}</div>
+  </div>
+  <div class="subtitle hidden" id="subtitle">{{SUBTITLE}}</div>
+  <div class="terminal hidden" id="terminal">
+    <div><span class="prompt">$</span> <span class="cmd" id="command">{{COMMAND}}</span></div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
+  <div class="tools hidden" id="tools">{{TOOLS}}</div>
+  <div class="domain">sereja.tech</div>
+</body>
+</html>
