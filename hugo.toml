@@ -37,7 +37,7 @@ enableRobotsTXT = true
       unsafe = true
   [markup.highlight]
     codeFences = true
-    guessSyntax = true
+    guessSyntax = false
     lineNos = false
     style = 'github'
 
