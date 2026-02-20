@@ -5,6 +5,7 @@ defaultContentLanguage = 'ru'
 enableRobotsTXT = true
 
 [taxonomies]
+  tag = "tags"
 
 [permalinks]
   blog = '/blog/:contentbasename'

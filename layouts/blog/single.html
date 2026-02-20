@@ -3,6 +3,11 @@
 <article>
   <h1>{{ .Title }}</h1>
   <p class="author">{{ .Site.Params.author }} · {{ .Date.Format "2 January 2006" }}</p>
+  {{ with .Params.tags }}
+  <div class="tags">
+    {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
+  </div>
+  {{ end }}
 
   {{ with .Params.intro }}
   <p class="intro">{{ . }}</p>

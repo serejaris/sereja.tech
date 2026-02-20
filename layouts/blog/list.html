@@ -6,6 +6,12 @@
 
 <p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
 
+{{ with .Site.Taxonomies.tags }}
+<div class="tags">
+  {{ range .ByCount }}{{ if ge .Count 2 }}<a href="{{ "/tags/" | relURL }}{{ .Term | urlize }}/" class="tag">{{ .Term }} ({{ .Count }})</a>{{ end }}{{ end }}
+</div>
+{{ end }}
+
 <ul class="posts">
   {{ range .Pages.ByDate.Reverse }}
   <li>

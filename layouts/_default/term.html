@@ -1,0 +1,13 @@
+{{ define "main" }}
+<p><a href="/blog/">&larr; Блог</a></p>
+<h1>{{ .Title }}</h1>
+<p class="intro">{{ len .Pages }} {{ if le (len .Pages) 4 }}статьи{{ else }}статей{{ end }} с тегом &laquo;{{ .Title }}&raquo;</p>
+<ul class="posts">
+  {{ range .Pages.ByDate.Reverse }}
+  <li>
+    <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

@@ -20,7 +20,7 @@
 
 <h2>Последнее из блога</h2>
 <ul class="posts">
-  {{ range first 5 .Site.RegularPages.ByDate.Reverse }}
+  {{ range first 10 .Site.RegularPages.ByDate.Reverse }}
   <li>
     <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
     <a href="{{ .Permalink }}">{{ .Title }}</a>

@@ -1,0 +1,7 @@
+{{ define "main" }}
+<p><a href="/blog/">&larr; Блог</a></p>
+<h1>Теги</h1>
+<div class="tags">
+  {{ range .Data.Terms.ByCount }}<a href="{{ .Page.Permalink }}" class="tag">{{ .Page.Title }} ({{ .Count }})</a>{{ end }}
+</div>
+{{ end }}
