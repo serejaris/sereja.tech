@@ -2,7 +2,7 @@
 title: "Контент-план для канала: от одного поста к субагентам"
 date: 2026-02-06
 description: "Завёл AI-канал — сначала писал промпт на каждый пост, потом делегировал серию агенту с Exa MCP."
-tags: ["claude-code", "telegram", "mcp", "субагенты", "контент"]
+tags: ["claude code", "telegram", "субагенты"]
 image: "/images/blog/content-plan-subagents-exa-preview.png"
 ---
 

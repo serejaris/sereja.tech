@@ -2,10 +2,7 @@
 title: "MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа"
 date: 2026-01-11
 description: "Как я настроил MIDI-контроллер для переключения сцен в OBS и написал LED-индикатор с помощью Claude Code. Полный разбор: velocity, SysEx, EventClient."
-tags:
-  - MIDI
-  - OBS
-  - Claude Code
+tags: ["midi", "obs", "claude code"]
 section: Вайбкодинг
 ---
 

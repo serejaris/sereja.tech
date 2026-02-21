@@ -2,7 +2,7 @@
 title: "Почему AI неправильно понимает длинные тексты"
 date: 2026-02-06
 description: "AI генерировал описание стрима и поставил GitHub в заголовок вместо Codex. Потому что считал упоминания, а не глубину. Починил формулу."
-tags: ["ai", "youtube", "claude-code", "метрики", "вайбкодинг"]
+tags: ["youtube", "claude code"]
 image: "/images/blog/youtube-metadata-relevance-fix-preview.png"
 ---
 

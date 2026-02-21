@@ -2,10 +2,7 @@
 title: "Текст + картинка в одном сообщении Telegram"
 date: 2026-01-17
 description: "Как отправить длинный текст с картинкой в одном сообщении Telegram. LinkPreviewOptions, catbox.moe и почему нужна задержка перед отправкой."
-tags:
-  - Telegram
-  - Bot API
-  - вайбкодинг
+tags: ["telegram", "bot api"]
 section: Telegram
 ---
 

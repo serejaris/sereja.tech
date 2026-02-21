@@ -2,10 +2,7 @@
 title: "Дневник вайбкодера: каждая сессия — статья"
 date: 2026-01-11
 description: "Как превратить сессии с Claude Code в контент. AI-скиллы для исследования и написания текстов. Открытый эксперимент на GitHub."
-tags:
-  - вайбкодинг
-  - Claude Code
-  - digital garden
+tags: ["claude code"]
 section: AI
 ---
 

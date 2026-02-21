@@ -2,7 +2,7 @@
 title: "SEO-аудит блога за одну сессию Claude Code"
 date: 2026-02-07
 description: "Открыл Google Search Console — 0 sitemap, 307 redirect, 0 видео. За сессию Claude Code нашёл 5 проблем. Чеклист для Hugo+Vercel."
-tags: ["SEO", "Hugo", "Vercel", "claude-code"]
+tags: ["seo", "hugo", "claude code"]
 image: "/images/blog/seo-audit-hugo-vercel-checklist-preview.png"
 ---
 

@@ -2,10 +2,7 @@
 title: "Видео-пайплайн на Claude Code: от записи до YouTube за один промпт"
 date: 2026-01-14
 description: "Как я автоматизировал публикацию видео: субтитры через Whisper, слайды глав, превью, загрузка на YouTube и HTML-страница урока. Всё делают агенты."
-tags:
-  - Claude Code
-  - видео
-  - автоматизация
+tags: ["claude code", "автоматизация"]
 section: Claude Code
 ---
 

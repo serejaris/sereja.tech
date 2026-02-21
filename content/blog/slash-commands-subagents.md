@@ -2,10 +2,7 @@
 title: "Почему model: в slash-командах — это ловушка"
 date: 2026-01-10
 description: "Разбираюсь почему model: haiku в командах Claude Code не экономит токены. Commands, Skills и Agents — в чём разница и как делегировать правильно."
-tags:
-  - Claude Code
-  - AI
-  - вайбкодинг
+tags: ["claude code", "субагенты"]
 section: Claude Code
 ---
 

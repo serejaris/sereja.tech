@@ -2,11 +2,7 @@
 title: "Семантический поиск по Telegram: мой second brain из чатов"
 date: 2026-01-26
 description: "Как я сделал поиск по смыслу в своих Telegram-переписках за вечер. Telethon, sqlite-vec, OpenAI embeddings — и больше никаких ctrl+F по 50 чатам."
-tags:
-  - вайбкодинг
-  - Telegram
-  - RAG
-  - sqlite-vec
+tags: ["telegram", "rag", "sqlite-vec"]
 section: "Проекты"
 ---
 

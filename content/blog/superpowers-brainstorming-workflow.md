@@ -2,7 +2,7 @@
 title: "Superpowers: скиллы для Claude Code, которые экономят часы"
 date: 2026-02-09
 description: "Superpowers skills заставляют Claude Code думать перед кодом. Brainstorming с веб-поиском сэкономил мне часы на реальном проекте."
-tags: ["claude-code", "superpowers", "brainstorming", "вайбкодинг", "workflow", "exa-mcp"]
+tags: ["claude code", "superpowers"]
 ---
 
 Попросил агента сделать админку. Он сразу полез писать код — два экрана компонентов за минуту. Через час я всё выкинул и начал заново.

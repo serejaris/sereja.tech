@@ -2,10 +2,7 @@
 title: "Structured Output: почему текстовые промпты — это хрупко"
 date: 2026-01-13
 description: "Как я перешёл от текстовых инструкций в промпте к JSON-схемам. Реальный кейс: генерация дайджеста, когда модель забывала хештег."
-tags:
-  - LLM
-  - structured output
-  - Pydantic
+tags: ["llm", "pydantic"]
 section: LLM
 ---
 

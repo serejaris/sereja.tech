@@ -2,9 +2,7 @@
 title: "Логи Claude Code — твоя карта проектов"
 date: 2026-01-16
 description: "Как использовать ~/.claude/projects для аудита репозиториев: какие проекты в работе, где непушнутые коммиты, что забыл синхронизировать."
-tags:
-  - Claude Code
-  - вайбкодинг
+tags: ["claude code"]
 section: "Claude Code"
 ---
 

@@ -2,9 +2,7 @@
 title: "ASCII-дашборды вместо веб-интерфейсов"
 date: 2026-01-18
 description: "Почему я смотрю аналитику в терминале, а не в браузере. Grid-layout, box drawing characters и как Claude Code рисует дашборды за меня."
-tags:
-  - TUI
-  - Claude Code
+tags: ["tui", "claude code"]
 section: "Вайбкодинг"
 ---
 

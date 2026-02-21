@@ -2,7 +2,7 @@
 title: "Мой редотдел из трёх промптов"
 date: 2026-02-12
 description: "За одну сессию Claude Code собрал редотдел: стиль канала, 9 постов на неделю, автопубликация в 8:00. Три промпта — канал на автопилоте."
-tags: ["claude-code", "telegram", "автоматизация", "вайбкодинг"]
+tags: ["claude code", "telegram", "автоматизация"]
 image: "/images/blog/telegram-autopublisher-preview.png"
 ---
 

@@ -2,10 +2,7 @@
 title: "Как убрать аишность из текста: параллельные критики вместо одного rewriter"
 date: 2026-01-11
 description: "Один агент раздувает текст и оставляет AI-маркеры. Три параллельных критика + rewriter с hard rules — и текст становится человечным."
-tags:
-  - AI
-  - multi-agent
-  - Claude Code
+tags: ["claude code", "agents"]
 section: AI
 ---
 

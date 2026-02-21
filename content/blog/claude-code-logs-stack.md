@@ -2,10 +2,7 @@
 title: "Мой стек для анализа логов Claude Code"
 date: 2026-01-15
 description: "Какие инструменты использую для анализа логов Claude Code: claude-code-transcripts, claude-code-log, структура JSONL и как превращать сессии в контент."
-tags:
-  - Claude Code
-  - логи
-  - вайбкодинг
+tags: ["claude code", "логи"]
 section: "Claude Code"
 ---
 

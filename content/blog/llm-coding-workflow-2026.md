@@ -2,10 +2,7 @@
 title: "Как работать с LLM в 2026: workflow Addy Osmani"
 date: 2026-01-11
 description: "Сборник практик для работы с LLM в 2026: планирование до кода, context engineering, git worktrees для параллельных агентов, смена моделей. Источники: Addy Osmani, O'Reilly, incident.io."
-tags:
-  - LLM
-  - AI
-  - workflow
+tags: ["llm"]
 section: "AI"
 ---
 

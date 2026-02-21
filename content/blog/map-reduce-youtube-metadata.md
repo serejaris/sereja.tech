@@ -2,7 +2,7 @@
 title: "Map-Reduce для YouTube метаданных через AI субагентов"
 description: "Как я генерирую точные заголовки и описания из транскрипта видео через параллельных агентов — без галлюцинаций и с реальными сущностями."
 date: 2026-02-02
-tags: ["ai-agents", "youtube", "vibe-coding"]
+tags: ["agents", "youtube"]
 youtube_id: "AHIaQKQqfRM"
 ---
 

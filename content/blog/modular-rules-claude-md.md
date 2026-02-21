@@ -2,10 +2,7 @@
 title: "Модульные правила: как не утонуть в CLAUDE.md"
 date: 2026-01-17
 description: "Один CLAUDE.md на 500 строк — боль. Разбиваю на .claude/rules/ по доменам: база данных, тесты, фронтенд. Практический гайд с примерами."
-tags:
-  - Claude Code
-  - документация
-  - вайбкодинг
+tags: ["claude code", "документация"]
 section: Claude Code
 ---
 

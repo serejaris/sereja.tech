@@ -2,10 +2,7 @@
 title: "MIDI-контроллер для OBS: переключаю сцены пэдами"
 date: 2026-01-11
 description: "Настроил Arturia MiniLab 3 для переключения сцен в OBS через obs-midi-mg. Главная проблема — velocity. Показываю JSON-конфиг и как автоматизировать."
-tags:
-  - MIDI
-  - OBS
-  - стриминг
+tags: ["midi", "obs", "стриминг"]
 section: Стриминг
 ---
 

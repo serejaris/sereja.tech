@@ -3,7 +3,7 @@ title: GitHub Projects как память для AI-агента
 date: 2026-02-01
 description: Настроил единую kanban-доску для Claude Code — теперь агент помнит контекст между сессиями и видит задачи из всех репозиториев.
 image: /images/blog/github-projects-ai-agent-memory-preview.png
-tags: [claude-code, github, productivity, ai-agents]
+tags: ["claude code", "github"]
 ---
 
 Вернулся к проекту через три недели. Открыл Claude Code, написал "продолжи работу над API". Агент честно ответил, что понятия не имеет, о чём речь.

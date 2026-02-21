@@ -2,10 +2,7 @@
 title: "SEO для блога в эру AI: что реально работает в 2026"
 date: 2026-01-10
 description: "Разбираю SEO для персонального блога в 2026. JSON-LD Schema, Person vs Organization, structured data — что критично для AI-поисковиков."
-tags:
-  - SEO
-  - AI
-  - JSON-LD
+tags: ["seo", "json-ld"]
 section: SEO
 ---
 

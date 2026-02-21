@@ -2,7 +2,7 @@
 title: "TUI-презентация прямо в Claude Code"
 date: 2026-01-25
 description: "Как я сделал презентацию с ASCII-артом внутри терминала — и показываю её не выходя из Claude Code"
-tags: ["claude-code", "вайбкодинг", "skills", "ascii-art"]
+tags: ["claude code", "skills"]
 ---
 
 Нужна была презентация про Claude Code. Для демонстрации Claude Code. По-моему, показывать слайды в PowerPoint — это как рассказывать про терминал в Word.

@@ -2,7 +2,7 @@
 title: "OpenClaw на сервере за $6: свой AI-агент 24/7"
 date: 2026-02-17
 description: "Ставлю OpenClaw на Contabo VPS за $5, подключаю Kimi K2.5 за $1. Получаю AI-агента в Telegram, который живёт на сервере 24/7 и стоит дешевле чашки кофе."
-tags: ["openclaw", "ai-agent", "telegram", "вайбкодинг", "kimi", "vps"]
+tags: ["openclaw", "telegram", "kimi", "vps"]
 ---
 
 Свой AI-агент на VPS — это $6 в месяц. Contabo за $5, Kimi API за $1, OpenClaw бесплатно. Он живёт на сервере 24/7, отвечает в Telegram и помнит контекст между сессиями. Дешевле чашки кофе.

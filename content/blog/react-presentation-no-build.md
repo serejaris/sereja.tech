@@ -2,10 +2,7 @@
 title: "React-презентация без сборки: Editorial Brutalism на CDN"
 date: 2026-01-13
 description: "Как сделать презентацию для курса на React без webpack и npm. Editorial Brutalism, grain-текстуры через SVG, анимации skew. Архитектура и примеры кода."
-tags:
-  - React
-  - презентация
-  - brutalism
+tags: ["react", "презентация"]
 section: Вайбкодинг
 ---
 

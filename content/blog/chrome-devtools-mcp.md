@@ -2,11 +2,7 @@
 title: "Chrome DevTools MCP: даём агенту глаза в браузер"
 date: 2026-01-20
 description: "Как подключить AI-агента к Chrome DevTools через MCP. Реальный кейс отладки формы авторизации в student-portal."
-tags:
-  - Claude Code
-  - MCP
-  - DevTools
-  - вайбкодинг
+tags: ["claude code", "mcp", "devtools"]
 section: "Claude Code"
 ---
 

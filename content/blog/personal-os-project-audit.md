@@ -2,7 +2,7 @@
 title: "Как я начал строить Personal OS с аудита проектов"
 date: 2026-02-11
 description: "Попросил агентов проанализировать 10 проектов — оказалось, всё уже было. 8 повторяющихся сервисов, которые я не замечал."
-tags: ["claude-code", "вайбкодинг", "паттерны", "personal-os"]
+tags: ["claude code", "паттерны"]
 image: "/images/blog/personal-os-project-audit-preview.png"
 ---
 

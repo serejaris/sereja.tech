@@ -2,7 +2,7 @@
 title: "Skill для автопостинга в Telegram: завайбкодил за стрим"
 date: 2026-01-23
 description: "Создал Claude Code skill который генерирует превью статьи и публикует в Telegram канал. Haiku пишет текст, Python отправляет."
-tags: ["claude-code", "telegram", "skills", "вайбкодинг", "автоматизация"]
+tags: ["claude code", "telegram", "skills"]
 youtube_id: "BxkAfHxQ9BU"
 ---
 

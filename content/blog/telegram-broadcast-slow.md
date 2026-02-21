@@ -2,10 +2,7 @@
 title: "Как мой AI-агент отправил 717 сообщений за 8 минут"
 date: 2026-01-13
 description: "Попросил Claude Code сделать рассылку — он использовал синхронный скрипт и ждали 8 минут вместо 30 секунд. Как AI-агенты учатся на своих ошибках."
-tags:
-  - Telegram
-  - Python
-  - asyncio
+tags: ["telegram", "python", "asyncio"]
 section: Python
 ---
 

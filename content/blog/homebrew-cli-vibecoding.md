@@ -2,7 +2,7 @@
 title: "Homebrew: тысяча инструментов для агента"
 date: 2026-02-18
 description: "Homebrew даёт Claude Code доступ к 7000+ CLI-программам: yt-dlp, ffmpeg, whisper. Вайбкодинг инструменты, которые работают без MCP и токенов."
-tags: ["вайбкодинг", "claude-code", "homebrew", "cli", "инструменты"]
+tags: ["claude code", "homebrew", "cli"]
 image: "/images/blog/homebrew-cli-vibecoding-preview.png"
 ---
 

@@ -2,10 +2,7 @@
 title: "Clawdbot: Claude Code с телефона через Telegram"
 date: 2026-01-18
 description: "Self-hosted бот для управления Claude Code через Telegram. Делегируем настройку агенту — он сам разберётся с OAuth, Keychain и синхронизацией."
-tags:
-  - Clawdbot
-  - Telegram
-  - Claude Code
+tags: ["clawdbot", "telegram"]
 section: "AI Tools"
 ---
 

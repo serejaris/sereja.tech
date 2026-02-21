@@ -2,7 +2,7 @@
 title: "Не модель делает агента полезным, а то, что вокруг"
 date: 2026-02-17
 description: "Хуки в OpenClaw — слой автоматизации между событиями агента и внешним миром. Без них агент отвечает на вопросы, с ними — действует автономно, без участия LLM."
-tags: ["openclaw", "ai-agent", "automation", "hooks", "вайбкодинг"]
+tags: ["openclaw", "hooks", "автоматизация"]
 image: "/images/blog/openclaw-hooks-automation-preview.png"
 ---
 

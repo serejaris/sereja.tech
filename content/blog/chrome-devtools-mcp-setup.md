@@ -2,7 +2,7 @@
 title: "Как научить Claude Code управлять твоим Chrome"
 date: 2026-02-20
 description: "Claude Code настройка Chrome DevTools MCP за 3 шага: агент управляет реальным Chrome с залогиненными сервисами."
-tags: ["Claude Code", "MCP", "DevTools", "браузер", "вайбкодинг", "SEO"]
+tags: ["claude code", "mcp", "devtools"]
 section: "Claude Code"
 image: "/images/blog/chrome-devtools-mcp-setup-preview.png"
 sources:
