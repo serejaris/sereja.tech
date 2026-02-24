@@ -17,6 +17,10 @@ Gemini 3.1 Pro генерирует SVG-анимации с параллаксо
 
 На [стриме](https://youtube.com/live/8oJQyTai2X4) решил потестировать Gemini 3.1 Pro. Не потому что ищу замену Claude Code — а потому что слышал конкретное: эта модель умеет SVG. В Canvas-режиме результат видно сразу, не надо копировать код в файл и открывать в браузере. Написал промпт — увидел анимацию.
 
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin: 1.5em 0;">
+<iframe src="https://www.youtube.com/embed/8oJQyTai2X4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div>
+
 Я шесть лет назад пробовал делать SVG-анимации вручную. Получился примитив — прямоугольник, который двигался по экрану. А тут за пять минут — параллакс с разными скоростями слоёв.
 
 ## Слабый агент, сильный генератор
