@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как работают LLM: Генерация кода</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+        body {
+            background-color: #020617; /* slate-950 */
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .svg-container {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16 / 10;
+            position: relative;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        .blinking-cursor::after {
+            content: '█';
+            animation: blink 1s step-end infinite;
+            color: #64748b;
+            margin-left: 2px;
+            font-size: 0.9em;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-center mt-4 mb-2 z-10">
+        <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-emerald-400">Авторегрессивная генерация кода (LLM)</h1>
+        <p class="text-slate-400 mt-2 text-sm max-w-2xl mx-auto">
+            Модель предсказывает следующий токен на основе контекста. Токен выбирается с учетом вероятностного распределения, после чего цикл повторяется, подавая новый текст обратно на вход.
+        </p>
+    </div>
+
+    <div class="svg-container">
+        <!-- Кнопки управления -->
+        <div class="absolute top-4 right-8 flex gap-3 z-20">
+            <button id="btn-play" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2 rounded-lg transition-colors shadow-lg shadow-indigo-900/20" onclick="togglePlay()">Запустить</button>
+            <button id="btn-reset" class="bg-slate-700 hover:bg-slate-600 text-white font-medium px-5 py-2 rounded-lg transition-colors shadow-lg shadow-slate-900/20" onclick="resetSequence()">Сброс</button>
+        </div>
+
+        <svg viewBox="0 0 1000 700" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+                </marker>
+            </defs>
+
+            <!-- Линии путей данных -->
+            <path d="M 500 180 L 500 250" stroke="#334155" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowhead)" />
+            <path d="M 650 325 L 685 325" stroke="#334155" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowhead)" />
+            <path id="p-out-in" d="M 100 580 C -10 580, -10 130, 100 130" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+
+            <!-- Скрытые пути для анимации частиц -->
+            <path id="p-in-llm" d="M 500 180 L 500 250" fill="none"/>
+            <path id="p-llm-prob" d="M 650 325 L 700 325" fill="none"/>
+
+            <!-- Блок Ввода (Контекст) -->
+            <rect x="100" y="70" width="800" height="110" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+            <text x="120" y="95" fill="#94a3b8" font-family="sans-serif" font-size="13" font-weight="600">ВХОДНОЙ КОНТЕКСТ (Промпт + История генерации)</text>
+            <foreignObject x="110" y="105" width="780" height="65">
+                <div xmlns="http://www.w3.org/1999/xhtml" id="context-div" class="code-font custom-scrollbar" style="color: #cbd5e1; font-size: 15px; white-space: pre-wrap; height: 100%; overflow-y: auto; padding-right: 10px; padding-left: 10px;">// Напиши функцию сложения</div>
+            </foreignObject>
+
+            <!-- Блок Модели (LLM Трансформер) -->
+            <rect id="llm-box" x="350" y="240" width="300" height="170" rx="16" fill="#020617" stroke="#4338ca" stroke-width="2" filter="url(#glow)"/>
+            <text x="500" y="270" fill="#a5b4fc" font-family="sans-serif" font-size="16" text-anchor="middle" font-weight="600">LLM (Трансформер)</text>
+            <!-- Визуализация слоев нейросети -->
+            <rect class="llm-layer" data-original-fill="#1e1b4b" x="385" y="290" width="25" height="100" rx="4" fill="#1e1b4b" stroke="#3730a3"/>
+            <rect class="llm-layer" data-original-fill="#2e1065" x="425" y="290" width="25" height="100" rx="4" fill="#2e1065" stroke="#4c1d95"/>
+            <rect class="llm-layer" data-original-fill="#1e1b4b" x="465" y="290" width="25" height="100" rx="4" fill="#1e1b4b" stroke="#3730a3"/>
+            <rect class="llm-layer" data-original-fill="#2e1065" x="505" y="290" width="25" height="100" rx="4" fill="#2e1065" stroke="#4c1d95"/>
+            <rect class="llm-layer" data-original-fill="#1e1b4b" x="545" y="290" width="25" height="100" rx="4" fill="#1e1b4b" stroke="#3730a3"/>
+            <rect class="llm-layer" data-original-fill="#2e1065" x="585" y="290" width="25" height="100" rx="4" fill="#2e1065" stroke="#4c1d95"/>
+            <text x="500" y="405" fill="#6366f1" font-family="sans-serif" font-size="11" text-anchor="middle">Скрытые слои внимания</text>
+
+            <!-- Блок Вероятностей -->
+            <rect x="700" y="240" width="240" height="170" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+            <text x="715" y="265" fill="#94a3b8" font-family="sans-serif" font-size="13" font-weight="600">ВЕРОЯТНОСТИ ТОКЕНОВ</text>
+            <g id="prob-bars">
+                <!-- Заполняется через JS -->
+            </g>
+
+            <!-- Блок Вывода (Сгенерированный текст) -->
+            <rect x="100" y="490" width="800" height="140" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+            <text x="120" y="515" fill="#94a3b8" font-family="sans-serif" font-size="13" font-weight="600">СГЕНЕРИРОВАННЫЙ КОД</text>
+            <foreignObject x="110" y="525" width="780" height="95">
+                <div xmlns="http://www.w3.org/1999/xhtml" id="output-div" class="code-font blinking-cursor custom-scrollbar" style="font-size: 18px; white-space: pre-wrap; height: 100%; overflow-y: auto; padding-right: 10px; padding-left: 10px; line-height: 1.5;"></div>
+            </foreignObject>
+
+            <g id="particles"></g>
+            <g id="floating-token"></g>
+        </svg>
+    </div>
+
+    <script>
+        // Сценарий генерации токенов, симулирующий написание функции сложения
+        const steps = [
+            { t: "def", label: "def", p: [{t:"def", v:85}, {t:"class", v:10}, {t:"import", v:5}], color: "#f43f5e" },
+            { t: " add", label: " add", p: [{t:" add", v:75}, {t:" sum", v:18}, {t:" calc", v:7}], color: "#8b5cf6" },
+            { t: "(", label: "(", p: [{t:"(", v:98}, {t:":", v:1}, {t:" ", v:1}], color: "#94a3b8" },
+            { t: "a", label: "a", p: [{t:"a", v:60}, {t:"x", v:30}, {t:"num1", v:10}], color: "#38bdf8" },
+            { t: ",", label: ",", p: [{t:",", v:85}, {t:")", v:10}, {t:":", v:5}], color: "#94a3b8" },
+            { t: " b", label: " b", p: [{t:" b", v:80}, {t:" y", v:15}, {t:" val", v:5}], color: "#38bdf8" },
+            { t: ")", label: ")", p: [{t:")", v:95}, {t:",", v:4}, {t:":", v:1}], color: "#94a3b8" },
+            { t: ":", label: ":", p: [{t:":", v:99}, {t:" ->", v:1}], color: "#94a3b8" },
+            { t: "\n    ", label: "↵    ", p: [{t:"↵    ", v:95}, {t:" pass", v:3}, {t:" #", v:2}], color: "#94a3b8" },
+            { t: "return", label: "return", p: [{t:"return", v:88}, {t:"print", v:8}, {t:"res", v:4}], color: "#f43f5e" },
+            { t: " a", label: " a", p: [{t:" a", v:70}, {t:" a+b", v:20}, {t:" b", v:10}], color: "#38bdf8" },
+            { t: " +", label: " +", p: [{t:" +", v:65}, {t:" -", v:20}, {t:",", v:15}], color: "#f472b6" },
+            { t: " b", label: " b", p: [{t:" b", v:95}, {t:" a", v:4}, {t:" 0", v:1}], color: "#38bdf8" }
+        ];
+
+        let isPlaying = false;
+        let currentStepIndex = 0;
+        let currentContextText = "// Напиши функцию сложения\n";
+
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        const escapeHTML = str => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        async function startSequence() {
+            if (isPlaying) return;
+            isPlaying = true;
+            document.getElementById('btn-play').textContent = "Пауза";
+
+            while (currentStepIndex < steps.length && isPlaying) {
+                await playStepLogic(currentStepIndex);
+                if (!isPlaying) break;
+                currentStepIndex++;
+                if (currentStepIndex >= steps.length) {
+                    document.getElementById('btn-play').textContent = "Завершено";
+                    isPlaying = false;
+                }
+            }
+        }
+
+        function togglePlay() {
+            if (currentStepIndex >= steps.length) return;
+            if (isPlaying) {
+                isPlaying = false;
+                document.getElementById('btn-play').textContent = "Продолжить";
+            } else {
+                startSequence();
+            }
+        }
+
+        function resetSequence() {
+            isPlaying = false;
+            currentStepIndex = 0;
+            currentContextText = "// Напиши функцию сложения\n";
+            document.getElementById('context-div').textContent = currentContextText;
+            document.getElementById('output-div').innerHTML = "";
+            document.getElementById('prob-bars').innerHTML = "";
+            document.getElementById('particles').innerHTML = "";
+            document.getElementById('floating-token').innerHTML = "";
+            document.getElementById('btn-play').textContent = "Запустить";
+        }
+
+        async function playStepLogic(stepIndex) {
+            const step = steps[stepIndex];
+            const probBars = document.getElementById('prob-bars');
+            probBars.innerHTML = "";
+
+            spawnParticles('p-in-llm', 4, '#818cf8', 600);
+            await sleep(600);
+            if (!isPlaying) return;
+
+            pulseLLM();
+            await sleep(400);
+            if (!isPlaying) return;
+
+            spawnParticles('p-llm-prob', 3, '#34d399', 500);
+            await sleep(500);
+            if (!isPlaying) return;
+
+            renderProbabilities(step.p);
+            await sleep(700);
+            if (!isPlaying) return;
+
+            highlightChosenProb();
+            await sleep(400);
+            if (!isPlaying) return;
+
+            return new Promise((resolve) => {
+                floatToken(step.label || step.t, 725, 290, step.color, async () => {
+                    const outputDiv = document.getElementById('output-div');
+                    const span = `<span style="color: ${step.color}; opacity: 0; transition: opacity 0.3s ease-in;">${escapeHTML(step.t)}</span>`;
+                    outputDiv.innerHTML += span;
+                    outputDiv.lastChild.offsetHeight;
+                    outputDiv.lastChild.style.opacity = 1;
+                    outputDiv.scrollTop = outputDiv.scrollHeight;
+
+                    await sleep(300);
+                    if (!isPlaying) { resolve(); return; }
+
+                    spawnParticles('p-out-in', 1, '#fbbf24', 900);
+                    await sleep(900);
+
+                    currentContextText += step.t;
+                    const contextDiv = document.getElementById('context-div');
+                    contextDiv.textContent = currentContextText;
+                    contextDiv.scrollTop = contextDiv.scrollHeight;
+
+                    resolve();
+                });
+            });
+        }
+
+        function renderProbabilities(probs) {
+            const probBars = document.getElementById('prob-bars');
+            probs.forEach((p, i) => {
+                const y = 280 + i * 40;
+
+                const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                bg.setAttribute('x', '715');
+                bg.setAttribute('y', y);
+                bg.setAttribute('width', '210');
+                bg.setAttribute('height', '26');
+                bg.setAttribute('rx', '4');
+                bg.setAttribute('fill', '#1e293b');
+                probBars.appendChild(bg);
+
+                const barWidth = (p.v / 100) * 210;
+                const fill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                fill.setAttribute('x', '715');
+                fill.setAttribute('y', y);
+                fill.setAttribute('width', '0');
+                fill.setAttribute('height', '26');
+                fill.setAttribute('rx', '4');
+                fill.setAttribute('fill', '#475569');
+                fill.setAttribute('id', `prob-fill-${i}`);
+                fill.style.transition = 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s';
+                probBars.appendChild(fill);
+
+                const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                txt.setAttribute('x', '725');
+                txt.setAttribute('y', y + 18);
+                txt.setAttribute('fill', '#f8fafc');
+                txt.setAttribute('font-family', 'monospace');
+                txt.setAttribute('font-size', '14');
+                txt.textContent = p.t;
+                probBars.appendChild(txt);
+
+                const perc = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                perc.setAttribute('x', '915');
+                perc.setAttribute('y', y + 18);
+                perc.setAttribute('fill', '#94a3b8');
+                perc.setAttribute('font-family', 'sans-serif');
+                perc.setAttribute('font-size', '13');
+                perc.setAttribute('text-anchor', 'end');
+                perc.textContent = p.v + '%';
+                probBars.appendChild(perc);
+
+                requestAnimationFrame(() => fill.setAttribute('width', barWidth));
+            });
+        }
+
+        function highlightChosenProb() {
+            const fill = document.getElementById('prob-fill-0');
+            if (fill) fill.setAttribute('fill', '#10b981');
+        }
+
+        function pulseLLM() {
+            const box = document.getElementById('llm-box');
+            box.animate([
+                { stroke: '#4338ca', filter: 'url(#glow)', transform: 'scale(1)', transformOrigin: '500px 325px' },
+                { stroke: '#8b5cf6', filter: 'url(#glow)', transform: 'scale(1.02)', transformOrigin: '500px 325px' },
+                { stroke: '#4338ca', filter: 'url(#glow)', transform: 'scale(1)', transformOrigin: '500px 325px' }
+            ], { duration: 500, easing: 'ease-in-out' });
+
+            const layers = document.querySelectorAll('.llm-layer');
+            layers.forEach((layer, i) => {
+                setTimeout(() => {
+                    layer.animate([
+                        { fill: layer.getAttribute('data-original-fill') },
+                        { fill: '#818cf8' },
+                        { fill: layer.getAttribute('data-original-fill') }
+                    ], { duration: 300 });
+                }, i * 80);
+            });
+        }
+
+        function spawnParticles(pathId, count, color, duration) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    if (!isPlaying) return;
+                    const path = document.getElementById(pathId);
+                    const length = path.getTotalLength();
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('r', '6');
+                    circle.setAttribute('fill', color);
+                    circle.setAttribute('filter', 'url(#glow)');
+                    document.getElementById('particles').appendChild(circle);
+
+                    let start = null;
+                    function step(timestamp) {
+                        if (!start) start = timestamp;
+                        const progress = Math.min((timestamp - start) / duration, 1);
+                        const point = path.getPointAtLength(progress * length);
+                        circle.setAttribute('cx', point.x);
+                        circle.setAttribute('cy', point.y);
+
+                        if (progress < 1 && isPlaying) {
+                            requestAnimationFrame(step);
+                        } else {
+                            circle.remove();
+                        }
+                    }
+                    requestAnimationFrame(step);
+                }, i * 150);
+            }
+        }
+
+        function floatToken(text, startX, startY, color, callback) {
+            const el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            el.setAttribute('x', startX);
+            el.setAttribute('y', startY);
+            el.setAttribute('fill', color || '#f8fafc');
+            el.setAttribute('font-family', 'monospace');
+            el.setAttribute('font-size', '16');
+            el.setAttribute('font-weight', 'bold');
+            el.textContent = text;
+            document.getElementById('floating-token').appendChild(el);
+
+            const targetX = 500;
+            const targetY = 560;
+
+            const anim = el.animate([
+                { transform: `translate(0px, 0px) scale(1)`, opacity: 1 },
+                { transform: `translate(${targetX - startX}px, ${targetY - startY}px) scale(1.5)`, opacity: 0 }
+            ], { duration: 600, easing: 'ease-in-out' });
+
+            anim.onfinish = () => {
+                el.remove();
+                callback();
+            };
+        }
+    </script>
+</body>
+</html>
