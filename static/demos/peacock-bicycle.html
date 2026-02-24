@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анимация: Павлин на велосипеде</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #87CEEB; /* Небесно-голубой цвет */
+            font-family: sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        #ui-layer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui-layer">
+        <h1>Вело-павлин</h1>
+        <p>Плавная поездка в солнечный день 🦚🚲</p>
+    </div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Настройка размера canvas
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Переменные для анимации
+        let time = 0;
+        let lastTime = performance.now();
+
+        // Облака
+        const clouds = Array.from({ length: 5 }, () => ({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight * 0.4,
+            speed: 0.5 + Math.random() * 1.5,
+            scale: 0.5 + Math.random() * 0.8
+        }));
+
+        // Деревья на заднем фоне
+        const trees = Array.from({ length: 8 }, () => ({
+            x: Math.random() * window.innerWidth,
+            scale: 0.6 + Math.random() * 0.6
+        }));
+
+        // Функция инверсной кинематики для вычисления положения колена
+        function getKnee(hip, pedal, thigh, calf) {
+            let dx = pedal.x - hip.x;
+            let dy = pedal.y - hip.y;
+            let d = Math.sqrt(dx * dx + dy * dy);
+
+            // Ограничение, чтобы нога не "отрывалась", если педаль слишком далеко
+            if (d > thigh + calf) d = thigh + calf - 0.01;
+
+            // Теорема косинусов
+            let a = (thigh * thigh + d * d - calf * calf) / (2 * thigh * d);
+            let alpha = Math.acos(Math.max(-1, Math.min(1, a)));
+
+            let angleHipToPedal = Math.atan2(dy, dx);
+            // Колено сгибается вперед (поэтому вычитаем угол)
+            let angleThigh = angleHipToPedal - alpha;
+
+            return {
+                x: hip.x + Math.cos(angleThigh) * thigh,
+                y: hip.y + Math.sin(angleThigh) * thigh
+            };
+        }
+
+        // Отрисовка колеса
+        function drawWheel(x, y, radius, rotation) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+
+            // Шина
+            ctx.lineWidth = 6;
+            ctx.strokeStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Обод
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#ccc';
+            ctx.beginPath();
+            ctx.arc(0, 0, radius - 4, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Спицы
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#aaa';
+            for (let i = 0; i < 12; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(radius - 4, 0);
+                ctx.stroke();
+                ctx.rotate((Math.PI * 2) / 12);
+            }
+
+            // Центр
+            ctx.fillStyle = '#555';
+            ctx.beginPath();
+            ctx.arc(0, 0, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        // Отрисовка хвоста павлина
+        function drawPeacockTail(x, y, angleOffset) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angleOffset);
+
+            // Основной веер хвоста
+            ctx.fillStyle = '#2e8b57'; // Морской зеленый
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.arc(0, 0, 140, Math.PI * 0.9, Math.PI * 2.1);
+            ctx.fill();
+
+            // Перья с "глазками"
+            const numFeathers = 11;
+            for (let i = 0; i < numFeathers; i++) {
+                let angle = Math.PI * 0.9 + (Math.PI * 1.2 / (numFeathers - 1)) * i;
+                let featherLen = 120 + Math.sin(i * 1.5) * 15; // Немного разная длина
+                let ex = Math.cos(angle) * featherLen;
+                let ey = Math.sin(angle) * featherLen;
+
+                // Стебель пера
+                ctx.strokeStyle = '#8fbc8f';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(ex, ey);
+                ctx.stroke();
+
+                // Рисуем "глазок"
+                ctx.save();
+                ctx.translate(ex, ey);
+                ctx.rotate(angle + Math.PI / 2);
+
+                // Золотая часть
+                ctx.fillStyle = '#daa520';
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 12, 18, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Темно-синяя часть
+                ctx.fillStyle = '#0000cd';
+                ctx.beginPath();
+                ctx.ellipse(0, 2, 7, 10, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Голубая сердцевина
+                ctx.fillStyle = '#00ffff';
+                ctx.beginPath();
+                ctx.arc(0, 5, 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+            ctx.restore();
+        }
+
+        // Отрисовка туловища и головы павлина
+        function drawPeacockBody(x, y, bounce) {
+            ctx.save();
+            ctx.translate(x, y + bounce);
+
+            // Туловище
+            ctx.fillStyle = '#0055a4'; // Королевский синий
+            ctx.beginPath();
+            ctx.ellipse(0, -20, 25, 40, Math.PI / 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Шея
+            ctx.beginPath();
+            ctx.moveTo(10, -45);
+            ctx.quadraticCurveTo(30, -70, 25, -90);
+            ctx.quadraticCurveTo(10, -70, -5, -45);
+            ctx.fill();
+
+            // Голова
+            ctx.beginPath();
+            ctx.arc(25, -90, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Клюв
+            ctx.fillStyle = '#ffd700'; // Золотой
+            ctx.beginPath();
+            ctx.moveTo(35, -92);
+            ctx.lineTo(50, -88);
+            ctx.lineTo(33, -84);
+            ctx.fill();
+
+            // Глаз
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(28, -92, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(29, -92, 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Хохолок (корона)
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#00ffff';
+            for (let i = 0; i < 4; i++) {
+                let hx = 20 + i * 4;
+                let hy = -102 - (i % 2) * 5;
+                ctx.beginPath();
+                ctx.moveTo(25, -100);
+                ctx.lineTo(hx, hy);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(hx, hy, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+
+        // Отрисовка ног
+        function drawLeg(hip, crankCenter, crankRadius, angle, isFront) {
+            // Позиция педали
+            let pedal = {
+                x: crankCenter.x + Math.cos(angle) * crankRadius,
+                y: crankCenter.y + Math.sin(angle) * crankRadius
+            };
+
+            let thigh = 45;
+            let calf = 45;
+
+            // Вычисляем позицию колена с помощью инверсной кинематики
+            let knee = getKnee(hip, pedal, thigh, calf);
+
+            ctx.save();
+
+            // Если нога на заднем плане, делаем её темнее
+            ctx.strokeStyle = isFront ? '#d2691e' : '#a0522d'; // Шоколадный/Охристый
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // Бедро
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.moveTo(hip.x, hip.y);
+            ctx.lineTo(knee.x, knee.y);
+            ctx.stroke();
+
+            // Голень
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(knee.x, knee.y);
+            ctx.lineTo(pedal.x, pedal.y);
+            ctx.stroke();
+
+            // Лапка на педали
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(pedal.x - 5, pedal.y);
+            ctx.lineTo(pedal.x + 15, pedal.y);
+            ctx.stroke();
+
+            ctx.restore();
+
+            return pedal; // Возвращаем позицию педали для отрисовки самой педали поверх
+        }
+
+        // Главный цикл анимации
+        function animate(currentTime) {
+            const dt = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+            time += dt;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const cy = canvas.height / 2 + 100; // Базовая линия (земля)
+
+            // --- ФОН ---
+
+            // Рисуем солнце
+            ctx.fillStyle = '#FFD700';
+            ctx.beginPath();
+            ctx.arc(canvas.width - 100, 100, 50, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Движение облаков
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            clouds.forEach(cloud => {
+                cloud.x -= cloud.speed;
+                if (cloud.x < -150) cloud.x = canvas.width + 150;
+
+                ctx.save();
+                ctx.translate(cloud.x, cloud.y);
+                ctx.scale(cloud.scale, cloud.scale);
+                ctx.beginPath();
+                ctx.arc(0, 0, 30, 0, Math.PI * 2);
+                ctx.arc(25, -15, 35, 0, Math.PI * 2);
+                ctx.arc(50, 0, 25, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // Земля и дорога
+            ctx.fillStyle = '#3CB371'; // Зеленая трава
+            ctx.fillRect(0, cy + 40, canvas.width, canvas.height - cy - 40);
+
+            // Деревья (параллакс эффект)
+            trees.forEach((tree, i) => {
+                tree.x -= 2; // Скорость деревьев
+                if (tree.x < -100) tree.x = canvas.width + 100;
+
+                ctx.save();
+                ctx.translate(tree.x, cy + 40);
+                ctx.scale(tree.scale, tree.scale);
+                // Ствол
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(-10, -80, 20, 80);
+                // Крона
+                ctx.fillStyle = '#228B22';
+                ctx.beginPath();
+                ctx.arc(0, -90, 40, 0, Math.PI * 2);
+                ctx.arc(-20, -120, 35, 0, Math.PI * 2);
+                ctx.arc(20, -120, 35, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // Дорога
+            ctx.fillStyle = '#888';
+            ctx.fillRect(0, cy + 40, canvas.width, 60);
+
+            // Разметка дороги (движущаяся)
+            ctx.fillStyle = '#fff';
+            const dashWidth = 40;
+            const dashGap = 40;
+            const roadSpeed = 300; // Пикселей в секунду
+            const offset = (time * roadSpeed) % (dashWidth + dashGap);
+            for (let i = -offset; i < canvas.width; i += dashWidth + dashGap) {
+                ctx.fillRect(i, cy + 65, dashWidth, 10);
+            }
+
+            // --- ВЕЛОСИПЕД И ПАВЛИН ---
+
+            ctx.save();
+            // Центрируем велосипедиста
+            ctx.translate(canvas.width / 2, cy);
+
+            const wheelRadius = 40;
+            const wheelDist = 120;
+            const crankCenter = { x: 0, y: 0 };
+            const crankRadius = 18;
+
+            // Скорость вращения колес и педалей
+            const rotationSpeed = time * 8;
+
+            // Легкое покачивание велосипеда и павлина вверх-вниз
+            const bounce = Math.sin(time * 16) * 2;
+
+            // Заднее колесо (отрисовка)
+            drawWheel(-wheelDist / 2, -wheelRadius + 40 + bounce, wheelRadius, rotationSpeed);
+            // Переднее колесо (отрисовка)
+            drawWheel(wheelDist / 2, -wheelRadius + 40 + bounce, wheelRadius, rotationSpeed);
+
+            // Рама велосипеда
+            ctx.save();
+            ctx.translate(0, bounce);
+            ctx.strokeStyle = '#dc143c'; // Красный (Crimson)
+            ctx.lineWidth = 6;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+
+            // Точки рамы
+            const pRear = { x: -wheelDist / 2, y: -wheelRadius + 40 };
+            const pFront = { x: wheelDist / 2, y: -wheelRadius + 40 };
+            const pCrank = { x: crankCenter.x, y: crankCenter.y + 40 };
+            const pSeat = { x: -35, y: -45 };
+            const pHandle = { x: 45, y: -50 };
+
+            // Треугольники рамы
+            ctx.moveTo(pRear.x, pRear.y);
+            ctx.lineTo(pCrank.x, pCrank.y);
+            ctx.lineTo(pSeat.x, pSeat.y);
+            ctx.closePath();
+
+            ctx.moveTo(pCrank.x, pCrank.y);
+            ctx.lineTo(pHandle.x, pHandle.y);
+            ctx.lineTo(pSeat.x, pSeat.y);
+            ctx.stroke();
+
+            // Вилка
+            ctx.beginPath();
+            ctx.moveTo(pFront.x, pFront.y);
+            ctx.lineTo(pHandle.x, pHandle.y);
+            ctx.stroke();
+
+            // Руль
+            ctx.strokeStyle = '#silver';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(pHandle.x - 10, pHandle.y + 10);
+            ctx.lineTo(pHandle.x + 10, pHandle.y - 15);
+            ctx.lineTo(pHandle.x + 25, pHandle.y - 15);
+            ctx.stroke();
+
+            // Сиденье
+            ctx.fillStyle = '#111';
+            ctx.beginPath();
+            ctx.ellipse(pSeat.x, pSeat.y, 15, 5, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+
+            // Позиция таза павлина
+            const hip = { x: -30, y: -45 + bounce };
+
+            // Задняя нога (отрисовывается до туловища)
+            let backPedal = drawLeg(hip, {x: crankCenter.x, y: crankCenter.y + 40 + bounce}, crankRadius, rotationSpeed + Math.PI, false);
+
+            // Отрисовка левой (задней) педали
+            ctx.fillStyle = '#333';
+            ctx.fillRect(backPedal.x - 8, backPedal.y - 4, 16, 8);
+
+            // Хвост (немного покачивается)
+            let tailSway = Math.sin(time * 2) * 0.1;
+            drawPeacockTail(-50, -40, -Math.PI / 8 + tailSway);
+
+            // Туловище
+            drawPeacockBody(-10, -5, bounce);
+
+            // Звездочка (шестеренка)
+            ctx.save();
+            ctx.translate(crankCenter.x, crankCenter.y + 40 + bounce);
+            ctx.rotate(rotationSpeed);
+            ctx.fillStyle = '#666';
+            ctx.beginPath();
+            ctx.arc(0, 0, 15, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // Передняя нога (отрисовывается поверх туловища)
+            let frontPedal = drawLeg(hip, {x: crankCenter.x, y: crankCenter.y + 40 + bounce}, crankRadius, rotationSpeed, true);
+
+            // Отрисовка правой (передней) педали
+            ctx.fillStyle = '#222';
+            ctx.fillRect(frontPedal.x - 8, frontPedal.y - 4, 16, 8);
+
+            ctx.restore();
+
+            // Запрашиваем следующий кадр
+            requestAnimationFrame(animate);
+        }
+
+        // Запуск анимации
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
