@@ -8,6 +8,11 @@ image: "/images/blog/gemini-3-1-pro-svg-animations-preview.png"
 
 Gemini 3.1 Pro генерирует SVG-анимации с параллаксом, слоями и переходами за один промпт. Без внешних библиотек — нативный SVG с `<animate>` и `<animateTransform>`. Google [выпустил модель](https://blog.google/technology/google-deepmind/gemini-3-1-pro/) 19 февраля 2026. За неделю я понял: узкий специалист. Но настолько хороший, что ему стоит держать место в арсенале.
 
+<figure>
+<iframe src="/demos/llm-autoregressive.html" width="100%" height="600" style="border: 1px solid #334155; border-radius: 12px; background: #020617;" loading="lazy"></iframe>
+<figcaption style="text-align: center; color: #94a3b8; font-size: 0.9em; margin-top: 8px;">Интерактивная визуализация авторегрессивной генерации кода — сделана с помощью Gemini 3.1 Pro за один промпт</figcaption>
+</figure>
+
 ## Почему я вообще полез в Gemini
 
 На стриме решил потестировать Gemini 3.1 Pro. Не потому что ищу замену Claude Code — а потому что слышал конкретное: эта модель умеет SVG. В Canvas-режиме результат видно сразу, не надо копировать код в файл и открывать в браузере. Написал промпт — увидел анимацию.
@@ -62,9 +67,6 @@ Gemini 3.1 Pro генерирует SVG-анимации с параллаксо
 
 Параллакс. Несколько слоёв двигаются с разной скоростью — входные токены, attention, выходной слой. Каждый слой анимирован отдельно. Это то, что я не смог бы сделать шесть лет назад за целый день.
 
-Вот что получилось — интерактивная анимация авторегрессивной генерации кода. Нажмите «Запустить»:
-
-<iframe src="/demos/llm-autoregressive.html" width="100%" height="600" style="border: 1px solid #334155; border-radius: 12px; background: #020617;" loading="lazy"></iframe>
 
 ## Суперсилы по моделям
 
