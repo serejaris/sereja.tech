@@ -6,6 +6,160 @@ tags: [vibe-coding, github, ai-agents, personal-corp, productivity]
 image: "/images/blog/vibecoder-to-ceo-personal-corp-github-preview.png"
 ---
 
+<div class="svg-header-container" style="width:100%; max-width: 800px; margin: 2rem auto; background: #ffffff; border: 1px solid #000000; font-family: 'Courier New', Courier, monospace;">
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style="display: block; shape-rendering: crispEdges;">
+  <style>
+    .node-box { fill: #ffffff; stroke: #000000; stroke-width: 1px; }
+    .node-title { fill: #000000; font-weight: bold; font-size: 14px; }
+    .node-desc { fill: #000000; font-size: 12px; }
+    .path-solid { fill: none; stroke: #000000; stroke-width: 2px; }
+    .task-bg { fill: #000000; }
+    .task-text { fill: #ffffff; font-size: 11px; font-weight: bold; }
+    .sub-bg { fill: #ffffff; stroke: #000000; stroke-width: 1px; }
+    .sub-text { fill: #000000; font-size: 11px; font-weight: bold; }
+    .status-text { fill: #ffffff; font-size: 13px; font-weight: bold; font-family: 'Courier New', Courier, monospace; }
+    @keyframes op1 { 0%, 16.66% { opacity: 1; } 16.67%, 100% { opacity: 0; } }
+    @keyframes op2 { 0%, 16.66% { opacity: 0; } 16.67%, 33.33% { opacity: 1; } 33.34%, 100% { opacity: 0; } }
+    @keyframes op3 { 0%, 33.33% { opacity: 0; } 33.34%, 50.00% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+    @keyframes op4 { 0%, 50.00% { opacity: 0; } 50.01%, 66.66% { opacity: 1; } 66.67%, 100% { opacity: 0; } }
+    @keyframes op5 { 0%, 66.66% { opacity: 0; } 66.67%, 83.33% { opacity: 1; } 83.34%, 100% { opacity: 0; } }
+    @keyframes op6 { 0%, 83.33% { opacity: 0; } 83.34%, 100% { opacity: 1; } }
+    @keyframes type {
+      0% { width: 0; }
+      6.25% { width: 800px; }
+      16.66% { width: 800px; }
+      16.67% { width: 0; }
+      22.91% { width: 800px; }
+      33.33% { width: 800px; }
+      33.34% { width: 0; }
+      39.58% { width: 800px; }
+      50.00% { width: 800px; }
+      50.01% { width: 0; }
+      56.25% { width: 800px; }
+      66.66% { width: 800px; }
+      66.67% { width: 0; }
+      72.91% { width: 800px; }
+      83.33% { width: 800px; }
+      83.34% { width: 0; }
+      89.58% { width: 800px; }
+      100% { width: 800px; }
+    }
+    .ld { fill: none; stroke: #000; stroke-width: 2px; stroke-dasharray: 100; stroke-dashoffset: 100; }
+    @keyframes ld1 { 0% { stroke-dashoffset: 100; opacity: 0;} 0.1% {opacity: 1;} 8%, 15% { stroke-dashoffset: 0; opacity: 1;} 16.66%, 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes ld2 { 0%, 16.66% { stroke-dashoffset: 100; opacity: 0;} 16.67% {opacity: 1; stroke-dashoffset: 100;} 25%, 32% { stroke-dashoffset: 0; opacity: 1;} 33.33%, 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes ld3_1 { 0%, 33.33% { stroke-dashoffset: 100; opacity: 0;} 33.34% {opacity: 1; stroke-dashoffset: 100;} 41%, 48% { stroke-dashoffset: 0; opacity: 1;} 50.00%, 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes ld4_1 { 0%, 50.00% { stroke-dashoffset: 100; opacity: 0;} 50.01% {opacity: 1; stroke-dashoffset: 100;} 58%, 65% { stroke-dashoffset: 0; opacity: 1;} 66.66%, 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes ld5_1 { 0%, 66.66% { stroke-dashoffset: 100; opacity: 0;} 66.67% {opacity: 1; stroke-dashoffset: 100;} 71%, 74% { stroke-dashoffset: 0; opacity: 1;} 75.00%, 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes ld5_2 { 0%, 75.00% { stroke-dashoffset: 100; opacity: 0;} 75.01% {opacity: 1; stroke-dashoffset: 100;} 79%, 82% { stroke-dashoffset: 0; opacity: 1;} 83.33%, 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes ld6 { 0%, 83.33% { stroke-dashoffset: 100; opacity: 0;} 83.34% {opacity: 1; stroke-dashoffset: 100;} 92%, 98% { stroke-dashoffset: 0; opacity: 1;} 100% { stroke-dashoffset: 100; opacity: 0;} }
+    @keyframes tg1 { 0% { opacity: 0; transform: translate(400px, 50px); } 0.1% { opacity: 1; } 8%, 15% { opacity: 1; transform: translate(400px, 90px); } 16.66%, 100% { opacity: 0; transform: translate(400px, 50px); } }
+    @keyframes tg2 { 0%, 16.66% { opacity: 0; transform: translate(400px, 130px); } 16.67% { opacity: 1; } 25%, 32% { opacity: 1; transform: translate(400px, 170px); } 33.33%, 100% { opacity: 0; transform: translate(400px, 130px); } }
+    @keyframes tg3_1 { 0%, 33.33% { opacity: 0; transform: translate(400px, 210px); } 33.34% { opacity: 1; } 41%, 48% { opacity: 1; transform: translate(200px, 260px); } 50.00%, 100% { opacity: 0; transform: translate(400px, 210px); } }
+    @keyframes tg3_2 { 0%, 33.33% { opacity: 0; transform: translate(400px, 210px); } 33.34% { opacity: 1; } 41%, 48% { opacity: 1; transform: translate(400px, 260px); } 50.00%, 100% { opacity: 0; transform: translate(400px, 210px); } }
+    @keyframes tg4_1 { 0%, 50.00% { opacity: 0; transform: translate(200px, 260px); } 50.01% { opacity: 1; } 58%, 65% { opacity: 1; transform: translate(400px, 210px); } 66.66%, 100% { opacity: 0; transform: translate(200px, 260px); } }
+    @keyframes tg4_2 { 0%, 50.00% { opacity: 0; transform: translate(400px, 260px); } 50.01% { opacity: 1; } 58%, 65% { opacity: 1; transform: translate(400px, 210px); } 66.66%, 100% { opacity: 0; transform: translate(400px, 260px); } }
+    @keyframes tg5_1 { 0%, 66.66% { opacity: 0; transform: translate(400px, 210px); } 66.67% { opacity: 1; } 71%, 74% { opacity: 1; transform: translate(600px, 260px); } 75.00%, 100% { opacity: 0; transform: translate(400px, 210px); } }
+    @keyframes tg5_2 { 0%, 75.00% { opacity: 0; transform: translate(600px, 260px); } 75.01% { opacity: 1; } 79%, 82% { opacity: 1; transform: translate(400px, 210px); } 83.33%, 100% { opacity: 0; transform: translate(600px, 260px); } }
+    @keyframes tg6 { 0%, 83.33% { opacity: 0; transform: translate(400px, 170px); } 83.34% { opacity: 1; } 92%, 98% { opacity: 1; transform: translate(400px, 50px); } 100% { opacity: 0; transform: translate(400px, 170px); } }
+  </style>
+  <line x1="400" y1="50" x2="400" y2="90" stroke="#000" stroke-width="1" opacity="0.1" />
+  <line x1="400" y1="130" x2="400" y2="170" stroke="#000" stroke-width="1" opacity="0.1" />
+  <line x1="400" y1="210" x2="200" y2="260" stroke="#000" stroke-width="1" opacity="0.1" />
+  <line x1="400" y1="210" x2="400" y2="260" stroke="#000" stroke-width="1" opacity="0.1" />
+  <line x1="400" y1="210" x2="600" y2="260" stroke="#000" stroke-width="1" opacity="0.1" />
+  <line x1="400" y1="170" x2="400" y2="50" stroke="#000" stroke-width="1" opacity="0.1" />
+
+  <path d="M 400 50 L 400 90" class="ld" pathLength="100" style="animation: ld1 24s infinite;" />
+  <path d="M 400 130 L 400 170" class="ld" pathLength="100" style="animation: ld2 24s infinite;" />
+  <path d="M 400 210 L 200 260" class="ld" pathLength="100" style="animation: ld3_1 24s infinite;" />
+  <path d="M 400 210 L 400 260" class="ld" pathLength="100" style="animation: ld3_1 24s infinite;" />
+  <path d="M 200 260 L 400 210" class="ld" pathLength="100" style="animation: ld4_1 24s infinite;" />
+  <path d="M 400 260 L 400 210" class="ld" pathLength="100" style="animation: ld4_1 24s infinite;" />
+  <path d="M 400 210 L 600 260" class="ld" pathLength="100" style="animation: ld5_1 24s infinite;" />
+  <path d="M 600 260 L 400 210" class="ld" pathLength="100" style="animation: ld5_2 24s infinite;" />
+  <path d="M 400 170 L 400 50" class="ld" pathLength="100" style="animation: ld6 24s infinite;" />
+
+  <g transform="translate(400, 30)">
+    <rect x="-60" y="-20" width="120" height="40" class="node-box" />
+    <text x="0" y="5" text-anchor="middle" class="node-title">CEO</text>
+  </g>
+  <g transform="translate(400, 110)">
+    <rect x="-80" y="-20" width="160" height="40" class="node-box" />
+    <text x="0" y="5" text-anchor="middle" class="node-title">Orchestrator Agent</text>
+  </g>
+  <g transform="translate(400, 190)">
+    <rect x="-160" y="-20" width="320" height="40" class="node-box" stroke-dasharray="4 4" />
+    <text x="0" y="-2" text-anchor="middle" class="node-title">GitHub Issues (Task Shelf)</text>
+    <text x="0" y="14" text-anchor="middle" class="node-desc">Очередь заданий Backlog</text>
+  </g>
+  <g transform="translate(200, 280)">
+    <rect x="-60" y="-20" width="120" height="40" class="node-box" />
+    <text x="0" y="-2" text-anchor="middle" class="node-title">Code</text>
+    <text x="0" y="14" text-anchor="middle" class="node-desc">Backend</text>
+  </g>
+  <g transform="translate(400, 280)">
+    <rect x="-60" y="-20" width="120" height="40" class="node-box" />
+    <text x="0" y="-2" text-anchor="middle" class="node-title">Code</text>
+    <text x="0" y="14" text-anchor="middle" class="node-desc">Frontend</text>
+  </g>
+  <g transform="translate(600, 280)">
+    <rect x="-60" y="-20" width="120" height="40" class="node-box" />
+    <text x="0" y="-2" text-anchor="middle" class="node-title">Review</text>
+    <text x="0" y="14" text-anchor="middle" class="node-desc">Agent</text>
+  </g>
+  <g style="animation: tg1 24s infinite;">
+    <rect x="-60" y="-12" width="120" height="24" class="task-bg" />
+    <text x="0" y="4" text-anchor="middle" class="task-text">Issue: + Stripe</text>
+  </g>
+  <g style="animation: tg2 24s infinite;">
+    <rect x="-60" y="-12" width="120" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">Issues #2, #3</text>
+  </g>
+  <g style="animation: tg3_1 24s infinite;">
+    <rect x="-50" y="-12" width="100" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">Issue #2 (Взял)</text>
+  </g>
+  <g style="animation: tg3_2 24s infinite;">
+    <rect x="-50" y="-12" width="100" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">Issue #3 (Взял)</text>
+  </g>
+  <g style="animation: tg4_1 24s infinite;">
+    <rect x="-50" y="-12" width="100" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">PR #1 Создан</text>
+  </g>
+  <g style="animation: tg4_2 24s infinite;">
+    <rect x="-50" y="-12" width="100" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">PR #2 Создан</text>
+  </g>
+  <g style="animation: tg5_1 24s infinite;">
+    <rect x="-50" y="-12" width="100" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">ПРОВЕРИТЬ PRs</text>
+  </g>
+  <g style="animation: tg5_2 24s infinite;">
+    <rect x="-50" y="-12" width="100" height="24" class="sub-bg" />
+    <text x="0" y="4" text-anchor="middle" class="sub-text">PR APPROVED</text>
+  </g>
+  <g style="animation: tg6 24s infinite;">
+    <rect x="-60" y="-12" width="120" height="24" class="task-bg" />
+    <text x="0" y="4" text-anchor="middle" class="task-text">Ready to Merge!</text>
+  </g>
+
+  <rect x="0" y="340" width="800" height="40" fill="#000000" />
+  <clipPath id="type-clip">
+    <rect x="0" y="340" height="40" style="animation: type 24s steps(400, end) infinite;" />
+  </clipPath>
+  <g clip-path="url(#type-clip)">
+    <text x="20" y="365" class="status-text" style="animation: op1 24s infinite;">> CEO: Открывает глобальный Issue #1 «Интегрировать оплату через Stripe»</text>
+    <text x="20" y="365" class="status-text" style="animation: op2 24s infinite;">> Orchestrator: Декомпозиция. Созданы Issue #2 (API Backend) и #3 (UI Frontend)</text>
+    <text x="20" y="365" class="status-text" style="animation: op3 24s infinite;">> Code Agents: Забирают технические Issue с полки GitHub. Пишут код...</text>
+    <text x="20" y="365" class="status-text" style="animation: op4 24s infinite;">> Code Agents: Задачи решены, отправлены Pull Requests. Ожидание проверки</text>
+    <text x="20" y="365" class="status-text" style="animation: op5 24s infinite;">> Review Agent: Проводит аудит кода PR #1 и PR #2. Одобрено (LGTM)!</text>
+    <text x="20" y="365" class="status-text" style="animation: op6 24s infinite;">> CEO: Проверяет работу роя и нажимает «Merge».</text>
+  </g>
+</svg>
+</div>
+<div style="text-align: right; width: 100%; max-width: 800px; margin: -1.5rem auto 2rem; font-size: 11px; color: #888888; font-family: 'Courier New', Courier, monospace;">Иллюстрация свг анимации сделана с помощью Gemini 3.1 Pro.</div>
+
 Утро. Открываешь GitHub. Issues разобраны. Два pull request ждут ревью. Документация обновлена. CI-провалы расследованы.
 
 Ты ничего из этого не делал. Вчера написал три issue и ушёл спать.
