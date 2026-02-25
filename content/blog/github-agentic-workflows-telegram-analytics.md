@@ -3,6 +3,7 @@ title: "Аналитика чата на автопилоте через GitHub 
 date: 2026-02-25
 description: "Как поставить AI-аналитику Telegram-чата на автопилот через GitHub Agentic Workflows — агент сам просыпается, анализирует и публикует отчёт."
 tags: ["github", "ai-агенты", "автоматизация", "telegram", "вайбкодинг"]
+image: "/images/blog/github-agentic-workflows-telegram-analytics-preview.png"
 ---
 
 GitHub Agentic Workflows позволяет запускать AI-агента по расписанию — как cron, только вместо скрипта работает агент, который думает. Я поставил на автопилот ежедневную аналитику Telegram-чата: агент сам просыпается, читает данные, находит тренды и публикует отчёт как GitHub Issue. Без моего участия.
