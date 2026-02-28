@@ -2,12 +2,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-82+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+83+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-02-28 | [Один JSON кормит всех: как строить data layer для агентов](https://sereja.tech/blog/data-layer-for-agents/) |
 | 2026-02-25 | [Персональная корпорация: ставим агентов на расписание](https://sereja.tech/blog/launchd-macos-agent-scheduler/) |
 | 2026-02-25 | [Аналитика чата на автопилоте через GitHub Actions](https://sereja.tech/blog/github-agentic-workflows-telegram-analytics/) |
 | 2026-02-24 | [Gemini 3.1 Pro — мастер SVG, но не агент](https://sereja.tech/blog/gemini-3-1-pro-svg-animations/) |
@@ -17,7 +18,6 @@
 | 2026-02-20 | [Как научить Claude Code управлять твоим Chrome](https://sereja.tech/blog/chrome-devtools-mcp-setup/) |
 | 2026-02-18 | [Homebrew: тысяча инструментов для агента](https://sereja.tech/blog/homebrew-cli-vibecoding/) |
 | 2026-02-17 | [OpenClaw на сервере за $6: свой AI-агент 24/7](https://sereja.tech/blog/openclaw-vps-6-dollars/) |
-| 2026-02-17 | [Не модель делает агента полезным, а то, что вокруг](https://sereja.tech/blog/openclaw-hooks-automation/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
