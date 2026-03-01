@@ -8,6 +8,8 @@
 
 ## Персональная корпорация
 
+> [Все статьи темы](https://sereja.tech/blog/personal-corporation/)
+
 Концепция: один человек управляет роем AI-агентов как CEO управляет компанией. GitHub Issues как единый интерфейс, event-driven архитектура, агенты на расписании.
 
 - [GitHub Projects как память для AI-агента](https://sereja.tech/blog/github-projects-ai-agent-memory/): Единая kanban-доска — агент помнит контекст между сессиями и видит задачи из всех репозиториев
@@ -18,6 +20,8 @@
 
 ## OpenClaw / Clawdbot
 
+> [Все статьи темы](https://sereja.tech/blog/openclaw/)
+
 Свой AI-агент 24/7. Self-hosted бот в Telegram на базе Claude Code — от установки на VPS до хуков автоматизации.
 
 - [OpenClaw на VPS за $6: свой агент 24/7](https://sereja.tech/blog/openclaw-vps-6-dollars/): Contabo VPS + Kimi K2.5. AI-агент в Telegram, который живёт на сервере и стоит дешевле кофе
@@ -26,6 +30,8 @@
 - [Claude Code с телефона через Telegram](https://sereja.tech/blog/clawdbot-telegram-max/): Self-hosted бот для управления Claude Code. Агент сам настраивает OAuth, Keychain, синхронизацию
 
 ## Управление агентом
+
+> [Все статьи темы](https://sereja.tech/blog/agent-management/)
 
 Настройка и оптимизация Claude Code: конфиги, правила, память, экономия контекста.
 
@@ -37,6 +43,8 @@
 
 ## Skills, хуки и инфраструктура
 
+> [Все статьи темы](https://sereja.tech/blog/skills-hooks/)
+
 Переиспользуемые знания, хуки автоматизации, data layer для агентов.
 
 - [Хуки Claude Code: агент сам ведёт задачи](https://sereja.tech/blog/claude-code-hooks-github-issues/): Два хука — агент при старте видит Issues, после push напоминает закрыть. Готовый конфиг
@@ -46,6 +54,8 @@
 - [Один JSON кормит всех: data layer](https://sereja.tech/blog/data-layer-for-agents/): Единый videos.json как источник данных для всех агентов. Схема, сбор через API, использование
 
 ## Мультиагентные паттерны
+
+> [Все статьи темы](https://sereja.tech/blog/multi-agent/)
 
 Субагенты, рой, команды — масштабирование через параллельную работу нескольких агентов.
 
@@ -57,6 +67,8 @@
 
 ## Пайплайны и автоматизация
 
+> [Все статьи темы](https://sereja.tech/blog/pipelines/)
+
 Конвейеры контента, видео, аналитики — от ручных действий к автоматическим цепочкам.
 
 - [Аналитика чата через GitHub Actions](https://sereja.tech/blog/github-agentic-workflows-telegram-analytics/): AI-аналитика Telegram-чата на автопилоте — агент просыпается, анализирует, публикует отчёт
@@ -66,6 +78,8 @@
 - [State persistence для падающих пайплайнов](https://sereja.tech/blog/pipeline-reliability-state-persistence/): Почему AI-пайплайны прерываются на середине и как state-файлы решают проблему
 
 ## Методология вайбкодинга
+
+> [Все статьи темы](https://sereja.tech/blog/methodology/)
 
 Философия подхода: как думать, планировать и проверять результаты агентов.
 
@@ -78,6 +92,8 @@
 ## Optional
 
 ### Инструменты и интеграции
+
+> [Все статьи темы](https://sereja.tech/blog/tools-integrations/)
 
 - [Homebrew: тысяча инструментов для агента](https://sereja.tech/blog/homebrew-cli-vibecoding/): 7000+ CLI-программ для Claude Code без MCP и токенов: yt-dlp, ffmpeg, whisper
 - [Chrome DevTools MCP за 3 шага](https://sereja.tech/blog/chrome-devtools-mcp-setup/): Агент управляет реальным Chrome с залогиненными сервисами

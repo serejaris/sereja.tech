@@ -1,0 +1,22 @@
+{{ define "main" }}
+<p><a href="/blog/">&larr; Блог</a></p>
+<h1>{{ .Title }}</h1>
+<p class="intro">{{ .Description }}</p>
+
+{{ .Content }}
+
+<h2>Статьи</h2>
+<ul class="posts">
+  {{ range .Params.articles }}
+    {{ with site.GetPage (printf "/blog/%s" .) }}
+    <li>
+      <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ with .Description }}<br><span class="intro" style="font-size:13px;">{{ . }}</span>{{ end }}
+    </li>
+    {{ end }}
+  {{ end }}
+</ul>
+
+<p style="margin-top:30px;"><a href="/blog/">&larr; Все статьи</a></p>
+{{ end }}
