@@ -3,6 +3,29 @@ title: "Claude Code — напарник, Codex — исполнитель"
 date: 2026-02-09
 description: "703 промпта в Claude Code, 94 в Codex CLI. Разобрал по логам, где каждый инструмент сильнее, и почему я использую оба."
 tags: ["claude code", "codex cli"]
+knowledge:
+  problem: "Непонятно когда использовать Claude Code, а когда Codex CLI на реальных задачах"
+  solution: "Claude Code как напарник для планирования и итераций, Codex CLI как автономный исполнитель для крупных задач и ревью"
+  pattern: "dual-agent-workflow"
+  tools: ["Claude Code", "Codex CLI", "Opus 4.6", "gpt-5.3-codex"]
+  takeaways:
+    - "703 промпта в Claude Code vs 94 в Codex CLI за неделю (2-9 февраля)"
+    - "Codex делает в среднем 9 turns на промпт, Claude Code — 1:1"
+    - "CC работает с 19 проектами, Codex — с 8 за ту же неделю"
+    - "Самая большая сессия Codex — 357 turns, 8 MB, интеграция CMS"
+    - "Реальная стоимость — внимание: CC 88 промптов/день, Codex 13"
+  metrics:
+    cc_prompts_week: 703
+    codex_prompts_week: 94
+    codex_turns_per_prompt: 9
+    cc_projects: 19
+  related:
+    - slug: "claude-code-token-optimization"
+      relation: "95% контекста CC занимают результаты тулов, что ограничивает длинные цепочки"
+    - slug: "ai-coding-tools-economics-2026"
+      relation: "полный разбор экономики AI-инструментов для кодинга"
+    - slug: "claude-code-auto-memory"
+      relation: "система памяти CC между сессиями — преимущество над Codex"
 ---
 
 Утром пятого февраля я час бился с задачей в Claude Code. 158 промптов за день — рекорд недели. Задача не шла. Отдал тот же контекст Codex CLI — он её прожил с первой попытки.

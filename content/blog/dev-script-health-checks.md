@@ -3,6 +3,19 @@ title: "Один скрипт вместо трёх терминалов"
 date: 2026-01-18
 description: "Как настроить dev.sh с health checks для автоматического запуска backend и frontend"
 tags: ["claude code", "devops"]
+knowledge:
+  problem: "Ежедневный ручной запуск backend и frontend занимает 5 минут и путает AI-агентов, которые дебажат несуществующие баги"
+  solution: "Единый dev.sh с health checks через curl, автоочисткой портов и документацией в CLAUDE.md"
+  pattern: "dev-script-health-checks"
+  tools: ["Bash", "FastAPI", "React", "curl"]
+  takeaways:
+    - "Время запуска dev-окружения сократилось с 5 минут до 30 секунд"
+    - "Health check через curl -f предотвращает запуск фронтенда до готовности бэкенда"
+    - "Агент потратил 15 минут на дебаг 404, хотя бэкенд просто не был запущен"
+    - "Документация в CLAUDE.md не даёт агенту запускать сервисы по отдельности"
+  metrics:
+    startup_before_seconds: 300
+    startup_after_seconds: 30
 ---
 
 Открыл проект, запустил фронтенд — ошибки 404 в консоли. Бэкенд не работает: на порту 8000 висит процесс от вчерашней сессии.

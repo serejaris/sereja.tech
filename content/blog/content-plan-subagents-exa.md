@@ -4,6 +4,26 @@ date: 2026-02-06
 description: "Завёл AI-канал — сначала писал промпт на каждый пост, потом делегировал серию агенту с Exa MCP."
 tags: ["claude code", "telegram", "субагенты"]
 image: "/images/blog/content-plan-subagents-exa-preview.png"
+knowledge:
+  problem: "Создание серии постов для канала требует повторяющегося ручного ресёрча для каждого поста"
+  solution: "Субагент content-planner с Exa MCP автоматизирует цикл ресёрч-пост по style guide для серий"
+  pattern: "subagent-content-pipeline"
+  tools: ["Claude Code", "Exa MCP", "Telegram"]
+  takeaways:
+    - "Паттерн четырёх шагов: руками → правила → заметил повторение → делегировал агенту"
+    - "Style guide в .claude/rules/ автоматически подхватывается субагентом без указания в промпте"
+    - "Exa MCP deep режим для real-time поиска фактов при генерации контента"
+    - "Субагент через Task tool работает в отдельном контексте, не загружая основной"
+    - "Серия из 5 постов за вечер вместо пары дней вручную"
+  related:
+    - slug: "digest-subagents-mapreduce"
+      relation: "тот же принцип делегирования субагентам — MapReduce для дайджестов"
+    - slug: "slash-commands-subagents"
+      relation: "разница между commands и agents — почему субагент лучше"
+    - slug: "blog-post-pipeline"
+      relation: "пайплайн для статей начинается с тех же правил"
+    - slug: "telegram-autoposter"
+      relation: "следующий шаг — автопостинг через очередь"
 ---
 
 Завёл AI-новостной канал @slop_info.
