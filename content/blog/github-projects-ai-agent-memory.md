@@ -4,6 +4,22 @@ date: 2026-02-01
 description: Настроил единую kanban-доску для Claude Code — теперь агент помнит контекст между сессиями и видит задачи из всех репозиториев.
 image: /images/blog/github-projects-ai-agent-memory-preview.png
 tags: ["claude code", "github"]
+knowledge:
+  problem: "AI-агент теряет контекст между сессиями и не видит задачи из разных репозиториев."
+  solution: "GitHub Projects как единая kanban-доска — агент читает и обновляет задачи через gh CLI между сессиями."
+  pattern: "github-projects-as-agent-memory"
+  tools: ["GitHub Projects", "GitHub CLI", "Claude Code", "GitHub Copilot", "Google Jules", "Amazon Q", "Devin"]
+  takeaways:
+    - "Issues — внешняя долговременная память агента, сохраняется навсегда"
+    - "GitHub Projects агрегирует задачи из разных репозиториев в одну доску"
+    - "Issue как промпт — паттерн для всех coding agents: Copilot, Claude, Jules, Amazon Q, Devin"
+    - "Кастомные поля (Priority, Effort, Type) позволяют фильтровать задачи"
+  prerequisites: ["GitHub CLI (gh)", "Авторизация gh auth login", "Права на Projects (gh auth refresh -s project)"]
+  related:
+    - slug: "github-issues-project-context"
+      relation: "pinned issue как контекст проекта — дополняет Projects как систему задач"
+    - slug: "github-agentic-workflows-telegram-analytics"
+      relation: "Agentic Workflows автоматизирует создание Issues по расписанию"
 ---
 
 Вернулся к проекту через три недели. Открыл Claude Code, написал "продолжи работу над API". Агент честно ответил, что понятия не имеет, о чём речь.

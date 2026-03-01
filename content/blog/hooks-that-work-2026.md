@@ -15,6 +15,26 @@ sources:
   - title: "Nielsen Norman Group: How Users Read"
     url: "https://www.nngroup.com/articles/how-users-read-on-the-web/"
     note: "исследование поведения читателей"
+knowledge:
+  problem: "Технические статьи собирают клики, но читатели уходят в первые 15 секунд — хук не удерживает."
+  solution: "Использовать психологические триггеры (Curiosity Gap, Identity, Tension) и формулы хуков (SPY, PAS, APP) для удержания внимания."
+  pattern: "hook-formulas-for-retention"
+  tools: ["Claude Code", "blog-post skill"]
+  takeaways:
+    - "15 секунд — время на решение читать или закрыть вкладку"
+    - "Максимум 30 слов на хук, только 20% текста реально читают на странице"
+    - "6 психологических триггеров: Curiosity Gap, Identity, Tension, ROMO, FOMO, Social Proof"
+    - "3 формулы: SPY (Short-Pain-Yay), PAS (Problem-Agitate-Solution), APP (Agree-Promise-Preview)"
+    - "Антипаттерны: 'В современном мире AI...', 'Многие разработчики сталкиваются...'"
+  metrics:
+    hook_decision_seconds: 15
+    max_hook_words: 30
+    page_text_read_percent: 20
+  related:
+    - slug: "fact-checker-in-ai-workflow"
+      relation: "оба улучшают качество текста — хуки удерживают, фактчекер проверяет достоверность"
+    - slug: "draft-before-artifact"
+      relation: "хук — часть черновика, который прорабатывается до генерации финального текста"
 ---
 
 ## Проблема

@@ -4,6 +4,20 @@ date: 2026-02-18
 description: "Homebrew даёт Claude Code доступ к 7000+ CLI-программам: yt-dlp, ffmpeg, whisper. Вайбкодинг инструменты, которые работают без MCP и токенов."
 tags: ["claude code", "homebrew", "cli"]
 image: "/images/blog/homebrew-cli-vibecoding-preview.png"
+knowledge:
+  problem: "Claude Code по умолчанию имеет только git, node, python — не может работать с видео, аудио и медиафайлами."
+  solution: "Homebrew даёт доступ к 7000+ CLI-программам без MCP-серверов и расхода токенов на описания."
+  pattern: "cli-over-mcp"
+  tools: ["Homebrew", "Claude Code", "yt-dlp", "ffmpeg", "whisper", "ImageMagick", "pandoc", "gh"]
+  takeaways:
+    - "Playwright MCP занимает 13 700 токенов только на описания — CLI не тратит контекст пока не вызван"
+    - "ffmpeg устанавливается 171 000 раз в месяц через Homebrew, существует с 2000 года"
+    - "Цепочка yt-dlp → ffmpeg → whisper → Claude Code заменяет 5 часов ручной работы одним промптом"
+    - "7000+ программ в каталоге Homebrew, 46 000 звёзд на GitHub"
+    - "CLI — фундамент, MCP — надстройка для специфичных интеграций"
+  related:
+    - slug: "gemini-3-1-pro-svg-animations"
+      relation: "разные модели как инструменты — Homebrew расширяет CLI, Gemini расширяет визуальные возможности"
 ---
 
 Homebrew — менеджер пакетов для macOS, через который агент устанавливает и запускает тысячи CLI-программ. Одна команда — и у Claude Code появляются инструменты для видео, аудио, поиска по коду. Без конфигов, без MCP-серверов, без подписок.
