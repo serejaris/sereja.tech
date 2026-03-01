@@ -4,6 +4,22 @@ date: 2026-01-15
 description: "Практический гайд по настройке zoxide и fzf для быстрой навигации в терминале. Типичные ошибки, интерактивный выбор директорий, frecency-алгоритм."
 tags: ["zoxide", "fzf", "терминал"]
 section: Терминал
+knowledge:
+  problem: "Навигация по глубоким путям в терминале требует печати длинных путей каждый раз"
+  solution: "zoxide запоминает посещённые директории и прыгает по ключевому слову, fzf добавляет интерактивный выбор"
+  pattern: "frecency-navigation"
+  tools: ["zoxide", "fzf", "Homebrew", "zsh"]
+  takeaways:
+    - "zoxide на Rust стартует за 5ms — в 10 раз быстрее autojump (50ms)"
+    - "Алгоритм frecency комбинирует частоту и свежесть посещений директорий"
+    - "alias z='cd' ломает zoxide — нужно использовать --cmd cd при инициализации"
+    - "Пробел перед TAB переключает режим: z foo<TAB> — локальные директории, z foo <TAB> — база zoxide"
+    - "За месяц в базе накапливается ~120 путей"
+  metrics:
+    startup_time_ms: 5
+    autojump_startup_ms: 50
+    speedup_factor: 10
+    paths_per_month: 120
 ---
 
 Установил zoxide. Не работает.

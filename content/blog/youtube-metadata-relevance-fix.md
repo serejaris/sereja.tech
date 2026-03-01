@@ -4,6 +4,28 @@ date: 2026-02-06
 description: "AI генерировал описание стрима и поставил GitHub в заголовок вместо Codex. Потому что считал упоминания, а не глубину. Починил формулу."
 tags: ["youtube", "claude code"]
 image: "/images/blog/youtube-metadata-relevance-fix-preview.png"
+knowledge:
+  problem: "AI ранжировал сущности по количеству упоминаний, а не по глубине вовлечённости, и ставил нерелевантные темы в заголовки"
+  solution: "Новая формула relevance_score = avg_role × time_share × mentions с порогами по роли и покрытию, аналог TF-IDF для видео"
+  pattern: "depth-vs-spread-ranking"
+  tools: ["Claude Code", "YouTube API", "Python"]
+  takeaways:
+    - "Наивная метрика по упоминаниям ставила GitHub (role=1.75) выше Codex (role=2.33) в заголовках"
+    - "Формула avg_role × time_share × mentions — аналог TF-IDF для видеоконтента"
+    - "Пороги для заголовков: time_share ≥ 10%, avg_role ≥ 2.0, mentions ≥ 10"
+    - "Роли сущностей: 3=main_focus, 2=actively_used, 1=mentioned"
+    - "Детектор фабрикаций ловит паттерны вроде 'от X до Y', 'батл', 'полный гайд'"
+  metrics:
+    role_levels: 3
+    time_share_threshold_pct: 10
+    avg_role_threshold: 2.0
+    mentions_threshold: 10
+    chapters_count: 21
+  related:
+    - slug: "map-reduce-youtube-metadata"
+      relation: "Базовый многопроходной пайплайн, в котором была исправлена формула ранжирования"
+    - slug: "video-pipeline-claude-code"
+      relation: "Общий видео-пайплайн, использующий метадату"
 ---
 
 Генерирую описание для 2.5-часового стрима. В заголовки глав пролез GitHub. Codex — нет. При том что Codex я активно демонстрировал треть видео.

@@ -4,6 +4,27 @@ date: 2026-02-06
 description: "Как генерировать обложки для видео через HTML-шаблоны, Playwright и YouTube API. Без графических редакторов."
 tags: ["youtube", "playwright", "claude code"]
 image: "/images/blog/youtube-thumbnails-html-code-preview.png"
+knowledge:
+  problem: "Создание обложек для YouTube вручную в графическом редакторе занимает 15 минут на каждую"
+  solution: "HTML-шаблон + Playwright для рендера в PNG + YouTube API для загрузки — обложка обновляется одной командой агенту"
+  pattern: "html-to-image-pipeline"
+  tools: ["Claude Code", "Playwright", "YouTube API", "CSS", "HTML"]
+  takeaways:
+    - "90% топовых видео используют custom thumbnails, лица с эмоциями дают +20-30% к CTR"
+    - "Текст из 3-5 слов добавляет 30% к кликабельности, visual cues — ещё 25%"
+    - "Минимальный размер обложки 1280×720, формат PNG для текстовых обложек"
+    - "Шрифт от 75px для читаемости на мобильных устройствах"
+    - "YouTube API принимает POST на /thumbnails/set, максимум 2MB"
+  metrics:
+    thumbnail_width: 1280
+    thumbnail_height: 720
+    max_upload_size_mb: 2
+    min_font_size_px: 75
+  related:
+    - slug: "carousel-cards-playwright"
+      relation: "Та же механика HTML→Playwright→PNG для квадратных карточек Telegram"
+    - slug: "video-pipeline-claude-code"
+      relation: "Общий видео-пайплайн, где обложки — один из этапов"
 ---
 
 Каждую неделю новый урок. Каждому уроку — обложка. Ни графический редактор, ни AI-генератор изображений не нужны — LLM сама делает обложку по одному промпту. Вот как это устроено на моём [канале](https://youtube.com/@serejaris).
