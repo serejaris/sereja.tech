@@ -3,6 +3,21 @@ title: "Почему GPT не умеет искать: эмбединги для
 date: 2026-01-20
 description: "Локальный RAG на M1: ChromaDB, эмбединги и почему генеративная модель не заменит поиск"
 tags: ["rag", "embeddings", "claude code"]
+knowledge:
+  problem: "Контекст LLM слишком мал для поиска по большому корпусу документов."
+  solution: "Локальный RAG на ChromaDB с sentence-transformers эмбедингами на M1 без внешних API."
+  pattern: "local-rag-pipeline"
+  tools: ["ChromaDB", "sentence-transformers", "all-MiniLM-L6-v2", "Claude Code", "Python"]
+  takeaways:
+    - "all-MiniLM-L6-v2 обрабатывает 150K слов за 30 секунд на M1 Pro"
+    - "Модель весит 80 МБ и работает на CPU без GPU"
+    - "Эмбединги в 10-100 раз быстрее LLM для задач поиска"
+    - "API эмбедингов OpenAI стоит $0.02/млн токенов, GPT-5 — $1.75/млн (разница в 87 раз)"
+    - "Поиск по транскриптам: ответ с цитатой за 0.2 секунды вместо 10 минут вручную"
+  metrics:
+    model_size_mb: 80
+    indexing_speed: "150K слов за 30 секунд"
+    query_time_sec: 0.2
 ---
 
 Спросил у Claude: "это тоже AI? почему генеративная модель не может делать эмбединги?"

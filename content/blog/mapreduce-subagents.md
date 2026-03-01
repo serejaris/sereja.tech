@@ -4,6 +4,28 @@ date: 2026-01-14
 description: "Контекст закончился на середине файла. Решение — разбить работу между субагентами параллельно. Паттерн MapReduce для Claude Code."
 tags: ["claude code", "субагенты"]
 section: Claude Code
+knowledge:
+  problem: "Контекст Claude Code переполняется при последовательном чтении файлов больше 5000 строк."
+  solution: "Паттерн MapReduce — разбить файл между параллельными субагентами, каждый со своим контекстом в 200K токенов."
+  pattern: "mapreduce-subagents"
+  tools: ["Claude Code", "Task tool", "Opus 4.5"]
+  takeaways:
+    - "3 субагента = 3 отдельных контекста по 200K токенов"
+    - "12800 строк субтитров → 460 строк конспекта, компрессия 28:1"
+    - "Каждый субагент стоит ~20K токенов на запуск — overhead для маленьких задач"
+    - "Последовательное чтение заняло 100% контекста и не завершилось, MapReduce — ~30% за 3 минуты"
+    - "Подходит когда задача разбивается на независимые куски и результаты можно склеить"
+  metrics:
+    input_lines: 12800
+    output_lines: 460
+    compression_ratio: "28:1"
+    execution_time_min: 3
+    subagent_overhead_tokens: 20000
+  related:
+    - slug: "map-reduce-youtube-metadata"
+      relation: "применение MapReduce к YouTube-метаданным"
+    - slug: "digest-subagents-mapreduce"
+      relation: "применение MapReduce к дайджестам чата"
 ---
 
 Файл субтитров — 12 тысяч строк. Читаю кусками по тысяче.

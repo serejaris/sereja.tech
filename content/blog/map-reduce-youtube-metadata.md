@@ -4,6 +4,30 @@ description: "Как я генерирую точные заголовки и о
 date: 2026-02-02
 tags: ["agents", "youtube"]
 youtube_id: "AHIaQKQqfRM"
+knowledge:
+  problem: "LLM теряет 30-85% точности в середине длинного контекста при обработке транскрипта."
+  solution: "Map-Reduce pipeline из 4 стадий с параллельными субагентами для извлечения метаданных из видео."
+  pattern: "mapreduce-metadata-extraction"
+  tools: ["Claude Code", "Sonnet", "Haiku", "ai-whisper"]
+  takeaways:
+    - "Pipeline: chunking (14 чанков) → extraction (14 Haiku) → aggregation (Sonnet) → metadata"
+    - "Из 3968 сегментов транскрипта извлечены 232 сущности, сведённые к 20 ключевым"
+    - "70% YouTube трафика из рекомендаций — метаданные из контента улучшают relevance"
+    - "Lost in the Middle: LLM теряют 30-85% точности в середине длинного контекста"
+    - "Стадия extraction заняла 30 секунд на 14 параллельных субагентах Haiku"
+  metrics:
+    transcript_segments: 3968
+    chunks: 14
+    entities_extracted: 232
+    final_entities: 20
+    extraction_time_sec: 30
+  related:
+    - slug: "mapreduce-subagents"
+      relation: "базовый паттерн MapReduce для субагентов, применённый здесь к YouTube"
+    - slug: "youtube-metadata-relevance-fix"
+      relation: "исправление релевантности метаданных YouTube"
+    - slug: "digest-subagents-mapreduce"
+      relation: "тот же паттерн MapReduce для дайджестов чата"
 ---
 
 Записал полуторачасовой стрим про OpenClaw:

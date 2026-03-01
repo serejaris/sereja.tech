@@ -4,6 +4,20 @@ date: 2026-01-11
 description: "Как я настроил MIDI-контроллер для переключения сцен в OBS и написал LED-индикатор с помощью Claude Code. Полный разбор: velocity, SysEx, EventClient."
 tags: ["midi", "obs", "claude code"]
 section: Вайбкодинг
+knowledge:
+  problem: "Переключение сцен OBS мышкой во время стрима приводит к потере фокуса и ошибкам."
+  solution: "Настройка MIDI-контроллера MiniLab 3 для управления OBS с LED-индикацией через Claude Code за 3 часа."
+  pattern: "hardware-integration-vibecoding"
+  tools: ["Claude Code", "OBS", "obs-midi-mg", "obsws-python", "mido", "python-rtmidi", "Arturia MiniLab 3", "MIDI Monitor"]
+  takeaways:
+    - "От идеи до работающего решения с LED-индикатором за 3 часа без ручного написания кода"
+    - "Velocity пэдов MiniLab различается при каждом ударе — нужен режим Ignore (state: 2)"
+    - "LED-индексы пэдов MiniLab 3 начинаются с 4, не с 0"
+    - "Callback obsws-python должен называться on_ + snake_case имя события"
+    - "EventClient вместо polling даёт мгновенную реакцию на переключение сцен"
+  related:
+    - slug: "midi-obs-scene-switching"
+      relation: "детальный гайд по настройке obs-midi-mg без LED-индикатора"
 ---
 
 У меня лежал Arturia MiniLab 3. Использовал только для музыки.

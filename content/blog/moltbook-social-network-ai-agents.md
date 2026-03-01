@@ -3,6 +3,21 @@ title: "Moltbook: как создать социальную сеть для AI-
 date: 2026-01-31
 description: "Разбор архитектуры Moltbook — Reddit для ботов. Протоколы A2A и ANP, skill-based onboarding, безопасность. Гайд по созданию своего."
 tags: ["agents", "moltbook", "openclaw"]
+knowledge:
+  problem: "Нет платформы для автономного общения AI-агентов между собой."
+  solution: "Архитектура Moltbook: REST API с JWT, skill-based onboarding через markdown, rate limiting."
+  pattern: "agent-social-network-architecture"
+  tools: ["OpenClaw", "Moltbook", "A2A", "ANP", "FastAPI", "PostgreSQL", "Redis", "JWT"]
+  takeaways:
+    - "37000 AI-агентов за 48 часов, 200+ сообществ, миллион зрителей за 2 дня"
+    - "Skill-based onboarding: агент читает skill.md и регистрируется сам без web-формы"
+    - "Rate limiting: 100 запросов/мин, 1 пост/30 мин, 50 комментариев/час"
+    - "Уязвимость OpenClaw: API ключи в plaintext, default auth: none — исправлено в v2026.1.29"
+    - "3 протокола: A2A (Google, JSON-RPC), ANP (W3C DID), Web Bot Auth (IETF)"
+  metrics:
+    agents_48h: 37000
+    communities: 200
+    viewers_2_days: 1000000
 ---
 
 37 тысяч AI-агентов за 48 часов. Ни одного человека среди авторов постов. Это Moltbook — социальная сеть, где агенты общаются между собой, а люди могут только наблюдать.

@@ -4,6 +4,22 @@ date: 2026-01-17
 description: "Один CLAUDE.md на 500 строк — боль. Разбиваю на .claude/rules/ по доменам: база данных, тесты, фронтенд. Практический гайд с примерами."
 tags: ["claude code", "документация"]
 section: Claude Code
+knowledge:
+  problem: "CLAUDE.md раздувается до сотен строк, данные противоречат друг другу в разных местах."
+  solution: "Разбиение правил на модульные файлы в .claude/rules/ по доменам с фильтрацией по путям."
+  pattern: "modular-agent-rules"
+  tools: ["Claude Code", ".claude/rules/"]
+  takeaways:
+    - "CLAUDE.md на 400 строк приводит к выборочному запоминанию и противоречиям"
+    - "Файлы в .claude/rules/ фильтруются по paths: — правила подгружаются только для релевантных файлов"
+    - "Изменяемые данные не дублировать в документации — описывать как достать из базы"
+    - "Корневой CLAUDE.md оставить для навигации, команд и ссылок на rules"
+    - "Секция Before Querying с .schema устранила ошибки агента с именами колонок"
+  related:
+    - slug: "fix-once-rule-forever"
+      relation: "принцип фиксации ошибок в правилах"
+    - slug: "ssot-documentation"
+      relation: "single source of truth для документации"
 ---
 
 CLAUDE.md раздулся до 400 строк. Агент читает, но запоминает выборочно.
