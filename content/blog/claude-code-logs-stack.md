@@ -4,6 +4,23 @@ date: 2026-01-15
 description: "Какие инструменты использую для анализа логов Claude Code: claude-code-transcripts, claude-code-log, структура JSONL и как превращать сессии в контент."
 tags: ["claude code", "логи"]
 section: "Claude Code"
+knowledge:
+  problem: "Рабочие сессии Claude Code содержат материал для туториалов и кейсов, но извлечь его сложно"
+  solution: "Стек инструментов: claude-code-transcripts для HTML-экспорта, claude-code-log для фильтрации по датам"
+  pattern: "logs-content-pipeline"
+  tools: ["claude-code-transcripts", "claude-code-log", "cctrace", "vibe-log-cli", "uvx"]
+  takeaways:
+    - "5 инструментов протестированы для анализа логов Claude Code"
+    - "Из полуторачасовой сессии получается 500-800 слов контента"
+    - "claude-code-transcripts работает без установки через uvx"
+    - "15 интересных сессий накоплено за январь для публикации"
+  metrics:
+    tools_tested: 5
+    content_words_per_session: "500-800"
+    sessions_collected: 15
+  related:
+    - slug: "claude-code-logs-project-status"
+      relation: "практическое использование логов для аудита проектов"
 ---
 
 Хочу превращать рабочие сессии в контент.

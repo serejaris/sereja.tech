@@ -4,6 +4,19 @@ date: 2026-01-20
 description: "Как подключить AI-агента к Chrome DevTools через MCP. Реальный кейс отладки формы авторизации в student-portal."
 tags: ["claude code", "mcp", "devtools"]
 section: "Claude Code"
+knowledge:
+  problem: "AI-агент пишет код, но не видит что сломал в браузере — отладка через копипасту ошибок"
+  solution: "Chrome DevTools MCP даёт агенту прямой доступ к браузеру: скриншоты, DOM, консоль, сеть"
+  pattern: "mcp-browser-debugging"
+  tools: ["Chrome DevTools MCP", "Claude Code", "OpenCode", "Playwright MCP", "Midscene"]
+  takeaways:
+    - "6 команд покрывают 80% frontend-багов: screenshot, snapshot, fill, click, console, network"
+    - "Баг с Input-компонентом в student-portal найден и починен одним промптом"
+    - "evaluate позволяет выполнить JS в контексте страницы"
+    - "DevTools MCP для отладки, Playwright MCP для E2E-тестов — не конфликтуют"
+  related:
+    - slug: "chrome-devtools-mcp-setup"
+      relation: "продвинутая настройка с подключением к реальному Chrome"
 ---
 
 Агент пишет код. Но не видит что сломал.

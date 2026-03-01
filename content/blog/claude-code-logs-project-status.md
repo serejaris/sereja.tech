@@ -4,6 +4,23 @@ date: 2026-01-16
 description: "Как использовать ~/.claude/projects для аудита репозиториев: какие проекты в работе, где непушнутые коммиты, что забыл синхронизировать."
 tags: ["claude code"]
 section: "Claude Code"
+knowledge:
+  problem: "Проекты множатся — непонятно где непушнутые коммиты и какие репозитории в работе"
+  solution: "Аудит через ~/.claude/projects/ — по датам модификации JSONL-файлов видно активные проекты и их git-статус"
+  pattern: "logs-project-audit"
+  tools: ["Claude Code", "claude-code-log", "git", "bash"]
+  takeaways:
+    - "44 коммита висели локально в 4 репозиториях — найдены за секунды"
+    - "7 активных репозиториев за 2 дня обнаружены через ~/.claude/projects/"
+    - "Формат пути в логах: слеши заменены на дефисы в имени папки"
+    - "claude-code-log конвертирует JSONL в HTML с фильтрами и подсчётом токенов"
+  metrics:
+    unpushed_commits: 44
+    active_repos: 7
+    unsynced_repos: 4
+  related:
+    - slug: "claude-code-logs-stack"
+      relation: "инструменты для детального анализа логов Claude Code"
 ---
 
 Спросил Claude Code: с какими проектами я работал последние два дня?

@@ -3,6 +3,21 @@ title: "Хуки Claude Code: агент сам ведёт задачи"
 date: 2026-02-21
 description: "Два хука Claude Code — и агент при старте видит активные GitHub Issues, а после пуша напоминает их закрыть. Настроил один раз, работает везде."
 tags: ["claude-code", "hooks", "github-issues", "автоматизация", "вайбкодинг"]
+knowledge:
+  problem: "Между сессиями Claude Code теряется контекст задач — каждый запуск начинается с чистого листа"
+  solution: "Два глобальных хука: SessionStart подгружает in-progress issues, PostToolUse после git push напоминает закрыть issue"
+  pattern: "hooks-task-tracking"
+  tools: ["Claude Code", "GitHub Issues", "gh CLI"]
+  takeaways:
+    - "Один промпт создал оба хука — агент не задал ни одного уточняющего вопроса"
+    - "stdout хука попадает в системный контекст агента, не в чат"
+    - "Plain text вывод надёжнее JSON — у JSON-варианта есть известные баги"
+    - "Хук SessionStart с таймаутом 15 секунд, реально gh отрабатывает за 2 секунды"
+    - "Хуки работают глобально через ~/.claude/settings.json во всех проектах"
+  prerequisites: ["gh CLI с авторизацией", "GitHub Issues с лейблом in-progress"]
+  related:
+    - slug: "claude-code-logs-project-status"
+      relation: "другой способ отслеживания проектов через логи Claude Code"
 ---
 
 Два хука в Claude Code превращают GitHub Issues в рабочую память агента. При старте сессии агент сам подгружает активные задачи, а после git push — напоминает обновить или закрыть их. Настраивается один раз, работает во всех проектах.

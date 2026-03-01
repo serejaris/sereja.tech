@@ -4,6 +4,23 @@ date: 2026-01-16
 description: "Три способа распространять скиллы Claude Code: плагины, комьюнити-реестр и свой маркетплейс. Разбираю что выбрать и как настроить."
 tags: ["claude code", "skills"]
 section: "Claude Code"
+knowledge:
+  problem: "Делиться скиллами Claude Code можно только копированием папок — не масштабируется"
+  solution: "Три способа: плагин с манифестом, комьюнити-реестр claude-plugins.dev, свой маркетплейс для команды"
+  pattern: "skills-distribution-methods"
+  tools: ["Claude Code", "claude-plugins.dev", "GitHub", "npx"]
+  takeaways:
+    - "Манифест плагина — 5 строк JSON в .claude-plugin/plugin.json"
+    - "Публичный репо + манифест = автоиндексация в claude-plugins.dev"
+    - "Установка одной командой: npx claude-plugins install @username/repo"
+    - "15 скиллов за полгода — каждый экономит 15 минут на установку"
+    - "Нужна Claude Code версия 2.0.12 или выше"
+  metrics:
+    skills_count: 15
+    manifest_lines: 5
+    min_version: "2.0.12"
+    time_saved_per_user: "15 минут"
+  prerequisites: ["Claude Code 2.0.12+", "GitHub репозиторий"]
 ---
 
 15 скиллов за полгода. gh-issues, cc-analytics, blog-post...

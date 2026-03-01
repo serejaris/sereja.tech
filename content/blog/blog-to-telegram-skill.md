@@ -4,6 +4,24 @@ date: 2026-01-23
 description: "Создал Claude Code skill который генерирует превью статьи и публикует в Telegram канал. Haiku пишет текст, Python отправляет."
 tags: ["claude code", "telegram", "skills"]
 youtube_id: "BxkAfHxQ9BU"
+knowledge:
+  problem: "Ручная публикация превью статей в Telegram отнимает время после каждого поста"
+  solution: "Claude Code skill с Haiku субагентом генерирует превью и отправляет через Python-скрипт на stdlib"
+  pattern: "skill-subagent-delegation"
+  tools: ["Claude Code", "Haiku", "Python", "Telegram API"]
+  takeaways:
+    - "Opus 4.5 — $5/M токенов, Haiku 4.5 — $1/M; для генерации 5 строк Haiku достаточно"
+    - "Рабочий skill создан за 8 минут одним агентом на Opus 4.5"
+    - "3 итерации промпта нужно для отладки инструкций субагенту"
+    - "Python-скрипт отправки в Telegram — 50 строк на stdlib без pip install"
+  metrics:
+    opus_price_per_million: "$5"
+    haiku_price_per_million: "$1"
+    skill_creation_time: "8 минут"
+    prompt_iterations: 3
+  related:
+    - slug: "claude-code-skills-distribution"
+      relation: "распространение созданных скиллов"
 ---
 
 Написал статью — копирую текст в Telegram. Надоело. За 2 часа стрима сделал skill.
