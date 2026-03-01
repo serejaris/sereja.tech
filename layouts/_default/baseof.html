@@ -6,6 +6,7 @@
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
   {{- partial "seo.html" . -}}
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-optimized content">
 
   <style>
     body {

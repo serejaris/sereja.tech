@@ -1,0 +1,86 @@
+# sereja.tech
+
+> Блог Сережи Риса про вайбкодинг — управление AI-агентами через промпты вместо написания кода руками. 80+ статей на русском языке. Фокус: Claude Code, мультиагентные паттерны, автоматизация, Personal Corporation.
+
+- [Все статьи](https://sereja.tech/blog/): полный каталог с тегами
+- [RSS](https://sereja.tech/blog/index.xml): полнотекстовая лента
+- [Полная версия](https://sereja.tech/llms-full.txt): все статьи с описаниями
+
+## Персональная корпорация
+
+Концепция: один человек управляет роем AI-агентов как CEO управляет компанией. GitHub Issues как единый интерфейс, event-driven архитектура, агенты на расписании.
+
+- [GitHub Projects как память для AI-агента](https://sereja.tech/blog/github-projects-ai-agent-memory/): Единая kanban-доска — агент помнит контекст между сессиями и видит задачи из всех репозиториев
+- [Из вайбкодера в CEO: Personal Corp на GitHub](https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github/): Концепция: один человек, рой агентов, GitHub Issues как единый источник правды
+- [Личная корпорация: event-driven агенты](https://sereja.tech/blog/personal-corporation-event-driven-agents/): Архитектура, где агенты подхватывают задачи из очереди сами — как отделы в компании. Паттерны и план
+- [Агенты на расписании через launchd](https://sereja.tech/blog/launchd-macos-agent-scheduler/): launchd запускает задачи на macOS без cron. Готовый plist-конфиг для автоматизации
+- [Personal OS: аудит проектов](https://sereja.tech/blog/personal-os-project-audit/): Агенты проанализировали 10 проектов — нашли 8 повторяющихся сервисов
+
+## OpenClaw / Clawdbot
+
+Свой AI-агент 24/7. Self-hosted бот в Telegram на базе Claude Code — от установки на VPS до хуков автоматизации.
+
+- [OpenClaw на VPS за $6: свой агент 24/7](https://sereja.tech/blog/openclaw-vps-6-dollars/): Contabo VPS + Kimi K2.5. AI-агент в Telegram, который живёт на сервере и стоит дешевле кофе
+- [Хуки делают агента полезным, не модель](https://sereja.tech/blog/openclaw-hooks-automation/): Хуки в OpenClaw — слой автоматизации между событиями агента и внешним миром. Без них — Q&A бот, с ними — автономный агент
+- [Clawdbot: личный AI-ассистент](https://sereja.tech/blog/clawdbot-personal-ai-assistant/): Что такое Clawdbot, почему 1000+ инстансов торчат голыми в интернет. Разбор безопасности
+- [Claude Code с телефона через Telegram](https://sereja.tech/blog/clawdbot-telegram-max/): Self-hosted бот для управления Claude Code. Агент сам настраивает OAuth, Keychain, синхронизацию
+
+## Управление агентом
+
+Настройка и оптимизация Claude Code: конфиги, правила, память, экономия контекста.
+
+- [Синхронизация Claude Code на 4 компах](https://sereja.tech/blog/sync-claude-code-four-machines/): 40 скиллов в приватный GitHub-репозиторий, синхронизация за один флоу
+- [5 приёмов экономии контекста](https://sereja.tech/blog/claude-code-token-optimization/): Анализ 22 сессий: 95% контекста жрут результаты тулов. Конкретные приёмы оптимизации
+- [Auto Memory: память между сессиями](https://sereja.tech/blog/claude-code-auto-memory/): Как агент запоминает контекст, где хранит заметки, чем отличается от CLAUDE.md
+- [Правка → Правило: агент не повторяет ошибки](https://sereja.tech/blog/fix-once-rule-forever/): Паттерн: исправил ошибку — записал правило — больше не повторится
+- [Модульные правила: декомпозиция CLAUDE.md](https://sereja.tech/blog/modular-rules-claude-md/): Разбиение одного файла на .claude/rules/ по доменам. Практический гайд с примерами
+
+## Skills, хуки и инфраструктура
+
+Переиспользуемые знания, хуки автоматизации, data layer для агентов.
+
+- [Хуки Claude Code: агент сам ведёт задачи](https://sereja.tech/blog/claude-code-hooks-github-issues/): Два хука — агент при старте видит Issues, после push напоминает закрыть. Готовый конфиг
+- [Superpowers: скиллы экономят часы](https://sereja.tech/blog/superpowers-brainstorming-workflow/): Superpowers skills заставляют Claude Code думать перед кодом. Brainstorming с веб-поиском
+- [Контекст проекта в GitHub Issues](https://sereja.tech/blog/github-issues-project-context/): Делегировал Claude Code создание структурированного контекста с mermaid-диаграммами
+- [Skills: знания между проектами](https://sereja.tech/blog/skills-knowledge-transfer/): Вместо повторения промптов — скиллы, которые переносятся между проектами и улучшаются
+- [Один JSON кормит всех: data layer](https://sereja.tech/blog/data-layer-for-agents/): Единый videos.json как источник данных для всех агентов. Схема, сбор через API, использование
+
+## Мультиагентные паттерны
+
+Субагенты, рой, команды — масштабирование через параллельную работу нескольких агентов.
+
+- [Консилиум: три агента нашли разные проблемы](https://sereja.tech/blog/agent-consilium-independent-opinions/): Независимые экспертные оценки от субагентов. Готовый промпт для запуска
+- [Agent Teams: команда агентов за 5 минут](https://sereja.tech/blog/agent-teams-opus-4-6/): Несколько агентов параллельно над одной задачей. Когда использовать, кейс со стрима
+- [Параллельные критики вместо одного rewriter](https://sereja.tech/blog/multi-agent-text-deaify/): Три критика + rewriter с hard rules — текст становится человечным
+- [MapReduce для субагентов](https://sereja.tech/blog/mapreduce-subagents/): Паттерн разбивки больших файлов (12800 строк) на чанки для параллельной обработки. Промпт для map и reduce
+- [Дайджесты чатов с субагентами](https://sereja.tech/blog/digest-subagents-mapreduce/): 954 сообщения за 3 дня через Haiku субагентов. MapReduce, reply_to контекст, верификация
+
+## Пайплайны и автоматизация
+
+Конвейеры контента, видео, аналитики — от ручных действий к автоматическим цепочкам.
+
+- [Аналитика чата через GitHub Actions](https://sereja.tech/blog/github-agentic-workflows-telegram-analytics/): AI-аналитика Telegram-чата на автопилоте — агент просыпается, анализирует, публикует отчёт
+- [Пайплайн для статей: 5 фаз](https://sereja.tech/blog/blog-post-pipeline/): Sequential pipeline: вопросы → research → черновик → деаификация → публикация
+- [12 паттернов AI-контент-конвейеров](https://sereja.tech/blog/ai-writing-pipelines/): Multi-agent архитектуры, human-in-the-loop, content repurposing. Анализ практик Anthropic, Notion, Amazon
+- [Видео-пайплайн: от записи до YouTube](https://sereja.tech/blog/video-pipeline-claude-code/): Субтитры Whisper, слайды глав, превью, загрузка на YouTube, HTML-страница — всё агенты
+- [State persistence для падающих пайплайнов](https://sereja.tech/blog/pipeline-reliability-state-persistence/): Почему AI-пайплайны прерываются на середине и как state-файлы решают проблему
+
+## Методология вайбкодинга
+
+Философия подхода: как думать, планировать и проверять результаты агентов.
+
+- [Сначала набросок, потом результат](https://sereja.tech/blog/draft-before-artifact/): Итерировать структуру в тексте быстрее и дешевле, чем переделывать готовые артефакты
+- [Документируй разговоры, а не код](https://sereja.tech/blog/document-conversations-not-code/): 54 промпта, 2.5 часа — технические статьи устарели. Вайбкодеры разговаривают с агентами
+- [Evals: автопроверка качества агентов](https://sereja.tech/blog/llm-evals-for-vibecoder/): Практический гайд по LLM evals без фреймворков. Как проверять выходы агентов
+- [50% времени — не код](https://sereja.tech/blog/context-lat-90-minutes/): Каталог AI-инструментов за 90 минут. Главный урок: половина работы — до первой строчки кода
+- [Structured Output вместо текстовых промптов](https://sereja.tech/blog/structured-output-llm/): JSON-схемы вместо текстовых инструкций. Кейс: модель забывала хештег в дайджесте
+
+## Optional
+
+### Инструменты и интеграции
+
+- [Homebrew: тысяча инструментов для агента](https://sereja.tech/blog/homebrew-cli-vibecoding/): 7000+ CLI-программ для Claude Code без MCP и токенов: yt-dlp, ffmpeg, whisper
+- [Chrome DevTools MCP за 3 шага](https://sereja.tech/blog/chrome-devtools-mcp-setup/): Агент управляет реальным Chrome с залогиненными сервисами
+- [Редотдел из трёх промптов](https://sereja.tech/blog/telegram-autopublisher/): Стиль канала, 9 постов на неделю, автопубликация в 8:00 — канал на автопилоте
+- [Семантический поиск по Telegram](https://sereja.tech/blog/telegram-vector-search/): Поиск по смыслу в переписках: Telethon, sqlite-vec, OpenAI embeddings
+- [E2E тесты пишет агент: Playwright](https://sereja.tech/blog/playwright-e2e-with-ai-agent/): Три встроенных агента — planner, generator, healer — генерируют Playwright тесты

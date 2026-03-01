@@ -1,0 +1,142 @@
+# sereja.tech
+
+> Блог Сережи Риса про вайбкодинг — управление AI-агентами через промпты вместо написания кода руками. 80+ статей на русском языке. Фокус: Claude Code, мультиагентные паттерны, автоматизация, Personal Corporation.
+
+- [Все статьи](https://sereja.tech/blog/): полный каталог с тегами
+- [RSS](https://sereja.tech/blog/index.xml): полнотекстовая лента
+- [Краткая версия](https://sereja.tech/llms.txt): топ-37 статей по кластерам
+
+## Персональная корпорация
+
+Концепция: один человек управляет роем AI-агентов как CEO управляет компанией.
+
+- [GitHub Projects как память для AI-агента](https://sereja.tech/blog/github-projects-ai-agent-memory/): Единая kanban-доска — агент помнит контекст между сессиями и видит задачи из всех репозиториев
+- [Из вайбкодера в CEO: Personal Corp на GitHub](https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github/): GitHub Issues как интерфейс управления агентами. Один человек, рой агентов, единый источник правды
+- [Личная корпорация: event-driven агенты](https://sereja.tech/blog/personal-corporation-event-driven-agents/): Event-driven архитектура, где агенты подхватывают задачи из очереди — как отделы в компании
+- [Агенты на расписании через launchd](https://sereja.tech/blog/launchd-macos-agent-scheduler/): launchd запускает задачи на macOS без cron. Готовый plist-конфиг
+- [Personal OS: аудит проектов](https://sereja.tech/blog/personal-os-project-audit/): Агенты проанализировали 10 проектов — нашли 8 повторяющихся сервисов
+
+## OpenClaw / Clawdbot
+
+Свой AI-агент 24/7 в Telegram на базе Claude Code.
+
+- [OpenClaw на VPS за $6](https://sereja.tech/blog/openclaw-vps-6-dollars/): Contabo VPS + Kimi K2.5. AI-агент в Telegram 24/7 дешевле кофе
+- [Хуки делают агента полезным, не модель](https://sereja.tech/blog/openclaw-hooks-automation/): Хуки в OpenClaw — слой автоматизации. Без них Q&A бот, с ними — автономный агент
+- [Clawdbot: личный AI-ассистент](https://sereja.tech/blog/clawdbot-personal-ai-assistant/): Что такое Clawdbot, 1000+ инстансов в интернете. Разбор безопасности
+- [Claude Code с телефона через Telegram](https://sereja.tech/blog/clawdbot-telegram-max/): Self-hosted бот для управления Claude Code. OAuth, Keychain, синхронизация
+
+## Управление агентом
+
+Настройка и оптимизация Claude Code.
+
+- [Синхронизация на 4 компах](https://sereja.tech/blog/sync-claude-code-four-machines/): 40 скиллов в приватный GitHub-репозиторий
+- [5 приёмов экономии контекста](https://sereja.tech/blog/claude-code-token-optimization/): 95% контекста жрут результаты тулов. Конкретные приёмы
+- [Auto Memory: память между сессиями](https://sereja.tech/blog/claude-code-auto-memory/): Как агент запоминает контекст и чем отличается от CLAUDE.md
+- [Правка → Правило](https://sereja.tech/blog/fix-once-rule-forever/): Исправил ошибку — записал правило — больше не повторится
+- [Модульные правила: .claude/rules/](https://sereja.tech/blog/modular-rules-claude-md/): Декомпозиция CLAUDE.md по доменам. Практический гайд
+- [Claude Code vs Codex CLI](https://sereja.tech/blog/claude-code-vs-codex-cli/): 703 промпта в Claude Code, 94 в Codex. Где каждый сильнее
+- [AI для кодинга в 2026: экономика](https://sereja.tech/blog/ai-coding-tools-economics-2026/): Сравнение Claude Code и Cursor, управление контекстом, кросс-валидация
+- [Логи — карта проектов](https://sereja.tech/blog/claude-code-logs-project-status/): ~/.claude/projects для аудита: какие проекты в работе, непушнутые коммиты
+- [Стек для анализа логов](https://sereja.tech/blog/claude-code-logs-stack/): claude-code-transcripts, JSONL структура, превращение сессий в контент
+- [Голосовой ассистент из Claude Code](https://sereja.tech/blog/claude-code-voice-assistant/): TTS hook через Gemini Live API — агент озвучивает ответы
+
+## Skills, хуки и инфраструктура
+
+Переиспользуемые знания, хуки автоматизации, data layer.
+
+- [Хуки: агент сам ведёт задачи](https://sereja.tech/blog/claude-code-hooks-github-issues/): При старте видит Issues, после push напоминает закрыть. Готовый конфиг
+- [Superpowers: скиллы экономят часы](https://sereja.tech/blog/superpowers-brainstorming-workflow/): Brainstorming с веб-поиском перед кодом
+- [Контекст проекта в GitHub Issues](https://sereja.tech/blog/github-issues-project-context/): Структурированный контекст с mermaid-диаграммами
+- [Skills: знания между проектами](https://sereja.tech/blog/skills-knowledge-transfer/): Скиллы переносятся между проектами и улучшаются
+- [Один JSON кормит всех: data layer](https://sereja.tech/blog/data-layer-for-agents/): videos.json как единый источник данных для агентов
+- [Как делиться скиллами](https://sereja.tech/blog/claude-code-skills-distribution/): Плагины, комьюнити-реестр, маркетплейс
+- [Commands vs Skills vs Agents](https://sereja.tech/blog/slash-commands-subagents/): Почему model: haiku в командах не экономит. Разница и как делегировать
+- [Skill для автопостинга в Telegram](https://sereja.tech/blog/blog-to-telegram-skill/): Haiku пишет текст, Python отправляет
+
+## Мультиагентные паттерны
+
+Субагенты, рой, команды — масштабирование через параллелизм.
+
+- [Консилиум: три агента, разные проблемы](https://sereja.tech/blog/agent-consilium-independent-opinions/): Независимые экспертные оценки. Готовый промпт
+- [Agent Teams за 5 минут](https://sereja.tech/blog/agent-teams-opus-4-6/): Несколько агентов параллельно. Кейс со стрима
+- [Параллельные критики вместо rewriter](https://sereja.tech/blog/multi-agent-text-deaify/): Три критика + hard rules — текст становится человечным
+- [MapReduce для субагентов](https://sereja.tech/blog/mapreduce-subagents/): Разбивка 12800 строк на чанки. Промпт для map и reduce
+- [Дайджесты чатов с субагентами](https://sereja.tech/blog/digest-subagents-mapreduce/): 954 сообщения через Haiku. MapReduce, reply_to контекст
+- [Рой агентов вместо верстки](https://sereja.tech/blog/agent-swarm-frontend/): Три варианта дизайна за 10 минут без кода
+- [Контент-план через субагентов](https://sereja.tech/blog/content-plan-subagents-exa/): Серия постов для канала через агента с Exa MCP
+- [Map-Reduce для YouTube метаданных](https://sereja.tech/blog/map-reduce-youtube-metadata/): Точные заголовки из транскрипта без галлюцинаций
+
+## Пайплайны и автоматизация
+
+Конвейеры контента, видео, аналитики.
+
+- [Аналитика чата через GitHub Actions](https://sereja.tech/blog/github-agentic-workflows-telegram-analytics/): AI-аналитика на автопилоте — агент просыпается, анализирует, публикует
+- [Пайплайн для статей: 5 фаз](https://sereja.tech/blog/blog-post-pipeline/): Вопросы → research → черновик → деаификация → публикация
+- [12 паттернов AI-контент-конвейеров](https://sereja.tech/blog/ai-writing-pipelines/): Multi-agent, human-in-the-loop, repurposing. Анализ Anthropic, Notion, Amazon
+- [Видео-пайплайн: запись → YouTube](https://sereja.tech/blog/video-pipeline-claude-code/): Whisper, слайды глав, превью, загрузка — всё агенты
+- [State persistence для пайплайнов](https://sereja.tech/blog/pipeline-reliability-state-persistence/): Почему прерываются и как state-файлы решают проблему
+- [Two-Stage Pipeline: платить вдвое меньше](https://sereja.tech/blog/two-stage-ai-pipeline/): Быстрая модель для извлечения + качественная для генерации
+- [Фактчекер в AI-воркфлоу](https://sereja.tech/blog/fact-checker-in-ai-workflow/): Четвёртый критик ловит устаревшие версии моделей
+
+## Методология вайбкодинга
+
+Как думать, планировать и проверять результаты агентов.
+
+- [Сначала набросок, потом результат](https://sereja.tech/blog/draft-before-artifact/): Итерировать в тексте дешевле, чем переделывать артефакты
+- [Документируй разговоры, а не код](https://sereja.tech/blog/document-conversations-not-code/): 54 промпта — технические статьи устарели
+- [Evals: автопроверка качества](https://sereja.tech/blog/llm-evals-for-vibecoder/): LLM evals без фреймворков
+- [50% времени — не код](https://sereja.tech/blog/context-lat-90-minutes/): PRD, прототип, потом агент
+- [Structured Output](https://sereja.tech/blog/structured-output-llm/): JSON-схемы вместо текстовых инструкций
+- [Дневник вайбкодера](https://sereja.tech/blog/vibecoder-diary/): Каждая сессия — статья. Открытый эксперимент
+- [Хуки, которые работают](https://sereja.tech/blog/hooks-that-work-2026/): Психология первых 15 секунд. Типы лидов и формулы
+- [Workflow Addy Osmani для LLM](https://sereja.tech/blog/llm-coding-workflow-2026/): Планирование, context engineering, git worktrees
+- [SSOT: один источник правды](https://sereja.tech/blog/ssot-documentation/): Почему копировать данные в документацию — плохая идея
+- [Какое приложение ты строишь](https://sereja.tech/blog/app-types-guide/): Информация или функция — первый вопрос перед разработкой
+
+## Инструменты и интеграции
+
+- [Homebrew: 7000+ CLI для агента](https://sereja.tech/blog/homebrew-cli-vibecoding/): yt-dlp, ffmpeg, whisper без MCP и токенов
+- [Chrome DevTools MCP за 3 шага](https://sereja.tech/blog/chrome-devtools-mcp-setup/): Агент управляет Chrome с залогиненными сервисами
+- [Chrome DevTools MCP: глаза в браузер](https://sereja.tech/blog/chrome-devtools-mcp/): Кейс отладки формы авторизации
+- [E2E тесты: Playwright + агент](https://sereja.tech/blog/playwright-e2e-with-ai-agent/): Planner, generator, healer генерируют тесты
+- [MIDI + OBS + Claude Code](https://sereja.tech/blog/midi-obs-claude-code/): MIDI-контроллер для OBS за 3 часа. Velocity, SysEx, EventClient
+- [MIDI для OBS: JSON-конфиг](https://sereja.tech/blog/midi-obs-scene-switching/): Arturia MiniLab 3 + obs-midi-mg
+- [zoxide + fzf: навигация в терминале](https://sereja.tech/blog/zoxide-fzf-terminal-navigation/): Frecency-алгоритм, интерактивный выбор директорий
+- [Один скрипт вместо трёх терминалов](https://sereja.tech/blog/dev-script-health-checks/): dev.sh с health checks для backend и frontend
+- [Gemini 3.1 Pro: SVG-анимации](https://sereja.tech/blog/gemini-3-1-pro-svg-animations/): SVG с параллаксом за один промпт. Без библиотек
+
+## Telegram-инструменты
+
+- [Редотдел из трёх промптов](https://sereja.tech/blog/telegram-autopublisher/): Стиль канала, 9 постов, автопубликация — на автопилоте
+- [Автопостер: очередь постов](https://sereja.tech/blog/telegram-autoposter/): Посты выходят в 19:00 сами через launchd
+- [Семантический поиск по чатам](https://sereja.tech/blog/telegram-vector-search/): Telethon, sqlite-vec, OpenAI embeddings
+- [Telegram API вместо JSON экспорта](https://sereja.tech/blog/telegram-api-vs-json-export/): Получать сообщения напрямую через API
+- [Рассылка: 717 сообщений за 8 минут](https://sereja.tech/blog/telegram-broadcast-slow/): Синхронный скрипт vs asyncio. Как агент учится на ошибках
+- [Альбом на 800 юзеров за 30 минут](https://sereja.tech/blog/telegram-broadcast-file-id/): file_id вместо повторной загрузки = 60 секунд вместо 30 минут
+- [Текст + картинка в одном сообщении](https://sereja.tech/blog/telegram-single-message-digest/): LinkPreviewOptions, catbox.moe, задержка перед отправкой
+- [Карточки-карусели без Figma](https://sereja.tech/blog/carousel-cards-playwright/): HTML/CSS + Playwright скриншоты
+- [Операционка для марафона](https://sereja.tech/blog/claude-code-marketing-ops/): 821 пользователь через Claude Code — рассылки, сегменты, аналитика
+
+## SEO и контент
+
+- [SEO-аудит за одну сессию](https://sereja.tech/blog/seo-audit-hugo-vercel-checklist/): Google Search Console, 5 проблем Hugo+Vercel. Чеклист
+- [SEO для блога в эру AI](https://sereja.tech/blog/seo-for-ai-era/): JSON-LD Schema, structured data для AI-поисковиков
+- [YouTube-обложки генерирует LLM](https://sereja.tech/blog/youtube-thumbnails-html-code/): HTML-шаблоны + Playwright + YouTube API
+- [AI неправильно понимает длинные тексты](https://sereja.tech/blog/youtube-metadata-relevance-fix/): Формула relevance: глубина обсуждения > количество упоминаний
+- [TUI-презентация в терминале](https://sereja.tech/blog/tui-presentation-claude-code/): Презентация с ASCII-артом не выходя из Claude Code
+- [React-презентация без сборки](https://sereja.tech/blog/react-presentation-no-build/): Editorial Brutalism на CDN, grain-текстуры через SVG
+
+## Образование и EdTech
+
+- [Трекинг прогресса студентов через AI](https://sereja.tech/blog/ai-student-progress-tracking/): Rich profile важнее оценок. Skills дают доступ к данным
+- [Персонализация уроков через данные](https://sereja.tech/blog/personalized-teaching-student-data/): Парсинг интро студентов через LLM для адаптации примеров
+- [UX видео-уроков](https://sereja.tech/blog/video-lesson-ux/): NN/g про таймкоды, табы vs скролл, удержание студента
+- [ASCII-дашборды вместо интерфейсов](https://sereja.tech/blog/ascii-dashboard-analytics/): Grid-layout, box drawing characters в терминале
+
+## Обзоры и аналитика
+
+- [Kimi K2.5: 256K контекст за копейки](https://sereja.tech/blog/kimi-k2-5-agentic-model/): Moonshot AI, цена в 5 раз ниже Claude. Где полезна
+- [Tailwind уволил 75% команды](https://sereja.tech/blog/tailwind-layoffs-ai-impact/): AI перехватил трафик с документации. Разбор бизнес-модели
+- [Moltbook: соцсеть для AI-агентов](https://sereja.tech/blog/moltbook-social-network-ai-agents/): A2A и ANP протоколы, skill-based onboarding
+- [Локальный RAG на M1](https://sereja.tech/blog/local-rag-embeddings-m1/): ChromaDB, эмбединги, почему генеративная модель не заменит поиск
+- [Remotion: программное видео](https://sereja.tech/blog/remotion-programmatic-video-vibecoding/): Сравнение ffmpeg, Playwright, Motion Canvas и Remotion
