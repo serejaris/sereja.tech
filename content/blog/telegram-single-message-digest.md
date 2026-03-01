@@ -4,6 +4,20 @@ date: 2026-01-17
 description: "Как отправить длинный текст с картинкой в одном сообщении Telegram. LinkPreviewOptions, catbox.moe и почему нужна задержка перед отправкой."
 tags: ["telegram", "bot api"]
 section: Telegram
+knowledge:
+  problem: "Нельзя отправить длинный текст (2000+ символов) с крупной картинкой в одном сообщении Telegram"
+  solution: "Использование LinkPreviewOptions из Bot API 7.0 с внешним хостингом картинки и задержкой 4 секунды для кэширования"
+  pattern: "link-preview-media-hack"
+  tools: ["Telegram Bot API", "LinkPreviewOptions", "catbox.moe", "python-telegram-bot"]
+  takeaways:
+    - "sendPhoto ограничен 1024 символами caption (2048 для Premium)"
+    - "sendMessage + LinkPreviewOptions поддерживает до 4096 символов с картинкой"
+    - "Внешние изображения требуют 3-4 секунды задержки для кэширования Telegram"
+    - "prefer_large_media=True необходим для крупного отображения картинки"
+    - "Telegraph не работает с PNG с альфа-каналом"
+  related:
+    - slug: "telegram-broadcast-file-id"
+      relation: "другой способ работы с медиа в Telegram Bot API"
 ---
 
 Бот для дайджестов. Текст + комикс снизу, в одном сообщении.

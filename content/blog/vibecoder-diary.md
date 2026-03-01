@@ -4,6 +4,21 @@ date: 2026-01-11
 description: "Как превратить сессии с Claude Code в контент. AI-скиллы для исследования и написания текстов. Открытый эксперимент на GitHub."
 tags: ["claude code"]
 section: AI
+knowledge:
+  problem: "Знания из сессий с Claude Code растворяются — через неделю невозможно вспомнить решения"
+  solution: "Набор AI-скиллов превращает каждую сессию в статью: blog-post, deaify-text, html-lesson"
+  pattern: "session-to-article-pipeline"
+  tools: ["Claude Code", "Skills", "Exa"]
+  takeaways:
+    - "За 5 дней — 4 статьи, первая заняла 3 часа, последняя — меньше часа"
+    - "deaify-text использует 4 параллельных критика для удаления AI-паттернов"
+    - "Зная что сессия станет статьёй, лучше формулируешь задачи для AI"
+    - "Learning in public снижает барьер документирования решений"
+  related:
+    - slug: "blog-post-pipeline"
+      relation: "техническая реализация пайплайна генерации статей"
+    - slug: "multi-agent-text-deaify"
+      relation: "подробнее про deaify-text и параллельных критиков"
 ---
 
 Вчера настраивал MIDI-контроллер для OBS. Сегодня не помню, какой SysEx-формат использовал для LED-индикации. Полчаса рылся в истории чата, искал строку `F0 00 20 6B 7F 42...`

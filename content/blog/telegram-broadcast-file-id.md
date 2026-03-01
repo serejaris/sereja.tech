@@ -3,6 +3,25 @@ title: "Массовая рассылка в Telegram: почему альбом
 date: 2026-01-25
 description: "Как ускорить отправку медиа-альбомов в Telegram Bot API с 30 минут до 60 секунд, используя file_id вместо повторной загрузки файлов"
 tags: ["telegram bot", "python"]
+knowledge:
+  problem: "Массовая рассылка медиа-альбомов в Telegram занимает 30+ минут из-за повторной загрузки файлов"
+  solution: "Использование file_id после однократной загрузки сокращает трафик с 15 ГБ до 5 МБ и время с 30 минут до 60 секунд"
+  pattern: "telegram-file-id-caching"
+  tools: ["Telegram Bot API", "Python", "asyncio"]
+  takeaways:
+    - "Повторная загрузка 6 картинок × 3 МБ на 871 юзера = 15 ГБ трафика"
+    - "file_id после однократной загрузки снижает трафик до ~5 МБ"
+    - "Лимит Telegram — 30 сообщений/секунду на токен"
+    - "file_id персистентный — можно хранить в базе и использовать повторно"
+  metrics:
+    users: 871
+    upload_before_gb: 15
+    upload_after_mb: 5
+    time_before_min: 30
+    time_after_sec: 60
+  related:
+    - slug: "telegram-broadcast-slow"
+      relation: "проблема медленной синхронной рассылки без file_id"
 ---
 
 Написал рассылку альбома из 6 картинок на 871 пользователя `@hashslash_bot`. Ожидал минуту-две. Полчаса — 100 человек.

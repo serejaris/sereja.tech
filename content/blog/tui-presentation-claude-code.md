@@ -3,6 +3,19 @@ title: "TUI-презентация прямо в Claude Code"
 date: 2026-01-25
 description: "Как я сделал презентацию с ASCII-артом внутри терминала — и показываю её не выходя из Claude Code"
 tags: ["claude code", "skills"]
+knowledge:
+  problem: "Существующие TUI-инструменты для презентаций требуют сложной настройки и не интегрируются с Claude Code"
+  solution: "Презентация как скилл Claude Code — 10 слайдов с ASCII-артом, вызываемых командой /presentation"
+  pattern: "skill-as-presentation"
+  tools: ["Claude Code", "Skills", "ASCII art"]
+  takeaways:
+    - "Unicode-символы █ ╔ ║ имеют переменную ширину в разных шрифтах терминала"
+    - "Левое выравнивание ASCII-арта работает стабильнее центрирования с рамками"
+    - "Claude Code сам добавляет рамку вокруг code-блока — отдельная рамка не нужна"
+    - "Презентация как часть репозитория — клонирует проект, получает и её"
+  related:
+    - slug: "claude-code-skills-distribution"
+      relation: "распространение и переиспользование скиллов Claude Code"
 ---
 
 Нужна была презентация про Claude Code. Для демонстрации Claude Code. По-моему, показывать слайды в PowerPoint — это как рассказывать про терминал в Word.

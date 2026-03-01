@@ -4,6 +4,26 @@ date: 2026-01-26
 description: "Как я сделал поиск по смыслу в своих Telegram-переписках за вечер. Telethon, sqlite-vec, OpenAI embeddings — и больше никаких ctrl+F по 50 чатам."
 tags: ["telegram", "rag", "sqlite-vec"]
 section: "Проекты"
+knowledge:
+  problem: "Стандартный поиск в Telegram ищет по словам, а не по смыслу — невозможно найти нужное сообщение среди 47 чатов"
+  solution: "Семантический поиск через Telethon + sqlite-vec + OpenAI embeddings позволяет искать по смыслу за секунду"
+  pattern: "local-vector-search"
+  tools: ["Telethon", "sqlite-vec", "OpenAI embeddings", "Python"]
+  takeaways:
+    - "15 000 сообщений проиндексированы за 10 минут, стоимость $0.02"
+    - "sqlite-vec — один файл без сервера, бэкап = копирование файла"
+    - "FloodWait от Telegram решается случайными задержками между запросами"
+    - "sqlite-vec требует особый SQL-синтаксис, отличный от стандартного"
+    - "Подход универсален — работает для Slack, Discord, Email, Obsidian"
+  metrics:
+    messages_indexed: 15000
+    indexing_time_min: 10
+    cost_usd: 0.02
+    chats_count: 50
+    history_days: 60
+  related:
+    - slug: "local-rag-embeddings-m1"
+      relation: "локальные эмбеддинги на Apple Silicon как альтернатива OpenAI"
 ---
 
 Вася три месяца назад скинул решение бага с async — помню точно. В каком из 47 чатов — уже нет.

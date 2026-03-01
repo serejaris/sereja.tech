@@ -4,6 +4,25 @@ date: 2026-02-23
 description: "GitHub Issues — интерфейс управления агентами. Один человек, рой агентов, единый источник правды."
 tags: [vibe-coding, github, ai-agents, personal-corp, productivity]
 image: "/images/blog/vibecoder-to-ceo-personal-corp-github-preview.png"
+knowledge:
+  problem: "Промпты в чат теряют контекст и не позволяют управлять несколькими агентами параллельно"
+  solution: "GitHub Issues как единый интерфейс управления роем агентов с оркестратором для декомпозиции задач"
+  pattern: "issues-as-agent-interface"
+  tools: ["GitHub Issues", "GitHub Projects", "Copilot Coding Agent", "Claude Code"]
+  takeaways:
+    - "Три уровня: промпт в чат → issue как задача → оркестратор как менеджер"
+    - "Copilot Coding Agent: назначаешь issue — получаешь PR автоматически"
+    - "Peli's Agent Factory: 514 merged PR из 761 — 67% success rate"
+    - "Spec Kit от GitHub: /specify → /plan → /tasks → /implement, 71k+ звёзд"
+    - "Issue — контракт с acceptance criteria, промпт — разговор без гарантий"
+  prerequisites: ["GitHub аккаунт", "Базовое понимание Issues и Projects"]
+  related:
+    - slug: "github-issues-project-context"
+      relation: "подробнее про контекст проекта в GitHub Issues"
+    - slug: "claude-code-hooks-github-issues"
+      relation: "автоматизация ведения задач через хуки"
+    - slug: "github-projects-ai-agent-memory"
+      relation: "Projects как память и координация для агентов"
 ---
 
 <div class="svg-header-container" style="width:100%; max-width: 800px; margin: 2rem auto; background: #ffffff; border: 1px solid #000000; font-family: 'Courier New', Courier, monospace;">
