@@ -3,6 +3,20 @@ title: "E2E тесты пишет агент: Playwright + Claude Code"
 date: 2026-01-23
 description: "Как AI-агент генерирует Playwright тесты из описания сценариев. Три встроенных агента — planner, generator, healer — и реальный опыт."
 tags: ["claude code", "playwright", "тестирование"]
+knowledge:
+  problem: "E2E тесты жрут время на написание и ломаются при каждом обновлении UI из-за изменения локаторов."
+  solution: "Три встроенных агента Playwright — Planner, Generator, Healer — генерируют тесты из описания и автоматически чинят сломанные."
+  pattern: "ai-generated-e2e-tests"
+  tools: ["Playwright", "Claude Code", "Playwright MCP", "Chrome"]
+  takeaways:
+    - "70 тестов (47 + 23) за два вечера вместо пяти дней ручной работы"
+    - "Три агента: Planner кликает UI и строит план, Generator пишет код, Healer чинит локаторы"
+    - "Агенты плохо справляются со сложной бизнес-логикой и API-тестами"
+    - "Playwright MCP даёт Claude Code прямой доступ к браузеру для проверки в реальном Chrome"
+  metrics:
+    tests_admin: 47
+    tests_bot: 23
+    time_saved_days: 3
 ---
 
 Локатор поменялся — тест сломался. Фронтендер обновил форму — опять всё красное. Я переписывал один и тот же тест для регистрации раз шесть за квартал.
