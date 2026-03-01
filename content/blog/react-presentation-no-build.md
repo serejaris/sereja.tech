@@ -4,6 +4,21 @@ date: 2026-01-13
 description: "Как сделать презентацию для курса на React без webpack и npm. Editorial Brutalism, grain-текстуры через SVG, анимации skew. Архитектура и примеры кода."
 tags: ["react", "презентация"]
 section: Вайбкодинг
+knowledge:
+  problem: "PowerPoint не подходит для презентации курса по вайбкодингу — нужны grain-текстуры, анимации и интерактивная карта."
+  solution: "React через CDN без сборки с Editorial Brutalism стилем — три ссылки в HTML и компиляция JSX в браузере через Babel."
+  pattern: "react-cdn-no-build"
+  tools: ["React", "Babel Standalone", "Claude Code", "SVG", "CSS animations"]
+  takeaways:
+    - "11 слайдов за один вечер без npm, webpack или любой сборки"
+    - "Три CDN-ссылки заменяют весь build pipeline для прототипов и презентаций"
+    - "Grain-текстура через SVG feTurbulence с opacity 0.03 генерируется в браузере без PNG"
+    - "Editorial Brutalism — типографика из журналов с бруталистскими акцентами"
+    - "19 участников из 9 городов на интерактивной SVG-карте с пульсирующими маркерами"
+  metrics:
+    slides_count: 11
+    participants: 19
+    cities: 9
 ---
 
 Презентация для первого урока. 8й поток курса по вайбкодингу.

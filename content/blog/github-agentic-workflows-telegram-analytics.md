@@ -4,6 +4,27 @@ date: 2026-02-25
 description: "Как поставить AI-аналитику Telegram-чата на автопилот через GitHub Agentic Workflows — агент сам просыпается, анализирует и публикует отчёт."
 tags: ["github", "ai-агенты", "автоматизация", "telegram", "вайбкодинг"]
 image: "/images/blog/github-agentic-workflows-telegram-analytics-preview.png"
+knowledge:
+  problem: "Ежедневный анализ Telegram-чата вручную — трудоёмко, нерегулярно и теряются важные обсуждения."
+  solution: "GitHub Agentic Workflows запускает AI-агента по расписанию: скрипт достаёт данные из базы, агент анализирует и публикует отчёт как Issue."
+  pattern: "data-first-then-agent"
+  tools: ["GitHub Agentic Workflows", "Claude Code", "Python", "PostgreSQL", "GitHub Actions"]
+  takeaways:
+    - "Агент в песочнице GitHub Actions пропускает только HTTP — прямое подключение к БД невозможно"
+    - "Гибридный подход: скрипт достаёт данные → агент анализирует файл"
+    - "Воркфлоу ~60 строк текста на обычном языке, скрипт ~150 строк Python"
+    - "Агент сам обнаружил 10-кратный рост активности и подсветил аномалию"
+    - "Agentic Workflows в техническом превью с 13 февраля 2026, MIT-лицензия"
+  metrics:
+    workflow_lines: 60
+    script_lines: 150
+    community_size: 41
+  prerequisites: ["GitHub-репозиторий", "Данные в доступном формате (БД или файл)"]
+  related:
+    - slug: "github-issues-project-context"
+      relation: "отчёты публикуются как GitHub Issues — тот же подход к хранению контекста"
+    - slug: "github-projects-ai-agent-memory"
+      relation: "GitHub как интерфейс для AI-агентов"
 ---
 
 GitHub Agentic Workflows позволяет запускать AI-агента по расписанию — как cron, только вместо скрипта работает агент, который думает. Я поставил на автопилот ежедневную аналитику Telegram-чата: агент сам просыпается, читает данные, находит тренды и публикует отчёт как GitHub Issue. Без моего участия.

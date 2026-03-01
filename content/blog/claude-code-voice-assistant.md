@@ -3,6 +3,20 @@ title: "Как я сделал голосового ассистента из Cl
 date: 2026-01-24
 description: "Настраиваем TTS hook для Claude Code через Gemini Live API — агент озвучивает свои ответы мягким ASMR-голосом"
 tags: ["claude code", "tts", "gemini"]
+knowledge:
+  problem: "При работе с Claude Code пропускаешь момент готовности ответа и теряешь ~40 минут в неделю"
+  solution: "TTS hook через Gemini Live API с постоянным WebSocket-соединением озвучивает ответы агента с суммаризацией"
+  pattern: "tts-hook-notification"
+  tools: ["Claude Code", "Gemini Live API", "Python", "WebSocket"]
+  takeaways:
+    - "Задержка от завершения ответа до озвучки — 1.5-2 секунды на M2 Pro"
+    - "Потеря ~40 минут в неделю на пропущенные моменты готовности"
+    - "Режим summary пересказывает 50 строк технического ответа в 1-2 предложения"
+    - "Daemon с постоянным WebSocket избегает 300-400мс на установку соединения"
+  metrics:
+    latency_seconds: 2
+    weekly_time_lost_minutes: 40
+    daemon_code_lines: 500
 ---
 
 Вчера пропустил момент, когда Claude Code закончил рефакторинг. Отвлёкся на кофе, вернулся через 10 минут — а он давно ждёт следующий промпт.

@@ -4,6 +4,21 @@ date: 2026-02-07
 description: "Открыл Google Search Console — 0 sitemap, 307 redirect, 0 видео. За сессию Claude Code нашёл 5 проблем. Чеклист для Hugo+Vercel."
 tags: ["seo", "hugo", "claude code"]
 image: "/images/blog/seo-audit-hugo-vercel-checklist-preview.png"
+knowledge:
+  problem: "Блог на Hugo+Vercel имеет 0 sitemap, 307 redirect и 0 discovered videos в Google Search Console."
+  solution: "Claude Code с Exa MCP за одну сессию методично нашёл и починил 5 SEO-проблем."
+  pattern: "ai-seo-audit"
+  tools: ["Claude Code", "Opus 4.6", "Exa MCP", "Google Search Console", "Perplexity", "Hugo", "Vercel"]
+  takeaways:
+    - "Sitemap сократился с 157 мусорных URL до 63 реальных статей"
+    - "307 redirect теряет SEO-вес — нужен 308 permanent для передачи link equity"
+    - "Google официально игнорирует changefreq и priority в sitemap"
+    - "Маркетплейс удалил 600K low-value страниц — +30% кликов, ТОП-3 удвоился за 4 месяца"
+    - "VideoObject JSON-LD обязателен для распознавания YouTube-видео в iframe"
+  metrics:
+    sitemap_urls_before: 157
+    sitemap_urls_after: 63
+    problems_found: 5
 ---
 
 Открыл Google Search Console — ноль сабмитнутых sitemap, 307 redirect на каждом запросе, ноль discovered videos. Три красных флага на пустом месте.

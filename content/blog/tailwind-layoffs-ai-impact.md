@@ -4,6 +4,21 @@ date: 2026-01-10
 description: "Tailwind Labs сократила 3 из 4 инженеров после падения revenue на 80%. Причина — AI перехватил трафик с документации, на которой держалась продажа UI-паков."
 tags: ["tailwind"]
 section: AI
+knowledge:
+  problem: "AI-инструменты перехватили трафик с документации, на которой держалась продажа UI-паков Tailwind"
+  solution: "Бизнес-модели на документационном трафике требуют адаптации: интеграция в AI-инструменты, подписки или enterprise"
+  pattern: "ai-disruption-docs-traffic"
+  tools: ["Tailwind CSS", "Claude", "Cursor"]
+  takeaways:
+    - "Revenue Tailwind Labs упал на 80%, уволены 3 из 4 инженеров"
+    - "Бизнес-модель 'бесплатный фреймворк → документация → платные продукты' сломалась из-за AI"
+    - "Под угрозой: WordPress плагины, UI-библиотеки, книги по программированию, курсы на SEO-трафике"
+    - "Три варианта адаптации: интеграция в AI-инструменты, SaaS-подписки, enterprise-продукты"
+  metrics:
+    revenue_drop_percent: 80
+    engineers_before: 4
+    engineers_after: 1
+    layoff_percent: 75
 ---
 
 В Tailwind Labs было 4 инженера. Остался один.

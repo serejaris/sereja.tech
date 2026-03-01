@@ -4,6 +4,27 @@ date: 2026-02-09
 description: "Запустил каталог AI-инструментов context.lat за 90 минут. Главный урок: половина работы — до первой строчки кода. PRD, прототип, потом агент."
 tags: ["claude code", "методология"]
 youtube_id: "A8HAkYWIMuk"
+knowledge:
+  problem: "Вайбкодеры начинают с кода вместо планирования и получают шаблонный результат, который переписывают неделю"
+  solution: "Методология PRD-first: проблема → данные → персоны → прототип в v0 → агент пишет по спецификации"
+  pattern: "prd-first-development"
+  tools: ["Claude Code", "Hugo", "v0", "Vercel", "Playwright MCP"]
+  takeaways:
+    - "50 из 90 минут — планирование и прототип, код агент писал только последние 40 минут"
+    - "Каталог context.lat запущен за 90 минут от чистого листа до рабочего сайта"
+    - "Параллельные агенты: один на контент (20 инструментов), второй на инфраструктуру"
+    - "Hugo + markdown + Vercel — без базы данных и серверов, деплой бесплатно"
+    - "Без PRD агент выдаёт шаблонный результат, который переписываешь дольше планирования"
+  metrics:
+    total_minutes: 90
+    planning_minutes: 50
+    coding_minutes: 40
+    tools_count: 20
+  related:
+    - slug: "superpowers-brainstorming-workflow"
+      relation: "GitHub Issues как память агентов при параллельной работе"
+    - slug: "pipeline-reliability-state-persistence"
+      relation: "принцип простого стека — меньше движущихся частей, надёжнее"
 ---
 
 {{< youtube A8HAkYWIMuk >}}

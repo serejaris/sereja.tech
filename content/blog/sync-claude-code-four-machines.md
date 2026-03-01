@@ -4,6 +4,28 @@ date: 2026-02-22
 description: "Купил новый MacBook — теперь 4 машины. Упаковал 40 скиллов в приватный репозиторий GitHub и настроил синхронизацию за один флоу."
 tags: ["claude-code", "github", "скиллы", "настройка", "вайбкодинг"]
 image: "/images/blog/sync-claude-code-four-machines-preview.png"
+knowledge:
+  problem: "40 скиллов разбросаны по 4 машинам, ни на одной нет полного набора"
+  solution: "Упаковать скиллы в приватный GitHub-репозиторий и синхронизировать через git pull + симлинки"
+  pattern: "git-skills-sync"
+  tools: ["GitHub CLI", "Git", "Claude Code", "symlinks"]
+  takeaways:
+    - "Порядок настройки: gh auth login → клон скиллов → установка Claude Code"
+    - "40 скиллов в одном приватном репо — работает без проблем, скиллы весят килобайты"
+    - "С 2026 года Claude Code ставится без Node.js через нативный инсталлятор"
+    - "На Windows нужно вручную добавить %USERPROFILE%\\.local\\bin в PATH"
+    - "Настройка новой машины — 15 минут по чеклисту из 4 пунктов"
+  metrics:
+    skills_count: 40
+    machines_count: 4
+    setup_minutes: 15
+  related:
+    - slug: "skills-knowledge-transfer"
+      relation: "Создание и структура скиллов для переноса между проектами"
+    - slug: "github-projects-ai-agent-memory"
+      relation: "GitHub Projects как память для агента"
+    - slug: "modular-rules-claude-md"
+      relation: "Модульные правила для Claude Code"
 ---
 
 Без `gh auth login` AI-агент слеп — не видит приватные репозитории, не может клонировать скиллы, не может создать PR. Первое, что нужно настроить на новом компьютере — не редактор, не терминал, а GitHub. Дальше расскажу, как я настроил четыре машины за один флоу.

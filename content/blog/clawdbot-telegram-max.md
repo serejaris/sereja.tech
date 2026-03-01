@@ -4,6 +4,22 @@ date: 2026-01-18
 description: "Self-hosted бот для управления Claude Code через Telegram. Делегируем настройку агенту — он сам разберётся с OAuth, Keychain и синхронизацией."
 tags: ["clawdbot", "telegram"]
 section: "AI Tools"
+knowledge:
+  problem: "Clawdbot и Claude Code конфликтуют при авторизации на одной Max подписке"
+  solution: "Делегировать агенту извлечение OAuth-токена из macOS Keychain и настройку auth-profiles для двух клиентов"
+  pattern: "oauth-token-sharing"
+  tools: ["Clawdbot", "Claude Code", "Telegram", "macOS Keychain"]
+  takeaways:
+    - "OAuth-токен из macOS Keychain позволяет двум клиентам работать на одной Max подписке"
+    - "Max 5x даёт ~45 сообщений Opus в час суммарно на все клиенты"
+    - "9 января 2026 Anthropic заблокировал OAuth в сторонних приложениях — Clawdbot обходит через bypass"
+    - "Агент сам нашёл токен, понял формат и записал куда нужно — ни одного запроса в Google"
+  metrics:
+    opus_messages_per_hour: 45
+  prerequisites: ["Max подписка Anthropic", "macOS с Keychain"]
+  related:
+    - slug: "clawdbot-personal-ai-assistant"
+      relation: "обзор безопасности и хайпа вокруг Clawdbot"
 ---
 
 Claude Code живёт в терминале. Терминал — на компе дома. А ты в кофейне, в метро, на созвоне.

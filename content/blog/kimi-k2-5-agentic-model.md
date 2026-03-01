@@ -3,6 +3,24 @@ title: "Kimi K2.5 — китайская модель, которая обошл
 date: 2026-01-27
 description: "Moonshot AI выпустили K2.5 с 256K контекстом и ценой в 5 раз ниже Claude. Разбираюсь, где реально полезна и стоит ли переключаться."
 tags: ["llm", "kimi"]
+knowledge:
+  problem: "Claude дорог для рутинных batch-задач с большим объёмом токенов."
+  solution: "Kimi K2.5 за $0.60/M токенов закрывает рутинные пайплайны и batch-операции при достаточном качестве."
+  pattern: "cheap-model-for-batch"
+  tools: ["Kimi K2.5", "Claude Opus 4.5", "OpenRouter", "Kimi CLI"]
+  takeaways:
+    - "K2.5 стоит $0.60/M токенов vs $3.00/M у Claude Sonnet — в 5 раз дешевле"
+    - "256K контекст, 50.2% на Humanity's Last Exam (выше GPT-5.2 и Claude Opus 4.5)"
+    - "200-300 вызовов инструментов подряд без потери качества (agent swarm)"
+    - "Парсинг 80MB логов за 40 секунд и $0.12 — на Claude вышло бы около доллара"
+    - "API совместим с OpenAI, доступен через OpenRouter как moonshotai/kimi-k2.5"
+  metrics:
+    cost_per_million_tokens: 0.60
+    context_window_k: 256
+    hle_score_percent: 50.2
+  related:
+    - slug: "gemini-3-1-pro-svg-animations"
+      relation: "оба — специализированные модели: Kimi для batch, Gemini для SVG"
 ---
 
 Moonshot AI сегодня обновили модель на kimi.com без анонсов. Просто тихо заменили K2 на K2.5. А через пару часов появились бенчмарки на Humanity's Last Exam — и там K2.5 набрала 50.2%, обойдя GPT-5.2 (48.1%) и Claude Opus 4.5 (47.8%).

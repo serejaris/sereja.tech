@@ -4,6 +4,17 @@ date: 2026-01-10
 description: "Разбираю SEO для персонального блога в 2026. JSON-LD Schema, Person vs Organization, structured data — что критично для AI-поисковиков."
 tags: ["seo", "json-ld"]
 section: SEO
+knowledge:
+  problem: "Классический SEO с meta-тегами недостаточен для AI-поисковиков в 2026 году"
+  solution: "Использовать трёхуровневый SEO: базовые мета-теги, социальные карточки и JSON-LD structured data"
+  pattern: "json-ld-structured-seo"
+  tools: ["JSON-LD", "Schema.org", "Google Rich Results Test"]
+  takeaways:
+    - "SEO в 2026 — три слоя: basic meta, social cards, JSON-LD structured data"
+    - "Для персонального блога publisher должен быть Person, не Organization"
+    - "BlogPosting лучше Article для личного блога — помогает с E-E-A-T"
+    - "Person Schema на главной связывает профили через sameAs и показывает экспертизу"
+  prerequisites: ["Hugo или другой SSG"]
 ---
 
 Переделывал SEO на своём сайте. Думал — добавлю meta description и хватит.

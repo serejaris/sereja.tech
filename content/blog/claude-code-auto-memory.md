@@ -3,6 +3,23 @@ title: "Claude Code получил память между сессиями"
 date: 2026-02-09
 description: "Auto Memory — новая фича Claude Code. Как агент запоминает контекст, где хранит заметки и чем это отличается от CLAUDE.md"
 tags: ["claude code"]
+knowledge:
+  problem: "Каждая сессия Claude Code начинается с чистого листа — агент не помнит контекст прошлых сессий"
+  solution: "Auto Memory сохраняет заметки агента в ~/.claude/projects/memory/ и загружает первые 200 строк при старте"
+  pattern: "agent-persistent-memory"
+  tools: ["Claude Code"]
+  takeaways:
+    - "Первые 200 строк MEMORY.md попадают в system prompt каждой сессии"
+    - "Auto Memory появилась в Claude Code 2.1.32"
+    - "Topic-файлы подгружаются автоматически при совпадении темы разговора"
+    - "CLAUDE.md побеждает при конфликте с Auto Memory"
+    - "Переменная CLAUDE_CODE_DISABLE_AUTO_MEMORY=0 включает фичу принудительно"
+  metrics:
+    memory_lines_loaded: 200
+    min_version: "2.1.32"
+  related:
+    - slug: "claude-code-logs-project-status"
+      relation: "использование ~/.claude/projects/ для аудита проектов"
 ---
 
 Открываю терминал, запускаю Claude Code в проекте, и вижу непривычное:

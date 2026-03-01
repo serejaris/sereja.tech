@@ -4,6 +4,27 @@ date: 2026-01-13
 description: "Попросил Claude Code сделать рассылку — он использовал синхронный скрипт и ждали 8 минут вместо 30 секунд. Как AI-агенты учатся на своих ошибках."
 tags: ["telegram", "python", "asyncio"]
 section: Python
+knowledge:
+  problem: "Синхронный скрипт рассылки в Telegram отправлял 717 сообщений за 8 минут вместо 30 секунд"
+  solution: "Замена синхронного requests на asyncio + aiohttp с батчами по 30 сообщений в секунду"
+  pattern: "sync-to-async-broadcast"
+  tools: ["Python", "asyncio", "aiohttp", "Telegram Bot API"]
+  takeaways:
+    - "Синхронный requests на 717 юзеров = 487 секунд (~8 минут)"
+    - "asyncio.gather с батчами по 30 = 24 секунды"
+    - "Telegram Bot API позволяет ~30 сообщений/секунду в разные чаты"
+    - "80% доставляемость — норма для Telegram (576 из 717)"
+    - "При 429 ошибке использовать retry_after из ответа API"
+  metrics:
+    recipients: 717
+    delivered: 576
+    blocked: 141
+    delivery_rate_pct: 80
+    sync_time_min: 8
+    async_time_sec: 30
+  related:
+    - slug: "telegram-broadcast-file-id"
+      relation: "оптимизация рассылки медиа через file_id"
 ---
 
 Попросил Claude Code сделать рассылку в Telegram-боте. 717 получателей.

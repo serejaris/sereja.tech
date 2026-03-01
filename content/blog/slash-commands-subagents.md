@@ -4,6 +4,23 @@ date: 2026-01-10
 description: "Разбираюсь почему model: haiku в командах Claude Code не экономит токены. Commands, Skills и Agents — в чём разница и как делегировать правильно."
 tags: ["claude code", "субагенты"]
 section: Claude Code
+knowledge:
+  problem: "Параметр model: в slash-командах Claude Code не экономит токены — текст всё равно попадает в основной контекст"
+  solution: "Использовать паттерн 'тонкий диспетчер' — команда вызывает Task tool для запуска отдельного субагента"
+  pattern: "thin-dispatcher-subagent"
+  tools: ["Claude Code", "Task tool", "Slash Commands"]
+  takeaways:
+    - "Commands и Skills вливают текст в основной контекст, только Agents работают изолированно"
+    - "169K токенов в основном контексте vs 21K через отдельного агента — разница в 8 раз"
+    - "model: в frontmatter работает только с полными названиями моделей, алиасы игнорируются"
+    - "После создания агента нужно перезапустить сессию — изменения подхватываются при старте"
+  metrics:
+    main_context_tokens: 169000
+    subagent_context_tokens: 21000
+    token_reduction_factor: 8
+  related:
+    - slug: "claude-code-token-optimization"
+      relation: "Оптимизация расхода токенов в Claude Code"
 ---
 
 Решил сэкономить на токенах. Сделал команду `/readme` с `model: haiku`.

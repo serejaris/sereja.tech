@@ -4,6 +4,21 @@ date: 2026-01-13
 description: "Как перестать экспортировать чаты вручную через Telegram Desktop и получать сообщения напрямую через API. Практический гайд с примерами."
 tags: ["telegram", "автоматизация"]
 section: Автоматизация
+knowledge:
+  problem: "Ежедневный экспорт чата через Telegram Desktop занимает 7 кликов и даёт устаревший снапшот"
+  solution: "Собрать бота на FastAPI + SQLite, который слушает чат и отдаёт данные по REST API"
+  pattern: "telegram-bot-api-collector"
+  tools: ["Telegram Bot API", "FastAPI", "SQLite", "Railway"]
+  takeaways:
+    - "Telegram Desktop экспорт — для архивации, не для ежедневной работы"
+    - "Бот должен быть в чате до начала переписки — старую историю не получить"
+    - "Разбор чата сократился с 30 минут до 30 секунд с помощью Claude"
+    - "Три варианта: свой бот, n8n + Telegram Trigger, готовые решения (CRMChat, Pluno)"
+  metrics:
+    manual_clicks: 7
+    analysis_before_minutes: 30
+    analysis_after_seconds: 30
+    students_in_chat: 19
 ---
 
 Веду курс по вайбкодингу, 19 человек в чате. Надо понимать кто активен.

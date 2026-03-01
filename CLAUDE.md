@@ -37,8 +37,33 @@
 2. OG-превью: `./scripts/og-preview/generate.sh --title "..." [--command "..." --tools "a,b,c" --subtitle "..."] --output static/images/blog/{slug}-preview.png`
 3. `hugo build` → `public/`
 
-Frontmatter: title, date, description, tags, image.
+Frontmatter: title, date, description, tags, image, knowledge.
 SEO: title ≤60 chars, description ≤160 chars.
+
+### knowledge блок (обязателен для каждой статьи)
+
+```yaml
+knowledge:
+  problem: "Какую проблему решает статья (1 предложение)"
+  solution: "Как решает (1 предложение)"
+  pattern: "slug-format-pattern-name"
+  tools: ["Tool1", "Tool2"]
+  takeaways:
+    - "Ключевой вывод 1 с конкретными числами"
+    - "Ключевой вывод 2"
+    - "Ключевой вывод 3"
+  metrics:           # опционально
+    key: value
+  prerequisites:     # опционально
+    - "Что нужно знать/иметь"
+  related:           # опционально
+    - slug: "other-article-slug"
+      relation: "тип связи"
+```
+
+Обязательные поля: `problem`, `solution`, `pattern`, `tools`, `takeaways`.
+Опциональные: `metrics`, `prerequisites`, `related`.
+Язык: русский. Pattern: slug формат (lowercase, hyphens).
 
 OG Preview: всегда генерировать через `scripts/og-preview/generate.sh`. Опции: `--title` (обязательно), `--subtitle`, `--command`, `--tools` (через запятую), `--visual` (эмодзи). Результат: 1200×630 PNG.
 

@@ -4,6 +4,22 @@ date: 2026-01-11
 description: "Сборник практик для работы с LLM в 2026: планирование до кода, context engineering, git worktrees для параллельных агентов, смена моделей. Источники: Addy Osmani, O'Reilly, incident.io."
 tags: ["llm"]
 section: "AI"
+knowledge:
+  problem: "Работа с LLM без системного подхода приводит к хаотичной генерации кода."
+  solution: "Сборник практик: планирование до кода, декомпозиция, context engineering, git worktrees для параллельных агентов."
+  pattern: "llm-workflow-best-practices"
+  tools: ["Claude Code", "GPT-5", "Gemini 3", "git worktrees", "Cursor", "Windsurf", "workmux"]
+  takeaways:
+    - "Декомпозиция: один промпт — одна задача, порог качества на 150-200 словах"
+    - "Git worktrees позволяют запускать 4-5 агентов параллельно в изолированных песочницах"
+    - "Context engineering важнее prompt engineering — управляй тем, что модель видит"
+    - "Кросс-ревью между моделями находит баги, которые одна модель пропускает"
+    - "CLAUDE.md и .cursorrules — формализуй правила проекта для модели"
+  related:
+    - slug: "mapreduce-subagents"
+      relation: "практическое применение паттерна параллельных субагентов"
+    - slug: "modular-rules-claude-md"
+      relation: "детальный гайд по организации CLAUDE.md"
 ---
 
 Addy Osmani из Google опубликовал свой подход к работе с AI-ассистентами.

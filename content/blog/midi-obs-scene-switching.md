@@ -4,6 +4,20 @@ date: 2026-01-11
 description: "Настроил Arturia MiniLab 3 для переключения сцен в OBS через obs-midi-mg. Главная проблема — velocity. Показываю JSON-конфиг и как автоматизировать."
 tags: ["midi", "obs", "стриминг"]
 section: Стриминг
+knowledge:
+  problem: "Ручное переключение сцен в OBS через мышку неудобно при стриминге."
+  solution: "Настройка obs-midi-mg плагина для переключения сцен MIDI-пэдами с velocity ignore mode."
+  pattern: "midi-obs-binding"
+  tools: ["OBS", "obs-midi-mg", "Arturia MiniLab 3", "MIDI Monitor", "Claude Code"]
+  takeaways:
+    - "Velocity по умолчанию фиксированная — нужен Ignore (state: 2) двойным кликом"
+    - "MiniLab 3 User mode (Shift + Pad 2) нужен для OBS, DAW mode отправляет другие сообщения"
+    - "Channel 10 — стандарт для пэдов, Note 36 — первый пэд, каждый следующий +1"
+    - "JSON-конфиг obs-midi-mg можно редактировать программно через Claude Code"
+    - "obs-midi-mg v3.1.1 работает на Mac, Windows, Linux"
+  related:
+    - slug: "midi-obs-claude-code"
+      relation: "полный разбор с LED-индикатором и SysEx-кодами"
 ---
 
 У меня лежал Arturia MiniLab 3. Использовал для музыки.

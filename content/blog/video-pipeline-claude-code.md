@@ -4,6 +4,30 @@ date: 2026-01-14
 description: "Как я автоматизировал публикацию видео: субтитры через Whisper, слайды глав, превью, загрузка на YouTube и HTML-страница урока. Всё делают агенты."
 tags: ["claude code", "автоматизация"]
 section: Claude Code
+knowledge:
+  problem: "Публикация видео после записи требует 6 ручных шагов и полдня работы"
+  solution: "Пайплайн из 6 скиллов Claude Code автоматизирует весь процесс от субтитров до загрузки на YouTube"
+  pattern: "multi-skill-pipeline"
+  tools: ["Claude Code", "MLX Whisper", "ffmpeg", "Playwright", "youtubeuploader"]
+  takeaways:
+    - "Двухчасовое видео обрабатывается за ~30 минут, из них 1 минута ручного участия"
+    - "MLX Whisper транскрибирует 2 часа за 10-15 минут на Apple Silicon"
+    - "Пайплайн из 6 скиллов: субтитры → метадата → слайды глав → превью → загрузка → страница урока"
+    - "YouTube API имеет квоту ~6 загрузок в сутки на стандартном лимите"
+    - "Whisper ошибается в терминах — нужен глоссарий и ручная проверка"
+  metrics:
+    pipeline_steps: 6
+    processing_time_min: 30
+    manual_time_min: 1
+    whisper_time_min: 12
+    chapters_count: 26
+    upload_size_gb: 1.8
+  prerequisites: ["Apple Silicon Mac", "OAuth для YouTube API"]
+  related:
+    - slug: "youtube-thumbnails-html-code"
+      relation: "Подробный гайд по генерации превью через HTML+Playwright"
+    - slug: "map-reduce-youtube-metadata"
+      relation: "Пайплайн генерации метаданных для YouTube"
 ---
 
 Вчера записал двухчасовой воркшоп. Впереди рутина: субтитры, таймкоды, превью, загрузка.

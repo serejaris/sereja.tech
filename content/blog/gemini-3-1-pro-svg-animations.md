@@ -4,6 +4,24 @@ date: 2026-02-24
 description: "Gemini 3.1 Pro генерирует SVG-анимации с параллаксом и слоями за один промпт. Без библиотек. Зачем вайбкодеру держать отдельную модель ради одной фичи."
 tags: ["llm", "gemini", "svg"]
 image: "/images/blog/gemini-3-1-pro-svg-animations-preview.png"
+knowledge:
+  problem: "Claude Code — отличный агент для кода, но не генерирует качественные SVG-анимации."
+  solution: "Использовать Gemini 3.1 Pro в Canvas mode для SVG-анимаций, а Claude Code для агентских задач."
+  pattern: "plan-in-gemini-execute-in-claude"
+  tools: ["Gemini 3.1 Pro", "Claude Opus 4.6", "Canvas mode", "GPT-5.3 Codex"]
+  takeaways:
+    - "Gemini 3.1 Pro генерирует SVG с параллаксом и слоями за один промпт без библиотек"
+    - "Стоимость Gemini 3.1 Pro: $2/M входных и $12/M выходных токенов"
+    - "ARC-AGI-2: Gemini 3.1 Pro набрала 77.1% — вдвое больше предыдущей версии"
+    - "Gemini плохой агент (застревает в циклах), но лучший для визуальных задач"
+    - "Каждая модель сильна в своём: Gemini — SVG, Claude — агент, GPT — терминал"
+  metrics:
+    gemini_input_cost_per_million: 2
+    gemini_output_cost_per_million: 12
+    arc_agi_2_score_percent: 77.1
+  related:
+    - slug: "kimi-k2-5-agentic-model"
+      relation: "сравнение моделей — Kimi K2.5 для batch-задач, Gemini для визуальных"
 ---
 
 Gemini 3.1 Pro генерирует SVG-анимации с параллаксом, слоями и переходами за один промпт. Без внешних библиотек — нативный SVG с `<animate>` и `<animateTransform>`. Google [выпустил модель](https://blog.google/technology/google-deepmind/gemini-3-1-pro/) 19 февраля 2026. За неделю я понял: узкий специалист. Но настолько хороший, что ему стоит держать место в арсенале.

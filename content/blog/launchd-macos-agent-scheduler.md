@@ -4,6 +4,22 @@ date: 2026-02-25
 description: "launchd запускает задачи по расписанию на macOS и не пропускает их, даже если мак спал. Как попросить Claude Code настроить автоматизацию без cron."
 tags: ["автоматизация", "macos", "claude code"]
 image: "/images/blog/launchd-macos-agent-scheduler-preview.png"
+knowledge:
+  problem: "Ручной запуск повторяющихся задач приводит к пропускам и забыванию."
+  solution: "Использование launchd на macOS для автоматического запуска задач по расписанию через Claude Code."
+  pattern: "scheduled-agent-automation"
+  tools: ["launchd", "Claude Code", "launchctl", "macOS"]
+  takeaways:
+    - "launchd запускает пропущенные задачи после пробуждения мака, в отличие от cron"
+    - "Конфиг plist содержит 6 параметров: Label, ProgramArguments, WorkingDirectory, StartCalendarInterval, StandardOutPath, RunAtLoad"
+    - "Одна команда агенту создаёт и активирует launchd-задачу за 3 минуты"
+    - "cron на macOS deprecated — Apple рекомендует launchd"
+    - "Windows-аналог — Task Scheduler, Linux — systemd timers с Persistent=true"
+  related:
+    - slug: "telegram-autoposter"
+      relation: "автопостер, который запускается по расписанию через launchd"
+    - slug: "github-agentic-workflows-telegram-analytics"
+      relation: "аналитика чата, добавленная вторым launchd-агентом"
 ---
 
 launchd — встроенный планировщик macOS, который запускает задачи по расписанию. В отличие от cron, он помнит пропущенные запуски: закрыл крышку ноутбука в 18:55, открыл в 21:00 — задача на 19:00 всё равно выполнится. Попросить Claude Code настроить launchd проще, чем разбираться в его XML-конфигах самому.

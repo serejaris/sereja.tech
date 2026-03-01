@@ -21,6 +21,25 @@ sources:
   - title: "Claude in Chrome — баг #21371"
     url: "https://github.com/anthropics/claude-code/issues/21371"
     note: "52+ upvotes, без фикса"
+knowledge:
+  problem: "Claude Code не может работать с залогиненными веб-сервисами — Playwright MCP запускает чистый браузер"
+  solution: "Chrome DevTools MCP от Google подключается к реальному Chrome через CDP-порт за 3 команды"
+  pattern: "mcp-real-browser-setup"
+  tools: ["Chrome DevTools MCP", "Claude Code", "Chrome DevTools Protocol", "npx"]
+  takeaways:
+    - "Chrome 136+ блокирует --remote-debugging-port с дефолтной data directory"
+    - "Флаг --browserUrl критичен — без него MCP запустит свой отдельный Chrome"
+    - "SEO-аудит через 4 промпта вместо 10 переключений вкладок и 30 минут"
+    - "26 инструментов: DOM, консоль, сеть, скриншоты, клики, навигация"
+    - "Настройка занимает 3 команды и работает во всех MCP-клиентах"
+  metrics:
+    setup_commands: 3
+    mcp_tools_count: 26
+    github_stars: 25000
+  prerequisites: ["Chrome", "Node.js (npx)", "Claude Code или другой MCP-клиент"]
+  related:
+    - slug: "chrome-devtools-mcp"
+      relation: "базовая статья про Chrome DevTools MCP без привязки к реальному браузеру"
 ---
 
 Claude in Chrome сломан с января 2026, а Playwright MCP запускает чистый браузер без логинов. Chrome DevTools MCP от Google решает обе проблемы: три команды в терминале — и агент ходит по залогиненным сервисам в твоём реальном Chrome.

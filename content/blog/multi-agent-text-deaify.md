@@ -4,6 +4,21 @@ date: 2026-01-11
 description: "Один агент раздувает текст и оставляет AI-маркеры. Три параллельных критика + rewriter с hard rules — и текст становится человечным."
 tags: ["claude code", "agents"]
 section: AI
+knowledge:
+  problem: "Один AI-rewriter раздувает текст на 50% и оставляет те же AI-маркеры вместо их удаления."
+  solution: "Три параллельных критика находят разные проблемы, затем rewriter с hard rules исправляет их по конкретному списку."
+  pattern: "multi-agent-parallel-critics"
+  tools: ["Claude Code", "Task tool", "Haiku"]
+  takeaways:
+    - "Один rewriter увеличивает текст на 50%, три критика + rewriter сокращают на 10%"
+    - "Три haiku-агента работают параллельно за 10 секунд (~500 input tokens на критика)"
+    - "AI-детекторы ищут perplexity и burstiness — простое перефразирование не помогает"
+    - "Паттерн переносится на code review, редактуру документации, проверку спецификаций"
+  metrics:
+    text_bloat_single_rewriter_percent: 50
+    text_reduction_multi_agent_percent: 10
+    critics_count: 3
+    parallel_time_seconds: 10
 ---
 
 Попросил Claude переписать текст "более человечно".
