@@ -4,6 +4,30 @@ date: 2026-01-11
 description: "Глубокое исследование конвейеров для создания контента с помощью LLM. 12 паттернов, multi-agent архитектуры, human-in-the-loop, content repurposing. Анализ практик Anthropic, Notion, Amazon."
 tags: ["llm", "контент"]
 section: "AI"
+knowledge:
+  problem: "Три проекта с генерацией контента используют разные костыльные процессы без системы"
+  solution: "Систематизация 12 паттернов AI-конвейеров: от линейных до итеративных, с multi-agent архитектурами"
+  pattern: "content-pipeline-patterns"
+  tools: ["Claude Code", "Exa AI", "LLM"]
+  takeaways:
+    - "88 источников исследованы 4 параллельными субагентами за 15 минут вместо нескольких часов"
+    - "Self-Refine loop улучшает качество на ~20% по сравнению с однократной генерацией"
+    - "Реалистичное ускорение от AI — 1.5x, а не маркетинговые 10x"
+    - "COPE (Create Once, Publish Everywhere) с LLM трансформирует контент под канал, а не копирует"
+    - "Deaify — это по сути формализованный Self-Refine loop из индустрии"
+  metrics:
+    sources_count: 88
+    patterns_count: 12
+    research_agents: 4
+    research_time_minutes: 15
+    self_refine_improvement_percent: 20
+  related:
+    - slug: "blog-post-pipeline"
+      relation: "конкретная реализация sequential pipeline для блога"
+    - slug: "multi-agent-text-deaify"
+      relation: "реализация Self-Refine паттерна с параллельными критиками"
+    - slug: "content-plan-subagents-exa"
+      relation: "использование субагентов и Exa для контент-планирования"
 ---
 
 У меня три проекта, где нужно генерировать контент: персональный блог, менторские сессии, когорты кружка вайбкодинга.

@@ -4,6 +4,30 @@ date: 2026-02-28
 description: "Как Claude Code за одну сессию спроектировал схему, получил API-ключ через Chrome и собрал 70 видео в videos.json — единый источник данных для всех агентов."
 tags: ["claude-code", "youtube-api", "mcp", "автоматизация", "инфраструктура"]
 image: "/images/blog/data-layer-for-agents-preview.png"
+knowledge:
+  problem: "Несколько агентов из разных проектов дёргают YouTube API по-своему, дублируя работу"
+  solution: "Один коллектор собирает данные в единый JSON-файл, который все агенты читают напрямую"
+  pattern: "single-source-data-layer"
+  tools: ["Claude Code", "YouTube API v3", "Exa MCP", "Chrome DevTools MCP", "launchd", "jq"]
+  takeaways:
+    - "playlistItems.list + videos.list в 100 раз эффективнее search.list по квотам YouTube API"
+    - "70 видео обновляются за 3-5 единиц из 10 000 дневной квоты — 0.05% лимита"
+    - "JSON выбран вместо SQLite: cat | jq работает без зависимостей из любого агента"
+    - "Chrome DevTools MCP получил API-ключ через браузер без ручных кликов"
+    - "Вся инфраструктура построена за одну сессию Claude Code"
+  metrics:
+    videos_count: 70
+    subscribers: 3360
+    total_views: 182000
+    api_units_per_run: 5
+    daily_quota: 10000
+    script_lines: 184
+  prerequisites: ["Аккаунт Google Cloud Console", "Chrome DevTools MCP"]
+  related:
+    - slug: "chrome-devtools-mcp-setup"
+      relation: "настройка Chrome DevTools MCP, использованного для получения API-ключа"
+    - slug: "blog-post-pipeline"
+      relation: "пример другой инфраструктуры, построенной агентами для агентов"
 ---
 
 Claude Code за одну сессию построил полноценную YouTube-инфраструктуру: исследовал квоты API, спроектировал схему данных, получил API-ключ через браузер, написал скрипт-коллектор и настроил ежедневный запуск. Результат --- файл `videos.json` с 70 видео, 3360 подписчиками и 182K просмотрами. Этот файл теперь кормит данными агентов из совершенно разных проектов.

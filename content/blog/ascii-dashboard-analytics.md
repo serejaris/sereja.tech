@@ -4,6 +4,24 @@ date: 2026-01-18
 description: "Почему я смотрю аналитику в терминале, а не в браузере. Grid-layout, box drawing characters и как Claude Code рисует дашборды за меня."
 tags: ["tui", "claude code"]
 section: "Вайбкодинг"
+knowledge:
+  problem: "Для просмотра простой аналитики нужно запускать веб-дашборд, что занимает минуту"
+  solution: "ASCII-дашборд в терминале через Claude Code skill — метрики за секунды без переключения контекста"
+  pattern: "terminal-ascii-dashboard"
+  tools: ["Claude Code", "PostgreSQL", "TypeScript", "Unicode box drawing"]
+  takeaways:
+    - "ASCII-дашборд показывает воронку, конверсию и источники трафика за 2 секунды"
+    - "Скилл из 70 строк TypeScript заменяет переключение в браузер для быстрой проверки метрик"
+    - "Двухколоночный layout из Unicode-символов вмещает больше данных в терминале 80-120 символов"
+    - "Конверсия 9-го потока курса: 78 стартов → 2 оплаты = 2.5%"
+  metrics:
+    bot_starts: 78
+    payments: 2
+    conversion_percent: 2.5
+    script_lines: 70
+  related:
+    - slug: "tui-presentation-claude-code"
+      relation: "другой пример TUI-приложения через Claude Code"
 ---
 
 Три слова в терминале. Через две секунды — воронка, конверсия, источники трафика.

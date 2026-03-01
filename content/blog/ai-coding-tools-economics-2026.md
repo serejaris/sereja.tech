@@ -3,6 +3,26 @@ title: "AI для кодинга в 2026: инструменты, контекс
 date: 2026-01-27
 description: "Сравнение Claude Code и Cursor, управление контекстом агентов, кросс-валидация моделей и реальная экономика AI-программирования"
 tags: ["claude code", "cursor"]
+knowledge:
+  problem: "Непонятно когда AI-инструменты для кодинга реально экономят деньги и время"
+  solution: "Сравнение Claude Code и Cursor по задачам, управление контекстом и кросс-валидация моделей"
+  pattern: "ai-tools-economic-analysis"
+  tools: ["Claude Code", "Cursor", "Codex", "VS Code"]
+  takeaways:
+    - "Claude Code — делегатор задач, Cursor — ускоритель набора кода"
+    - "Исследование METR: с AI-инструментами разработчики работали на 19% дольше, думая что на 20% быстрее"
+    - "Claude Code на Opus стоит $15-20 в день при активной работе"
+    - "После 50 сообщений агент теряет контекст — нужен CLAUDE.md с архитектурой"
+    - "AI реально экономит на скриптах, тулах, прототипах — где задача понятна и связность низкая"
+  metrics:
+    claude_daily_cost_usd: 20
+    developer_hourly_cost_rub: 4300
+    metr_slowdown_percent: 19
+  related:
+    - slug: "agent-teams-opus-4-6"
+      relation: "Agent Teams расходуют больше токенов — прямое влияние на экономику"
+    - slug: "claude-code-token-optimization"
+      relation: "оптимизация расхода токенов в Claude Code"
 ---
 
 Claude Code требует управленческих навыков. Cursor — нет.
