@@ -3,6 +3,7 @@ title: "Как я собрал совет директоров из субаге
 date: 2026-03-04
 description: "Board of Advisors — скилл Claude Code для параллельных субагентов с персонами. 46 сессий, 29 персон от Jobs до Karpathy"
 tags: ["claude-code", "субагенты", "skills", "decision-making"]
+image: "/images/blog/board-of-advisors-subagents-preview.png"
 ---
 
 Один агент — одна точка зрения. Board of Advisors — скилл для Claude Code, который собирает консилиум из нескольких экспертов, запускает их параллельно на одних данных и сводит результаты в вердикт. За 46 сессий через него прошли 29 реальных персон — от Steve Jobs до Gosha Rubchinskiy. Каждый раз состав совета определял, какие рекомендации я получу.
