@@ -3,6 +3,7 @@ title: "NotebookLM + Claude Code: бесплатный RAG за 5 минут"
 date: 2026-03-12
 description: "Через notebooklm-py Claude Code управляет NotebookLM — бесплатным RAG на Gemini. Загружаешь источники, получаешь ответы с цитатами."
 tags: ["claude-code", "rag", "notebooklm", "gemini", "mcp", "автоматизация"]
+image: "/images/blog/notebooklm-claude-code-rag-preview.png"
 ---
 
 RAG (Retrieval-Augmented Generation) — это когда AI не выдумывает ответ, а сначала ищет в твоих документах и отвечает на основе найденного, с цитатами. NotebookLM от Google делает именно это. Загружаешь файлы, задаёшь вопрос, получаешь ответ со ссылкой на конкретное место в источнике.
