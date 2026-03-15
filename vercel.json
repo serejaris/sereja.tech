@@ -10,6 +10,8 @@
   "trailingSlash": true,
   "redirects": [
     { "source": "/blog/midi-obs-scene-switching", "destination": "/blog/midi-obs-claude-code/", "permanent": true },
-    { "source": "/blog/midi-obs-scene-switching/", "destination": "/blog/midi-obs-claude-code/", "permanent": true }
+    { "source": "/blog/midi-obs-scene-switching/", "destination": "/blog/midi-obs-claude-code/", "permanent": true },
+    { "source": "/blog/chrome-devtools-mcp", "destination": "/blog/chrome-devtools-mcp-setup/", "permanent": true },
+    { "source": "/blog/chrome-devtools-mcp/", "destination": "/blog/chrome-devtools-mcp-setup/", "permanent": true }
   ]
 }

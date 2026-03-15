@@ -123,6 +123,36 @@ claude
 
 Три команды. Готово.
 
+## 26 инструментов — какие реально нужны
+
+Chrome DevTools MCP даёт 26 инструментов. На практике хватает шести:
+
+**screenshot** — скриншот страницы. Когда нужно увидеть что рендерится.
+
+**snapshot** — DOM без стилей. Агент ищет элементы, анализирует структуру. Быстрее чем парсить скриншот.
+
+**fill, click** — взаимодействие. Заполнить форму, нажать кнопку, пройти flow.
+
+**console** — ошибки, warnings, логи. То что раньше приходилось копировать руками из F12.
+
+**network** — запросы к API. Статусы, payload, тайминги.
+
+**evaluate** — выполнить JS в контексте страницы. Посмотреть window, проверить глобальные переменные.
+
+Стили поехали — агент делает скриншот и видит проблему. Форма не сабмитится — тестирует flow сам. Hydration mismatch — смотрит консоль и сравнивает DOM. API молчит — проверяет network.
+
+## Пример: отладка студенческого портала
+
+Баг: ввод пароля не работает. Пользователь печатает — поле пустое. Три студента написали в саппорт за час.
+
+Промпт агенту: "Проведи E2E через devtools mcp".
+
+Агент запустил Chrome. Нашёл форму. Попробовал ввести текст — увидел что `value` не обновляется. Полез в React state, нашёл что `onChange` не триггерится.
+
+Диагноз: кастомный Input-компонент не прокидывал пропс. Одна строка — и баг закрыт.
+
+Раньше это было бы: открыть DevTools, поставить брейкпоинты, гуглить "react input value not updating". А тут — один промпт.
+
 ## Кейс: SEO-аудит через агента
 
 Настроил Chrome DevTools MCP и решил проверить на реальной задаче. Мне нужно было найти проблемы индексации на sereja.tech и починить их. Раньше это выглядело так: открыть Search Console, найти ошибку, переключиться в редактор, найти файл, исправить, вернуться в Search Console, проверить. Десять переключений контекста на каждую проблему.
@@ -195,8 +225,6 @@ claude
 
 Chrome DevTools MCP выигрывает по простоте. Три команды — и работает. Playwright MCP с расширением тоже подключается к реальному Chrome, но настройка сложнее: нужно установить расширение, настроить профиль, прописать путь. Browser MCP — близкий конкурент, но менее популярен.
 
-Про [основы Chrome DevTools MCP](/blog/chrome-devtools-mcp) — настройку без привязки к реальному браузеру — писал в отдельной статье.
-
 ## Подводные камни
 
 **Chrome 136+ блокирует debug-порт с дефолтной директорией** — если не указать `--user-data-dir`, Chrome просто проигнорирует `--remote-debugging-port` без ошибок и предупреждений. Порт не откроется, MCP не подключится. Проверяй через `curl -s http://127.0.0.1:9222/json/version` — если пусто, дело в профиле.
@@ -233,6 +261,9 @@ Debug-порт слушает только `127.0.0.1` — локальный и
 
 - [Chrome DevTools MCP — GitHub](https://github.com/anthropics/anthropic-tools/tree/main/chrome-devtools-mcp) — 25 542 stars, Apache 2.0
 - [Chrome DevTools MCP — анонс Google](https://developer.chrome.com/blog/chrome-devtools-mcp)
+- [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
 - [Remote Debugging Port — Chrome 136+ изменения](https://developer.chrome.com/blog/remote-debugging-port) — почему нужен отдельный профиль
 - [Chrome Debugging Profile for MCP — гайд](https://raf.dev/blog/chrome-debugging-profile-mcp/)
+- [@playwright/mcp — npm](https://www.npmjs.com/package/@playwright/mcp)
+- [Midscene.js](https://midscenejs.com/) — vision-based альтернатива
 - [Claude in Chrome — баг #21371](https://github.com/anthropics/claude-code/issues/21371) — 52+ upvotes, без фикса
