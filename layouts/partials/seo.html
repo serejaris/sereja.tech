@@ -87,28 +87,6 @@
 }
 </script>
 {{ end }}
-{{/* FAQPage schema */}}
-{{ with .Params.faq }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {{ range $i, $item := . }}{{ if $i }},{{ end }}
-    {
-      "@type": "Question",
-      "name": "{{ $item.q | htmlEscape }}",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "{{ $item.a | htmlEscape }}"
-      }
-    }
-    {{ end }}
-  ]
-}
-</script>
-{{ end }}
-
 {{/* HowTo schema */}}
 {{ with .Params.howto }}
 <script type="application/ld+json">
