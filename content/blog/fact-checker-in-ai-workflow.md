@@ -4,6 +4,7 @@ date: 2026-01-11
 description: "Как я наступил на грабли с устаревшими версиями моделей и добавил четвёртого критика в deaify-text. Практический кейс."
 tags: ["fact-checking"]
 section: "AI"
+image: /images/blog/fact-checker-in-ai-workflow-preview.png
 ---
 
 Писал статью про LLM coding воркфлоу.

@@ -4,6 +4,7 @@ date: 2026-01-15
 description: "Практический гайд по настройке zoxide и fzf для быстрой навигации в терминале. Типичные ошибки, интерактивный выбор директорий, frecency-алгоритм."
 tags: ["zoxide", "fzf", "терминал"]
 section: Терминал
+image: /images/blog/zoxide-fzf-terminal-navigation-preview.png
 ---
 
 Установил zoxide. Не работает.

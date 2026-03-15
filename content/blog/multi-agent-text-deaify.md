@@ -4,6 +4,7 @@ date: 2026-01-11
 description: "Один агент раздувает текст и оставляет AI-маркеры. Три параллельных критика + rewriter с hard rules — и текст становится человечным."
 tags: ["claude code", "agents"]
 section: AI
+image: /images/blog/multi-agent-text-deaify-preview.png
 ---
 
 Попросил Claude переписать текст "более человечно".

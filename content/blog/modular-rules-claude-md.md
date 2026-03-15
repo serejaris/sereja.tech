@@ -4,6 +4,7 @@ date: 2026-01-17
 description: "Один CLAUDE.md на 500 строк — боль. Разбиваю на .claude/rules/ по доменам: база данных, тесты, фронтенд. Практический гайд с примерами."
 tags: ["claude code", "документация"]
 section: Claude Code
+image: /images/blog/modular-rules-claude-md-preview.png
 ---
 
 CLAUDE.md раздулся до 400 строк. Агент читает, но запоминает выборочно.

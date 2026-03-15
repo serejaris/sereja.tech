@@ -4,6 +4,7 @@ date: 2026-02-09
 description: "Запустил каталог AI-инструментов context.lat за 90 минут. Главный урок: половина работы — до первой строчки кода. PRD, прототип, потом агент."
 tags: ["claude code", "методология"]
 youtube_id: "A8HAkYWIMuk"
+image: /images/blog/context-lat-90-minutes-preview.png
 ---
 
 {{< youtube A8HAkYWIMuk >}}

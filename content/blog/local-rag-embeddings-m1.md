@@ -3,6 +3,7 @@ title: "Почему GPT не умеет искать: эмбединги для
 date: 2026-01-20
 description: "Локальный RAG на M1: ChromaDB, эмбединги и почему генеративная модель не заменит поиск"
 tags: ["rag", "embeddings", "claude code"]
+image: /images/blog/local-rag-embeddings-m1-preview.png
 ---
 
 Спросил у Claude: "это тоже AI? почему генеративная модель не может делать эмбединги?"

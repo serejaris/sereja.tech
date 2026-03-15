@@ -3,6 +3,7 @@ title: "Один скрипт вместо трёх терминалов"
 date: 2026-01-18
 description: "Как настроить dev.sh с health checks для автоматического запуска backend и frontend"
 tags: ["claude code", "devops"]
+image: /images/blog/dev-script-health-checks-preview.png
 ---
 
 Открыл проект, запустил фронтенд — ошибки 404 в консоли. Бэкенд не работает: на порту 8000 висит процесс от вчерашней сессии.

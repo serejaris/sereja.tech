@@ -4,6 +4,7 @@ date: 2026-01-13
 description: "Попросил Claude Code сделать рассылку — он использовал синхронный скрипт и ждали 8 минут вместо 30 секунд. Как AI-агенты учатся на своих ошибках."
 tags: ["telegram", "python", "asyncio"]
 section: Python
+image: /images/blog/telegram-broadcast-slow-preview.png
 ---
 
 Попросил Claude Code сделать рассылку в Telegram-боте. 717 получателей.

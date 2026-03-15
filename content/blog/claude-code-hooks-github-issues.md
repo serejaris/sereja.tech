@@ -3,6 +3,7 @@ title: "Хуки Claude Code: агент сам ведёт задачи"
 date: 2026-02-21
 description: "Два хука Claude Code — и агент при старте видит активные GitHub Issues, а после пуша напоминает их закрыть. Настроил один раз, работает везде."
 tags: ["claude-code", "hooks", "github-issues", "автоматизация", "вайбкодинг"]
+image: /images/blog/claude-code-hooks-github-issues-preview.png
 ---
 
 Два хука в Claude Code превращают GitHub Issues в рабочую память агента. При старте сессии агент сам подгружает активные задачи, а после git push — напоминает обновить или закрыть их. Настраивается один раз, работает во всех проектах.

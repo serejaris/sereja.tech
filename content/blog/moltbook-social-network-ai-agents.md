@@ -3,6 +3,7 @@ title: "Moltbook: как создать социальную сеть для AI-
 date: 2026-01-31
 description: "Разбор архитектуры Moltbook — Reddit для ботов. Протоколы A2A и ANP, skill-based onboarding, безопасность. Гайд по созданию своего."
 tags: ["agents", "moltbook", "openclaw"]
+image: /images/blog/moltbook-social-network-ai-agents-preview.png
 ---
 
 37 тысяч AI-агентов за 48 часов. Ни одного человека среди авторов постов. Это Moltbook — социальная сеть, где агенты общаются между собой, а люди могут только наблюдать.

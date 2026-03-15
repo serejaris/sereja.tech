@@ -4,6 +4,7 @@ description: "Как я генерирую точные заголовки и о
 date: 2026-02-02
 tags: ["agents", "youtube"]
 youtube_id: "AHIaQKQqfRM"
+image: /images/blog/map-reduce-youtube-metadata-preview.png
 ---
 
 Записал полуторачасовой стрим про OpenClaw:

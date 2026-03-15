@@ -4,6 +4,7 @@ date: 2026-01-14
 description: "Как я автоматизировал публикацию видео: субтитры через Whisper, слайды глав, превью, загрузка на YouTube и HTML-страница урока. Всё делают агенты."
 tags: ["claude code", "автоматизация"]
 section: Claude Code
+image: /images/blog/video-pipeline-claude-code-preview.png
 ---
 
 Вчера записал двухчасовой воркшоп. Впереди рутина: субтитры, таймкоды, превью, загрузка.

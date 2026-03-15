@@ -4,6 +4,7 @@ date: 2026-01-14
 description: "Контекст закончился на середине файла. Решение — разбить работу между субагентами параллельно. Паттерн MapReduce для Claude Code."
 tags: ["claude code", "субагенты"]
 section: Claude Code
+image: /images/blog/mapreduce-subagents-preview.png
 ---
 
 Файл субтитров — 12 тысяч строк. Читаю кусками по тысяче.

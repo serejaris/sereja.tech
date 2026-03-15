@@ -3,6 +3,7 @@ title: "Как я делаю карточки для Telegram-каруселей
 date: 2026-01-25
 description: "Генерация карточек для постов через HTML/CSS и автоматические скриншоты Playwright. Быстрее и гибче дизайнерских инструментов."
 tags: ["claude code", "playwright", "контент"]
+image: /images/blog/carousel-cards-playwright-preview.png
 ---
 
 Нужны были карточки для поста о восьмом потоке кружка. Шесть штук, квадратные, в едином стиле.

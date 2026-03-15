@@ -3,6 +3,7 @@ title: "AGENTS.md: дружим Claude Code с Codex"
 date: 2026-03-14
 description: "AGENTS.md — единый source of truth для всех AI-агентов на проекте. 60 000 репозиториев уже используют. Как настроить и подружить с Claude Code."
 tags: ["agents-md", "claude-code", "codex", "мультиагентность", "инфраструктура"]
+image: /images/blog/agents-md-source-of-truth-preview.png
 ---
 
 AGENTS.md — файл в корне репозитория, который описывает правила проекта для любого AI-агента. Один файл, одна правда. 60 000+ репозиториев уже используют его, стандарт поддерживается Linux Foundation и читается нативно двадцатью инструментами. Вот как я внедрил его у себя и решил главную проблему — Claude Code читает не его, а CLAUDE.md.

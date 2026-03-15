@@ -15,6 +15,7 @@ sources:
   - title: "Nielsen Norman Group: How Users Read"
     url: "https://www.nngroup.com/articles/how-users-read-on-the-web/"
     note: "исследование поведения читателей"
+image: /images/blog/hooks-that-work-2026-preview.png
 ---
 
 ## Проблема

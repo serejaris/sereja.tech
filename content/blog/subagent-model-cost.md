@@ -3,6 +3,7 @@ title: "Haiku, Sonnet, Opus: какую модель ставить субаге
 date: 2026-03-05
 description: "Проаудитировал 55 скиллов Claude Code — четыре гоняли субагентов на Opus вместо Haiku. Паттерн: extraction на Haiku, analysis на Sonnet, creation на Opus."
 tags: ["claude-code", "субагенты", "task-tool", "оптимизация"]
+image: /images/blog/subagent-model-cost-preview.png
 ---
 
 Субагент без `model:` наследует Opus. Платишь в пять раз больше за работу, которую Haiku сделает так же. Я обнаружил это когда попросил агента проаудитировать все 55 скиллов. Четыре из четырнадцати с субагентами не указывали модель. Каждый молча работал на Opus.

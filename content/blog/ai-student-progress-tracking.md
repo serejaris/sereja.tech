@@ -4,6 +4,7 @@ date: 2026-01-12
 description: "Опыт персонализации курса по вайбкодингу с помощью LLM. Почему rich profile важнее оценок, и как skills дают доступ к данным студентов."
 tags: ["llm", "онлайн-курсы"]
 section: "Онлайн-образование"
+image: /images/blog/ai-student-progress-tracking-preview.png
 ---
 
 Веду курс по вайбкодингу. 20 человек, восьмой поток.

@@ -4,6 +4,7 @@ date: 2026-01-13
 description: "Как сделать презентацию для курса на React без webpack и npm. Editorial Brutalism, grain-текстуры через SVG, анимации skew. Архитектура и примеры кода."
 tags: ["react", "презентация"]
 section: Вайбкодинг
+image: /images/blog/react-presentation-no-build-preview.png
 ---
 
 Презентация для первого урока. 8й поток курса по вайбкодингу.

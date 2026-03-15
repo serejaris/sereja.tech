@@ -4,6 +4,7 @@ date: 2026-01-26
 description: "Как я сделал поиск по смыслу в своих Telegram-переписках за вечер. Telethon, sqlite-vec, OpenAI embeddings — и больше никаких ctrl+F по 50 чатам."
 tags: ["telegram", "rag", "sqlite-vec"]
 section: "Проекты"
+image: /images/blog/telegram-vector-search-preview.png
 ---
 
 Вася три месяца назад скинул решение бага с async — помню точно. В каком из 47 чатов — уже нет.
