@@ -45,6 +45,8 @@ enableRobotsTXT = true
 [outputs]
   home = ['HTML', 'RSS']
   section = ['HTML', 'RSS']
+  taxonomy = ['HTML']
+  term = ['HTML']
 
 [sitemap]
   changefreq = ''
