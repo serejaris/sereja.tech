@@ -7,5 +7,9 @@
   "framework": "hugo",
   "outputDirectory": "public",
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/blog/midi-obs-scene-switching", "destination": "/blog/midi-obs-claude-code/", "permanent": true },
+    { "source": "/blog/midi-obs-scene-switching/", "destination": "/blog/midi-obs-claude-code/", "permanent": true }
+  ]
 }
