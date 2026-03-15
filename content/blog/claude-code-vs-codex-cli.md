@@ -3,6 +3,7 @@ title: "Claude Code — напарник, Codex — исполнитель"
 date: 2026-02-09
 description: "703 промпта в Claude Code, 94 в Codex CLI. Разобрал по логам, где каждый инструмент сильнее, и почему я использую оба."
 tags: ["claude code", "codex cli"]
+image: /images/blog/claude-code-vs-codex-cli-preview.png
 ---
 
 Утром пятого февраля я час бился с задачей в Claude Code. 158 промптов за день — рекорд недели. Задача не шла. Отдал тот же контекст Codex CLI — он её прожил с первой попытки.

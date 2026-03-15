@@ -2,8 +2,9 @@
 title: "MIDI + OBS + Claude Code: от идеи до работающего решения за 3 часа"
 date: 2026-01-11
 description: "Как я настроил MIDI-контроллер для переключения сцен в OBS и написал LED-индикатор с помощью Claude Code. Полный разбор: velocity, SysEx, EventClient."
-tags: ["midi", "obs", "claude code"]
+tags: ["midi", "obs", "claude code", "стриминг"]
 section: Вайбкодинг
+image: /images/blog/midi-obs-claude-code-preview.png
 ---
 
 У меня лежал Arturia MiniLab 3. Использовал только для музыки.
@@ -140,6 +141,68 @@ python scene_indicator.py
 
 Не забудь включить OBS WebSocket: Tools → WebSocket Server Settings → Enable.
 
+## Установка obs-midi-mg
+
+```bash
+curl -LO "https://github.com/nhielost/obs-midi-mg/releases/download/3.1.1/obs-midi-mg-3.1.1-macos-universal.pkg"
+open obs-midi-mg-*.pkg
+```
+
+После установки: OBS → Tools → obs-midi-mg. Выбираешь устройство, жмёшь Connect.
+
+## Настройка obs-midi-mg через JSON
+
+Настраивать через UI долго. Каждый пэд — отдельный биндинг. Можно редактировать JSON напрямую.
+
+Конфиг лежит тут:
+
+```
+~/Library/Application Support/obs-studio/plugin_config/obs-midi-mg/obs-midi-mg-config.json
+```
+
+Сначала нужны UUID сцен:
+
+```bash
+cat ~/Library/Application\ Support/obs-studio/basic/scenes/*.json | \
+python3 -c "import sys,json; d=json.load(sys.stdin); \
+[print(f'{s[\"name\"]}: {s[\"uuid\"]}') for s in d.get('sources',[]) \
+if s.get('versioned_id')=='scene']"
+```
+
+Структура биндинга:
+
+```json
+{
+  "name": "Pad 1 → Desktop",
+  "enabled": true,
+  "type": 0,
+  "messages": [{
+    "device": "Minilab3 MIDI",
+    "channel": {"state": 0, "value": 10},
+    "note": {"state": 0, "value": 36},
+    "velocity": {"state": 2, "index": 0, "min": 0, "max": 127}
+  }],
+  "actions": [{
+    "id": 4353,
+    "scene": {"state": 0, "value": "UUID-СЦЕНЫ"}
+  }]
+}
+```
+
+Channel 10 — стандарт для пэдов MiniLab. Note 36 — первый пэд. Каждый следующий +1.
+
+## MiniLab 3: режимы
+
+У MiniLab три режима работы. Переключение: Shift + пэд 1/2/3.
+
+| Комбинация | Режим | Для чего |
+|------------|-------|----------|
+| Shift + Pad 1 | Arturia | Analog Lab |
+| Shift + Pad 2 | User | OBS, кастомные маппинги |
+| Shift + Pad 3 | DAW | Ableton, Logic |
+
+Для OBS нужен User mode. В DAW mode пэды отправляют другие сообщения.
+
 ## Выводы
 
 Три часа — от "хочу переключать сцены пэдами" до работающего решения с LED-индикатором. Без написания кода вручную.
@@ -149,6 +212,9 @@ Claude Code не просто генерирует код — он ставит 
 ## Источники
 
 - [obs-midi-mg на GitHub](https://github.com/nhielost/obs-midi-mg)
+- [obs-midi-mg на OBS Forum](https://obsproject.com/forum/resources/obs-midi-mg.1570/)
+- [Документация плагина](https://github.com/nhielost/obs-midi-mg/blob/master/docs/operations.md)
+- [MIDI Monitor для macOS](https://www.snoize.com/MIDIMonitor/)
 - [obsws-python — WebSocket клиент](https://github.com/aatikturk/obsws-python)
 - [MiniLab 3 SysEx коды](https://gist.github.com/Janiczek/04a87c2534b9d1435a1d8159c742d260)
 - [Axios: Claude Code и вайбкодинг](https://www.axios.com/2026/01/07/anthropics-claude-code-vibe-coding)

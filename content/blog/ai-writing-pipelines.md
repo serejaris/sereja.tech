@@ -4,6 +4,7 @@ date: 2026-01-11
 description: "Глубокое исследование конвейеров для создания контента с помощью LLM. 12 паттернов, multi-agent архитектуры, human-in-the-loop, content repurposing. Анализ практик Anthropic, Notion, Amazon."
 tags: ["llm", "контент"]
 section: "AI"
+image: /images/blog/ai-writing-pipelines-preview.png
 ---
 
 У меня три проекта, где нужно генерировать контент: персональный блог, менторские сессии, когорты кружка вайбкодинга.

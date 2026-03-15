@@ -4,6 +4,7 @@ date: 2026-01-15
 description: "Какие инструменты использую для анализа логов Claude Code: claude-code-transcripts, claude-code-log, структура JSONL и как превращать сессии в контент."
 tags: ["claude code", "логи"]
 section: "Claude Code"
+image: /images/blog/claude-code-logs-stack-preview.png
 ---
 
 Хочу превращать рабочие сессии в контент.

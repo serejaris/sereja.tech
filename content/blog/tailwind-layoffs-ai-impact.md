@@ -4,6 +4,7 @@ date: 2026-01-10
 description: "Tailwind Labs сократила 3 из 4 инженеров после падения revenue на 80%. Причина — AI перехватил трафик с документации, на которой держалась продажа UI-паков."
 tags: ["tailwind"]
 section: AI
+image: /images/blog/tailwind-layoffs-ai-impact-preview.png
 ---
 
 В Tailwind Labs было 4 инженера. Остался один.

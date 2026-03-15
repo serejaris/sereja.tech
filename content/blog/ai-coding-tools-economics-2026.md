@@ -3,6 +3,7 @@ title: "AI для кодинга в 2026: инструменты, контекс
 date: 2026-01-27
 description: "Сравнение Claude Code и Cursor, управление контекстом агентов, кросс-валидация моделей и реальная экономика AI-программирования"
 tags: ["claude code", "cursor"]
+image: /images/blog/ai-coding-tools-economics-2026-preview.png
 ---
 
 Claude Code требует управленческих навыков. Cursor — нет.

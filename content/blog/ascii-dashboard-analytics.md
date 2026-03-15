@@ -4,6 +4,7 @@ date: 2026-01-18
 description: "Почему я смотрю аналитику в терминале, а не в браузере. Grid-layout, box drawing characters и как Claude Code рисует дашборды за меня."
 tags: ["tui", "claude code"]
 section: "Вайбкодинг"
+image: /images/blog/ascii-dashboard-analytics-preview.png
 ---
 
 Три слова в терминале. Через две секунды — воронка, конверсия, источники трафика.

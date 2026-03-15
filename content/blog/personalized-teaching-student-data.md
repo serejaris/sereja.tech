@@ -4,6 +4,7 @@ date: 2026-01-13
 description: "Как я парсю интро студентов через LLM и использую профили для адаптации примеров на уроке. Практический кейс с 8-й когортой."
 tags: []
 section: Education
+image: /images/blog/personalized-teaching-student-data-preview.png
 ---
 
 Максим делает аналитику для селлеров WildBerries. Елена — бота для Figma. Андрей — снайпер для Zora.

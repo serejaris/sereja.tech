@@ -4,6 +4,7 @@ date: 2026-01-12
 description: "Скопировал информацию о студентах в README.md. Теперь у меня два источника: база данных и файл. Single Source of Truth — принцип, который я нарушил."
 tags: ["ssot", "документация"]
 section: Документация
+image: /images/blog/ssot-documentation-preview.png
 ---
 
 Скопировал список студентов из базы в README.md.

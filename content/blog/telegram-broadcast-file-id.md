@@ -3,6 +3,7 @@ title: "Массовая рассылка в Telegram: почему альбом
 date: 2026-01-25
 description: "Как ускорить отправку медиа-альбомов в Telegram Bot API с 30 минут до 60 секунд, используя file_id вместо повторной загрузки файлов"
 tags: ["telegram bot", "python"]
+image: /images/blog/telegram-broadcast-file-id-preview.png
 ---
 
 Написал рассылку альбома из 6 картинок на 871 пользователя `@hashslash_bot`. Ожидал минуту-две. Полчаса — 100 человек.

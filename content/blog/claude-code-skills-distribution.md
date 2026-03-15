@@ -4,6 +4,7 @@ date: 2026-01-16
 description: "Три способа распространять скиллы Claude Code: плагины, комьюнити-реестр и свой маркетплейс. Разбираю что выбрать и как настроить."
 tags: ["claude code", "skills"]
 section: "Claude Code"
+image: /images/blog/claude-code-skills-distribution-preview.png
 ---
 
 15 скиллов за полгода. gh-issues, cc-analytics, blog-post...

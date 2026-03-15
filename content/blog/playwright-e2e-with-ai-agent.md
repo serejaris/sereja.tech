@@ -3,6 +3,7 @@ title: "E2E тесты пишет агент: Playwright + Claude Code"
 date: 2026-01-23
 description: "Как AI-агент генерирует Playwright тесты из описания сценариев. Три встроенных агента — planner, generator, healer — и реальный опыт."
 tags: ["claude code", "playwright", "тестирование"]
+image: /images/blog/playwright-e2e-with-ai-agent-preview.png
 ---
 
 Локатор поменялся — тест сломался. Фронтендер обновил форму — опять всё красное. Я переписывал один и тот же тест для регистрации раз шесть за квартал.

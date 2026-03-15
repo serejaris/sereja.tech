@@ -4,6 +4,7 @@ date: 2026-01-10
 description: "Разбираюсь почему model: haiku в командах Claude Code не экономит токены. Commands, Skills и Agents — в чём разница и как делегировать правильно."
 tags: ["claude code", "субагенты"]
 section: Claude Code
+image: /images/blog/slash-commands-subagents-preview.png
 ---
 
 Решил сэкономить на токенах. Сделал команду `/readme` с `model: haiku`.

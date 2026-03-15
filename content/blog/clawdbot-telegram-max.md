@@ -4,6 +4,7 @@ date: 2026-01-18
 description: "Self-hosted бот для управления Claude Code через Telegram. Делегируем настройку агенту — он сам разберётся с OAuth, Keychain и синхронизацией."
 tags: ["clawdbot", "telegram"]
 section: "AI Tools"
+image: /images/blog/clawdbot-telegram-max-preview.png
 ---
 
 Claude Code живёт в терминале. Терминал — на компе дома. А ты в кофейне, в метро, на созвоне.

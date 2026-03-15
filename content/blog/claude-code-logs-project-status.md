@@ -4,6 +4,7 @@ date: 2026-01-16
 description: "Как использовать ~/.claude/projects для аудита репозиториев: какие проекты в работе, где непушнутые коммиты, что забыл синхронизировать."
 tags: ["claude code"]
 section: "Claude Code"
+image: /images/blog/claude-code-logs-project-status-preview.png
 ---
 
 Спросил Claude Code: с какими проектами я работал последние два дня?

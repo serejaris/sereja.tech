@@ -3,6 +3,7 @@ title: "Claude Code получил память между сессиями"
 date: 2026-02-09
 description: "Auto Memory — новая фича Claude Code. Как агент запоминает контекст, где хранит заметки и чем это отличается от CLAUDE.md"
 tags: ["claude code"]
+image: /images/blog/claude-code-auto-memory-preview.png
 ---
 
 Открываю терминал, запускаю Claude Code в проекте, и вижу непривычное:

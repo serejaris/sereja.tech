@@ -4,6 +4,7 @@ date: 2026-01-17
 description: "Как отправить длинный текст с картинкой в одном сообщении Telegram. LinkPreviewOptions, catbox.moe и почему нужна задержка перед отправкой."
 tags: ["telegram", "bot api"]
 section: Telegram
+image: /images/blog/telegram-single-message-digest-preview.png
 ---
 
 Бот для дайджестов. Текст + комикс снизу, в одном сообщении.
