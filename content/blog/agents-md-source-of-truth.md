@@ -40,7 +40,7 @@ AGENTS.md — это конвенция, а не фича конкретного
 - Workflow для типовых задач
 - Границы: что можно делать, что нельзя, что требует подтверждения
 
-Формат стартовал летом 2025 как community-инициатива. К марту 2026 за ним стоит [Linux Foundation](https://agents.md/) через Agentic AI Foundation. Больше [60 000 репозиториев](https://socket.dev/blog/agents-md-gains-traction-as-an-open-format-for-ai-coding-agents) уже содержат этот файл. Нативно его читают [20+ инструментов](https://www.deployhq.com/blog/ai-coding-config-files-guide): Codex, Copilot, Gemini CLI, Windsurf, Cline, Aider, JetBrains Junie и другие.
+Формат стартовал летом 2025 как community-инициатива. К марту 2026 за ним стоит [Linux Foundation](https://agents.md/) через Agentic AI Foundation. Больше [60 000 репозиториев](https://socket.dev/blog/agents-md-gains-traction-as-an-open-format-for-ai-coding-agents) уже содержат этот файл. Нативно его читают [20+ инструментов](https://www.deployhq.com/blog/ai-coding-config-files-guide): Codex, Copilot, Gemini CLI, Google Antigravity, Windsurf, Cline, Aider, JetBrains Junie и другие. Antigravity добавил поддержку AGENTS.md в последнем обновлении — раньше читал только GEMINI.md.
 
 Описываешь правила один раз — каждый агент подхватывает их автоматически.
 
