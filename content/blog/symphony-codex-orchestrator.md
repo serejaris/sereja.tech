@@ -287,16 +287,3 @@ Aakash Gupta сформулировал ещё точнее: "The model is commo
 
 Разница между вторым и третьим — не в качестве ответов агента. В том, что я перестал быть event loop.
 
-## Частые вопросы
-
-### Можно ли использовать Symphony не с Codex?
-
-Спецификация language-agnostic: она описывает интерфейсы, а не конкретную модель. Текущая Elixir-реализация заточена под Codex app-server, но `codex.command` в WORKFLOW.md — произвольная shell-команда. Теоретически можно подставить любой агент с совместимым протоколом.
-
-### Насколько это безопасно для production?
-
-Symphony — prototype software, как написано в README: "presented as-is, intended for evaluation only". OpenAI рекомендуют реализовать собственную hardened версию по SPEC.md. Для side-project — работает. Для production с чувствительным кодом — стоит добавить свои guardrails.
-
-### Сколько агентов можно запускать параллельно?
-
-По умолчанию `max_concurrent_agents: 10`. Реальный bottleneck — не оркестратор (BEAM держит тысячи процессов), а rate limits Codex API и стоимость токенов.
