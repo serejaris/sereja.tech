@@ -2,12 +2,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-87+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+88+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-03-16 | [Слои контекста: организуем файлы по скорости изменения](https://sereja.tech/blog/context-architecture-lifecycle-split/) |
 | 2026-03-12 | [NotebookLM + Claude Code: бесплатный RAG за 5 минут](https://sereja.tech/blog/notebooklm-claude-code-rag/) |
 | 2026-03-05 | [Symphony: демон на Elixir раздаёт задачи Codex](https://sereja.tech/blog/symphony-codex-orchestrator/) |
 | 2026-03-04 | [Как я собрал совет директоров из субагентов](https://sereja.tech/blog/board-of-advisors-subagents/) |
