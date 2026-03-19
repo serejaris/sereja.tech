@@ -2,12 +2,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-88+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+89+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-03-19 | [Software for One: софт, который нужен только тебе](https://sereja.tech/blog/software-for-one-personal-tools/) |
 | 2026-03-16 | [Слои контекста: организуем файлы по скорости изменения](https://sereja.tech/blog/context-architecture-lifecycle-split/) |
 | 2026-03-12 | [NotebookLM + Claude Code: бесплатный RAG за 5 минут](https://sereja.tech/blog/notebooklm-claude-code-rag/) |
 | 2026-03-05 | [Symphony: демон на Elixir раздаёт задачи Codex](https://sereja.tech/blog/symphony-codex-orchestrator/) |
@@ -19,7 +20,6 @@
 | 2026-02-24 | [Gemini 3.1 Pro — мастер SVG, но не агент](https://sereja.tech/blog/gemini-3-1-pro-svg-animations/) |
 | 2026-02-23 | [Из вайбкодера в CEO: Personal Corp на GitHub](https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github/) |
 | 2026-02-22 | [Как я синхронизирую Claude Code на четырёх компах](https://sereja.tech/blog/sync-claude-code-four-machines/) |
-| 2026-02-21 | [Хуки Claude Code: агент сам ведёт задачи](https://sereja.tech/blog/claude-code-hooks-github-issues/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
