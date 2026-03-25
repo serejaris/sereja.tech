@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Персональная корпорация — Сережа Рис</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --border: #1e1e1e;
+  --text: #e8e8e8;
+  --text-dim: #888888;
+  --green: deeppink;
+  --green-dim: rgba(255,20,147,0.15);
+  --purple: #8b5cf6;
+  --purple-dim: rgba(139,92,246,0.15);
+  --yellow: #f59e0b;
+  --yellow-dim: rgba(245,158,11,0.15);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.15);
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Outfit', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Slide base ─── */
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 80px 100px;
+  position: relative;
+}
+
+.slide-footer {
+  position: absolute;
+  bottom: 24px;
+  left: 80px;
+  right: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.slide-number {
+  display: none;
+}
+
+/* ─── Typography ─── */
+h1 {
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-right: 8px;
+  margin-bottom: 6px;
+}
+
+.tag-green { background: var(--green-dim); color: var(--green); }
+.tag-purple { background: var(--purple-dim); color: var(--purple); }
+.tag-yellow { background: var(--yellow-dim); color: var(--yellow); }
+
+.accent-green { color: var(--green); }
+.accent-purple { color: var(--purple); }
+.accent-yellow { color: var(--yellow); }
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  font-weight: 300;
+  margin-top: 16px;
+}
+
+.quote {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 700px;
+  border-left: 3px solid var(--green);
+  padding-left: 24px;
+  color: var(--text);
+}
+
+.link-box {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--green);
+  background: var(--green-dim);
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+/* ─── Bullets ─── */
+.bullets { list-style: none; }
+.bullets li {
+  padding: 12px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+.bullets li:last-child { border-bottom: none; }
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: var(--green);
+}
+.bullets li.pain::before { background: var(--red); }
+
+/* ─── SVG diagrams ─── */
+.diagram-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin: 30px 0;
+}
+
+svg text {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+svg .mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Grid layouts ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.dept-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.3s;
+}
+.dept-card:hover { border-color: var(--green); }
+.dept-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.dept-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+.dept-card .meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  gap: 12px;
+}
+
+/* ─── Timeline ─── */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -34px;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  background: var(--bg);
+}
+.timeline-item.active::before {
+  background: var(--green);
+}
+.timeline-item .day {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.timeline-item .action {
+  font-size: 1rem;
+  color: var(--text);
+}
+.timeline-item .result {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ─── Skills grid ─── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.skill-card:hover {
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+.skill-card .name {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+.skill-card .desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* ─── Nav dots ─── */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  padding: 0;
+}
+.nav-dot.active {
+  background: var(--green);
+  transform: scale(1.3);
+}
+
+/* ─── Telegram icon ─── */
+.tg-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  vertical-align: -2px;
+  margin-right: 2px;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide > * {
+  animation: fadeUp 0.6s ease-out both;
+}
+
+.slide > *:nth-child(2) { animation-delay: 0.1s; }
+.slide > *:nth-child(3) { animation-delay: 0.2s; }
+.slide > *:nth-child(4) { animation-delay: 0.3s; }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .slide { padding: 40px 24px 80px; }
+  .slide-footer { left: 24px; right: 24px; }
+  .slide-number { right: 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 30px; }
+  .nav-dots { display: none; }
+  h1 { font-size: 2rem; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots"></nav>
+<main id="deck">
+<section class="slide" id="s01">
+<span class="slide-number">01 / 10</span>
+
+  <h3>25 марта 2026 · AI-Native Organizations Sprint</h3>
+
+  <h1>Персональная корпорация:<br>
+  <span class="accent-green">как дать AI место</span><br>
+  внутри работы</h1>
+
+  <p class="subtitle">Сережа Рис · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @serejaris</p>
+
+  <p style="color:var(--text-dim); font-size:1rem; margin-top:12px;">Помогаю фаундерам и операторам использовать AI на уровне <span class="accent-green">unfair advantage</span></p>
+
+
+  <div class="slide-footer">
+    <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="s01a">
+<div style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; flex:1;">
+
+  <h2 style="margin-bottom:16px;">Слайды и скиллы</h2>
+
+  <p style="color:var(--text-dim); font-size:1.1rem; max-width:600px; margin-bottom:40px;">
+    Эту презентацию можно открыть прямо сейчас. В конце — ссылки на скиллы, которые можно забрать и развернуть у себя.
+  </p>
+
+  <div class="link-box" style="font-size:1.4rem; padding:16px 32px;">sereja.tech/aicorp</div>
+
+  <div style="margin-top:40px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+    <span class="tag tag-purple" style="font-size:14px; padding:6px 14px;">project-init</span>
+    <span class="tag tag-purple" style="font-size:14px; padding:6px 14px;">weekly-planning</span>
+    <span class="tag tag-purple" style="font-size:14px; padding:6px 14px;">weekly-retro</span>
+    <span class="tag tag-purple" style="font-size:14px; padding:6px 14px;">board-of-advisors</span>
+    <span class="tag tag-purple" style="font-size:14px; padding:6px 14px;">claude-md-writer</span>
+  </div>
+
+  <p style="color:var(--text-dim); font-size:0.85rem; margin-top:16px; font-family:var(--mono);">
+    github.com/serejaris/ris-claude-code · 124 ★
+  </p>
+
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s03">
+<style>
+  .pain-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,20,147,0.06) 0%, transparent 60%);
+    border: 1px solid rgba(255,20,147,0.15);
+    border-radius: 14px;
+    padding: 28px 24px;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .pain-card:hover {
+    border-color: deeppink;
+    box-shadow: 0 0 30px rgba(255,20,147,0.2), inset 0 0 30px rgba(255,20,147,0.05);
+    background: linear-gradient(135deg, rgba(255,20,147,0.12) 0%, transparent 60%);
+  }
+  .pain-card .pain-num {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 6rem;
+    opacity: 0.05;
+    font-weight: 900;
+    color: deeppink;
+    line-height: 1;
+    transition: opacity 0.3s;
+  }
+  .pain-card:hover .pain-num {
+    opacity: 0.12;
+  }
+  .pain-card .pain-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(255,20,147,0.6);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .pain-card:hover .pain-label {
+    color: deeppink;
+  }
+</style>
+
+<span class="slide-number">03 / 11</span>
+
+<h2 style="margin-bottom:12px;">Что обычно <span class="accent-green">болит</span></h2>
+<p style="color:var(--text-dim);font-size:0.95rem;margin-bottom:32px;">Четыре вещи, которые я слышу почти на каждой встрече</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;">
+
+  <div class="pain-card">
+    <div class="pain-num">01</div>
+    <div class="pain-label">Изоляция</div>
+    <div style="font-size:1.15rem;font-weight:600;line-height:1.35;margin-bottom:8px;">Личный стек есть,<br>командного — нет</div>
+    <div style="color:var(--text-dim);font-size:0.85rem;line-height:1.5;">AI работает у меня. Команда живёт в старом процессе. Стек — в моей голове.</div>
+  </div>
+
+  <div class="pain-card">
+    <div class="pain-num">02</div>
+    <div class="pain-label">Фрагментация</div>
+    <div style="font-size:1.15rem;font-weight:600;line-height:1.35;margin-bottom:8px;">Данные и договорённости<br>размазаны</div>
+    <div style="color:var(--text-dim);font-size:0.85rem;line-height:1.5;">Bitrix, таблицы, Telegram, 1С, голова руководителя. Пять мест — ноль истины.</div>
+  </div>
+
+  <div class="pain-card">
+    <div class="pain-num">03</div>
+    <div class="pain-label">Затухание</div>
+    <div style="font-size:1.15rem;font-weight:600;line-height:1.35;margin-bottom:8px;">Пилоты не переходят<br>в работу</div>
+    <div style="color:var(--text-dim);font-size:0.85rem;line-height:1.5;">Попробовали, вдохновились. Через месяц — всё как раньше. Энтузиазм без системы = ноль.</div>
+  </div>
+
+  <div class="pain-card">
+    <div class="pain-num">04</div>
+    <div class="pain-label">Страх</div>
+    <div style="font-size:1.15rem;font-weight:600;line-height:1.35;margin-bottom:8px;">Страшно<br>масштабировать</div>
+    <div style="color:var(--text-dim);font-size:0.85rem;line-height:1.5;">Как расшарить на команду, не пролив данные и не потеряв контроль? Нет ответа — нет действий.</div>
+  </div>
+
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s02">
+<span class="slide-number">02 / 10</span>
+
+  <h2>Кто я и почему я об этом говорю</h2>
+
+  <div class="two-col" style="gap:40px;">
+    <ul class="bullets">
+      <li>Практик вайбкодинга — строю продукты через AI-агентов</li>
+      <li>Фаундер крупнейшего русскоязычного комьюнити — <span class="accent-green">@vibecod3rs</span></li>
+      <li>В образовании больше 8 лет: Яндекс.Практикум, Спортмастер, Moscow Coding School</li>
+      <li class="pain">Стал руководителем, которого сам не любил</li>
+      <li>Сейчас: 5 проектов через AI-агентов из одного терминала</li>
+    </ul>
+
+    <div style="display:flex; flex-direction:column; gap:12px; padding-top:8px;">
+      <a href="https://youtube.com/@serajaris" target="_blank" style="text-decoration:none; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; transition:border-color 0.3s;">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--green); margin-bottom:4px;">YouTube</div>
+        <div style="font-size:0.9rem; color:var(--text-dim);">youtube.com/@serajaris</div>
+      </a>
+      <a href="https://github.com/serejaris" target="_blank" style="text-decoration:none; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; transition:border-color 0.3s;">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--green); margin-bottom:4px;">GitHub</div>
+        <div style="font-size:0.9rem; color:var(--text-dim);">github.com/serejaris</div>
+      </a>
+      <a href="https://vibecoding.phd" target="_blank" style="text-decoration:none; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; transition:border-color 0.3s;">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--green); margin-bottom:4px;">Школа</div>
+        <div style="font-size:0.9rem; color:var(--text-dim);">vibecoding.phd</div>
+      </a>
+      <a href="https://sereja.tech" target="_blank" style="text-decoration:none; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; transition:border-color 0.3s;">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--green); margin-bottom:4px;">Блог</div>
+        <div style="font-size:0.9rem; color:var(--text-dim);">sereja.tech</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="s02a">
+<span class="slide-number">02a</span>
+
+<h2>Как это было устроено в <span class="accent-green">Практикуме</span></h2>
+
+<div class="diagram-container" style="flex:1;align-items:stretch;">
+  <svg viewBox="0 0 1100 700" width="100%" style="max-width:1100px;">
+
+    <!-- ═══ TIER -1 — Другие направления (ghost, показывают масштаб) ═══ -->
+    <rect x="30" y="8" width="140" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="100" y="30" text-anchor="middle" fill="#444" font-size="9" class="mono">Аналитика данных</text>
+
+    <rect x="190" y="8" width="140" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="260" y="30" text-anchor="middle" fill="#444" font-size="9" class="mono">Python</text>
+
+    <rect x="770" y="8" width="140" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="840" y="30" text-anchor="middle" fill="#444" font-size="9" class="mono">Дизайн</text>
+
+    <rect x="930" y="8" width="140" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="1000" y="30" text-anchor="middle" fill="#444" font-size="9" class="mono">Маркетинг</text>
+
+    <!-- ═══ TIER 0 — Руководство (dim, dashed) ═══ -->
+    <rect x="400" y="8" width="300" height="44" rx="8" fill="none" stroke="#444" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="550" y="22" text-anchor="middle" fill="#666" font-size="11" font-weight="600">Веб-разработка</text>
+    <text x="550" y="38" text-anchor="middle" fill="#555" font-size="10">руководитель направления</text>
+    <text x="550" y="48" text-anchor="middle" fill="#444" font-size="9" class="mono">моё направление</text>
+
+    <!-- Ghost connectors from other directions -->
+    <line x1="100" y1="44" x2="100" y2="55" stroke="#222" stroke-width="1" stroke-dasharray="2,3"/>
+    <circle cx="100" cy="60" r="2" fill="#333"/>
+    <circle cx="100" cy="68" r="1.5" fill="#2a2a2a"/>
+
+    <line x1="260" y1="44" x2="260" y2="55" stroke="#222" stroke-width="1" stroke-dasharray="2,3"/>
+    <circle cx="260" cy="60" r="2" fill="#333"/>
+    <circle cx="260" cy="68" r="1.5" fill="#2a2a2a"/>
+
+    <line x1="840" y1="44" x2="840" y2="55" stroke="#222" stroke-width="1" stroke-dasharray="2,3"/>
+    <circle cx="840" cy="60" r="2" fill="#333"/>
+    <circle cx="840" cy="68" r="1.5" fill="#2a2a2a"/>
+
+    <line x1="1000" y1="44" x2="1000" y2="55" stroke="#222" stroke-width="1" stroke-dasharray="2,3"/>
+    <circle cx="1000" cy="60" r="2" fill="#333"/>
+    <circle cx="1000" cy="68" r="1.5" fill="#2a2a2a"/>
+
+    <line x1="550" y1="52" x2="550" y2="68" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+
+    <rect x="400" y="68" width="300" height="44" rx="8" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+    <text x="550" y="88" text-anchor="middle" fill="#555" font-size="12">продюсер</text>
+    <text x="550" y="102" text-anchor="middle" fill="#444" font-size="10" class="mono">1 человек</text>
+
+    <line x1="550" y1="112" x2="550" y2="132" stroke="#444" stroke-width="1.5"/>
+
+    <!-- ═══ TIER 1 — Я (тимлид) — HERO NODE ═══ -->
+    <rect x="380" y="132" width="340" height="80" rx="14" fill="rgba(255,20,147,0.12)" stroke="deeppink" stroke-width="2.5"/>
+    <text x="550" y="163" text-anchor="middle" fill="deeppink" font-size="20" font-weight="700">Я — тимлид</text>
+    <text x="550" y="183" text-anchor="middle" fill="#888" font-size="12">координация · ревью · дедлайны</text>
+    <text x="550" y="200" text-anchor="middle" fill="#666" font-size="10" class="mono">1 человек</text>
+
+    <!-- ═══ Connector lines from Я to TIER 2 ═══ -->
+    <!-- Vertical trunk -->
+    <line x1="550" y1="212" x2="550" y2="255" stroke="deeppink" stroke-width="2"/>
+    <!-- Horizontal rail -->
+    <line x1="110" y1="255" x2="990" y2="255" stroke="deeppink" stroke-width="2"/>
+    <!-- Vertical drops -->
+    <line x1="110" y1="255" x2="110" y2="280" stroke="deeppink" stroke-width="1.5"/>
+    <line x1="330" y1="255" x2="330" y2="280" stroke="deeppink" stroke-width="1.5"/>
+    <line x1="550" y1="255" x2="550" y2="280" stroke="deeppink" stroke-width="1.5"/>
+    <line x1="770" y1="255" x2="770" y2="280" stroke="deeppink" stroke-width="1.5"/>
+    <line x1="990" y1="255" x2="990" y2="280" stroke="deeppink" stroke-width="1.5"/>
+
+    <!-- ═══ TIER 2 — Прямые подчинённые ═══ -->
+
+    <!-- Методист -->
+    <rect x="20" y="280" width="180" height="72" rx="10" fill="var(--bg-card)" stroke="deeppink" stroke-width="1.5"/>
+    <text x="110" y="306" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Методист</text>
+    <text x="110" y="324" text-anchor="middle" fill="#888" font-size="11">структура курса</text>
+    <text x="110" y="342" text-anchor="middle" fill="#666" font-size="10" class="mono">1 человек</text>
+
+    <!-- Авторы -->
+    <rect x="230" y="280" width="200" height="72" rx="10" fill="var(--bg-card)" stroke="deeppink" stroke-width="1.5"/>
+    <text x="330" y="306" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Авторы</text>
+    <text x="330" y="324" text-anchor="middle" fill="#888" font-size="11">пишут уроки и тексты</text>
+    <text x="330" y="342" text-anchor="middle" fill="deeppink" font-size="11" font-weight="600" class="mono">3 человека</text>
+
+    <!-- Иллюстратор -->
+    <rect x="460" y="280" width="180" height="72" rx="10" fill="var(--bg-card)" stroke="deeppink" stroke-width="1.5"/>
+    <text x="550" y="306" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Иллюстратор</text>
+    <text x="550" y="324" text-anchor="middle" fill="#888" font-size="11">визуалы для уроков</text>
+    <text x="550" y="342" text-anchor="middle" fill="#666" font-size="10" class="mono">1 человек</text>
+
+    <!-- Выпускающий редактор -->
+    <rect x="670" y="280" width="200" height="72" rx="10" fill="var(--bg-card)" stroke="deeppink" stroke-width="1.5"/>
+    <text x="770" y="306" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Выпускающий</text>
+    <text x="770" y="322" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">редактор</text>
+    <text x="770" y="342" text-anchor="middle" fill="#888" font-size="11">финальная сборка модуля</text>
+
+    <!-- Продюсер (operational) -->
+    <rect x="900" y="280" width="180" height="72" rx="10" fill="var(--bg-card)" stroke="deeppink" stroke-width="1.5"/>
+    <text x="990" y="306" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Рецензент</text>
+    <text x="990" y="324" text-anchor="middle" fill="#888" font-size="11">экспертная проверка</text>
+    <text x="990" y="342" text-anchor="middle" fill="#666" font-size="10" class="mono">1 человек</text>
+
+    <!-- ═══ TIER 3 — Смежные отделы (dim, dashed, below) ═══ -->
+
+    <!-- Connector from trunk down to tier 3 -->
+    <line x1="550" y1="352" x2="550" y2="395" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="120" y1="395" x2="980" y2="395" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="120" y1="395" x2="120" y2="415" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="370" y1="395" x2="370" y2="415" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="615" y1="395" x2="615" y2="415" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="860" y1="395" x2="860" y2="415" stroke="#333" stroke-width="1" stroke-dasharray="4,3"/>
+
+    <!-- Разработка платформы -->
+    <rect x="20" y="415" width="200" height="78" rx="8" fill="var(--bg-card)" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+    <text x="120" y="437" text-anchor="middle" fill="#666" font-size="12" font-weight="600">Разработка</text>
+    <text x="120" y="453" text-anchor="middle" fill="#666" font-size="12" font-weight="600">платформы</text>
+    <text x="120" y="472" text-anchor="middle" fill="#555" font-size="10" class="mono">бэкенд · фронтенд</text>
+    <text x="120" y="486" text-anchor="middle" fill="#555" font-size="10" class="mono">инфраструктура</text>
+
+    <!-- LX-дизайн + UX -->
+    <rect x="260" y="415" width="220" height="78" rx="8" fill="var(--bg-card)" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+    <text x="370" y="437" text-anchor="middle" fill="#666" font-size="12" font-weight="600">LX-дизайн</text>
+    <text x="370" y="456" text-anchor="middle" fill="#555" font-size="10" class="mono">пользовательский опыт</text>
+    <text x="370" y="470" text-anchor="middle" fill="#555" font-size="10" class="mono">интерфейс обучения</text>
+    <text x="370" y="484" text-anchor="middle" fill="#555" font-size="10" class="mono">A/B тесты</text>
+
+    <!-- Отдел заботы -->
+    <rect x="510" y="415" width="210" height="78" rx="8" fill="var(--bg-card)" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+    <text x="615" y="437" text-anchor="middle" fill="#666" font-size="12" font-weight="600">Отдел заботы</text>
+    <text x="615" y="456" text-anchor="middle" fill="#555" font-size="10" class="mono">поддержка студентов</text>
+    <text x="615" y="470" text-anchor="middle" fill="#555" font-size="10" class="mono">онбординг</text>
+    <text x="615" y="484" text-anchor="middle" fill="#555" font-size="10" class="mono">retention</text>
+
+    <!-- Проведение программ -->
+    <rect x="750" y="415" width="220" height="78" rx="8" fill="var(--bg-card)" stroke="#333" stroke-width="1" stroke-dasharray="5,3"/>
+    <text x="860" y="437" text-anchor="middle" fill="#666" font-size="12" font-weight="600">Проведение</text>
+    <text x="860" y="453" text-anchor="middle" fill="#666" font-size="12" font-weight="600">программ</text>
+    <text x="860" y="472" text-anchor="middle" fill="#555" font-size="10" class="mono">менеджеры · координаторы</text>
+    <text x="860" y="486" text-anchor="middle" fill="#555" font-size="10" class="mono">кураторы · ревьюеры</text>
+
+    <!-- ═══ TIER 4 — Ещё дальше (еле видно, показывает масштаб) ═══ -->
+    <line x1="120" y1="493" x2="120" y2="520" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <line x1="370" y1="493" x2="370" y2="520" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <line x1="615" y1="493" x2="615" y2="520" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <line x1="860" y1="493" x2="860" y2="520" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+
+    <rect x="40" y="520" width="160" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="120" y="542" text-anchor="middle" fill="#444" font-size="10" class="mono">DevOps · QA</text>
+
+    <rect x="290" y="520" width="160" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="370" y="542" text-anchor="middle" fill="#444" font-size="10" class="mono">Исследования</text>
+
+    <rect x="535" y="520" width="160" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="615" y="542" text-anchor="middle" fill="#444" font-size="10" class="mono">Маркетинг</text>
+
+    <rect x="780" y="520" width="160" height="36" rx="6" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="860" y="542" text-anchor="middle" fill="#444" font-size="10" class="mono">HR · рекрутинг</text>
+
+    <!-- ═══ TIER 5 — Ghost nodes (масштаб уходит в бесконечность) ═══ -->
+    <circle cx="120" cy="580" r="2" fill="#333"/>
+    <circle cx="120" cy="592" r="2" fill="#2a2a2a"/>
+    <circle cx="120" cy="604" r="2" fill="#222"/>
+
+    <circle cx="370" cy="580" r="2" fill="#333"/>
+    <circle cx="370" cy="592" r="2" fill="#2a2a2a"/>
+    <circle cx="370" cy="604" r="2" fill="#222"/>
+
+    <circle cx="615" cy="580" r="2" fill="#333"/>
+    <circle cx="615" cy="592" r="2" fill="#2a2a2a"/>
+    <circle cx="615" cy="604" r="2" fill="#222"/>
+
+    <circle cx="860" cy="580" r="2" fill="#333"/>
+    <circle cx="860" cy="592" r="2" fill="#2a2a2a"/>
+    <circle cx="860" cy="604" r="2" fill="#222"/>
+
+    <!-- ═══ Параллельные команды (ghost, рядом с моей) ═══ -->
+    <rect x="20" y="132" width="140" height="50" rx="8" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="90" y="153" text-anchor="middle" fill="#444" font-size="10" class="mono">Команда Python</text>
+    <text x="90" y="168" text-anchor="middle" fill="#333" font-size="9" class="mono">свой тимлид · свои авторы</text>
+
+    <rect x="180" y="132" width="140" height="50" rx="8" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="250" y="153" text-anchor="middle" fill="#444" font-size="10" class="mono">Команда Data</text>
+    <text x="250" y="168" text-anchor="middle" fill="#333" font-size="9" class="mono">свой тимлид · свои авторы</text>
+
+    <rect x="780" y="132" width="140" height="50" rx="8" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="850" y="153" text-anchor="middle" fill="#444" font-size="10" class="mono">Команда Дизайн</text>
+    <text x="850" y="168" text-anchor="middle" fill="#333" font-size="9" class="mono">свой тимлид · свои авторы</text>
+
+    <rect x="940" y="132" width="140" height="50" rx="8" fill="none" stroke="#222" stroke-width="1" stroke-dasharray="3,4"/>
+    <text x="1010" y="153" text-anchor="middle" fill="#444" font-size="10" class="mono">Команда QA</text>
+    <text x="1010" y="168" text-anchor="middle" fill="#333" font-size="9" class="mono">свой тимлид · свои авторы</text>
+
+    <!-- ═══ Output: продукт ═══ -->
+    <text x="550" y="640" text-anchor="middle" fill="#555" font-size="11">на выходе всего этого — один продукт: веб-направление Практикума</text>
+
+  </svg>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04">
+<span class="slide-number">04 / 10</span>
+
+<h2>Моя цифровая корпорация — <span class="accent-green">5 отделов</span></h2>
+
+<div class="diagram-container">
+  <svg viewBox="0 0 1000 540" width="100%" style="max-width:1000px;">
+
+    <!-- ═══ Center: Штаб ═══ -->
+    <rect x="370" y="185" width="220" height="100" rx="12" fill="var(--green-dim)" stroke="var(--green)" stroke-width="2"/>
+    <text x="480" y="220" text-anchor="middle" fill="var(--green)" font-size="17" font-weight="600">Штаб</text>
+    <text x="480" y="242" text-anchor="middle" fill="#888" font-size="12">стратегия · координация</text>
+    <text x="480" y="264" text-anchor="middle" fill="#888" font-size="11" class="mono">50+ задач</text>
+
+    <!-- Штаб skills (below штаб, centered) -->
+    <line x1="480" y1="285" x2="480" y2="302" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="480" y="316" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">совет директоров · планирование · ретро · аналитика</text>
+
+    <!-- ═══ Top: Образование ═══ -->
+    <rect x="370" y="20" width="220" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="50" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Образование</text>
+    <text x="480" y="70" text-anchor="middle" fill="#888" font-size="11">уроки · студенты · лайвы</text>
+    <text x="480" y="86" text-anchor="middle" fill="#666" font-size="10" class="mono">50+ задач</text>
+    <line x1="480" y1="100" x2="480" y2="185" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Skills: right -->
+    <line x1="590" y1="55" x2="630" y2="55" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="638" y="42" fill="var(--purple)" font-size="9" class="mono">видео → транскрипт</text>
+    <text x="638" y="54" fill="var(--purple)" font-size="9" class="mono">→ анализ → HTML</text>
+    <text x="638" y="66" fill="var(--purple)" font-size="9" class="mono">→ воркбук → KB</text>
+    <text x="638" y="80" fill="var(--purple)" font-size="9" class="mono" opacity="0.6">9 навыков</text>
+
+    <!-- ═══ Bottom: Клиенты ═══ -->
+    <rect x="370" y="360" width="220" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="390" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Клиенты</text>
+    <text x="480" y="410" text-anchor="middle" fill="#888" font-size="11">лиды · встречи · pipeline</text>
+    <text x="480" y="426" text-anchor="middle" fill="#666" font-size="10" class="mono">8 задач</text>
+    <line x1="480" y1="316" x2="480" y2="360" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Skills: right -->
+    <line x1="590" y1="395" x2="630" y2="395" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="638" y="382" fill="var(--purple)" font-size="9" class="mono">обзор CRM · разбор встреч</text>
+    <text x="638" y="394" fill="var(--purple)" font-size="9" class="mono">обогащение из Telegram</text>
+    <text x="638" y="406" fill="var(--purple)" font-size="9" class="mono">сканирование лидов</text>
+    <text x="638" y="420" fill="var(--purple)" font-size="9" class="mono" opacity="0.6">6 навыков</text>
+
+    <!-- ═══ Left: Контент ═══ -->
+    <rect x="30" y="195" width="200" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="130" y="225" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Контент</text>
+    <text x="130" y="245" text-anchor="middle" fill="#888" font-size="11">блог · SEO · статьи</text>
+    <text x="130" y="261" text-anchor="middle" fill="#666" font-size="10" class="mono">24 задачи</text>
+    <line x1="230" y1="235" x2="370" y2="235" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Skills: below -->
+    <line x1="130" y1="275" x2="130" y2="298" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="130" y="312" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">идеи из логов</text>
+    <text x="130" y="324" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">статьи · анонсы в ТГ</text>
+    <text x="130" y="336" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">«очеловечивание»</text>
+
+    <!-- ═══ Right: Продажи ═══ -->
+    <rect x="730" y="195" width="200" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="830" y="225" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Продажи</text>
+    <text x="830" y="245" text-anchor="middle" fill="#888" font-size="11">бот · воронки · аналитика</text>
+    <text x="830" y="261" text-anchor="middle" fill="#666" font-size="10" class="mono">23 задачи</text>
+    <line x1="590" y1="235" x2="730" y2="235" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Skills: below -->
+    <line x1="830" y1="275" x2="830" y2="298" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="830" y="312" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">трекинг-ссылки</text>
+    <text x="830" y="324" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">аналитика воронки</text>
+    <text x="830" y="336" text-anchor="middle" fill="var(--purple)" font-size="9" class="mono">сегментация · рассылки</text>
+
+    <!-- ═══ Legend (bottom) ═══ -->
+    <rect x="300" y="480" width="8" height="8" rx="2" fill="var(--green)"/>
+    <text x="314" y="488" fill="#888" font-size="10">отдел (задачи + правила)</text>
+    <rect x="500" y="480" width="8" height="8" rx="2" fill="var(--purple)"/>
+    <text x="514" y="488" fill="#888" font-size="10">навыки — повторяемые процессы (SOPs)</text>
+
+  </svg>
+</div>
+
+<p style="text-align:center; color:var(--text-dim); font-family:var(--mono); font-size:14px;">
+  <span class="accent-green">470+ задач</span> · <span class="accent-purple">30+ навыков</span> · в дневном фокусе — 10-12
+</p>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04a">
+<h2>Кто работает в <span class="accent-green">отделах</span></h2>
+
+<div class="diagram-container">
+  <svg viewBox="0 0 1000 540" width="100%" style="max-width:1000px;">
+
+    <!-- ═══ Center: Штаб ═══ -->
+    <rect x="370" y="185" width="220" height="100" rx="12" fill="var(--green-dim)" stroke="var(--green)" stroke-width="2"/>
+    <text x="480" y="218" text-anchor="middle" fill="var(--green)" font-size="17" font-weight="600">Штаб</text>
+    <text x="480" y="238" text-anchor="middle" fill="#888" font-size="12">стратегия · координация</text>
+    <text x="480" y="258" text-anchor="middle" fill="#888" font-size="11" class="mono">CEO — я</text>
+    <text x="480" y="274" text-anchor="middle" fill="var(--green)" font-size="10" class="mono">Claude Opus 4.6 · $200/мес</text>
+
+    <!-- Штаб: что делает -->
+    <line x1="480" y1="285" x2="480" y2="302" stroke="var(--green)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="480" y="316" text-anchor="middle" fill="var(--text-dim)" font-size="10">принимает решения · ставит задачи в отделы</text>
+    <text x="480" y="330" text-anchor="middle" fill="var(--text-dim)" font-size="10">видит весь борд сверху</text>
+
+    <!-- ═══ Top: Образование ═══ -->
+    <rect x="370" y="14" width="220" height="88" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="42" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Образование</text>
+    <text x="480" y="60" text-anchor="middle" fill="#888" font-size="11">уроки · студенты · лайвы</text>
+    <text x="480" y="78" text-anchor="middle" fill="var(--green)" font-size="10" class="mono">Claude Opus 4.6 · $200/мес</text>
+    <text x="480" y="94" text-anchor="middle" fill="#666" font-size="9" class="mono">+ Gemini 2.5 Pro для транскриптов</text>
+    <line x1="480" y1="102" x2="480" y2="185" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Что делает -->
+    <line x1="590" y1="55" x2="630" y2="55" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="638" y="42" fill="var(--text-dim)" font-size="10">пишет уроки</text>
+    <text x="638" y="56" fill="var(--text-dim)" font-size="10">готовит слайды и демо</text>
+    <text x="638" y="70" fill="var(--text-dim)" font-size="10">публикует записи</text>
+    <text x="638" y="84" fill="var(--text-dim)" font-size="10">обогащает базу знаний</text>
+
+    <!-- ═══ Bottom: Клиенты ═══ -->
+    <rect x="370" y="360" width="220" height="88" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="388" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Клиенты</text>
+    <text x="480" y="406" text-anchor="middle" fill="#888" font-size="11">лиды · встречи · pipeline</text>
+    <text x="480" y="424" text-anchor="middle" fill="var(--green)" font-size="10" class="mono">Claude Opus 4.6 · $200/мес</text>
+    <text x="480" y="440" text-anchor="middle" fill="#666" font-size="9" class="mono">+ Telethon для сканирования DM</text>
+    <line x1="480" y1="330" x2="480" y2="360" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Что делает -->
+    <line x1="590" y1="395" x2="630" y2="395" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="638" y="382" fill="var(--text-dim)" font-size="10">утренний обзор карточек</text>
+    <text x="638" y="396" fill="var(--text-dim)" font-size="10">разбор звонков → CRM</text>
+    <text x="638" y="410" fill="var(--text-dim)" font-size="10">follow-up после встреч</text>
+    <text x="638" y="424" fill="var(--text-dim)" font-size="10">сканирование ЛС на лиды</text>
+
+    <!-- ═══ Left: Контент ═══ -->
+    <rect x="20" y="190" width="210" height="88" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="125" y="218" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Контент</text>
+    <text x="125" y="236" text-anchor="middle" fill="#888" font-size="11">блог · SEO · статьи</text>
+    <text x="125" y="254" text-anchor="middle" fill="var(--green)" font-size="10" class="mono">GPT-5.4 Pro · $200/мес</text>
+    <text x="125" y="270" text-anchor="middle" fill="#666" font-size="9" class="mono">лучший для длинных текстов</text>
+    <line x1="230" y1="235" x2="370" y2="235" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Что делает -->
+    <line x1="125" y1="278" x2="125" y2="298" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="125" y="312" text-anchor="middle" fill="var(--text-dim)" font-size="10">пишет статьи</text>
+    <text x="125" y="326" text-anchor="middle" fill="var(--text-dim)" font-size="10">анонсы в Telegram</text>
+    <text x="125" y="340" text-anchor="middle" fill="var(--text-dim)" font-size="10">SEO-оптимизация</text>
+
+    <!-- ═══ Right: Продажи ═══ -->
+    <rect x="730" y="190" width="210" height="88" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="835" y="218" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Продажи</text>
+    <text x="835" y="236" text-anchor="middle" fill="#888" font-size="11">бот · воронки · аналитика</text>
+    <text x="835" y="254" text-anchor="middle" fill="var(--green)" font-size="10" class="mono">Claude Sonnet 4.6 · $100/мес</text>
+    <text x="835" y="270" text-anchor="middle" fill="#666" font-size="9" class="mono">быстрый, дешёвый, точный</text>
+    <line x1="590" y1="235" x2="730" y2="235" stroke="var(--border)" stroke-width="1.5"/>
+    <!-- Что делает -->
+    <line x1="835" y1="278" x2="835" y2="298" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <text x="835" y="312" text-anchor="middle" fill="var(--text-dim)" font-size="10">отвечает на входящие</text>
+    <text x="835" y="326" text-anchor="middle" fill="var(--text-dim)" font-size="10">рассылки по сегментам</text>
+    <text x="835" y="340" text-anchor="middle" fill="var(--text-dim)" font-size="10">аналитика конверсий</text>
+
+    <!-- ═══ Legend ═══ -->
+    <rect x="250" y="476" width="8" height="8" rx="2" fill="var(--green)"/>
+    <text x="264" y="484" fill="#888" font-size="10">модель (сотрудник)</text>
+    <rect x="420" y="476" width="8" height="8" rx="2" fill="#666"/>
+    <text x="434" y="484" fill="#888" font-size="10">почему эта модель</text>
+    <rect x="600" y="476" width="8" height="8" rx="2" fill="var(--text-dim)"/>
+    <text x="614" y="484" fill="#888" font-size="10">что конкретно делается</text>
+
+  </svg>
+</div>
+
+<p style="text-align:center; color:var(--text-dim); font-size:0.9rem; max-width:650px; margin:0 auto;">
+  Каждый отдел — конкретная модель под задачу. Общий бюджет: ~$700/мес. Заменяет команду из 6+ человек.
+</p>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04b">
+<h2>Что работает <span class="accent-green">автономно</span></h2>
+
+<div class="diagram-container">
+  <svg viewBox="0 0 1000 460" width="100%" style="max-width:1000px;">
+
+    <!-- ═══ Center: Штаб ═══ -->
+    <rect x="370" y="155" width="220" height="80" rx="12" fill="var(--green-dim)" stroke="var(--green)" stroke-width="2"/>
+    <text x="480" y="185" text-anchor="middle" fill="var(--green)" font-size="16" font-weight="600">Штаб</text>
+    <text x="480" y="205" text-anchor="middle" fill="#888" font-size="11">CEO — я</text>
+    <text x="480" y="225" text-anchor="middle" fill="var(--green)" font-size="10" class="mono">weekly-planning: пн → outcomes</text>
+
+    <!-- ═══ Top: Забота о студентах ═══ -->
+    <rect x="370" y="15" width="220" height="60" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="40" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Забота о студентах</text>
+    <text x="480" y="58" text-anchor="middle" fill="#888" font-size="11">дайджесты · поддержка · комьюнити</text>
+    <line x1="480" y1="75" x2="480" y2="155" stroke="var(--border)" stroke-width="1"/>
+
+    <text x="636" y="30" fill="var(--green)" font-size="10" font-weight="600">автономно:</text>
+    <text x="636" y="46" fill="var(--text-dim)" font-size="10">дайджест из чата раз в неделю</text>
+    <text x="636" y="60" fill="var(--text-dim)" font-size="10">напоминания о домашке</text>
+    <text x="636" y="74" fill="var(--text-dim)" font-size="10">пинг куратору, если студент молчит</text>
+
+    <!-- ═══ Bottom: Клиенты ═══ -->
+    <rect x="370" y="310" width="220" height="60" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="335" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Клиенты</text>
+    <text x="480" y="353" text-anchor="middle" fill="#888" font-size="11">лиды · встречи · follow-up</text>
+    <line x1="480" y1="235" x2="480" y2="310" stroke="var(--border)" stroke-width="1"/>
+
+    <text x="636" y="320" fill="var(--green)" font-size="10" font-weight="600">автономно:</text>
+    <text x="636" y="336" fill="var(--text-dim)" font-size="10">scoring лидов раз в день</text>
+    <text x="636" y="350" fill="var(--text-dim)" font-size="10">сканирование ЛС на пропущенные сигналы</text>
+    <text x="636" y="364" fill="var(--text-dim)" font-size="10">обогащение карточек из Telegram</text>
+
+    <!-- ═══ Left: Публикация ═══ -->
+    <rect x="30" y="165" width="210" height="60" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="135" y="190" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Публикация</text>
+    <text x="135" y="208" text-anchor="middle" fill="#888" font-size="11">записи · блог · анонсы</text>
+    <line x1="240" y1="195" x2="370" y2="195" stroke="var(--border)" stroke-width="1"/>
+
+    <text x="135" y="248" text-anchor="middle" fill="var(--green)" font-size="10" font-weight="600">автономно:</text>
+    <text x="135" y="264" text-anchor="middle" fill="var(--text-dim)" font-size="10">видео → транскрипт → страница</text>
+    <text x="135" y="278" text-anchor="middle" fill="var(--text-dim)" font-size="10">идеи постов из рабочих логов</text>
+    <text x="135" y="292" text-anchor="middle" fill="var(--text-dim)" font-size="10">анонсы в Telegram</text>
+
+    <!-- ═══ Right: Продажи ═══ -->
+    <rect x="720" y="165" width="210" height="60" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="825" y="190" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">Продажи</text>
+    <text x="825" y="208" text-anchor="middle" fill="#888" font-size="11">бот · воронки · рассылки</text>
+    <line x1="590" y1="195" x2="720" y2="195" stroke="var(--border)" stroke-width="1"/>
+
+    <text x="825" y="248" text-anchor="middle" fill="var(--green)" font-size="10" font-weight="600">автономно:</text>
+    <text x="825" y="264" text-anchor="middle" fill="var(--text-dim)" font-size="10">ответы на входящие в бот</text>
+    <text x="825" y="278" text-anchor="middle" fill="var(--text-dim)" font-size="10">аналитика воронки по источникам</text>
+    <text x="825" y="292" text-anchor="middle" fill="var(--text-dim)" font-size="10">рассылки по сегментам</text>
+
+  </svg>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s05">
+<span class="slide-number">05 / 10</span>
+
+<h2>Штаб: <span class="accent-purple">управленческие ритуалы</span></h2>
+
+<div class="diagram-container">
+  <svg viewBox="0 0 860 380" width="100%" style="max-width:860px;">
+    <!-- Main cycle -->
+    <!-- project-init -->
+    <rect x="30" y="120" width="180" height="70" rx="10" fill="var(--green-dim)" stroke="var(--green)" stroke-width="1.5"/>
+    <text x="120" y="148" text-anchor="middle" fill="var(--green)" font-size="12" font-weight="600" class="mono">project-init</text>
+    <text x="120" y="170" text-anchor="middle" fill="#888" font-size="11">Запуск проекта</text>
+
+    <!-- Arrow to planning -->
+    <line x1="210" y1="155" x2="270" y2="155" stroke="#444" stroke-width="1.5"/>
+    <polygon points="265,150 275,155 265,160" fill="#444"/>
+
+    <!-- weekly-planning -->
+    <rect x="275" y="120" width="180" height="70" rx="10" fill="var(--purple-dim)" stroke="var(--purple)" stroke-width="1.5"/>
+    <text x="365" y="148" text-anchor="middle" fill="var(--purple)" font-size="12" font-weight="600" class="mono">weekly-planning</text>
+    <text x="365" y="170" text-anchor="middle" fill="#888" font-size="11">Утро понедельника</text>
+
+    <!-- Arrow to work -->
+    <line x1="455" y1="155" x2="515" y2="155" stroke="#444" stroke-width="1.5"/>
+    <polygon points="510,150 520,155 510,160" fill="#444"/>
+
+    <!-- Work week -->
+    <rect x="520" y="120" width="120" height="70" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="580" y="152" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Рабочая</text>
+    <text x="580" y="170" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">неделя</text>
+
+    <!-- Arrow to retro -->
+    <line x1="640" y1="155" x2="700" y2="155" stroke="#444" stroke-width="1.5"/>
+    <polygon points="695,150 705,155 695,160" fill="#444"/>
+
+    <!-- weekly-retro -->
+    <rect x="705" y="120" width="140" height="70" rx="10" fill="var(--yellow-dim)" stroke="var(--yellow)" stroke-width="1.5"/>
+    <text x="775" y="148" text-anchor="middle" fill="var(--yellow)" font-size="12" font-weight="600" class="mono">weekly-retro</text>
+    <text x="775" y="170" text-anchor="middle" fill="#888" font-size="11">Вечер пятницы</text>
+
+    <!-- Return arrow (retro → planning) -->
+    <path d="M775,190 Q775,250 365,250 Q365,250 365,190" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <polygon points="360,195 365,185 370,195" fill="#444"/>
+    <text x="570" y="268" text-anchor="middle" fill="#666" font-size="11">цикл повторяется</text>
+
+    <!-- Board of Advisors — branch -->
+    <rect x="500" y="290" width="200" height="60" rx="10" fill="var(--bg-card)" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="600" y="316" text-anchor="middle" fill="var(--purple)" font-size="12" font-weight="600" class="mono">board-of-advisors</text>
+    <text x="600" y="336" text-anchor="middle" fill="#888" font-size="11">Совет директоров по запросу</text>
+    <line x1="580" y1="190" x2="580" y2="290" stroke="var(--purple)" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+    <!-- claude-md-writer — foundation -->
+    <rect x="100" y="290" width="200" height="60" rx="10" fill="var(--bg-card)" stroke="var(--green)" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="200" y="316" text-anchor="middle" fill="var(--green)" font-size="12" font-weight="600" class="mono">claude-md-writer</text>
+    <text x="200" y="336" text-anchor="middle" fill="#888" font-size="11">Правила для каждого отдела</text>
+
+    <!-- Labels -->
+    <text x="120" y="105" text-anchor="middle" fill="#666" font-size="10">один раз</text>
+    <text x="365" y="105" text-anchor="middle" fill="#666" font-size="10">каждый пн</text>
+    <text x="775" y="105" text-anchor="middle" fill="#666" font-size="10">каждую пт</text>
+  </svg>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04c">
+<style>
+.prim-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  cursor: default;
+}
+.prim-row .prim-left {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  transition: border-color 0.3s;
+}
+.prim-row .prim-right {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.8;
+  transition: border-color 0.3s, opacity 0.3s;
+  opacity: 0.4;
+}
+.prim-row:hover .prim-left {
+  border-color: deeppink;
+}
+.prim-row:hover .prim-right {
+  border-color: rgba(255,20,147,0.4);
+  opacity: 1;
+}
+.prim-row .prim-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+  transition: color 0.3s;
+}
+.prim-row:hover .prim-title {
+  color: deeppink;
+}
+</style>
+
+<h2>На чём это <span class="accent-green">построено</span></h2>
+<p style="color:var(--text-dim);font-size:0.95rem;margin-bottom:24px;">Четыре вещи, из которых собран каждый отдел</p>
+
+<div style="display:flex; flex-direction:column; gap:14px;">
+
+  <div class="prim-row">
+    <div class="prim-left">
+      <div class="prim-title">Задача</div>
+      <div style="color:var(--text-dim); font-size:0.85rem; line-height:1.5;">Цель + контекст + критерий «готово».<br>Можно передать агенту, человеку или продолжить позже.</div>
+    </div>
+    <div class="prim-right">
+      <span style="color:#666;">issue: lesson-04 — подготовить слайды</span><br>
+      <span style="color:#555;">цель: 10 слайдов по структуре week-03</span><br>
+      <span style="color:#555;">контекст: lesson.md, chat-digest.md</span><br>
+      <span style="color:deeppink;">done: slide-plan.md + excalidraw готовы</span>
+    </div>
+  </div>
+
+  <div class="prim-row">
+    <div class="prim-left">
+      <div class="prim-title">Правила</div>
+      <div style="color:var(--text-dim); font-size:0.85rem; line-height:1.5;">Инструкция для нового сотрудника: что можно,<br>что нельзя, как называть задачи, куда складывать.</div>
+    </div>
+    <div class="prim-right">
+      <span style="color:#666;">CLAUDE.md — главные правила отдела</span><br>
+      <span style="color:#555;">rules/chat-digest.md — как делать дайджест</span><br>
+      <span style="color:#555;">rules/ops.md — как читать метрики</span><br>
+      <span style="color:deeppink;">описываешь один раз — агент следует всегда</span>
+    </div>
+  </div>
+
+  <div class="prim-row">
+    <div class="prim-left">
+      <div class="prim-title">Скиллы</div>
+      <div style="color:var(--text-dim); font-size:0.85rem; line-height:1.5;">Повторяемый процесс — SOP для агента.<br>Написал один раз — запускается по команде или автоматически.</div>
+    </div>
+    <div class="prim-right">
+      <span style="color:#666;">blog-post: написать статью по шаблону</span><br>
+      <span style="color:#555;">telegram-broadcast: рассылка по сегментам</span><br>
+      <span style="color:#555;">board-of-advisors: 4 эксперта за 5 минут</span><br>
+      <span style="color:deeppink;">30+ скиллов по всем отделам</span>
+    </div>
+  </div>
+
+  <div class="prim-row">
+    <div class="prim-left">
+      <div class="prim-title">Единая очередь</div>
+      <div style="color:var(--text-dim); font-size:0.85rem; line-height:1.5;">Один борд — задачи из всех отделов.<br>Приоритет, статус, дедлайн — видно за 10 секунд.</div>
+    </div>
+    <div class="prim-right">
+      <span style="color:#666;">GitHub Project — единый экран</span><br>
+      <span style="color:#555;">470+ задач · P0 / P1 / P2</span><br>
+      <span style="color:#555;">фильтры: по отделу, по неделе, по статусу</span><br>
+      <span style="color:#666;">та же логика: Linear, Jira, Notion, Bitrix</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · @ris_ai · @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04d">
+<h2><span class="accent-green">Задача</span> — единица работы</h2>
+
+<div class="two-col" style="margin-top:24px;">
+  <div>
+    <p style="font-size:1.1rem; line-height:1.7; margin-bottom:24px;">
+      Задача — это не «сделай X». Это <strong>контейнер</strong>, в котором живёт всё нужное: цель, ссылки на контекст, и чёткий критерий «готово».
+    </p>
+
+    <p style="font-size:1rem; color:var(--text-dim); line-height:1.7; margin-bottom:12px;">
+      У меня уже описаны правила создания задач. Есть скилл, который этим занимается. Я просто говорю: «создай задачу — подготовить слайды к уроку 4» — и агент сам заполняет контекст, ставит ссылки, прописывает критерий done.
+    </p>
+
+    <p style="font-size:1rem; color:var(--text-dim); line-height:1.7; margin-bottom:24px;">
+      Задача живёт <strong>в GitHub</strong>, не в чате. Она не исчезает. Любой агент, любая модель, любое устройство — подключается и видит весь контекст.
+    </p>
+
+    <ul class="bullets">
+      <li>Запустить 10 агентов параллельно — выбрать лучший результат</li>
+      <li>Продолжить с телефона, с другого компьютера — контекст в GitHub, не в чате</li>
+      <li>Вышел новый агент — подключаешь за 2 секунды, отдаёшь задачу</li>
+      <li>Задача — это звено в цепочке. Она часть пайплайна, а не изолированный промпт</li>
+    </ul>
+  </div>
+
+  <div>
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:20px; font-family:var(--mono); font-size:12px; line-height:1.8;">
+      <div style="color:var(--green); margin-bottom:8px;">issue: lesson-04 — подготовить слайды</div>
+      <div style="color:#666;">цель: 10 слайдов по структуре week-03</div>
+      <div style="color:#666;">контекст:</div>
+      <div style="color:#555; padding-left:16px;">lesson.md — конспект урока</div>
+      <div style="color:#555; padding-left:16px;">chat-digest.md — что обсуждали студенты</div>
+      <div style="color:#555; padding-left:16px;">week-02/slides/ — референс прошлого урока</div>
+      <div style="color:var(--green); margin-top:8px;">done: slide-plan.md + excalidraw готовы</div>
+    </div>
+
+    <p style="color:#555; font-size:0.8rem; margin-top:12px; font-family:var(--mono);">
+      ↑ реальная задача из моего проекта
+    </p>
+  </div>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · @ris_ai · @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04e">
+<h2><span class="accent-green">Правила</span> — инструкция для отдела</h2>
+
+<div class="two-col" style="margin-top:24px;">
+  <div>
+    <p style="font-size:1.1rem; line-height:1.7; margin-bottom:24px;">
+      Правила — это то, что ты объясняешь новому сотруднику в первый день. Что можно, что нельзя, как называть задачи, куда складывать результат.
+    </p>
+
+    <p style="font-size:1rem; color:var(--text-dim); line-height:1.7; margin-bottom:24px;">
+      Описываешь <strong>один раз</strong> — и все агенты в этом отделе работают по этим правилам. Не нужно повторять каждый раз. Не нужно надеяться, что агент «помнит».
+    </p>
+
+    <ul class="bullets">
+      <li>Главный файл: CLAUDE.md — как README для агента</li>
+      <li>Дисциплинные правила: rules/*.md — загружаются по контексту</li>
+      <li>Скилл <span style="color:deeppink; font-family:var(--mono);">claude-md-writer</span> помогает писать и поддерживать</li>
+    </ul>
+  </div>
+
+  <div style="display:flex; flex-direction:column; gap:14px;">
+    <!-- Штаб -->
+    <div style="background:var(--bg-card); border:1px solid rgba(255,20,147,0.3); border-radius:10px; padding:16px 18px; font-family:var(--mono); font-size:11px; line-height:1.7;">
+      <div style="color:deeppink; margin-bottom:6px; font-weight:600;">CLAUDE.md — Штаб</div>
+      <div style="color:#666;">куда роутить задачи: education → teach-vibecoding</div>
+      <div style="color:#666;">sales → hsl-mozg, content → sereja.tech</div>
+      <div style="color:#555;">rules/routing.md — какой проект за что отвечает</div>
+      <div style="color:deeppink; margin-top:4px; font-size:10px;">штаб знает, куда направить любую задачу</div>
+    </div>
+
+    <!-- Контент -->
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; font-family:var(--mono); font-size:11px; line-height:1.7;">
+      <div style="color:deeppink; margin-bottom:6px; font-weight:600;">CLAUDE.md — Контент</div>
+      <div style="color:#666;">статьи в стиле sereja.tech: прямо, без воды</div>
+      <div style="color:#555;">rules/seo.md — мета-описания, заголовки, alt</div>
+      <div style="color:#555;">rules/tone.md — голос и тон бренда</div>
+    </div>
+
+    <!-- Образование -->
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; font-family:var(--mono); font-size:11px; line-height:1.7;">
+      <div style="color:deeppink; margin-bottom:6px; font-weight:600;">CLAUDE.md — Образование</div>
+      <div style="color:#666;">issues на каждую сессию, артефакты в week-NN/</div>
+      <div style="color:#555;">rules/chat-digest.md — как делать дайджест</div>
+      <div style="color:#555;">rules/ops.md — как читать метрики</div>
+    </div>
+
+    <p style="color:#555; font-size:0.75rem; font-family:var(--mono); margin:0;">
+      ↑ у каждого отдела свои правила — агент следует им автоматически
+    </p>
+  </div>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04f">
+<h2><span class="accent-purple">Скиллы</span> — SOP для агента</h2>
+<p style="color:var(--text-dim); font-size:0.9rem; margin-bottom:20px;">SOP — Standard Operating Procedure, стандартная операционная процедура</p>
+
+<div class="two-col" style="margin-top:12px;">
+  <div>
+    <p style="font-size:1.1rem; line-height:1.7; margin-bottom:20px;">
+      Скилл — это <strong>папка с промптами</strong>, которая описывает повторяемый процесс. Написал один раз — агент выполняет по команде или автоматически.
+    </p>
+
+    <p style="font-size:1rem; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">
+      Пример: в отделе контента есть скилл «написать пост». Агент пишет черновик — это самый плохой пост, который можно написать. Дальше я правлю, редактор правит, любой может улучшить. Но <strong>процесс уже запущен</strong>.
+    </p>
+
+    <p style="font-size:1rem; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">
+      Скилл можно передать коллеге, скопировать в другой проект, опубликовать. Уже появляются стартапы, которые упаковывают экспертизу в скиллы — через интервью, анализ процессов, шаблоны. Это новая индустрия.
+    </p>
+
+    <ul class="bullets">
+      <li>Каждый отдел имеет свои скиллы</li>
+      <li>Написал один раз — работает всегда</li>
+      <li>Можно передать, скопировать, опубликовать</li>
+    </ul>
+  </div>
+
+  <div>
+    <div style="font-size:0.85rem; color:var(--text-dim); margin-bottom:12px;">Примеры скиллов по отделам:</div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:10px;">
+      <div style="font-family:var(--mono); font-size:11px; color:#666; margin-bottom:4px;">Контент</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">blog-post</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">blog-to-telegram</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">deaify-text</div>
+    </div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:10px;">
+      <div style="font-family:var(--mono); font-size:11px; color:#666; margin-bottom:4px;">Продажи</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">telegram-broadcast</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">deeplink-creator</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">hsl-stream-analytics</div>
+    </div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:14px 16px;">
+      <div style="font-family:var(--mono); font-size:11px; color:#666; margin-bottom:4px;">Клиенты</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">crm-daily</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">meeting-intelligence</div>
+      <div class="tag tag-purple" style="font-size:11px; padding:3px 8px; margin:2px 0;">telegram-dm-inbox</div>
+    </div>
+
+    <p style="color:var(--purple); font-size:0.8rem; margin-top:10px; font-family:var(--mono); text-align:center;">
+      30+ скиллов по всем отделам
+    </p>
+  </div>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · @ris_ai · @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s06">
+<span class="slide-number">06 / 10</span>
+
+<h2>Новая модель: <span class="accent-green">контекст → агенты → результат</span></h2>
+
+<div class="diagram-container">
+  <svg viewBox="0 0 920 300" width="100%" style="max-width:920px;">
+    <!-- Outer frame -->
+    <rect x="160" y="20" width="600" height="260" rx="14" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="460" y="14" text-anchor="middle" fill="#666" font-size="12" font-weight="600" letter-spacing="3">СИСТЕМА</text>
+
+    <!-- Context box -->
+    <rect x="190" y="50" width="230" height="200" rx="10" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="305" y="42" text-anchor="middle" fill="#888" font-size="11" font-weight="600" letter-spacing="2">КОНТЕКСТ</text>
+    <text x="210" y="90" fill="#888" font-size="12">Планы</text>
+    <text x="210" y="114" fill="#888" font-size="12">Решения</text>
+    <text x="210" y="138" fill="#888" font-size="12">Спецификации</text>
+    <text x="210" y="162" fill="#888" font-size="12">Обратная связь</text>
+    <text x="210" y="186" fill="#888" font-size="12">Обсуждения</text>
+    <text x="210" y="210" fill="#888" font-size="12">Память</text>
+
+    <!-- Rules box -->
+    <rect x="440" y="50" width="160" height="200" rx="10" fill="none" stroke="var(--purple)" stroke-width="1"/>
+    <text x="520" y="42" text-anchor="middle" fill="var(--purple)" font-size="11" font-weight="600" letter-spacing="2">ПРАВИЛА</text>
+    <text x="460" y="95" fill="#888" font-size="12">Автоматизации</text>
+    <text x="460" y="125" fill="var(--purple)" font-size="13" font-weight="600">Скиллы</text>
+    <text x="460" y="155" fill="#888" font-size="12">Доступы</text>
+
+    <!-- Agents box -->
+    <rect x="620" y="80" width="110" height="140" rx="10" fill="var(--green-dim)" stroke="var(--green)" stroke-width="1.5"/>
+    <text x="675" y="72" text-anchor="middle" fill="var(--green)" font-size="11" font-weight="600" letter-spacing="2">АГЕНТЫ</text>
+    <!-- Agent blocks -->
+    <rect x="638" y="100" width="74" height="24" rx="4" fill="var(--green)" opacity="0.3"/>
+    <rect x="638" y="132" width="74" height="24" rx="4" fill="var(--green)" opacity="0.5"/>
+    <rect x="638" y="164" width="74" height="24" rx="4" fill="var(--green)" opacity="0.7"/>
+
+    <!-- Input arrows (left) -->
+    <text x="20" y="110" fill="#888" font-size="12" text-anchor="end" transform="translate(130,0)">Запросы клиентов</text>
+    <text x="20" y="150" fill="#888" font-size="12" text-anchor="end" transform="translate(130,0)">Идеи</text>
+    <text x="20" y="190" fill="#888" font-size="12" text-anchor="end" transform="translate(130,0)">Обратная связь</text>
+
+    <line x1="145" y1="110" x2="188" y2="110" stroke="#444" stroke-width="1"/>
+    <line x1="145" y1="150" x2="188" y2="150" stroke="#444" stroke-width="1"/>
+    <line x1="145" y1="190" x2="188" y2="190" stroke="#444" stroke-width="1"/>
+    <polygon points="183,106 193,110 183,114" fill="#444"/>
+    <polygon points="183,146 193,150 183,154" fill="#444"/>
+    <polygon points="183,186 193,190 183,194" fill="#444"/>
+
+    <!-- Arrow context → rules -->
+    <line x1="420" y1="150" x2="438" y2="150" stroke="#444" stroke-width="1"/>
+    <polygon points="434,146 444,150 434,154" fill="#444"/>
+
+    <!-- Arrow rules → agents -->
+    <line x1="600" y1="150" x2="618" y2="150" stroke="#444" stroke-width="1"/>
+    <polygon points="614,146 624,150 614,154" fill="#444"/>
+
+    <!-- Output arrow (right) -->
+    <line x1="730" y1="150" x2="790" y2="150" stroke="var(--green)" stroke-width="2"/>
+    <polygon points="785,144 800,150 785,156" fill="var(--green)"/>
+    <text x="845" y="155" text-anchor="middle" fill="var(--green)" font-size="15" font-weight="600">Результат</text>
+  </svg>
+</div>
+
+<div class="quote" style="margin: 0 auto;">
+  Старые системы — для передачи между людьми. Новая модель — вокруг контекста и агентов. Агенты не читают мысли. Они становятся полезными через контекст.
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s07">
+<span class="slide-number">07 / 10</span>
+
+<h2>А как это на <span class="accent-purple">команду</span>?</h2>
+
+<div class="diagram-container">
+  <svg viewBox="0 0 800 400" width="100%" style="max-width:800px;">
+    <!-- Top: Штаб (private) -->
+    <rect x="280" y="20" width="240" height="70" rx="12" fill="var(--green-dim)" stroke="var(--green)" stroke-width="2"/>
+    <text x="400" y="50" text-anchor="middle" fill="var(--green)" font-size="15" font-weight="600">Штаб</text>
+    <text x="400" y="72" text-anchor="middle" fill="#888" font-size="12">приватный · только вы</text>
+
+    <!-- Arrow down -->
+    <line x1="400" y1="90" x2="400" y2="130" stroke="#444" stroke-width="1.5"/>
+    <polygon points="395,125 405,125 400,135" fill="#444"/>
+    <text x="430" y="115" fill="#666" font-size="11">задачи ↓</text>
+
+    <!-- Middle: Departments (shared) -->
+    <rect x="40" y="140" width="160" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="120" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Образование</text>
+    <text x="120" y="188" text-anchor="middle" fill="var(--purple)" font-size="11">shared · ответственный</text>
+    <text x="120" y="205" text-anchor="middle" fill="#666" font-size="10">Маша</text>
+
+    <rect x="220" y="140" width="160" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="300" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Контент</text>
+    <text x="300" y="188" text-anchor="middle" fill="var(--purple)" font-size="11">shared · ответственный</text>
+    <text x="300" y="205" text-anchor="middle" fill="#666" font-size="10">Саша</text>
+
+    <rect x="400" y="140" width="160" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="480" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Продажи</text>
+    <text x="480" y="188" text-anchor="middle" fill="var(--purple)" font-size="11">shared · ответственный</text>
+    <text x="480" y="205" text-anchor="middle" fill="#666" font-size="10">Дима</text>
+
+    <rect x="580" y="140" width="160" height="80" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="660" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="600">Клиенты</text>
+    <text x="660" y="188" text-anchor="middle" fill="var(--purple)" font-size="11">shared · ответственный</text>
+    <text x="660" y="205" text-anchor="middle" fill="#666" font-size="10">Лена</text>
+
+    <!-- Lines from Штаб -->
+    <line x1="320" y1="90" x2="120" y2="140" stroke="#333" stroke-width="1"/>
+    <line x1="360" y1="90" x2="300" y2="140" stroke="#333" stroke-width="1"/>
+    <line x1="440" y1="90" x2="480" y2="140" stroke="#333" stroke-width="1"/>
+    <line x1="480" y1="90" x2="660" y2="140" stroke="#333" stroke-width="1"/>
+
+    <!-- Bottom: Человек + Агент pairs -->
+    <g transform="translate(60,260)">
+      <circle cx="30" cy="20" r="14" fill="none" stroke="var(--text-dim)" stroke-width="1.5"/>
+      <text x="30" y="25" text-anchor="middle" fill="var(--text-dim)" font-size="11">\u{1F464}</text>
+      <text x="60" y="25" fill="#666" font-size="14">+</text>
+      <rect x="75" y="6" width="60" height="28" rx="6" fill="var(--green-dim)" stroke="var(--green)" stroke-width="1"/>
+      <text x="105" y="25" text-anchor="middle" fill="var(--green)" font-size="11">агент</text>
+    </g>
+
+    <g transform="translate(240,260)">
+      <circle cx="30" cy="20" r="14" fill="none" stroke="var(--text-dim)" stroke-width="1.5"/>
+      <text x="30" y="25" text-anchor="middle" fill="var(--text-dim)" font-size="11">\u{1F464}</text>
+      <text x="60" y="25" fill="#666" font-size="14">+</text>
+      <rect x="75" y="6" width="60" height="28" rx="6" fill="var(--green-dim)" stroke="var(--green)" stroke-width="1"/>
+      <text x="105" y="25" text-anchor="middle" fill="var(--green)" font-size="11">агент</text>
+    </g>
+
+    <g transform="translate(420,260)">
+      <circle cx="30" cy="20" r="14" fill="none" stroke="var(--text-dim)" stroke-width="1.5"/>
+      <text x="30" y="25" text-anchor="middle" fill="var(--text-dim)" font-size="11">\u{1F464}</text>
+      <text x="60" y="25" fill="#666" font-size="14">+</text>
+      <rect x="75" y="6" width="60" height="28" rx="6" fill="var(--green-dim)" stroke="var(--green)" stroke-width="1"/>
+      <text x="105" y="25" text-anchor="middle" fill="var(--green)" font-size="11">агент</text>
+    </g>
+
+    <g transform="translate(600,260)">
+      <circle cx="30" cy="20" r="14" fill="none" stroke="var(--text-dim)" stroke-width="1.5"/>
+      <text x="30" y="25" text-anchor="middle" fill="var(--text-dim)" font-size="11">\u{1F464}</text>
+      <text x="60" y="25" fill="#666" font-size="14">+</text>
+      <rect x="75" y="6" width="60" height="28" rx="6" fill="var(--green-dim)" stroke="var(--green)" stroke-width="1"/>
+      <text x="105" y="25" text-anchor="middle" fill="var(--green)" font-size="11">агент</text>
+    </g>
+
+    <!-- Arrows department → pairs -->
+    <line x1="120" y1="220" x2="120" y2="260" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="220" x2="300" y2="260" stroke="#333" stroke-width="1"/>
+    <line x1="480" y1="220" x2="480" y2="260" stroke="#333" stroke-width="1"/>
+    <line x1="660" y1="220" x2="660" y2="260" stroke="#333" stroke-width="1"/>
+
+    <!-- Results flow up -->
+    <text x="400" y="340" text-anchor="middle" fill="#666" font-size="12">\u2191 результаты видны в едином борде наверху</text>
+
+    <!-- Key insight -->
+    <text x="400" y="380" text-anchor="middle" fill="var(--text-dim)" font-size="13">Каждый видит свой отдел. Вы видите всё.</text>
+  </svg>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s04g">
+<h2>Как это выглядит: <span class="accent-green">GitHub</span></h2>
+<p style="color:var(--text-dim);font-size:0.95rem;margin-bottom:28px;">Тебе нужны три вещи — и они связаны между собой</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+
+  <!-- ═══ Репозиторий ═══ -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px 20px;">
+    <div style="color:var(--green); font-size:15px; font-weight:600; margin-bottom:4px;">Репозиторий = Отдел</div>
+    <div style="color:#666; font-size:0.85rem; margin-bottom:16px;">Одно место для всего отдела</div>
+
+    <div style="border-top:1px solid var(--border); padding-top:12px; font-family:var(--mono); font-size:11px; line-height:2;">
+      <span style="color:var(--purple);">CLAUDE.md</span> <span style="color:#555;">правила</span><br>
+      <span style="color:var(--purple);">rules/</span> <span style="color:#555;">дисциплины</span><br>
+      <span style="color:var(--purple);">skills/</span> <span style="color:#555;">SOPs</span><br>
+      <span style="color:#666;">posts/</span> <span style="color:#555;">файлы, код</span><br>
+      <span style="color:#666;">git log</span> <span style="color:#555;">история</span>
+    </div>
+
+    <div style="border-top:1px solid var(--border); margin-top:12px; padding-top:10px; font-size:0.75rem; color:#555;">
+      Можно расшарить или оставить приватным
+    </div>
+    <div style="font-family:var(--mono); font-size:10px; color:#444; margin-top:6px;">
+      аналог: пространство в Notion, папка в Bitrix
+    </div>
+  </div>
+
+  <!-- ═══ Issue ═══ -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px 20px;">
+    <div style="color:var(--green); font-size:15px; font-weight:600; margin-bottom:4px;">Issue = Задача</div>
+    <div style="color:#666; font-size:0.85rem; margin-bottom:16px;">Единица работы с контекстом</div>
+
+    <div style="border-top:1px solid var(--border); padding-top:12px; font-family:var(--mono); font-size:11px; line-height:2;">
+      <span style="color:var(--green);">цель</span> <span style="color:#555;">что сделать</span><br>
+      <span style="color:var(--green);">контекст</span> <span style="color:#555;">ссылки, файлы</span><br>
+      <span style="color:var(--green);">done</span> <span style="color:#555;">критерий готово</span><br>
+      <span style="color:#666;">labels</span> <span style="color:#555;">приоритет, тип</span><br>
+      <span style="color:#666;">comments</span> <span style="color:#555;">результат</span>
+    </div>
+
+    <div style="border-top:1px solid var(--border); margin-top:12px; padding-top:10px; font-size:0.75rem; color:#555;">
+      Передать агенту, человеку, продолжить позже
+    </div>
+    <div style="font-family:var(--mono); font-size:10px; color:#444; margin-top:6px;">
+      аналог: задача в Jira, карточка в Trello
+    </div>
+  </div>
+
+  <!-- ═══ Project ═══ -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px 20px;">
+    <div style="color:var(--green); font-size:15px; font-weight:600; margin-bottom:4px;">Project = Очередь</div>
+    <div style="color:#666; font-size:0.85rem; margin-bottom:16px;">Единый борд из всех отделов</div>
+
+    <div style="border-top:1px solid var(--border); padding-top:12px; font-family:var(--mono); font-size:11px; line-height:2;">
+      <span style="color:var(--green);">статус</span> <span style="color:#555;">Todo → Done</span><br>
+      <span style="color:var(--green);">приоритет</span> <span style="color:#555;">P0 · P1 · P2</span><br>
+      <span style="color:var(--green);">фильтры</span> <span style="color:#555;">отдел, неделя</span><br>
+      <span style="color:#666;">views</span> <span style="color:#555;">разные виды</span><br>
+      <span style="color:#666;">cross-repo</span> <span style="color:#555;">все отделы</span>
+    </div>
+
+    <div style="border-top:1px solid var(--border); margin-top:12px; padding-top:10px; font-size:0.75rem; color:#555;">
+      Один экран: 470+ задач, 10-12 в фокусе
+    </div>
+    <div style="font-family:var(--mono); font-size:10px; color:#444; margin-top:6px;">
+      аналог: борд в Linear, доска в Bitrix
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:20px;">
+  Репозиторий содержит задачи. Задачи попадают в Project. Project показывает всё на одном экране.
+</p>
+
+<div class="slide-footer">
+  <span>sereja.tech · @ris_ai · @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s07a">
+<style>
+@keyframes taskDrop1 { 0% { opacity:0; transform:translateY(-20px); } 30% { opacity:1; transform:translateY(0); } 100% { opacity:1; } }
+@keyframes taskDrop2 { 0%,20% { opacity:0; transform:translateY(-20px); } 50% { opacity:1; transform:translateY(0); } 100% { opacity:1; } }
+@keyframes taskDrop3 { 0%,40% { opacity:0; transform:translateY(-20px); } 70% { opacity:1; transform:translateY(0); } 100% { opacity:1; } }
+.task-1 { animation: taskDrop1 2s ease-out both; }
+.task-2 { animation: taskDrop2 2s ease-out both; }
+.task-3 { animation: taskDrop3 2s ease-out both; }
+</style>
+
+<h2>Внутри каждого <span class="accent-purple">отдела</span></h2>
+<p style="color:var(--text-dim);font-size:0.95rem;margin-bottom:16px;">Каждый отдел — это репозиторий. Внутри: правила, история, и задачи, которые падают из штаба.</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-top:8px;">
+
+  <!-- ═══ Контент ═══ -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px 20px; position:relative; overflow:hidden;">
+    <div style="font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:8px;">repo: sereja.tech</div>
+    <div style="font-size:1.1rem; font-weight:600; margin-bottom:12px;">Контент</div>
+
+    <div style="font-size:0.8rem; color:#555; margin-bottom:14px; line-height:1.5;">
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">rules/</span> стиль статей, SEO-чеклист<br>
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">posts/</span> 24 статьи<br>
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">git log</span> история решений
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:10px; font-size:0.75rem; color:var(--text-dim); margin-bottom:6px; font-family:var(--mono);">задачи ↓</div>
+
+    <div class="task-1" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">content:</span> статья про Board of Advisors
+    </div>
+    <div class="task-2" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">seo:</span> обновить meta-описания
+    </div>
+    <div class="task-3" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">content:</span> анонс в Telegram
+    </div>
+  </div>
+
+  <!-- ═══ Продажи ═══ -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px 20px; position:relative; overflow:hidden;">
+    <div style="font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:8px;">repo: hsl-mozg</div>
+    <div style="font-size:1.1rem; font-weight:600; margin-bottom:12px;">Продажи</div>
+
+    <div style="font-size:0.8rem; color:#555; margin-bottom:14px; line-height:1.5;">
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">rules/</span> скрипты ответов, тон<br>
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">analytics/</span> воронки, конверсии<br>
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">segments/</span> базы для рассылок
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:10px; font-size:0.75rem; color:var(--text-dim); margin-bottom:6px; font-family:var(--mono);">задачи ↓</div>
+
+    <div class="task-1" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">ops:</span> рассылка «запись урока 3»
+    </div>
+    <div class="task-2" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">analytics:</span> воронка за март
+    </div>
+    <div class="task-3" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">ops:</span> deeplink для спринта
+    </div>
+  </div>
+
+  <!-- ═══ Клиенты ═══ -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:24px 20px; position:relative; overflow:hidden;">
+    <div style="font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:8px;">repo: crm</div>
+    <div style="font-size:1.1rem; font-weight:600; margin-bottom:12px;">Клиенты</div>
+
+    <div style="font-size:0.8rem; color:#555; margin-bottom:14px; line-height:1.5;">
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">accounts/</span> карточки клиентов<br>
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">reviews/</span> еженедельные обзоры<br>
+      <span style="color:var(--purple); font-family:var(--mono); font-size:10px;">pipeline/</span> стадии сделок
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:10px; font-size:0.75rem; color:var(--text-dim); margin-bottom:6px; font-family:var(--mono);">задачи ↓</div>
+
+    <div class="task-1" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">crm:</span> обзор карточек за утро
+    </div>
+    <div class="task-2" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">meeting:</span> разбор звонка Sportmaster
+    </div>
+    <div class="task-3" style="background:rgba(255,20,147,0.08); border:1px solid rgba(255,20,147,0.2); border-radius:6px; padding:8px 10px; font-size:0.8rem;">
+      <span style="color:var(--green); font-family:var(--mono); font-size:10px;">ops:</span> follow-up после встречи
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:20px;">
+  Задачи падают из штаба. Человек в отделе подхватывает, работает с агентом. Результат — наверху, в едином борде.
+</p>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="sd1">
+<div style="position:absolute; top:40px; right:60px; font-size:8rem; font-weight:900; font-family:var(--mono); color:var(--green); opacity:0.12; line-height:1;">01</div>
+
+  <span class="tag tag-green" style="margin-bottom:16px; display:inline-block;">День 1 из 5</span>
+
+  <h1 style="font-size:2.4rem; margin-bottom:32px;">Установить инструмент.<br><span class="accent-green">Выбрать один процесс.</span></h1>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:40px;">
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:28px;">
+      <div style="font-size:0.85rem; color:var(--green); font-family:var(--mono); margin-bottom:12px;">// установить</div>
+      <h3 style="margin-bottom:12px;">Claude Code</h3>
+      <a class="link-box" href="https://claude.ai/download" target="_blank" style="margin-bottom:16px; display:block;">claude.ai/download</a>
+      <p style="color:var(--text-dim); font-size:0.9rem;">Mac, Windows, Linux, в браузере</p>
+    </div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:28px;">
+      <div style="font-size:0.85rem; color:var(--purple); font-family:var(--mono); margin-bottom:12px;">// выбрать</div>
+      <h3 style="margin-bottom:12px;">Один процесс</h3>
+      <p style="color:var(--text-dim); font-size:0.95rem; margin-bottom:12px;">Который повторяется каждую неделю:</p>
+      <ul class="bullets" style="color:var(--text); font-size:0.9rem;">
+        <li>Еженедельный статус-отчёт</li>
+        <li>Подготовка к встрече</li>
+        <li>Обработка входящих заявок</li>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div class="slide-footer">
+    <span>sereja.tech &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="sd2">
+<div style="position:absolute; top:40px; right:60px; font-size:8rem; font-weight:900; font-family:var(--mono); color:var(--purple); opacity:0.12; line-height:1;">02</div>
+
+  <span class="tag tag-purple" style="margin-bottom:16px; display:inline-block;">День 2 из 5</span>
+
+  <h1 style="font-size:2.4rem; margin-bottom:32px;">Запустить <span class="accent-purple">project-init</span> &mdash;<br>первый отдел за 5 минут</h1>
+
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:32px; max-width:700px; margin:0 auto 32px;">
+
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:start;">
+
+      <div>
+        <div style="font-size:0.85rem; color:var(--purple); font-family:var(--mono); margin-bottom:12px;">// агент спрашивает</div>
+        <ul class="bullets" style="font-size:0.9rem;">
+          <li>Чем занимаешься?</li>
+          <li>Какие проекты?</li>
+          <li>Где числа?</li>
+          <li>Какой ритм работы?</li>
+          <li>Что повторяется каждую неделю?</li>
+        </ul>
+      </div>
+
+      <div style="display:flex; align-items:center; font-size:2rem; color:var(--purple); padding-top:24px;">&rarr;</div>
+
+      <div>
+        <div style="font-size:0.85rem; color:var(--green); font-family:var(--mono); margin-bottom:12px;">// агент создаёт</div>
+        <ul class="bullets" style="font-size:0.9rem;">
+          <li>Борд с задачами</li>
+          <li>Правила для агента <span class="mono" style="font-size:0.8rem;">(CLAUDE.md)</span></li>
+          <li>Шаблоны задач</li>
+          <li>Config</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-bottom:8px;">
+    <span class="tag tag-purple" style="font-family:var(--mono); font-size:0.85rem; padding:6px 14px;">project-init</span>
+  </div>
+
+  <div style="text-align:center;">
+    <span class="tag tag-green" style="font-size:1rem; padding:8px 20px;">Первый отдел: борд + правила + структура</span>
+  </div>
+
+  <div class="slide-footer">
+    <span>sereja.tech &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="sd3">
+<div style="position:absolute; top:40px; right:60px; font-size:8rem; font-weight:900; font-family:var(--mono); color:var(--yellow); opacity:0.12; line-height:1;">03</div>
+
+  <span class="tag tag-yellow" style="margin-bottom:16px; display:inline-block;">День 3 из 5</span>
+
+  <h1 style="font-size:2.4rem; margin-bottom:32px;">Создать задачи.<br><span class="accent-yellow">Попросить агента сделать одну.</span></h1>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:40px;">
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:28px;">
+      <div style="font-size:0.85rem; color:var(--yellow); font-family:var(--mono); margin-bottom:12px;">// создать 3-5 задач</div>
+      <h3 style="margin-bottom:16px;">Каждая задача содержит:</h3>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:var(--bg); border-radius:8px; padding:12px 16px;">
+          <span class="accent-yellow" style="font-weight:600;">Цель</span>
+          <span style="color:var(--text-dim);"> &mdash; что сделать</span>
+        </div>
+        <div style="background:var(--bg); border-radius:8px; padding:12px 16px;">
+          <span class="accent-yellow" style="font-weight:600;">Контекст</span>
+          <span style="color:var(--text-dim);"> &mdash; ссылки, файлы</span>
+        </div>
+        <div style="background:var(--bg); border-radius:8px; padding:12px 16px;">
+          <span class="accent-yellow" style="font-weight:600;">Критерий &laquo;готово&raquo;</span>
+          <span style="color:var(--text-dim);"> &mdash; как понять, что ок</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:28px;">
+      <div style="font-size:0.85rem; color:var(--green); font-family:var(--mono); margin-bottom:12px;">// попросить агента</div>
+      <h3 style="margin-bottom:16px;">Агент берёт задачу:</h3>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:0.95rem;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-size:1.2rem;">1</span>
+          <span>Выбрать одну задачу</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-size:1.2rem;">2</span>
+          <span>Агент читает контекст</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-size:1.2rem;">3</span>
+          <span>Агент делает работу</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--green); font-size:1.2rem;">4</span>
+          <span>Результат сохраняется в системе</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;">
+    <span class="tag tag-yellow" style="font-size:1rem; padding:8px 20px;">Первые единицы работы + первый результат от агента</span>
+  </div>
+
+  <div class="slide-footer">
+    <span>sereja.tech &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="sd4">
+<div style="position:absolute; top:40px; right:60px; font-size:8rem; font-weight:900; font-family:var(--mono); color:var(--purple); opacity:0.12; line-height:1;">04</div>
+
+  <span class="tag tag-purple" style="margin-bottom:16px; display:inline-block;">День 4 из 5</span>
+
+  <h1 style="font-size:2.4rem; margin-bottom:12px;">Оформить один процесс<br>как <span class="accent-purple">скилл</span></h1>
+
+  <p style="color:var(--text-dim); font-size:1.05rem; margin-bottom:12px;">Скилл = SOP для агента. Повторяемый процесс, записанный как инструкция.</p>
+  <p style="color:#666; font-size:0.9rem; margin-bottom:28px;">Важно: сначала всегда тестируйте процесс вручную. Убедитесь, что шаги работают. Потом оформляйте как скилл.</p>
+
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:32px; max-width:640px; margin:0 auto 28px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <span class="tag tag-purple" style="font-family:var(--mono); font-size:0.85rem;">weekly-digest</span>
+      <span style="color:var(--text-dim); font-size:0.9rem;">Пример: еженедельный дайджест</span>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:0; flex-wrap:wrap;">
+      <div style="background:var(--bg); border-radius:8px; padding:10px 16px; font-size:0.9rem;">
+        Собрать сообщения из чата
+      </div>
+      <span style="color:var(--purple); padding:0 8px; font-size:1.2rem;">&rarr;</span>
+      <div style="background:var(--bg); border-radius:8px; padding:10px 16px; font-size:0.9rem;">
+        Выделить темы
+      </div>
+      <span style="color:var(--purple); padding:0 8px; font-size:1.2rem;">&rarr;</span>
+      <div style="background:var(--bg); border-radius:8px; padding:10px 16px; font-size:0.9rem;">
+        Написать сводку
+      </div>
+      <span style="color:var(--purple); padding:0 8px; font-size:1.2rem;">&rarr;</span>
+      <div style="background:var(--bg); border-radius:8px; padding:10px 16px; font-size:0.9rem;">
+        Отправить
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--purple-dim); border:1px solid var(--purple); border-radius:10px; padding:16px 24px; max-width:640px; margin:0 auto 24px; text-align:center;">
+    <span style="color:var(--purple); font-size:0.95rem;">В следующий раз агент делает это сам &mdash; по одной команде</span>
+  </div>
+
+  <div style="text-align:center;">
+    <span class="tag tag-green" style="font-size:1rem; padding:8px 20px;">Один процесс работает без ручного объяснения</span>
+  </div>
+
+  <div class="slide-footer">
+    <span>sereja.tech &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="sd5">
+<div style="position:absolute; top:40px; right:60px; font-size:8rem; font-weight:900; font-family:var(--mono); color:var(--green); opacity:0.12; line-height:1;">05</div>
+
+  <span class="tag tag-green" style="margin-bottom:16px; display:inline-block;">День 5 из 5</span>
+
+  <h1 style="font-size:2.4rem; margin-bottom:12px;">Мини-ретро:<br><span class="accent-green">замкнуть цикл</span></h1>
+
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:32px; max-width:640px; margin:0 auto 24px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <span class="tag tag-yellow" style="font-family:var(--mono); font-size:0.85rem;">weekly-retro</span>
+      <span style="color:var(--text-dim); font-size:0.9rem;">Что проверить:</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="display:flex; align-items:start; gap:12px; background:var(--bg); border-radius:8px; padding:12px 16px;">
+        <span style="color:var(--green); font-size:1.1rem; flex-shrink:0;">&#9745;</span>
+        <span>Какие задачи закрыты, какие нет</span>
+      </div>
+      <div style="display:flex; align-items:start; gap:12px; background:var(--bg); border-radius:8px; padding:12px 16px;">
+        <span style="color:var(--green); font-size:1.1rem; flex-shrink:0;">&#9745;</span>
+        <span>Что агент сделал хорошо</span>
+      </div>
+      <div style="display:flex; align-items:start; gap:12px; background:var(--bg); border-radius:8px; padding:12px 16px;">
+        <span style="color:var(--yellow); font-size:1.1rem; flex-shrink:0;">&#9745;</span>
+        <span>Где пришлось вмешаться</span>
+      </div>
+      <div style="display:flex; align-items:start; gap:12px; background:var(--bg); border-radius:8px; padding:12px 16px;">
+        <span style="color:var(--purple); font-size:1.1rem; flex-shrink:0;">&#9745;</span>
+        <span>Что добавить на следующую неделю</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--green-dim); border:1px solid var(--green); border-radius:10px; padding:20px 28px; max-width:640px; margin:0 auto; text-align:center;">
+    <div style="font-size:1.6rem; margin-bottom:8px;">&#10003;</div>
+    <p style="color:var(--green); font-size:1.05rem; font-weight:600; margin-bottom:6px;">Цикл замкнулся.</p>
+    <p style="color:var(--text-dim); font-size:0.9rem;">Теперь можно добавить второй отдел, подключить коллегу, запустить weekly-planning.</p>
+  </div>
+
+  <div class="slide-footer">
+    <span>sereja.tech &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai &middot; <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+    <span>Персональная корпорация</span>
+  </div>
+</section>
+
+<section class="slide" id="s09">
+<span class="slide-number">09 / 10</span>
+
+<h2>Забрать и попробовать</h2>
+
+<div class="skills-grid">
+  <div class="skill-card">
+    <div class="name">project-init</div>
+    <div class="desc">Запуск нового отдела: борд, правила, шаблоны за 5 минут</div>
+  </div>
+  <div class="skill-card">
+    <div class="name">weekly-planning</div>
+    <div class="desc">Утро понедельника: задачи из всех отделов → outcomes на неделю</div>
+  </div>
+  <div class="skill-card">
+    <div class="name">weekly-retro</div>
+    <div class="desc">Вечер пятницы: факты → интервью → бэклог на следующую неделю</div>
+  </div>
+  <div class="skill-card">
+    <div class="name">board-of-advisors</div>
+    <div class="desc">Совет директоров: 4-6 экспертов анализируют решение параллельно</div>
+  </div>
+  <div class="skill-card">
+    <div class="name">claude-md-writer</div>
+    <div class="desc">Правила для отдела: пишет и поддерживает CLAUDE.md + rules</div>
+  </div>
+</div>
+
+<div style="margin-top:40px; text-align:center;">
+  <div class="link-box" style="font-size:18px;">github.com/serejaris/ris-claude-code</div>
+  <p style="color:var(--text-dim); margin-top:8px; font-family:var(--mono); font-size:13px;">124 ★ · 14 скиллов · открытый код</p>
+</div>
+
+<div style="margin-top:30px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+  <span class="tag tag-green">Кружок · Поток #11 · 2 апреля</span>
+  <span class="tag tag-purple">Менторинг 1-на-1</span>
+  <span class="tag tag-yellow">sereja.tech/blog</span>
+</div>
+
+<div class="slide-footer">
+  <span>sereja.tech · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @ris_ai · <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg> @vibecod3rs</span>
+  <span>Персональная корпорация</span>
+</div>
+</section>
+
+<section class="slide" id="s11" style="justify-content:center;align-items:center;text-align:center;">
+<div style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; flex:1; gap:24px;">
+
+  <h1 style="font-size:clamp(2rem,4vw,3.2rem); line-height:1.2;">
+    Сережа Рис
+  </h1>
+
+  <p style="color:var(--text-dim); font-size:1.15rem; max-width:500px;">
+    Помогаю фаундерам и операторам использовать AI на уровне <span class="accent-green">unfair advantage</span>
+  </p>
+
+  <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:16px;">
+    <a href="https://t.me/serejaris" target="_blank" style="text-decoration:none;">
+      <div class="link-box" style="font-size:15px; padding:10px 20px;">
+        <svg class="tg-icon" style="width:16px;height:16px;vertical-align:-3px;margin-right:4px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg>
+        @serejaris
+      </div>
+    </a>
+    <a href="https://t.me/ris_ai" target="_blank" style="text-decoration:none;">
+      <div class="link-box" style="font-size:15px; padding:10px 20px;">
+        <svg class="tg-icon" style="width:16px;height:16px;vertical-align:-3px;margin-right:4px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg>
+        @ris_ai
+      </div>
+    </a>
+    <a href="https://t.me/vibecod3rs" target="_blank" style="text-decoration:none;">
+      <div class="link-box" style="font-size:15px; padding:10px 20px;">
+        <svg class="tg-icon" style="width:16px;height:16px;vertical-align:-3px;margin-right:4px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.18.18 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.63 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.8-1.6 4.59-1.88 5.1-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .37z"/></svg>
+        @vibecod3rs
+      </div>
+    </a>
+  </div>
+
+  <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+    <a href="https://sereja.tech" target="_blank" style="text-decoration:none; color:var(--text-dim); font-family:var(--mono); font-size:14px; padding:8px 16px; border:1px solid var(--border); border-radius:6px; transition:border-color 0.3s;">sereja.tech</a>
+    <a href="https://vibecoding.phd" target="_blank" style="text-decoration:none; color:var(--text-dim); font-family:var(--mono); font-size:14px; padding:8px 16px; border:1px solid var(--border); border-radius:6px; transition:border-color 0.3s;">vibecoding.phd</a>
+    <a href="https://youtube.com/@serajaris" target="_blank" style="text-decoration:none; color:var(--text-dim); font-family:var(--mono); font-size:14px; padding:8px 16px; border:1px solid var(--border); border-radius:6px; transition:border-color 0.3s;">YouTube</a>
+    <a href="https://github.com/serejaris" target="_blank" style="text-decoration:none; color:var(--text-dim); font-family:var(--mono); font-size:14px; padding:8px 16px; border:1px solid var(--border); border-radius:6px; transition:border-color 0.3s;">GitHub</a>
+  </div>
+
+  <div style="margin-top:24px;">
+    <div class="link-box" style="font-size:18px; padding:14px 28px;">sereja.tech/aicorp</div>
+  </div>
+
+</div>
+</section>
+
+</main>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('navDots');
+slides.forEach((slide, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'nav-dot';
+  dot.setAttribute('aria-label', 'Slide ' + i);
+  dot.onclick = () => slide.scrollIntoView({ behavior: 'smooth' });
+  nav.appendChild(dot);
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(slides).indexOf(entry.target);
+      document.querySelectorAll('.nav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+      });
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => observer.observe(s));
+document.addEventListener('keydown', e => {
+  const dots = document.querySelectorAll('.nav-dot');
+  const current = Array.from(dots).findIndex(d => d.classList.contains('active'));
+  if (['ArrowDown','ArrowRight',' '].includes(e.key)) {
+    e.preventDefault();
+    if (current < slides.length - 1) slides[current + 1].scrollIntoView({ behavior: 'smooth' });
+  }
+  if (['ArrowUp','ArrowLeft'].includes(e.key)) {
+    e.preventDefault();
+    if (current > 0) slides[current - 1].scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+
+</body>
+</html>
