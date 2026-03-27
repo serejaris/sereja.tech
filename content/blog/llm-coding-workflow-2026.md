@@ -85,6 +85,11 @@ AI усиливает экспертизу. Архитектура, trade-offs, 
 
 ---
 
+## Смотри также
+
+- [Сначала набросок, потом результат: как работать с LLM](/blog/draft-before-artifact/) — почему планирование до кода — это не водопад, а скорость
+- [Structured Output: почему текстовые промпты — это хрупко](/blog/structured-output-llm/) — как перейти от текстовых инструкций к схемам и убрать сбои
+
 ## Источники
 
 - [My LLM coding workflow going into 2026 — Addy Osmani](https://addyo.substack.com/p/my-llm-coding-workflow-going-into)

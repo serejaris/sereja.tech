@@ -112,6 +112,11 @@ Structured output — когда нужна надёжность. Когда 10%
 
 Мой дайджест публикуется каждый день. 10% сбоев — это 3 косяка в месяц. Перешёл на structured output.
 
+## Смотри также
+
+- [Сначала набросок, потом результат: как работать с LLM](/blog/draft-before-artifact/) — тот же принцип: сначала структура, потом контент
+- [Two-Stage AI Pipeline: платим вдвое меньше](/blog/two-stage-ai-pipeline/) — structured output в связке с двухэтапным пайплайном на реальном примере
+
 ## Источники
 
 - [Gemini API: Structured Output](https://ai.google.dev/gemini-api/docs/structured-output)

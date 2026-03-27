@@ -105,6 +105,11 @@ image: /images/blog/personalized-teaching-student-data-preview.png
 
 Максим теперь слушает. И делает калькулятор маржи для своих товаров.
 
+## Смотри также
+
+- [Как трекать прогресс студентов на онлайн-курсе с помощью AI](/blog/ai-student-progress-tracking/) — следующий шаг после профилей: отслеживать как студент движется к цели
+- [UX видео-уроков: что реально работает](/blog/video-lesson-ux/) — как структурировать сам урок, чтобы студент не терялся
+
 ## Источники
 
 - [NGLC: Learner Profiles for Personalization](https://www.nextgenlearning.org/articles/getting-to-know-you-learner-profiles-for-personalization)

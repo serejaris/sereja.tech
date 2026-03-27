@@ -80,6 +80,11 @@ uvx claude-code-log@latest --open-browser
 
 ---
 
+## Смотри также
+
+- [Мой стек для анализа логов Claude Code](/blog/claude-code-logs-stack/) — какие инструменты использую для конвертации JSONL в контент
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — как разные агенты вписываются в рабочий процесс
+
 ## Источники
 
 - [claude-code-log](https://github.com/daaain/claude-code-log) — конвертер JSONL в HTML

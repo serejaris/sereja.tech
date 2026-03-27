@@ -131,6 +131,11 @@ Anthropic выпустили курс на DeepLearning.AI — там подро
 
 Но начать проще: после следующего проекта спросить — что было сложным? Записать так, чтобы в следующий раз агент знал это сразу.
 
+## Смотри также
+
+- [Как делиться скиллами Claude Code](/blog/claude-code-skills-distribution/) — три способа распространять скиллы: плагины, реестр, маркетплейс
+- [Superpowers: скиллы для Claude Code](/blog/superpowers-brainstorming-workflow/) — готовый набор скиллов, с которых можно начать
+
 ## Источники
 
 - [Agent Skills — Claude API Docs](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)

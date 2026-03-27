@@ -139,6 +139,11 @@ Fix once, remember forever.
 
 Он не читает. Он читает твои правила.
 
+## Смотри также
+
+- [Модульные правила: как не утонуть в CLAUDE.md](/blog/modular-rules-claude-md/) — как структурировать rules/ по доменам, чтобы правила не устаревали
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — как правила и контекст работают по-разному в разных агентах
+
 ## Источники
 
 - [The Complete Guide to CLAUDE.md — Builder.io](https://www.builder.io/blog/claude-md-guide)

@@ -142,6 +142,11 @@ Claude Code даёт статистику прямо в терминале:
 
 821 пользователь — первый тест. Следующий запуск покажет как это масштабируется.
 
+## Смотри также
+
+- [Хуки Claude Code: агент сам ведёт задачи](/blog/claude-code-hooks-github-issues/) — как автоматизировать рутину через хуки, не только в операционке
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — разница между агентом, который держит контекст, и агентом-исполнителем
+
 ## Источники
 
 - [Agentic AI Trends 2026](https://www.cloudkeeper.com/insights/blog/top-agentic-ai-trends-watch-2026-how-ai-agents-are-redefining-enterprise-automation) — CloudKeeper о том как AI-агенты переопределяют автоматизацию

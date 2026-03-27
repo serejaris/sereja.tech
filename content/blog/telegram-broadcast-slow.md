@@ -94,6 +94,11 @@ python-telegram-bot имеет встроенный AIORateLimiter. aiogram то
 
 Урок: перед запуском больших операций — просить агента сначала проанализировать, потом делать.
 
+## Смотри также
+
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — как устроена очередь постов с планировщиком
+- [Telegram-рассылка: почему альбом шёл 30 минут](/blog/telegram-broadcast-file-id/) — следующая проблема с рассылками: медиа и file_id
+
 ## Источники
 
 - [Avoiding flood limits](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Avoiding-flood-limits) — wiki python-telegram-bot

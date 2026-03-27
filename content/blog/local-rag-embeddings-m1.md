@@ -107,6 +107,11 @@ for doc, meta in zip(results["documents"][0], results["metadatas"][0]):
 
 Эмбединги — для поиска. LLM — для ответов. RAG связывает их: сначала находим релевантные куски, потом скармливаем модели.
 
+## Смотри также
+
+- [NotebookLM + Claude Code: бесплатный RAG за 5 минут](/blog/notebooklm-claude-code-rag/) — более простой вариант RAG без кода, когда данных немного
+- [Семантический поиск по Telegram](/blog/telegram-vector-search/) — применение эмбедингов для поиска по реальным переписками
+
 ## Источники
 
 - [OpenAI Embeddings Pricing](https://platform.openai.com/docs/pricing) — актуальные цены

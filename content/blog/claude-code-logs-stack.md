@@ -81,6 +81,11 @@ uvx claude-code-log@latest --from-date "last week" --open-browser
 
 ---
 
+## Смотри также
+
+- [Логи Claude Code — твоя карта проектов](/blog/claude-code-logs-project-status/) — как использовать логи для аудита репозиториев и непушнутых коммитов
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — как разные агенты вписываются в пайплайн
+
 ## Источники
 
 - [claude-code-transcripts — Simon Willison](https://simonwillison.net/2025/Dec/25/claude-code-transcripts/)

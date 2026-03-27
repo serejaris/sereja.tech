@@ -136,6 +136,11 @@ SEO в 2026 — это три слоя: базовые мета-теги, соц
 
 Для персонального блога: Person schema на главной, BlogPosting на статьях, publisher = Person (не Organization).
 
+## Смотри также
+
+- [llms.txt: делаю блог читаемым для агентов](/blog/llms-txt-agent-readable-web/) — следующий шаг после JSON-LD: structured data для AI-агентов и краулеров
+- [SEO-аудит блога за одну сессию Claude Code](/blog/seo-audit-hugo-vercel-checklist/) — практический чеклист для проверки всех трёх уровней SEO
+
 ## Источники
 
 - [Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article) — Google Search Central

@@ -121,6 +121,11 @@ await bot.send_message(...)
 
 Костыль? Да. Работает? Тоже да.
 
+## Смотри также
+
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — как поставить отправку по расписанию, когда сообщение готово
+- [Мой редотдел из трёх промптов](/blog/telegram-autopublisher/) — полный пайплайн публикации в канал
+
 ## Источники
 
 - [LinkPreviewOptions — Telegram Bot API](https://core.telegram.org/bots/api#linkpreviewoptions)

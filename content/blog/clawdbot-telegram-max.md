@@ -105,6 +105,11 @@ Max через сторонние клиенты не поддерживаетс
 
 ---
 
+## Смотри также
+
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — ещё один способ автоматизировать работу с Telegram через агентов
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — почему Claude Code подходит для таких задач лучше альтернатив
+
 ## Источники
 
 - [Clawdbot Getting Started](https://docs.clawd.bot/getting-started) — установка и настройка

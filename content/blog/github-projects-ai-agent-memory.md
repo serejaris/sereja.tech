@@ -130,6 +130,11 @@ GitHub становится стандартным интерфейсом для
 
 ---
 
+## Смотри также
+
+- [Контекст проекта в GitHub Issues: делегируй агенту](/blog/github-issues-project-context/) — как структурировать контекст внутри отдельного репозитория
+- [Из вайбкодера в CEO: Personal Corp на GitHub](/blog/vibecoder-to-ceo-personal-corp-github/) — как GitHub становится операционной системой для личной корпорации
+
 ## Источники
 
 - [GitHub CLI](https://cli.github.com/manual/) — официальная документация

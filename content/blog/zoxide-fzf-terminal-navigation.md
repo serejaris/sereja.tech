@@ -125,6 +125,11 @@ echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
 
 У меня в базе 120 путей за месяц. Чаще всего: `z hsl`, `z whisper`, `z claude`. Секунды на каждом переходе — за день набегает.
 
+## Смотри также
+
+- [Homebrew: тысяча инструментов для агента](/blog/homebrew-cli-vibecoding/) — откуда берётся zoxide и как управлять всем терминальным окружением
+- [Один скрипт вместо трёх терминалов](/blog/dev-script-health-checks/) — как быстрая навигация помогает при работе с несколькими сервисами
+
 ## Источники
 
 - [zoxide на GitHub](https://github.com/ajeetdsouza/zoxide)

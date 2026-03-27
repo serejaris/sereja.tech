@@ -80,6 +80,11 @@ for user_id in users:
 
 По-моему, это самая недооценённая фича Bot API. Я раньше пролистывал эту секцию в доках. Оказалось — критическая оптимизация для любой рассылки с медиа.
 
+## Смотри также
+
+- [Как мой AI-агент отправил 717 сообщений за 8 минут](/blog/telegram-broadcast-slow/) — предыдущая проблема с рассылками: синхронный скрипт вместо asyncio
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — как автоматизировать очередь постов целиком
+
 ## Источники
 
 - [Telegram Bot API: Sending files](https://core.telegram.org/bots/api#sending-files)
