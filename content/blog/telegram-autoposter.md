@@ -84,6 +84,11 @@ image: /images/blog/telegram-autoposter-preview.png
 
 Код писал не я — только промпт и проверка что работает. Никаких подписок, данные локально. Нужно изменить логику — попрошу агента.
 
+## Смотри также
+
+- [Мой редотдел из трёх промптов](/blog/telegram-autopublisher/) — как устроен весь пайплайн от идеи до публикации
+- [Как мой AI-агент отправил 717 сообщений за 8 минут](/blog/telegram-broadcast-slow/) — что происходит когда запускаешь рассылку без asyncio
+
 ## Источники
 
 - [Buffer: Consistent Posting Study](https://buffer.com/resources/consistent-posting-study/) — данные про 5x engagement

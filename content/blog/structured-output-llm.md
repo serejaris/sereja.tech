@@ -61,10 +61,10 @@ response = client.models.generate_content(
     )
 )
 
-# Парсинг в Pydantic
+## Парсинг в Pydantic
 content = DigestContent.model_validate_json(response.text)
 
-# Форматирование в HTML (хештег добавляется тут)
+## Форматирование в HTML (хештег добавляется тут)
 html = format_html(content) + "\n#дайджестчата"
 ```
 
@@ -111,6 +111,11 @@ Structured output — когда нужна надёжность. Когда 10%
 Текстовые промпты — когда прототипируешь. Когда формат не критичен. Когда пишешь для человека, а не для кода.
 
 Мой дайджест публикуется каждый день. 10% сбоев — это 3 косяка в месяц. Перешёл на structured output.
+
+## Смотри также
+
+- [Сначала набросок, потом результат: как работать с LLM](/blog/draft-before-artifact/) — тот же принцип: сначала структура, потом контент
+- [Two-Stage AI Pipeline: платим вдвое меньше](/blog/two-stage-ai-pipeline/) — structured output в связке с двухэтапным пайплайном на реальном примере
 
 ## Источники
 

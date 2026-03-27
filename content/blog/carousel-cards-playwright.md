@@ -59,6 +59,11 @@ CSS-переменные держат консистентность: отсту
 
 Для брендбука это не замена дизайнеру. Но для контентных карточек, OG-изображений, превью в соцсети — по-моему, идеальный воркфлоу.
 
+## Смотри также
+
+- [E2E тесты пишет агент: Playwright + Claude Code](/blog/playwright-e2e-with-ai-agent/) — другие задачи, которые решает Playwright в связке с агентом
+- [YouTube-превью без дизайнера](/blog/youtube-thumbnails-html-code/) — тот же подход HTML → скриншот для превью к видео
+
 ## Источники
 
 - [Generate Open Graph Images with Playwright](https://dbushell.com/2024/11/15/generate-open-graph-images-with-playwright/) — David Bushell о генерации OG-картинок

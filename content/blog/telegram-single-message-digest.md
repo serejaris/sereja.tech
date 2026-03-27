@@ -97,13 +97,13 @@ async def upload_image(image_bytes: bytes) -> str:
 ```python
 import asyncio
 
-# 1. Загружаем картинку
+## 1. Загружаем картинку
 image_url = await upload_image(comic_image)
 
-# 2. Даём Telegram время закэшировать
+## 2. Даём Telegram время закэшировать
 await asyncio.sleep(4)
 
-# 3. Отправляем сообщение
+## 3. Отправляем сообщение
 await bot.send_message(...)
 ```
 
@@ -120,6 +120,11 @@ await bot.send_message(...)
 3. Добавляешь задержку 3-4 секунды между загрузкой и отправкой
 
 Костыль? Да. Работает? Тоже да.
+
+## Смотри также
+
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — как поставить отправку по расписанию, когда сообщение готово
+- [Мой редотдел из трёх промптов](/blog/telegram-autopublisher/) — полный пайплайн публикации в канал
 
 ## Источники
 

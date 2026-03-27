@@ -63,6 +63,11 @@ state.json сохраняется после КАЖДОГО шага:
 
 **Dry run.** `--dry-run` проверяет ffmpeg, backend, playwright до старта.
 
+## Смотри также
+
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — как разные агенты вписываются в пайплайн и где каждый уместен
+- [Хуки Claude Code: агент сам ведёт задачи](/blog/claude-code-hooks-github-issues/) — автоматизация шагов через хуки, не только state persistence
+
 ## Источники
 
 - [Persistence in LangGraph — Deep, Practical Guide](https://medium.com/towards-artificial-intelligence/persistence-in-langgraph-deep-practical-guide-36dc4c452c3b)

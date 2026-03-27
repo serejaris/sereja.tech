@@ -101,6 +101,11 @@ python3 ~/.claude/hooks/tts_daemon.py &
 
 Я выбрал Gemini из-за суммаризации. ElevenLabs просто читает текст, Gemini может пересказать.
 
+## Смотри также
+
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — как выбирать инструмент под задачу
+- [Claude Code получил память между сессиями](/blog/claude-code-auto-memory/) — ещё один способ сохранять контекст между запусками агента
+
 ## Источники
 
 - [Claude Code Hooks](https://code.claude.com/docs/en/hooks)

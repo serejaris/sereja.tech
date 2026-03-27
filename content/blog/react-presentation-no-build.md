@@ -199,6 +199,11 @@ presentation/
 
 Для курсовой презентации — хватает. Сел в 8 вечера, к 9 уже прогонял слайды.
 
+## Смотри также
+
+- [TUI-презентация прямо в Claude Code](/blog/tui-presentation-claude-code/) — другой подход: презентация прямо в терминале без браузера
+- [Software for One: софт, который нужен только тебе](/blog/software-for-one-personal-tools/) — почему делать инструменты под себя — это не расточительство
+
 ## Источники
 
 - [Neobrutalism: Definition and Best Practices — NN/G](https://www.nngroup.com/articles/neobrutalism/)

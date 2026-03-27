@@ -27,7 +27,7 @@ image: /images/blog/telegram-broadcast-file-id-preview.png
 Вот что делал мой код:
 
 ```python
-# НЕПРАВИЛЬНО — upload каждый раз
+## НЕПРАВИЛЬНО — upload каждый раз
 for user_id in users:
     files = {f"photo{i}": open(path, 'rb') for i, path in enumerate(images)}
     requests.post(f"{API}/sendMediaGroup", files=files, data={"chat_id": user_id})
@@ -79,6 +79,11 @@ for user_id in users:
 3. **file_id персистентный** — храни в базе, используй повторно
 
 По-моему, это самая недооценённая фича Bot API. Я раньше пролистывал эту секцию в доках. Оказалось — критическая оптимизация для любой рассылки с медиа.
+
+## Смотри также
+
+- [Как мой AI-агент отправил 717 сообщений за 8 минут](/blog/telegram-broadcast-slow/) — предыдущая проблема с рассылками: синхронный скрипт вместо asyncio
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — как автоматизировать очередь постов целиком
 
 ## Источники
 

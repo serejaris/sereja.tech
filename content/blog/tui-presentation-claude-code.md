@@ -69,6 +69,11 @@ Claude Code умеет скиллы — папки с инструкциями, 
 
 Бонус: презентация — часть репозитория. Клонирует кто-то проект — получает и её.
 
+## Смотри также
+
+- [React-презентация без сборки: Editorial Brutalism на CDN](/blog/react-presentation-no-build/) — альтернатива: презентация в браузере без npm, когда нужно больше визуала
+- [ASCII-дашборды вместо веб-интерфейсов](/blog/ascii-dashboard-analytics/) — другой способ получать информацию прямо в терминале
+
 ## Источники
 
 - [presenterm — TUI markdown slideshow tool](https://terminaltrove.com/presenterm/)

@@ -54,7 +54,7 @@ image: /images/blog/slash-commands-subagents-preview.png
 ```
 
 ```markdown
-# ~/.claude/commands/readme.md
+## ~/.claude/commands/readme.md
 ---
 description: Генерация README через Haiku
 ---
@@ -85,6 +85,11 @@ description: Генерация README через Haiku
 - Opus и так справляется, экономить не на чем
 
 И да — после создания агента перезапусти сессию. Изменения подхватываются только при старте.
+
+## Смотри также
+
+- [Как перестать сжигать контекст Claude Code впустую](/blog/claude-code-token-optimization/) — системный подход к экономии токенов
+- [Claude Code — напарник, Codex — исполнитель](/blog/claude-code-vs-codex-cli/) — когда нужен агент с полным контекстом, а когда хватит отдельного исполнителя
 
 ## Источники
 

@@ -250,6 +250,11 @@ image: /images/blog/app-types-guide-preview.png
 
 ---
 
+## Смотри также
+
+- [Software for One: софт, который нужен только тебе](/blog/software-for-one-personal-tools/) — тот же вопрос «зачем?», но применительно к инструментам только для себя
+- [Дневник вайбкодера: каждая сессия — статья](/blog/vibecoder-diary/) — пример информационного продукта, который одновременно документирует процесс
+
 ## Источники
 
 - [Informational vs Functional Websites — Brand Whisk](https://brandwhisk.com/web-development/informational-vs-functional-websites/)

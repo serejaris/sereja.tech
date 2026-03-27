@@ -98,6 +98,11 @@ Health checks:
 
 Теперь агент не лезет запускать бэкенд и фронтенд по отдельности.
 
+## Смотри также
+
+- [Homebrew: тысяча инструментов для агента](/blog/homebrew-cli-vibecoding/) — как управлять инструментами, которые запускает этот скрипт
+- [ASCII-дашборды вместо веб-интерфейсов](/blog/ascii-dashboard-analytics/) — следующий шаг: видеть состояние системы прямо в терминале
+
 ## Источники
 
 - [Monorepo best practices](https://graphite.dev/guides/monorepo-frontend-backend-best-practices) — Graphite

@@ -118,6 +118,11 @@ Anthropic пишут, что в их research-системе субагенты 
 
 То же самое с файлами. В моём случае: 12800 строк субтитров превратились в 460 строк конспекта. Компрессия примерно 28:1.
 
+## Смотри также
+
+- [Haiku, Sonnet, Opus: какую модель ставить субагенту](/blog/subagent-model-cost/) — три субагента на Haiku дешевле одного на Opus; разбираю цифры
+- [Agent Teams в Claude Code: команда агентов за 5 минут](/blog/agent-teams-opus-4-6/) — следующий шаг после базового MapReduce: агенты с разными ролями и общим состоянием
+
 ## Источники
 
 - [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) — Anthropic Engineering

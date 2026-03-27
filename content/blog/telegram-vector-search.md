@@ -72,6 +72,11 @@ Telegram забанил за спам. Добавь random задержки ме
 
 ---
 
+## Смотри также
+
+- [Telegram API вместо JSON экспорта](/blog/telegram-api-vs-json-export/) — как получать сообщения через API, а не ручной экспорт
+- [Автопостер для Telegram](/blog/telegram-autoposter/) — другая сторона автоматизации: не читать, а публиковать
+
 ## Источники
 
 - [telegram-search](https://github.com/groupultra/telegram-search) — похожий проект с 3.7k звёзд

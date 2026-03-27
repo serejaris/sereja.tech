@@ -59,6 +59,11 @@ image: /images/blog/video-lesson-ux-preview.png
 3. Всё сохраняется между сессиями.
 4. И да: сначала спека, потом агенты.
 
+## Смотри также
+
+- [Видео-пайплайн на Claude Code: от записи до YouTube](/blog/video-pipeline-claude-code/) — как автоматизировать всё, что после UX-решений
+- [Персонализация уроков через данные о студентах](/blog/personalized-teaching-student-data/) — как адаптировать контент под каждого студента
+
 ## Источники
 
 - [NN/g: Videos as Instructional Content](https://www.nngroup.com/articles/instructional-video-guidelines/)

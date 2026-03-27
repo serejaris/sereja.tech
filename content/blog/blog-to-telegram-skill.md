@@ -145,6 +145,11 @@ def send(text: str) -> dict:
                                             └──────────────┘
 ```
 
+## Смотри также
+
+- [Пайплайн для статей: 5 фаз от идеи до Telegram](/blog/blog-post-pipeline/) — полный цикл, в котором этот skill — финальная фаза
+- [Мой редотдел из трёх промптов](/blog/telegram-autopublisher/) — как работает система автопубликации в целом
+
 ## Источники
 
 - [Claude Skills — документация](https://code.claude.com/docs/en/skills)

@@ -135,6 +135,11 @@ npx claude-plugins install @serejaris/ris-claude-code
 
 ---
 
+## Смотри также
+
+- [Skills: как не терять опыт между проектами](/blog/skills-knowledge-transfer/) — зачем вообще создавать скиллы и какой эффект накапливается со временем
+- [Superpowers: скиллы для Claude Code](/blog/superpowers-brainstorming-workflow/) — готовый набор скиллов для типовых задач
+
 ## Источники
 
 - [Create plugins — Claude Code Docs](https://code.claude.com/docs/en/plugins)
