@@ -1,7 +1,7 @@
 ---
 title: "Agent Teams в Claude Code: команда агентов за 5 минут"
 date: 2026-02-05
-description: "Opus 4.6 принёс Agent Teams — несколько агентов работают параллельно над одной задачей. Как включить, когда использовать и как я собрал чат на стриме за 15 минут двумя агентами."
+description: "Opus 4.6 — Agent Teams: несколько агентов параллельно над одной задачей. Как включить, когда использовать и как собрал чат двумя агентами."
 tags: ["claude code", "agents"]
 image: "/images/blog/agent-teams-opus-4-6-preview.png"
 youtube_id: "vVpmc-C1yrM"

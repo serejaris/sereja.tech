@@ -1,7 +1,7 @@
 ---
 title: "Как устроены конвейеры AI-контента: 12 паттернов"
 date: 2026-01-11
-description: "Глубокое исследование конвейеров для создания контента с помощью LLM. 12 паттернов, multi-agent архитектуры, human-in-the-loop, content repurposing. Анализ практик Anthropic, Notion, Amazon."
+description: "12 паттернов AI-конвейеров для контента: multi-agent архитектуры, human-in-the-loop, repurposing. Практики Anthropic, Notion, Amazon."
 tags: ["llm", "контент"]
 section: "AI"
 image: /images/blog/ai-writing-pipelines-preview.png
