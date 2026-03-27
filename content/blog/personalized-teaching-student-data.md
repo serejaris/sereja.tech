@@ -2,7 +2,7 @@
 title: "Персонализация уроков через данные о студентах"
 date: 2026-01-13
 description: "Как я парсю интро студентов через LLM и использую профили для адаптации примеров на уроке. Практический кейс с 8-й когортой."
-tags: []
+tags: ["education", "ai", "llm", "mentoring"]
 section: Education
 image: /images/blog/personalized-teaching-student-data-preview.png
 ---

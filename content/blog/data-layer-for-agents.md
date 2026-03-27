@@ -89,7 +89,7 @@ YouTube Data API v3 даёт 10 000 единиц квоты в день --- зв
 
 У меня не было API-ключа YouTube. Обычно это значит: открой Google Cloud Console, создай проект, включи API, создай credentials... Минут 10 ручных кликов.
 
-Но у меня настроен [Chrome DevTools MCP](/blog/chrome-devtools-mcp-setup/) --- агент умеет [управлять браузером](/blog/chrome-devtools-mcp/): кликать, вводить текст, читать страницы.
+Но у меня настроен [Chrome DevTools MCP](/blog/chrome-devtools-mcp-setup/) --- агент умеет [управлять браузером](/blog/chrome-devtools-mcp-setup/): кликать, вводить текст, читать страницы.
 
 {{< callout type="insight" >}}
 **Промпт для Claude Code (Opus 4.6) с Chrome DevTools MCP:**

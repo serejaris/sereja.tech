@@ -119,7 +119,7 @@ sudo ufw status
 - Быстрых задач когда нет ноута
 - Экспериментов со скиллами
 
-Бот в Telegram выступает мостом между мной и Claude Code на сервере. Писал про это в блоге: [clawdbot-telegram-bridge](/blog/clawdbot-telegram-bridge).
+Бот в Telegram выступает мостом между мной и Claude Code на сервере. Писал про это в блоге: [Clawdbot: Claude Code с телефона через Telegram](/blog/clawdbot-telegram-max).
 
 {{< callout type="insight" >}}
 Главный инсайт: Clawdbot — это не замена Claude Code. Это дополнение для мобильного доступа.
