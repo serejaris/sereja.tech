@@ -61,7 +61,11 @@
   "wordCount": {{ .WordCount }},
   {{ with .Params.section }}"articleSection": "{{ . }}",{{ end }}
   "keywords": [{{ range $i, $tag := .Params.tags }}{{ if $i }}, {{ end }}"{{ $tag }}"{{ end }}],
-  "inLanguage": "ru-RU"{{ with .Params.youtube_id }},
+  "inLanguage": "ru-RU"{{ with .Params.image }},
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ . | absURL }}"
+  }{{ end }}{{ with .Params.youtube_id }},
   "video": {
     "@type": "VideoObject",
     "name": "{{ $.Title }}",
