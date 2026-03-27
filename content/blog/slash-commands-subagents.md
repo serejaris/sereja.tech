@@ -54,7 +54,7 @@ image: /images/blog/slash-commands-subagents-preview.png
 ```
 
 ```markdown
-# ~/.claude/commands/readme.md
+## ~/.claude/commands/readme.md
 ---
 description: Генерация README через Haiku
 ---

@@ -61,10 +61,10 @@ response = client.models.generate_content(
     )
 )
 
-# Парсинг в Pydantic
+## Парсинг в Pydantic
 content = DigestContent.model_validate_json(response.text)
 
-# Форматирование в HTML (хештег добавляется тут)
+## Форматирование в HTML (хештег добавляется тут)
 html = format_html(content) + "\n#дайджестчата"
 ```
 

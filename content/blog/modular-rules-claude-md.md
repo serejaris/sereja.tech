@@ -90,7 +90,7 @@ sqlite3 backend/cohorts.db ".schema lessons"
 paths: backend/**/*.py, migrations/**
 ---
 
-# Database Rules
+## Database Rules
 ...
 ```
 

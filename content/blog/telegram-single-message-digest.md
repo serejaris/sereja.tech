@@ -97,13 +97,13 @@ async def upload_image(image_bytes: bytes) -> str:
 ```python
 import asyncio
 
-# 1. Загружаем картинку
+## 1. Загружаем картинку
 image_url = await upload_image(comic_image)
 
-# 2. Даём Telegram время закэшировать
+## 2. Даём Telegram время закэшировать
 await asyncio.sleep(4)
 
-# 3. Отправляем сообщение
+## 3. Отправляем сообщение
 await bot.send_message(...)
 ```
 

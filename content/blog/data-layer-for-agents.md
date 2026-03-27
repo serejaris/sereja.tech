@@ -148,10 +148,10 @@ launchd --- встроенный планировщик macOS. Один plist-ф
 Любой агент может достать нужное одной командой:
 
 ```bash
-# Топ-3 видео по просмотрам
+## Топ-3 видео по просмотрам
 jq '.videos | sort_by(-.stats.views) | .[0:3] | .[].title' videos.json
 
-# Видео с тегом "claude-code"
+## Видео с тегом "claude-code"
 jq '.videos[] | select(.tags[] | test("claude"; "i")) | .title' videos.json
 ```
 

@@ -27,7 +27,7 @@ image: /images/blog/telegram-broadcast-file-id-preview.png
 Вот что делал мой код:
 
 ```python
-# НЕПРАВИЛЬНО — upload каждый раз
+## НЕПРАВИЛЬНО — upload каждый раз
 for user_id in users:
     files = {f"photo{i}": open(path, 'rb') for i, path in enumerate(images)}
     requests.post(f"{API}/sendMediaGroup", files=files, data={"chat_id": user_id})

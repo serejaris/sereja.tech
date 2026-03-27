@@ -24,7 +24,7 @@ Clawdbot — self-hosted бот, который превращает Telegram в
 **Workspace как системный промпт.** Clawdbot читает markdown-файлы из `~/clawd/` и инъецирует в system prompt. Вот реальный пример `SOUL.md`:
 
 ```markdown
-# SOUL.md - Persona & Boundaries
+## SOUL.md - Persona & Boundaries
 
 - Keep replies concise and direct.
 - Ask clarifying questions when needed.
@@ -77,7 +77,7 @@ security find-generic-password -s "Claude Code-credentials" -w
 
 ```bash
 clawdbot models status
-# anthropic:claude-cli=OAuth, subscriptionType=max
+## anthropic:claude-cli=OAuth, subscriptionType=max
 ```
 
 Ни одного запроса в Google. Агент нашёл токен, понял формат, записал куда нужно.

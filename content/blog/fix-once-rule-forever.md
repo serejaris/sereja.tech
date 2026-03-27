@@ -85,7 +85,7 @@ Claude Code не знает что делал вчера. Cursor не помни
 paths: frontend/**/*.tsx
 ---
 
-# Frontend Rules
+## Frontend Rules
 ...
 ```
 

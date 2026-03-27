@@ -118,7 +118,7 @@ def set_pad_color(led_index, r, g, b):
 ```
 
 ```python
-# Имя функции ДОЛЖНО соответствовать событию
+## Имя функции ДОЛЖНО соответствовать событию
 def on_current_program_scene_changed(self, data):
     scene_name = data.scene_name
     self._update_pads(scene_name)
@@ -127,15 +127,15 @@ def on_current_program_scene_changed(self, data):
 ## Запуск
 
 ```bash
-# Установка
+## Установка
 cd ~/Documents/GitHub/obs-midi
 uv venv && uv pip install -r requirements.txt
 
-# Тесты
+## Тесты
 source .venv/bin/activate
 python scene_indicator.py --test
 
-# Запуск
+## Запуск
 python scene_indicator.py
 ```
 

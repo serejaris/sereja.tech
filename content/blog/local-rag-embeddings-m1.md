@@ -54,12 +54,12 @@ image: /images/blog/local-rag-embeddings-m1-preview.png
 import chromadb
 from chromadb.utils import embedding_functions
 
-# Локальная модель — работает на M1 без GPU
+## Локальная модель — работает на M1 без GPU
 embed_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
     model_name="all-MiniLM-L6-v2"
 )
 
-# Персистентное хранилище
+## Персистентное хранилище
 client = chromadb.PersistentClient(path="./transcripts_db")
 collection = client.get_or_create_collection(
     name="mentor_sessions",
