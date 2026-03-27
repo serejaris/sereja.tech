@@ -1,0 +1,2378 @@
+{
+  "about/index": [
+    {
+      "title": "Cursor или Claude Code — что выбрать?",
+      "url": "https://vibecoded.pro/q/cursor-vs-claude-code/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение двух главных AI-инструментов для вайбкодинга: Cursor IDE и Claude Code CLI. Мнения из комь"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    }
+  ],
+  "blog/document-conversations-not-code": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Как написать хороший CLAUDE.md?",
+      "url": "https://vibecoded.pro/q/kak-napisat-claude-md/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "CLAUDE.md — главный конфиг для Claude Code. Что туда писать, чтобы агент работал правильно с первого"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    }
+  ],
+  "blog/telegram-api-vs-json-export": [
+    {
+      "title": "Личная корпорация",
+      "url": "https://context.lat/concepts/personal-corp/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Один человек, управляющий роем AI-агентов вместо команды сотрудников"
+    },
+    {
+      "title": "Raycast",
+      "url": "https://context.lat/tools/raycast/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Лаунчер для macOS с AI-ассистентом и автоматизацией рабочих процессов"
+    },
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    }
+  ],
+  "blog/video-pipeline-claude-code": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/context-architecture-lifecycle-split": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    }
+  ],
+  "blog/slash-commands-subagents": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/chrome-devtools-mcp-setup": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/structured-output-llm": [
+    {
+      "title": "Sonnet или Opus — какую модель выбрать?",
+      "url": "https://vibecoded.pro/q/sonnet-vs-opus-kakuyu-model-vybrat/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение моделей Claude для вайбкодинга: Sonnet 4.5 vs Opus 4. Когда нужна мощность, когда хватает "
+    },
+    {
+      "title": "Claude",
+      "url": "https://context.lat/models/claude/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Модели",
+      "description": "Лучшая модель для кодинга. SWE-bench 80.9%, контекст 1M токенов"
+    },
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    }
+  ],
+  "blog/notebooklm-claude-code-rag": [
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "GitHub MCP",
+      "url": "https://context.lat/mcp/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "MCP серверы",
+      "description": "MCP сервер для работы с GitHub: issues, PR, репозитории прямо из AI"
+    },
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    }
+  ],
+  "blog/launchd-macos-agent-scheduler": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/llm-coding-workflow-2026": [
+    {
+      "title": "Контекст",
+      "url": "https://context.lat/concepts/context/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Рабочая память модели: всё, что LLM видит в момент генерации ответа"
+    },
+    {
+      "title": "MCP (Model Context Protocol)",
+      "url": "https://context.lat/concepts/mcp/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Открытый стандарт Anthropic для подключения AI-агентов к внешним инструментам, данным и сервисам"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    }
+  ],
+  "blog/subagent-model-cost": [
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Sonnet или Opus — какую модель выбрать?",
+      "url": "https://vibecoded.pro/q/sonnet-vs-opus-kakuyu-model-vybrat/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение моделей Claude для вайбкодинга: Sonnet 4.5 vs Opus 4. Когда нужна мощность, когда хватает "
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    }
+  ],
+  "blog/data-layer-for-agents": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Что такое MCP и зачем он нужен?",
+      "url": "https://vibecoded.pro/q/chto-takoe-mcp/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "MCP (Model Context Protocol) — стандарт для подключения инструментов к AI-агентам. Браузер, базы дан"
+    }
+  ],
+  "blog/llms-txt-agent-readable-web": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Что такое MCP и зачем он нужен?",
+      "url": "https://vibecoded.pro/q/chto-takoe-mcp/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "MCP (Model Context Protocol) — стандарт для подключения инструментов к AI-агентам. Браузер, базы дан"
+    },
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    }
+  ],
+  "blog/react-presentation-no-build": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Kilo Code",
+      "url": "https://context.lat/tools/kilo-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Open source AI-агент для VS Code — бесплатная альтернатива Cursor с любыми моделями"
+    },
+    {
+      "title": "Claude",
+      "url": "https://context.lat/models/claude/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Модели",
+      "description": "Лучшая модель для кодинга. SWE-bench 80.9%, контекст 1M токенов"
+    }
+  ],
+  "blog/claude-code-logs-stack": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/remotion-programmatic-video-vibecoding": [
+    {
+      "title": "Pipeline",
+      "url": "https://context.lat/concepts/pipeline/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Цепочка автоматизированных шагов: ресёрч, генерация, редактирование, публикация"
+    },
+    {
+      "title": "Личная корпорация",
+      "url": "https://context.lat/concepts/personal-corp/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Один человек, управляющий роем AI-агентов вместо команды сотрудников"
+    },
+    {
+      "title": "Raycast",
+      "url": "https://context.lat/tools/raycast/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Лаунчер для macOS с AI-ассистентом и автоматизацией рабочих процессов"
+    }
+  ],
+  "blog/homebrew-cli-vibecoding": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/carousel-cards-playwright": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/llm-evals-for-vibecoder": [
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/symphony-codex-orchestrator": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Codex",
+      "url": "https://context.lat/tools/codex/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агент OpenAI для автономной реализации задач в фоновом режиме"
+    },
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    }
+  ],
+  "blog/github-issues-project-context": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/clawdbot-personal-ai-assistant": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/context-lat-90-minutes": [
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    },
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    }
+  ],
+  "blog/zoxide-fzf-terminal-navigation": [
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "GitHub Copilot",
+      "url": "https://context.lat/tools/github-copilot/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-ассистент от GitHub/Microsoft. Встроен в VS Code, JetBrains, Neovim"
+    }
+  ],
+  "blog/telegram-autoposter": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/sync-claude-code-four-machines": [
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/openclaw-hooks-automation": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Pipeline",
+      "url": "https://context.lat/concepts/pipeline/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Цепочка автоматизированных шагов: ресёрч, генерация, редактирование, публикация"
+    },
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    }
+  ],
+  "blog/ai-writing-pipelines": [
+    {
+      "title": "Контекст",
+      "url": "https://context.lat/concepts/context/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Рабочая память модели: всё, что LLM видит в момент генерации ответа"
+    },
+    {
+      "title": "С чего начать вайбкодинг",
+      "url": "https://context.lat/guides/getting-started/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Пошаговый гайд для новичков: выбери инструмент, установи, сделай первый проект за 15 минут"
+    },
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    }
+  ],
+  "blog/github-projects-ai-agent-memory": [
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/ssot-documentation": [
+    {
+      "title": "Kilo Code",
+      "url": "https://context.lat/tools/kilo-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Open source AI-агент для VS Code — бесплатная альтернатива Cursor с любыми моделями"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    }
+  ],
+  "blog/seo-audit-hugo-vercel-checklist": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/agent-consilium-independent-opinions": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    }
+  ],
+  "blog/fix-once-rule-forever": [
+    {
+      "title": "Cursor или Claude Code — что выбрать?",
+      "url": "https://vibecoded.pro/q/cursor-vs-claude-code/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение двух главных AI-инструментов для вайбкодинга: Cursor IDE и Claude Code CLI. Мнения из комь"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Cursor",
+      "url": "https://context.lat/tools/cursor/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-first IDE на базе VS Code. Самый популярный инструмент для вайбкодинга"
+    }
+  ],
+  "blog/superpowers-brainstorming-workflow": [
+    {
+      "title": "Superpowers",
+      "url": "https://context.lat/skills/superpowers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Скиллы",
+      "description": "Agentic skills framework от Jesse Vincent — превращает Claude Code из генератора кода в дисциплиниро"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    }
+  ],
+  "blog/seo-for-ai-era": [
+    {
+      "title": "Gemini — платформа и модели от Google",
+      "url": "https://context.lat/tools/gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-ассистент Google: контекст до 2M токенов, конкурентные цены API, мультимодальность"
+    },
+    {
+      "title": "Perplexity",
+      "url": "https://context.lat/tools/perplexity/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-поисковик с актуальными данными для ресёрча стека и инструментов"
+    },
+    {
+      "title": "Claude vs GPT vs Gemini",
+      "url": "https://context.lat/guides/claude-vs-gpt-vs-gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-моделей для кодинга: бенчмарки, цены, контекстное окно, сильные стороны"
+    }
+  ],
+  "blog/vibecoder-diary": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/playwright-e2e-with-ai-agent": [
+    {
+      "title": "Cursor или Claude Code — что выбрать?",
+      "url": "https://vibecoded.pro/q/cursor-vs-claude-code/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение двух главных AI-инструментов для вайбкодинга: Cursor IDE и Claude Code CLI. Мнения из комь"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/telegram-autopublisher": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/personalized-teaching-student-data": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Cursor",
+      "url": "https://context.lat/tools/cursor/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-first IDE на базе VS Code. Самый популярный инструмент для вайбкодинга"
+    },
+    {
+      "title": "Perplexity",
+      "url": "https://context.lat/tools/perplexity/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-поисковик с актуальными данными для ресёрча стека и инструментов"
+    }
+  ],
+  "blog/youtube-thumbnails-html-code": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/mapreduce-subagents": [
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/content-plan-subagents-exa": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/openclaw-vps-6-dollars": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    },
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    }
+  ],
+  "blog/digest-subagents-mapreduce": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/hooks-that-work-2026": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Что такое агент",
+      "url": "https://context.lat/concepts/what-is-agent/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "LLM + действия + цикл — три компонента, которые превращают чат-бота в автономного помощника"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    }
+  ],
+  "blog/clawdbot-telegram-max": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/claude-code-voice-assistant": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/agent-swarm-frontend": [
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    },
+    {
+      "title": "Личная корпорация",
+      "url": "https://context.lat/concepts/personal-corp/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Один человек, управляющий роем AI-агентов вместо команды сотрудников"
+    },
+    {
+      "title": "Raycast",
+      "url": "https://context.lat/tools/raycast/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Лаунчер для macOS с AI-ассистентом и автоматизацией рабочих процессов"
+    }
+  ],
+  "blog/claude-code-hooks-github-issues": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    }
+  ],
+  "blog/tui-presentation-claude-code": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/app-types-guide": [
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    },
+    {
+      "title": "Агентский цикл",
+      "url": "https://context.lat/concepts/agentic-loop/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "LLM в цикле с действиями и автономностью — ключевое отличие агента от чат-бота"
+    },
+    {
+      "title": "С чего начать вайбкодинг",
+      "url": "https://context.lat/guides/getting-started/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Пошаговый гайд для новичков: выбери инструмент, установи, сделай первый проект за 15 минут"
+    }
+  ],
+  "blog/claude-code-logs-project-status": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/claude-code-token-optimization": [
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/pipeline-reliability-state-persistence": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/telegram-broadcast-slow": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Kilo Code",
+      "url": "https://context.lat/tools/kilo-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Open source AI-агент для VS Code — бесплатная альтернатива Cursor с любыми моделями"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/kimi-k2-5-agentic-model": [
+    {
+      "title": "Контекст",
+      "url": "https://context.lat/concepts/context/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Рабочая память модели: всё, что LLM видит в момент генерации ответа"
+    },
+    {
+      "title": "Claude",
+      "url": "https://context.lat/models/claude/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Модели",
+      "description": "Лучшая модель для кодинга. SWE-bench 80.9%, контекст 1M токенов"
+    },
+    {
+      "title": "Sonnet или Opus — какую модель выбрать?",
+      "url": "https://vibecoded.pro/q/sonnet-vs-opus-kakuyu-model-vybrat/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение моделей Claude для вайбкодинга: Sonnet 4.5 vs Opus 4. Когда нужна мощность, когда хватает "
+    }
+  ],
+  "blog/telegram-single-message-digest": [
+    {
+      "title": "Gemini — платформа и модели от Google",
+      "url": "https://context.lat/tools/gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-ассистент Google: контекст до 2M токенов, конкурентные цены API, мультимодальность"
+    }
+  ],
+  "blog/youtube-metadata-relevance-fix": [
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/tailwind-layoffs-ai-impact": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Windsurf",
+      "url": "https://context.lat/tools/windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI IDE от Codeium. Flows — уникальный подход к AI-ассистенту"
+    },
+    {
+      "title": "Cursor",
+      "url": "https://context.lat/tools/cursor/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-first IDE на базе VS Code. Самый популярный инструмент для вайбкодинга"
+    }
+  ],
+  "blog/personal-os-project-audit": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/ai-coding-tools-economics-2026": [
+    {
+      "title": "Cursor или Claude Code — что выбрать?",
+      "url": "https://vibecoded.pro/q/cursor-vs-claude-code/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение двух главных AI-инструментов для вайбкодинга: Cursor IDE и Claude Code CLI. Мнения из комь"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    }
+  ],
+  "blog/ascii-dashboard-analytics": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/board-of-advisors-subagents": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/claude-code-vs-codex-cli": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Cursor",
+      "url": "https://context.lat/tools/cursor/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-first IDE на базе VS Code. Самый популярный инструмент для вайбкодинга"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/multi-agent-text-deaify": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/blog-post-pipeline": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/two-stage-ai-pipeline": [
+    {
+      "title": "Контекст",
+      "url": "https://context.lat/concepts/context/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Рабочая память модели: всё, что LLM видит в момент генерации ответа"
+    },
+    {
+      "title": "Claude",
+      "url": "https://context.lat/models/claude/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Модели",
+      "description": "Лучшая модель для кодинга. SWE-bench 80.9%, контекст 1M токенов"
+    },
+    {
+      "title": "Токен",
+      "url": "https://context.lat/concepts/token/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Минимальная единица текста для LLM: примерно 3/4 слова в английском, меньше в русском"
+    }
+  ],
+  "blog/software-for-one-personal-tools": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Что такое MCP и зачем он нужен?",
+      "url": "https://vibecoded.pro/q/chto-takoe-mcp/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "MCP (Model Context Protocol) — стандарт для подключения инструментов к AI-агентам. Браузер, базы дан"
+    }
+  ],
+  "blog/github-agentic-workflows-telegram-analytics": [
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "GitHub MCP",
+      "url": "https://context.lat/mcp/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "MCP серверы",
+      "description": "MCP сервер для работы с GitHub: issues, PR, репозитории прямо из AI"
+    }
+  ],
+  "blog/modular-rules-claude-md": [
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/draft-before-artifact": [
+    {
+      "title": "Replit",
+      "url": "https://context.lat/tools/replit/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Облачная IDE с AI Agent. Полный цикл: код, база данных, деплой"
+    },
+    {
+      "title": "Kilo Code",
+      "url": "https://context.lat/tools/kilo-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Open source AI-агент для VS Code — бесплатная альтернатива Cursor с любыми моделями"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/claude-code-marketing-ops": [
+    {
+      "title": "Хуки (Hooks)",
+      "url": "https://context.lat/concepts/hooks/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Детерминированные обработчики событий в Claude Code — гарантированное выполнение, в отличие от промп"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/fact-checker-in-ai-workflow": [
+    {
+      "title": "Sonnet или Opus — какую модель выбрать?",
+      "url": "https://vibecoded.pro/q/sonnet-vs-opus-kakuyu-model-vybrat/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение моделей Claude для вайбкодинга: Sonnet 4.5 vs Opus 4. Когда нужна мощность, когда хватает "
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Gemini — платформа и модели от Google",
+      "url": "https://context.lat/tools/gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-ассистент Google: контекст до 2M токенов, конкурентные цены API, мультимодальность"
+    }
+  ],
+  "blog/agent-teams-opus-4-6": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/telegram-vector-search": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Что такое агент",
+      "url": "https://context.lat/concepts/what-is-agent/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "LLM + действия + цикл — три компонента, которые превращают чат-бота в автономного помощника"
+    },
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    }
+  ],
+  "blog/telegram-broadcast-file-id": [
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Kilo Code",
+      "url": "https://context.lat/tools/kilo-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Open source AI-агент для VS Code — бесплатная альтернатива Cursor с любыми моделями"
+    }
+  ],
+  "blog/moltbook-social-network-ai-agents": [
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Gemini — платформа и модели от Google",
+      "url": "https://context.lat/tools/gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-ассистент Google: контекст до 2M токенов, конкурентные цены API, мультимодальность"
+    }
+  ],
+  "blog/map-reduce-youtube-metadata": [
+    {
+      "title": "Субагент",
+      "url": "https://context.lat/concepts/subagent/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Изолированная сессия AI-агента со своим контекстом для параллельных или специализированных задач"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Claude",
+      "url": "https://context.lat/models/claude/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Модели",
+      "description": "Лучшая модель для кодинга. SWE-bench 80.9%, контекст 1M токенов"
+    }
+  ],
+  "blog/claude-code-auto-memory": [
+    {
+      "title": "Как сохранять контекст между сессиями Claude Code?",
+      "url": "https://vibecoded.pro/q/kontekst-mezhdu-sessiyami/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Агент не помнит прошлые сессии. Как передавать контекст правильно: CLAUDE.md, TODO-файлы, git-истори"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/dev-script-health-checks": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/personal-corporation-event-driven-agents": [
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "GitHub MCP",
+      "url": "https://context.lat/mcp/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "MCP серверы",
+      "description": "MCP сервер для работы с GitHub: issues, PR, репозитории прямо из AI"
+    }
+  ],
+  "blog/gemini-3-1-pro-svg-animations": [
+    {
+      "title": "Gemini — платформа и модели от Google",
+      "url": "https://context.lat/tools/gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "AI-ассистент Google: контекст до 2M токенов, конкурентные цены API, мультимодальность"
+    },
+    {
+      "title": "Claude",
+      "url": "https://context.lat/models/claude/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Модели",
+      "description": "Лучшая модель для кодинга. SWE-bench 80.9%, контекст 1M токенов"
+    },
+    {
+      "title": "Claude vs GPT vs Gemini",
+      "url": "https://context.lat/guides/claude-vs-gpt-vs-gemini/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-моделей для кодинга: бенчмарки, цены, контекстное окно, сильные стороны"
+    }
+  ],
+  "blog/local-rag-embeddings-m1": [
+    {
+      "title": "MCP Exa: поиск, который понимает смысл",
+      "url": "https://context.lat/guides/mcp-exa-guide/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как подключить Exa MCP к Claude Code и почему это must-have инструмент для вайбкодера"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/video-lesson-ux": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    },
+    {
+      "title": "Kilo Code",
+      "url": "https://context.lat/tools/kilo-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Open source AI-агент для VS Code — бесплатная альтернатива Cursor с любыми моделями"
+    }
+  ],
+  "blog/claude-code-skills-distribution": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/agents-md-source-of-truth": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/vibecoder-to-ceo-personal-corp-github": [
+    {
+      "title": "GitHub",
+      "url": "https://context.lat/tools/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Хостинг кода с Issues, Projects и автодеплоем — командный центр вайбкодера"
+    },
+    {
+      "title": "GitHub CLI (gh)",
+      "url": "https://context.lat/tools/github-cli/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Официальный CLI для GitHub — Issues, PR и репозитории из терминала"
+    },
+    {
+      "title": "GitHub MCP",
+      "url": "https://context.lat/mcp/github/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "MCP серверы",
+      "description": "MCP сервер для работы с GitHub: issues, PR, репозитории прямо из AI"
+    }
+  ],
+  "blog/blog-to-telegram-skill": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ],
+  "blog/skills-knowledge-transfer": [
+    {
+      "title": "Скиллы (Skills)",
+      "url": "https://context.lat/concepts/skill/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Переиспользуемые промпты в формате markdown — программирование агента на естественном языке"
+    },
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    }
+  ],
+  "blog/ai-student-progress-tracking": [
+    {
+      "title": "Контекст",
+      "url": "https://context.lat/concepts/context/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Концепции",
+      "description": "Рабочая память модели: всё, что LLM видит в момент генерации ответа"
+    },
+    {
+      "title": "Агент делает не то что нужно — как исправить?",
+      "url": "https://vibecoded.pro/q/agent-delaet-ne-to/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Главные причины, почему AI-агент уходит не в ту сторону, и как промптить правильно: конкретность, ко"
+    },
+    {
+      "title": "Cursor или Claude Code — что выбрать?",
+      "url": "https://vibecoded.pro/q/cursor-vs-claude-code/",
+      "domain": "vibecoded.pro",
+      "domain_label": "Вайбкодеры",
+      "section_label": "Q&A",
+      "description": "Сравнение двух главных AI-инструментов для вайбкодинга: Cursor IDE и Claude Code CLI. Мнения из комь"
+    }
+  ],
+  "blog/midi-obs-claude-code": [
+    {
+      "title": "Claude Code",
+      "url": "https://context.lat/tools/claude-code/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Инструменты",
+      "description": "Агентный CLI от Anthropic. Работает прямо в терминале, автономно решает задачи"
+    },
+    {
+      "title": "Гайд для дизайнеров по Claude Code и Superpowers",
+      "url": "https://context.lat/guides/claude-code-for-designers/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Как дизайнеру перейти от макетов к работающему продукту через Claude Code и систему скиллов Superpow"
+    },
+    {
+      "title": "Cursor vs Claude Code vs Windsurf",
+      "url": "https://context.lat/guides/cursor-vs-claude-code-vs-windsurf/",
+      "domain": "context.lat",
+      "domain_label": "Справочник",
+      "section_label": "Гайды",
+      "description": "Сравнение AI-инструментов для кодинга: IDE, CLI, цены, модели, агентный режим"
+    }
+  ]
+}
