@@ -1,0 +1,140 @@
+{
+  "ghost_policy_stage": "decisioned",
+  "canonical_policy": {
+    "site_base_url": "https://sereja.tech/",
+    "blog_posts": "trailing_slash"
+  },
+  "priority_batches": {
+    "batch_a": [
+      "github-projects-ai-agent-memory",
+      "agent-teams-opus-4-6"
+    ],
+    "batch_b": [
+      "homebrew-cli-vibecoding",
+      "chrome-devtools-mcp-setup",
+      "claude-code-token-optimization"
+    ]
+  },
+  "discoverability": {
+    "min_internal_donor_links": 3,
+    "hub_routes": [
+      "/",
+      "/blog/"
+    ],
+    "donor_pages": [
+      "superpowers-brainstorming-workflow",
+      "openclaw-hooks-automation",
+      "claude-code-auto-memory",
+      "github-issues-project-context",
+      "openclaw-vps-6-dollars",
+      "youtube-metadata-relevance-fix"
+    ],
+    "vague_anchor_texts": [
+      "here",
+      "this",
+      "link",
+      "read more",
+      "click here",
+      "здесь",
+      "тут",
+      "сюда",
+      "читать",
+      "подробнее"
+    ]
+  },
+  "ghost_urls": [
+    {
+      "path": "/blog/subagent-model-cost",
+      "status": "restore",
+      "target": "/blog/subagent-model-cost/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Recoverable source found in git history and restored."
+    },
+    {
+      "path": "/blog/remotion-programmatic-video-vibecoding",
+      "status": "restore",
+      "target": "/blog/remotion-programmatic-video-vibecoding/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Recoverable source found in git history and restored."
+    },
+    {
+      "path": "/blog/llms.txt",
+      "status": "redirect",
+      "target": "/blog/llms-txt-agent-readable-web/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Unambiguous alias from context."
+    },
+    {
+      "path": "/blog/data-layer",
+      "status": "redirect",
+      "target": "/blog/data-layer-for-agents/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Unambiguous alias from context."
+    },
+    {
+      "path": "/blog/github-projects-ai-memory",
+      "status": "redirect",
+      "target": "/blog/github-projects-ai-agent-memory/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Unambiguous alias from context."
+    },
+    {
+      "path": "/blog/hooks",
+      "status": "410_or_404",
+      "notes": "Low traffic and no unambiguous successor after git-history inspection."
+    },
+    {
+      "path": "/blog/personal-corporation-agents-scheduler",
+      "status": "410_or_404",
+      "notes": "Low traffic and no unambiguous successor after git-history inspection."
+    },
+    {
+      "path": "/blog/sync-claude-code",
+      "status": "redirect",
+      "target": "/blog/sync-claude-code-four-machines/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Unambiguous alias from issue #66."
+    },
+    {
+      "path": "/blog/superpowers",
+      "status": "redirect",
+      "target": "/blog/superpowers-brainstorming-workflow/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Unambiguous alias from issue #66."
+    },
+    {
+      "path": "/blog/skills",
+      "status": "410_or_404",
+      "notes": "Low traffic and no unambiguous successor after git-history inspection."
+    }
+  ],
+  "malformed_urls": [
+    {
+      "path": "/blog/%20open%20router",
+      "status": "410_or_404",
+      "implemented": true,
+      "notes": "Garbage URL from issue #66. Returns 404 by default from Hugo — no redirect needed."
+    },
+    {
+      "path": "/blog/openclaw-vps-6-kimi.com/code/console",
+      "status": "410_or_404",
+      "implemented": true,
+      "notes": "Garbage URL from issue #66. Returns 404 by default from Hugo — no redirect needed."
+    },
+    {
+      "path": "/blog/data-layer-for-agents/)",
+      "status": "redirect",
+      "target": "/blog/data-layer-for-agents/",
+      "must_implement": true,
+      "implemented": true,
+      "notes": "Malformed trailing punctuation variant."
+    }
+  ]
+}

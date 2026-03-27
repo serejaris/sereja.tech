@@ -44,6 +44,19 @@ OG Preview: всегда генерировать через `scripts/og-preview
 
 Permalinks: `/blog/:filename`. RSS только для blog.
 
+## Pre-commit Hook
+
+Validates staged `content/blog/*.md` files before commit:
+- `title` ≤60 chars (required)
+- `description` ≤160 chars (required)
+- `date` present and YYYY-MM-DD format (required)
+- `tags` non-empty array (required)
+- `image` points to existing file in `static/` (warning if missing)
+
+Install after cloning: `./scripts/install-hooks.sh`
+Run standalone: `./scripts/validate-blog-post.sh [file ...]`
+Skip: `git commit --no-verify`
+
 ## Testing
 
 | Check | Command |
