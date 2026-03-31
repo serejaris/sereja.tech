@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Утечка Claude Code — скрытые функции в исходниках</title>
+<meta name="description" content="31 марта 2026 в сеть попал исходный код Claude Code. Внутри — десятки скрытых функций: от AI-питомца до автономных агентов.">
+<link rel="canonical" href="https://sereja.tech/cc-new-features/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Утечка Claude Code — скрытые функции в исходниках">
+<meta property="og:description" content="31 марта 2026 в сеть попал исходный код Claude Code. 59 скрытых функций: BUDDY, KAIROS, ULTRAPLAN, Coordinator Mode и другие.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sereja.tech/cc-new-features/">
+<meta property="og:site_name" content="sereja.tech">
+<meta property="article:published_time" content="2026-03-31">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Утечка Claude Code — скрытые функции в исходниках">
+<meta name="twitter:description" content="59 скрытых функций в исходном коде Claude Code. Полный разбор утечки.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fafafa;
+  color: #1a1a1a;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: #9ca3af;
+  letter-spacing: 0.02em;
+  margin-bottom: 40px;
+}
+.breadcrumb span { margin: 0 6px; }
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* News block */
+.news-block {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #5046e5;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+.news-block p {
+  font-size: 15px;
+  color: #374151;
+  margin-bottom: 8px;
+}
+.news-block p:last-child { margin-bottom: 0; }
+
+/* TOC */
+.toc {
+  margin-bottom: 48px;
+  padding: 20px 24px;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+.toc-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+.toc a {
+  display: block;
+  font-size: 14px;
+  color: #374151;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+.toc a:hover { color: #5046e5; }
+
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 56px;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* Features list */
+.features-list {
+  list-style: none;
+  margin-bottom: 16px;
+}
+.features-list li {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid #e5e7eb;
+  align-items: flex-start;
+}
+.features-list li:last-child { border-bottom: none; }
+
+.feature-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+  line-height: 1.4;
+}
+.feature-body { flex: 1; min-width: 0; }
+.feature-name {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: inline;
+}
+.feature-desc {
+  font-size: 15px;
+  color: #6b7280;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+/* Toggle / accordion */
+.toggle {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #fff;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  transition: background 0.15s;
+}
+.toggle-header:hover { background: #f9fafb; }
+.toggle-count {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+  margin-left: 8px;
+}
+.toggle-arrow {
+  font-size: 12px;
+  color: #9ca3af;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.toggle.open .toggle-arrow { transform: rotate(90deg); }
+.toggle-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #fff;
+}
+.toggle.open .toggle-body {
+  max-height: 4000px;
+}
+.toggle-body-inner {
+  padding: 0 20px 16px;
+  border-top: 1px solid #f3f4f6;
+}
+.toggle-body-inner .features-list li:first-child { padding-top: 12px; }
+
+code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #1a1a1a;
+}
+
+/* CTA */
+.cta-block {
+  margin-top: 56px;
+  padding: 32px 0;
+  border-top: 1px solid #e5e7eb;
+}
+.cta-block p {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+.cta-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #5046e5;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.cta-link:hover { opacity: 0.8; }
+.cta-link .arrow {
+  display: inline-block;
+  margin-left: 4px;
+  transition: transform 0.15s;
+}
+.cta-link:hover .arrow { transform: translateX(3px); }
+
+.footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 28px; }
+  .page { padding: 32px 16px 64px; }
+  .features-list li { gap: 12px; }
+  .feature-icon { width: 24px; font-size: 16px; }
+}
+
+@media print {
+  body { background: #fff; }
+  .toggle-body { max-height: none !important; }
+  .toggle-arrow { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="breadcrumb">Утечка <span>/</span> Claude Code <span>/</span> 31.03.2026</div>
+
+<h1>Скрытые функции Claude Code</h1>
+<p class="subtitle">Что нашлось в исходном коде npm-пакета <code>@anthropic-ai/claude-code</code></p>
+
+<!-- News block -->
+<div class="news-block">
+  <p>31 марта 2026 года в открытый доступ попал исходный код Claude Code — CLI-инструмента Anthropic для разработчиков. Пакет весит ~33 МБ и содержит 1 884 файла. Код обфусцирован, но читаем.</p>
+  <p>Внутри обнаружились десятки скрытых функций — от виртуального питомца в терминале до полноценной системы автономных агентов. Большинство отключены флагами сборки и удалёнными переключателями. Ниже — разбор всех находок.</p>
+</div>
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-title">Содержание</div>
+  <a href="#main-features">Ключевые скрытые функции</a>
+  <a href="#ui-features">Интерфейс и настройки</a>
+  <a href="#ops">Скрытые команды и ops</a>
+  <a href="#experiments">Эксперименты и заготовки</a>
+  <a href="#source">Исходники</a>
+</nav>
+
+<!-- ===== MAIN FEATURES ===== -->
+<h2 id="main-features">Ключевые скрытые функции</h2>
+<p class="section-desc">Готовые продуктовые модули, спрятанные за флагами. Каждый — законченная система.</p>
+
+<ul class="features-list">
+  <li>
+    <span class="feature-icon">🐣</span>
+    <div class="feature-body">
+      <span class="feature-name">BUDDY</span>
+      <p class="feature-desc">Виртуальный питомец рядом со строкой ввода. Есть вид, редкость, внешние атрибуты, реакции и команда <code>/buddy pet</code>. Даёт геймификацию и «эмоциональную» обратную связь во время работы.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">🧠</span>
+    <div class="feature-body">
+      <span class="feature-name">KAIROS</span>
+      <p class="feature-desc">Режим постоянного ассистента, который живёт дольше одной сессии. Ведёт дневные логи памяти, умеет быть проактивным и общаться через отдельный канал. Даёт ощущение «личного инженера», который помнит контекст, привычки и цели.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">🎓</span>
+    <div class="feature-body">
+      <span class="feature-name">ADVISOR</span>
+      <p class="feature-desc">Дополнительный reviewer на более сильной модели. Подключается до начала работы, при смене подхода и перед финальным ответом. Второй взгляд на сложные задачи — меньше ложных выводов.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">🗺️</span>
+    <div class="feature-body">
+      <span class="feature-name">ULTRAPLAN</span>
+      <p class="feature-desc">Удалённый режим долгого планирования в Claude Code on the web. Подтверждение в браузере. Даёт продуманный план для сложной задачи без загрузки локальной сессии.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">🔍</span>
+    <div class="feature-body">
+      <span class="feature-name">ULTRAREVIEW</span>
+      <p class="feature-desc">Удалённая глубокая проверка ветки или PR, ориентированная на поиск багов, а не на стиль кода. Жёсткий review, способный найти реальные дефекты до мержа.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">✅</span>
+    <div class="feature-body">
+      <span class="feature-name">Verification Stack</span>
+      <p class="feature-desc">Система верификации через специального агента и verifier-skills. Агент не «одобряет», а пытается сломать реализацию. Надёжный результат вместо формального «готово».</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">💬</span>
+    <div class="feature-body">
+      <span class="feature-name">Brief / SendUserMessage</span>
+      <p class="feature-desc">Отдельный канал ответа пользователю для финальных сообщений, статусов и вложений. Меньше служебного шума, больше коротких осмысленных обновлений.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">🕸️</span>
+    <div class="feature-body">
+      <span class="feature-name">Coordinator Mode</span>
+      <p class="feature-desc">Режим координатора: главный агент ставит задачи воркерам, собирает отчёты и синтезирует результат. Распараллеливание работы на больших задачах.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">📬</span>
+    <div class="feature-body">
+      <span class="feature-name">UDS Inbox</span>
+      <p class="feature-desc">Локальная система обмена сообщениями между сессиями и агентами через Unix domain sockets. Связывание нескольких сессий и составные локальные workflows.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">🌉</span>
+    <div class="feature-body">
+      <span class="feature-name">Bridge / Remote Control</span>
+      <p class="feature-desc">Удалённое управление локальной сессией из веба. Есть reconnect, control requests и remote-control flow. Работа с машиной не только из текущего терминала.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">👻</span>
+    <div class="feature-body">
+      <span class="feature-name">Daemon Mode</span>
+      <p class="feature-desc">Долгоживущий супервизорный режим с bridge, расписаниями и фоновыми воркерами. Процессы продолжают жить после закрытия основной сессии.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">📦</span>
+    <div class="feature-body">
+      <span class="feature-name">BG Sessions</span>
+      <p class="feature-desc">Фоновые сессии через <code>--bg</code>, плюс команды ps, logs, attach, kill. Отправить агента в фон, посмотреть прогресс, вернуться.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">💭</span>
+    <div class="feature-body">
+      <span class="feature-name">Auto-Dream</span>
+      <p class="feature-desc">Фоновая переработка памяти — периодически пересобирает знания из логов в более компактную форму. Менее захламлённая память и лучший долгосрочный контекст.</p>
+    </div>
+  </li>
+  <li>
+    <span class="feature-icon">⚡</span>
+    <div class="feature-body">
+      <span class="feature-name">Proactive Mode</span>
+      <p class="feature-desc">Автономный режим с periodic tick. Агент сам решает, что делать дальше или когда «спать». Ассистент, который сам двигает задачу без постоянных пинков.</p>
+    </div>
+  </li>
+</ul>
+
+<!-- Toggles for secondary product features -->
+<div class="toggle">
+  <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+    Ещё: уведомления, подписки, файлы, триггеры<span class="toggle-count">6</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+  <div class="toggle-body"><div class="toggle-body-inner">
+    <ul class="features-list">
+      <li>
+        <span class="feature-icon">📎</span>
+        <div class="feature-body">
+          <span class="feature-name">SendUserFile</span>
+          <p class="feature-desc">Отдельный канал отправки файлов пользователю. Прямая доставка артефактов, отчётов, скриншотов.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔔</span>
+        <div class="feature-body">
+          <span class="feature-name">PushNotification</span>
+          <p class="feature-desc">Push-уведомления о важных событиях и завершениях задач. Не нужно сидеть в терминале постоянно.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔗</span>
+        <div class="feature-body">
+          <span class="feature-name">SubscribePR</span>
+          <p class="feature-desc">Подписка на события GitHub PR — комментарии и CI-активность. Реактивная работа без ручного мониторинга.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📡</span>
+        <div class="feature-body">
+          <span class="feature-name">Channels</span>
+          <p class="feature-desc">Регистрация inbound push-событий от MCP servers. Event-driven сценарии, где внешние системы «будят» агента.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">⏰</span>
+        <div class="feature-body">
+          <span class="feature-name">RemoteTriggerTool</span>
+          <p class="feature-desc">Удалённые триггеры и запуск задач по расписанию или событию. Основа для автоматизаций и recurring flows.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📊</span>
+        <div class="feature-body">
+          <span class="feature-name">MonitorTool</span>
+          <p class="feature-desc">Наблюдение за состоянием процессов и удалённой активности. Контроль над долгими операциями.</p>
+        </div>
+      </li>
+    </ul>
+  </div></div>
+</div>
+
+<!-- ===== UI & SETTINGS ===== -->
+<h2 id="ui-features">Интерфейс и настройки</h2>
+<p class="section-desc">Команды и режимы для управления сессиями, окружением и UI.</p>
+
+<div class="toggle open">
+  <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+    13 скрытых команд интерфейса
+    <span class="toggle-arrow">▶</span>
+  </div>
+  <div class="toggle-body"><div class="toggle-body-inner">
+    <ul class="features-list">
+      <li>
+        <span class="feature-icon">🌐</span>
+        <div class="feature-body">
+          <span class="feature-name">web-setup</span>
+          <p class="feature-desc">Настройка Claude Code on the web и подключение GitHub-учётки.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🖥️</span>
+        <div class="feature-body">
+          <span class="feature-name">remote-env</span>
+          <p class="feature-desc">Работа с удалёнными окружениями. Запуск сценариев в подготовленных environments.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📱</span>
+        <div class="feature-body">
+          <span class="feature-name">session</span>
+          <p class="feature-desc">Показ URL и QR-кода текущей удалённой сессии. Подключение с другого устройства.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🏷️</span>
+        <div class="feature-body">
+          <span class="feature-name">tag</span>
+          <p class="feature-desc">Теги на сессиях для поиска и resume. Организация истории работы.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📂</span>
+        <div class="feature-body">
+          <span class="feature-name">files</span>
+          <p class="feature-desc">Показ файлов в контексте модели. Быстрый ответ на «что агент уже прочитал».</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔄</span>
+        <div class="feature-body">
+          <span class="feature-name">think-back</span>
+          <p class="feature-desc">Персональный обзор активности в Claude Code. Рефлексия по истории использования.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔀</span>
+        <div class="feature-body">
+          <span class="feature-name">fork</span>
+          <p class="feature-desc">Запуск отдельной ветки агентной работы. Безопасное параллельное исследование альтернативного подхода.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">👥</span>
+        <div class="feature-body">
+          <span class="feature-name">peers</span>
+          <p class="feature-desc">Работа с peer-сессиями или соседними агентами. Multi-session координация.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📋</span>
+        <div class="feature-body">
+          <span class="feature-name">tasks</span>
+          <p class="feature-desc">Просмотр и управление фоновыми задачами. Единый экран для долгих процессов.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🤖</span>
+        <div class="feature-body">
+          <span class="feature-name">assistant</span>
+          <p class="feature-desc">Принудительное включение assistant-mode. Более «постоянный» тип агента.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🎤</span>
+        <div class="feature-body">
+          <span class="feature-name">voice</span>
+          <p class="feature-desc">Голосовой режим и голосовой ввод. Hands-free сценарии без клавиатуры.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📊</span>
+        <div class="feature-body">
+          <span class="feature-name">statusline</span>
+          <p class="feature-desc">Отдельная status line в интерфейсе. Более информативный UI.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">⚙️</span>
+        <div class="feature-body">
+          <span class="feature-name">workflows</span>
+          <p class="feature-desc">Запуск многошаговых workflow-сценариев. Повторяемые автоматизированные цепочки действий.</p>
+        </div>
+      </li>
+    </ul>
+  </div></div>
+</div>
+
+<!-- ===== OPS ===== -->
+<h2 id="ops">Скрытые команды и ops</h2>
+<p class="section-desc">Служебные команды для автоматизации git-операций, диагностики и управления сессиями.</p>
+
+<div class="toggle">
+  <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+    8 ops-команд
+    <span class="toggle-arrow">▶</span>
+  </div>
+  <div class="toggle-body"><div class="toggle-body-inner">
+    <ul class="features-list">
+      <li>
+        <span class="feature-icon">💾</span>
+        <div class="feature-body">
+          <span class="feature-name">commit</span>
+          <p class="feature-desc">Агент сам готовит и делает коммит. Автоматизированное завершение без ручной git-рутины.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🚀</span>
+        <div class="feature-body">
+          <span class="feature-name">commit-push-pr</span>
+          <p class="feature-desc">Ветка, коммит, push и создание PR в одном потоке. «От кода до PR» за один шаг.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🧹</span>
+        <div class="feature-body">
+          <span class="feature-name">heapdump</span>
+          <p class="feature-desc">Снятие heap dump для диагностики утечек памяти. Для отладки самого инструмента.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🏷️</span>
+        <div class="feature-body">
+          <span class="feature-name">version</span>
+          <p class="feature-desc">Скрытый путь вывода версии. Быстрый self-check.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">⚠️</span>
+        <div class="feature-body">
+          <span class="feature-name">rate-limit-options</span>
+          <p class="feature-desc">Экран действий при упоре в лимиты. Fallback-выбор вместо тупика.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🎨</span>
+        <div class="feature-body">
+          <span class="feature-name">output-style</span>
+          <p class="feature-desc">Скрытое управление стилем вывода. Тонкая настройка формата ответа.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔧</span>
+        <div class="feature-body">
+          <span class="feature-name">bridge-kick</span>
+          <p class="feature-desc">Служебный «пинок» bridge-соединению. Аварийное восстановление remote-control.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🖥️</span>
+        <div class="feature-body">
+          <span class="feature-name">terminal-setup</span>
+          <p class="feature-desc">Настройка среды и терминала вокруг сессии. Меньше ручной настройки окружения.</p>
+        </div>
+      </li>
+    </ul>
+  </div></div>
+</div>
+
+<!-- ===== EXPERIMENTS ===== -->
+<h2 id="experiments">Эксперименты и заготовки</h2>
+<p class="section-desc">Незавершённые прототипы и внутренние инструменты. Смысл некоторых из снапшота кода полностью не раскрыт.</p>
+
+<div class="toggle">
+  <div class="toggle-header" onclick="this.parentElement.classList.toggle('open')">
+    18 экспериментальных функций
+    <span class="toggle-arrow">▶</span>
+  </div>
+  <div class="toggle-body"><div class="toggle-body-inner">
+    <ul class="features-list">
+      <li>
+        <span class="feature-icon">🔧</span>
+        <div class="feature-body">
+          <span class="feature-name">autofix-pr</span>
+          <p class="feature-desc">Автоисправление PR по замечаниям. Автоматическое доведение PR до зелёного состояния.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📋</span>
+        <div class="feature-body">
+          <span class="feature-name">background-pr</span>
+          <p class="feature-desc">Фоновая обработка PR как долгий backend-процесс.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🐛</span>
+        <div class="feature-body">
+          <span class="feature-name">bughunter</span>
+          <p class="feature-desc">Отдельный режим агрессивной охоты за багами.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📤</span>
+        <div class="feature-body">
+          <span class="feature-name">share</span>
+          <p class="feature-desc">Шаринг сессии или summary. Передача результатов другим людям.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📝</span>
+        <div class="feature-body">
+          <span class="feature-name">summary</span>
+          <p class="feature-desc">Автосводка по сессии. Быстрый digest без чтения всей истории.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">✈️</span>
+        <div class="feature-body">
+          <span class="feature-name">teleport</span>
+          <p class="feature-desc">Перенос удалённой работы в локальный терминал. Бесшовный переход между remote и local.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🌍</span>
+        <div class="feature-body">
+          <span class="feature-name">env</span>
+          <p class="feature-desc">Более явная работа с окружением и средой исполнения.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">👋</span>
+        <div class="feature-body">
+          <span class="feature-name">onboarding</span>
+          <p class="feature-desc">Отдельный пользовательский онбординг-флоу. Мягкий вход в продукт.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔬</span>
+        <div class="feature-body">
+          <span class="feature-name">ant-trace</span>
+          <p class="feature-desc">Внутренний trace/debug режим. Диагностика.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">⏱️</span>
+        <div class="feature-body">
+          <span class="feature-name">perf-issue</span>
+          <p class="feature-desc">Поток для performance-проблем. Системный способ фиксировать перф-баги.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🎫</span>
+        <div class="feature-body">
+          <span class="feature-name">issue</span>
+          <p class="feature-desc">Более явная работа с issue-трекером. Интеграция «из задачи в код».</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔍</span>
+        <div class="feature-body">
+          <span class="feature-name">debug-tool-call</span>
+          <p class="feature-desc">Отладка отдельного tool call. Для сложных сбоев инструментов.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">📚</span>
+        <div class="feature-body">
+          <span class="feature-name">backfill-sessions</span>
+          <p class="feature-desc">Восстановление или миграция старых сессий. Сохранность истории.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">💥</span>
+        <div class="feature-body">
+          <span class="feature-name">break-cache</span>
+          <p class="feature-desc">Принудительная ломка кеша для тестов и дебага.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">👁️</span>
+        <div class="feature-body">
+          <span class="feature-name">ctx_viz</span>
+          <p class="feature-desc">Визуализация контекста модели. Прозрачность того, что агент реально видит.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🧪</span>
+        <div class="feature-body">
+          <span class="feature-name">mock-limits</span>
+          <p class="feature-desc">Симуляция лимитов. Тестирование edge-cases без реального упора.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔄</span>
+        <div class="feature-body">
+          <span class="feature-name">reset-limits</span>
+          <p class="feature-desc">Сброс лимитов в тестовом режиме.</p>
+        </div>
+      </li>
+      <li>
+        <span class="feature-icon">🔥</span>
+        <div class="feature-body">
+          <span class="feature-name">torch, passes, good-claude</span>
+          <p class="feature-desc">Экспериментальные internal surface'ы. Потенциально — новые режимы качества или поведения, но из снапшота их смысл полностью не раскрыт.</p>
+        </div>
+      </li>
+    </ul>
+  </div></div>
+</div>
+
+<!-- ===== CTA ===== -->
+<section id="source" class="cta-block">
+  <p>Полный интерактивный разбор со всеми флагами, переменными и gate-именами:</p>
+  <a href="https://cc-hidden-deploy.vercel.app/" class="cta-link" target="_blank" rel="noopener">Открыть разбор <span class="arrow">→</span></a>
+  <p style="margin-top: 20px;">Форк исходников на GitHub:</p>
+  <a href="https://github.com/instructkr/claude-code" class="cta-link" target="_blank" rel="noopener">github.com/instructkr/claude-code <span class="arrow">→</span></a>
+</section>
+
+<div class="footer">
+  Утечка от 31 марта 2026 · npm-пакет <code>@anthropic-ai/claude-code</code> · 1 884 файла · ~33 МБ
+</div>
+
+</div>
+
+<script>
+// Smooth scroll for TOC
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+<!-- PostHog -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
+  api_host: 'https://us.i.posthog.com',
+  capture_pageview: true,
+  autocapture: true,
+  disable_session_recording: true
+});
+</script>
+</body>
+</html>
