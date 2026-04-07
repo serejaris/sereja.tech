@@ -1,0 +1,16 @@
+{{- $key := printf "%s/%s" .Section .File.ContentBaseName -}}
+{{- $links := index .Site.Data.cross_links $key -}}
+{{- with $links -}}
+<div class="cross-domain-links">
+  <h3>На других сайтах</h3>
+  <ul>
+    {{- range . -}}
+    <li class="cdl-item cdl-{{ .domain | replaceRE `\..*$` `` }}">
+      <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+      <span class="cdl-badge">{{ .domain_label }}</span>
+      {{- with .description -}}<span class="cdl-desc">{{ . }}</span>{{- end -}}
+    </li>
+    {{- end -}}
+  </ul>
+</div>
+{{- end -}}
