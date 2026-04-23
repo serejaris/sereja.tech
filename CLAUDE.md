@@ -24,11 +24,18 @@
 | Path | Purpose |
 |------|---------|
 | `content/blog/*.md` | Статьи |
+| `data/videos.yml` | 4 последних YouTube-видео для блока на главной (featured + 3) |
 | `layouts/` | Hugo шаблоны |
 | `static/` | JS, images |
 | `scripts/og-preview/` | OG-превью генератор (HTML → Playwright → PNG 1200×630) |
 | `hugo.toml` | Конфиг Hugo |
 | `index.html` | Legacy главная (вне Hugo) |
+
+## YouTube Block
+
+Секция «YouTube» на главной (`layouts/index.html`) — data-driven из `data/videos.yml`. Первая запись = featured iframe + подпись «Последнее видео: {label}». Следующие 3 — список с thumbnail 80×45 (грузятся с `i.ytimg.com/vi/{id}/mqdefault.jpg`).
+
+Обновление = часть lifecycle стрима, **живёт не здесь**. Владелец процесса — `live-sereja-tech/AGENTS.md` § 9.1 «YouTube Broadcast Lifecycle», шаг «D+1 refresh». IDs/titles canonical в `~/Documents/GitHub/stats-youtube/videos.json`.
 
 ## Blog Workflow
 
