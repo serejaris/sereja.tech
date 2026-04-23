@@ -43,6 +43,17 @@
     .youtube-preview { margin: 20px 0; }
     .youtube-preview iframe { width: 100%; aspect-ratio: 16/9; border: none; }
 
+    .video-list { list-style: none; padding: 0; margin: 12px 0 20px; }
+    .video-list li { margin-bottom: 10px; }
+    .video-item { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: inherit; }
+    .video-item:visited { color: inherit; }
+    .video-item img { flex-shrink: 0; display: block; border: 1px solid #000; }
+    .video-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .video-title { color: #0000EE; text-decoration: underline; }
+    .video-item:visited .video-title { color: #551A8B; }
+    .video-item:hover .video-title { text-decoration: none; }
+    .video-meta .date { margin-right: 0; }
+
     img { max-width: 100%; height: auto; display: block; }
     figure { margin: 24px 0; max-width: 100%; }
     figcaption { font-size: 13px; color: #666; margin-top: 6px; }
@@ -121,6 +132,9 @@
       .tag { border-color: #4a4a4a; color: #d1d5db; }
       .tag:visited { color: #d1d5db; }
       .tag:hover { background: #4a4a4a; color: #fff; }
+      .video-item img { border-color: #3a3a3a; }
+      .video-title { color: #7ab0ff; }
+      .video-item:visited .video-title { color: #c4a6f5; }
     }
   </style>
 </head>

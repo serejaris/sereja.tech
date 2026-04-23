@@ -8,15 +8,31 @@
 </div>
 
 <h2>YouTube</h2>
+{{ with index .Site.Data.videos.videos 0 }}
 <div class="youtube-preview">
   <iframe
-    src="https://www.youtube-nocookie.com/embed/AHIaQKQqfRM"
-    title="Стрим про ClawdBot"
+    src="https://www.youtube-nocookie.com/embed/{{ .id }}"
+    title="{{ .title }}"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
   </iframe>
 </div>
-<p><small>Последний стрим: ClawdBot · <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=youtube_section" target="_blank">Все видео</a></small></p>
+<p><small>Последнее видео: {{ .label }} · <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=youtube_section" target="_blank">Все видео</a></small></p>
+{{ end }}
+
+<ul class="video-list">
+  {{ range after 1 .Site.Data.videos.videos }}
+  <li>
+    <a href="https://www.youtube.com/watch?v={{ .id }}" target="_blank" class="video-item">
+      <img src="https://i.ytimg.com/vi/{{ .id }}/mqdefault.jpg" alt="" width="80" height="45" loading="lazy">
+      <span class="video-meta">
+        <span class="video-title">{{ .title }}</span>
+        <span class="date">{{ time.Format "2 Jan 2006" .date }}</span>
+      </span>
+    </a>
+  </li>
+  {{ end }}
+</ul>
 
 <h2>Последнее из блога</h2>
 <ul class="posts">

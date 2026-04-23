@@ -1,0 +1,16 @@
+# Последние YouTube-видео/стримы. Первый = featured (iframe на главной).
+# Как обновить: после публикации нового — новое сверху, старое с конца выкинуть.
+videos:
+  - id: 05xs_kyacxI
+    title: "GPT Image 2: разбор новой модели OpenAI"
+    label: "GPT Image 2"
+    date: 2026-04-21
+  - id: yX9-bOj1Mu0
+    title: "Claude Design: обзор нового AI для дизайна, прототипов и презентаций"
+    date: 2026-04-17
+  - id: tqDBIhMjo8w
+    title: "Claude Opus 4.7, обзор, вайбкодинг тесты, сравнение с GPT 5.4"
+    date: 2026-04-16
+  - id: O4KwzNZuaB8
+    title: "Paperclip: как собрать компанию из AI-агентов на базе Claude Code"
+    date: 2026-03-27
