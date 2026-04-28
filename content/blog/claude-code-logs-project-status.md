@@ -44,7 +44,7 @@ find ~/.claude/projects -type f -name "*.jsonl" -mtime -2 | \
 | hsl-mozg | ✓ | synced |
 | presentation-skills | ✓ | 7 |
 | tg-web-app | ✗ | — |
-| 0_ШКОЛА | ✓ | 1 |
+| 0_hq | ✓ | 1 |
 
 tg-web-app без git — эксперимент месячной давности, который забросил.
 
