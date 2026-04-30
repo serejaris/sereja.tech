@@ -8,6 +8,7 @@
 
 | Дата | Статья |
 |------|--------|
+| 2026-04-30 | [OTel для Claude Code — рентген твоих скиллов](https://sereja.tech/blog/claude-code-skills-grafana/) |
 | 2026-04-27 | [Свой Miro за 30 минут вместо подписки](https://sereja.tech/blog/svoy-miro-za-30-minut/) |
 | 2026-04-22 | [Как я научил Claude Code писать техно-музыку](https://sereja.tech/blog/claude-code-techno-strudel-mcp/) |
 | 2026-04-22 | [Как трекать задачи агентом в нескольких репо](https://sereja.tech/blog/tracking-tasks-agent-multi-repo/) |
