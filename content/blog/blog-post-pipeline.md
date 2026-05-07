@@ -200,7 +200,7 @@ Output: "[CLAIM]: {exact quote}" + "[FLAG]: {why suspicious}"
 {{< callout type="insight" >}}
 Напиши превью статьи для Telegram канала.
 
-URL: https://sereja.tech/blog/{slug}
+URL: CANONICAL_ARTICLE_URL
 
 ФОРМАТ:
 &lt;b&gt;Hook — цепляющая фраза про боль/результат&lt;/b&gt;

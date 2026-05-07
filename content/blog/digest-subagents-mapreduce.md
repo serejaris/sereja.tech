@@ -18,7 +18,7 @@ image: /images/blog/digest-subagents-mapreduce-preview.png
 
 ## Решение: MapReduce через субагенты
 
-[Этот паттерн я уже использовал](/blog/map-reduce-youtube-metadata) для генерации метаданных YouTube — там тоже нужно было обработать большой транскрипт без потери деталей. Для дайджестов логика та же.
+[Этот паттерн я уже использовал](/blog/map-reduce-youtube-metadata/) для генерации метаданных YouTube — там тоже нужно было обработать большой транскрипт без потери деталей. Для дайджестов логика та же.
 
 Разделил процесс на четыре этапа.
 
@@ -118,7 +118,7 @@ Telegram API возвращает `reply_to_message_id`. Добавляю тек
 
 ## Почему субагенты
 
-MapReduce — [один из 12 паттернов AI-пайплайнов](/blog/ai-writing-pipelines), которые я разбирал раньше. [Anthropic писали](https://www.anthropic.com/engineering/multi-agent-research-system) про multi-agent для исследований. Та же логика для дайджестов:
+MapReduce — [один из 12 паттернов AI-пайплайнов](/blog/ai-writing-pipelines/), которые я разбирал раньше. [Anthropic писали](https://www.anthropic.com/engineering/multi-agent-research-system) про multi-agent для исследований. Та же логика для дайджестов:
 
 - **Фокус**: каждый агент на ~15 сообщений
 - **Цена**: Haiku в 6 раз дешевле Sonnet

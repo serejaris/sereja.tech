@@ -1,0 +1,300 @@
+[
+  {
+    "url": "https://sereja.tech/blog/tui-presentation-claude-code",
+    "hits": [
+      [
+        "content/blog/product-data-audit-skill.md",
+        112,
+        "Дизайн-спецификация зашита в скилл. Агент не выбирает тему при запуске — он генерирует отчёт в этом стиле каждый раз. По тому же принципу я делал [интерактивные"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/claude-code-hooks-github-issues",
+    "hits": [
+      [
+        "content/blog/sync-claude-code-four-machines.md",
+        25,
+        "Я уже использую [GitHub Projects как память для агента](/blog/github-projects-ai-agent-memory) — единая доска с задачами из всех репозиториев. И [хуки, которые "
+      ],
+      [
+        "content/blog/claude-code-skills-grafana.md",
+        101,
+        "Тестовая метрика появилась в Prometheus за 15 секунд. Рестарт `claude`, первый запрос — и в дашборде поползли реальные имена скиллов. Тот же паттерн «настроил о"
+      ],
+      [
+        "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+        248,
+        "Я не следил за процессом. Открыл проект через час — зелёная галочка. Подробнее про механику — в [Хуки Claude Code: агент сам ведёт задачи](/blog/claude-code-hoo"
+      ]
+    ],
+    "hit_count": 3
+  },
+  {
+    "url": "https://sereja.tech/blog/midi-obs-scene-switching/",
+    "hits": [
+      [
+        "static/llms-full.txt",
+        103,
+        "- [MIDI для OBS: JSON-конфиг](https://sereja.tech/blog/midi-obs-scene-switching/): Arturia MiniLab 3 + obs-midi-mg"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/data-layer-for-agents",
+    "hits": [
+      [
+        "content/blog/claude-code-techno-strudel-mcp.md",
+        63,
+        "[Через тот же DevTools MCP агент уже доставал у меня ключ от YouTube API](/blog/data-layer-for-agents) — но там была плоская читалка. Тут впервые он что-то сочи"
+      ],
+      [
+        "content/blog/product-data-audit-skill.md",
+        132,
+        "Подробнее про [единый data layer как основу для таких отчётов](/blog/data-layer-for-agents) — без канонических файлов с данными аудит не будет конкретным."
+      ]
+    ],
+    "hit_count": 2
+  },
+  {
+    "url": "https://sereja.tech/blog/agent-consilium-independent-opinions",
+    "hits": [
+      [
+        "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+        258,
+        "И тут важно: Personal Corp — это не про код. Код — частный случай. Агенты умеют больше: анализировать стратегию, находить проблемы в продукте, писать тексты, сч"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/seo-for-ai-era",
+    "hits": [
+      [
+        "content/blog/seo-audit-hugo-vercel-checklist.md",
+        61,
+        "Про JSON-LD и structured data подробнее — в [SEO для блога в эру AI](/blog/seo-for-ai-era). VideoObject добавил для постов с видео из [видео-пайплайна](/blog/vi"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/openclaw-vps-6-dollars",
+    "hits": [
+      [
+        "content/blog/openclaw-hooks-automation.md",
+        13,
+        "В [первой части](/blog/openclaw-vps-6-dollars) я поставил OpenClaw на VPS за $6. Агент жил на сервере, отвечал в Telegram, называл меня самураем. Всё красиво."
+      ],
+      [
+        "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+        195,
+        "На третьем — CEO. Ты описываешь задачу, оркестратор сам декомпозирует, раздаёт агентам, проверяет результат. Агенты работают параллельно — и не только над кодом"
+      ]
+    ],
+    "hit_count": 2
+  },
+  {
+    "url": "https://sereja.tech/blog/playwright-e2e-with-ai-agent",
+    "hits": [
+      [
+        "content/blog/chrome-devtools-mcp-setup.md",
+        38,
+        "**Playwright MCP** — запускает чистый Chromium. Без логинов, без кук, без сессий. Про [браузерную автоматизацию с Playwright](/blog/playwright-e2e-with-ai-agent"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github",
+    "hits": [
+      [
+        "content/blog/paperclip-ai-company-agents.md",
+        21,
+        "Первый подход был простым — [GitHub Issues как первый способ трекать агентов](/blog/vibecoder-to-ceo-personal-corp-github). Попросил агента завести issues, наст"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/fix-once-rule-forever",
+    "hits": [
+      [
+        "content/blog/llm-evals-for-vibecoder.md",
+        117,
+        "У обоих одна причина: никто не проверял выход автоматически. [Правила в CLAUDE.md](/blog/fix-once-rule-forever) предотвращают известные ошибки. Eval-ы ловят нов"
+      ],
+      [
+        "content/blog/claude-code-token-optimization.md",
+        82,
+        "Бонус: в плане видно что агент собирается делать. Ловлю проблемы до выполнения, не после. Подробнее про то как [учить агента не повторять ошибки](/blog/fix-once"
+      ],
+      [
+        "content/blog/claude-code-vs-codex-cli.md",
+        92,
+        "Codex плохо справляется с brainstorming. Он не задаёт уточняющих вопросов. Получает задачу — и делает. Нечёткая формулировка — не тот результат. Нет аналога Pla"
+      ],
+      [
+        "content/blog/draft-before-artifact.md",
+        116,
+        "Подробнее про этот подход к документированию — [в статье про разговоры с агентом](/blog/document-conversations-not-code). Документируй мышление, а не финальный "
+      ],
+      [
+        "content/blog/claude-code-auto-memory.md",
+        70,
+        "По-моему, это самая ценная часть. Похоже на подход из [Правка → Правило](/blog/fix-once-rule-forever) — только здесь агент сам формулирует правила из наблюдений"
+      ]
+    ],
+    "hit_count": 5
+  },
+  {
+    "url": "https://sereja.tech/blog/superpowers-brainstorming-workflow",
+    "hits": [
+      [
+        "content/blog/homebrew-cli-vibecoding.md",
+        146,
+        "Из CLI-инструментов потом собираются [скиллы для агента](/blog/superpowers-brainstorming-workflow). А когда нужно взаимодействие с внешними системами — подключа"
+      ],
+      [
+        "content/blog/claude-code-vs-codex-cli.md",
+        54,
+        "CC — для длинных сессий и планирования. Brainstorming, architecture decisions, итеративная работа, когда мне нужно обсудить подход, а не получить результат. 37%"
+      ]
+    ],
+    "hit_count": 2
+  },
+  {
+    "url": "https://sereja.tech/blog/chrome-devtools-mcp/",
+    "hits": [
+      [
+        "static/llms-full.txt",
+        100,
+        "- [Chrome DevTools MCP: глаза в браузер](https://sereja.tech/blog/chrome-devtools-mcp/): Кейс отладки формы авторизации"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/modular-rules-claude-md",
+    "hits": [
+      [
+        "content/blog/sync-claude-code-four-machines.md",
+        166,
+        "Пятнадцать минут — и машина готова. Со всеми скиллами, хуками и [модульными правилами](/blog/modular-rules-claude-md). Без флешек и ручного копирования."
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/agent-teams-opus-4-6",
+    "hits": [
+      [
+        "content/blog/paperclip-ai-company-agents.md",
+        115,
+        "**Попробовать [параллельную работу как следующий шаг](/blog/agent-teams-opus-4-6).** Несколько агентов берут задачи одновременно. Не последовательно, а параллел"
+      ],
+      [
+        "content/blog/agent-consilium-independent-opinions.md",
+        17,
+        "[Agent Teams](/blog/agent-teams-opus-4-6) — команда, которая работает вместе. Один делает backend, другой frontend, третий тесты. Цель — скорость."
+      ],
+      [
+        "content/blog/superpowers-brainstorming-workflow.md",
+        135,
+        "**Plan — это промпт для агентов.** Результат brainstorming — готовый промпт, который передаётся агентам в новую сессию. Они выполняют задачи по порядку, с полны"
+      ],
+      [
+        "content/blog/gemini-3-1-pro-svg-animations.md",
+        113,
+        "Это ровно тот же принцип, что и с Agent Teams: каждый агент делает своё. Только здесь \"команда\" — это разные модели. Подробнее про координацию агентов писал в ["
+      ]
+    ],
+    "hit_count": 4
+  },
+  {
+    "url": "https://sereja.tech/blog/github-projects-ai-agent-memory",
+    "hits": [
+      [
+        "content/blog/sync-claude-code-four-machines.md",
+        25,
+        "Я уже использую [GitHub Projects как память для агента](/blog/github-projects-ai-agent-memory) — единая доска с задачами из всех репозиториев. И [хуки, которые "
+      ],
+      [
+        "content/blog/claude-code-hooks-github-issues.md",
+        21,
+        "GitHub Issues — это и так список задач. Я [уже использую их как память для AI-агента](/blog/github-projects-ai-agent-memory). Задачи лежат в проекте \"everything"
+      ],
+      [
+        "content/blog/agent-teams-opus-4-6.md",
+        124,
+        "Про [хранение контекста между сессиями агентов](/blog/github-projects-ai-agent-memory) — отдельная тема, но с Teams это ещё актуальнее."
+      ],
+      [
+        "content/blog/tracking-tasks-agent-multi-repo.md",
+        17,
+        "Раньше я писал [про GitHub Projects как память для AI-агента](/blog/github-projects-ai-agent-memory) — там речь шла про один репо: доска = память, агент читает "
+      ],
+      [
+        "content/blog/claude-code-auto-memory.md",
+        135,
+        "**Онбординг на чужой проект.** Начинаете с новой кодобазой. Агент записывает открытия по ходу. Через пару сессий — готовая шпаргалка в памяти агента. Мне кажетс"
+      ]
+    ],
+    "hit_count": 6
+  },
+  {
+    "url": "https://sereja.tech/blog/openclaw-hooks-automation",
+    "hits": [
+      [
+        "content/blog/claude-code-hooks-github-issues.md",
+        50,
+        "Claude Code поддерживает хуки — скрипты, которые запускаются на определённых этапах жизненного цикла сессии. Я [писал про хуки раньше](/blog/openclaw-hooks-auto"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/pipeline-reliability-state-persistence",
+    "hits": [
+      [
+        "content/blog/openclaw-hooks-automation.md",
+        21,
+        "Я уже проходил через это с [пайплайнами на скиллах](/blog/pipeline-reliability-state-persistence) — без сохранения состояния любая система одноразовая. Там помо"
+      ]
+    ],
+    "hit_count": 1
+  },
+  {
+    "url": "https://sereja.tech/blog/blog-post-pipeline",
+    "hits": [
+      [
+        "content/blog/remotion-programmatic-video-vibecoding.md",
+        205,
+        "Видео как [часть контент-пайплайна](/blog/blog-post-pipeline) --- уже реальность. Статья, OG-картинка, промо-ролик --- всё из одного набора данных, всё собирает"
+      ],
+      [
+        "content/blog/paperclip-ai-company-agents.md",
+        83,
+        "Pipeline — тот же, что описан в статье про [pipeline который Content Writer проходит автономно](/blog/blog-post-pipeline). Пять фаз: уточняющие вопросы, researc"
+      ],
+      [
+        "content/blog/seo-audit-hugo-vercel-checklist.md",
+        101,
+        "Этот подход — часть моего [воркфлоу публикации статей](/blog/blog-post-pipeline), где агенты делают research и черновик, а я направляю."
+      ],
+      [
+        "content/blog/content-plan-subagents-exa.md",
+        113,
+        "Похожий подход к системной генерации контента описывал в [Пайплайн для статей](/blog/blog-post-pipeline) — там тоже всё начинается с правил, а потом делегируетс"
+      ],
+      [
+        "content/blog/draft-before-artifact.md",
+        89,
+        "**Блог-посты.** Мой [пайплайн для статей](/blog/blog-post-pipeline) устроен именно так: сначала research, потом brief с тезисами, потом черновик, потом финальны"
+      ]
+    ],
+    "hit_count": 7
+  }
+]

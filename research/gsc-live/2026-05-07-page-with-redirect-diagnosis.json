@@ -1,0 +1,686 @@
+[
+  {
+    "url": "http://www.sereja.tech/",
+    "statuses": [
+      "308",
+      "308",
+      "200"
+    ],
+    "locations": [
+      "https://www.sereja.tech/",
+      "https://sereja.tech/"
+    ],
+    "final": "https://sereja.tech/",
+    "in_sitemap_related": false,
+    "source_hits": [
+      "content/about/index.md",
+      "content/blog/agent-consilium-independent-opinions.md",
+      "content/blog/agent-swarm-frontend.md",
+      "content/blog/agent-teams-opus-4-6.md",
+      "content/blog/agents-md-source-of-truth.md",
+      "content/blog/ai-coding-tools-economics-2026.md",
+      "content/blog/ai-student-progress-tracking.md",
+      "content/blog/ai-writing-pipelines.md",
+      "content/blog/app-types-guide.md",
+      "content/blog/ascii-dashboard-analytics.md"
+    ]
+  },
+  {
+    "url": "https://www.sereja.tech/",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "https://sereja.tech/"
+    ],
+    "final": "https://sereja.tech/",
+    "in_sitemap_related": false,
+    "source_hits": [
+      "content/about/index.md",
+      "content/blog/agent-consilium-independent-opinions.md",
+      "content/blog/agent-swarm-frontend.md",
+      "content/blog/agent-teams-opus-4-6.md",
+      "content/blog/agents-md-source-of-truth.md",
+      "content/blog/ai-coding-tools-economics-2026.md",
+      "content/blog/ai-student-progress-tracking.md",
+      "content/blog/ai-writing-pipelines.md",
+      "content/blog/app-types-guide.md",
+      "content/blog/ascii-dashboard-analytics.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/tui-presentation-claude-code",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/tui-presentation-claude-code/"
+    ],
+    "final": "https://sereja.tech/blog/tui-presentation-claude-code/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/ascii-dashboard-analytics.md",
+      "content/blog/product-data-audit-skill.md",
+      "content/blog/react-presentation-no-build.md",
+      "content/blog/tui-presentation-claude-code.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/claude-code-hooks-github-issues",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/claude-code-hooks-github-issues/"
+    ],
+    "final": "https://sereja.tech/blog/claude-code-hooks-github-issues/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/agents-md-source-of-truth.md",
+      "content/blog/cc-alias-bypass-permissions.md",
+      "content/blog/claude-code-hooks-github-issues.md",
+      "content/blog/claude-code-marketing-ops.md",
+      "content/blog/claude-code-skills-grafana.md",
+      "content/blog/github-agentic-workflows-telegram-analytics.md",
+      "content/blog/pipeline-reliability-state-persistence.md",
+      "content/blog/software-for-one-personal-tools.md",
+      "content/blog/svoy-miro-za-30-minut.md",
+      "content/blog/symphony-codex-orchestrator.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/midi-obs-scene-switching",
+    "statuses": [
+      "308",
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/midi-obs-scene-switching/",
+      "/blog/midi-obs-claude-code/"
+    ],
+    "final": "https://sereja.tech/blog/midi-obs-claude-code/",
+    "in_sitemap_related": false,
+    "source_hits": [
+      "static/llms-full.txt",
+      "vercel.json"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/midi-obs-scene-switching/",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/midi-obs-claude-code/"
+    ],
+    "final": "https://sereja.tech/blog/midi-obs-claude-code/",
+    "in_sitemap_related": false,
+    "source_hits": [
+      "static/llms-full.txt",
+      "vercel.json"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/data-layer-for-agents",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/data-layer-for-agents/"
+    ],
+    "final": "https://sereja.tech/blog/data-layer-for-agents/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/agents-md-source-of-truth.md",
+      "content/blog/claude-code-techno-strudel-mcp.md",
+      "content/blog/context-architecture-lifecycle-split.md",
+      "content/blog/data-layer-for-agents.md",
+      "content/blog/llms-txt-agent-readable-web.md",
+      "content/blog/moltbook-social-network-ai-agents.md",
+      "content/blog/notebooklm-claude-code-rag.md",
+      "content/blog/product-data-audit-skill.md",
+      "content/blog/symphony-codex-orchestrator.md",
+      "docs/PLAN.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/agent-consilium-independent-opinions",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/agent-consilium-independent-opinions/"
+    ],
+    "final": "https://sereja.tech/blog/agent-consilium-independent-opinions/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/agent-consilium-independent-opinions.md",
+      "content/blog/board-of-advisors-subagents.md",
+      "content/blog/multi-agent-text-deaify.md",
+      "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/seo-for-ai-era",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/seo-for-ai-era/"
+    ],
+    "final": "https://sereja.tech/blog/seo-for-ai-era/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/llms-txt-agent-readable-web.md",
+      "content/blog/seo-audit-hugo-vercel-checklist.md",
+      "content/blog/seo-for-ai-era.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/openclaw-vps-6-dollars",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/openclaw-vps-6-dollars/"
+    ],
+    "final": "https://sereja.tech/blog/openclaw-vps-6-dollars/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/openclaw-hooks-automation.md",
+      "content/blog/openclaw-vps-6-dollars.md",
+      "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+      "docs/STATUS.md",
+      "docs/TEST_PLAN.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/telegram-broadcast-file-id",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/telegram-broadcast-file-id/"
+    ],
+    "final": "https://sereja.tech/blog/telegram-broadcast-file-id/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/telegram-broadcast-file-id.md",
+      "content/blog/telegram-broadcast-slow.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/claude-code-marketing-ops",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/claude-code-marketing-ops/"
+    ],
+    "final": "https://sereja.tech/blog/claude-code-marketing-ops/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/claude-code-marketing-ops.md",
+      "content/blog/github-agentic-workflows-telegram-analytics.md",
+      "content/blog/telegram-autopublisher.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/playwright-e2e-with-ai-agent",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/playwright-e2e-with-ai-agent/"
+    ],
+    "final": "https://sereja.tech/blog/playwright-e2e-with-ai-agent/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/carousel-cards-playwright.md",
+      "content/blog/chrome-devtools-mcp-setup.md",
+      "content/blog/playwright-e2e-with-ai-agent.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "http://sereja.tech/",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "https://sereja.tech/"
+    ],
+    "final": "https://sereja.tech/",
+    "in_sitemap_related": false,
+    "source_hits": [
+      "content/about/index.md",
+      "content/blog/agent-consilium-independent-opinions.md",
+      "content/blog/agent-swarm-frontend.md",
+      "content/blog/agent-teams-opus-4-6.md",
+      "content/blog/agents-md-source-of-truth.md",
+      "content/blog/ai-coding-tools-economics-2026.md",
+      "content/blog/ai-student-progress-tracking.md",
+      "content/blog/ai-writing-pipelines.md",
+      "content/blog/app-types-guide.md",
+      "content/blog/ascii-dashboard-analytics.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/kimi-k2-5-agentic-model",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/kimi-k2-5-agentic-model/"
+    ],
+    "final": "https://sereja.tech/blog/kimi-k2-5-agentic-model/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/kimi-k2-5-agentic-model.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/ascii-dashboard-analytics",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/ascii-dashboard-analytics/"
+    ],
+    "final": "https://sereja.tech/blog/ascii-dashboard-analytics/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/ascii-dashboard-analytics.md",
+      "content/blog/dev-script-health-checks.md",
+      "content/blog/tui-presentation-claude-code.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/vibecoder-to-ceo-personal-corp-github/"
+    ],
+    "final": "https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/github-projects-ai-agent-memory.md",
+      "content/blog/paperclip-ai-company-agents.md",
+      "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/fix-once-rule-forever",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/fix-once-rule-forever/"
+    ],
+    "final": "https://sereja.tech/blog/fix-once-rule-forever/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/claude-code-auto-memory.md",
+      "content/blog/claude-code-token-optimization.md",
+      "content/blog/claude-code-vs-codex-cli.md",
+      "content/blog/draft-before-artifact.md",
+      "content/blog/fix-once-rule-forever.md",
+      "content/blog/llm-evals-for-vibecoder.md",
+      "content/blog/modular-rules-claude-md.md",
+      "content/blog/personal-os-project-audit.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/mapreduce-subagents",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/mapreduce-subagents/"
+    ],
+    "final": "https://sereja.tech/blog/mapreduce-subagents/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/ai-writing-pipelines.md",
+      "content/blog/map-reduce-youtube-metadata.md",
+      "content/blog/mapreduce-subagents.md",
+      "content/blog/multi-agent-text-deaify.md",
+      "content/blog/subagent-model-cost.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/superpowers-brainstorming-workflow",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/superpowers-brainstorming-workflow/"
+    ],
+    "final": "https://sereja.tech/blog/superpowers-brainstorming-workflow/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/claude-code-skills-distribution.md",
+      "content/blog/claude-code-vs-codex-cli.md",
+      "content/blog/context-lat-90-minutes.md",
+      "content/blog/homebrew-cli-vibecoding.md",
+      "content/blog/personal-os-project-audit.md",
+      "content/blog/skills-knowledge-transfer.md",
+      "content/blog/superpowers-brainstorming-workflow.md",
+      "docs/PLAN.md",
+      "docs/STATUS.md",
+      "docs/TEST_PLAN.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/fact-checker-in-ai-workflow",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/fact-checker-in-ai-workflow/"
+    ],
+    "final": "https://sereja.tech/blog/fact-checker-in-ai-workflow/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/fact-checker-in-ai-workflow.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/chrome-devtools-mcp",
+    "statuses": [
+      "308",
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/chrome-devtools-mcp/",
+      "/blog/chrome-devtools-mcp-setup/"
+    ],
+    "final": "https://sereja.tech/blog/chrome-devtools-mcp-setup/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/chrome-devtools-mcp-setup.md",
+      "content/blog/claude-code-techno-strudel-mcp.md",
+      "content/blog/data-layer-for-agents.md",
+      "content/blog/playwright-e2e-with-ai-agent.md",
+      "docs/PLAN.md",
+      "docs/STATUS.md",
+      "docs/TEST_PLAN.md",
+      "static/llms-full.txt",
+      "static/llms.txt",
+      "vercel.json"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/chrome-devtools-mcp/",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/chrome-devtools-mcp-setup/"
+    ],
+    "final": "https://sereja.tech/blog/chrome-devtools-mcp-setup/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "static/llms-full.txt",
+      "vercel.json"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/local-rag-embeddings-m1",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/local-rag-embeddings-m1/"
+    ],
+    "final": "https://sereja.tech/blog/local-rag-embeddings-m1/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/local-rag-embeddings-m1.md",
+      "content/blog/notebooklm-claude-code-rag.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/zoxide-fzf-terminal-navigation",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/zoxide-fzf-terminal-navigation/"
+    ],
+    "final": "https://sereja.tech/blog/zoxide-fzf-terminal-navigation/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/zoxide-fzf-terminal-navigation.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/modular-rules-claude-md",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/modular-rules-claude-md/"
+    ],
+    "final": "https://sereja.tech/blog/modular-rules-claude-md/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/fix-once-rule-forever.md",
+      "content/blog/modular-rules-claude-md.md",
+      "content/blog/sync-claude-code-four-machines.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/agent-teams-opus-4-6",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/agent-teams-opus-4-6/"
+    ],
+    "final": "https://sereja.tech/blog/agent-teams-opus-4-6/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/agent-consilium-independent-opinions.md",
+      "content/blog/agent-swarm-frontend.md",
+      "content/blog/agent-teams-opus-4-6.md",
+      "content/blog/gemini-3-1-pro-svg-animations.md",
+      "content/blog/mapreduce-subagents.md",
+      "content/blog/moltbook-social-network-ai-agents.md",
+      "content/blog/paperclip-ai-company-agents.md",
+      "content/blog/subagent-model-cost.md",
+      "content/blog/superpowers-brainstorming-workflow.md",
+      "docs/PLAN.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/github-projects-ai-agent-memory",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/github-projects-ai-agent-memory/"
+    ],
+    "final": "https://sereja.tech/blog/github-projects-ai-agent-memory/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/agent-teams-opus-4-6.md",
+      "content/blog/claude-code-auto-memory.md",
+      "content/blog/claude-code-hooks-github-issues.md",
+      "content/blog/github-issues-project-context.md",
+      "content/blog/github-projects-ai-agent-memory.md",
+      "content/blog/sync-claude-code-four-machines.md",
+      "content/blog/tracking-tasks-agent-multi-repo.md",
+      "content/blog/vibecoder-to-ceo-personal-corp-github.md",
+      "docs/PLAN.md",
+      "docs/STATUS.md"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/ssot-documentation",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/ssot-documentation/"
+    ],
+    "final": "https://sereja.tech/blog/ssot-documentation/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/document-conversations-not-code.md",
+      "content/blog/ssot-documentation.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/openclaw-hooks-automation",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/openclaw-hooks-automation/"
+    ],
+    "final": "https://sereja.tech/blog/openclaw-hooks-automation/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/claude-code-hooks-github-issues.md",
+      "content/blog/github-agentic-workflows-telegram-analytics.md",
+      "content/blog/openclaw-hooks-automation.md",
+      "docs/STATUS.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/telegram-api-vs-json-export",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/telegram-api-vs-json-export/"
+    ],
+    "final": "https://sereja.tech/blog/telegram-api-vs-json-export/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/telegram-api-vs-json-export.md",
+      "content/blog/telegram-vector-search.md",
+      "static/llms-full.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/pipeline-reliability-state-persistence",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/pipeline-reliability-state-persistence/"
+    ],
+    "final": "https://sereja.tech/blog/pipeline-reliability-state-persistence/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/context-lat-90-minutes.md",
+      "content/blog/openclaw-hooks-automation.md",
+      "content/blog/pipeline-reliability-state-persistence.md",
+      "static/llms-full.txt",
+      "static/llms.txt"
+    ]
+  },
+  {
+    "url": "https://sereja.tech/blog/blog-post-pipeline",
+    "statuses": [
+      "308",
+      "200"
+    ],
+    "locations": [
+      "/blog/blog-post-pipeline/"
+    ],
+    "final": "https://sereja.tech/blog/blog-post-pipeline/",
+    "in_sitemap_related": true,
+    "source_hits": [
+      "content/blog/agent-teams-opus-4-6.md",
+      "content/blog/blog-post-pipeline.md",
+      "content/blog/blog-to-telegram-skill.md",
+      "content/blog/content-plan-subagents-exa.md",
+      "content/blog/data-layer-for-agents.md",
+      "content/blog/draft-before-artifact.md",
+      "content/blog/github-agentic-workflows-telegram-analytics.md",
+      "content/blog/hooks-that-work-2026.md",
+      "content/blog/paperclip-ai-company-agents.md",
+      "content/blog/personal-corporation-event-driven-agents.md"
+    ]
+  },
+  {
+    "url": "https://www.sereja.tech/blog/ai-student-progress-tracking",
+    "statuses": [
+      "308",
+      "308",
+      "200"
+    ],
+    "locations": [
+      "https://sereja.tech/blog/ai-student-progress-tracking",
+      "/blog/ai-student-progress-tracking/"
+    ],
+    "final": "https://www.sereja.tech/blog/ai-student-progress-tracking/",
+    "in_sitemap_related": false,
+    "source_hits": [
+      "content/blog/ai-student-progress-tracking.md",
+      "content/blog/personalized-teaching-student-data.md",
+      "static/llms-full.txt"
+    ]
+  }
+]

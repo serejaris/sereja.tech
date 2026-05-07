@@ -12,7 +12,7 @@ image: "/images/blog/sync-claude-code-four-machines-preview.png"
 
 Купил новый MacBook. Итого четыре машины: два старых мака, один новый, один Windows. На каждой — свой набор скиллов, свои конфиги, свои привычки.
 
-На одном маке — скилл для [аналитики Claude Code](/blog/claude-code-logs-stack). На другом — для [рассылок в Telegram](/blog/telegram-broadcast-slow). А на Windows вообще ничего, потому что настраивал в спешке и бросил на полпути.
+На одном маке — скилл для [аналитики Claude Code](/blog/claude-code-logs-stack/). На другом — для [рассылок в Telegram](/blog/telegram-broadcast-slow/). А на Windows вообще ничего, потому что настраивал в спешке и бросил на полпути.
 
 40 скиллов. Разбросаны по трём машинам. Ни на одной нет полного набора.
 
@@ -22,7 +22,7 @@ image: "/images/blog/sync-claude-code-four-machines-preview.png"
 
 Без авторизации ни одна из этих команд не работает. Агент не может клонировать приватный репозиторий. Не может прочитать issues. Не может запушить код.
 
-Я уже использую [GitHub Projects как память для агента](/blog/github-projects-ai-agent-memory) — единая доска с задачами из всех репозиториев. И [хуки, которые автоматически подгружают активные задачи](/blog/claude-code-hooks-github-issues) при старте сессии. Всё это завязано на `gh`. Без него — пустота.
+Я уже использую [GitHub Projects как память для агента](/blog/github-projects-ai-agent-memory/) — единая доска с задачами из всех репозиториев. И [хуки, которые автоматически подгружают активные задачи](/blog/claude-code-hooks-github-issues/) при старте сессии. Всё это завязано на `gh`. Без него — пустота.
 
 ```
 НОВЫЙ КОМПЬЮТЕР
@@ -63,7 +63,7 @@ GitHub первый. Всё остальное — потом.
 
 ## Шаг первый: упаковать скиллы
 
-На старом маке у меня лежало всё: `cc-analytics`, `gh-issues`, `blog-post`, `telegram-broadcast`, `deeplink-creator`... [40 скиллов](/blog/skills-knowledge-transfer) в `~/.claude/skills/`. Нужно было собрать их в одно место.
+На старом маке у меня лежало всё: `cc-analytics`, `gh-issues`, `blog-post`, `telegram-broadcast`, `deeplink-creator`... [40 скиллов](/blog/skills-knowledge-transfer/) в `~/.claude/skills/`. Нужно было собрать их в одно место.
 
 Попросил Claude Code на Opus 4.6:
 
@@ -79,7 +79,7 @@ GitHub первый. Всё остальное — потом.
 
 Новый MacBook. Чистая система.
 
-Сначала — предварительная настройка, которую нужно сделать до агента. [GitHub CLI ставится через Homebrew](/blog/homebrew-cli-vibecoding): `brew install gh`. На Windows — через WinGet или с сайта.
+Сначала — предварительная настройка, которую нужно сделать до агента. [GitHub CLI ставится через Homebrew](/blog/homebrew-cli-vibecoding/): `brew install gh`. На Windows — через WinGet или с сайта.
 
 Потом — авторизация. `gh auth login`. Выбрал HTTPS, браузер открылся, подтвердил. Три клика.
 
@@ -163,7 +163,7 @@ irm https://claude.ai/install.ps1 | iex
 3. Установить Claude Code
 4. Попросить агента создать симлинки
 
-Пятнадцать минут — и машина готова. Со всеми скиллами, хуками и [модульными правилами](/blog/modular-rules-claude-md). Без флешек и ручного копирования.
+Пятнадцать минут — и машина готова. Со всеми скиллами, хуками и [модульными правилами](/blog/modular-rules-claude-md/). Без флешек и ручного копирования.
 
 И на Windows — тот же флоу, тот же результат. Единственное: PATH нужно прописать вручную после установки Claude Code. Потратил 10 минут на поиск, почему `claude` не запускается. Мелочь, но раздражает.
 
