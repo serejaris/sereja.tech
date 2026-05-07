@@ -232,6 +232,46 @@ Negative checks:
 
 ---
 
+## L4.6 — GSC backlog classifier checks
+
+Purpose:
+
+- keep issue `#102` grounded in the live GSC inventory instead of manual guesses.
+
+Fixtures:
+
+- `research/gsc-live/2026-05-07-gsc-backlog-inventory.json`
+
+Checks:
+
+- GSC example counts match the captured row totals
+- repo-controlled examples render locally after `hugo build`
+- normalized canonical routes have self-canonical tags
+- normalized canonical routes are in the sitemap unless they are `/blog/`
+- normalized routes are not `noindex`
+- repo-controlled canonical/slashless backlog routes have at least 3 unique indexable donor pages
+- out-of-scope hosts are classified instead of silently treated as Hugo pages
+
+Commands:
+
+```bash
+hugo build
+python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json
+```
+
+Pass condition:
+
+- command exits `0`
+- output includes `low_donor_routes=0`
+
+Negative checks:
+
+- do not use this helper as proof that GSC has reindexed the pages
+- do not fix `live.sereja.tech` or sibling hosts inside this Hugo repo
+- do not treat slashless examples as content duplicates without URL Inspection evidence
+
+---
+
 ## L5 — Search-fit content checks
 
 Purpose:

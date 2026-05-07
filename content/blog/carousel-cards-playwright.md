@@ -63,6 +63,7 @@ CSS-переменные держат консистентность: отсту
 
 - [E2E тесты пишет агент: Playwright + Claude Code](/blog/playwright-e2e-with-ai-agent/) — другие задачи, которые решает Playwright в связке с агентом
 - [YouTube-превью без дизайнера](/blog/youtube-thumbnails-html-code/) — тот же подход HTML → скриншот для превью к видео
+- [Программные видео: Remotion для вайбкодера](/blog/remotion-programmatic-video-vibecoding/) — следующий шаг после карточек и превью: анимированное видео из компонентов
 
 ## Источники
 

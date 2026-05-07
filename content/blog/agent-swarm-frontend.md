@@ -44,6 +44,8 @@ image: /images/blog/agent-swarm-frontend-preview.png
 
 - [Agent Teams в Claude Code: команда агентов за 5 минут](/blog/agent-teams-opus-4-6/) — как запускать несколько агентов с разными ролями через один промпт
 - [Haiku, Sonnet, Opus: какую модель ставить субагенту](/blog/subagent-model-cost/) — не все задачи требуют дорогой модели; рой из трёх агентов — как раз тот случай
+- [Moltbook: социальная сеть для AI-агентов](/blog/moltbook-social-network-ai-agents/) — когда интерфейс строится не для людей, а для взаимодействия агентов
+- [AI и увольнения в Tailwind: где настоящая проблема](/blog/tailwind-layoffs-ai-impact/) — почему frontend-автоматизация меняет роль разработчика, а не просто ускоряет верстку
 
 ## Источники
 

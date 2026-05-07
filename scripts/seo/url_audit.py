@@ -8,6 +8,7 @@ import re
 import sys
 import tomllib
 import xml.etree.ElementTree as ET
+from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Iterable
@@ -22,6 +23,7 @@ VERCEL_CONFIG_PATH = REPO_ROOT / "vercel.json"
 PUBLIC_DIR = REPO_ROOT / "public"
 BLOG_DIR = REPO_ROOT / "content" / "blog"
 ABOUT_DIR = REPO_ROOT / "content" / "about"
+DEFAULT_GSC_BACKLOG_PATH = REPO_ROOT / "research" / "gsc-live" / "2026-05-07-gsc-backlog-inventory.json"
 REQUIRED_COMMANDS = (
     "summary",
     "check-ghosts",
@@ -30,6 +32,7 @@ REQUIRED_COMMANDS = (
     "check-target-links",
     "check-redirect-sources",
 )
+GSC_BACKLOG_COMMAND = "classify-gsc-backlog"
 SOURCE_LINK_GLOBS = (
     "content/**/*.md",
     "layouts/**/*.html",
@@ -518,6 +521,20 @@ def command_check_sitemap(policy: dict) -> int:
     return 0
 
 
+def sitemap_routes() -> set[str]:
+    sitemap_path = PUBLIC_DIR / "sitemap.xml"
+    if not sitemap_path.exists():
+        raise AuditError("public/sitemap.xml does not exist; run `hugo build` first")
+
+    root = ET.fromstring(sitemap_path.read_text(encoding="utf-8"))
+    namespace = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    return {
+        route
+        for route in (normalize_route(element.text or "", allow_file_paths=True) for element in root.findall("sm:url/sm:loc", namespace))
+        if route
+    }
+
+
 def indexable_pages(pages: dict[str, dict]) -> dict[str, dict]:
     result: dict[str, dict] = {}
     for route, page in pages.items():
@@ -675,12 +692,162 @@ def command_check_redirect_sources(policy: dict) -> int:
     return 0
 
 
+def blog_slug_from_route(route: str | None) -> str | None:
+    if not route or not route.startswith("/blog/") or route == "/blog/":
+        return None
+    return route.strip("/").split("/")[-1]
+
+
+def donor_counts_for_pages(pages: dict[str, dict]) -> Counter[str]:
+    indexable = {
+        route: page
+        for route, page in indexable_pages(pages).items()
+        if route in current_canonical_routes()
+    }
+    donors_by_target: dict[str, set[str]] = {}
+
+    for source_route, page in indexable.items():
+        for href, _ in page["links"]:
+            normalized = normalize_internal_link(href, source_route)
+            if normalized is None or normalized == source_route:
+                continue
+            donors_by_target.setdefault(normalized, set()).add(source_route)
+
+    return Counter({route: len(donors) for route, donors in donors_by_target.items()})
+
+
+def route_type_for_gsc_url(url: str, redirect_routes: set[str]) -> tuple[str, str | None, str | None]:
+    parsed = urlparse(url)
+    host = parsed.netloc
+    path = parsed.path
+
+    if host and host != site_netloc():
+        if host == f"www.{site_netloc()}":
+            normalized = normalize_route(path, allow_file_paths=True)
+            return "www-host-variant", normalized, blog_slug_from_route(normalized)
+        return "out-of-scope-host", None, None
+
+    if path in {"/blog", "/blog/"}:
+        return "blog-index", "/blog/", None
+
+    raw_path = path.replace("\\)", ")").replace("\\(", "(")
+    normalized = normalize_route(raw_path, allow_file_paths=True)
+    slug = blog_slug_from_route(normalized)
+
+    if raw_path.startswith("/tags/"):
+        return "taxonomy-noindex", normalized, None
+    if normalized in redirect_routes:
+        return "alias-or-redirect-source", normalized, slug
+    if raw_path.startswith("/blog/") and not raw_path.endswith("/") and "." not in Path(raw_path).name and slug in existing_blog_slugs():
+        return "slashless-blog", normalized, slug
+    if normalized in current_canonical_routes():
+        if normalized.startswith("/blog/") and normalized != "/blog/":
+            return "canonical-blog", normalized, slug
+        return "canonical-page", normalized, None
+    return "unknown", normalized, slug
+
+
+def local_status_for_gsc_url(url: str, pages: dict[str, dict], sitemap: set[str], donor_counts: Counter[str], redirect_routes: set[str]) -> dict:
+    route_type, route, slug = route_type_for_gsc_url(url, redirect_routes)
+    page = pages.get(route or "")
+    robots_values = " ".join(page["robots"]).lower() if page else ""
+    expected_canonical = f"{site_base_url().rstrip('/')}{route}" if route else None
+
+    return {
+        "url": url,
+        "host": urlparse(url).netloc,
+        "route": route,
+        "slug": slug,
+        "route_type": route_type,
+        "content_exists": bool(slug and slug in existing_blog_slugs()),
+        "rendered": bool(page),
+        "canonical_self": bool(page and page["canonical_href"] == expected_canonical),
+        "canonical_href": page["canonical_href"] if page else None,
+        "in_sitemap": bool(route and route in sitemap),
+        "noindex": "noindex" in robots_values,
+        "donor_count": int(donor_counts[route]) if route else 0,
+    }
+
+
+def command_classify_gsc_backlog(policy: dict, inventory_path: Path) -> int:
+    inventory = load_json(inventory_path)
+    pages = build_page_index()
+    sitemap = sitemap_routes()
+    donor_counts = donor_counts_for_pages(pages)
+    redirect_routes = redirect_source_routes(policy)
+    issues: list[str] = []
+    route_type_counts: Counter[str] = Counter()
+    reason_counts: Counter[str] = Counter()
+    low_donor_routes: set[str] = set()
+
+    reasons = inventory.get("reasons")
+    if not isinstance(reasons, list):
+        raise AuditError(f"{inventory_path}: expected `reasons` list")
+
+    total_examples = 0
+    for reason in reasons:
+        reason_name = reason.get("reason", "unknown")
+        examples = reason.get("examples", [])
+        if not isinstance(examples, list):
+            issues.append(f"{reason_name}: expected examples list")
+            continue
+
+        affected = reason.get("affected_pages")
+        if isinstance(affected, int) and affected != len(examples):
+            issues.append(f"{reason_name}: affected_pages={affected} but examples={len(examples)}")
+
+        for example in examples:
+            url = example.get("url")
+            if not isinstance(url, str):
+                issues.append(f"{reason_name}: example is missing url")
+                continue
+            total_examples += 1
+            reason_counts[reason_name] += 1
+            status = local_status_for_gsc_url(url, pages, sitemap, donor_counts, redirect_routes)
+            route_type_counts[status["route_type"]] += 1
+
+            route_type = status["route_type"]
+            if route_type in {"canonical-blog", "canonical-page", "slashless-blog", "www-host-variant", "blog-index"}:
+                route = status["route"]
+                if not status["rendered"]:
+                    issues.append(f"{url}: normalized route is not rendered locally ({route})")
+                if route_type != "blog-index" and not status["in_sitemap"]:
+                    issues.append(f"{url}: normalized route is missing from sitemap ({route})")
+                if status["rendered"] and not status["canonical_self"]:
+                    issues.append(f"{url}: canonical mismatch ({status['canonical_href']} != {site_base_url().rstrip('/')}{route})")
+                if status["noindex"]:
+                    issues.append(f"{url}: normalized route is noindex ({route})")
+                if route_type in {"canonical-blog", "slashless-blog"} and status["donor_count"] < 3 and route:
+                    low_donor_routes.add(route)
+
+    if issues:
+        for issue in issues:
+            print(issue, file=sys.stderr)
+        return 1
+
+    print(f"gsc-backlog-ok (examples={total_examples})")
+    print("by_reason=" + ", ".join(f"{reason}:{count}" for reason, count in sorted(reason_counts.items())))
+    print("by_route_type=" + ", ".join(f"{route_type}:{count}" for route_type, count in sorted(route_type_counts.items())))
+    print(f"low_donor_routes={len(low_donor_routes)}")
+    for route in sorted(low_donor_routes):
+        print(f"low_donor {route} donors={donor_counts[route]}")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="SEO audit helpers for sereja.tech")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     for command in REQUIRED_COMMANDS:
         subparsers.add_parser(command)
+
+    gsc_backlog_parser = subparsers.add_parser(GSC_BACKLOG_COMMAND)
+    gsc_backlog_parser.add_argument(
+        "inventory_path",
+        nargs="?",
+        default=str(DEFAULT_GSC_BACKLOG_PATH),
+        help="Path to a GSC backlog inventory JSON file",
+    )
 
     args = parser.parse_args()
     policy = load_json(POLICY_PATH)
@@ -698,6 +865,8 @@ def main() -> int:
         return command_check_target_links(policy)
     if args.command == "check-redirect-sources":
         return command_check_redirect_sources(policy)
+    if args.command == GSC_BACKLOG_COMMAND:
+        return command_classify_gsc_backlog(policy, Path(args.inventory_path))
 
     raise AuditError(f"unsupported command: {args.command}")
 

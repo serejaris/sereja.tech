@@ -149,6 +149,8 @@ def send(text: str) -> dict:
 
 - [Пайплайн для статей: 5 фаз от идеи до Telegram](/blog/blog-post-pipeline/) — полный цикл, в котором этот skill — финальная фаза
 - [Мой редотдел из трёх промптов](/blog/telegram-autopublisher/) — как работает система автопубликации в целом
+- [Telegram API вместо JSON экспорта](/blog/telegram-api-vs-json-export/) — как получать сообщения напрямую, если публикация превращается в аналитику
+- [Дайджест одного Telegram-сообщения](/blog/telegram-single-message-digest/) — как упаковать длинный результат в формат, который Telegram нормально показывает
 
 ## Источники
 
