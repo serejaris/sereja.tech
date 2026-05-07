@@ -224,6 +224,40 @@ def vercel_redirects() -> dict[str, str]:
     return redirects
 
 
+def raw_config_route(value: str) -> str | None:
+    if not value:
+        return None
+    parsed = urlparse(value)
+    if parsed.scheme in {"http", "https"} and parsed.netloc and parsed.netloc != site_netloc():
+        return None
+    path = parsed.path if parsed.scheme else value.split("#", 1)[0].split("?", 1)[0]
+    if not path.startswith("/"):
+        return None
+    return path.replace("\\)", ")").replace("\\(", "(")
+
+
+def vercel_redirect_source_variants() -> dict[str, set[str]]:
+    config = load_json(VERCEL_CONFIG_PATH)
+    variants: dict[str, set[str]] = {}
+
+    for item in config.get("redirects", []):
+        raw_source = raw_config_route(item.get("source", ""))
+        normalized_source = normalize_route(item.get("source", ""), allow_file_paths=True)
+        if raw_source and normalized_source:
+            variants.setdefault(normalized_source, set()).add(raw_source)
+
+    for item in config.get("routes", []):
+        status_code = item.get("status") or item.get("statusCode")
+        if status_code not in {301, 302, 307, 308}:
+            continue
+        raw_source = raw_config_route(item.get("src", ""))
+        normalized_source = normalize_route(item.get("src", ""), allow_file_paths=True)
+        if raw_source and normalized_source:
+            variants.setdefault(normalized_source, set()).add(raw_source)
+
+    return variants
+
+
 def target_route_for_slug(slug: str) -> str:
     return f"/blog/{slug}/"
 
@@ -336,12 +370,12 @@ def check_policy_entry_statuses(policy: dict) -> list[str]:
     return issues
 
 
-def is_redirect_implemented(entry: dict, redirects: dict) -> bool:
+def is_redirect_implemented(entry: dict, redirects: dict, source_variants: dict[str, set[str]]) -> bool:
     source = normalize_route(entry["path"], allow_file_paths=True)
     target = normalize_route(entry.get("target", ""), allow_file_paths=True)
     if source is None or target is None:
         return False
-    return redirects.get(source) == target
+    return redirects.get(source) == target and source in source_variants.get(source, set())
 
 
 def is_restore_implemented(entry: dict) -> bool:
@@ -357,6 +391,7 @@ def command_check_ghosts(policy: dict) -> int:
 
     stage = policy["ghost_policy_stage"]
     redirects = vercel_redirects()
+    source_variants = vercel_redirect_source_variants()
 
     if stage not in {"inventory", "decisioned", "implemented"}:
         issues.append(f"unknown ghost_policy_stage `{stage}`")
@@ -385,7 +420,7 @@ def command_check_ghosts(policy: dict) -> int:
             issues.append(f"{path}: must_implement is true but implemented is false")
             continue
 
-        if status == "redirect" and not is_redirect_implemented(entry, redirects):
+        if status == "redirect" and not is_redirect_implemented(entry, redirects, source_variants):
             issues.append(f"{path}: redirect marked implemented but not found in vercel.json")
         elif status == "restore" and not is_restore_implemented(entry):
             issues.append(f"{path}: restore marked implemented but target content is missing")
