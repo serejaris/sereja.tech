@@ -1,0 +1,245 @@
+{
+  "captured_at": "2026-05-07T12:37:36.768Z",
+  "out": [
+    {
+      "reason": "Page with redirect",
+      "clicked": {
+        "ok": true,
+        "row": "Page with redirect\tWebsite\t\n\nNot Started\n\t\t34"
+      },
+      "href": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Asereja.tech&item_key=CAMYCyAC",
+      "affected": "34",
+      "first_detected": "First detected: 1/24/26",
+      "examples": [
+        {
+          "url": "http://www.sereja.tech/",
+          "last_crawled": "May 2, 2026"
+        },
+        {
+          "url": "https://www.sereja.tech/",
+          "last_crawled": "May 2, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/tui-presentation-claude-code",
+          "last_crawled": "May 1, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/claude-code-hooks-github-issues",
+          "last_crawled": "Apr 27, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/midi-obs-scene-switching",
+          "last_crawled": "Apr 24, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/midi-obs-scene-switching/",
+          "last_crawled": "Apr 24, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/data-layer-for-agents",
+          "last_crawled": "Apr 23, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/agent-consilium-independent-opinions",
+          "last_crawled": "Apr 16, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/seo-for-ai-era",
+          "last_crawled": "Apr 15, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/openclaw-vps-6-dollars",
+          "last_crawled": "Apr 14, 2026"
+        }
+      ]
+    },
+    {
+      "reason": "Not found (404)",
+      "clicked": {
+        "ok": true,
+        "row": "Not found (404)\tWebsite\t\n\nNot Started\n\t\t2"
+      },
+      "href": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Asereja.tech&item_key=CAMYDSAC",
+      "affected": "2",
+      "first_detected": "First detected: 2/10/26",
+      "examples": [
+        {
+          "url": "https://sereja.tech/blog/{slug}",
+          "last_crawled": "Apr 16, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/brainstorming/",
+          "last_crawled": "Mar 19, 2026"
+        }
+      ]
+    },
+    {
+      "reason": "Crawled - currently not indexed",
+      "clicked": {
+        "ok": true,
+        "row": "Crawled - currently not indexed\tGoogle systems\t\n\nNot Started\n\t\t74"
+      },
+      "href": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Asereja.tech&item_key=CAMYFyAC",
+      "affected": "74",
+      "first_detected": "First detected: 1/24/26",
+      "examples": [
+        {
+          "url": "https://sereja.tech/blog/llms-txt-agent-readable-web/",
+          "last_crawled": "May 3, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/midi-obs-claude-code/",
+          "last_crawled": "Apr 24, 2026"
+        },
+        {
+          "url": "https://live.sereja.tech/feed.xml",
+          "last_crawled": "Apr 21, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/blog-to-telegram-skill/",
+          "last_crawled": "Apr 21, 2026"
+        },
+        {
+          "url": "https://live.sereja.tech/",
+          "last_crawled": "Apr 21, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/agent-consilium-independent-opinions/",
+          "last_crawled": "Apr 16, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/multi-agent-text-deaify/",
+          "last_crawled": "Apr 15, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/app-types-guide/",
+          "last_crawled": "Apr 14, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/video-pipeline-claude-code",
+          "last_crawled": "Apr 13, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/ascii-dashboard-analytics/",
+          "last_crawled": "Apr 11, 2026"
+        }
+      ]
+    },
+    {
+      "reason": "Duplicate, Google chose different canonical than user",
+      "clicked": {
+        "ok": true,
+        "row": "Duplicate, Google chose different canonical than user\tGoogle systems\t\n\nNot Started\n\t\t9"
+      },
+      "href": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Asereja.tech&item_key=CAMYECAC",
+      "affected": "9",
+      "first_detected": "First detected: 2/24/26",
+      "examples": [
+        {
+          "url": "https://sereja.tech/blog/document-conversations-not-code/",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/personal-os-project-audit",
+          "last_crawled": "Feb 13, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/skills-knowledge-transfer",
+          "last_crawled": "Feb 11, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/agent-swarm-frontend",
+          "last_crawled": "Feb 8, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/blog-to-telegram-skill",
+          "last_crawled": "Feb 8, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/react-presentation-no-build",
+          "last_crawled": "Feb 8, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/dev-script-health-checks",
+          "last_crawled": "Feb 7, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/content-plan-subagents-exa",
+          "last_crawled": "Feb 7, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/github-issues-project-context",
+          "last_crawled": "Feb 7, 2026"
+        }
+      ]
+    },
+    {
+      "reason": "Discovered - currently not indexed",
+      "clicked": {
+        "ok": true,
+        "row": "Discovered - currently not indexed\tGoogle systems\t\n\nStarted\n\t\t1"
+      },
+      "href": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Asereja.tech&item_key=CAMYFiAC",
+      "affected": "1",
+      "first_detected": null,
+      "examples": [
+        {
+          "url": "https://sereja.tech/blog/remotion-programmatic-video-vibecoding/",
+          "last_crawled": "N/A"
+        }
+      ]
+    },
+    {
+      "reason": "Excluded by ‘noindex’ tag",
+      "clicked": {
+        "ok": true,
+        "row": "Excluded by ‘noindex’ tag\tWebsite\t\n\nNot Started\n\t\t86"
+      },
+      "href": "https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Asereja.tech&item_key=CAMYCCAC",
+      "affected": "86",
+      "first_detected": "First detected: 2/21/26",
+      "examples": [
+        {
+          "url": "https://sereja.tech/tags/context-engineering/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/vibe-coding/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/software-for-one/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/svg/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/claude.md",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/claude.md/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/ai-агенты/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/personal-software/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/архитектура/",
+          "last_crawled": "Apr 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/tags/youtube-api/",
+          "last_crawled": "Apr 27, 2026"
+        }
+      ]
+    }
+  ]
+}

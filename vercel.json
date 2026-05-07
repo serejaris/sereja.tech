@@ -17,6 +17,7 @@
     { "source": "/blog/llms.txt/", "destination": "/blog/llms-txt-agent-readable-web/", "permanent": true },
     { "source": "/blog/data-layer", "destination": "/blog/data-layer-for-agents/", "permanent": true },
     { "source": "/blog/data-layer/", "destination": "/blog/data-layer-for-agents/", "permanent": true },
+    { "source": "/blog/data-layer-for-agents/\\)", "destination": "/blog/data-layer-for-agents/", "permanent": true },
     { "source": "/blog/github-projects-ai-memory", "destination": "/blog/github-projects-ai-agent-memory/", "permanent": true },
     { "source": "/blog/github-projects-ai-memory/", "destination": "/blog/github-projects-ai-agent-memory/", "permanent": true },
     { "source": "/blog/sync-claude-code", "destination": "/blog/sync-claude-code-four-machines/", "permanent": true },

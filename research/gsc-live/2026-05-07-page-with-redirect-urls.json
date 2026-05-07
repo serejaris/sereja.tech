@@ -1,0 +1,306 @@
+{
+  "reason": "Page with redirect",
+  "pages": [
+    {
+      "page": 1,
+      "rows": [
+        {
+          "url": "http://www.sereja.tech/",
+          "last_crawled": "May 2, 2026"
+        },
+        {
+          "url": "https://www.sereja.tech/",
+          "last_crawled": "May 2, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/tui-presentation-claude-code",
+          "last_crawled": "May 1, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/claude-code-hooks-github-issues",
+          "last_crawled": "Apr 27, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/midi-obs-scene-switching",
+          "last_crawled": "Apr 24, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/midi-obs-scene-switching/",
+          "last_crawled": "Apr 24, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/data-layer-for-agents",
+          "last_crawled": "Apr 23, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/agent-consilium-independent-opinions",
+          "last_crawled": "Apr 16, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/seo-for-ai-era",
+          "last_crawled": "Apr 15, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/openclaw-vps-6-dollars",
+          "last_crawled": "Apr 14, 2026"
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "rows": [
+        {
+          "url": "https://sereja.tech/blog/telegram-broadcast-file-id",
+          "last_crawled": "Apr 13, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/claude-code-marketing-ops",
+          "last_crawled": "Apr 13, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/playwright-e2e-with-ai-agent",
+          "last_crawled": "Apr 13, 2026"
+        },
+        {
+          "url": "http://sereja.tech/",
+          "last_crawled": "Apr 12, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/kimi-k2-5-agentic-model",
+          "last_crawled": "Apr 11, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/ascii-dashboard-analytics",
+          "last_crawled": "Apr 11, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github",
+          "last_crawled": "Apr 5, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/fix-once-rule-forever",
+          "last_crawled": "Apr 4, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/mapreduce-subagents",
+          "last_crawled": "Apr 1, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/superpowers-brainstorming-workflow",
+          "last_crawled": "Mar 31, 2026"
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "rows": [
+        {
+          "url": "https://sereja.tech/blog/fact-checker-in-ai-workflow",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/chrome-devtools-mcp",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/chrome-devtools-mcp/",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/local-rag-embeddings-m1",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/zoxide-fzf-terminal-navigation",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/modular-rules-claude-md",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/agent-teams-opus-4-6",
+          "last_crawled": "Mar 30, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/github-projects-ai-agent-memory",
+          "last_crawled": "Mar 29, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/ssot-documentation",
+          "last_crawled": "Mar 28, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/openclaw-hooks-automation",
+          "last_crawled": "Mar 16, 2026"
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "rows": [
+        {
+          "url": "https://sereja.tech/blog/telegram-api-vs-json-export",
+          "last_crawled": "Feb 22, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/pipeline-reliability-state-persistence",
+          "last_crawled": "Feb 22, 2026"
+        },
+        {
+          "url": "https://sereja.tech/blog/blog-post-pipeline",
+          "last_crawled": "Feb 20, 2026"
+        },
+        {
+          "url": "https://www.sereja.tech/blog/ai-student-progress-tracking",
+          "last_crawled": "Feb 8, 2026"
+        }
+      ]
+    },
+    {
+      "stop": {
+        "ok": false,
+        "why": "disabled",
+        "cls": "ZQsUQe GVTvnf"
+      }
+    }
+  ],
+  "urls": [
+    {
+      "url": "http://www.sereja.tech/",
+      "last_crawled": "May 2, 2026"
+    },
+    {
+      "url": "https://www.sereja.tech/",
+      "last_crawled": "May 2, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/tui-presentation-claude-code",
+      "last_crawled": "May 1, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/claude-code-hooks-github-issues",
+      "last_crawled": "Apr 27, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/midi-obs-scene-switching",
+      "last_crawled": "Apr 24, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/midi-obs-scene-switching/",
+      "last_crawled": "Apr 24, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/data-layer-for-agents",
+      "last_crawled": "Apr 23, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/agent-consilium-independent-opinions",
+      "last_crawled": "Apr 16, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/seo-for-ai-era",
+      "last_crawled": "Apr 15, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/openclaw-vps-6-dollars",
+      "last_crawled": "Apr 14, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/telegram-broadcast-file-id",
+      "last_crawled": "Apr 13, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/claude-code-marketing-ops",
+      "last_crawled": "Apr 13, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/playwright-e2e-with-ai-agent",
+      "last_crawled": "Apr 13, 2026"
+    },
+    {
+      "url": "http://sereja.tech/",
+      "last_crawled": "Apr 12, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/kimi-k2-5-agentic-model",
+      "last_crawled": "Apr 11, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/ascii-dashboard-analytics",
+      "last_crawled": "Apr 11, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/vibecoder-to-ceo-personal-corp-github",
+      "last_crawled": "Apr 5, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/fix-once-rule-forever",
+      "last_crawled": "Apr 4, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/mapreduce-subagents",
+      "last_crawled": "Apr 1, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/superpowers-brainstorming-workflow",
+      "last_crawled": "Mar 31, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/fact-checker-in-ai-workflow",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/chrome-devtools-mcp",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/chrome-devtools-mcp/",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/local-rag-embeddings-m1",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/zoxide-fzf-terminal-navigation",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/modular-rules-claude-md",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/agent-teams-opus-4-6",
+      "last_crawled": "Mar 30, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/github-projects-ai-agent-memory",
+      "last_crawled": "Mar 29, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/ssot-documentation",
+      "last_crawled": "Mar 28, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/openclaw-hooks-automation",
+      "last_crawled": "Mar 16, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/telegram-api-vs-json-export",
+      "last_crawled": "Feb 22, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/pipeline-reliability-state-persistence",
+      "last_crawled": "Feb 22, 2026"
+    },
+    {
+      "url": "https://sereja.tech/blog/blog-post-pipeline",
+      "last_crawled": "Feb 20, 2026"
+    },
+    {
+      "url": "https://www.sereja.tech/blog/ai-student-progress-tracking",
+      "last_crawled": "Feb 8, 2026"
+    }
+  ]
+}
