@@ -2,7 +2,7 @@
 
 ## Current phase
 
-`GSC redirect source cleanup`
+`GSC validation monitoring`
 
 ## Done
 
@@ -28,20 +28,20 @@
 - [x] Issue `#98` redirect source cleanup completed locally: slashless internal blog links normalized, old alias links removed from maintained `llms` sources, and `check-redirect-sources` added.
 - [x] Issue `#98` GSC reason-by-reason browser audit completed; `Page with redirect` and the crawlable-looking `/blog/{slug}` 404 are covered by PR `#99`, while `Crawled`, `Duplicate`, and `Discovered` remain separate post-merge work.
 - [x] Issue `#98` post-merge production smoke found the malformed `/blog/data-layer-for-agents/)` redirect still falling through to 404; follow-up guardrail now requires the Vercel trailing-slash source variant that production actually matches.
+- [x] Issue `#98` shipped through the Git-connected Vercel path via PR `#99` and follow-up PR `#100`; production smoke is green and GSC `Page with redirect` validation started on `2026-05-07`.
 
 ## In progress
 
 - [ ] Monitor new analytics events after deployment.
 - [ ] Work through GitHub issue `#97` before the next analytics run creates new tasks.
-- [ ] After Git-connected production deploy, validate issue `#98` in GSC and continue the separate `Crawled - currently not indexed`, `Duplicate`, and `Discovered` canonical-page work.
+- [ ] Continue the separate `Crawled - currently not indexed`, `Duplicate`, and `Discovered` canonical-page work after the GSC validation window.
 
 ## Next
 
-1. Ship the issue `#98` cleanup through the Git-connected Vercel path, then request GSC validation for `Page with redirect`.
-2. Re-check GSC on `2026-05-11`, `2026-05-14`, and `2026-05-21`; host/protocol redirects may remain.
+1. Re-check GSC `Page with redirect` on `2026-05-11`, `2026-05-14`, and `2026-05-21`; host/protocol redirects may remain.
+2. Open the next SEO iteration around canonical pages still stuck in `Crawled - currently not indexed`, especially `claude-code-token-optimization` and `remotion-programmatic-video-vibecoding`.
 3. Use `python3 scripts/analytics/site_review.py research/analytics-runs/YYYY-MM-DD.json` for the next analytics run, then revisit issue `#97` before creating new tasks.
-4. Open the next SEO iteration around canonical pages still stuck in `Crawled - currently not indexed`, especially `claude-code-token-optimization` and `remotion-programmatic-video-vibecoding`.
-5. Keep issue `#35` separate from the GSC rollout track.
+4. Keep issue `#35` separate from the GSC rollout track.
 
 ## Decisions made
 
@@ -214,7 +214,8 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-05-07 | GSC redirect diagnosis and guardrail sync | `AGENTS.md`, `docs/STATUS.md`, `research/gsc-live/*`, GitHub issue `#98` | Live GSC Page indexing drilldown; `curl` redirect diagnosis; source leak scan; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links` | pass for existing local helpers; redirect source leaks confirmed separately | normalize redirect source leaks, add a permanent helper check, then validate in GSC |
 | 2026-05-07 | M12 GSC redirect source cleanup | `content/blog/*.md`, `static/llms-full.txt`, `scripts/seo/url_audit.py`, `AGENTS.md`, `docs/PLAN.md`, `docs/TEST_PLAN.md`, `docs/STATUS.md` | `hugo build`; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 -m py_compile scripts/seo/url_audit.py` | pass | sync issue `#98`, then ship via Git-connected deploy path |
 | 2026-05-07 | GSC reason-by-reason browser audit | `research/gsc-live/2026-05-07-reason-by-reason-audit.md`, `content/blog/blog-post-pipeline.md`, `scripts/seo/url_audit.py`, `docs/STATUS.md` | Chrome DevTools browser snapshots for all 7 GSC Page indexing reasons; `hugo build`; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 -m py_compile scripts/seo/url_audit.py`; `git diff --check` | pass | update PR `#99`; merge before GSC validation |
-| 2026-05-07 | Post-merge malformed redirect repair | `vercel.json`, `scripts/seo/url_audit.py`, `docs/STATUS.md` | `curl -sIL 'https://sereja.tech/blog/data-layer-for-agents/)'`; `hugo build`; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 -m py_compile scripts/seo/url_audit.py`; `git diff --check` | pass locally; production pending Git-connected deploy | merge follow-up and re-run production smoke before GSC validation |
+| 2026-05-07 | Post-merge malformed redirect repair | `vercel.json`, `scripts/seo/url_audit.py`, `docs/STATUS.md` | `curl -sIL 'https://sereja.tech/blog/data-layer-for-agents/)'`; `hugo build`; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 -m py_compile scripts/seo/url_audit.py`; `git diff --check` | pass locally; shipped via PR `#100` | run production smoke before GSC validation |
+| 2026-05-07 | Production smoke and GSC validation start | GitHub PRs `#99` and `#100`, GSC Page indexing report | `gh pr merge 99`; `gh pr merge 100`; Git-connected Vercel checks on `main`; `curl -sL 'https://sereja.tech/blog/blog-post-pipeline/?codex_check=8693c8c'`; `curl -sIL 'https://sereja.tech/blog/data-layer-for-agents/)?codex_check=8693c8c'`; `curl -sI 'https://sereja.tech/blog/telegram-api-vs-json-export?codex_check=8693c8c'`; `curl -sL 'https://sereja.tech/sitemap.xml?codex_check=8693c8c'`; Chrome DevTools MCP click on GSC `VALIDATE FIX` | pass; GSC shows `Validation started`, started `5/7/26` | monitor GSC validation and continue separate canonical backlog |
 
 ## Blocker log
 
