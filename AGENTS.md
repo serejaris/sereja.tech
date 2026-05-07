@@ -210,6 +210,7 @@ Board sync is best-effort only.
   - `python3 scripts/seo/url_audit.py check-sitemap`
   - `python3 scripts/seo/url_audit.py check-target-links`
   - `python3 scripts/seo/url_audit.py check-redirect-sources`
+  - `python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json`
 
 ## Execution contract
 

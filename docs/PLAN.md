@@ -716,3 +716,70 @@ python3 scripts/seo/url_audit.py check-redirect-sources
 ### Stop-and-fix rule
 
 If `check-redirect-sources` fails, fix the source URL first before changing sitemap, canonical, or redirect policy.
+
+---
+
+## M13 — GSC canonical backlog classification and conservative fixes
+
+Status: `[x]`
+
+### Goal
+
+Work issue `#102` as a controlled SEO iteration for these GSC rows:
+
+- `Crawled - currently not indexed`
+- `Duplicate, Google chose different canonical than user`
+- `Discovered - currently not indexed`
+
+### Tasks
+
+- [x] Work from a clean worktree based on `origin/main`.
+- [x] Capture full GSC inventory for the three rows in `research/gsc-live/2026-05-07-gsc-backlog-inventory.json`.
+- [x] Inspect `/blog/document-conversations-not-code/` in GSC and record Google-selected canonical.
+- [x] Add `python3 scripts/seo/url_audit.py classify-gsc-backlog`.
+- [x] Classify GSC examples by host, route type, local render state, canonical, sitemap membership, `noindex`, and donor count.
+- [x] Split `live.sereja.tech` and `ai-corp.sereja.tech` examples out of this Hugo repo scope.
+- [x] Add conservative internal donor links for repo-controlled backlog URLs with fewer than 3 unique indexable donor pages.
+- [x] Record the audit and final decision table in `research/gsc-live/2026-05-07-gsc-backlog-audit.md`.
+- [x] Add the new helper to the regular validation command list.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- The GSC inventory is saved as an inspectable artifact.
+- Repo-controlled examples pass local technical checks.
+- Low-donor repo-controlled backlog routes are no longer below 3 unique donor pages.
+- Out-of-scope hosts are not silently fixed in this Hugo repo.
+- The next step is Git-connected deploy, production smoke, and GSC validation/request indexing.
+
+### Validation commands
+
+```bash
+hugo build
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json
+```
+
+### Known risks
+
+- GSC validation can lag for days after a production fix.
+- Slashless and host-variant rows can remain in GSC even after repo source cleanup.
+- Internal links improve discovery but do not guarantee indexing.
+- URL Inspection can show a stale Google-selected canonical until recrawl.
+
+### Milestone guardrails
+
+- Do not deploy with local Vercel CLI.
+- Do not push or merge to `main` directly.
+- Do not change the trailing-slash canonical policy.
+- Do not widen the indexable surface.
+- Do not rewrite articles broadly just to satisfy GSC.
+
+### Stop-and-fix rule
+
+If `classify-gsc-backlog` reports a repo-controlled canonical page missing from render output, sitemap, self-canonical, or indexability, fix that technical cause before adding more donor links.
