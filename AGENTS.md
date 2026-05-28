@@ -138,6 +138,29 @@ For every task:
 - Prefer explicit redirects only when the successor is unambiguous.
 - Do not treat `llms.txt`, analytics extras, or AI-era experiments as blockers for core indexation work.
 
+## GSC validation rules
+
+- Treat Search Console emails as reason-level alerts only. They identify the
+  failing reason, not the exact current URL set.
+- Before changing code after a GSC email, compare live GSC with the last repo
+  snapshot: reason counts, validation status, example URLs, and `Last crawled`
+  dates.
+- Do not treat `Validation failed` as proof that no improvement happened. Report
+  both the failed reason and the count movement, for example indexed pages,
+  `Crawled - currently not indexed`, `Duplicate`, and `Page with redirect`.
+- For `Page with redirect`, separate expected host/protocol/slash redirects
+  from repo-source leaks. First run `check-redirect-sources` and production
+  redirect smoke; edit sources only if current repo or maintained static files
+  still emit redirecting internal URLs.
+- For `Crawled - currently not indexed`, do not assume a canonical-generation
+  bug. Check canonical, sitemap membership, `noindex`, internal donor links,
+  content/search fit, and the latest crawl date before proposing a fix.
+- For `Duplicate, Google chose different canonical than user`, use URL
+  Inspection to capture the Google-selected canonical before changing
+  canonicals, redirects, or slugs.
+- For `Discovered - currently not indexed`, prefer stronger internal discovery
+  and request indexing before considering redirects or content deletion.
+
 ## Reasonable assumptions
 
 Proceed without asking when the assumption is local, reversible, and consistent with the repo:
