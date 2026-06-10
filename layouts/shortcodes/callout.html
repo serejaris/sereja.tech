@@ -1,5 +1,20 @@
-{{ $type := .Get 0 | default "default" }}
+{{- $type := "default" }}{{- $title := "" }}{{- $copy := false }}
+{{- if .IsNamedParams }}
+  {{- $type = .Get "type" | default "default" }}
+  {{- $title = .Get "title" | default "" }}
+  {{- $copy = eq (.Get "copy" | default "") "true" }}
+{{- else }}
+  {{- $type = .Get 0 | default "default" }}
+  {{- $title = .Get 1 | default "" }}
+{{- end }}
 <div class="callout {{ $type }}">
-  {{ if .Get 1 }}<strong>{{ .Get 1 }}</strong>{{ end }}
-  {{ .Inner | markdownify }}
+  {{- if or $title $copy }}
+  <div class="callout-head">
+    <strong>{{ $title }}</strong>
+    {{- if $copy }}
+    <button class="callout-copy" type="button" aria-label="Скопировать промпт" onclick="navigator.clipboard.writeText(this.closest('.callout').querySelector('.callout-body').innerText.trim()).then(()=>{this.textContent='скопировано';setTimeout(()=>{this.textContent='копировать'},1500)})">копировать</button>
+    {{- end }}
+  </div>
+  {{- end }}
+  <div class="callout-body">{{ .Inner | markdownify }}</div>
 </div>
