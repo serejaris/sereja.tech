@@ -1,1 +1,4 @@
 public/
+
+# Analytics secret (PostHog personal API key)
+.env.analytics
