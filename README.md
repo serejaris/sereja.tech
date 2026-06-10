@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-93+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+94+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-06-10 | [Перешёл на Claude Fable 5: цены, effort, кейсы](https://sereja.tech/blog/claude-fable-5-review/) |
 | 2026-04-30 | [OTel для Claude Code — рентген твоих скиллов](https://sereja.tech/blog/claude-code-skills-grafana/) |
 | 2026-04-27 | [Свой Miro за 30 минут вместо подписки](https://sereja.tech/blog/svoy-miro-za-30-minut/) |
 | 2026-04-22 | [Как я научил Claude Code писать техно-музыку](https://sereja.tech/blog/claude-code-techno-strudel-mcp/) |
@@ -48,7 +49,6 @@
 | 2026-03-04 | [Как я собрал совет директоров из субагентов](https://sereja.tech/blog/board-of-advisors-subagents/) |
 | 2026-03-01 | [llms.txt: делаю блог читаемым для агентов](https://sereja.tech/blog/llms-txt-agent-readable-web/) |
 | 2026-02-28 | [Один JSON кормит всех: как строить data layer для агентов](https://sereja.tech/blog/data-layer-for-agents/) |
-| 2026-02-25 | [Персональная корпорация: ставим агентов на расписание](https://sereja.tech/blog/launchd-macos-agent-scheduler/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
