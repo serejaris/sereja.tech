@@ -39,6 +39,18 @@
     .callout.cta strong { font-size: 15px; }
     .callout strong { display: block; margin-bottom: 4px; }
     .callout p { margin-bottom: 0; }
+    .callout-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+    .callout-head strong { margin-bottom: 0; font-size: 13px; }
+    .callout-copy {
+      flex-shrink: 0;
+      font: 12px ui-monospace, monospace;
+      color: #666;
+      background: none;
+      border: 1px solid #ccc;
+      padding: 2px 8px;
+      cursor: pointer;
+    }
+    .callout-copy:hover { color: #000; border-color: #000; }
 
     .youtube-preview { margin: 20px 0; }
     .youtube-preview iframe { width: 100%; aspect-ratio: 16/9; border: none; }
@@ -121,6 +133,8 @@
       .callout { border-color: #3a3a3a; }
       .callout.cta { background: #2f2f2f; border-color: #4a4a4a; }
       .callout.insight { border-left-color: #34d399; }
+      .callout-copy { color: #9b9b9b; border-color: #4a4a4a; }
+      .callout-copy:hover { color: #d1d5db; border-color: #9b9b9b; }
       pre { background: #2f2f2f !important; border-color: #3a3a3a; }
       code { background: #2f2f2f; }
       pre code { background: none; }
