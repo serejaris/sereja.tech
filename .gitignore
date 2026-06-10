@@ -2,3 +2,6 @@ public/
 
 # Analytics secret (PostHog personal API key)
 .env.analytics
+
+__pycache__/
+*.pyc
