@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-94+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+95+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-06-12 | [Запустил AI-радио, которое делают агенты](https://sereja.tech/blog/ai-radio-agents/) |
 | 2026-06-10 | [Перешёл на Claude Fable 5: цены, effort, кейсы](https://sereja.tech/blog/claude-fable-5-review/) |
 | 2026-04-30 | [OTel для Claude Code — рентген твоих скиллов](https://sereja.tech/blog/claude-code-skills-grafana/) |
 | 2026-04-27 | [Свой Miro за 30 минут вместо подписки](https://sereja.tech/blog/svoy-miro-za-30-minut/) |
@@ -45,10 +46,6 @@
 | 2026-03-19 | [Software for One: софт, который нужен только тебе](https://sereja.tech/blog/software-for-one-personal-tools/) |
 | 2026-03-16 | [Слои контекста: организуем файлы по скорости изменения](https://sereja.tech/blog/context-architecture-lifecycle-split/) |
 | 2026-03-12 | [NotebookLM + Claude Code: бесплатный RAG за 5 минут](https://sereja.tech/blog/notebooklm-claude-code-rag/) |
-| 2026-03-05 | [Symphony: демон на Elixir раздаёт задачи Codex](https://sereja.tech/blog/symphony-codex-orchestrator/) |
-| 2026-03-04 | [Как я собрал совет директоров из субагентов](https://sereja.tech/blog/board-of-advisors-subagents/) |
-| 2026-03-01 | [llms.txt: делаю блог читаемым для агентов](https://sereja.tech/blog/llms-txt-agent-readable-web/) |
-| 2026-02-28 | [Один JSON кормит всех: как строить data layer для агентов](https://sereja.tech/blog/data-layer-for-agents/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
