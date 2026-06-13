@@ -14,9 +14,9 @@ image: "/images/blog/youtube-chapters-split-concern-preview.png"
 
 {{< youtube eguZQ4MAh8U >}}
 
-Сами стримы — из серии про Claude Fable 5. У самой модели судьба вышла громкая и короткая, но это отдельная история — вот она одной картинкой:
+Весь путь — от видео до готовых таймкодов на YouTube — одной схемой:
 
-![Как Anthropic сама подвела Fable 5 под отключение](/images/blog/youtube-chapters-split-concern-fable5.png)
+![Пайплайн генерации таймкодов: видео — транскрипт — очистка по словарю — смысловые границы сильной моделью — snap к ASR-сегментам — критик — обновление YouTube](/images/blog/youtube-chapters-split-concern-preview.png)
 
 ## Проблема: равномерная сетка
 
