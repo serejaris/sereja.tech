@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-95+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+96+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-06-13 | [Генерируем таймкоды для YouTube из транскрипта с помощью AI](https://sereja.tech/blog/youtube-chapters-split-concern/) |
 | 2026-06-13 | [undercast: оверлей для OBS, сделанный Fable 5](https://sereja.tech/blog/undercast-obs-overlay-fable-5/) |
 | 2026-06-12 | [Запустил AI-радио, которое делают агенты](https://sereja.tech/blog/ai-radio-agents/) |
 | 2026-06-10 | [Перешёл на Claude Fable 5: цены, effort, кейсы](https://sereja.tech/blog/claude-fable-5-review/) |
@@ -45,7 +46,6 @@
 | 2026-04-22 | [Как трекать задачи агентом в нескольких репо](https://sereja.tech/blog/tracking-tasks-agent-multi-repo/) |
 | 2026-04-08 | [Как я включил Claude Code в режим без вопросов](https://sereja.tech/blog/cc-alias-bypass-permissions/) |
 | 2026-03-19 | [Software for One: софт, который нужен только тебе](https://sereja.tech/blog/software-for-one-personal-tools/) |
-| 2026-03-16 | [Слои контекста: организуем файлы по скорости изменения](https://sereja.tech/blog/context-architecture-lifecycle-split/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
