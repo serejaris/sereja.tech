@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-98+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+99+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-06-30 | [Как тестировать LLM модели для написания текстов?](https://sereja.tech/blog/text-evals-grader/) |
 | 2026-06-30 | [Сто агентов, ноль результата](https://sereja.tech/blog/orchestration-without-goals/) |
 | 2026-06-29 | [Orca вместо четырёх терминалов](https://sereja.tech/blog/orca-menedzher-agentov/) |
 | 2026-06-13 | [Генерируем таймкоды для YouTube из транскрипта с помощью AI](https://sereja.tech/blog/youtube-chapters-split-concern/) |
@@ -45,7 +46,6 @@
 | 2026-04-30 | [OTel для Claude Code — рентген твоих скиллов](https://sereja.tech/blog/claude-code-skills-grafana/) |
 | 2026-04-27 | [Свой Miro за 30 минут вместо подписки](https://sereja.tech/blog/svoy-miro-za-30-minut/) |
 | 2026-04-22 | [Как я научил Claude Code писать техно-музыку](https://sereja.tech/blog/claude-code-techno-strudel-mcp/) |
-| 2026-04-22 | [Как трекать задачи агентом в нескольких репо](https://sereja.tech/blog/tracking-tasks-agent-multi-repo/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
