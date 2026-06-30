@@ -68,8 +68,8 @@
   }{{ end }}{{ with .Params.youtube_id }},
   "video": {
     "@type": "VideoObject",
-    "name": "{{ $.Title }}",
-    "description": "{{ $.Description }}",
+    "name": "{{ $.Params.video_title | default $.Title }}",
+    "description": "{{ $.Params.video_description | default $.Description }}",
     "thumbnailUrl": "https://img.youtube.com/vi/{{ . }}/maxresdefault.jpg",
     "uploadDate": "{{ $.Date.Format "2006-01-02" }}",
     "contentUrl": "https://www.youtube.com/watch?v={{ . }}",
@@ -82,8 +82,8 @@
 {
   "@context": "https://schema.org",
   "@type": "VideoObject",
-  "name": "{{ $.Title }}",
-  "description": "{{ $.Description }}",
+  "name": "{{ $.Params.video_title | default $.Title }}",
+  "description": "{{ $.Params.video_description | default $.Description }}",
   "thumbnailUrl": "https://img.youtube.com/vi/{{ . }}/maxresdefault.jpg",
   "uploadDate": "{{ $.Date.Format "2006-01-02" }}",
   "contentUrl": "https://www.youtube.com/watch?v={{ . }}",
