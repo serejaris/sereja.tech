@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:      #0b0d12;
+    --bg2:     #11141c;
+    --ink:     #f4f1e8;
+    --muted:   #6b7585;
+    --line:    rgba(255,255,255,0.07);
+    --gold:    #f6c453;   /* winning score / the number */
+    --gold-dim:#7a6a3a;
+    --slate:   #3a414f;   /* losing draft */
+    --mono:    ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+    --sans:    -apple-system, 'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;
+  }
+
+  html, body { width: 1200px; height: 630px; }
+
+  body {
+    background:
+      radial-gradient(1100px 700px at 18% -10%, #161a24 0%, var(--bg) 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    align-items: center;
+    padding: 64px;
+    gap: 56px;
+  }
+
+  /* faint measurement ruler along the top */
+  .ruler {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 18px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--line) 0, var(--line) 1px,
+      transparent 1px, transparent 40px
+    );
+    opacity: 0.6;
+  }
+
+  /* ===== LEFT: kicker + dominant hook ===== */
+  .left { position: relative; z-index: 2; }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 26px;
+    white-space: nowrap;
+  }
+  .kicker .p { color: var(--gold-dim); }
+
+  .hook {
+    font-size: 66px;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+  }
+  .hook .num { color: var(--gold); }
+  .hook .reg { color: var(--ink); }
+  .hook .line { display: block; white-space: nowrap; }
+
+  /* ===== RIGHT: scoreboard — two drafts, one wins ===== */
+  .board {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0));
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    column-gap: 16px;
+  }
+
+  .tag {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .meta { display: flex; flex-direction: column; gap: 10px; }
+  .meta .lbl {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  .bar {
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .bar > span { display: block; height: 100%; border-radius: 6px; }
+
+  .score {
+    font-family: var(--mono);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  /* winner */
+  .card.win {
+    border-color: rgba(246,196,83,0.55);
+    background: linear-gradient(180deg, rgba(246,196,83,0.10), rgba(246,196,83,0.02));
+    box-shadow: 0 0 0 1px rgba(246,196,83,0.12), 0 18px 50px rgba(246,196,83,0.06);
+  }
+  .card.win .tag { color: var(--gold); border-color: rgba(246,196,83,0.5); background: rgba(246,196,83,0.08); }
+  .card.win .bar > span { background: var(--gold); width: 90%; }
+  .card.win .score { color: var(--gold); }
+
+  /* loser */
+  .card.lose { opacity: 0.78; }
+  .card.lose .bar > span { background: var(--slate); width: 65%; }
+  .card.lose .score { color: var(--slate); }
+
+  .verdict {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 2px;
+  }
+  .verdict b { color: var(--gold); font-weight: 700; }
+
+  /* ===== attribution ===== */
+  .brand {
+    position: absolute;
+    bottom: 38px;
+    left: 64px;
+    z-index: 3;
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+  }
+  .brand::before {
+    content: "";
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-right: 9px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+  <div class="ruler"></div>
+
+  <div class="left">
+    <div class="kicker"><span class="p">$</span> grade.py draft_a.md draft_b.md</div>
+    <div class="hook">
+      <span class="line"><span class="num">Один</span> <span class="reg">бриф,</span></span>
+      <span class="line"><span class="num">два</span> <span class="reg">черновика,</span></span>
+      <span class="line"><span class="num">один</span> <span class="reg">балл.</span></span>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="card win">
+      <div class="tag">A</div>
+      <div class="meta">
+        <div class="lbl">ЧЕРНОВИК A</div>
+        <div class="bar"><span></span></div>
+      </div>
+      <div class="score">9.0</div>
+    </div>
+    <div class="card lose">
+      <div class="tag">B</div>
+      <div class="meta">
+        <div class="lbl">ЧЕРНОВИК B</div>
+        <div class="bar"><span></span></div>
+      </div>
+      <div class="score">6.5</div>
+    </div>
+    <div class="verdict">ГРЕЙДЕР ВЫБРАЛ → <b>A</b></div>
+  </div>
+
+  <div class="brand">sereja.tech</div>
+</body>
+</html>
