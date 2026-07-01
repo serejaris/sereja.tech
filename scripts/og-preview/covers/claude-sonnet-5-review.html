@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:      #0a0a0a;
+    --ink:     #f2f2f0;
+    --muted:   #6b7280;
+    --line:    rgba(255,255,255,0.08);
+    --pink:    #ff1493;   /* Opus — orchestrator, dominant */
+    --pink-dim:#7a0a48;
+    --slate:   #464c58;   /* Sonnet — worker, muted */
+    --mono:    ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+  }
+
+  html, body { width: 1200px; height: 630px; }
+
+  body {
+    background:
+      radial-gradient(1000px 640px at 82% 8%, rgba(255,20,147,0.08) 0%, transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    align-items: center;
+    padding: 64px;
+    gap: 40px;
+  }
+
+  .ruler {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 18px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--line) 0, var(--line) 1px,
+      transparent 1px, transparent 40px
+    );
+    opacity: 0.6;
+  }
+
+  /* ===== LEFT: kicker + dominant hook ===== */
+  .left { position: relative; z-index: 2; }
+
+  .kicker {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    white-space: nowrap;
+  }
+  .kicker .p { color: var(--pink-dim); }
+  .kicker .hi { color: var(--pink); }
+
+  .hook {
+    font-size: 62px;
+    font-weight: 800;
+    line-height: 1.14;
+    letter-spacing: -1.5px;
+  }
+  .hook .line { display: block; white-space: nowrap; }
+  .hook .opus { color: var(--pink); }
+  .hook .sonnet { color: #9aa3af; }
+  .hook .reg { color: var(--ink); }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 34px;
+    padding: 9px 16px;
+    border: 1px solid rgba(255,20,147,0.35);
+    border-radius: 8px;
+    background: rgba(255,20,147,0.06);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    color: #e8a8c6;
+  }
+  .badge::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+
+  /* ===== RIGHT: orchestration diagram ===== */
+  .diagram {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .node-opus {
+    border: 1px solid rgba(255,20,147,0.55);
+    border-radius: 12px;
+    padding: 16px 28px;
+    background: linear-gradient(180deg, rgba(255,20,147,0.14), rgba(255,20,147,0.03));
+    box-shadow: 0 0 0 1px rgba(255,20,147,0.12), 0 18px 40px rgba(255,20,147,0.08);
+    text-align: center;
+  }
+  .node-opus .name { font-size: 22px; font-weight: 700; color: var(--pink); letter-spacing: 0.5px; }
+  .node-opus .role { font-size: 13px; color: var(--muted); margin-top: 4px; letter-spacing: 0.5px; }
+
+  .lines {
+    width: 300px;
+    height: 46px;
+    position: relative;
+  }
+  .lines svg { position: absolute; top: 0; left: 0; }
+
+  .workers {
+    display: flex;
+    gap: 16px;
+  }
+
+  .node-sonnet {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.02);
+    text-align: center;
+    opacity: 0.85;
+  }
+  .node-sonnet .name { font-size: 15px; font-weight: 700; color: #9aa3af; letter-spacing: 0.3px; }
+  .node-sonnet .role { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* ===== attribution ===== */
+  .brand {
+    position: absolute;
+    bottom: 38px;
+    left: 64px;
+    z-index: 3;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--pink);
+  }
+  .brand::before {
+    content: "";
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--pink);
+    margin-right: 9px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+  <div class="ruler"></div>
+
+  <div class="left">
+    <div class="kicker"><span class="p">$</span> agent --plan=<span class="hi">opus</span> --run=sonnet-5</div>
+    <div class="hook">
+      <span class="line"><span class="opus">Opus</span> <span class="reg">планирует,</span></span>
+      <span class="line"><span class="sonnet">Sonnet</span> <span class="reg">исполняет.</span></span>
+    </div>
+    <div class="badge">CLAUDE SONNET 5 · ВЕРДИКТ СО СТРИМА</div>
+  </div>
+
+  <div class="diagram">
+    <div class="node-opus">
+      <div class="name">OPUS</div>
+      <div class="role">orchestrator</div>
+    </div>
+    <div class="lines">
+      <svg width="300" height="46" viewBox="0 0 300 46">
+        <path d="M150 0 L150 14 L48 14 L48 46" stroke="rgba(255,20,147,0.35)" stroke-width="2" fill="none"/>
+        <path d="M150 0 L150 46" stroke="rgba(255,20,147,0.35)" stroke-width="2" fill="none"/>
+        <path d="M150 0 L150 14 L252 14 L252 46" stroke="rgba(255,20,147,0.35)" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+    <div class="workers">
+      <div class="node-sonnet"><div class="name">SONNET</div><div class="role">worker</div></div>
+      <div class="node-sonnet"><div class="name">SONNET</div><div class="role">worker</div></div>
+      <div class="node-sonnet"><div class="name">SONNET</div><div class="role">worker</div></div>
+    </div>
+  </div>
+
+  <div class="brand">sereja.tech</div>
+</body>
+</html>
