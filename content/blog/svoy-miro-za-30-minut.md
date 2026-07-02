@@ -3,6 +3,7 @@ title: "Свой Miro за 30 минут вместо подписки"
 date: 2026-04-27
 description: "Попросил Claude Code сделать live-whiteboard поверх React-дека с синхро на iPad. 30 минут до лайва вместо подписки на Miro или Excalidraw."
 tags: ["claude-code", "react", "websocket", "canvas", "вайбкодинг"]
+image: /images/blog/svoy-miro-za-30-minut-preview.png
 ---
 
 ## Как добавить свой live-whiteboard прямо в деке с синхро на iPad

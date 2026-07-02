@@ -3,6 +3,7 @@ title: "OTel для Claude Code — рентген твоих скиллов"
 date: 2026-04-30
 description: "Поднял локальный observability-стек, чтобы увидеть, какие скиллы Claude Code реально вызываются. Промпты, грабли, ASCII-диаграмма."
 tags: ["claude-code", "observability", "grafana", "вайбкодинг", "скиллы"]
+image: /images/blog/claude-code-skills-grafana-preview.png
 ---
 
 Grafana — это дашборд, который показывает, какие из моих скиллов в Claude Code реально вызываются, а какие висят мёртвым грузом. Нативного счётчика на скилл не существует — тикет [#35319 «Skill invocation tracking»](https://github.com/anthropics/claude-code/issues/35319) висит открытым с 17 марта. Решается через стандартный OpenTelemetry-стек, который агент собирает локально в Docker за один вечер.
