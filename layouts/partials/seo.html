@@ -131,6 +131,32 @@
 }
 </script>
 {{ end }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "{{ .Site.BaseURL }}"
+    }{{ if eq .Section "blog" }},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Блог",
+      "item": "{{ "/blog/" | absURL }}"
+    }{{ end }},
+    {
+      "@type": "ListItem",
+      "position": {{ if eq .Section "blog" }}3{{ else }}2{{ end }},
+      "name": {{ .Title | jsonify }},
+      "item": "{{ .Permalink }}"
+    }
+  ]
+}
+</script>
 {{ else if .IsHome }}
 <script type="application/ld+json">
 {
