@@ -1,0 +1,10 @@
+# sereja.tech
+
+> Блог Сережи Риса про вайбкодинг — управление AI-агентами через промпты вместо написания кода руками. 80+ статей на русском языке. Фокус: Claude Code, мультиагентные паттерны, автоматизация, Personal Corporation.
+
+- [Все статьи](https://sereja.tech/blog/): полный каталог с тегами
+- [RSS](https://sereja.tech/blog/index.xml): полнотекстовая лента
+- [Полная версия](https://sereja.tech/llms-full.txt): все статьи с описаниями
+{{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
+{{- end }}

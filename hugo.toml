@@ -42,8 +42,18 @@ enableRobotsTXT = true
     lineNos = false
     style = 'github'
 
+[outputFormats.LLMS]
+  baseName = 'llms'
+  mediaType = 'text/plain'
+  isPlainText = true
+
+[outputFormats.LLMS-FULL]
+  baseName = 'llms-full'
+  mediaType = 'text/plain'
+  isPlainText = true
+
 [outputs]
-  home = ['HTML', 'RSS']
+  home = ['HTML', 'RSS', 'LLMS', 'LLMS-FULL']
   section = ['HTML', 'RSS']
   taxonomy = ['HTML']
   term = ['HTML']
