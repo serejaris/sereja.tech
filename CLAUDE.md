@@ -17,7 +17,6 @@
 | Dev | `hugo server -D` |
 | Build | `hugo build` |
 | OG preview | `./scripts/og-preview/generate.sh --title "..." --output static/images/blog/{slug}-preview.png` |
-| Static preview | `python3 -m http.server` |
 
 ## Architecture
 
@@ -29,7 +28,6 @@
 | `static/` | JS, images |
 | `scripts/og-preview/` | OG-превью генератор (HTML → Playwright → PNG 1200×630) |
 | `hugo.toml` | Конфиг Hugo |
-| `index.html` | Legacy главная (вне Hugo) |
 
 ## YouTube Block
 
