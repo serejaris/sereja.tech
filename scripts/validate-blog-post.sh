@@ -87,7 +87,7 @@ validate_file() {
 
   # --- image ---
   local image_val
-  image_val=$(echo "$fm" | grep -E '^image:' | sed 's/^image:[[:space:]]*//' | sed 's/^"\(.*\)"$/\1/' | sed "s/^'\(.*\)'$/\1/")
+  image_val=$(echo "$fm" | grep -E '^image:' | sed 's/^image:[[:space:]]*//' | sed 's/^"\(.*\)"$/\1/' | sed "s/^'\(.*\)'$/\1/" || true)
   if [[ -z "$image_val" ]]; then
     warn "$rel: no 'image' field (OG preview will be missing)"
   else
