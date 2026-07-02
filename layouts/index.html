@@ -12,7 +12,7 @@
     allowfullscreen>
   </iframe>
 </div>
-<p><small>Последнее видео: {{ .label }} · <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=youtube_section" target="_blank">Все видео</a></small></p>
+<p><small>Последнее видео: {{ .label | default .title }} · <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=youtube_section" target="_blank">Все видео</a></small></p>
 {{ end }}
 
 <ul class="video-list">

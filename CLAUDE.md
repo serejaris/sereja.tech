@@ -33,7 +33,7 @@
 
 Секция «YouTube» на главной (`layouts/index.html`) — data-driven из `data/videos.yml`. Первая запись = featured iframe + подпись «Последнее видео: {label}». Следующие 3 — список с thumbnail 80×45 (грузятся с `i.ytimg.com/vi/{id}/mqdefault.jpg`).
 
-Обновление = часть lifecycle стрима, **живёт не здесь**. Владелец процесса — `live-sereja-tech/AGENTS.md` § 9.1 «YouTube Broadcast Lifecycle», шаг «D+1 refresh». IDs/titles canonical в `~/Documents/GitHub/stats-youtube/videos.json`.
+Обновление автоматическое: `.github/workflows/sync-videos.yml` (cron дважды в день + `workflow_dispatch`) синкает `data/videos.yml` из RSS-фида канала через `scripts/sync-videos.py`.
 
 ## Blog Workflow
 
