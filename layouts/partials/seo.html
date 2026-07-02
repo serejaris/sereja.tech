@@ -151,7 +151,7 @@
     {
       "@type": "ListItem",
       "position": {{ if eq .Section "blog" }}3{{ else }}2{{ end }},
-      "name": {{ .Title | jsonify }},
+      "name": {{ .Title }},
       "item": "{{ .Permalink }}"
     }
   ]
