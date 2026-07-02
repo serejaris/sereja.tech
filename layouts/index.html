@@ -29,6 +29,18 @@
   {{ end }}
 </ul>
 
+<h2>Популярное</h2>
+<ul class="posts">
+  {{ range .Site.Data.featured.featured }}
+  {{ with $.Site.GetPage (printf "/blog/%s" .) }}
+  <li>
+    <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+  {{ end }}
+</ul>
+
 <h2>Последнее из блога</h2>
 <ul class="posts">
   {{ range first 10 .Site.RegularPages.ByDate.Reverse }}

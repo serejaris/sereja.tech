@@ -1,0 +1,9 @@
+# Курируемый список слагов для секции «Популярное» на главной.
+# Порядок = порядок вывода на главной.
+
+featured:
+  - modular-rules-claude-md
+  - claude-code-vs-codex-cli
+  - personal-corporation-event-driven-agents
+  - app-types-guide
+  - subagent-model-cost
