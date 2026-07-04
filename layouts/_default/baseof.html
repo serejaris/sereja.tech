@@ -166,7 +166,7 @@
   {{ if .Store.Get "hasMermaid" }}
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'strict' });
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'strict', htmlLabels: true });
   </script>
   {{ end }}
 </body>
