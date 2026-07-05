@@ -64,7 +64,6 @@ If sources conflict:
 - Do not edit `public/` by hand.
 - Do not deploy directly from the local working tree with `vercel deploy`, `vercel --prod`, or similar CLI flows.
 - Production deploys must happen through the Git-connected repository update path used by Vercel.
-- Do not push or merge to `main`.
 - Do not block on GitHub board or issue sync.
 
 ## Pre-approved scope for this run
@@ -89,8 +88,6 @@ If sources conflict:
 - Renaming slugs without an explicit successor and validation.
 - Changing analytics behavior in `static/analytics.js`.
 - Editing unrelated GitHub Actions.
-- Direct Vercel CLI deployments from the local checkout.
-- Pushing to remote or merging PRs.
 
 ## Dependency order
 
