@@ -6,6 +6,15 @@
 
 <p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
 
+<p class="search-box"><input type="search" id="search" placeholder="Поиск по {{ len .Pages }} статьям" autocomplete="off" spellcheck="false" aria-label="Поиск по статьям"></p>
+
+<div id="search-output" hidden>
+  <p class="search-count" id="search-count"></p>
+  <ul class="posts" id="search-results"></ul>
+</div>
+
+<div id="browse">
+
 {{ with .Site.Taxonomies.tags }}
 <div class="tags">
   {{ range .ByCount }}{{ if ge .Count 2 }}<a href="{{ "/tags/" | relURL }}{{ .Term | urlize }}/" class="tag">{{ .Term }} ({{ .Count }})</a>{{ end }}{{ end }}
@@ -20,4 +29,8 @@
   </li>
   {{ end }}
 </ul>
+
+</div>
+
+<script defer src="/search.js"></script>
 {{ end }}

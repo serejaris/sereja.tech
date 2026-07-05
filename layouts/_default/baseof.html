@@ -144,6 +144,19 @@
     .posts li { margin-bottom: 12px; }
     .date { color: #666; font-size: 13px; margin-right: 8px; }
 
+    .search-box input {
+      width: 100%;
+      box-sizing: border-box;
+      font: inherit;
+      padding: 6px 10px;
+      border: 1px solid #000;
+      background: #fff;
+      color: #000;
+    }
+    .search-count { color: #666; font-size: 13px; }
+    .search-snippet { display: block; font-size: 13px; color: #666; margin-top: 2px; }
+    .search-snippet mark { background: #ff0; color: inherit; padding: 0; }
+
     /* Dark mode */
     @media (prefers-color-scheme: dark) {
       body { background: #212121; color: #d1d5db; }
@@ -172,6 +185,10 @@
       .video-item img { border-color: #3a3a3a; }
       .video-title { color: #7ab0ff; }
       .video-item:visited .video-title { color: #c4a6f5; }
+
+      .search-box input { background: #2f2f2f; border-color: #4a4a4a; color: #d1d5db; }
+      .search-count, .search-snippet { color: #9b9b9b; }
+      .search-snippet mark { background: #7a6a00; color: #fff; }
     }
   </style>
 </head>

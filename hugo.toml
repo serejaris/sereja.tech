@@ -52,8 +52,12 @@ enableRobotsTXT = true
   mediaType = 'text/plain'
   isPlainText = true
 
+[outputFormats.SearchIndex]
+  baseName = 'searchindex'
+  mediaType = 'application/json'
+
 [outputs]
-  home = ['HTML', 'RSS', 'LLMS', 'LLMS-FULL']
+  home = ['HTML', 'RSS', 'LLMS', 'LLMS-FULL', 'SearchIndex']
   section = ['HTML', 'RSS']
   taxonomy = ['HTML']
   term = ['HTML']
