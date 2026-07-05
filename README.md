@@ -30,12 +30,14 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-99+ статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+107 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-07-04 | [Как я гоняю команду агентов из терминала в omp](https://sereja.tech/blog/omp-orchestration/) |
+| 2026-07-01 | [Sonnet 5: скучный релиз с одним полезным навыком](https://sereja.tech/blog/claude-sonnet-5-review/) |
 | 2026-06-30 | [Как тестировать LLM модели для написания текстов?](https://sereja.tech/blog/text-evals-grader/) |
 | 2026-06-30 | [Сто агентов, ноль результата](https://sereja.tech/blog/orchestration-without-goals/) |
 | 2026-06-29 | [Orca вместо четырёх терминалов](https://sereja.tech/blog/orca-menedzher-agentov/) |
@@ -44,8 +46,6 @@
 | 2026-06-12 | [Запустил AI-радио, которое делают агенты](https://sereja.tech/blog/ai-radio-agents/) |
 | 2026-06-10 | [Перешёл на Claude Fable 5: цены, effort, кейсы](https://sereja.tech/blog/claude-fable-5-review/) |
 | 2026-04-30 | [OTel для Claude Code — рентген твоих скиллов](https://sereja.tech/blog/claude-code-skills-grafana/) |
-| 2026-04-27 | [Свой Miro за 30 минут вместо подписки](https://sereja.tech/blog/svoy-miro-za-30-minut/) |
-| 2026-04-22 | [Как я научил Claude Code писать техно-музыку](https://sereja.tech/blog/claude-code-techno-strudel-mcp/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
