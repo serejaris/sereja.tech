@@ -1,0 +1,5 @@
+{{- $result := transform.HighlightCodeBlock . -}}
+<div class="code-block">
+  <button class="code-copy" type="button" aria-label="Скопировать код" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').innerText.trim()).then(()=>{this.textContent='скопировано';setTimeout(()=>{this.textContent='копировать'},1500)})">копировать</button>
+  {{ $result.Wrapped }}
+</div>

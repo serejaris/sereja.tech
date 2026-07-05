@@ -49,6 +49,8 @@ OG Preview: всегда генерировать через `scripts/og-preview
 
 Permalinks: `/blog/:filename`. RSS только для blog.
 
+Кнопка «копировать» автоматическая: у всех callout (кроме type="cta") и у всех fenced code blocks (render hook `layouts/_default/_markup/render-codeblock.html`). `copy="true"` писать не нужно; отключение — `copy="false"`.
+
 ### Посты по стримам (обязательный чеклист)
 
 Если статья описывает стрим с экспериментами (есть репозиторий-песочница, как `serejaris/claude-fable`), в пост обязательно входят:

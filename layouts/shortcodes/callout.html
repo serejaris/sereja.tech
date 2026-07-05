@@ -1,12 +1,13 @@
-{{- $type := "default" }}{{- $title := "" }}{{- $copy := false }}
+{{- $type := "default" }}{{- $title := "" }}
 {{- if .IsNamedParams }}
   {{- $type = .Get "type" | default "default" }}
   {{- $title = .Get "title" | default "" }}
-  {{- $copy = eq (.Get "copy" | default "") "true" }}
 {{- else }}
   {{- $type = .Get 0 | default "default" }}
   {{- $title = .Get 1 | default "" }}
 {{- end }}
+{{- $copy := ne $type "cta" }}
+{{- if and .IsNamedParams (eq (.Get "copy") "false") }}{{- $copy = false }}{{- end }}
 <div class="callout {{ $type }}">
   {{- if or $title $copy }}
   <div class="callout-head">
