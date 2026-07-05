@@ -89,6 +89,8 @@ If sources conflict:
 - Changing analytics behavior in `static/analytics.js`.
 - Editing unrelated GitHub Actions.
 
+- Direct Vercel CLI deployments from the local checkout.
+
 ## Dependency order
 
 Always work in this order unless `docs/PLAN.md` narrows the active task:
