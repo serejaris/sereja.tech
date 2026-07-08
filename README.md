@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-107 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+108 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-07-08 | [Почему автоматизация не работает без рецепта](https://sereja.tech/blog/pipeline-born-by-hand/) |
 | 2026-07-04 | [Как я гоняю команду агентов из терминала в omp](https://sereja.tech/blog/omp-orchestration/) |
 | 2026-07-01 | [Sonnet 5: скучный релиз с одним полезным навыком](https://sereja.tech/blog/claude-sonnet-5-review/) |
 | 2026-06-30 | [Как тестировать LLM модели для написания текстов?](https://sereja.tech/blog/text-evals-grader/) |
@@ -45,7 +46,6 @@
 | 2026-06-13 | [undercast: оверлей для OBS, сделанный Fable 5](https://sereja.tech/blog/undercast-obs-overlay-fable-5/) |
 | 2026-06-12 | [Запустил AI-радио, которое делают агенты](https://sereja.tech/blog/ai-radio-agents/) |
 | 2026-06-10 | [Перешёл на Claude Fable 5: цены, effort, кейсы](https://sereja.tech/blog/claude-fable-5-review/) |
-| 2026-04-30 | [OTel для Claude Code — рентген твоих скиллов](https://sereja.tech/blog/claude-code-skills-grafana/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
