@@ -775,7 +775,6 @@ python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-
 ### Milestone guardrails
 
 - Do not deploy with local Vercel CLI.
-- Do not push or merge to `main` directly.
 - Do not change the trailing-slash canonical policy.
 - Do not widen the indexable surface.
 - Do not rewrite articles broadly just to satisfy GSC.
@@ -783,3 +782,175 @@ python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-
 ### Stop-and-fix rule
 
 If `classify-gsc-backlog` reports a repo-controlled canonical page missing from render output, sitemap, self-canonical, or indexability, fix that technical cause before adding more donor links.
+
+---
+
+## M14 — GSC/Ahrefs page-level refresh and redirect-source repair
+
+Status: `[x]`
+
+### Goal
+
+Use the latest browser-backed GSC and Ahrefs signals to make a small page-level SEO repair without changing URL policy or widening the indexable surface.
+
+### Tasks
+
+- [x] Check latest GitHub/task status for issue `#102` and issue `#97`.
+- [x] Open GSC in Chrome and capture current page indexing and performance signals.
+- [x] Open Ahrefs Site Explorer in Chrome and capture current organic keyword/page context.
+- [x] Repair new slashless internal blog links that fail `check-redirect-sources`.
+- [x] Tune `content/blog/superpowers-brainstorming-workflow.md` for the current `superpowers`, `superpowers skills`, and `superpowers claude` demand.
+- [x] Tune `content/blog/agents-md-source-of-truth.md` for the current `agents md`, `agents.md это`, and `codex/claude agents.md` demand.
+- [x] Update `scripts/seo/url_audit.py` so draft posts are not treated as rendered canonical blog pages.
+- [x] Validate the full local SEO helper stack.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- GSC and Ahrefs observations are recorded.
+- Repo-maintained sources no longer emit newly introduced slashless blog links.
+- Page edits are scoped to metadata, opening copy, and one heading per target page.
+- Local build and SEO checks pass.
+
+### Validation commands
+
+```bash
+hugo build
+python3 -m py_compile scripts/seo/url_audit.py
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json
+git diff --check
+```
+
+### Known risks
+
+- GSC `Page with redirect` and `Crawled - currently not indexed` can lag behind repo fixes.
+- Ahrefs estimates are sparse for this domain and should not override GSC data.
+- URL Inspection direct links returned a Google `404`; use the GSC UI search field for future URL-level inspection.
+
+### Milestone guardrails
+
+- Do not deploy with local Vercel CLI.
+- Do not change trailing-slash canonical policy.
+- Do not rewrite articles broadly for query chasing.
+- Do not request indexing before the changed pages are deployed through the Git-connected path.
+
+### Stop-and-fix rule
+
+If `check-redirect-sources` fails, repair source links before doing any more snippet or content edits.
+
+---
+
+## M15 — New post discovery and release
+
+Status: `[x]`
+
+### Goal
+
+Make the new `pipeline-born-by-hand` post discoverable through technically valid publication and two natural contextual internal links, while preserving the existing URL policy and indexable surface.
+
+### Tasks
+
+- [x] Audit issue `#140` and the production target state through the available browser check; use the 2026-07-08 browser-backed GSC/Ahrefs slice only as general discovery context.
+- [x] Verify the target route's trailing-slash canonical, rendered output, and sitemap membership before adding donor links.
+- [x] Add one natural contextual inbound link from the direct-topic predecessor page to `/blog/pipeline-born-by-hand/`.
+- [x] Add one natural contextual inbound link from the strongest organic page to `/blog/pipeline-born-by-hand/`.
+- [x] Register `/blog/pipeline-born-by-hand/` in `priority_batches.batch_c` and make the SEO audit helper evaluate every array in `priority_batches`.
+- [x] Run the full local SEO validation stack, including the new batch guardrail and JSON policy parse.
+- [x] Create a scoped commit and push the current branch through the Git-connected release path; do not use local Vercel deployment.
+- [x] Smoke-test the production canonical URL, sitemap presence, and both donor links after deployment.
+- [x] GSC URL Inspection was skipped due Chrome profile lock; manual follow-up is retained without blocking local or production readiness.
+
+### Definition of done
+
+- Locally, `/blog/pipeline-born-by-hand/` renders, is self-canonical with a trailing slash, is indexable, and is present in the sitemap.
+- The target has at least the two planned explicit natural contextual donors—the direct-topic predecessor and the strongest organic page—in addition to hub or automatic links.
+- `priority_batches.batch_c` protects the target without reducing checks for existing priority batches.
+- The scoped current-branch push completes through the Git-connected path and production smoke checks pass.
+- GSC URL Inspection is skipped due Chrome profile lock; its manual follow-up is recorded separately from completed local and production validation and does not block them.
+
+### Validation commands
+
+```bash
+hugo build
+python3 -m py_compile scripts/seo/url_audit.py
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json
+python3 -m json.tool scripts/seo/url_policy.json > /dev/null
+git diff --check
+```
+
+### Known risks
+
+- GSC discovery, canonical selection, and indexing signals can lag after a valid deploy.
+- The available 2026-07-08 browser-backed GSC slice is general context, not a substitute for post-deploy URL-level inspection.
+- Live GSC is unavailable in this session because the Chrome profile is locked.
+- Internal links improve discovery but do not guarantee indexing.
+
+### Milestone guardrails
+
+- Do not change the target title, slug, or canonical without URL-level data.
+- Do not change the trailing-slash canonical policy.
+- Do not widen the indexable surface.
+- Do not deploy with local Vercel CLI; use the scoped current-branch push through the Git-connected release path.
+- Treat the browser-backed GSC slice dated `2026-07-08` only as general context while live GSC remains unavailable because of the Chrome profile lock.
+
+### Stop-and-fix rule
+
+If the target is absent from render output or sitemap, lacks a trailing-slash self-canonical, is not indexable, or either planned donor does not resolve to the canonical target, fix that technical or source-link cause before the scoped Git-connected push.
+
+---
+
+## M16 — Organic winner rollback and governance
+
+Status: `[x]`
+
+### Goal
+
+Restore the known-good pre-M14 search presentation of `/blog/superpowers-brainstorming-workflow/` without disturbing the later M15 donor link or any unrelated URL, canonical, batch, or M14 repair.
+
+### Tasks
+
+- [x] Synthesize parallel content, organic-search, specification, and standards critics: title and description roll back unanimously; opening has a rollback majority; H2 feedback is split; full-baseline recovery restores all four fields from `4f21fa1^`.
+- [x] Surgically restore only the title, description, opening, and targeted H2 of `content/blog/superpowers-brainstorming-workflow.md` from `4f21fa1^`, while preserving the M15 contextual donor link to `/blog/pipeline-born-by-hand/`.
+- [x] Add the short mandatory AGENTS rule that requires evidence before changing an organic winner, with a pointer to the ADR as the sole rationale and exceptions owner.
+- [x] Create ADR `0001` documenting the incident decision, evidence threshold, options, and exceptions.
+- [x] Run rollback-specific local validation, including exact four-field baseline comparison and confirmation that the M15 donor link, slug, canonical, other M14 fixes, and `batch_c` remain unchanged.
+- [x] Push the scoped rollback through the Git-connected release path.
+- [x] Smoke-test the restored production URL and preserved M15 donor link after the Git-connected release.
+- [x] Live GSC URL Inspection was skipped due Chrome profile lock; manual URL-level follow-up remains optional when an unlocked browser profile is available.
+
+### Definition of done
+
+- Rollback validation establishes that the four specified fields exactly match the known-good `4f21fa1^` baseline and that the M15 donor link is still present and points to `/blog/pipeline-born-by-hand/`.
+- Rollback validation also establishes that the slug, canonical policy, all other M14 fixes, and `priority_batches.batch_c` did not change.
+- The AGENTS rule is short and mandatory and points only to ADR `0001`; the ADR owns the rationale, options, evidence threshold, and exceptions.
+- The Git-connected release is pushed and production smoke confirms the restored page and preserved donor link.
+- Future search measurement is not implied by rollback validation or production smoke: current live GSC URL Inspection is unavailable because the Chrome profile is locked, and URL-level inspection and measurement remain a follow-up only when a browser profile is available.
+
+### Known risks
+
+- Restoring only some of the four M14 fields would leave an unverified hybrid rather than the known-good baseline.
+- A broad revert could remove the later M15 donor link or unrelated M14 technical repairs.
+- Local and production checks cannot establish Google-selected canonical, indexing, or performance while live GSC URL Inspection is unavailable due the Chrome profile lock.
+
+### Milestone guardrails
+
+- Do not change the slug, canonical, trailing-slash policy, other M14 fixes, or `priority_batches.batch_c`.
+- Preserve the M15 donor link to `/blog/pipeline-born-by-hand/` exactly.
+- Do not use a local Vercel deployment; release only through the Git-connected push path.
+- Do not represent rollback validation as evidence of future GSC indexing or performance.
+
+### Stop-and-fix rule
+
+If the four restored fields do not match `4f21fa1^`, the M15 donor link changes, or any protected URL, canonical, batch, or unrelated M14 surface changes, stop and reduce the diff to the surgical rollback before pushing.

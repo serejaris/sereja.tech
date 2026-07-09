@@ -2,7 +2,7 @@
 
 ## Current phase
 
-`Issue #102 GSC canonical backlog rollout`
+`M16 completed — rollback governance, Git-connected production rollout, and smoke passed`
 
 ## Done
 
@@ -31,21 +31,23 @@
 - [x] Issue `#98` shipped through the Git-connected Vercel path via PR `#99` and follow-up PR `#100`; production smoke is green and GSC `Page with redirect` validation started on `2026-05-07`.
 - [x] Issue `#102` GSC inventory captured for `Crawled`, `Duplicate`, and `Discovered` rows from the `2026-05-03` GSC report.
 - [x] Issue `#102` local classifier and conservative donor-link fixes completed; `classify-gsc-backlog` now reports `low_donor_routes=0`.
+- [x] Issue `#102` verified closed: PR `#103` merged, production smoke completed, and GSC validation/request indexing started on `2026-05-07`.
+- [x] GSC checked in Chrome on `2026-07-08`: Page indexing shows `246` not indexed, `50` indexed, `Page with redirect` failed with `29`, `Crawled - currently not indexed` failed with `115`.
+- [x] Ahrefs checked in Chrome on `2026-07-08`: DR `7`, referring domains `263`, organic keywords `4`, organic traffic `2`; top organic page is `/blog/superpowers-brainstorming-workflow/`.
+- [x] M14 local repair completed: new slashless internal blog links normalized, Superpowers and AGENTS.md snippets/openings tuned, draft posts excluded from canonical helper expectations.
+- [x] M15 local audit, implementation, and validation completed: issue `#140` reviewed; the production target browser check confirmed title, trailing-slash canonical, `lang="ru"`, description, `BlogPosting` + `BreadcrumbList`, images, and sitemap presence; two explicit contextual donors added; `batch_c` and dynamic priority-batch handling added; full helper stack and local browser smoke passed.
+- [x] M15 release and production smoke completed: commits `4f21fa1` (M14) and `cec1a27` (M15) were pushed with `git push origin main`; the Git-connected production deploy is live. Browser smoke observed `/blog/pipeline-born-by-hand/` self-canonical at `https://sereja.tech/blog/pipeline-born-by-hand/`, index-default, `BlogPosting` + `BreadcrumbList`, sitemap entry, both explicit donors live, and M14 Superpowers plus AGENTS title/description live; an independent URL read confirmed the blog-post-pipeline donor. GSC URL Inspection was skipped due Chrome profile lock; manual follow-up retained and non-blocking.
+- [x] M16 completed: four critics rejected the ungrounded Superpowers winner rewrite; the title, description, opening, and targeted H2 were restored from `4f21fa1^` while preserving the M15 donor. The mandatory AGENTS guardrail and ADR `0001` now govern protected organic winners; clean rollback validation passed, commit `c5182d1` was pushed to `main`, and Git-connected production browser smoke passed. Live GSC URL Inspection was skipped due Chrome profile lock; manual follow-up is optional and non-blocking.
 
 ## In progress
+- None.
 
-- [ ] Monitor new analytics events after deployment.
-- [ ] Work through GitHub issue `#97` before the next analytics run creates new tasks.
-- [ ] Ship issue `#102` through Git-connected Vercel, smoke production, then start GSC validation/request indexing.
 
 ## Next
 
-1. Merge issue `#102` only through a PR / Git-connected Vercel path; do not use local `vercel deploy`.
-2. After production deploy, smoke changed URLs and sitemap, then start GSC validation for `Crawled` and `Duplicate`.
-3. Inspect `/blog/remotion-programmatic-video-vibecoding/` and request indexing, or record the existing GSC state if request indexing is unavailable.
-4. Re-check GSC `Page with redirect` on `2026-05-11`, `2026-05-14`, and `2026-05-21`; host/protocol redirects may remain.
-5. Use `python3 scripts/analytics/site_review.py research/analytics-runs/YYYY-MM-DD.json` for the next analytics run, then revisit issue `#97` before creating new tasks.
-6. Keep issue `#35` separate from the GSC rollout track.
+1. When a browser profile is available, optionally run manual GSC URL Inspection for `/blog/pipeline-born-by-hand/` and the restored `/blog/superpowers-brainstorming-workflow/`; both production rollouts and smoke checks are already complete.
+2. Use `python3 scripts/analytics/site_review.py research/analytics-runs/YYYY-MM-DD.json` for the next analytics run, then revisit issue `#97` before creating new tasks.
+3. Keep issue `#35` separate from the GSC rollout track.
 
 ## Decisions made
 
@@ -94,6 +96,15 @@
 - `live.sereja.tech/*` and `ai-corp.sereja.tech/` examples are out of this Hugo repo scope and should be split if they need SEO work.
 - GSC URL Inspection for `/blog/document-conversations-not-code/` showed Google-selected canonical `https://sereja.tech/blog/document-conversations-not-code`, so the current duplicate evidence is slash/canonical lag rather than a semantic duplicate.
 - Issue `#102` completion means repo fixes shipped, production smoke green, and GSC validation/request indexing started or state recorded; it does not mean waiting for the final GSC pass.
+- GSC on `2026-07-08` shows `Page with redirect` examples are still mostly host/protocol/slash variants; current repo must keep `check-redirect-sources` green so it does not feed new slashless examples.
+- GSC on `2026-07-08` shows `/blog/agents-md-source-of-truth/` lost impressions while position and CTR stayed roughly stable, so the local repair targets query fit for `agents md` rather than canonical behavior.
+- GSC and Ahrefs on `2026-07-08` both identify `/blog/superpowers-brainstorming-workflow/` as the strongest current organic page; the local repair targets broader `superpowers` and `superpowers skills` intent.
+- `context.md` is referenced by the execution pack but is missing in the current checkout; this run used `docs/PLAN.md`, `docs/STATUS.md`, GitHub issues, live GSC, Ahrefs, and repo reality.
+- M15 introduced no new technical canonical defect; the target title and slug remain unchanged.
+- M15 uses two explicit contextual donors for `/blog/pipeline-born-by-hand/`: `/blog/blog-post-pipeline/` as the direct-topic predecessor and `/blog/superpowers-brainstorming-workflow/` as the strongest organic page.
+- `priority_batches.batch_c` plus dynamic handling of every priority-batch array is the guardrail for the target.
+- Live GSC URL Inspection for M15 was skipped because the Chrome browser profile is locked; the 2026-07-08 browser-backed slice is general context only, not M15 URL-level evidence.
+- Superseded: the M14 Superpowers snippet rewrite decision is no longer in force. `/blog/superpowers-brainstorming-workflow/` is a protected organic winner; ADR `0001` is the sole owner of the protected-winner rule, evidence threshold, rationale, and exceptions, while AGENTS supplies the mandatory guardrail and pointer.
 
 ## Assumptions in force
 
@@ -202,7 +213,7 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 
 ## Current blockers
 
-- The KPI refresh in issue `#71` depends on Google recrawling the 5 requested pages after `2026-03-13`; until then, refreshed index-state data would be premature.
+- None. GSC URL Inspection for the M15 target and restored M16 winner remains optional manual follow-up after the Chrome profile lock; it is not a production blocker.
 
 ## Audit log
 
@@ -228,6 +239,11 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-05-07 | Production smoke and GSC validation start | GitHub PRs `#99` and `#100`, GSC Page indexing report | `gh pr merge 99`; `gh pr merge 100`; Git-connected Vercel checks on `main`; `curl -sL 'https://sereja.tech/blog/blog-post-pipeline/?codex_check=8693c8c'`; `curl -sIL 'https://sereja.tech/blog/data-layer-for-agents/)?codex_check=8693c8c'`; `curl -sI 'https://sereja.tech/blog/telegram-api-vs-json-export?codex_check=8693c8c'`; `curl -sL 'https://sereja.tech/sitemap.xml?codex_check=8693c8c'`; Chrome DevTools MCP click on GSC `VALIDATE FIX` | pass; GSC shows `Validation started`, started `5/7/26` | monitor GSC validation and continue separate canonical backlog |
 | 2026-05-07 | M13 GSC canonical backlog classification and conservative fixes | `research/gsc-live/2026-05-07-gsc-backlog-*`, `scripts/seo/url_audit.py`, selected `content/blog/*.md`, `AGENTS.md`, `docs/PLAN.md`, `docs/TEST_PLAN.md`, `docs/STATUS.md` | Chrome DevTools GSC inventory and URL Inspection; `hugo build`; `python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json` | pass locally; `low_donor_routes=0` | ship issue `#102` via Git-connected Vercel path, then production smoke and GSC validation |
 | 2026-05-15 12:16 UTC | GSC email interpretation guardrail | `AGENTS.md`, `docs/STATUS.md` | Gmail Search Console email review; live GSC comparison; `hugo build`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json`; `git diff --check` | pass; `redirect-sources-ok`, `low_donor_routes=0` after build | use GSC validation rules before any next indexing fix |
+| 2026-07-08 17:08 UTC | M14 GSC/Ahrefs page-level refresh | `content/blog/agents-md-source-of-truth.md`, `content/blog/superpowers-brainstorming-workflow.md`, `content/blog/ai-radio-agents.md`, `content/blog/orca-menedzher-agentov.md`, `content/blog/orchestration-without-goals.md`, `content/blog/undercast-obs-overlay-fable-5.md`, `scripts/seo/url_audit.py`, `docs/PLAN.md`, `docs/STATUS.md` | Chrome GSC and Ahrefs reads; `hugo build`; `python3 -m py_compile scripts/seo/url_audit.py`; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json`; `git diff --check` | pass; `redirect-sources-ok`, `canonical-ok (checked=108)`, `low_donor_routes=0` | ship via Git-connected PR, then smoke changed pages and GSC state |
+| 2026-07-09 | M15 local discovery implementation and validation | `content/blog/blog-post-pipeline.md`, `content/blog/superpowers-brainstorming-workflow.md`, `scripts/seo/url_audit.py`, `scripts/seo/url_policy.json`, `docs/PLAN.md`, `docs/STATUS.md`, `docs/TEST_PLAN.md` | production target browser check (title, canonical slash, `lang="ru"`, description, `BlogPosting` + `BreadcrumbList`, images, sitemap); `hugo build`; `python3 -m py_compile scripts/seo/url_audit.py`; `python3 scripts/seo/url_audit.py summary`; `python3 scripts/seo/url_audit.py check-ghosts`; `python3 scripts/seo/url_audit.py check-canonical`; `python3 scripts/seo/url_audit.py check-sitemap`; `python3 scripts/seo/url_audit.py check-target-links`; `python3 scripts/seo/url_audit.py check-redirect-sources`; `python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json`; `python3 -m json.tool scripts/seo/url_policy.json > /dev/null`; `git diff --check`; local browser smoke for target, sitemap, and both donors | local pass; production deploy/smoke pending; live GSC URL Inspection skipped because Chrome profile is locked | scoped Git-connected push, production smoke, then GSC URL Inspection when browser is available |
+| 2026-07-09 | M15 Git-connected production rollout audit | `docs/PLAN.md`, `docs/STATUS.md` | `git push origin main`; browser production smoke for `/blog/pipeline-born-by-hand/`, sitemap, and both explicit donors; independent URL read of the blog-post-pipeline donor | pass: commits `4f21fa1` (M14) and `cec1a27` (M15) are live; target is self-canonical, index-default, exposes `BlogPosting` + `BreadcrumbList`, appears in sitemap; both donors and M14 Superpowers/AGENTS metadata are live. GSC URL Inspection skipped due Chrome profile lock. | optional manual GSC URL Inspection when a browser profile is available |
+| 2026-07-09 | M16 critic synthesis and surgical rollback validation | `content/blog/superpowers-brainstorming-workflow.md`, `AGENTS.md`, `docs/adr/0001-protect-organic-winners.md` | Four-critic evidence/specification review; exact four-field baseline comparison; clean build, helper, and baseline checks | pass: restored title, description, opening, and targeted H2 exactly match `4f21fa1^`; M15 donor, slug, canonical, other M14 repairs, and `batch_c` are unchanged | Git-connected rollout and production smoke |
+| 2026-07-09 | M16 Git-connected production rollout and smoke | commit `c5182d1`; `docs/PLAN.md`, `docs/STATUS.md` | Git-connected release and production browser smoke | pass: restored title, description, opening, targeted H2, canonical, and preserved M15 donor are live; GSC URL Inspection skipped due Chrome profile lock | optional manual GSC URL Inspection when browser is available |
 
 ## Blocker log
 
