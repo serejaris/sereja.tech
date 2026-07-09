@@ -302,8 +302,9 @@ def ensure_policy_shape(policy: dict) -> None:
 
 def all_target_slugs(policy: dict) -> list[str]:
     targets: list[str] = []
-    for batch in ("batch_a", "batch_b"):
-        targets.extend(policy["priority_batches"].get(batch, []))
+    for batch in policy["priority_batches"].values():
+        if isinstance(batch, list):
+            targets.extend(batch)
     return targets
 
 
@@ -347,8 +348,9 @@ def command_summary(policy: dict) -> int:
     unresolved_malformed = sum(1 for entry in policy["malformed_urls"] if entry.get("status") == "needs_policy")
 
     print(f"blog_posts={len(blog_slugs)}")
-    print(f"batch_a={len(policy['priority_batches'].get('batch_a', []))}")
-    print(f"batch_b={len(policy['priority_batches'].get('batch_b', []))}")
+    for name, batch in policy["priority_batches"].items():
+        if isinstance(batch, list):
+            print(f"{name}={len(batch)}")
     print(f"ghost_urls={len(policy['ghost_urls'])}")
     print(f"malformed_urls={len(policy['malformed_urls'])}")
     print(f"ghost_policy_stage={policy['ghost_policy_stage']}")

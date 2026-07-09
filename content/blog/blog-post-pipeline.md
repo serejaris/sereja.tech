@@ -269,3 +269,4 @@ Skills — это extensibility паттерн. Вместо того чтобы
 
 - [Skill для автопостинга в Telegram](/blog/blog-to-telegram-skill/) — как агент публикует превью статьи в канал после пайплайна
 - [Дневник вайбкодера](/blog/vibecoder-diary/) — как выглядит реальный процесс работы день за днём
+- [От ручного прогона к pipeline](/blog/pipeline-born-by-hand/) — как проверенный вручную процесс превращается в повторяемый pipeline и runbook

@@ -13,6 +13,9 @@
       "homebrew-cli-vibecoding",
       "chrome-devtools-mcp-setup",
       "claude-code-token-optimization"
+    ],
+    "batch_c": [
+      "pipeline-born-by-hand"
     ]
   },
   "discoverability": {

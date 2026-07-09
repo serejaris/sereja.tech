@@ -69,6 +69,7 @@ Sample local routes:
 - `/blog/homebrew-cli-vibecoding/`
 - `/blog/chrome-devtools-mcp-setup/`
 - `/blog/claude-code-token-optimization/`
+- `/blog/pipeline-born-by-hand/`
 
 Known non-blocking local noise:
 
@@ -177,6 +178,10 @@ Fixtures:
 - `homebrew-cli-vibecoding`
 - `chrome-devtools-mcp-setup`
 - `claude-code-token-optimization`
+
+### Batch C
+
+- `pipeline-born-by-hand`
 
 Checks:
 
