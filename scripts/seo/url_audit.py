@@ -102,8 +102,23 @@ def load_toml(path: Path) -> dict:
         raise AuditError(f"invalid toml in {path}: {exc}") from exc
 
 
+def is_draft_content(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        return False
+    try:
+        frontmatter = text.split("\n---", 1)[0]
+    except ValueError:
+        return False
+    return any(re.match(r"^draft:\s*true\s*(?:#.*)?$", line.strip(), re.IGNORECASE) for line in frontmatter.splitlines())
+
+
 def existing_blog_slugs() -> set[str]:
-    return {path.stem for path in BLOG_DIR.glob("*.md") if path.name != "_index.md"}
+    return {
+        path.stem
+        for path in BLOG_DIR.glob("*.md")
+        if path.name != "_index.md" and not is_draft_content(path)
+    }
 
 
 def normalize_route(value: str, *, allow_file_paths: bool = False) -> str | None:

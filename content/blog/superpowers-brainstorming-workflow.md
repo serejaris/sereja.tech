@@ -1,12 +1,12 @@
 ---
-title: "Superpowers: скиллы для Claude Code, которые экономят часы"
+title: "Superpowers skills для Claude Code: brainstorming и workflow"
 date: 2026-02-09
-description: "Superpowers skills заставляют Claude Code думать перед кодом. Brainstorming с веб-поиском сэкономил мне часы на реальном проекте."
+description: "Как Superpowers для Claude Code включает skill-first protocol, brainstorming, planning и веб-поиск, чтобы агент не писал код вслепую."
 tags: ["claude code", "superpowers"]
 image: /images/blog/superpowers-brainstorming-workflow-preview.png
 ---
 
-Попросил агента сделать админку. Он сразу полез писать код — два экрана компонентов за минуту. Через час я всё выкинул и начал заново.
+Superpowers skills для Claude Code — это workflow, который заставляет агента сначала выбрать скилл, задать вопросы, проверить факты и только потом писать код. Я проверил его на реальной админке: без этого агент сразу нагенерил два экрана компонентов, а через час я всё выкинул и начал заново.
 
 ## Проблема: агент слишком торопится
 
@@ -16,7 +16,7 @@ image: /images/blog/superpowers-brainstorming-workflow-preview.png
 
 Быстро. Мимо.
 
-## Superpowers: дисциплина для агента
+## Что такое Superpowers skills для Claude Code
 
 [Superpowers](https://github.com/obra/superpowers) — набор скиллов для Claude Code от Jesse Vincent (48k звёзд на GitHub, официально в marketplace с января 2026). Но "набор скиллов" — упрощение. Это фреймворк, который заставляет агента работать дисциплинированно.
 
