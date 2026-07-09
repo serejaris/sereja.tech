@@ -160,6 +160,12 @@ For every task:
 - For `Discovered - currently not indexed`, prefer stronger internal discovery
   and request indexing before considering redirects or content deletion.
 
+### Organic-winner protection
+
+- A page proven indexed/top-organic is a protected organic winner. Do not change its title, meta description, opening, or primary heading without URL-level GSC evidence for that exact page, an explicit experiment scope, a one-variable change, and documented baseline and rollback criterion.
+- Contextual donor links that preserve snippet and first-screen copy are allowed.
+- Rationale, exceptions, and consequences: [`docs/adr/0001-protect-organic-winners.md`](docs/adr/0001-protect-organic-winners.md).
+
 ## Reasonable assumptions
 
 Proceed without asking when the assumption is local, reversible, and consistent with the repo:
