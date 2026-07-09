@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Мой AI-стек — Сережа Рис</title>
+  <meta name="description" content="Реальный рабочий стек Сережи Риса: Codex, Claude Code, GitHub, GLM, браузерные агенты, скиллы, Railway и собственная инфраструктура.">
+  <link rel="canonical" href="https://tech.sereja.tech/">
+  <link rel="icon" href="https://sereja.tech/favicon.svg">
+  <meta name="theme-color" content="#090a0d">
+  <meta property="og:title" content="Мой AI-стек — Сережа Рис">
+  <meta property="og:description" content="Как идея проходит через контекст, задачи, команду AI-агентов, проверку и продакшен.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tech.sereja.tech/">
+  <meta property="og:image" content="https://tech.sereja.tech/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@riiiiiiiiss">
+  <meta name="twitter:title" content="Мой AI-стек — Сережа Рис">
+  <meta name="twitter:description" content="Мой реальный агентный workflow в июле 2026.">
+  <meta name="twitter:image" content="https://tech.sereja.tech/og.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090a0d;
+      --panel: rgba(20, 22, 28, .78);
+      --panel-strong: #12141a;
+      --line: rgba(255, 255, 255, .11);
+      --text: #f3f0e9;
+      --muted: #9a9daa;
+      --acid: #c8ff4d;
+      --cyan: #55e6ff;
+      --pink: #ff4fb8;
+      --orange: #ff9a52;
+      --violet: #9f7cff;
+      --mono: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, monospace;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 14% -5%, rgba(159, 124, 255, .17), transparent 32rem),
+        radial-gradient(circle at 88% 8%, rgba(85, 230, 255, .12), transparent 31rem),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .24;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    }
+
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(9, 10, 13, .76);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font: 800 13px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .brand-dot {
+      width: 11px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 24px rgba(200, 255, 77, .8);
+    }
+    nav { display: flex; gap: 22px; }
+    nav a { color: var(--muted); text-decoration: none; font: 600 12px/1 var(--mono); }
+    nav a:hover { color: var(--text); }
+
+    .hero {
+      padding: 88px 0 64px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 54px;
+      align-items: center;
+    }
+    .eyebrow, .kicker {
+      margin: 0 0 18px;
+      color: var(--acid);
+      font: 800 12px/1.2 var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(3.3rem, 7.8vw, 7.2rem);
+      line-height: .89;
+      letter-spacing: -.075em;
+      text-wrap: balance;
+    }
+    .hero h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(243, 240, 233, .52);
+    }
+    .lead {
+      max-width: 650px;
+      margin: 30px 0 0;
+      color: #c6c4c0;
+      font-size: clamp(1.02rem, 1.6vw, 1.3rem);
+      text-wrap: pretty;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .035);
+      text-decoration: none;
+      font: 700 13px/1 var(--mono);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.35); }
+    .button-primary { color: #0a0b0d; background: var(--acid); border-color: var(--acid); }
+
+    .terminal {
+      position: relative;
+      overflow: hidden;
+      min-height: 590px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px;
+      background: rgba(13, 15, 20, .88);
+      box-shadow: 0 36px 100px rgba(0, 0, 0, .44);
+      transform: rotate(1.2deg);
+    }
+    .terminal::after {
+      content: "";
+      position: absolute;
+      inset: -30% -25% auto auto;
+      width: 320px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--cyan);
+      filter: blur(110px);
+      opacity: .15;
+    }
+    .terminal-head {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      font: 600 11px/1 var(--mono);
+      color: var(--muted);
+    }
+    .lights { display: flex; gap: 7px; }
+    .lights i { width: 8px; aspect-ratio: 1; border-radius: 50%; background: #3f424c; }
+    .lights i:first-child { background: var(--pink); }
+    .lights i:nth-child(2) { background: var(--orange); }
+    .lights i:last-child { background: var(--acid); }
+    .terminal-body { padding: 26px; }
+    .prompt { margin: 0 0 26px; font: 700 13px/1.55 var(--mono); color: var(--muted); }
+    .prompt b { color: var(--acid); }
+    .flow { display: grid; gap: 10px; }
+    .flow-row {
+      display: grid;
+      grid-template-columns: 74px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 60px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+    }
+    .flow-row:nth-child(2) { margin-left: 18px; }
+    .flow-row:nth-child(3) { margin-left: 36px; }
+    .flow-row:nth-child(4) { margin-left: 54px; }
+    .flow-row:nth-child(5) { margin-left: 72px; }
+    .flow-index { color: var(--muted); font: 600 11px/1 var(--mono); }
+    .flow-name { font: 780 15px/1.15 var(--sans); }
+    .flow-tool { color: var(--cyan); font: 600 11px/1.2 var(--mono); text-align: right; }
+    .terminal-note { margin: 24px 0 0; color: var(--muted); font: 12px/1.6 var(--mono); }
+
+    .evidence-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .evidence-item { padding: 24px; border-right: 1px solid var(--line); }
+    .evidence-item:last-child { border-right: 0; }
+    .evidence-item strong { display: block; font-size: 1.45rem; letter-spacing: -.04em; }
+    .evidence-item span { display: block; margin-top: 5px; color: var(--muted); font: 11px/1.45 var(--mono); }
+
+    section { padding: 106px 0 0; scroll-margin-top: 84px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 50px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+    h2 { margin: 0; font-size: clamp(2.3rem, 5vw, 4.8rem); line-height: .96; letter-spacing: -.06em; }
+    .section-copy { margin: 0; max-width: 600px; color: var(--muted); font-size: 1rem; }
+
+    .core-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 245px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      right: -55px;
+      bottom: -80px;
+      width: 180px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50%;
+      box-shadow: 0 0 0 22px rgba(255,255,255,.02), 0 0 0 46px rgba(255,255,255,.012);
+    }
+    .card:nth-child(1), .card:nth-child(2) { grid-column: span 6; min-height: 320px; }
+    .card:nth-child(n+3) { grid-column: span 4; }
+    .card-no { color: var(--muted); font: 600 11px/1 var(--mono); }
+    .card h3 { margin: 50px 0 10px; font-size: clamp(1.45rem, 2.5vw, 2.3rem); letter-spacing: -.045em; }
+    .card p { margin: 0; max-width: 46ch; color: var(--muted); }
+    .card-foot { position: absolute; left: 26px; bottom: 24px; color: var(--cyan); font: 600 10px/1.3 var(--mono); }
+    .card:nth-child(1) { background: linear-gradient(145deg, rgba(159,124,255,.13), var(--panel)); }
+    .card:nth-child(2) { background: linear-gradient(145deg, rgba(85,230,255,.11), var(--panel)); }
+
+    .routing {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(255,255,255,.025);
+    }
+    .role {
+      min-height: 310px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 20px;
+      color: #090a0d;
+    }
+    .role:nth-child(1) { background: var(--pink); }
+    .role:nth-child(2) { background: var(--violet); }
+    .role:nth-child(3) { background: var(--cyan); }
+    .role:nth-child(4) { background: var(--acid); }
+    .role-index { font: 800 11px/1 var(--mono); text-transform: uppercase; }
+    .role h3 { margin: 0 0 10px; font-size: 2rem; line-height: .95; letter-spacing: -.055em; }
+    .role p { margin: 0; color: rgba(9,10,13,.72); font-weight: 650; }
+    .routing-note { margin: 18px 0 0; color: var(--muted); font: 12px/1.6 var(--mono); }
+
+    .pipeline {
+      counter-reset: pipe;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--line);
+    }
+    .pipe {
+      counter-increment: pipe;
+      min-height: 190px;
+      padding: 20px;
+      background: var(--panel-strong);
+    }
+    .pipe::before { content: "0" counter(pipe); display: block; margin-bottom: 55px; color: var(--muted); font: 600 11px/1 var(--mono); }
+    .pipe strong { display: block; font-size: 1.05rem; }
+    .pipe span { display: block; margin-top: 8px; color: var(--muted); font: 11px/1.45 var(--mono); }
+
+    .subscriptions { display: grid; gap: 14px; }
+    .sub-row {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 22px;
+      align-items: start;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--panel);
+    }
+    .sub-status { display: inline-flex; align-items: center; gap: 9px; font: 800 11px/1.4 var(--mono); text-transform: uppercase; }
+    .sub-status::before { content: ""; width: 8px; aspect-ratio: 1; border-radius: 50%; background: var(--muted); }
+    .status-core::before { background: var(--acid); box-shadow: 0 0 16px rgba(200,255,77,.55); }
+    .status-rotation::before { background: var(--cyan); }
+    .status-access::before { background: var(--violet); }
+    .tool-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tool {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #d5d3cd;
+      background: rgba(255,255,255,.025);
+      text-decoration: none;
+      font: 600 12px/1 var(--mono);
+    }
+    .tool:hover { border-color: var(--cyan); color: #fff; }
+    .truth-note {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-left: 3px solid var(--orange);
+      background: rgba(255,154,82,.075);
+      color: #c7c2ba;
+      font: 12px/1.65 var(--mono);
+    }
+
+    .sources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .source {
+      display: flex;
+      justify-content: space-between;
+      gap: 22px;
+      min-height: 105px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.022);
+      text-decoration: none;
+    }
+    .source:hover { border-color: rgba(255,255,255,.34); }
+    .source strong { display: block; margin-bottom: 6px; }
+    .source span { color: var(--muted); font: 11px/1.45 var(--mono); }
+    .source b { color: var(--acid); font: 700 15px/1 var(--mono); }
+
+    footer { padding: 110px 0 40px; }
+    .footer-card {
+      padding: 34px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      border-top: 1px solid var(--line);
+    }
+    .footer-card h2 { max-width: 720px; font-size: clamp(2rem, 5.2vw, 5rem); }
+    .footer-meta { flex: 0 0 auto; color: var(--muted); font: 11px/1.65 var(--mono); text-align: right; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 64px; }
+      .terminal { transform: none; min-height: 0; }
+      .section-head { grid-template-columns: 1fr; gap: 18px; }
+      .card:nth-child(1), .card:nth-child(2), .card:nth-child(n+3) { grid-column: span 6; }
+      .routing { grid-template-columns: 1fr 1fr; }
+      .pipeline { grid-template-columns: repeat(3, 1fr); }
+      .sources-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .hero { padding-top: 46px; }
+      h1 { font-size: clamp(3rem, 18vw, 5rem); }
+      .lead { font-size: 1rem; }
+      .terminal-body { padding: 16px; }
+      .flow-row, .flow-row:nth-child(n) { margin-left: 0; grid-template-columns: 46px 1fr; }
+      .flow-tool { grid-column: 2; text-align: left; }
+      .evidence-strip { grid-template-columns: 1fr; }
+      .evidence-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .evidence-item:last-child { border-bottom: 0; }
+      section { padding-top: 78px; }
+      .card:nth-child(1), .card:nth-child(2), .card:nth-child(n+3) { grid-column: 1 / -1; min-height: 260px; }
+      .routing { grid-template-columns: 1fr; }
+      .role { min-height: 245px; }
+      .pipeline { grid-template-columns: 1fr 1fr; }
+      .sub-row { grid-template-columns: 1fr; }
+      .footer-card { padding: 30px 0 0; align-items: flex-start; flex-direction: column; }
+      .footer-meta { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top"><span class="brand-dot"></span> Sereja / tech stack</a>
+      <nav aria-label="Разделы">
+        <a href="#core">ядро</a>
+        <a href="#routing">роли</a>
+        <a href="#subscriptions">подписки</a>
+        <a href="#evidence">источники</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="shell">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Live snapshot · 09.07.2026</p>
+          <h1>Агентная студия <span>одного человека.</span></h1>
+          <p class="lead">Мой стек — маршрут от голосовой идеи до задачи, команды агентов, браузерной проверки и продакшена. Сейчас оркестрация живёт в OMP + Orca, память — в GitHub и Markdown.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#core">Смотреть ядро ↓</a>
+            <a class="button" href="https://www.youtube.com/@serejaris" target="_blank" rel="noreferrer">YouTube ↗</a>
+            <a class="button" href="https://github.com/serejaris" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
+        </div>
+
+        <div class="terminal" aria-label="Рабочий процесс от идеи до продакшена">
+          <div class="terminal-head">
+            <div class="lights"><i></i><i></i><i></i></div>
+            <span>WORKFLOW / LIVE</span>
+          </div>
+          <div class="terminal-body">
+            <p class="prompt"><b>ris@omp</b> $ orchestrate idea-to-production</p>
+            <div class="flow">
+              <div class="flow-row"><span class="flow-index">01</span><span class="flow-name">Разобрать проблему</span><span class="flow-tool">/grill-me</span></div>
+              <div class="flow-row"><span class="flow-index">02</span><span class="flow-name">Собрать спецификацию</span><span class="flow-tool">/to-prd</span></div>
+              <div class="flow-row"><span class="flow-index">03</span><span class="flow-name">Нарезать задачи</span><span class="flow-tool">/to-issues · GitHub</span></div>
+              <div class="flow-row"><span class="flow-index">04</span><span class="flow-name">Раздать роли</span><span class="flow-tool">OMP · Orca</span></div>
+              <div class="flow-row"><span class="flow-index">05</span><span class="flow-name">Проверить и выпустить</span><span class="flow-tool">Chrome · Railway · Vercel</span></div>
+            </div>
+            <p class="terminal-note">status: human-in-the-loop<br>memory: git + local files<br>surface: orca / omp / codex app / claude code</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="evidence-strip reveal">
+        <div class="evidence-item"><strong>Codex → OMP</strong><span>90% в Codex App 02.06; переход на OMP + Orca к 05.07</span></div>
+        <div class="evidence-item"><strong>4 040</strong><span>сообщений автора в @vibecod3rs просмотрены как корпус</span></div>
+        <div class="evidence-item"><strong>5 стримов</strong><span>март–июль: смена стека, GLM, Orca, Fable и роли агентов</span></div>
+      </div>
+    </div>
+
+    <section id="core">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">01 / DAILY CORE</p><h2>То, что держит работу каждый день.</h2></div>
+          <p class="section-copy">Текущий центр управления — OMP внутри Orca. Codex и Claude остаются рабочими движками, GitHub держит очередь, локальные файлы — контекст, браузер и голос — входы и проверку.</p>
+        </div>
+        <div class="core-grid">
+          <article class="card reveal"><span class="card-no">CORE / 01</span><h3>OMP</h3><p>Текущий слой оркестрации агентов разных провайдеров: роли, параллельная разведка, DAG и синтез в одной CLI-сессии.</p><span class="card-foot">CURRENT ORCHESTRATOR / 05.07</span></article>
+          <article class="card reveal"><span class="card-no">CORE / 02</span><h3>Orca</h3><p>Менеджер терминалов и рабочая оболочка: несколько CLI-агентов, worktree, задачи, ветки, Markdown и ревью в одном окне.</p><span class="card-foot">WORKSPACE / TERMINALS / WORKTREES</span></article>
+          <article class="card reveal"><span class="card-no">SYSTEM / 03</span><h3>GitHub</h3><p>Issues, Projects, API, ветки и PR. Задача становится промптом, доска — общей памятью человека и агентов.</p><span class="card-foot">TASKS / MEMORY / DELIVERY</span></article>
+          <article class="card reveal"><span class="card-no">CONTEXT / 04</span><h3>Файлы + skills</h3><p>Markdown в локальных репозиториях, AGENTS.md / CLAUDE.md и небольшой набор глобальных скиллов под git.</p><span class="card-foot">LOCAL-FIRST / VERSIONED</span></article>
+          <article class="card reveal"><span class="card-no">ENGINES / 05</span><h3>Codex + Claude</h3><p>Codex — длинная работа, браузер и ревью. Claude/Fable/Opus — основной тред, планирование и сложные развилки. Cursor даёт Composer.</p><span class="card-foot">GPT / OPUS / COMPOSER</span></article>
+          <article class="card reveal"><span class="card-no">I/O / 06</span><h3>Chrome + голос</h3><p>$chrome работает с живым браузерным профилем. Wispr Flow диктует агентам, Granola фиксирует встречи и планы.</p><span class="card-foot">BROWSER / WISPR / GRANOLA</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="routing">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">02 / MODEL ROUTING</p><h2>Модели получают роли.</h2></div>
+          <p class="section-copy">Текущая формула из июля: сильная модель проектирует, советник критикует, дешёвые воркеры исполняют. Конкретные модели вращаются вместе с лимитами и качеством.</p>
+        </div>
+        <div class="routing reveal">
+          <article class="role"><span class="role-index">01 · Operator</span><div><h3>Сережа</h3><p>Задаёт направление, цену ошибки и принимает результат.</p></div></article>
+          <article class="role"><span class="role-index">02 · Architect</span><div><h3>Fable / Opus</h3><p>Контракт, архитектура, декомпозиция и синтез контекста.</p></div></article>
+          <article class="role"><span class="role-index">03 · Advisor</span><div><h3>GPT-5.5</h3><p>Критика решения, проверка диффов, tool calls и reasoning воркеров.</p></div></article>
+          <article class="role"><span class="role-index">04 · Workers</span><div><h3>GLM / Sonnet / Codex</h3><p>Реализация задач по готовой спецификации, контрактам и тестам.</p></div></article>
+        </div>
+        <p class="routing-note">06.07: «Fable (архитектор) + GPT 5.5 (советник) + GLM (воркер)». Модели в слотах заменяемы.<br>09.07: GPT-5.6 Sol выставлен в Codex как свежий тест; статуса daily default у него пока нет.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">03 / DELIVERY PIPELINE</p><h2>Контекст проходит весь путь.</h2></div>
+          <p class="section-copy">Большая часть ценности живёт в маршруте и проверках. Языки и фреймворки выбираются под срок жизни задачи.</p>
+        </div>
+        <div class="pipeline reveal">
+          <div class="pipe"><strong>Разведка</strong><span>/grill-me<br>research<br>scouts</span></div>
+          <div class="pipe"><strong>Спека</strong><span>/to-prd<br>Markdown<br>AGENTS.md</span></div>
+          <div class="pipe"><strong>Задачи</strong><span>/to-issues<br>GitHub Issues<br>Projects</span></div>
+          <div class="pipe"><strong>Сборка</strong><span>Python<br>TypeScript<br>React / Vite</span></div>
+          <div class="pipe"><strong>Проверка</strong><span>tests<br>agent review<br>Chrome E2E</span></div>
+          <div class="pipe"><strong>Прод</strong><span>Railway<br>Vercel<br>OVH / Proxmox</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">04 / LIVE SYSTEM</p><h2>Стрим — тоже агентный продукт.</h2></div>
+          <p class="section-copy">На эфирах работает отдельный production-контур: OBS, live-транскрипт, автоматический план, чат, AI-соведущий и постобработка записи.</p>
+        </div>
+        <div class="pipeline reveal">
+          <div class="pipe"><strong>Эфир</strong><span>OBS<br>YouTube RTMP<br>scenes</span></div>
+          <div class="pipe"><strong>Overlay</strong><span>undercast<br>SSE ticker<br>prompt widget</span></div>
+          <div class="pipe"><strong>Контекст</strong><span>Granola<br>companion<br>live plan</span></div>
+          <div class="pipe"><strong>Чат</strong><span>YouTube chat<br>chatfeed<br>Telegram</span></div>
+          <div class="pipe"><strong>Голос</strong><span>ElevenLabs<br>Grok voice<br>Нейрочел</span></div>
+          <div class="pipe"><strong>После</strong><span>yt-dlp<br>Whisper<br>YouTube API</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">05 / HARDWARE</p><h2>Локальная машина и свой сервер.</h2></div>
+          <p class="section-copy">Основная работа идёт на обычном Mac. Тяжёлые контейнеры и учебный runtime вынесены на выделенный сервер; Linux-ноутбук остаётся отдельной средой для Docker-задач.</p>
+        </div>
+        <div class="evidence-strip reveal">
+          <div class="evidence-item"><strong>M1 Pro · 16 GB</strong><span>основной MacBook Pro</span></div>
+          <div class="evidence-item"><strong>Arch · 8 GB</strong><span>отдельный Linux-ноутбук и Docker</span></div>
+          <div class="evidence-item"><strong>128 GB RAM</strong><span>Kimsufi / OVH · контейнеры · Proxmox</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="subscriptions">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">06 / SUBSCRIPTION TRUTH</p><h2>Доступ и использование — разные сигналы.</h2></div>
+          <p class="section-copy">Ниже все рабочие инструменты из реестра активных подписок на 07.07.2026. Статус показывает наличие свежего публичного доказательства использования.</p>
+        </div>
+        <div class="subscriptions">
+          <div class="sub-row reveal">
+            <div><span class="sub-status status-core">Ядро / регулярно</span></div>
+            <div class="tool-cloud">
+              <a class="tool" href="https://openai.com/codex/">ChatGPT Pro · Codex</a><a class="tool" href="https://claude.ai/">Claude Max · Claude Code</a><a class="tool" href="https://z.ai/">GLM Coding Pro</a><a class="tool" href="https://wisprflow.ai/">Wispr Flow Pro</a><a class="tool" href="https://railway.com/">Railway Hobby</a><a class="tool" href="https://www.ovhcloud.com/">OVHcloud SYS-2</a>
+            </div>
+          </div>
+          <div class="sub-row reveal">
+            <div><span class="sub-status status-rotation">В ротации / проекты</span></div>
+            <div class="tool-cloud">
+              <a class="tool" href="https://grok.com/">SuperGrok Heavy</a><a class="tool" href="https://cursor.com/">Cursor Pro</a><a class="tool" href="https://factory.ai/">Factory Pro</a><a class="tool" href="https://v0.dev/">v0 Premium</a><a class="tool" href="https://lovable.dev/">Lovable</a><a class="tool" href="https://elevenlabs.io/">ElevenLabs Creator</a>
+            </div>
+          </div>
+          <div class="sub-row reveal">
+            <div><span class="sub-status status-access">Доступ / тестирование</span></div>
+            <div class="tool-cloud">
+              <a class="tool" href="https://manus.im/">Manus Pro</a><a class="tool" href="https://devin.ai/">Devin Core</a><a class="tool" href="https://one.google.com/about/google-ai-plans/">Google AI Pro</a><a class="tool" href="https://github.com/features/copilot">GitHub Copilot Pro</a><a class="tool" href="https://www.canva.com/">Canva Business</a><a class="tool" href="https://www.warp.dev/">Warp Pro</a><a class="tool" href="https://replit.com/">Replit Core</a><a class="tool" href="https://bolt.new/">Bolt.new Pro</a><a class="tool" href="https://www.magicpatterns.com/">Magic Patterns Pro</a><a class="tool" href="https://www.raycast.com/">Raycast Pro</a><a class="tool" href="https://www.descript.com/">Descript Creator</a><a class="tool" href="https://www.notion.com/product/ai">Notion AI</a><a class="tool" href="https://www.zoom.com/">Zoom Workplace Pro</a>
+            </div>
+          </div>
+        </div>
+        <div class="truth-note reveal">Активная подписка означает доступ к инструменту. Ежедневное ядро определяется свежими собственными сообщениями, демонстрациями на стримах и реальными проектами. Биллинг-статусы отдельных промо-планов требуют периодической сверки в кабинетах сервисов.</div>
+      </div>
+    </section>
+
+    <section id="evidence">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="kicker">07 / RECEIPTS</p><h2>Откуда взялся этот срез.</h2></div>
+          <p class="section-copy">Страница собрана по первичным источникам: сообщениям Сережи в публичном чате, описаниям и транскриптам его стримов, репозиториям и реестру подписок.</p>
+        </div>
+        <div class="sources-grid">
+          <a class="source reveal" href="https://t.me/vibecod3rs/75545" target="_blank" rel="noreferrer"><div><strong>«90% времени в Codex App»</strong><span>Telegram · 02.06.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://t.me/vibecod3rs/86021" target="_blank" rel="noreferrer"><div><strong>«Полностью перешёл на OMP»</strong><span>Telegram · 05.07.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://t.me/vibecod3rs/87428" target="_blank" rel="noreferrer"><div><strong>Свежий coding-flow из трёх скиллов</strong><span>Telegram · 08.07.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://t.me/vibecod3rs/80942" target="_blank" rel="noreferrer"><div><strong>Почему одновременно Codex, Claude и Cursor</strong><span>Telegram · 21.06.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://t.me/vibecod3rs/85557" target="_blank" rel="noreferrer"><div><strong>GitHub как хранилище задач</strong><span>Telegram · 04.07.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://t.me/vibecod3rs/78264" target="_blank" rel="noreferrer"><div><strong>Codex + $chrome для живого веба</strong><span>Telegram · 11.06.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://youtu.be/ocbtH4-FttI" target="_blank" rel="noreferrer"><div><strong>GLM + Orca: мой AI-сетап 2026</strong><span>YouTube · 30.06.2026</span></div><b>↗</b></a>
+          <a class="source reveal" href="https://youtu.be/Nh6Qui9VSUk" target="_blank" rel="noreferrer"><div><strong>Карта агентов: кому отдать руки</strong><span>YouTube · 04.07.2026</span></div><b>↗</b></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-card">
+      <h2>Стек живой.<br>Обновляю по факту.</h2>
+      <div class="footer-meta">Сережа Рис · июль 2026<br><a href="https://sereja.tech/">sereja.tech</a> · <a href="https://t.me/ris_ai">@ris_ai</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add('visible'));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      items.forEach((item) => observer.observe(item));
+    }
+  </script>
+</body>
+</html>

@@ -8,7 +8,18 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        { "type": "host", "value": "tech.sereja.tech" }
+      ],
+      "destination": "/tech/:path*"
+    }
+  ],
   "redirects": [
+    { "source": "/stack", "destination": "https://tech.sereja.tech/", "permanent": true },
+    { "source": "/stack/", "destination": "https://tech.sereja.tech/", "permanent": true },
     { "source": "/blog/midi-obs-scene-switching", "destination": "/blog/midi-obs-claude-code/", "permanent": true },
     { "source": "/blog/midi-obs-scene-switching/", "destination": "/blog/midi-obs-claude-code/", "permanent": true },
     { "source": "/blog/chrome-devtools-mcp", "destination": "/blog/chrome-devtools-mcp-setup/", "permanent": true },
