@@ -8,15 +8,6 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": true,
-  "rewrites": [
-    {
-      "source": "/:path*",
-      "has": [
-        { "type": "host", "value": "tech.sereja.tech" }
-      ],
-      "destination": "/tech/:path*"
-    }
-  ],
   "redirects": [
     { "source": "/stack", "destination": "https://tech.sereja.tech/", "permanent": true },
     { "source": "/stack/", "destination": "https://tech.sereja.tech/", "permanent": true },
