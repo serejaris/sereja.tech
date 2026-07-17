@@ -1,11 +1,10 @@
 {{ define "main" }}
 <section class="hero">
-  <p class="prompt"><b>~/sereja.tech</b> $ ls ./blog — {{ len .Pages }} файлов <span class="cursor">▮</span></p>
   <h1 class="display">Блог</h1>
   <p class="intro">{{ .Site.Params.description }}</p>
 </section>
 
-<p class="subscribe-inline"><span class="k">></span> Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank" rel="noopener">@sereja_tech</a></p>
+<p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank" rel="noopener">@sereja_tech</a></p>
 
 <div class="search-box"><input type="search" id="search" placeholder="Поиск по {{ len .Pages }} статьям" autocomplete="off" spellcheck="false" aria-label="Поиск по статьям"></div>
 

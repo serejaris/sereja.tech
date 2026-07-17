@@ -1,18 +1,17 @@
 {{ define "main" }}
 <section class="hero">
-  <p class="prompt"><b>~/sereja.tech</b> $ whoami <span class="cursor">▮</span></p>
   <h1 class="display">Сережа Рис</h1>
   <p class="lead">Архитектор агентных систем на Claude Code. Веду <a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero" target="_blank" rel="noopener">телеграм-канал</a>, <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero" target="_blank" rel="noopener">YouTube</a> и <a href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero" target="_blank" rel="noopener">лучшее сообщество вайбкодеров</a>.</p>
   <div class="chips">
-    <a class="chip" href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener"><span class="k">></span> @ris_ai</a>
-    <a class="chip" href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener"><span class="k">></span> youtube</a>
-    <a class="chip" href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener"><span class="k">></span> сообщество</a>
-    <a class="chip" href="/blog/"><span class="k">></span> блог</a>
+    <a class="chip" href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener">@ris_ai</a>
+    <a class="chip" href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener">YouTube</a>
+    <a class="chip" href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener">Сообщество</a>
+    <a class="chip" href="/blog/">Блог</a>
   </div>
 </section>
 
 <section>
-  <h2 class="eyebrow">видео <span class="count">— свежее с канала</span></h2>
+  <h2 class="eyebrow">Видео <span class="count">— свежее с канала</span></h2>
   {{ with index .Site.Data.videos.videos 0 }}
   <div class="yt-feature">
     <iframe
@@ -42,7 +41,7 @@
 </section>
 
 <section>
-  <h2 class="eyebrow">популярное <span class="count">— выбор автора</span></h2>
+  <h2 class="eyebrow">Популярное <span class="count">— выбор автора</span></h2>
   <div class="cards">
     {{ range .Site.Data.featured.featured }}
     {{ with $.Site.GetPage (printf "/blog/%s" .) }}
@@ -59,7 +58,7 @@
 </section>
 
 <section>
-  <h2 class="eyebrow">последнее из блога</h2>
+  <h2 class="eyebrow">Последнее из блога</h2>
   <ul class="posts">
     {{ range first 10 .Site.RegularPages.ByDate.Reverse }}
     <li>
@@ -72,7 +71,7 @@
 </section>
 
 <section>
-  <h2 class="eyebrow">ссылки</h2>
+  <h2 class="eyebrow">Ссылки</h2>
   <ul class="links">
     <li><a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">рис. AI</a> <span class="desc">— телеграм-канал про AI, вайбкодинг и эксперименты</span></li>
     <li><a href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">Сообщество Вайбкодеров</a> <span class="desc">— 2000+ человек, обсуждения и взаимопомощь</span></li>
