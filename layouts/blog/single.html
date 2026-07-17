@@ -1,26 +1,28 @@
 {{ define "main" }}
-<p><a href="/blog/">&larr; Блог</a></p>
-<article>
-  <h1>{{ .Title }}</h1>
-  <p class="author">{{ .Site.Params.author }} · {{ .Date.Format "2 January 2006" }}</p>
+<p class="crumb"><a href="/blog/">← все статьи</a></p>
+<article class="prose">
+  <h1 class="post-title">{{ .Title }}</h1>
+  <p class="post-meta">{{ .Site.Params.author }} <span class="dot">·</span> {{ partial "fdate.html" (dict "date" .Date "style" "long") }} <span class="dot">·</span> {{ .ReadingTime }} мин чтения</p>
   {{ with .Params.tags }}
   <div class="tags">
     {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
   </div>
   {{ end }}
 
+  {{ with .Params.image }}<img class="post-cover" src="{{ . }}" alt="{{ $.Title }}" loading="eager" decoding="async">{{ end }}
+
   {{ with .Params.intro }}
   <p class="intro">{{ . }}</p>
   {{ end }}
 
-  {{ .Content }}
+  <div class="content">{{ .Content }}</div>
 
   {{ with .Params.sources }}
   <div class="sources">
     <h3>Источники</h3>
     <ul>
       {{ range . }}
-      <li><a href="{{ .url }}" target="_blank">{{ .title }}</a>{{ with .note }} — {{ . }}{{ end }}</li>
+      <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ with .note }} — {{ . }}{{ end }}</li>
       {{ end }}
     </ul>
   </div>
@@ -30,20 +32,24 @@
   {{ with $related }}
   <div class="related-posts">
     <h3>Читайте также</h3>
-    <ul>
+    <div class="rel-cards">
       {{ range . }}
-      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      <a class="card" href="{{ .Permalink }}">
+        {{ with .Params.image }}<img src="{{ . }}" alt="" loading="lazy">{{ end }}
+        <span class="card-body">
+          <span class="card-title">{{ .Title }}</span>
+          <span class="date">{{ .Date.Format ":date_medium" }}</span>
+        </span>
+      </a>
       {{ end }}
-    </ul>
+    </div>
   </div>
   {{ end }}
 
   <p class="author-link"><a href="/about/">Об авторе</a></p>
 
-  <p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
+  <p class="subscribe-inline"><span class="k">></span> Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank" rel="noopener">@sereja_tech</a></p>
 
-  <footer>
-    {{ .Date.Format "January 2006" }}
-  </footer>
+  <p class="muted" style="font-size:13px">{{ partial "fdate.html" (dict "date" .Date "style" "monthyear") }}</p>
 </article>
 {{ end }}

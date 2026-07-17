@@ -1,12 +1,13 @@
 {{ define "main" }}
-<p><a href="/">&larr; sereja.tech</a></p>
-<p><a href="/about/">Обо мне</a></p>
-<h1>Блог</h1>
-<p class="intro">{{ .Site.Params.description }}</p>
+<section class="hero">
+  <p class="prompt"><b>~/sereja.tech</b> $ ls ./blog — {{ len .Pages }} файлов <span class="cursor">▮</span></p>
+  <h1 class="display">Блог</h1>
+  <p class="intro">{{ .Site.Params.description }}</p>
+</section>
 
-<p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
+<p class="subscribe-inline"><span class="k">></span> Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank" rel="noopener">@sereja_tech</a></p>
 
-<p class="search-box"><input type="search" id="search" placeholder="Поиск по {{ len .Pages }} статьям" autocomplete="off" spellcheck="false" aria-label="Поиск по статьям"></p>
+<div class="search-box"><input type="search" id="search" placeholder="Поиск по {{ len .Pages }} статьям" autocomplete="off" spellcheck="false" aria-label="Поиск по статьям"></div>
 
 <div id="search-output" hidden>
   <p class="search-count" id="search-count"></p>
@@ -21,14 +22,17 @@
 </div>
 {{ end }}
 
+{{ range .Pages.ByDate.Reverse.GroupByDate "January 2006" }}
+<h2 class="month-head">{{ partial "fdate.html" (dict "date" (index .Pages 0).Date "style" "monthyear") }}</h2>
 <ul class="posts">
-  {{ range .Pages.ByDate.Reverse }}
+  {{ range .Pages }}
   <li>
-    <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
+    <span class="date">{{ partial "fdate.html" (dict "date" .Date) }}</span>
     <a href="{{ .Permalink }}">{{ .Title }}</a>
   </li>
   {{ end }}
 </ul>
+{{ end }}
 
 </div>
 

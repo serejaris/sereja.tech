@@ -1,7 +1,6 @@
 {{ define "main" }}
-<p><a href="/blog/">&larr; Блог</a></p>
-<article>
-  <h1>{{ .Title }}</h1>
+<article class="prose">
+  <h1 class="post-title">{{ .Title }}</h1>
   {{ .Content }}
 </article>
 

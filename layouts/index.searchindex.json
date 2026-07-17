@@ -1,5 +1,5 @@
 {{- $index := slice -}}
 {{- range (where .Site.RegularPages "Section" "blog").ByDate.Reverse -}}
-{{- $index = $index | append (dict "title" .Title "url" .RelPermalink "date" (.Date.Format "2 Jan 2006") "tags" (.Params.tags | default slice) "description" (.Description | plainify) "content" .Plain) -}}
+{{- $index = $index | append (dict "title" .Title "url" .RelPermalink "date" (partial "fdate.html" (dict "date" .Date)) "tags" (.Params.tags | default slice) "description" (.Description | plainify) "content" .Plain) -}}
 {{- end -}}
 {{- $index | jsonify -}}
