@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-07-18 | [Kimi K3 в работе: AI-билдер, Code, Work и сварм](https://sereja.tech/blog/kimi-k3-guide/) |
+| 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
 | 2026-07-09 | [GPT-5.6 в работе: Sol, Terra и Luna](https://sereja.tech/blog/gpt-5-6-review/) |
 | 2026-07-08 | [Почему автоматизация не работает без рецепта](https://sereja.tech/blog/pipeline-born-by-hand/) |
 | 2026-07-04 | [Как я гоняю команду агентов из терминала в omp](https://sereja.tech/blog/omp-orchestration/) |
