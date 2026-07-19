@@ -30,13 +30,14 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-110 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+111 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
+| 2026-07-18 | [База знаний для агентов: вход, слои и обслуживание](https://sereja.tech/blog/agent-knowledge-base/) |
 | 2026-07-09 | [GPT-5.6 в работе: Sol, Terra и Luna](https://sereja.tech/blog/gpt-5-6-review/) |
 | 2026-07-08 | [Почему автоматизация не работает без рецепта](https://sereja.tech/blog/pipeline-born-by-hand/) |
 | 2026-07-04 | [Как я гоняю команду агентов из терминала в omp](https://sereja.tech/blog/omp-orchestration/) |
@@ -45,7 +46,6 @@
 | 2026-06-30 | [Сто агентов, ноль результата](https://sereja.tech/blog/orchestration-without-goals/) |
 | 2026-06-29 | [Orca вместо четырёх терминалов](https://sereja.tech/blog/orca-menedzher-agentov/) |
 | 2026-06-13 | [Генерируем таймкоды для YouTube из транскрипта с помощью AI](https://sereja.tech/blog/youtube-chapters-split-concern/) |
-| 2026-06-13 | [undercast: оверлей для OBS, сделанный Fable 5](https://sereja.tech/blog/undercast-obs-overlay-fable-5/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
