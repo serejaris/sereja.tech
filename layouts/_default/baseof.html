@@ -195,6 +195,12 @@
 <body>
   {{ block "main" . }}{{ end }}
 
+  <footer>
+    <a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=footer" target="_blank" rel="noopener">Телеграм</a>
+    · <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=footer" target="_blank" rel="noopener">YouTube</a>
+    · <a href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=footer" target="_blank" rel="noopener">Вайбкодеры</a>
+  </footer>
+
   <script defer src="/_vercel/insights/script.js"></script>
   {{ if .IsPage }}<script src="/analytics.js"></script>{{ end }}
   {{ if .Store.Get "hasMermaid" }}

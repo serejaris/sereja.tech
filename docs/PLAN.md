@@ -954,3 +954,27 @@ Restore the known-good pre-M14 search presentation of `/blog/superpowers-brainst
 ### Stop-and-fix rule
 
 If the four restored fields do not match `4f21fa1^`, the M15 donor link changes, or any protected URL, canonical, batch, or unrelated M14 surface changes, stop and reduce the diff to the surgical rollback before pushing.
+
+---
+
+## M17 — Task-first blog navigation and social footer
+
+Status: `[x]`
+
+### Goal
+
+Make `/blog/` easier to scan by user intent and expose the three primary public channels at the end of the page.
+
+### Tasks
+
+- [x] Add six task-first article clusters above the chronological list.
+- [x] Keep detailed taxonomy links inside the expandable «Все темы и инструменты» block.
+- [x] Add Telegram, YouTube, and «Вайбкодеры» links to the shared footer.
+- [x] Validate Hugo build, JavaScript syntax, canonical, sitemap, target-link, and redirect-source checks.
+- [x] Ship through the Git-connected `main` release path and smoke-test `/blog/` in production.
+
+### Definition of done
+
+- `/blog/` renders the six clusters and expandable detailed tags.
+- Topic links return relevant article selections without substring false positives.
+- The production footer exposes all three requested public channels.
