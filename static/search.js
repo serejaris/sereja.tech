@@ -10,6 +10,15 @@
   var indexPromise = null;
   var prepared = null;
   var debounceTimer = null;
+  var topicMinScore = 5; // A topic term must match a title (8) or tag (5).
+  var topics = {};
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-topic]'), function (link) {
+    topics[link.dataset.topic] = {
+      label: link.textContent.trim(),
+      terms: (link.dataset.terms || '').split(',').filter(Boolean)
+    };
+  });
 
   function norm(s) {
     return (s || '').toLowerCase().replace(/ё/g, 'е');
@@ -69,6 +78,27 @@
     return score;
   }
 
+  function hasTopicTerm(text, term) {
+    var value = norm(text);
+    var needle = norm(term);
+    if (needle.indexOf(' ') !== -1) return value.indexOf(needle) !== -1;
+
+    return value.split(/[^a-zа-я0-9-]+/i).some(function (word) {
+      return word.indexOf(needle) === 0;
+    });
+  }
+
+  function scoreTopic(p, terms) {
+    var score = 0;
+    for (var t = 0; t < terms.length; t++) {
+      var term = terms[t];
+      if (hasTopicTerm(p.title, term)) score += 8;
+      if (hasTopicTerm(p.tags, term)) score += 5;
+      if (hasTopicTerm(p.description, term)) score += 3;
+    }
+    return score;
+  }
+
   function snippetAround(contentNorm, contentRaw, token) {
     var idx = contentNorm.indexOf(token);
     if (idx === -1) return null;
@@ -123,6 +153,7 @@
     countEl.textContent = '';
     var url = new URL(window.location.href);
     url.searchParams.delete('q');
+    url.searchParams.delete('topic');
     history.replaceState(null, '', url.pathname + url.search + url.hash);
   }
 
@@ -140,6 +171,7 @@
 
     var url = new URL(window.location.href);
     url.searchParams.set('q', query);
+    url.searchParams.delete('topic');
     history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString() + url.hash);
 
     loadIndex()
@@ -180,6 +212,46 @@
       });
   }
 
+  function runTopic(topicKey) {
+    var topic = topics[topicKey];
+    if (!topic) {
+      showBrowse();
+      return;
+    }
+
+    loadIndex()
+      .then(function () {
+        var matches = [];
+        for (var i = 0; i < prepared.length; i++) {
+          var p = prepared[i];
+          var sc = scoreTopic(p, topic.terms);
+          if (sc >= topicMinScore) {
+            matches.push({
+              doc: p.doc,
+              score: sc,
+              i: p.i,
+              contentNorm: p.content
+            });
+          }
+        }
+        matches.sort(function (a, b) {
+          if (b.score !== a.score) return b.score - a.score;
+          return a.i - b.i;
+        });
+
+        showSearchUI();
+        countEl.textContent = topic.label + ': ' + matches.length;
+        renderResults(matches, []);
+      })
+      .catch(function (err) {
+        console.error(err);
+        countEl.textContent = 'Подборка недоступна';
+        resultsEl.textContent = '';
+        browse.hidden = false;
+        output.hidden = false;
+      });
+  }
+
   function onInput() {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function () {
@@ -204,5 +276,9 @@
   if (initialQ) {
     input.value = initialQ;
     runSearch(initialQ);
+    return;
   }
+
+  var initialTopic = new URL(window.location.href).searchParams.get('topic');
+  if (initialTopic) runTopic(initialTopic);
 })();

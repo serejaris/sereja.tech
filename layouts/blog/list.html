@@ -15,10 +15,25 @@
 
 <div id="browse">
 
+<nav aria-label="Подборки статей по задачам">
+  <p class="muted">Что хотите сделать?</p>
+  <div class="chips">
+    <a href="?topic=writing" class="chip" data-topic="writing" data-terms="текст,контент,статья,пост,copywriting,seo,транскрипт">Написание текстов</a>
+    <a href="?topic=apps" class="chip" data-topic="apps" data-terms="приложен,сайт,react,playwright,разработк,вайбкодинг,кодинг">Создание сайтов и приложений</a>
+    <a href="?topic=automation" class="chip" data-topic="automation" data-terms="автоматизац,пайплайн,бот,рассылк,workflow,github actions,расписани">Автоматизация работы</a>
+    <a href="?topic=agents" class="chip" data-topic="agents" data-terms="агент,субагент,оркестрац,multi-agent,ai-agents">Работа с AI-агентами</a>
+    <a href="?topic=setup" class="chip" data-topic="setup" data-terms="настройк,mcp,skills,скилл,терминал,cli,hooks">Настройка AI-инструментов</a>
+    <a href="?topic=models" class="chip" data-topic="models" data-terms="модель,llm,gpt,gemini,kimi,codex,anthropic">Выбор AI-модели</a>
+  </div>
+</nav>
+
 {{ with .Site.Taxonomies.tags }}
-<div class="tags">
-  {{ range .ByCount }}{{ if ge .Count 2 }}<a href="{{ "/tags/" | relURL }}{{ .Term | urlize }}/" class="tag">{{ .Term }} ({{ .Count }})</a>{{ end }}{{ end }}
-</div>
+<details>
+  <summary class="muted">Все темы и инструменты</summary>
+  <div class="tags">
+    {{ range .ByCount }}{{ if ge .Count 2 }}<a href="{{ "/tags/" | relURL }}{{ .Term | urlize }}/" class="tag">{{ .Term }} ({{ .Count }})</a>{{ end }}{{ end }}
+  </div>
+</details>
 {{ end }}
 
 {{ range .Pages.ByDate.Reverse.GroupByDate "January 2006" }}
