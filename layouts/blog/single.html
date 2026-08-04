@@ -1,49 +1,128 @@
 {{ define "main" }}
-<p><a href="/blog/">&larr; Блог</a></p>
-<article>
-  <h1>{{ .Title }}</h1>
-  <p class="author">{{ .Site.Params.author }} · {{ .Date.Format "2 January 2006" }}</p>
-  {{ with .Params.tags }}
-  <div class="tags">
-    {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
-  </div>
-  {{ end }}
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+<div class="reading-ledger">
+  <aside class="article-sidebar" aria-label="Навигация по сайту">
+    <div class="sidebar-top">
+      <a class="ledger-wordmark" href="/" aria-label="Сережа Рис — главная">СЕРЕЖА<br>РИС</a>
+      <nav class="ledger-nav" aria-label="Основная навигация">
+        <a href="/blog/" aria-current="page">Статьи</a>
+        <a href="/about/">Обо мне</a>
+        <a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=article_nav" target="_blank" rel="noopener">Telegram</a>
+      </nav>
+    </div>
 
-  {{ with .Params.intro }}
-  <p class="intro">{{ . }}</p>
-  {{ end }}
+    <div class="sidebar-social" aria-label="Ссылки автора">
+      <a href="https://github.com/serejaris" target="_blank" rel="noopener"><i class="ph ph-github-logo" aria-hidden="true"></i><span>GitHub</span></a>
+      <a href="https://x.com/riiiiiiiiss" target="_blank" rel="noopener"><i class="ph ph-x-logo" aria-hidden="true"></i><span>X</span></a>
+      <a href="https://t.me/ris_ai" target="_blank" rel="noopener"><i class="ph ph-telegram-logo" aria-hidden="true"></i><span>Telegram</span></a>
+      <a href="/index.xml"><i class="ph ph-rss" aria-hidden="true"></i><span>RSS</span></a>
+      <span class="sidebar-copyright">© 2026 Сережа Рис</span>
+    </div>
+  </aside>
 
-  {{ .Content }}
+  <article class="article-main">
+    <header class="article-header">
+      <p class="article-crumb"><a href="/blog/">Статьи</a><span aria-hidden="true">/</span>{{ with index .Params.tags 0 }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}</p>
 
-  {{ with .Params.sources }}
-  <div class="sources">
-    <h3>Источники</h3>
-    <ul>
-      {{ range . }}
-      <li><a href="{{ .url }}" target="_blank">{{ .title }}</a>{{ with .note }} — {{ . }}{{ end }}</li>
+      {{ with .Params.tags }}
+      <nav class="article-tags" aria-label="Теги статьи">
+        {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}
+      </nav>
       {{ end }}
-    </ul>
-  </div>
-  {{ end }}
 
-  {{ $related := .Site.RegularPages.Related . | first 3 }}
-  {{ with $related }}
-  <div class="related-posts">
-    <h3>Читайте также</h3>
-    <ul>
-      {{ range . }}
-      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      <h1 class="post-title">{{ .Title }}</h1>
+
+      <div class="post-meta">
+        <span>{{ .Site.Params.author }}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "fdate.html" (dict "date" .Date "style" "long") }}</time>
+        <span aria-hidden="true">·</span>
+        <span>{{ .ReadingTime }} мин чтения</span>
+        <button class="copy-page-link" type="button" data-copy-page data-label="Скопировать ссылку">
+          <i class="ph ph-link-simple" aria-hidden="true"></i>
+          <span>Скопировать ссылку</span>
+        </button>
+      </div>
+
+      <details class="mobile-toc">
+        <summary>Содержание</summary>
+        {{ replace .TableOfContents "id=\"TableOfContents\"" "class=\"mobile-toc-nav\"" | safeHTML }}
+      </details>
+
+      {{ with .Params.image }}
+      {{ $dims := "" }}
+      {{ $path := printf "static%s" . }}
+      {{ if os.FileExists $path }}{{ with imageConfig $path }}{{ $dims = dict "w" .Width "h" .Height }}{{ end }}{{ end }}
+      <img class="post-cover" src="{{ . }}" alt="{{ $.Title }}"{{ with $dims }} width="{{ .w }}" height="{{ .h }}"{{ end }} loading="eager" decoding="async" fetchpriority="high">
       {{ end }}
-    </ul>
-  </div>
-  {{ end }}
 
-  <p class="author-link"><a href="/about/">Об авторе</a></p>
+      {{ with .Params.intro }}<p class="intro">{{ . }}</p>{{ end }}
+    </header>
 
-  <p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
+    <div class="content">{{ .Content }}</div>
 
-  <footer>
-    {{ .Date.Format "January 2006" }}
-  </footer>
-</article>
+    {{ with .Params.sources }}
+    <section class="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Источники</h2>
+      <ul>
+        {{ range . }}
+        <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ with .note }} — {{ . }}{{ end }}</li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    <nav class="article-sequence" aria-label="Соседние статьи">
+      {{ with .PrevInSection }}
+      <a class="sequence-link sequence-prev" href="{{ .RelPermalink }}">
+        <span>Предыдущая статья</span>
+        <strong>{{ .Title }}</strong>
+      </a>
+      {{ end }}
+      {{ with .NextInSection }}
+      <a class="sequence-link sequence-next" href="{{ .RelPermalink }}">
+        <span>Следующая статья</span>
+        <strong>{{ .Title }}</strong>
+      </a>
+      {{ end }}
+    </nav>
+
+    {{ with $related }}
+    <section class="related-posts" aria-labelledby="related-title">
+      <h2 id="related-title">Похожие статьи</h2>
+      <div class="related-list">
+        {{ range . }}
+        <a class="related-row" href="{{ .RelPermalink }}">
+          <span class="related-title">{{ .Title }}</span>
+          <span class="related-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "fdate.html" (dict "date" .Date) }}</time>
+            {{ with index .Params.tags 0 }}<span aria-hidden="true">·</span><span>{{ . }}</span>{{ end }}
+          </span>
+        </a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    {{ with .Params.tags }}
+    <section class="related-tags" aria-labelledby="related-tags-title">
+      <h2 id="related-tags-title">Похожие темы</h2>
+      <div class="article-tags article-tags-bottom">
+        {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    <footer class="article-signoff">
+      <a href="/about/">Об авторе</a>
+      <span>Подписаться — <a href="https://t.me/ris_ai" target="_blank" rel="noopener">@ris_ai</a></span>
+    </footer>
+  </article>
+
+  <aside class="article-toc" aria-label="Содержание статьи">
+    <p class="toc-title">Содержание</p>
+    {{ .TableOfContents }}
+  </aside>
+</div>
+<script defer src="/article.js"></script>
 {{ end }}

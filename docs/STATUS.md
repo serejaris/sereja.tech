@@ -126,6 +126,9 @@
 - Internal links to blog posts must use final canonical slash URLs and must not point at slashless routes or old redirect aliases.
 - `check-redirect-sources` is now part of the regular SEO helper stack and must stay green before GSC redirect validation.
 - `classify-gsc-backlog` is now part of the issue `#102` helper stack and expects the dated GSC inventory artifact unless a newer inventory is explicitly captured.
+- M18 uses the user-selected Reading Ledger target: graphite article pages, warm orange accent, fixed desktop rails, and a single-column mobile layout.
+- M18 keeps complete article bodies even when their length moves the related-content modules below the target screenshot fold.
+- M18 retains canonical slash URLs for article, neighboring-article, related-article, and tag links.
 
 ## Baseline snapshot
 
@@ -245,6 +248,7 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-07-09 | M16 critic synthesis and surgical rollback validation | `content/blog/superpowers-brainstorming-workflow.md`, `AGENTS.md`, `docs/adr/0001-protect-organic-winners.md` | Four-critic evidence/specification review; exact four-field baseline comparison; clean build, helper, and baseline checks | pass: restored title, description, opening, and targeted H2 exactly match `4f21fa1^`; M15 donor, slug, canonical, other M14 repairs, and `batch_c` are unchanged | Git-connected rollout and production smoke |
 | 2026-07-09 | M16 Git-connected production rollout and smoke | commit `c5182d1`; `docs/PLAN.md`, `docs/STATUS.md` | Git-connected release and production browser smoke | pass: restored title, description, opening, targeted H2, canonical, and preserved M15 donor are live; GSC URL Inspection skipped due Chrome profile lock | optional manual GSC URL Inspection when browser is available |
 | 2026-07-24 | M17 task-first blog navigation and social footer | `layouts/blog/list.html`, `static/search.js`, `layouts/_default/baseof.html`, `docs/PLAN.md`, `docs/STATUS.md` | `node --check static/search.js`; `hugo build`; canonical, sitemap, target-link, and redirect-source checks; Git-connected `main` push; cache-busted production `/blog/` fetch | pass: six clusters, expandable detailed tags, and Telegram · YouTube · Вайбкодеры are live on production | monitor cluster usage |
+| 2026-08-04 | M18 Reading Ledger article redesign | `layouts/blog/single.html`, `layouts/_default/baseof.html`, `layouts/_default/_markup/render-heading.html`, `static/article.js`, `static/images/blog/best-practices-code-ledger.webp`, `content/blog/best-practices-code.md`, `hugo.toml`, `design-qa.md`, `docs/PLAN.md`, `docs/STATUS.md` | `hugo build`; `node --check static/article.js`; rendered-HTML audit; local browser desktop/mobile interaction and route smoke; full Python SEO helper stack; `git diff --check` | pass locally: design QA passed; one H1, five H2 permalinks, one desktop TOC, one mobile TOC, three related rows, no duplicate IDs, canonical slash preserved | ship through the Git-connected production path and smoke-test the live article |
 
 ## Blocker log
 

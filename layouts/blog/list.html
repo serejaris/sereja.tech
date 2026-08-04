@@ -1,12 +1,12 @@
 {{ define "main" }}
-<p><a href="/">&larr; sereja.tech</a></p>
-<p><a href="/about/">Обо мне</a></p>
-<h1>Блог</h1>
-<p class="intro">{{ .Site.Params.description }}</p>
+<section class="hero">
+  <h1 class="display">Блог</h1>
+  <p class="intro">{{ .Site.Params.description }}</p>
+</section>
 
-<p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank">@sereja_tech</a></p>
+<p class="subscribe-inline">Подписаться на обновления — <a href="https://t.me/sereja_tech" target="_blank" rel="noopener">@sereja_tech</a></p>
 
-<p class="search-box"><input type="search" id="search" placeholder="Поиск по {{ len .Pages }} статьям" autocomplete="off" spellcheck="false" aria-label="Поиск по статьям"></p>
+<div class="search-box"><input type="search" id="search" placeholder="Поиск по {{ len .Pages }} статьям" autocomplete="off" spellcheck="false" aria-label="Поиск по статьям"></div>
 
 <div id="search-output" hidden>
   <p class="search-count" id="search-count"></p>
@@ -16,34 +16,37 @@
 <div id="browse">
 
 <nav aria-label="Подборки статей по задачам">
-  <p>Что хотите сделать?</p>
-  <div class="tags">
-    <a href="?topic=writing" class="tag" data-topic="writing" data-terms="текст,контент,статья,пост,copywriting,seo,транскрипт">Написание текстов</a>
-    <a href="?topic=apps" class="tag" data-topic="apps" data-terms="приложен,сайт,react,playwright,разработк,вайбкодинг,кодинг">Создание сайтов и приложений</a>
-    <a href="?topic=automation" class="tag" data-topic="automation" data-terms="автоматизац,пайплайн,бот,рассылк,workflow,github actions,расписани">Автоматизация работы</a>
-    <a href="?topic=agents" class="tag" data-topic="agents" data-terms="агент,субагент,оркестрац,multi-agent,ai-agents">Работа с AI-агентами</a>
-    <a href="?topic=setup" class="tag" data-topic="setup" data-terms="настройк,mcp,skills,скилл,терминал,cli,hooks">Настройка AI-инструментов</a>
-    <a href="?topic=models" class="tag" data-topic="models" data-terms="модель,llm,gpt,gemini,kimi,codex,anthropic">Выбор AI-модели</a>
+  <p class="muted">Что хотите сделать?</p>
+  <div class="chips">
+    <a href="?topic=writing" class="chip" data-topic="writing" data-terms="текст,контент,статья,пост,copywriting,seo,транскрипт">Написание текстов</a>
+    <a href="?topic=apps" class="chip" data-topic="apps" data-terms="приложен,сайт,react,playwright,разработк,вайбкодинг,кодинг">Создание сайтов и приложений</a>
+    <a href="?topic=automation" class="chip" data-topic="automation" data-terms="автоматизац,пайплайн,бот,рассылк,workflow,github actions,расписани">Автоматизация работы</a>
+    <a href="?topic=agents" class="chip" data-topic="agents" data-terms="агент,субагент,оркестрац,multi-agent,ai-agents">Работа с AI-агентами</a>
+    <a href="?topic=setup" class="chip" data-topic="setup" data-terms="настройк,mcp,skills,скилл,терминал,cli,hooks">Настройка AI-инструментов</a>
+    <a href="?topic=models" class="chip" data-topic="models" data-terms="модель,llm,gpt,gemini,kimi,codex,anthropic">Выбор AI-модели</a>
   </div>
 </nav>
 
 {{ with .Site.Taxonomies.tags }}
 <details>
-  <summary>Все темы и инструменты</summary>
+  <summary class="muted">Все темы и инструменты</summary>
   <div class="tags">
     {{ range .ByCount }}{{ if ge .Count 2 }}<a href="{{ "/tags/" | relURL }}{{ .Term | urlize }}/" class="tag">{{ .Term }} ({{ .Count }})</a>{{ end }}{{ end }}
   </div>
 </details>
 {{ end }}
 
+{{ range .Pages.ByDate.Reverse.GroupByDate "January 2006" }}
+<h2 class="month-head">{{ partial "fdate.html" (dict "date" (index .Pages 0).Date "style" "monthyear") }}</h2>
 <ul class="posts">
-  {{ range .Pages.ByDate.Reverse }}
+  {{ range .Pages }}
   <li>
-    <span class="date">{{ .Date.Format "2 Jan 2006" }}</span>
+    <span class="date">{{ partial "fdate.html" (dict "date" .Date) }}</span>
     <a href="{{ .Permalink }}">{{ .Title }}</a>
   </li>
   {{ end }}
 </ul>
+{{ end }}
 
 </div>
 
