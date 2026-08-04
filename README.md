@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-112 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+113 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-08-04 | [Как подключить Claude Max к Hermes через подписку](https://sereja.tech/blog/claude-max-hermes-telegram/) |
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
 | 2026-07-18 | [База знаний для агентов: вход, слои и обслуживание](https://sereja.tech/blog/agent-knowledge-base/) |
@@ -45,7 +46,6 @@
 | 2026-07-01 | [Sonnet 5: скучный релиз с одним полезным навыком](https://sereja.tech/blog/claude-sonnet-5-review/) |
 | 2026-06-30 | [Как тестировать LLM модели для написания текстов?](https://sereja.tech/blog/text-evals-grader/) |
 | 2026-06-30 | [Сто агентов, ноль результата](https://sereja.tech/blog/orchestration-without-goals/) |
-| 2026-06-29 | [Orca вместо четырёх терминалов](https://sereja.tech/blog/orca-menedzher-agentov/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
