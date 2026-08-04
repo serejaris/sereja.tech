@@ -1,354 +1,253 @@
 ---
-title: "Как подключить подписку Anthropic к Hermes"
+title: "Как подключить подписку Anthropic к Hermes с помощью агента"
 date: 2026-08-04
-description: "Проверенный путь: Hermes остаётся Telegram runtime, а Opus вызывается через официальный Claude Code CLI и подписку Anthropic без Extra Usage."
+description: "Понятная инструкция без ручной настройки: скопируйте готовый промпт серверному агенту, войдите в Anthropic и проверьте ответы Hermes в Telegram."
 tags: ["hermes", "anthropic", "claude-code", "telegram", "вайбкодинг"]
 image: "/images/blog/claude-max-hermes-telegram-preview.png"
 cta: personal_corp
 cta_code: pc_blog
 ---
 
-Я хотел оставить Hermes самим ботом и подключить к нему Opus через действующую подписку Anthropic. Без API key, отдельного pay-as-you-go и Extra Usage.
+Если у вас уже работает Hermes-бот, его можно подключить к Opus через действующую подписку Anthropic.
 
-Связка заработала. Hermes отвечает в Telegram-личке и topics, хранит свои сессии и память, вызывает свои tools.
+Самостоятельно разбираться в сервере, командах и настройках не потребуется. Ниже есть готовое задание для агента.
 
-Каждый основной model turn идёт через официальный Claude Code CLI.
+Вам не придётся вводить команды в терминале. Скопируйте задание целиком и дождитесь результатов проверки.
 
-Мой живой тест выполнен на Claude Max и Opus.
+Я прошёл этот путь на живом боте. Hermes сохранил память, скиллы и Telegram. Opus отвечает через мою подписку Claude. Extra Usage остался выключен.
 
-Архитектура привязана к авторизованной подписочной сессии Claude Code.
+## Что получится
 
-Max здесь пример проверенного тарифа. Сама схема опирается на подписочную сессию Claude Code.
+После настройки вы продолжите писать прежнему Telegram-боту.
 
-## Как связаны Hermes, provider и Claude CLI
+Hermes останется основой бота. Он сохранит свои диалоги, память, скиллы и инструменты. Ответы модели будет готовить Opus через официальный Claude Code.
 
-Здесь четыре слоя:
+Вам не понадобится Anthropic API key. Оплата за отдельные API-запросы тоже не подключается.
 
-| Слой | Роль |
-|---|---|
-| Telegram | Доставляет сообщения существующему боту |
-| Hermes | Ведёт gateway, сессии, память и tool loop |
-| User provider | Переводит запрос Hermes в локальный вызов CLI |
-| Claude Code CLI | Запускает Opus через подписочную сессию Anthropic |
+Мой тест выполнен на Claude Max. Подойдёт платный план Anthropic, который даёт доступ к Claude Code и нужной модели. Доступность Opus агент проверит до переключения бота.
 
-User provider — это community-плагин для штатного каталога Hermes. Он поднимает OpenAI-compatible shim на 127.0.0.1:8765.
+## Что потребуется от вас
 
-Hermes обращается к shim как к обычному model provider. Shim запускает официальный claude -p --model opus. Авторизацию и расход лимита контролирует Claude Code.
+Подготовьте четыре вещи:
+
+1. Работающий Hermes-бот.
+2. Доступ агента к серверу с Hermes.
+3. Активную подписку Anthropic с Claude Code.
+4. Доступ к Telegram для финальной проверки.
+
+Подойдёт Codex, Claude Code или другой серверный агент, который умеет работать по SSH, читать логи, менять конфиги и запускать тесты.
+
+Если агент уже устанавливал или обслуживал ваш Hermes, используйте тот же чат. Доступ к серверу у него, скорее всего, уже настроен.
+
+Пароль Anthropic, OAuth-токены и Telegram bot token агенту отправлять не нужно.
+
+## Шаг 1. Дайте агенту готовое задание
+
+Откройте агента, у которого есть доступ к серверу Hermes.
+
+Можно отправить ему ссылку на эту статью и попросить выполнить готовое задание:
 
 ~~~text
-Telegram
-   ↕
-Hermes gateway · sessions · memory · tools
-   ↕
-claude-code-cli provider на 127.0.0.1
-   ↕
-официальный claude -p --model opus
-   ↕
-подписка Anthropic
+Прочитай эту статью целиком и выполни задание из раздела Шаг 1:
+https://sereja.tech/blog/claude-max-hermes-telegram/
+
+Работай до полного результата и используй все проверки из статьи.
 ~~~
 
-Официальный Telegram Channel Anthropic в этой схеме не участвует. Это был мой первый обход.
-
-В нём Hermes полностью заменялся, поэтому исходная задача оставалась нерешённой.
-
-## Почему здесь работает подписка
-
-Native Anthropic OAuth в Hermes использует пул Extra Usage. При выключенном Extra Usage мой живой запрос завершался ошибкой out of extra usage.
-
-Provider идёт другим путём. Он запускает официальный Claude Code CLI, уже авторизованный через аккаунт Claude.
-
-Hermes не хранит Anthropic API key и не вызывает metered API напрямую.
-
-В проверочном запуске Claude сообщил:
-
-- authMethod=claude.ai;
-- apiProvider=firstParty;
-- apiKeySource=none;
-- модель claude-opus-5;
-- окно подписки five_hour разрешено;
-- isUsingOverage=false;
-- overage выключен на уровне организации.
-
-Так я отделяю подписочный маршрут от случайного расхода API или Extra Usage.
-
-## Какой код я использовал
-
-Основа — community provider Ouroborosrex/hermes-claude-code-cli-provider.
-
-Я зафиксировал base commit:
+Скопируйте весь блок ниже одним сообщением. Текст внутри рассчитан на агента. Вам не нужно понимать команды, названия файлов и технические проверки.
 
 ~~~text
+Подключи мой существующий Telegram-бот Hermes к Opus через мою действующую подписку Anthropic.
+
+Главный результат: Hermes остаётся runtime бота, сохраняет свои сессии, память, скиллы и native tools. Каждый основной ответ модели идёт через официальный Claude Code CLI и мою подписочную сессию.
+
+Работай самостоятельно до полного результата. Остановись только для моего входа в Anthropic, необратимого действия или реального блокера после трёх попыток исправления.
+
+Сначала изучи текущий сервер, версию Hermes, конфиги, systemd services, Telegram gateway, активные poller и доступные backup. Прочитай локальные AGENTS.md и runbooks.
+
+Перед изменениями проверь актуальность решения через официальную документацию, GitHub и Grok CLI. Сопоставь публичные данные с текущим сервером.
+
+Не заменяй Hermes официальным Claude Telegram Channel. Нужен Hermes с user model provider, который запускает официальный claude -p локально.
+
+Используй проверенную основу:
+https://github.com/Ouroborosrex/hermes-claude-code-cli-provider
+
+Base commit:
 09a3aec0ab7406c6a0731f858f1b4b7a99f0cb77
-~~~
 
-Из PR #12 взял два независимых исправления:
-
-~~~text
+Добавь два commit из PR #12 в указанном порядке:
 8e5c74c2eb3017fd47f5d1d504625d3c87058b40
 62420fb094a1124292bd4931781b45a8e7ab9633
+
+Примени проверенный hardening patch:
+https://sereja.tech/downloads/hermes-claude-code-cli-provider-hardening.patch
+
+Ожидаемый SHA-256:
+7f2389abd04462df678da2e52b92cf1199a9298cabc6edad3a9bff456d3d242b
+
+Перед production создай внешний backup и отдельную копию конфигов Hermes. Запиши точный rollback. Сохрани текущий рабочий gateway как выключенный резерв.
+
+Сначала проверь provider в изолированном окружении. Прогони все unit tests и fake-Claude Hermes smokes. Ожидается 58 тестов без ошибок.
+
+Проверь совместимость user provider с установленной версией Hermes. Для Hermes v0.14 учти отсутствие поля supports_vision в старой схеме ProviderProfile.
+
+Установи официальный Claude Code CLI на целевой сервер. Авторизацию выполни от имени service account Hermes.
+
+Когда потребуется вход в Anthropic, покажи мне только ссылку или код авторизации и дождись моего подтверждения. Не печатай и не передавай credentials.
+
+Не добавляй Anthropic API key. Не включай Extra Usage. Не меняй billing.
+
+Перед реальным запросом удали из окружения дочернего claude все metered и cloud-routing переменные.
+
+В subprocess не должны попадать ANTHROPIC_API_KEY, ANTHROPIC_AUTH_TOKEN, ANTHROPIC_BASE_URL, Bedrock, Vertex, Foundry, Telegram token и ключи других провайдеров.
+
+Разреши только системные переменные, настройки локальной подписочной сессии Claude Code и явно необходимые параметры.
+
+Докажи подписочный маршрут через claude auth status и stream-json probe.
+
+Прими результат только при одновременном выполнении условий:
+- authMethod сообщает claude.ai;
+- apiProvider сообщает firstParty;
+- apiKeySource сообщает none;
+- реально обслужившая модель относится к Opus;
+- isUsingOverage=false;
+- нет credits required;
+- нет неожиданного API provider.
+
+Подними provider shim только на 127.0.0.1. Не создавай публичный порт, DNAT или новое firewall rule.
+
+Используй managed systemd user service. Включи streaming, Hermes native tools, strict model provenance, engine=auto и timeout 600.
+
+Включи linger для service account. Проверь, что сервис остаётся активным после logout и restart.
+
+Настрой Hermes на provider claude-code-cli и модель opus.
+
+Проверь по отдельности:
+- обычный текстовый ответ;
+- native Hermes tool call;
+- добавление и удаление временной memory-записи;
+- доступность нужных скиллов;
+- корректную модель и provider в agent log.
+
+Перед Telegram cutover останови прежний gateway. Один bot token должен обслуживать ровно один poller.
+
+После запуска Hermes отправь свежие уникальные сообщения и проверь:
+- ответ в обычном DM;
+- ответ внутри существующего Telegram topic;
+- ответ в том же topic после рестарта Hermes gateway;
+- повторный DM после рестарта.
+
+Для topic проверь через Telegram-клиент:
+- ответ ссылается на исходное сообщение;
+- reply_to_top_id совпадает с корнем topic;
+- forum_topic=true.
+
+Реакция с глазами без текстового ответа не считается успехом.
+
+Финальный отчёт должен содержать:
+- Hermes gateway active/running;
+- Claude CLI shim active/running;
+- NRestarts=0;
+- Linger=yes;
+- ровно один Telegram poller;
+- прежний gateway inactive;
+- provider claude-code-cli;
+- model opus;
+- isUsingOverage=false;
+- результаты DM, topic и restart;
+- путь к backup и команды rollback.
+
+Claude OAuth refresh credentials могут ротироваться. Перед rollback в другой container сначала синхронизируй туда текущую credential branch, пока оба Telegram gateway остановлены.
+
+Не показывай мне секреты. Не удаляй пользовательские данные. Не запускай два gateway с одним Telegram token.
+
+Продолжай диагностировать и исправлять, пока все проверки не пройдут.
 ~~~
 
-Первое превращает ошибки CLI в HTTP-коды, понятные fallback-механизму Hermes.
+## Шаг 2. Войдите в Anthropic
 
-Второе проверяет реально обслужившую модель и ловит тихую подмену Opus.
+Во время работы агент попросит авторизовать Claude Code.
 
-Мой hardening patch добавляет ещё три вещи:
+Он должен прислать ссылку или короткий код. Откройте ссылку, войдите в свой аккаунт Anthropic и подтвердите доступ.
 
-- allowlist окружения дочернего claude;
-- корректный context accounting для Hermes;
-- совместимость с ProviderProfile в Hermes v0.14.
+После успешного входа напишите агенту: готово.
 
-Allowlist важен. Процесс Hermes видит Telegram token и ключи других провайдеров. Передавать всё окружение в Claude CLI нельзя.
+Пароль, содержимое файла credentials и OAuth-токен отправлять в чат нельзя. Агенту достаточно увидеть статус успешной авторизации на сервере.
 
-Patch оставляет системные переменные и OAuth-настройки Claude Code.
+## Шаг 3. Проверьте бота в Telegram
 
-Anthropic API keys, cloud routing, Telegram token и ключи других провайдеров в subprocess не попадают.
+После отчёта агента выполните три простых проверки.
 
-Context patch тоже нужен. Внутренний system prompt Claude Code большой.
+### Обычный диалог
 
-Если вернуть его usage в Hermes как пользовательский prompt, Hermes может слишком рано сжать контекст.
+Напишите боту:
 
-## Установка
-
-Сначала сохраните container или VM, ~/.hermes, Telegram-конфиг и текущий provider. Зафиксируйте rollback-команды.
-
-У одного Telegram bot token должен быть один poller. Старый gateway останавливайте только перед финальным переключением.
-
-### 1. Установить Claude Code и войти в подписку
-
-Установите официальный Claude Code CLI по документации Anthropic. На целевом сервере выполните:
-
-~~~bash
-claude auth login
-claude auth status --json
+~~~text
+Ответь ровно: ЛИЧКА РАБОТАЕТ
 ~~~
 
-Ожидаемый статус: вход через claude.ai, first-party provider и ваш subscription type.
+Бот должен прислать эту фразу ответом на ваше сообщение.
 
-Файл credentials держите с mode 0600. Не печатайте OAuth token в логи и не вставляйте его в конфиг Hermes.
+### Диалог внутри topic
 
-### 2. Установить provider
+Откройте существующий topic и напишите:
 
-~~~bash
-export HERMES_HOME="${HERMES_HOME:-$HOME/.hermes}"
-plugin_dir="$HERMES_HOME/plugins/model-providers/claude-code-cli"
-
-git clone https://github.com/Ouroborosrex/hermes-claude-code-cli-provider "$plugin_dir"
-git -C "$plugin_dir" checkout 09a3aec0ab7406c6a0731f858f1b4b7a99f0cb77
-git -C "$plugin_dir" fetch origin pull/12/head:pr-12
-git -C "$plugin_dir" cherry-pick 8e5c74c2eb3017fd47f5d1d504625d3c87058b40
-git -C "$plugin_dir" cherry-pick 62420fb094a1124292bd4931781b45a8e7ab9633
+~~~text
+Ответь ровно: ТОПИК РАБОТАЕТ
 ~~~
 
-Скачайте мой versioned patch и примените его:
+Ответ должен появиться внутри того же topic.
 
-~~~bash
-curl -fsSLo /tmp/hermes-provider-hardening.patch \
-  https://sereja.tech/downloads/hermes-claude-code-cli-provider-hardening.patch
+### Проверка после перезапуска
 
-echo "7f2389abd04462df678da2e52b92cf1199a9298cabc6edad3a9bff456d3d242b  /tmp/hermes-provider-hardening.patch" \
-  | sha256sum -c -
-git -C "$plugin_dir" apply --check /tmp/hermes-provider-hardening.patch
-git -C "$plugin_dir" apply /tmp/hermes-provider-hardening.patch
+Попросите агента перезапустить Hermes gateway. Затем повторите сообщение внутри topic.
+
+Если бот поставил реакцию и промолчал, проверка провалена. Отправьте агенту:
+
+~~~text
+После рестарта бот ставит реакцию и молчит в topic. Продолжай диагностику. Проверь единственный poller, agent log, reply_to_top_id и forum_topic. Не останавливайся до текстового ответа внутри этого же topic.
 ~~~
 
-### 3. Прогнать тесты до реального Opus
+## Как понять, что всё готово
 
-~~~bash
-cd "$plugin_dir"
-python3 -m unittest discover -s tests -v
-~~~
+Работа завершена, когда агент показал шесть подтверждений:
 
-На чистой базе с patch у меня прошли 58 тестов. Fake-Claude тесты не расходуют подписочный лимит.
+1. Hermes и вспомогательный сервис активны.
+2. В логах указаны Opus и provider claude-code-cli.
+3. Подписка используется с isUsingOverage=false.
+4. В Telegram работает обычный диалог.
+5. Ответ приходит внутрь topic до и после рестарта.
+6. Сохранены backup и понятный rollback.
 
-### 4. Настроить loopback shim
+Скрин статуса сервисов сам по себе ничего не доказывает. Главная проверка — реальные ответы бота в Telegram.
 
-Добавьте в ~/.hermes/.env:
+## Что происходит внутри
 
-~~~dotenv
-CLAUDE_CODE_CLI_API_KEY=local
-CLAUDE_CODE_CLI_BASE_URL=http://127.0.0.1:8765/v1
-CLAUDE_CODE_CLI_AUTOSTART=0
-~~~
+Hermes продолжает принимать сообщения, помнить контекст и запускать свои инструменты.
 
-Значение local — непустой placeholder для registry Hermes. Shim его игнорирует.
+Небольшой локальный адаптер передаёт запрос официальному Claude Code. Claude Code использует вашу подписочную сессию и возвращает ответ Hermes.
 
-Установите managed service из provider:
+Эта часть полностью поручена агенту. Человеку достаточно пройти авторизацию и проверить Telegram.
 
-~~~bash
-cd "$plugin_dir"
-CLAUDE_CODE_CLI_HOST=127.0.0.1 \
-CLAUDE_CODE_CLI_PORT=8765 \
-scripts/install-service.sh
-~~~
+## Важное ограничение
 
-Разрешите user service работать после logout и reboot:
+Связка рассчитана на личного бота владельца подписки.
 
-~~~bash
-sudo loginctl enable-linger "$(id -un)"
-loginctl show-user "$(id -un)" -p Linger
-~~~
+Anthropic официально поддерживает Claude Code с платными планами. Постоянная работа через сторонний Hermes provider остаётся серой зоной правил.
 
-Ожидаемый результат — Linger=yes.
-
-Дополните ~/.hermes/claude-code-cli-shim.env:
-
-~~~dotenv
-CLAUDE_CODE_CLI_BIN=/home/student/.local/bin/claude
-CLAUDE_CODE_CLI_MODEL=opus
-CLAUDE_CODE_CLI_ENGINE=auto
-CLAUDE_CODE_CLI_NATIVE_TOOLS=1
-CLAUDE_CODE_CLI_STREAM=1
-CLAUDE_CODE_CLI_VISION=1
-CLAUDE_CODE_CLI_STRICT_MODEL=1
-CLAUDE_CODE_CLI_TIMEOUT=600
-~~~
-
-Путь к claude замените на результат command -v claude.
-
-~~~bash
-chmod 600 ~/.hermes/.env ~/.hermes/claude-code-cli-shim.env
-systemctl --user restart claude-code-cli-shim.service
-curl -fsS http://127.0.0.1:8765/healthz
-curl -fsS http://127.0.0.1:8765/v1/models
-~~~
-
-Закройте SSH, подключитесь снова и повторите health check. Это проверяет работу user service после logout.
-
-### 5. Выбрать provider в Hermes
-
-Через picker:
-
-~~~bash
-hermes model
-~~~
-
-Выберите claude-code-cli и модель opus. В конфигурации итог должен соответствовать:
-
-~~~yaml
-model:
-  provider: claude-code-cli
-  default: opus
-~~~
-
-Теперь проверьте регистрацию provider в Hermes v0.14:
-
-~~~bash
-hermes chat -Q --provider claude-code-cli -m opus -q "Reply PROVIDER_OK"
-~~~
-
-Этот вызов уже расходует Claude usage.
-
-### 6. Доказать подписочный маршрут
-
-Перед production включением выполните один прямой probe с удалёнными metered и cloud-routing переменными:
-
-~~~bash
-env -u ANTHROPIC_API_KEY \
-    -u ANTHROPIC_AUTH_TOKEN \
-    -u ANTHROPIC_BASE_URL \
-    -u CLAUDE_CODE_USE_BEDROCK \
-    -u CLAUDE_CODE_USE_VERTEX \
-    -u CLAUDE_CODE_USE_FOUNDRY \
-  claude -p --model opus \
-    --output-format stream-json --verbose \
-    "Reply exactly SUBSCRIPTION_OPUS_OK"
-~~~
-
-Проверьте apiKeySource, served model и rate-limit event. Остановитесь при isUsingOverage=true, credits required или неожиданном API provider.
-
-После этого прогоните Hermes:
-
-~~~bash
-hermes chat -Q --provider claude-code-cli -m opus \
-  -q "Reply exactly HERMES_OPUS_OK"
-~~~
-
-Отдельно проверьте нативный Hermes tool call и memory roundtrip. Текстовый smoke доказывает только генерацию ответа.
-
-## Переключение Telegram
-
-Перед стартом Hermes остановите gateway, который сейчас использует bot token. Убедитесь, что poller исчез.
-
-Запустите Hermes gateway и проверьте три отдельные ситуации:
-
-1. обычный DM;
-2. сообщение внутри Telegram topic;
-3. тот же topic после рестарта gateway.
-
-В topic ответ должен ссылаться на входящее сообщение и сохранять topic root. Через Telegram-клиент это видно по reply_to_msg_id, reply_to_top_id и forum_topic=true.
-
-На Hermes v0.14 отдельный Telegram patch мне не понадобился. Живой ответ прошёл внутри topic до и после рестарта.
-
-Финальное состояние моего сервера:
-
-- hermes-gateway.service active/running;
-- claude-code-cli-shim.service active/running;
-- оба сервиса с NRestarts=0;
-- прежний Claude Telegram gateway inactive/dead;
-- один Telegram poller;
-- agent log: provider claude-code-cli, model opus.
-
-## Промпт для серверного агента
-
-{{< callout insight >}}
-Подключи существующий Telegram runtime Hermes к моей подписке Anthropic через официальный Claude Code CLI и user provider.
-
-Сохрани Hermes gateway, sessions, memory и native tool loop. Используй pinned community provider base 09a3aec и только два commit из PR #12: 8e5c74c2 и 62420fb0.
-
-До production сверь SHA-256 versioned hardening patch со страницы и примени его.
-
-Проверь child-env allowlist, host prompt-token accounting и Hermes v0.14 compatibility. Прогони все unit и fake-Claude tests.
-
-Создай backup и точный rollback. Установи официальный Claude Code CLI. Авторизацию выполни через мой Claude plan.
-
-Не печатай credentials и не добавляй Anthropic API key.
-
-Докажи через stream-json: apiKeySource=none, served Opus, subscription rate window и isUsingOverage=false. Остановись при overage, credits required или неизвестном provider.
-
-Подними shim только на 127.0.0.1, managed user service, ENGINE=auto, Hermes native tools, streaming, strict model provenance и timeout 600. Включи linger и проверь сервис после logout.
-
-Проверь Hermes CLI, native tool loop и memory add/remove. Перед Telegram cutover останови текущий poller. Никогда не запускай два poller с одним token.
-
-Проверь отдельными nonce DM, forum topic и forum topic после рестарта. Через Telegram-клиент подтверди source reply, тот же topic root и forum_topic=true.
-
-Покажи финальные service states, NRestarts, единственный poller, provider/model из Hermes agent log и rollback. Продолжай исправлять, пока все проверки не пройдут.
-{{< /callout >}}
-
-## Rollback
-
-Сначала остановите Hermes gateway и shim. Пока оба Telegram poller остановлены, восстановите прежний provider и конфиг Hermes.
-
-Claude OAuth refresh credentials ротируются. Если rollback runtime тоже использует Claude Code, сначала передайте ему текущую credential branch и поставьте mode 0600.
-
-После этого запускайте rollback gateway и повторяйте свежие DM/topic smoke. Одновременный запуск двух gateway с одним token создаёт гонку getUpdates.
-
-## Ограничения
-
-Provider поддерживается сообществом. После обновления Hermes, Claude CLI или plugin повторяйте unit, billing, tool, memory, DM, topic и restart проверки.
-
-Каждый turn создаёт процесс claude -p. Это добавляет latency и внутренний prompt floor Claude Code.
-
-Anthropic документирует Claude Code и Agent SDK с подписочным планом. Постоянный owner-only Telegram transport через сторонний Hermes provider остаётся policy gray area.
-
-Публичного одобрения конкретной связки Hermes + Telegram от Anthropic я не нашёл.
-
-Не делитесь consumer credentials и не превращайте личную подписку в multi-user backend.
+Не передавайте свою подписку другим людям и не превращайте её в общий сервис.
 
 Похожие серверные связки и агентские отделы я собираю в Personal Corp. [Посмотреть, как это устроено](https://t.me/hashslash_bot?start=pc_blog).
 
 ---
 
-## Ссылки
+## Ссылки для агента
 
 - [Hermes: model providers](https://hermes-agent.nousresearch.com/docs/integrations/providers)
 - [Hermes Claude Code CLI provider](https://github.com/Ouroborosrex/hermes-claude-code-cli-provider)
-- [Provider issue #13: context accounting](https://github.com/Ouroborosrex/hermes-claude-code-cli-provider/issues/13)
-- [Provider PR #12: error handling and model provenance](https://github.com/Ouroborosrex/hermes-claude-code-cli-provider/pull/12)
-- [Мой проверенный hardening patch](/downloads/hermes-claude-code-cli-provider-hardening.patch)
-- [Claude Code: authentication](https://code.claude.com/docs/en/iam)
+- [Проверенный hardening patch](/downloads/hermes-claude-code-cli-provider-hardening.patch)
+- [Claude Code: вход и авторизация](https://code.claude.com/docs/en/iam)
 - [Claude Code: headless mode](https://code.claude.com/docs/en/headless)
-- [Claude Agent SDK with a Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)
-- [Claude Code with Pro or Max](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)
-- [Claude Code legal and compliance](https://code.claude.com/docs/en/legal-and-compliance)
-- [Telegram Bot API](https://core.telegram.org/bots/api)
+- [Claude Agent SDK с подпиской](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)
+- [Claude Code с Pro или Max](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)
+- [Правила использования Claude Code](https://code.claude.com/docs/en/legal-and-compliance)
