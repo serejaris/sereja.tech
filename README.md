@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-08-04 | [Как подключить Claude Max к Hermes через подписку](https://sereja.tech/blog/claude-max-hermes-telegram/) |
+| 2026-08-04 | [Как перевести Hermes-бота на подписку Anthropic](https://sereja.tech/blog/claude-max-hermes-telegram/) |
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
 | 2026-07-18 | [База знаний для агентов: вход, слои и обслуживание](https://sereja.tech/blog/agent-knowledge-base/) |
