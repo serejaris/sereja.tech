@@ -1,0 +1,8 @@
+<h{{ .Level }} id="{{ .Anchor | safeURL }}">
+  <span>{{ .Text | safeHTML }}</span>
+  {{ if ge .Level 2 }}
+  <a class="heading-anchor" href="#{{ .Anchor | safeURL }}" aria-label="Ссылка на раздел «{{ .PlainText }}»">
+    <i class="ph ph-link-simple" aria-hidden="true"></i>
+  </a>
+  {{ end }}
+</h{{ .Level }}>

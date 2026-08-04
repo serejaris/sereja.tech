@@ -954,3 +954,77 @@ Restore the known-good pre-M14 search presentation of `/blog/superpowers-brainst
 ### Stop-and-fix rule
 
 If the four restored fields do not match `4f21fa1^`, the M15 donor link changes, or any protected URL, canonical, batch, or unrelated M14 surface changes, stop and reduce the diff to the surgical rollback before pushing.
+
+---
+
+## M17 — Task-first blog navigation and social footer
+
+Status: `[x]`
+
+### Goal
+
+Make `/blog/` easier to scan by user intent and expose the three primary public channels at the end of the page.
+
+### Tasks
+
+- [x] Add six task-first article clusters above the chronological list.
+- [x] Keep detailed taxonomy links inside the expandable «Все темы и инструменты» block.
+- [x] Add Telegram, YouTube, and «Вайбкодеры» links to the shared footer.
+- [x] Validate Hugo build, JavaScript syntax, canonical, sitemap, target-link, and redirect-source checks.
+- [x] Ship through the Git-connected `main` release path and smoke-test `/blog/` in production.
+
+### Definition of done
+
+- `/blog/` renders the six clusters and expandable detailed tags.
+- Topic links return relevant article selections without substring false positives.
+- The production footer exposes all three requested public channels.
+
+---
+
+## M18 — Reading Ledger article redesign
+
+Status: `[x]`
+
+### Goal
+
+Apply the selected Cloudflare-inspired Reading Ledger direction to canonical blog article pages, including visible heading permalinks, tags, article navigation, and related content.
+
+### Tasks
+
+- [x] Capture the reference and select a concrete visual target before implementation.
+- [x] Rebuild the article template with author rail, reading column, sticky table of contents, and responsive mobile table of contents.
+- [x] Add visible heading permalinks, copy-link feedback, active TOC state, previous/next navigation, three related articles, and bottom tags.
+- [x] Add a purpose-built cover asset for `/blog/best-practices-code/` and retain the complete article content.
+- [x] Compare source and implementation at the same `936 × 1680` viewport, repair all P2 differences, and record the passing result in `design-qa.md`.
+- [x] Run the Hugo build, rendered-HTML checks, browser smoke, JavaScript syntax check, and full SEO helper stack.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- Article pages preserve one H1, trailing-slash canonicals, sitemap membership, and the intended indexability policy.
+- Every rendered H2 has a visible permalink and the desktop and mobile TOCs resolve to real headings without duplicate IDs.
+- The bottom area exposes canonical previous/next links, exactly three related articles when available, and canonical tag URLs.
+- Desktop and mobile browser checks pass with no horizontal overflow.
+- `design-qa.md` ends with `final result: passed`.
+
+### Validation commands
+
+```bash
+hugo build
+node --check static/article.js
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json
+git diff --check
+```
+
+### Milestone guardrails
+
+- Preserve the trailing-slash canonical policy and taxonomy `noindex, follow` behavior.
+- Keep protected organic-winner titles, descriptions, openings, and primary headings unchanged.
+- Keep the full article body; visual comparison may not shorten published content to fit the reference viewport.
+- Do not deploy through the local Vercel CLI.
