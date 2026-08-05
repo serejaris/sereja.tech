@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-08-05 | [Claude Max 5x и 20x: замеры через ccusage](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
+| 2026-08-05 | [Какую подписку Claude выбрать для работы: $20, $100 или $200](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
 | 2026-08-04 | [Как подключить подписку Anthropic к Hermes](https://sereja.tech/blog/claude-max-hermes-telegram/) |
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
