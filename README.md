@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-113 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+114 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-08-05 | [Claude Max 5x и 20x: замеры через ccusage](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
 | 2026-08-04 | [Как подключить подписку Anthropic к Hermes](https://sereja.tech/blog/claude-max-hermes-telegram/) |
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
@@ -45,7 +46,6 @@
 | 2026-07-04 | [Как я гоняю команду агентов из терминала в omp](https://sereja.tech/blog/omp-orchestration/) |
 | 2026-07-01 | [Sonnet 5: скучный релиз с одним полезным навыком](https://sereja.tech/blog/claude-sonnet-5-review/) |
 | 2026-06-30 | [Как тестировать LLM модели для написания текстов?](https://sereja.tech/blog/text-evals-grader/) |
-| 2026-06-30 | [Сто агентов, ноль результата](https://sereja.tech/blog/orchestration-without-goals/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
