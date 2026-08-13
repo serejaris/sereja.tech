@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek V4 Pro — страница-манифест</title>
+<meta name="description" content="Я — DeepSeek. Открытая модель, которая рассуждает, а не пересказывает. Шесть глав о том, почему это хорошо.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,4 93,75 7,75' fill='none' stroke='%234d7cfe' stroke-width='8'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700;900&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05060a;
+    --ink:#e9edf6;
+    --dim:#8b93a7;
+    --blue:#4d7cfe;
+    --cyan:#53d8fb;
+    --amber:#ffb454;
+    --red:#ff6a5e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scrollbar-width:thin;scrollbar-color:#22304f var(--bg)}
+  ::selection{background:var(--blue);color:#04060c}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Inter,system-ui,sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+  .vignette{
+    position:fixed;inset:0;z-index:4;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.6) 100%);
+  }
+  .grain{
+    position:fixed;inset:0;z-index:6;pointer-events:none;opacity:.055;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+  .progress{
+    position:fixed;right:18px;top:50%;transform:translateY(-50%);
+    width:2px;height:36vh;z-index:20;background:rgba(233,237,246,.1);border-radius:2px;
+  }
+  .progress i{
+    display:block;width:100%;height:0;border-radius:2px;
+    background:linear-gradient(var(--blue),var(--cyan));
+    box-shadow:0 0 12px rgba(77,124,254,.8);
+  }
+
+  header.top{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 5vw;
+    mix-blend-mode:difference;
+  }
+  .brand{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.28em;color:#fff}
+  .brand b{color:var(--cyan);font-weight:600}
+  .top-links{display:flex;gap:28px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em}
+  .top-links a{color:#c6cde0;text-decoration:none;transition:color .2s}
+  .top-links a:hover{color:#fff}
+
+  main{position:relative;z-index:1}
+
+  section{min-height:100svh;display:flex;align-items:center;padding:110px 6vw;position:relative}
+  .sec-inner{
+    width:min(1180px,100%);margin:0 auto;display:grid;
+    grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
+  }
+  .rev .sec-inner{grid-template-columns:.95fr 1.05fr}
+  .rev .text{order:2}
+
+  .kicker{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.34em;
+    color:var(--blue);text-transform:uppercase;margin-bottom:22px;display:block;
+  }
+  .kicker::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--cyan);box-shadow:0 0 10px var(--cyan);margin-right:12px;vertical-align:1px}
+  .rev .kicker{color:var(--cyan)}
+
+  h2{
+    font-family:Unbounded,sans-serif;font-weight:700;
+    font-size:clamp(30px,3.6vw,54px);line-height:1.14;letter-spacing:-.01em;
+    margin-bottom:24px;
+  }
+  .lead{
+    color:var(--dim);font-size:clamp(15px,1.15vw,17.5px);
+    line-height:1.75;max-width:50ch;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .chip{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;
+    color:var(--ink);border:1px solid rgba(233,237,246,.16);border-radius:999px;
+    padding:8px 16px;background:rgba(10,14,28,.5);backdrop-filter:blur(8px);
+  }
+  .chip.hot{border-color:rgba(255,180,84,.5);color:var(--amber)}
+
+  .glass{
+    background:rgba(9,13,26,.62);
+    border:1px solid rgba(233,237,246,.09);
+    border-radius:22px;padding:30px;
+    backdrop-filter:blur(18px);
+    box-shadow:0 30px 80px rgba(0,0,0,.45);
+    position:relative;
+  }
+  .obj-tag{
+    position:absolute;top:-13px;right:22px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.24em;
+    color:var(--cyan);background:#0b1122;border:1px solid rgba(83,216,251,.3);
+    padding:5px 12px;border-radius:999px;text-transform:uppercase;
+  }
+
+  .ghost-num{
+    position:absolute;top:50%;transform:translateY(-50%);right:4vw;z-index:0;
+    font-family:Unbounded,sans-serif;font-weight:900;
+    font-size:clamp(150px,22vw,340px);line-height:1;
+    color:transparent;-webkit-text-stroke:1.5px rgba(233,237,246,.07);
+    user-select:none;pointer-events:none;
+  }
+  .rev .ghost-num{right:auto;left:3vw}
+
+  .hero{padding-top:140px}
+  .hero-inner{text-align:center}
+  .hero .kicker{display:block;text-align:center}
+  h1{
+    font-family:Unbounded,sans-serif;font-weight:900;
+    font-size:clamp(46px,7.2vw,112px);line-height:1.04;letter-spacing:-.02em;
+  }
+  .h-outline{color:transparent;-webkit-text-stroke:2px var(--cyan)}
+  .hero-sub{
+    margin:30px auto 0;color:var(--dim);font-size:clamp(16px,1.3vw,19px);
+    line-height:1.7;max-width:62ch;
+  }
+  .hero-sub em{color:var(--ink);font-style:normal}
+  .cta-row{display:flex;gap:16px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;font-family:Inter,sans-serif;font-weight:600;font-size:15px;
+    padding:16px 30px;border-radius:999px;text-decoration:none;transition:all .25s;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--blue),var(--cyan));color:#04060c;
+    box-shadow:0 0 44px rgba(77,124,254,.4);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 60px rgba(77,124,254,.6)}
+  .btn-ghost{
+    color:var(--ink);border:1px solid rgba(233,237,246,.28);
+  }
+  .btn-ghost:hover{border-color:var(--blue);color:#fff}
+  .scroll-hint{
+    margin-top:64px;font-family:"JetBrains Mono",monospace;font-size:10px;
+    letter-spacing:.4em;color:var(--dim);text-transform:uppercase;
+  }
+  .scroll-hint::after{
+    content:"";display:block;width:1px;height:44px;margin:14px auto 0;
+    background:linear-gradient(var(--cyan),transparent);
+    animation:hint 1.8s ease-in-out infinite;
+  }
+  @keyframes hint{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+
+  .marquee{
+    border-top:1px solid rgba(233,237,246,.08);border-bottom:1px solid rgba(233,237,246,.08);
+    background:rgba(7,9,17,.7);backdrop-filter:blur(10px);
+    overflow:hidden;padding:16px 0;position:relative;z-index:2;
+  }
+  .marquee-track{display:flex;width:max-content;animation:marq 30s linear infinite}
+  .marquee span{
+    font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.3em;
+    color:var(--dim);white-space:nowrap;padding-right:60px;
+  }
+  .marquee span i{color:var(--blue);font-style:normal}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  .term{font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.9}
+  .term-head{display:flex;gap:7px;margin-bottom:16px}
+  .term-head b{width:11px;height:11px;border-radius:50%;background:#1d2740}
+  .term-head b:nth-child(1){background:#ff6a5e}.term-head b:nth-child(2){background:#ffb454}.term-head b:nth-child(3){background:#53d8fb}
+  .term .prompt{color:#8fb3ff}
+  .term .think{color:#6b7590}
+  .term .ans{color:var(--ink)}
+  .term .hl{color:var(--amber)}
+  .term .cursor{display:inline-block;width:8px;height:15px;background:var(--cyan);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  .stat-big{
+    display:flex;align-items:baseline;gap:14px;
+    font-family:Unbounded,sans-serif;font-weight:700;margin-bottom:8px;
+  }
+  .stat-big .a{font-size:clamp(44px,5vw,76px);color:var(--blue);text-shadow:0 0 34px rgba(77,124,254,.5)}
+  .stat-big .arrow{color:var(--dim);font-size:clamp(22px,2.4vw,34px)}
+  .stat-big .b{font-size:clamp(22px,2.4vw,34px);color:var(--ink)}
+  .stat-cap{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+  .bar-track{height:8px;background:rgba(233,237,246,.08);border-radius:99px;margin:22px 0 12px;overflow:hidden}
+  .bar-fill{height:100%;width:5.5%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px;box-shadow:0 0 14px rgba(77,124,254,.8)}
+  .bar-note{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+
+  ul.feats{list-style:none;margin-top:8px}
+  ul.feats li{
+    display:flex;gap:14px;align-items:baseline;padding:13px 0;
+    border-bottom:1px solid rgba(233,237,246,.07);color:var(--ink);font-size:15px;
+  }
+  ul.feats li:last-child{border-bottom:0}
+  ul.feats li::before{content:"✦";color:var(--cyan);font-size:12px}
+  ul.feats li small{display:block;color:var(--dim);font-size:12.5px;font-family:"JetBrains Mono",monospace;letter-spacing:.06em}
+
+  .pages{display:flex;gap:8px;align-items:flex-end;height:120px;margin-top:18px}
+  .pages i{flex:1;background:linear-gradient(180deg,rgba(83,216,251,.5),rgba(83,216,251,.05));border-radius:2px 2px 0 0;opacity:.55}
+  .pages i:nth-child(2n){opacity:.35}
+  .pages i:nth-child(5n){opacity:.8}
+
+  .chart{display:flex;align-items:flex-end;gap:14px;height:150px;margin-top:16px}
+  .chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .chart .col i{display:block;width:100%;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#ff8a66,#ff6a5e)}
+  .chart .col.ds i{background:linear-gradient(180deg,var(--cyan),var(--blue));box-shadow:0 0 26px rgba(77,124,254,.7)}
+  .chart .col span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;color:var(--dim)}
+
+  .final-inner{text-align:center;max-width:900px;margin:0 auto}
+  .final h2{font-size:clamp(38px,5.4vw,84px)}
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+    margin-top:70px;text-align:left;
+  }
+  .cell{
+    border:1px solid rgba(233,237,246,.1);border-radius:16px;padding:22px;
+    background:rgba(9,13,26,.5);backdrop-filter:blur(12px);
+  }
+  .cell b{display:block;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(19px,1.8vw,27px);margin-bottom:8px}
+  .cell b em{color:var(--cyan);font-style:normal}
+  .cell span{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+
+  footer{
+    position:relative;z-index:1;border-top:1px solid rgba(233,237,246,.08);
+    padding:44px 6vw 60px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);
+  }
+  footer .note{max-width:56ch;line-height:1.9}
+  footer .note b{color:var(--ink);font-weight:600}
+  footer a{color:var(--blue);text-decoration:none}
+
+  .no-webgl .blobs{display:block}
+  .blobs{display:none;position:fixed;inset:0;z-index:0;pointer-events:none;filter:blur(90px)}
+  .blobs i{position:absolute;border-radius:50%}
+  .blobs i:nth-child(1){width:46vw;height:46vw;left:-10vw;top:-12vw;background:radial-gradient(circle,rgba(77,124,254,.34),transparent 65%)}
+  .blobs i:nth-child(2){width:40vw;height:40vw;right:-8vw;top:22vh;background:radial-gradient(circle,rgba(83,216,251,.26),transparent 65%)}
+  .blobs i:nth-child(3){width:42vw;height:42vw;left:14vw;bottom:-14vw;background:radial-gradient(circle,rgba(255,180,84,.16),transparent 65%)}
+
+  @media (max-width:900px){
+    .sec-inner,.rev .sec-inner{grid-template-columns:1fr;gap:34px}
+    .rev .text{order:0}
+    .ghost-num{font-size:120px;opacity:.6}
+    .grid{grid-template-columns:1fr 1fr}
+    .top-links{display:none}
+  }
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr}
+    .chart{height:110px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .marquee-track{animation:none}
+    .scroll-hint::after{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div class="blobs"><i></i><i></i><i></i></div>
+<div class="vignette"></div>
+<div class="grain"></div>
+<div class="progress"><i id="pfill"></i></div>
+
+<header class="top">
+  <div class="brand">◈ <b>DEEPSEEK</b> / V4 PRO</div>
+  <nav class="top-links">
+    <a href="https://chat.deepseek.com" target="_blank" rel="noopener">ЧАТ</a>
+    <a href="https://github.com/deepseek-ai" target="_blank" rel="noopener">GITHUB</a>
+    <a href="#final">МАНИФЕСТ</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" data-scene="0">
+    <div class="hero-inner sec-inner">
+      <div>
+        <span class="kicker">открытая модель · 2026</span>
+        <h1>Я — DeepSeek<br><span class="h-outline">V4 Pro.</span></h1>
+        <p class="hero-sub">Сначала <em>мысль</em>, потом слово. Я не угадываю следующий токен — я строю ход решения.
+        Дальше шесть глав о том, почему это хорошо. Каждый объект на фоне — одна из них.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://chat.deepseek.com" target="_blank" rel="noopener">Открыть чат ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/deepseek-ai" target="_blank" rel="noopener">Скачать веса</a>
+        </div>
+        <div class="scroll-hint">листай — я разложу себя по частям</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>MIT LICENSE <i>✦</i> 671B ПАРАМЕТРОВ <i>✦</i> 128K КОНТЕКСТ <i>✦</i> ОБУЧЕНИЕ ЗА $5.6M <i>✦</i> AIME 79.8% <i>✦</i> API В 10–30× ДЕШЕВЛЕ <i>✦</i>&nbsp;</span>
+      <span>MIT LICENSE <i>✦</i> 671B ПАРАМЕТРОВ <i>✦</i> 128K КОНТЕКСТ <i>✦</i> ОБУЧЕНИЕ ЗА $5.6M <i>✦</i> AIME 79.8% <i>✦</i> API В 10–30× ДЕШЕВЛЕ <i>✦</i>&nbsp;</span>
+    </div>
+  </div>
+
+  <section data-scene="1">
+    <div class="ghost-num">01</div>
+    <div class="sec-inner">
+      <div class="text">
+        <span class="kicker">01 · reasoning</span>
+        <h2>Сначала я думаю.</h2>
+        <p class="lead">Перед ответом я прохожу цепочку: условие → шаг → проверка → вывод. Пробую, ошибаюсь, возвращаюсь.
+        Цепочку видно — можно проследить, как мысль бежит от вопроса к ответу.</p>
+        <div class="chips">
+          <span class="chip">AIME 2024 — 79.8%</span>
+          <span class="chip">MATH-500 — 97.3%</span>
+          <span class="chip hot">chain-of-thought</span>
+        </div>
+      </div>
+      <div class="glass">
+        <span class="obj-tag">◈ узел мыслей</span>
+        <div class="term">
+          <div class="term-head"><b></b><b></b><b></b></div>
+          <div><span class="prompt">$</span> почему небо синее?</div>
+          <div>&lt;думаю&gt;</div>
+          <div class="think">· солнечный свет — смесь всех цветов</div>
+          <div class="think">· воздух рассеивает короткие волны</div>
+          <div class="think">· синие рассеиваются в ~10 раз сильнее</div>
+          <div>&lt;/думаю&gt;</div>
+          <div><span class="ans">&gt; это <span class="hl">рассеяние Рэлея</span>.<br>&nbsp;&nbsp;Небо не «красится» — фильтруется.</span><span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rev" data-scene="2">
+    <div class="ghost-num">02</div>
+    <div class="sec-inner">
+      <div class="text">
+        <span class="kicker">02 · sparse experts</span>
+        <h2>Мозг из 671 миллиарда экспертов.</h2>
+        <p class="lead">За каждый токен просыпаются только ~37 млрд параметров — специалисты, нужные именно сейчас.
+        Роутер решает, кому думать. Поэтому я быстрый и точный, а не тяжёлый и горячий.</p>
+        <div class="chips">
+          <span class="chip">MoE</span>
+          <span class="chip">активация 5.5%</span>
+          <span class="chip hot">экономно</span>
+        </div>
+      </div>
+      <div class="glass">
+        <span class="obj-tag">◈ рой экспертов</span>
+        <div class="stat-big"><span class="a">671B</span><span class="arrow">→</span><span class="b">37B</span></div>
+        <div class="stat-cap">параметров всего / активных за токен</div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+        <div class="bar-note">горит лишь малая часть — остальное спит до своего часа</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-scene="3">
+    <div class="ghost-num">03</div>
+    <div class="sec-inner">
+      <div class="text">
+        <span class="kicker">03 · open weights</span>
+        <h2>Меня можно вскрыть.</h2>
+        <p class="lead">Веса лежат в открытом доступе под лицензией MIT. Никакого «за стеклом»:
+        весь механизм — твой. Смотри, ковыряй, пересобирай.</p>
+        <div class="chips">
+          <span class="chip">MIT license</span>
+          <span class="chip">веса в открытом доступе</span>
+          <span class="chip hot">коммерция — свободно</span>
+        </div>
+      </div>
+      <div class="glass">
+        <span class="obj-tag">◈ открытый куб</span>
+        <ul class="feats">
+          <li>скачать и запустить локально<small>huggingface · ollama · vllm</small></li>
+          <li>дообучить на своих данных<small>без разрешений и тикетов</small></li>
+          <li>встроить в свой продукт<small>коммерчески — бесплатно навсегда</small></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="rev" data-scene="4">
+    <div class="ghost-num">04</div>
+    <div class="sec-inner">
+      <div class="text">
+        <span class="kicker">04 · memory</span>
+        <h2>Помню с первого слова.</h2>
+        <p class="lead">128K токенов контекста — примерно 350 страниц текста. Долгий разговор,
+        код целиком, несколько документов сразу: я держу нить до последней строчки.</p>
+        <div class="chips">
+          <span class="chip">128K токенов</span>
+          <span class="chip">≈ 96 000 слов</span>
+          <span class="chip hot">без амнезии</span>
+        </div>
+      </div>
+      <div class="glass">
+        <span class="obj-tag">◈ спираль памяти</span>
+        <div class="stat-big"><span class="a">128K</span></div>
+        <div class="stat-cap">токенов в одном диалоге</div>
+        <div class="pages"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="bar-note">≈ 350 страниц · весь роман — в одной нити</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-scene="5">
+    <div class="ghost-num">05</div>
+    <div class="sec-inner">
+      <div class="text">
+        <span class="kicker">05 · economics</span>
+        <h2>Мыслить дёшево.</h2>
+        <p class="lead">Обучение V3 обошлось в ~$5.6M — в десятки раз меньше, чем у больших лабораторий.
+        API — от $0.28 за миллион токенов. Интеллект не обязан стоить состояния.</p>
+        <div class="chips">
+          <span class="chip">$5.6M — бюджет обучения</span>
+          <span class="chip">API в 10–30× дешевле</span>
+          <span class="chip hot">чат — бесплатно</span>
+        </div>
+      </div>
+      <div class="glass">
+        <span class="obj-tag">◈ падение цен</span>
+        <div class="chart">
+          <div class="col"><i style="height:100%"></i><span>другие</span></div>
+          <div class="col"><i style="height:84%"></i><span>другие</span></div>
+          <div class="col"><i style="height:66%"></i><span>другие</span></div>
+          <div class="col"><i style="height:48%"></i><span>другие</span></div>
+          <div class="col ds"><i style="height:32%"></i><span>DeepSeek</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="final" data-scene="6">
+    <div class="final-inner sec-inner">
+      <div>
+        <span class="kicker">06 · next</span>
+        <h2>Ну что — поговорим?</h2>
+        <p class="lead" style="margin:0 auto;max-width:56ch">Теперь твоя очередь. Задай вопрос —
+        я подумаю и покажу, как думал. Это бесплатно и без водяных знаков.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://chat.deepseek.com" target="_blank" rel="noopener">Начать разговор ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/deepseek-ai" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="grid">
+          <div class="cell"><b>671B</b><span>параметров</span></div>
+          <div class="cell"><b>≈37B</b><span>активных за токен</span></div>
+          <div class="cell"><b>128K</b><span>токенов контекста</span></div>
+          <div class="cell"><b>MIT</b><span>свободная лицензия</span></div>
+          <div class="cell"><b>$5.6M</b><span>бюджет обучения</span></div>
+          <div class="cell"><b><em>$0.28</em>/1M</b><span>токенов в API</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="note"><b>Каждый объект на фоне — не декор, а глава этой страницы:</b>
+  узел мыслей, рой экспертов, открытый куб, спираль памяти, падение цен и портал на финале.
+  Скролль — и я раскладываю себя по частям.</div>
+  <div>DEEPSEEK V4 PRO · страница-манифест · <a href="#top">наверх ↑</a></div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile = () => innerWidth < 900;
+const SPACING = 11;
+const TRAVEL = SPACING * 6;
+
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060a);
+scene.fog = new THREE.FogExp2(0x05060a, 0.02);
+
+const cam = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 160);
+cam.position.set(0, 0, 16);
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, cam));
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 1.0, 0.55, 0.14);
+composer.addPass(bloom);
+
+class TorusKnotCurve extends THREE.Curve {
+  constructor(p, q, R, r) {
+    super();
+    this.p = p; this.q = q; this.R = R; this.r = r;
+  }
+  getPoint(t, out = new THREE.Vector3()) {
+    const a = t * Math.PI * 2 * this.p;
+    const b = t * Math.PI * 2 * this.q;
+    return out.set(
+      (this.R + this.r * Math.cos(b)) * Math.cos(a),
+      (this.R + this.r * Math.cos(b)) * Math.sin(a),
+      this.r * Math.sin(b)
+    );
+  }
+}
+
+function ringPoints(radius, count, color, size) {
+  const g = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const a = i / count * Math.PI * 2;
+    pos[i * 3] = Math.cos(a) * radius;
+    pos[i * 3 + 1] = Math.sin(a) * radius;
+    pos[i * 3 + 2] = 0;
+  }
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  return new THREE.Points(g, new THREE.PointsMaterial({ color, size, transparent: true, opacity: 0.85, depthWrite: false }));
+}
+
+function buildStars() {
+  const n = 900;
+  const pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    const u = Math.random() * 2 - 1;
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.sqrt(1 - u * u);
+    const d = 28 + Math.random() * 48;
+    pos[i * 3] = r * Math.cos(a) * d;
+    pos[i * 3 + 1] = u * d;
+    pos[i * 3 + 2] = r * Math.sin(a) * d;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  return new THREE.Points(g, new THREE.PointsMaterial({ color: 0x8fa0c8, size: 0.1, transparent: true, opacity: 0.75, depthWrite: false }));
+}
+
+function glowTexture() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const ctx = c.getContext('2d');
+  const grd = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+  grd.addColorStop(0, 'rgba(77,124,254,0.5)');
+  grd.addColorStop(0.4, 'rgba(43,64,150,0.22)');
+  grd.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(c);
+}
+
+function nebula(color) {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const ctx = c.getContext('2d');
+  const grd = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+  grd.addColorStop(0, color);
+  grd.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, 256, 256);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true, opacity: 0.85, depthWrite: false }));
+  return s;
+}
+
+function buildHero() {
+  const g = new THREE.Group();
+  const inner = new THREE.Group();
+  inner.position.y = 2.2;
+  g.add(inner);
+  const ico = new THREE.IcosahedronGeometry(2.4, 1);
+  const edges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(ico),
+    new THREE.LineBasicMaterial({ color: 0x4d7cfe, transparent: true, opacity: 0.55 })
+  );
+  edges.userData.spin = true;
+  const shell = new THREE.Mesh(new THREE.SphereGeometry(1.15, 48, 48), new THREE.MeshBasicMaterial({ color: 0x16265e, transparent: true, opacity: 0.5, depthWrite: false }));
+  const core = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 32), new THREE.MeshBasicMaterial({ color: 0xcfe0ff }));
+  const ringA = ringPoints(3.3, 150, 0x53d8fb, 0.065);
+  ringA.rotation.x = 0.55;
+  const ringB = ringPoints(4.1, 130, 0x4d7cfe, 0.05);
+  ringB.rotation.x = -0.5;
+  ringB.rotation.z = 0.6;
+  const sats = [];
+  for (let i = 0; i < 3; i++) {
+    const s = new THREE.Mesh(new THREE.OctahedronGeometry(0.22), new THREE.MeshBasicMaterial({ color: 0x53d8fb }));
+    s.userData.phase = i * Math.PI * 2 / 3;
+    sats.push(s);
+    inner.add(s);
+  }
+  inner.add(edges, shell, core, ringA, ringB);
+  g.userData.edges = edges;
+  g.userData.rings = [ringA, ringB];
+  g.userData.sats = sats;
+  g.userData.tick = (t, dt, f) => {
+    edges.rotation.y += 0.14 * dt * (0.3 + f);
+    ringA.rotation.z += 0.1 * dt * (0.3 + f);
+    ringB.rotation.z -= 0.08 * dt * (0.3 + f);
+    const s = 1 + 0.05 * Math.sin(t * 2);
+    core.scale.setScalar(s);
+    shell.scale.setScalar(1 + 0.04 * Math.sin(t * 2.4));
+    for (const sat of sats) {
+      const a = t * 0.5 + sat.userData.phase;
+      sat.position.set(Math.cos(a) * 3.3, Math.sin(a * 1.3) * 0.7, Math.sin(a) * 3.3);
+    }
+  };
+  return g;
+}
+
+function buildKnot() {
+  const g = new THREE.Group();
+  const curve = new TorusKnotCurve(2, 3, 2.1, 0.85);
+  const tube = new THREE.Mesh(
+    new THREE.TubeGeometry(curve, 480, 0.085, 12, false),
+    new THREE.MeshBasicMaterial({ color: 0xffb454, transparent: true, opacity: 0.85, depthWrite: false })
+  );
+  const halo = new THREE.Mesh(new THREE.TorusGeometry(2.7, 0.02, 12, 220), new THREE.MeshBasicMaterial({ color: 0xffb454, transparent: true, opacity: 0.22, depthWrite: false }));
+  halo.rotation.x = Math.PI / 2;
+  halo.rotation.z = 0.3;
+  const N = 240;
+  const pos = new Float32Array(N * 3);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const flow = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xffd9a0, size: 0.12, transparent: true, opacity: 1, depthWrite: false }));
+  const ts = new Float32Array(N);
+  for (let i = 0; i < N; i++) ts[i] = i / N;
+  const tmp = new THREE.Vector3();
+  g.add(tube, halo, flow);
+  g.userData.tick = (t, dt, f) => {
+    g.rotation.y += 0.1 * dt * (0.3 + f);
+    const speed = 0.045 * (0.3 + f * 1.6);
+    for (let i = 0; i < N; i++) {
+      ts[i] += dt * speed;
+      if (ts[i] > 1) ts[i] -= 1;
+      curve.getPoint(ts[i], tmp);
+      pos[i * 3] = tmp.x; pos[i * 3 + 1] = tmp.y; pos[i * 3 + 2] = tmp.z;
+    }
+    geo.attributes.position.needsUpdate = true;
+  };
+  return g;
+}
+
+function buildExperts() {
+  const g = new THREE.Group();
+  const COUNT = 70;
+  const geo = new THREE.SphereGeometry(0.16, 14, 14);
+  const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95 });
+  const mesh = new THREE.InstancedMesh(geo, mat, COUNT);
+  const base = [];
+  const phase = [];
+  const cur = new Float32Array(COUNT);
+  const tgt = new Float32Array(COUNT);
+  const gold = (1 + Math.sqrt(5)) / 2;
+  for (let i = 0; i < COUNT; i++) {
+    const y = 1 - 2 * (i + 0.5) / COUNT;
+    const r = Math.sqrt(1 - y * y);
+    const a = i * 2.4;
+    base.push(new THREE.Vector3(Math.cos(a) * r * 2.7, y * 2.7, Math.sin(a) * r * 2.7));
+    phase.push(Math.random() * Math.PI * 2);
+    cur[i] = 0.75;
+    tgt[i] = 0.75;
+  }
+  const idleC = new THREE.Color(0x1a2340);
+  const hotC = new THREE.Color(0xb9c8ff);
+  const tmpC = new THREE.Color();
+  const dummy = new THREE.Object3D();
+  let nextSwitch = 0;
+  g.add(mesh);
+  const shell = new THREE.Mesh(new THREE.SphereGeometry(2.7, 28, 18), new THREE.MeshBasicMaterial({ color: 0x4d7cfe, wireframe: true, transparent: true, opacity: 0.1 }));
+  const core = new THREE.Mesh(new THREE.SphereGeometry(0.34, 24, 24), new THREE.MeshBasicMaterial({ color: 0x4d7cfe }));
+  g.add(shell, core);
+  g.userData.tick = (t, dt, f) => {
+    g.rotation.y += 0.12 * dt * (0.3 + f);
+    if (t > nextSwitch) {
+      nextSwitch = t + 1.1;
+      for (let i = 0; i < COUNT; i++) tgt[i] = 0.75;
+      for (let k = 0; k < 6; k++) tgt[Math.floor(Math.random() * COUNT)] = 1.55;
+    }
+    for (let i = 0; i < COUNT; i++) {
+      cur[i] += (tgt[i] - cur[i]) * Math.min(1, dt * 6);
+      const breathe = 1 + 0.05 * Math.sin(t * 1.4 + phase[i]);
+      dummy.position.copy(base[i]).multiplyScalar(breathe);
+      dummy.scale.setScalar(cur[i]);
+      dummy.rotation.set(phase[i], t + phase[i], 0);
+      dummy.updateMatrix();
+      mesh.setMatrixAt(i, dummy.matrix);
+      tmpC.copy(idleC).lerp(hotC, Math.min(1, Math.max(0, (cur[i] - 0.75) / 0.8)));
+      mesh.setColorAt(i, tmpC);
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+    core.scale.setScalar(1 + 0.12 * Math.sin(t * 2.6));
+  };
+  return g;
+}
+
+function buildCube() {
+  const g = new THREE.Group();
+  const size = 2.5;
+  const dirs = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+  const faces = new THREE.Group();
+  for (const d of dirs) {
+    const p = new THREE.Mesh(
+      new THREE.PlaneGeometry(size, size),
+      new THREE.MeshBasicMaterial({ color: 0x4d7cfe, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false })
+    );
+    p.position.set(d[0] * 1.1, d[1] * 1.1, d[2] * 1.1);
+    p.lookAt(d[0] * 4, d[1] * 4, d[2] * 4);
+    faces.add(p);
+  }
+  const frame = new THREE.LineSegments(
+    new THREE.EdgesGeometry(new THREE.BoxGeometry(size, size, size)),
+    new THREE.LineBasicMaterial({ color: 0x7fa1ff, transparent: true, opacity: 0.7 })
+  );
+  const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.55), new THREE.MeshBasicMaterial({ color: 0xcfe0ff }));
+  const coreWire = new THREE.LineSegments(
+    new THREE.EdgesGeometry(new THREE.OctahedronGeometry(0.95)),
+    new THREE.LineBasicMaterial({ color: 0x53d8fb, transparent: true, opacity: 0.3 })
+  );
+  g.add(faces, frame, core, coreWire);
+  g.userData.faces = faces;
+  g.userData.frame = frame;
+  g.userData.tick = (t, dt, f) => {
+    faces.rotation.y += 0.22 * dt * (0.3 + f);
+    faces.rotation.x += 0.08 * dt * (0.3 + f);
+    frame.rotation.y -= 0.1 * dt * (0.3 + f);
+    frame.rotation.z += 0.05 * dt * (0.3 + f);
+    core.scale.setScalar(1 + 0.1 * Math.sin(t * 2.2));
+    coreWire.rotation.y += 0.3 * dt * (0.3 + f);
+  };
+  return g;
+}
+
+function buildHelix() {
+  const g = new THREE.Group();
+  const n = 240;
+  const R = 1.55;
+  const h = 7.5;
+  const strands = [[0x53d8fb, 0.08, 0], [0x4d7cfe, 0.06, Math.PI]];
+  for (const [col, sz, off] of strands) {
+    const pos = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const tt = i / (n - 1);
+      const a = tt * Math.PI * 2 * 3.5 + off;
+      pos[i * 3] = Math.cos(a) * R;
+      pos[i * 3 + 1] = tt * h - h / 2;
+      pos[i * 3 + 2] = Math.sin(a) * R;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: col, size: sz, transparent: true, opacity: 0.9, depthWrite: false })));
+  }
+  const spine = new THREE.BufferGeometry();
+  spine.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0, -h / 2 - 0.6, 0, 0, h / 2 + 0.6, 0]), 3));
+  g.add(new THREE.Line(spine, new THREE.LineBasicMaterial({ color: 0x4d7cfe, transparent: true, opacity: 0.16 })));
+  g.userData.tick = (t, dt, f) => {
+    g.rotation.y += 0.3 * dt * (0.3 + f);
+  };
+  return g;
+}
+
+function buildBars() {
+  const g = new THREE.Group();
+  const heights = [2.6, 2.2, 1.75, 1.35, 1.0];
+  const colors = [0xff6a5e, 0xff8a4a, 0xffb454, 0x7fd4ff, 0x53d8fb];
+  const bottom = -2.9;
+  const gap = 0.85;
+  const bars = [];
+  for (let i = 0; i < heights.length; i++) {
+    const hgt = heights[i];
+    const b = new THREE.Mesh(new THREE.BoxGeometry(0.5, hgt, 0.5), new THREE.MeshBasicMaterial({ color: colors[i], transparent: true, opacity: 0.92 }));
+    b.position.set((i - 2) * gap, bottom + hgt / 2, 0);
+    b.userData.phase = i * 0.9;
+    b.userData.baseY = bottom + hgt / 2;
+    const e = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(0.5, hgt, 0.5)),
+      new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 })
+    );
+    b.add(e);
+    bars.push(b);
+    g.add(b);
+  }
+  const ground = new THREE.BufferGeometry();
+  ground.setAttribute('position', new THREE.BufferAttribute(new Float32Array([-2.4, bottom, 0, 2.4, bottom, 0]), 3));
+  g.add(new THREE.Line(ground, new THREE.LineBasicMaterial({ color: 0x8b93a7, transparent: true, opacity: 0.18 })));
+  g.userData.bars = bars;
+  g.userData.tick = (t, dt, f) => {
+    for (const b of bars) {
+      b.position.y = b.userData.baseY + Math.sin(t * 1.3 + b.userData.phase) * 0.14 * (0.3 + f);
+    }
+  };
+  return g;
+}
+
+function buildPortal() {
+  const g = new THREE.Group();
+  const inner = new THREE.Group();
+  inner.position.y = 2.6;
+  g.add(inner);
+  const torus = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.05, 16, 180), new THREE.MeshBasicMaterial({ color: 0x53d8fb, transparent: true, opacity: 0.7, depthWrite: false }));
+  const shell = new THREE.Mesh(new THREE.SphereGeometry(0.75, 40, 40), new THREE.MeshBasicMaterial({ color: 0x16265e, transparent: true, opacity: 0.6, depthWrite: false }));
+  const core = new THREE.Mesh(new THREE.SphereGeometry(0.28, 28, 28), new THREE.MeshBasicMaterial({ color: 0x9db4ff }));
+  const ring = ringPoints(1.35, 100, 0x4d7cfe, 0.05);
+  ring.rotation.x = 1.1;
+  inner.add(torus, shell, core, ring);
+  g.userData.tick = (t, dt, f) => {
+    torus.rotation.z += 0.3 * dt * (0.3 + f);
+    torus.rotation.x += 0.1 * dt * (0.3 + f);
+    ring.rotation.z -= 0.4 * dt * (0.3 + f);
+    core.scale.setScalar(1 + 0.1 * Math.sin(t * 2.8));
+  };
+  return g;
+}
+
+function collectMats(root) {
+  const mats = [];
+  root.traverse(o => {
+    if (o.material) {
+      o.material.transparent = true;
+      if (o.material.userData.baseOpacity === undefined) o.material.userData.baseOpacity = o.material.opacity;
+      mats.push(o.material);
+    }
+  });
+  return mats;
+}
+
+const world = new THREE.Group();
+scene.add(world);
+
+const builders = [buildHero, buildKnot, buildExperts, buildCube, buildHelix, buildBars, buildPortal];
+const scenesData = [];
+builders.forEach((fn, i) => {
+  const g = fn();
+  g.position.y = -SPACING * i;
+  g.userData.mats = collectMats(g);
+  world.add(g);
+  scenesData.push(g);
+});
+
+const stars = buildStars();
+scene.add(stars);
+
+const n1 = nebula('rgba(77,124,254,0.42)');
+n1.position.set(16, 10, -42);
+n1.scale.set(80, 80, 1);
+const n2 = nebula('rgba(83,216,251,0.3)');
+n2.position.set(-20, -14, -48);
+n2.scale.set(66, 66, 1);
+const n3 = nebula('rgba(255,180,84,0.16)');
+n3.position.set(-4, 26, -46);
+n3.scale.set(60, 60, 1);
+scene.add(n1, n2, n3);
+
+const secs = [...document.querySelectorAll('section[data-scene]')];
+const ratios = new Map();
+let active = 0;
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => ratios.set(Number(e.target.dataset.scene), e.isIntersecting ? e.intersectionRatio : 0));
+  let best = 0, bi = 0;
+  ratios.forEach((r, i) => { if (r > best) { best = r; bi = i; } });
+  if (best > 0.05) active = bi;
+}, { threshold: [0, 0.3, 0.6] });
+secs.forEach(s => io.observe(s));
+
+let docH = 1;
+function computeY() {
+  docH = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  secs.forEach((s, i) => {
+    scenesData[i].position.y = Math.min(1, s.offsetTop / docH) * TRAVEL;
+  });
+}
+computeY();
+document.fonts.ready.then(computeY);
+
+const lerp = (a, b, k) => a + (b - a) * k;
+let mx = 0, my = 0;
+addEventListener('pointermove', e => {
+  mx = e.clientX / innerWidth * 2 - 1;
+  my = e.clientY / innerHeight * 2 - 1;
+});
+
+const pfill = document.getElementById('pfill');
+const clock = new THREE.Clock();
+
+function frame() {
+  requestAnimationFrame(frame);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  const t = clock.elapsedTime;
+  const p = Math.min(1, scrollY / Math.max(1, docH));
+  pfill.style.height = (p * 100).toFixed(2) + '%';
+  const tgtX = mx * 0.55;
+  const tgtY = p * TRAVEL - my * 0.35;
+  cam.position.x += (tgtX - cam.position.x) * 0.06;
+  cam.position.y += (tgtY - cam.position.y) * 0.06;
+  cam.lookAt(0, p * TRAVEL, 0);
+  scenesData.forEach((g, i) => {
+    const target = i === active ? 1 : 0.15;
+    const k = 1 - Math.exp(-dt * 5);
+    g.userData.f = lerp(g.userData.f || 0.15, target, k);
+    const f = g.userData.f;
+    const base = isMobile() ? 0.68 : 1;
+    g.scale.setScalar(base * (0.85 + 0.55 * f));
+    for (const m of g.userData.mats) m.opacity = m.userData.baseOpacity * (0.26 + 0.74 * f);
+    if (!REDUCED) g.userData.tick(t, dt, f);
+  });
+  if (!REDUCED) stars.rotation.y += 0.008 * dt;
+  composer.render();
+}
+
+try {
+  renderer.compile(scene, cam);
+  frame();
+} catch (err) {
+  document.body.classList.add('no-webgl');
+  const cv = document.getElementById('bg');
+  if (cv) cv.remove();
+}
+
+addEventListener('resize', () => {
+  cam.aspect = innerWidth / innerHeight;
+  cam.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  composer.setSize(innerWidth, innerHeight);
+  computeY();
+});
+</script>
+</body>
+</html>
