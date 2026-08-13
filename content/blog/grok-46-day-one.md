@@ -34,7 +34,22 @@ x.ai обещает длинные агенты, визуал, интеракт�
 <figcaption>Открыть: <a href="/demos/grok-46-3d/">страница Grok 4.6</a></figcaption>
 </figure>
 
-Параллельно в Grok Build собрался 3D-аквариум Laguna и визуальный роман. Сцены живые. Публичные grok.me-ссылки потом отвалились. Смотреть их лучше в записи.
+В Grok Build собрались три живых прогона: аквариум Laguna, разрез пистолета и визуальный роман «Последняя смена».
+
+<figure>
+<img src="/images/blog/grok-46-aqua.png" alt="Laguna: 3D-аквариум с рыбами, кораллами и пузырями" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Открыть: <a href="https://aqua.grok.me">aqua.grok.me</a></figcaption>
+</figure>
+
+<figure>
+<img src="/images/blog/grok-46-gunmodel.png" alt="Разрез: цикл выстрела, расширение газов в 3D-схеме пистолета" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Открыть: <a href="https://gunmodel.grok.me">gunmodel.grok.me</a></figcaption>
+</figure>
+
+<figure>
+<img src="/images/blog/grok-46-storybook.png" alt="Последняя смена: сцена визуального романа в квартире" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Открыть: <a href="https://storybook.grok.me">storybook.grok.me</a></figcaption>
+</figure>
 
 Для игры промпт тот же, что и на прошлых релизах.
 
