@@ -19,8 +19,6 @@ DeepSeek V4 Pro на старте дешёвый и слишком медлен�
 
 {{< youtube SAZQy5JK9tM >}}
 
-Код игр лежит в [serejaris/grok-4-6-test-online](https://github.com/serejaris/grok-4-6-test-online).
-
 ## Grok 4.6 не закрывает дыру в сетапе
 
 Мне нужна модель, которой я отдаю задачу и потом принимаю или выкидываю результат. Агенты пишут за меня. Я смотрю артефакт.
@@ -29,9 +27,12 @@ x.ai обещает длинные агенты, визуал, интеракт�
 
 Не появился. После этих прогонов релиз [не ощущается принципиально новым](https://youtu.be/SAZQy5JK9tM?t=4847). Тот же класс работы, что уже закрывает стек. Формулировка, которую оставляю: «релиз получился интересным, но не революционным точно».
 
-В Cursor агент собрал [страницу про модель](/demos/grok-46-3d/): восемь камер, орбита, 3D-узел. Креатив сильнее, чем у 4.5. Роль daily это не меняет.
+В Cursor агент собрал страницу про модель: восемь камер, орбита, 3D-узел. Креатив сильнее, чем у 4.5. Роль daily это не меняет.
 
-![Страница Grok 4.6 в Cursor: 3D-узел и восемь камер](/images/blog/grok-46-3d-page.png)
+<figure>
+<img src="/images/blog/grok-46-3d-page.png" alt="Страница Grok 4.6 в Cursor: 3D-узел и восемь камер" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Открыть: <a href="/demos/grok-46-3d/">страница Grok 4.6</a></figcaption>
+</figure>
 
 Параллельно в Grok Build собрался 3D-аквариум Laguna и визуальный роман. Сцены живые. Публичные grok.me-ссылки потом отвалились. Смотреть их лучше в записи.
 
@@ -47,13 +48,17 @@ x.ai обещает длинные агенты, визуал, интеракт�
 
 Получился Queake 3 Arena. Low-poly двор, один общий матч, можно зайти по ссылке. Карта тесная, оружие сырое. Это рабочий артефакт того же класса, что Dust Arena у Fable, не новый слой.
 
-![Queake 3 Arena: вид от первого лица, warmup, пулемёт](/images/blog/grok-46-queake-ingame.png)
+<figure>
+<img src="/images/blog/grok-46-queake-ingame.png" alt="Queake 3 Arena: вид от первого лица, warmup, пулемёт" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Поиграть: <a href="https://queake-arena-production.up.railway.app/">Queake 3 Arena</a>. Код: <a href="https://github.com/serejaris/grok-4-6-test-online">serejaris/grok-4-6-test-online</a></figcaption>
+</figure>
 
-Поиграть: [queake-arena-production.up.railway.app](https://queake-arena-production.up.railway.app/).
+В тот же день рядом собрался Lantern Grave: Vampire Survivors на Three.js, ходишь сам, реликвии бьют сами.
 
-В тот же день рядом собрался [Lantern Grave](https://serejaris.github.io/grok-4-6-test-vampire-survivors/): Vampire Survivors на Three.js, ходишь сам, реликвии бьют сами.
-
-![Lantern Grave: титульный экран Three.js survivor](/images/blog/grok-46-lantern-grave.png)
+<figure>
+<img src="/images/blog/grok-46-lantern-grave.png" alt="Lantern Grave: титульный экран Three.js survivor" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Поиграть: <a href="https://serejaris.github.io/grok-4-6-test-vampire-survivors/">Lantern Grave</a>. Код: <a href="https://github.com/serejaris/grok-4-6-test-vampire-survivors">serejaris/grok-4-6-test-vampire-survivors</a></figcaption>
+</figure>
 
 Интересный здесь важное слово. Просто нет новой дыры, которую 4.6 внезапно затыкает. Если агент и так доводит визуал и игру до состояния, когда можно смотреть глазами, смена шильдика ничего не меняет.
 
@@ -95,9 +100,12 @@ Daily у меня про повторяемые задачи, которые а�
 
 Я не спорю, что модель потом ускорят. У меня другой критерий. Агент либо встраивается в день, либо остаётся новостью. V4 Pro пока новость.
 
-Не сравниваю окна контекста и прайс за миллион токенов. Цифр в карточке нет. Хватает одного живого факта: страница про себя шла около часа. Её можно открыть: [манифест DeepSeek V4 Pro](/demos/deepseek-v4-pro/).
+Не сравниваю окна контекста и прайс за миллион токенов. Цифр в карточке нет. Хватает одного живого факта: страница про себя шла около часа.
 
-![Страница-манифест DeepSeek V4 Pro, которую модель собирала около часа](/images/blog/grok-46-deepseek-self.png)
+<figure>
+<img src="/images/blog/grok-46-deepseek-self.png" alt="Страница-манифест DeepSeek V4 Pro, которую модель собирала около часа" width="1280" height="720" loading="lazy" decoding="async">
+<figcaption>Открыть: <a href="/demos/deepseek-v4-pro/">манифест DeepSeek V4 Pro</a></figcaption>
+</figure>
 
 Лишняя медленная модель засоряет выбор. В момент, когда надо просто попросить агента сделать страницу, я не хочу вспоминать ещё один дешёвый путь, который думал час.
 
