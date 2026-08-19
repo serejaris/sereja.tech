@@ -1028,3 +1028,27 @@ git diff --check
 - Keep protected organic-winner titles, descriptions, openings, and primary headings unchanged.
 - Keep the full article body; visual comparison may not shorten published content to fit the reference viewport.
 - Do not deploy through the local Vercel CLI.
+
+---
+
+## M19 — Grok Bot publication
+
+Status: `[x]`
+
+### Goal
+
+Publish a source-backed Russian guide to the first Grok Bot workflow with localized visuals and explicit approval boundaries.
+
+### Tasks
+
+- [x] Verify the persistent-computer, skill-to-routine, and approval model against current xAI documentation.
+- [x] Build one document-summary case and keep external actions behind human confirmation.
+- [x] Add the localized cover and 25 original-style Russian diagrams; use 24 diagrams in the article body.
+- [x] Pass style, editorial, fact, persona, Hugo, rendered-HTML, and SEO checks.
+- [x] Release through the Git-connected `main` path and smoke-test production.
+
+### Definition of done
+
+- The article is live at `/blog/grok-bot-cloud-agents-guide/` with one H1, seven H2 sections, a self-canonical URL, and valid social preview metadata.
+- The body uses exactly three evidence pillars and one expanded example.
+- The production page and cover asset return `200`, and the Telegram announcement is queued through the standard blog pipeline.
