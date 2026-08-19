@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-08-18 | [Grok Bot: один бот, один процесс, одна граница](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
+| 2026-08-18 | [Гайд по использованию Grok Bot](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
 | 2026-08-13 | [Grok 4.6 интересный. Гнаться незачем](https://sereja.tech/blog/grok-46-day-one/) |
 | 2026-08-05 | [Какую подписку Claude выбрать для работы: $20, $100 или $200](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
 | 2026-08-04 | [Как подключить подписку Anthropic к Hermes](https://sereja.tech/blog/claude-max-hermes-telegram/) |
