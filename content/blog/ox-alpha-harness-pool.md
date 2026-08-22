@@ -51,11 +51,11 @@ flowchart LR
 
 Смоук-тест нонсом прошёл с первого раза на всех шести. Доступ снаружи не прошёл вообще.
 
-Ловушка первая: клонирование раздало контейнерам адреса 10.70.0.70–.73, уже занятые пулом ботов, поднятым неделей раньше. ARP на мосту захватил чужие MAC-адреса, проброс портов увёл меня в соседний пул. SSH на 2470 отвечал незнакомым host-key и `Permission denied`. Лечится перенумерацией на .90–.93 и правкой базы адресов в NAT-скрипте.
+Ловушка первая: клонирование раздало контейнерам адреса 10.70.0.70-.73, уже занятые пулом ботов, поднятым неделей раньше. ARP на мосту захватил чужие MAC-адреса, проброс портов увёл меня в соседний пул. SSH на 2470 отвечал незнакомым host-key и `Permission denied`. Лечится перенумерацией на .90-.93 и правкой базы адресов в NAT-скрипте.
 
 Ловушка вторая тоньше. Дропин sshd с `PermitRootLogin` агент положил под именем `99-oxalpha.conf`, а в шаблоне уже лежал `60-pc2-student.conf` с запретом. В sshd побеждает первое прочитанное значение, так что `99-` проигрывал молча. Переименовали в `50-oxalpha.conf`: root-логин заработал, `journalctl` перестал сыпать `ROOT LOGIN REFUSED`, скан host-key совпал с контейнерами.
 
-Наружу пул смотрит портами 2470–2475. Правила поднимает systemd-юнит `oxalpha-nat.service`, который запускает скрипт `oxalpha-nat.sh` с таблицей порт → контейнер.
+Наружу пул смотрит портами 2470-2475. Правила поднимает systemd-юнит `oxalpha-nat.service`, который запускает скрипт `oxalpha-nat.sh` с таблицей порт → контейнер.
 
 ## Что потребовал каждый харнесс
 
@@ -118,7 +118,15 @@ flowchart LR
 
 <video controls loop muted src="/images/blog/ox-alpha-harness-pool/omp-cycle.webm"></video>
 
-Если видео не играет, есть GIF-версии: [Codex](/images/blog/ox-alpha-harness-pool/codex-cycle.gif), [Hermes](/images/blog/ox-alpha-harness-pool/hermes-cycle.gif), [Claude Code](/images/blog/ox-alpha-harness-pool/claude-code-cycle.gif), [OMP](/images/blog/ox-alpha-harness-pool/omp-cycle.gif).
+Если видео не играет, есть GIF-версии:
+
+[Codex](/images/blog/ox-alpha-harness-pool/codex-cycle.gif)
+
+[Hermes](/images/blog/ox-alpha-harness-pool/hermes-cycle.gif)
+
+[Claude Code](/images/blog/ox-alpha-harness-pool/claude-code-cycle.gif)
+
+[OMP](/images/blog/ox-alpha-harness-pool/omp-cycle.gif)
 
 ## Ещё два бенча
 
@@ -132,6 +140,19 @@ flowchart LR
 | Hermes agent | | | не собрано | ~6 мин | 16 926 B | успех (MeshToonMaterial) |
 | OMP | | | не собрано | | | не собрано |
 | OpenCode | | | не собрано | | | не собрано |
+
+Тренажёр прав Аргентины:
+
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-argentina-license-trainer-codex.jpg" alt="Интерфейс тренажёра прав Аргентины от Codex CLI: вопрос на испанском, варианты ответов и счёт" caption="Codex CLI · 22 636 B · ~5 мин" >}}
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-argentina-license-trainer-cline.jpg" alt="Интерфейс тренажёра прав Аргентины от Cline CLI: карточка вопроса на испанском с прогрессом" caption="Cline · 70 986 B · ~25 мин" >}}
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-argentina-license-trainer-claude-code.jpg" alt="Интерфейс тренажёра прав Аргентины от Claude Code: вопросы на испанском с разбором ответов" caption="Claude Code · 106 635 B · ~2 ч 12 мин" >}}
+
+Аниме-улица:
+
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-anime-street-orbit-codex.jpg" alt="Аниме-улица от Codex CLI: cel-shading сцена на Three.js" caption="Codex CLI · 13 411 B · ~5.5 мин" >}}
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-anime-street-orbit-hermes.jpg" alt="Аниме-улица от Hermes agent: cel-shading улица с орбитальной камерой" caption="Hermes · 16 926 B · ~6 мин" >}}
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-anime-street-orbit-cline.jpg" alt="Аниме-улица от Cline CLI: детализированная cel-shading сцена" caption="Cline · 630 989 B · ~20 мин" >}}
+{{< figure src="/images/blog/ox-alpha-harness-pool/art-anime-street-orbit-claude-code.jpg" alt="Аниме-улица от Claude Code: сцена с halftone-небом и проработанной физикой" caption="Claude Code · 47 474 B · ~80 мин" >}}
 
 Расклад перевернулся. Cline, который на пистолете просто не дожил до финиша, во втором раунде собрал обе сцены и спокойно проглотил 1.26 миллиона входных токенов. Большие входы для него оказались рабочим режимом. Claude Code в аниме-улице вытащил физику хвостиков, инстансы листьев и halftone-небо, отдав за это 80 минут. OMP и OpenCode остались без артефакта в обеих батареях.
 
