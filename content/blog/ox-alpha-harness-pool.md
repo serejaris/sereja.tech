@@ -1,8 +1,8 @@
 ---
-title: "Одна модель, шесть харнессов: пул за вечер"
-description: "Шесть изолированных стендов с одной stealth-моделью и три бенча на всех. Где ломается пул харнессов и почему долгие сессии не доживают до конца."
+title: "ox-alpha: 6 агентов, 3 бенча"
+description: "ox-alpha в 6 изолированных агентах (Claude Code, Codex, Cline, OpenCode, Hermes, OMP). Три бенча, цифры по времени и обрывам."
 date: 2026-08-22
-tags: ["вайбкодинг", "агенты", "proxmox", "openrouter", "бенчмарк"]
+tags: ["вайбкодинг", "агенты", "ox-alpha", "proxmox", "openrouter", "бенчмарк"]
 cta: kruzhok
 cta_code: blog_oxalpha_pool
 image: "/images/blog/ox-alpha-harness-pool/pool-dashboard.png"
