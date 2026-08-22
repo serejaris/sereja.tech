@@ -95,11 +95,6 @@ flowchart LR
 
 Четыре страницы открылись и заработали.
 
-{{< figure src="/images/blog/ox-alpha-harness-pool/codex.png" alt="3D-сцена выстрела от Codex CLI: стилизованный пистолет, вспышка у дульного среза, подписи этапов" caption="Codex CLI · 14 610 B · ~5.5 мин" >}}
-{{< figure src="/images/blog/ox-alpha-harness-pool/hermes.png" alt="3D-сцена выстрела от Hermes agent: панель управления, слайдер скорости времени" caption="Hermes agent · 19 191 B · ~9.4 мин" >}}
-{{< figure src="/images/blog/ox-alpha-harness-pool/claude-code.png" alt="3D-сцена выстрела от Claude Code: пистолет в разрезе, телеметрия и этапы цикла" caption="Claude Code · 76 823 B · ~57 мин" >}}
-{{< figure src="/images/blog/ox-alpha-harness-pool/omp.png" alt="3D-сцена выстрела от OMP: разрез пистолета с подписями деталей" caption="OMP · 652 681 B · ~80 мин" >}}
-
 Статика тут врёт: вся разница живёт в движении. Тот же цикл выстрела у всех четырёх, по возрастанию размера артефакта.
 
 **Codex CLI**
@@ -212,6 +207,5 @@ Cline упёрся в другое. На пистолете агент рабо�
 ### Что делать с обрывами на длинных задачах?
 
 Держать харнесс, который умеет вернуться в упавшую сессию. У Claude Code это `claude --resume`: он подхватывает сохранённый контекст и доводит генерацию до конца. Короткие задачи, до пяти-шести минут, проходят чисто и без этого.
-
 
 Хочешь так же? В [Кружке](https://t.me/hashslash_bot?start=blog_oxalpha_pool) разбираем это на практике, с агентами и вживую.
