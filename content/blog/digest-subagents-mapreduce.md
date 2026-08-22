@@ -133,4 +133,4 @@ Reply_to контекст критичен — URL без описания ин�
 
 Итого: ~$0.03 за дайджест, галлюцинации редки.
 
-Код: [tg-digest-opus](https://github.com/serejaris/tg-digest-opus)
+Код: `tg-digest-opus` (репозиторий закрыт)

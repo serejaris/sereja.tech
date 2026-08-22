@@ -1,1 +1,9 @@
-<img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- $src := .Destination | safeURL -}}
+{{- $dims := "" -}}
+{{- if not (or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//")) -}}
+  {{- $path := printf "static%s" $src -}}
+  {{- if os.FileExists $path -}}
+    {{- with imageConfig $path -}}{{ $dims = dict "w" .Width "h" .Height }}{{- end -}}
+  {{- end -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ with $dims }} width="{{ .w }}" height="{{ .h }}"{{ end }} loading="lazy" decoding="async">

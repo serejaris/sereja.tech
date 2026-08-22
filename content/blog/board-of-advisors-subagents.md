@@ -1,7 +1,7 @@
 ---
 title: "Как я собрал совет директоров из субагентов"
 date: 2026-03-04
-description: "Board of Advisors — скилл Claude Code для параллельных субагентов с персонами. 46 сессий, 29 персон от Jobs до Karpathy"
+description: "Один агент — одна точка зрения. Скилл собирает совет из 4–6 параллельных субагентов с персонами: Jobs, Victor, Karpathy. 46 сессий, слепое рецензирование."
 tags: ["claude-code", "субагенты", "skills", "decision-making"]
 image: "/images/blog/board-of-advisors-subagents-preview.png"
 ---

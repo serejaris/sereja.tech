@@ -1,7 +1,7 @@
 ---
 title: "Почему GPT не умеет искать: эмбединги на M1"
 date: 2026-01-20
-description: "Локальный RAG на M1: ChromaDB, эмбединги и почему генеративная модель не заменит поиск"
+description: "Транскрипты сессий — 150K слов, в контекст Claude не влезают. Собрал локальный RAG на M1: ChromaDB и all-MiniLM ищут цитату по смыслу за секунды, без API."
 tags: ["rag", "embeddings", "claude code"]
 image: /images/blog/local-rag-embeddings-m1-preview.png
 ---

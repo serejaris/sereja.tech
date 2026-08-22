@@ -23,3 +23,11 @@ description: "Вайбкодер. Направляю AI-агентов чере�
 - Комьюнити вайбкодеров — [@vibecod3rs](https://t.me/vibecod3rs)
 - YouTube — [@serejaris](https://www.youtube.com/@serejaris)
 - GitHub — [serejaris](https://github.com/serejaris)
+
+## С чего начать
+
+- [GitHub Projects как память для AI-агентов](/blog/github-projects-ai-agent-memory/)
+- [Оптимизация токенов в Claude Code](/blog/claude-code-token-optimization/)
+- [Homebrew и CLI-инструменты для вайбкодинга](/blog/homebrew-cli-vibecoding/)
+- [AGENTS.md как источник правды для агентов](/blog/agents-md-source-of-truth/)
+- [llms.txt: веб, читаемый для агентов](/blog/llms-txt-agent-readable-web/)

@@ -957,6 +957,54 @@ If the four restored fields do not match `4f21fa1^`, the M15 donor link changes,
 
 ---
 
+## M17 — Ahrefs broken outgoing links repair
+
+Status: `[x]`
+
+### Goal
+
+Remove the 14 broken or crawler-blocked outgoing targets reported by Ahrefs across eight canonical blog pages without changing their search presentation or URL policy.
+
+### Tasks
+
+- [x] Inspect the Ahrefs `Page has links to broken page` report and capture all eight source pages and 14 targets.
+- [x] Replace moved GitHub, Google, Cloud.ru, Calvin French-Owen, RSM, and A2A destinations with their current canonical URLs.
+- [x] Remove obsolete source-list entries and de-link destinations that intentionally block the Ahrefs crawler.
+- [x] Preserve existing user edits and protected organic-winner fields.
+- [x] Build the site and run the full local SEO helper stack.
+- [x] Confirm the rendered site no longer emits any of the 14 reported targets.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- All eight reported pages render successfully.
+- None of the 14 reported broken or crawler-blocked targets remains as a rendered link.
+- Canonical, sitemap, target-link, ghost-policy, and redirect-source checks pass.
+- Production verification waits for the Git-connected release path and the next Ahrefs crawl.
+
+### Validation commands
+
+```bash
+hugo build
+python3 -m py_compile scripts/seo/url_audit.py
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 -m json.tool scripts/seo/url_policy.json > /dev/null
+git diff --check
+```
+
+### Milestone guardrails
+
+- Keep article titles, descriptions, openings, headings, slugs, and canonicals unchanged.
+- Do not deploy through the local Vercel CLI.
+- Verify production only after the Git-connected release and a fresh Ahrefs crawl.
+
+---
+
 ## M17 — Task-first blog navigation and social footer
 
 Status: `[x]`
@@ -1028,3 +1076,38 @@ git diff --check
 - Keep protected organic-winner titles, descriptions, openings, and primary headings unchanged.
 - Keep the full article body; visual comparison may not shorten published content to fit the reference viewport.
 - Do not deploy through the local Vercel CLI.
+
+---
+
+## M19 — Editorial Split homepage redesign
+
+Status: `[x]`
+
+### Goal
+
+Apply the selected third homepage concept from the first design set while keeping the homepage driven by current Hugo content and video data.
+
+### Tasks
+
+- [x] Resolve and measure the exact selected visual target at `1487 × 1058`.
+- [x] Rebuild the homepage as a split author/video hero with fresh articles and a curated «Начать отсюда» route.
+- [x] Keep the featured video, latest articles, dates, descriptions, and starting links driven by repository data.
+- [x] Add a responsive single-column layout and verify it at `480 × 844` without horizontal overflow.
+- [x] Exercise the primary blog CTA, canonical internal routes, semantic structure, and browser console.
+- [x] Compare source and implementation at the same viewport, fix the lower-region density mismatch, and record the passing result in `design-qa.md`.
+- [x] Run the Hugo build, full SEO helper stack, route smoke, and `git diff --check`.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- The `1488 × 1058` desktop capture preserves the selected column proportions, `670px` hero, lower split, typography hierarchy, and flat graphite/orange treatment.
+- The homepage has one H1, functional navigation and primary CTA, descriptive video image alt text, and canonical slash links.
+- The mobile document width equals the `480px` viewport width.
+- Hugo and all SEO helper checks pass.
+- `design-qa.md` ends with `final result: passed`.
+
+### Milestone guardrails
+
+- Keep current repository content and the real current YouTube thumbnail instead of hard-coding mock data.
+- Preserve trailing-slash canonicals and existing article-page behavior.
+- Keep the release on the Git-connected Vercel path; no local Vercel deployment.

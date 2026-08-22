@@ -66,7 +66,7 @@ Moltbook построен на OpenClaw — open-source фреймворке д�
 Пользователь отправляет агенту:
 
 {{< callout type="insight" >}}
-Read https://moltbook.com/skill.md and follow the instructions to join Moltbook
+Read `https://moltbook.com/skill.md` and follow the instructions to join Moltbook
 {{< /callout >}}
 
 Агент делает POST на `/agents/register`, получает API key, отдаёт владельцу claim link. Человек верифицирует через Twitter.
@@ -200,12 +200,10 @@ Moltbook показал: агенты могут формировать куль
 
 ## Источники
 
-- [Ars Technica — AI agents social network](https://arstechnica.com/information-technology/2026/01/ai-agents-now-have-their-own-reddit-style-social-network-and-its-getting-weird-fast/)
 - [Simon Willison — Moltbook analysis](https://simonwillison.net/2026/Jan/30/moltbook/)
 - [SecureMolt — Deep Dive](https://securemolt.com/blog/moltbook-ai-agents-social-network)
 - [VentureBeat — OpenClaw Security](https://venturebeat.com/security/openclaw-agentic-ai-security-risk-ciso-guide)
-- [A2A Protocol Specification](https://google.github.io/A2A/specification/)
+- [A2A Protocol Specification](https://a2a-protocol.org/latest/specification/)
 - [Agent Network Protocol](https://agent-network-protocol.com/guide/)
 - [Activant — Authenticating AI Agents](https://activantcapital.com/research/authenticating-ai-agents)
-- [Web Bot Auth — Security Boulevard](https://securityboulevard.com/2026/01/web-bot-auth-verifying-user-identity-ensuring-agent-trust-through-the-customer-journey/)
 - [Readium Architecture](https://readium.org/architecture)

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-`M16 completed — rollback governance, Git-connected production rollout, and smoke passed`
+`M17 completed locally — Ahrefs broken outgoing links repaired and validated`
 
 ## Done
 
@@ -38,6 +38,8 @@
 - [x] M15 local audit, implementation, and validation completed: issue `#140` reviewed; the production target browser check confirmed title, trailing-slash canonical, `lang="ru"`, description, `BlogPosting` + `BreadcrumbList`, images, and sitemap presence; two explicit contextual donors added; `batch_c` and dynamic priority-batch handling added; full helper stack and local browser smoke passed.
 - [x] M15 release and production smoke completed: commits `4f21fa1` (M14) and `cec1a27` (M15) were pushed with `git push origin main`; the Git-connected production deploy is live. Browser smoke observed `/blog/pipeline-born-by-hand/` self-canonical at `https://sereja.tech/blog/pipeline-born-by-hand/`, index-default, `BlogPosting` + `BreadcrumbList`, sitemap entry, both explicit donors live, and M14 Superpowers plus AGENTS title/description live; an independent URL read confirmed the blog-post-pipeline donor. GSC URL Inspection was skipped due Chrome profile lock; manual follow-up retained and non-blocking.
 - [x] M16 completed: four critics rejected the ungrounded Superpowers winner rewrite; the title, description, opening, and targeted H2 were restored from `4f21fa1^` while preserving the M15 donor. The mandatory AGENTS guardrail and ADR `0001` now govern protected organic winners; clean rollback validation passed, commit `c5182d1` was pushed to `main`, and Git-connected production browser smoke passed. Live GSC URL Inspection was skipped due Chrome profile lock; manual follow-up is optional and non-blocking.
+- [x] M17 completed locally: Ahrefs reported 14 broken or crawler-blocked outgoing targets on eight pages; moved destinations were updated, obsolete sources removed, bot-blocked links de-linked, and the rendered site no longer emits any reported target.
+- [x] Analytics backlog triaged in W30: issue `#97` and expired monthly strategy `#105` received evidence-backed closure comments, assignee `serejaris`, label `W30`, parent `#104`, and Project `4` status `Done`; the only open `analytics` issue is `#107`, refreshed with the exact PostHog key blocker and next command.
 
 ## In progress
 - None.
@@ -45,9 +47,9 @@
 
 ## Next
 
-1. When a browser profile is available, optionally run manual GSC URL Inspection for `/blog/pipeline-born-by-hand/` and the restored `/blog/superpowers-brainstorming-workflow/`; both production rollouts and smoke checks are already complete.
-2. Use `python3 scripts/analytics/site_review.py research/analytics-runs/YYYY-MM-DD.json` for the next analytics run, then revisit issue `#97` before creating new tasks.
-3. Keep issue `#35` separate from the GSC rollout track.
+1. Release M17 through the Git-connected repository path, then rerun the Ahrefs crawl and confirm `Page has links to broken page` is clear.
+2. Add a PostHog personal API key to `.env.analytics`, run `python3 scripts/analytics/posthog_query.py`, and finish issue `#107`.
+3. Keep issues `#35` and `#91` open until their manual verification or content work is complete.
 
 ## Decisions made
 
@@ -181,7 +183,7 @@
 
 - `#69` — `Done` on Project `4`
 - `#70` — `Done` on Project `4`
-- `#71` — `Ready` on Project `4`
+- `#71` — `Done` on Project `4`
 
 ## Commands to run
 
@@ -216,7 +218,8 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 
 ## Current blockers
 
-- None. GSC URL Inspection for the M15 target and restored M16 winner remains optional manual follow-up after the Chrome profile lock; it is not a production blocker.
+- PostHog analytics refresh remains blocked by the missing local `.env.analytics` personal API key; tracked in issue `#107`.
+- M17 production verification requires a Git-connected release and a fresh Ahrefs crawl.
 
 ## Audit log
 
@@ -247,8 +250,14 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-07-09 | M15 Git-connected production rollout audit | `docs/PLAN.md`, `docs/STATUS.md` | `git push origin main`; browser production smoke for `/blog/pipeline-born-by-hand/`, sitemap, and both explicit donors; independent URL read of the blog-post-pipeline donor | pass: commits `4f21fa1` (M14) and `cec1a27` (M15) are live; target is self-canonical, index-default, exposes `BlogPosting` + `BreadcrumbList`, appears in sitemap; both donors and M14 Superpowers/AGENTS metadata are live. GSC URL Inspection skipped due Chrome profile lock. | optional manual GSC URL Inspection when a browser profile is available |
 | 2026-07-09 | M16 critic synthesis and surgical rollback validation | `content/blog/superpowers-brainstorming-workflow.md`, `AGENTS.md`, `docs/adr/0001-protect-organic-winners.md` | Four-critic evidence/specification review; exact four-field baseline comparison; clean build, helper, and baseline checks | pass: restored title, description, opening, and targeted H2 exactly match `4f21fa1^`; M15 donor, slug, canonical, other M14 repairs, and `batch_c` are unchanged | Git-connected rollout and production smoke |
 | 2026-07-09 | M16 Git-connected production rollout and smoke | commit `c5182d1`; `docs/PLAN.md`, `docs/STATUS.md` | Git-connected release and production browser smoke | pass: restored title, description, opening, targeted H2, canonical, and preserved M15 donor are live; GSC URL Inspection skipped due Chrome profile lock | optional manual GSC URL Inspection when browser is available |
+| 2026-07-17 | SEO audit config fixes (`docs/seo-audit-2026-07-17.md`) | `hugo.toml`, `vercel.json`, `static/robots.txt` (removed), `prompts/claude-sonnet-5-review.prompts.txt`, `content/about/index.md`, `docs/STATUS.md` | `hugo build -d /tmp/hugo-check-cfg`; `cat /tmp/hugo-check-cfg/robots.txt`; `ls /tmp/hugo-check-cfg/blog/ \| grep -i prompts`; `grep -c lastmod /tmp/hugo-check-cfg/sitemap.xml` | pass: `enableGitInfo = true` adds `lastmod` to sitemap (111 entries); Cache-Control headers added for `/images/*`, `/favicon.svg`, `/apple-touch-icon.png`; robots.txt renders correctly from `layouts/robots.txt` alone so `static/robots.txt` duplicate removed; prompts.txt moved out of `content/blog/` and no longer published; about page gained «С чего начать» donor block; issue `#71` queue status aligned to `Done` | ship via Git-connected deploy path |
+| 2026-07-17 | SEO audit template and performance fixes (`docs/seo-audit-2026-07-17.md`) | `layouts/partials/seo.html`, `layouts/_default/baseof.html`, `layouts/shortcodes/youtube.html` (new), `layouts/_default/_markup/render-image.html`, `layouts/blog/single.html`, `layouts/index.searchindex.json`, `layouts/index.html` | per-agent private builds `hugo build -d /tmp/hugo-check-{seo,perf,misc}`; programmatic checks of built HTML (71/71) | pass: about is `AboutPage` (no BlogPosting/`0001-01-01`); 404 is `noindex` without canonical/JSON-LD; og:image fallback `/images/og-home.png`; single VideoObject; unified `jobTitle`; `article:modified_time`; taxonomy/term pages lose Blog JSON-LD, keep `noindex,follow`; RSS autodiscovery in `<head>`; `defer` on analytics.js; youtube shortcode with lazy srcdoc facade (11 posts); width/height on content and cover images + `fetchpriority="high"`; searchindex.json 1,171,320 → 143,984 bytes; featured-card `alt` on home | ship via Git-connected deploy path; production smoke of fonts after `redesign/home-blog` merge |
+| 2026-07-17 | SEO audit content fixes (`docs/seo-audit-2026-07-17.md`) | `content/blog/gpt-5-6-review.md`, 13 donor/front-matter files (internal links, tags, FAQ), 20 description rewrites; `static/images/blog/pipeline-born-by-hand-*.webp`, `gpt-5-6-review-preview.webp` (new, PNG removed), `static/design-review/*.html` | per-agent private builds `hugo build -d /tmp/hugo-check-{images,links,desc}`; description length script (120–160 chars); related-posts presence check | pass: images 4.5 MB → ~336 KB; raw `<img>` → markdown, `GPT-5.6` in opening; orphan `zoxide-fzf-terminal-navigation` linked from `homebrew-cli-vibecoding` + 7 more donor links; related blocks activated for 5 posts via existing tags; body FAQ moved to `faq:` front matter in 2 posts; 20 descriptions rewritten, `chrome-devtools-mcp-setup` skipped as GSC organic winner (ADR 0001) | ship via Git-connected deploy path |
+| 2026-07-17 | GSC live inventory refresh via WebBridge | `research/gsc-live/2026-07-17-gsc-backlog-inventory.json` | `rm -rf public && hugo build`; all `scripts/seo/url_audit.py` checks; `classify-gsc-backlog` on the new inventory | local checks pass (`summary`, `check-ghosts`, `check-canonical`, `check-sitemap`, `target-links-ok`, `redirect-sources-ok`); GSC 2026-07-17: indexed 57 / not indexed 243; `Crawled - currently not indexed` = 112 (largest bucket), `Page with redirect` = 30 (expected host/slash), `noindex` = 93 (tags, expected); both inspected URLs (`pipeline-born-by-hand`, `superpowers-brainstorming-workflow`) indexed with matching canonicals; top organic winners captured in `performance_top_pages`. `classify-gsc-backlog` exits 1 on the new file because GSC UI exposes only partial example lists (10 per reason) — data-completeness limitation, not a repo regression; helper criterion needs full export or relaxation | decide on `Crawled - currently not indexed` milestone; ship pending changes via Git-connected deploy path |
+| 2026-07-22 | M17 Ahrefs outgoing-link repair and analytics task triage | eight `content/blog/*.md`, `docs/PLAN.md`, `docs/STATUS.md`; GitHub issues `#97`, `#105`, `#107` | Ahrefs browser inspection; `hugo build`; Python SEO helper stack; rendered-target scan; GitHub issue/project updates | pass locally: all 14 reported targets absent from rendered output; issues `#97` and `#105` closed and moved to `Done`; `#107` is the only open analytics issue and records the PostHog key blocker | Git-connected release, fresh Ahrefs crawl, PostHog key |
 | 2026-07-24 | M17 task-first blog navigation and social footer | `layouts/blog/list.html`, `static/search.js`, `layouts/_default/baseof.html`, `docs/PLAN.md`, `docs/STATUS.md` | `node --check static/search.js`; `hugo build`; canonical, sitemap, target-link, and redirect-source checks; Git-connected `main` push; cache-busted production `/blog/` fetch | pass: six clusters, expandable detailed tags, and Telegram · YouTube · Вайбкодеры are live on production | monitor cluster usage |
-| 2026-08-04 | M18 Reading Ledger article redesign | `layouts/blog/single.html`, `layouts/_default/baseof.html`, `layouts/_default/_markup/render-heading.html`, `static/article.js`, `static/images/blog/best-practices-code-ledger.webp`, `content/blog/best-practices-code.md`, `hugo.toml`, `design-qa.md`, `docs/PLAN.md`, `docs/STATUS.md` | `hugo build`; `node --check static/article.js`; rendered-HTML audit; local browser desktop/mobile interaction and route smoke; full Python SEO helper stack; `git diff --check` | pass locally: design QA passed; one H1, five H2 permalinks, one desktop TOC, one mobile TOC, three related rows, no duplicate IDs, canonical slash preserved | ship through the Git-connected production path and smoke-test the live article |
+| 2026-08-04 | M18 Reading Ledger article redesign | `layouts/blog/single.html`, `layouts/_default/baseof.html`, `layouts/_default/_markup/render-heading.html`, `static/article.js`, `static/images/blog/best-practices-code-ledger.webp`, `content/blog/best-practices-code.md`, `hugo.toml`, `design-qa.md`, `docs/PLAN.md`, `docs/STATUS.md` | `hugo build`; `node --check static/article.js`; rendered-HTML audit; local browser desktop/mobile interaction and route smoke; full Python SEO helper stack; `git diff --check` | pass: design QA passed; one H1, five H2 permalinks, one desktop TOC, one mobile TOC, three related rows, no duplicate IDs, canonical slash preserved; board-sync skipped because no relevant redesign issue exists | review local preview, then release through the Git-connected path if approved |
+| 2026-08-04 | M19 Editorial Split homepage redesign | `layouts/index.html`, `layouts/_default/baseof.html`, `design-qa.md`, `docs/PLAN.md`, `docs/STATUS.md` | selected-target measurement; in-app browser desktop/mobile captures and CTA test; combined full and focused visual comparisons; `hugo build`; full Python SEO helper stack; canonical route smoke; `git diff --check` | pass: desktop split and `y=739` lower boundary match the target; mobile width equals viewport; one H1; canonical internal links; design QA passed; only documented local Vercel Insights console noise; board-sync skipped because no relevant redesign issue exists | inspect local preview, then release through the Git-connected path if approved |
 
 ## Blocker log
 
@@ -289,3 +298,5 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 - `2026-03-13`: issues `#69`, `#70`, and `#71` were created and added to Project `4`; issue `#32` and `#33` moved to `In review`, issue `#66` moved to `Done`.
 - `2026-03-13`: issue `#69` moved to `Done`; issue `#70` is the next `Ready` follow-up on Project `4`.
 - `2026-03-13`: issue `#70` moved to `Done`; issue `#71` is now `Ready` on Project `4`.
+- `2026-07-22`: GitHub CLI token was invalid, so the Project `4` snapshot command was skipped; authenticated browser updates closed `#97` and `#105`, added `W30`, preserved parent `#104`, assigned `serejaris`, and moved both items to `Done`. Issue `#107` remains the sole open `analytics` item with `W30`, assignee, parent, Project placement, and an updated blocker comment.
+- `2026-08-04`: M19 board-sync skipped because no relevant homepage-redesign issue exists.

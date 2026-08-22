@@ -1,7 +1,7 @@
 ---
 title: "Один скрипт вместо трёх терминалов"
 date: 2026-01-18
-description: "Как настроить dev.sh с health checks для автоматического запуска backend и frontend"
+description: "Каждое утро: убить зомби на порту и поднять два терминала. Собрал dev.sh с health checks — скрипт чистит порты, запускает backend и frontend, ждёт /health."
 tags: ["claude code", "devops"]
 image: /images/blog/dev-script-health-checks-preview.png
 ---

@@ -27,5 +27,25 @@
     { "source": "/blog/sync-claude-code/", "destination": "/blog/sync-claude-code-four-machines/", "permanent": true },
     { "source": "/blog/superpowers", "destination": "/blog/superpowers-brainstorming-workflow/", "permanent": true },
     { "source": "/blog/superpowers/", "destination": "/blog/superpowers-brainstorming-workflow/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000" }
+      ]
+    },
+    {
+      "source": "/favicon.svg",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000" }
+      ]
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000" }
+      ]
+    }
   ]
 }

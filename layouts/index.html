@@ -1,84 +1,78 @@
 {{ define "main" }}
-<section class="hero">
-  <h1 class="display">Сережа Рис</h1>
-  <p class="lead">Архитектор агентных систем на Claude Code. Веду <a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero" target="_blank" rel="noopener">телеграм-канал</a>, <a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero" target="_blank" rel="noopener">YouTube</a> и <a href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero" target="_blank" rel="noopener">лучшее сообщество вайбкодеров</a>.</p>
-  <div class="chips">
-    <a class="chip" href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener">@ris_ai</a>
-    <a class="chip" href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener">YouTube</a>
-    <a class="chip" href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=hero_chips" target="_blank" rel="noopener">Сообщество</a>
-    <a class="chip" href="/blog/">Блог</a>
-  </div>
-</section>
+{{ $blogPages := where .Site.RegularPages "Section" "blog" }}
+{{ $latestPosts := first 3 $blogPages.ByDate.Reverse }}
+{{ $featuredVideo := index .Site.Data.videos.videos 0 }}
 
-<section>
-  <h2 class="eyebrow">Видео <span class="count">— свежее с канала</span></h2>
-  {{ with index .Site.Data.videos.videos 0 }}
-  <div class="yt-feature">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/{{ .id }}"
-      title="{{ .title }}"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-    <p class="yt-cap"><span>Последнее видео: {{ .label | default .title }}</span><a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=youtube_section" target="_blank" rel="noopener">Все видео →</a></p>
-  </div>
-  {{ end }}
+<div class="home-shell">
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-intro">
+      <div>
+        <h1 id="home-title" class="home-title"><span>Сережа</span><span>Рис<span class="home-dot">.</span></span></h1>
+        <p class="home-lead">Строю агентные системы.<br>Показываю, как они работают.</p>
+        <p class="home-topics">Claude Code · AI-агенты · вайбкодинг</p>
+      </div>
 
-  <ul class="video-list">
-    {{ range after 1 .Site.Data.videos.videos }}
-    <li>
-      <a href="https://www.youtube.com/watch?v={{ .id }}" target="_blank" rel="noopener" class="video-item">
-        <img src="https://i.ytimg.com/vi/{{ .id }}/mqdefault.jpg" alt="" width="96" height="54" loading="lazy">
-        <span class="video-meta">
-          <span class="video-title">{{ .title }}</span>
-          <span class="date">{{ partial "fdate.html" (dict "date" (time.AsTime .date)) }}</span>
-        </span>
-      </a>
-    </li>
-    {{ end }}
-  </ul>
-</section>
+      <div class="home-actions">
+        <a class="home-primary" href="/blog/">Читать блог <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        <a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=home_hero" target="_blank" rel="noopener">Telegram <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        <a href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=home_hero" target="_blank" rel="noopener">Сообщество <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
 
-<section>
-  <h2 class="eyebrow">Популярное <span class="count">— выбор автора</span></h2>
-  <div class="cards">
-    {{ range .Site.Data.featured.featured }}
-    {{ with $.Site.GetPage (printf "/blog/%s" .) }}
-    <a class="card" href="{{ .Permalink }}">
-      {{ with .Params.image }}<img src="{{ . }}" alt="" loading="lazy">{{ end }}
-      <span class="card-body">
-        <span class="card-title">{{ .Title }}</span>
-        <span class="date">{{ partial "fdate.html" (dict "date" .Date) }}</span>
+    {{ with $featuredVideo }}
+    <a class="home-video" href="https://www.youtube.com/watch?v={{ .id }}" target="_blank" rel="noopener" aria-label="Смотреть видео: {{ .title }}">
+      <img class="home-video-image" src="https://i.ytimg.com/vi/{{ .id }}/maxresdefault.jpg" alt="Превью видео «{{ .title }}»" width="1280" height="720">
+      <span class="home-video-scrim" aria-hidden="true"></span>
+      <span class="home-video-copy">
+        <span class="home-video-label">Новое видео</span>
+        <strong>{{ .title }}</strong>
+        <time datetime="{{ .date }}">{{ partial "fdate.html" (dict "date" (time.AsTime .date) "style" "long") }}</time>
+        <span class="home-video-cta">Смотреть <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
       </span>
+      <span class="home-video-play" aria-hidden="true"><i class="ph ph-play"></i></span>
+      <span class="home-video-progress" aria-hidden="true"><b>Свежее видео</b><i></i><i></i><i></i><i></i><i></i></span>
     </a>
     {{ end }}
-    {{ end }}
-  </div>
-</section>
+  </section>
 
-<section>
-  <h2 class="eyebrow">Последнее из блога</h2>
-  <ul class="posts">
-    {{ range first 10 .Site.RegularPages.ByDate.Reverse }}
-    <li>
-      <span class="date">{{ partial "fdate.html" (dict "date" .Date) }}</span>
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </li>
-    {{ end }}
-  </ul>
-  <p><a href="/blog/">Все статьи →</a></p>
-</section>
+  <section class="home-feed" aria-label="Материалы сайта">
+    <div class="home-latest">
+      <div class="home-section-head">
+        <h2>Свежие статьи</h2>
+      </div>
+      <ol class="home-post-list">
+        {{ range $latestPosts }}
+        <li>
+          <a href="{{ .RelPermalink }}">
+            <strong>{{ .Title }}</strong>
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "fdate.html" (dict "date" .Date "style" "long") }}</time>
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </li>
+        {{ end }}
+      </ol>
+    </div>
 
-<section>
-  <h2 class="eyebrow">Ссылки</h2>
-  <ul class="links">
-    <li><a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">рис. AI</a> <span class="desc">— телеграм-канал про AI, вайбкодинг и эксперименты</span></li>
-    <li><a href="https://t.me/vibecod3rs?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">Сообщество Вайбкодеров</a> <span class="desc">— 2000+ человек, обсуждения и взаимопомощь</span></li>
-    <li><a href="https://www.youtube.com/@serejaris?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">YouTube</a> <span class="desc">— туториалы и стримы про вайбкодинг</span></li>
-    <li><a href="https://vibecoding.phd?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">Кружок Вайбкодинга</a> <span class="desc">— обучение разработке с AI</span></li>
-    <li><a href="https://hsl.sh?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">HSL</a> <span class="desc">— AI-студия, делаем креативные проекты на заказ</span></li>
-    <li><a href="https://x.com/riiiiiiiiss?utm_source=sereja_tech&utm_medium=link&utm_campaign=homepage" target="_blank" rel="noopener">Twitter</a> <span class="desc">— генеративное искусство и код-арт</span></li>
-  </ul>
-</section>
+    <div class="home-start">
+      <div class="home-section-head">
+        <h2>Начать отсюда</h2>
+      </div>
+      <ol class="home-start-list">
+        {{ range first 2 .Site.Data.featured.featured }}
+          {{ with $.Site.GetPage (printf "/blog/%s" .) }}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              <span>
+                <strong>{{ .Title }}</strong>
+                <small>{{ .Description }}</small>
+              </span>
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </a>
+          </li>
+          {{ end }}
+        {{ end }}
+      </ol>
+    </div>
+  </section>
+</div>
 {{ end }}

@@ -1,7 +1,7 @@
 ---
 title: "Пайплайны на скиллах падают. Вот как это исправить"
 date: 2026-01-27
-description: "Почему AI-пайплайны прерываются на середине и как state persistence решает проблему для Claude Code"
+description: "Видео-пайплайн упал на 47-й минуте — 20 минут субтитров в мусорку. Решение: state.json после каждого шага и --resume с места падения. Пять шагов, ноль потерь."
 tags: ["claude code", "пайплайны"]
 image: /images/blog/pipeline-reliability-state-persistence-preview.png
 ---

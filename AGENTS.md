@@ -137,6 +137,26 @@ For every task:
 - Prefer explicit redirects only when the successor is unambiguous.
 - Do not treat `llms.txt`, analytics extras, or AI-era experiments as blockers for core indexation work.
 
+## Blog publishing
+
+Статьи через skill `blog-post`. Frontmatter: title, date, description, tags, image. SEO: title ≤60, description ≤160.
+
+Любой пост со стрима: frontmatter `youtube_id`, эмбед `{{</* youtube ID */>}}` сразу после вступления (до первого H2), OG/превью = кадр 1280×720 из записи (skill `blog-post` Phase 6). Не Imagegen и не `scripts/og-preview`.
+
+Если есть репозиторий-песочница (как `serejaris/claude-fable`), дополнительно:
+
+- Ссылка на публичный репозиторий экспериментов — в начале текста, под плеером
+- Для каждого показанного проекта: ссылка на живой деплой (проверить, что отвечает) + на папку проекта в репо
+- Скриншоты работающих экземпляров: снять через Chrome (in-game/in-app кадр, не только стартовый экран), ужать до 1280px, положить в `static/images/blog/`
+- Оригинальные промпты проектов (живут в `{project}/prompt.md` репо-песочницы) — в callout-блоках, слегка причёсанные
+- Рассказать про все артефакты стрима, не только главные: скиллы, документы (GDD, design-review), side-эксперименты
+
+Для постов без `youtube_id`: `scripts/og-preview/generate.sh` или Imagegen через skill `blog-post`.
+
+Главная YouTube-секция: `data/videos.yml`, синкает `.github/workflows/sync-videos.yml`.
+
+`CLAUDE.md` в этом репо — симлинк на `Agents.md`. Правила править только здесь.
+
 ## GSC validation rules
 
 - Treat Search Console emails as reason-level alerts only. They identify the

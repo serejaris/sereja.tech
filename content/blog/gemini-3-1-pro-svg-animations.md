@@ -6,7 +6,7 @@ tags: ["llm", "gemini", "svg"]
 image: "/images/blog/gemini-3-1-pro-svg-animations-preview.png"
 ---
 
-Gemini 3.1 Pro генерирует SVG-анимации с параллаксом, слоями и переходами за один промпт. Без внешних библиотек — нативный SVG с `<animate>` и `<animateTransform>`. Google [выпустил модель](https://blog.google/technology/google-deepmind/gemini-3-1-pro/) 19 февраля 2026. За неделю я понял: узкий специалист. Но настолько хороший, что ему стоит держать место в арсенале.
+Gemini 3.1 Pro генерирует SVG-анимации с параллаксом, слоями и переходами за один промпт. Без внешних библиотек — нативный SVG с `<animate>` и `<animateTransform>`. Google [выпустил модель](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/) 19 февраля 2026. За неделю я понял: узкий специалист. Но настолько хороший, что ему стоит держать место в арсенале.
 
 <figure>
 <iframe src="/demos/peacock-bicycle.html" width="100%" height="600" style="border: none; border-radius: 12px;" loading="lazy"></iframe>

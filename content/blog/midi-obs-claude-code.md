@@ -218,9 +218,7 @@ Claude Code не просто генерирует код — он ставит 
 
 - [obs-midi-mg на GitHub](https://github.com/nhielost/obs-midi-mg)
 - [obs-midi-mg на OBS Forum](https://obsproject.com/forum/resources/obs-midi-mg.1570/)
-- [Документация плагина](https://github.com/nhielost/obs-midi-mg/blob/master/docs/operations.md)
 - [MIDI Monitor для macOS](https://www.snoize.com/MIDIMonitor/)
 - [obsws-python — WebSocket клиент](https://github.com/aatikturk/obsws-python)
 - [MiniLab 3 SysEx коды](https://gist.github.com/Janiczek/04a87c2534b9d1435a1d8159c742d260)
-- [Axios: Claude Code и вайбкодинг](https://www.axios.com/2026/01/07/anthropics-claude-code-vibe-coding)
 - [The Vibe Coding Stack for 2026](https://craftbettersoftware.com/p/the-vibe-coding-stack-for-2026)

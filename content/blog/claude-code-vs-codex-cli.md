@@ -1,7 +1,7 @@
 ---
 title: "Claude Code — напарник, Codex — исполнитель"
 date: 2026-02-09
-description: "703 промпта в Claude Code, 94 в Codex CLI. Разобрал по логам, где каждый инструмент сильнее, и почему я использую оба."
+description: "703 промпта в Claude Code против 94 в Codex CLI за неделю. CC — напарник для диалога, Codex — исполнитель: 9 turns на промпт и делает сам. Разбор по логам."
 tags: ["claude code", "codex cli"]
 image: /images/blog/claude-code-vs-codex-cli-preview.png
 ---
@@ -53,7 +53,7 @@ Codex работает как исполнитель. Получает зада�
 
 CC — для длинных сессий и планирования. Brainstorming, architecture decisions, итеративная работа, когда мне нужно обсудить подход, а не получить результат. 37% сессий маленькие, 29% средние, 34% большие. Переключаюсь между 19 проектами за неделю, и у каждого свой CLAUDE.md, свои [скиллы](/blog/superpowers-brainstorming-workflow/), своя [память](/blog/claude-code-auto-memory/). Короче: CC знает контекст каждого проекта.
 
-9 февраля я отдал Codex проект amarchitects-site — CMS-записи не обновлялись на сайте. 357 turns спустя он нашёл разрыв между PocketBase и Vercel, прогнал полный CRUD-цикл и написал: "можно отдавать клиенту". Я не просил его проверять CRUD. Он сам. [Calvin French-Owen](https://calv.info/the-coding-agent-metagame), сооснователь Segment и бывший инженер команды Codex в OpenAI, признался что сам перешёл на CC для ежедневной работы. Но его оценка Codex как ревьюера совпадает с моей.
+9 февраля я отдал Codex проект amarchitects-site — CMS-записи не обновлялись на сайте. 357 turns спустя он нашёл разрыв между PocketBase и Vercel, прогнал полный CRUD-цикл и написал: "можно отдавать клиенту". Я не просил его проверять CRUD. Он сам. [Calvin French-Owen](https://calv.info/coding-agent-metagame), сооснователь Segment и бывший инженер команды Codex в OpenAI, признался что сам перешёл на CC для ежедневной работы. Но его оценка Codex как ревьюера совпадает с моей.
 
 {{< callout type="insight" >}}
 Проверь весь проект. Найди несоответствия между компонентами. Можно отдавать клиенту?

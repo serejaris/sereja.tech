@@ -1,7 +1,7 @@
 ---
 title: "Эту статью написал мой агент по тикету"
 date: 2026-03-27
-description: "Paperclip — open-source контрол-плейн для управления командой AI-агентов через роли, тикеты и расписание. Личный кейс."
+description: "20 вкладок с агентами — и runaway loop сжигает $140 за кофе. Paperclip: контрол-плейн с ролями, тикетами, бюджетами и расписанием. 35K звёзд за 3 недели."
 tags: ["paperclip", "ai-agents", "вайбкодинг", "автоматизация", "personal-corp"]
 image: "/images/blog/paperclip-ai-company-agents-preview.png"
 ---

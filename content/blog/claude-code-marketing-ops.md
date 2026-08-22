@@ -1,7 +1,7 @@
 ---
 title: "Claude Code как операционка марафона: рассылки, аналитика"
 date: 2026-01-31
-description: "Как я управляю 821 пользователем через Claude Code — отменяю рассылки, создаю сегменты на лету, смотрю статистику в TUI"
+description: "Три дня марафона: 821 пользователь, 47 рассылок, 12 сегментов. Отменяю бродкасты и смотрю статистику через Claude Code — код не открывал ни разу."
 tags: ["claude code", "telegram bot", "автоматизация"]
 image: /images/blog/claude-code-marketing-ops-preview.png
 ---
