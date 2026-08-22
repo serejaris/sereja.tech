@@ -7,6 +7,10 @@
 
 set -euo pipefail
 
+# git-хуки запускаются без UTF-8 локали, и ${#var} считает байты:
+# кириллический title удваивается и ложно проваливает лимит
+export LC_ALL=en_US.UTF-8
+
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 ERRORS=0
 
