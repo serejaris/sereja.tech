@@ -30,12 +30,19 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-113 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+<<<<<<< HEAD
+116 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+=======
+116 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+>>>>>>> 21ee69d (feat(blog): add Шесть харнессов, одна модель: тестовый пул за вечер)
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-08-21 | [Шесть харнессов, одна модель: тестовый пул за вечер](https://sereja.tech/blog/ox-alpha-harness-pool/) |
+| 2026-08-13 | [Grok 4.6 интересный. Гнаться незачем](https://sereja.tech/blog/grok-46-day-one/) |
+| 2026-08-05 | [Какую подписку Claude выбрать для работы: $20, $100 или $200](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
 | 2026-08-04 | [Как подключить подписку Anthropic к Hermes](https://sereja.tech/blog/claude-max-hermes-telegram/) |
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
@@ -43,9 +50,6 @@
 | 2026-07-09 | [GPT-5.6 в работе: Sol, Terra и Luna](https://sereja.tech/blog/gpt-5-6-review/) |
 | 2026-07-08 | [Почему автоматизация не работает без рецепта](https://sereja.tech/blog/pipeline-born-by-hand/) |
 | 2026-07-04 | [Как я гоняю команду агентов из терминала в omp](https://sereja.tech/blog/omp-orchestration/) |
-| 2026-07-01 | [Sonnet 5: скучный релиз с одним полезным навыком](https://sereja.tech/blog/claude-sonnet-5-review/) |
-| 2026-06-30 | [Как тестировать LLM модели для написания текстов?](https://sereja.tech/blog/text-evals-grader/) |
-| 2026-06-30 | [Сто агентов, ноль результата](https://sereja.tech/blog/orchestration-without-goals/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
