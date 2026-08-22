@@ -1,6 +1,6 @@
 ---
-title: "Шесть харнессов, одна модель: тестовый пул за вечер"
-description: "Один шаблон LXC и один ключ OpenRouter: шесть изолированных стендов с одной моделью за вечер. Где ломается пул харнессов и что показал первый бенч."
+title: "Тестирую ox-alpha в шести харнесах за вечер"
+description: "Пул из шести харнесов под одну модель ox-alpha: OMP, Claude Code, Codex, Cline, Hermes, OpenCode. Что сломалось, сколько длилось и что показал первый бенч."
 date: 2026-08-21
 tags: ["вайбкодинг", "агенты", "proxmox", "openrouter", "бенчмарк"]
 cta: kruzhok
@@ -11,6 +11,8 @@ image: "/images/blog/ox-alpha-harness-pool/pool-dashboard.png"
 <style>
 .pre.mermaid svg, pre.mermaid svg { max-width: 100% !important; height: auto !important; }
 pre.mermaid { overflow-x: auto; }
+.post video, article video { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.post-header img, .hero img, figure.hero img { height: auto; object-fit: contain; }
 </style>
 Новая модель вышла, и проверять её в чате скучно: интереснее смотреть, что она умеет в руках разных агентов. Я поднял пул из шести изолированных стендов с одной и той же моделью за один вечер. Вердикт: поднимать пул стоит, если хочешь честно сравнить модель в разных харнессах. Один шаблон LXC и один ключ OpenRouter закрывают всю подготовку. Ломается при этом не модель. Ломаются IP-план и порядок sshd-конфов, и именно там я потерял вечерние часы.
 
@@ -74,7 +76,7 @@ flowchart LR
 | Claude Code 2.1.239 | ox-02 | ~57 мин | 76 823 B | успех |
 | OMP 17.4.2 | ox-01 | ~80 мин | 652 681 B (Three.js инлайнен внутрь файла) | успех |
 | Cline CLI 3.0.56 | ox-04 | таймауты 900 s и 1500 s при живой работе, 131k input-токенов | не собран | не уложился |
-| OpenCode 1.18.21 | ox-06 | два прогона finish=length: cap в 32k съеден reasoning-токенами | не собран | корректирующий запуск с лимитом 64k был ещё в работе на момент правки |
+| OpenCode 1.18.21 | ox-06 | два прогона finish=length: cap в 32k съеден reasoning-токенами | не собран | лимит подняли до 64k, модель дошла до записи файла, но длинные сессии стал рвать 504 от самого OpenRouter: артефакт не собран |
 
 
 Каждый артефакт оказался живой страницей. Вот что получилось у четырёх финишировавших:
@@ -84,9 +86,19 @@ flowchart LR
 {{< figure src="/images/blog/ox-alpha-harness-pool/claude-code.png" alt="3D-сцена выстрела от Claude Code: пистолет в разрезе, телеметрия и этапы цикла" caption="Claude Code · 76 823 B · ~57 мин" >}}
 {{< figure src="/images/blog/ox-alpha-harness-pool/omp.png" alt="3D-сцена выстрела от OMP: разрез пистолета с подписями деталей" caption="OMP · 652 681 B · ~80 мин" >}}
 
-Полный цикл выстрела из артефакта Claude Code в движении:
+Полный цикл выстрела в движении, по одному ролику на артефакт:
+
+<video controls loop muted src="/images/blog/ox-alpha-harness-pool/omp-cycle.webm"></video>
+*OMP · 652 681 B · ~80 мин*
 
 <video controls loop muted src="/images/blog/ox-alpha-harness-pool/claude-code-cycle.webm"></video>
+*Claude Code · 76 823 B · ~57 мин*
+
+<video controls loop muted src="/images/blog/ox-alpha-harness-pool/codex-cycle.webm"></video>
+*Codex CLI · 14 610 B · ~5.5 мин*
+
+<video controls loop muted src="/images/blog/ox-alpha-harness-pool/hermes-cycle.webm"></video>
+*Hermes · 19 191 B · ~9.4 мин*
 
 [GIF-версия](/images/blog/ox-alpha-harness-pool/claude-code-cycle.gif), если видео не играет.
 
