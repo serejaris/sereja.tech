@@ -7,6 +7,7 @@ description: "Сервисы, которыми пользуюсь каждый �
 
 ## Кодинг и агенты
 
+- **[GLM Coding Plan (z.ai)](https://z.ai/subscribe?ic=JISELHBIG0)** — подписка, на которой у меня работают 20 параллельных субагентов: GLM-5.3 внутри Claude Code за пол-окна лимита. Тебе: 10% скидка на первый заказ. Мне: до 20% кредитами с твоих оплат.
 - **[Warp](https://app.warp.dev/referral/3E5DWL)** — терминал, в котором живут мои параллельные сессии Claude Code. Тебе: эксклюзивная тема. Мне: свэг за каждые 5 приглашённых.
 - **[Replit](https://replit.com/refer/serejaris)** — браузерная среда для быстрых прототипов. Нам обоим по $20 кредитов.
 - **[Kimi](https://kimi-bot.com/activities/viral-referral/share?scenario=invite&from=share_poster&invitation_code=7HP6U7)** — модель с огромным контекстом, которой я доверяю длинные задачи. У Kimi призовая программа приглашений, условия у них свои.
