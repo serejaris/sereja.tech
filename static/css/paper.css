@@ -50,9 +50,9 @@ th{border-bottom-color:var(--rule)}
 .partner-logo{width:20px;height:20px;flex-shrink:0;color:var(--ink);display:flex;align-items:center;justify-content:center}
 .partner-logo svg{width:100%;height:100%;display:block;fill:currentColor}
 .partner-name{font:700 12.5px/1.3 'PT Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
-.hero-art{margin:24px 0 28px;border:1px solid var(--hairline);background:var(--card);overflow:hidden}
-.hero-art img{width:100%;height:auto;display:block}
-.hero-art figcaption{font:400 11px/1.5 'PT Mono',monospace;color:var(--muted);padding:8px 12px;text-align:left;border-top:1px solid var(--hairline);margin:0}
+.hero-art{margin:24px 0 28px;border:1px solid var(--hairline);background:#020202;overflow:hidden;border-radius:4px;text-align:center}
+.hero-art img{width:100%;max-width:540px;height:auto;display:block;margin:0 auto}
+.hero-art figcaption{font:400 11px/1.5 'PT Mono',monospace;color:var(--muted);padding:8px 12px;text-align:center;border-top:1px solid var(--hairline);margin:0;background:var(--card)}
 .card .orig{display:inline-block;margin-top:8px;font:400 11px/1.4 'PT Mono',monospace;letter-spacing:.06em;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--hairline)}
 .card .orig:hover{color:var(--accent)}
 #oblasti svg a{text-decoration:none;cursor:pointer}
