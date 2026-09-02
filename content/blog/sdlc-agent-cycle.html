@@ -1,0 +1,641 @@
+---
+title: "Цикл разработки с агентами: шесть шагов, контракт и операционный слой"
+date: 2026-09-02
+description: "Цикл разработки с агентами: шесть шагов от намерения до деплоя, контракт с критериями приёмки и операционный слой задач на GitHub."
+tags: ["агенты", "вайбкодинг", "sdlc", "github-issues", "оркестрация"]
+keywords: ["цикл разработки с агентами", "агенты в разработке", "задача-контракт", "вайбкодинг", "операционный слой github", "оркестрация агентов"]
+section: "AI"
+layout: paper
+---
+
+<div class="page">
+<header class="masthead">
+  <p class="kicker">Вайбкодинг · Прикладной гайд</p>
+  <h1>Цикл разработки с агентами: шесть шагов, контракт и операционный слой</h1>
+  <p class="lede">Продукт собирают агенты, порядок работы держите вы. Намерение фиксируется текстом, каждая задача превращается в контракт с приёмкой, карточки в GitHub ведут работу от идеи до публикации. Цикл из шести шагов держит порядок, контракт задаёт критерии приёмки, карточки ведут работу до публикации.</p>
+</header>
+
+<nav class="toc" aria-label="Содержание">
+  <ul>
+    <li><a href="#slova">Словарь цикла разработки</a></li>
+    <li><a href="#chat">Пока задачи живут в чате</a></li>
+    <li><a href="#shest">Шесть шагов от намерения до публикации</a></li>
+    <li><a href="#kontrakt">Задача как контракт с приёмкой</a></li>
+    <li><a href="#sloy">Ведение задач силами агентов</a></li>
+    <li><a href="#progon">Живой прогон задачи</a></li>
+    <li><a href="#prompty">Промпты для старта</a></li>
+    <li><a href="#oshibki">Типичные ошибки</a></li>
+    <li><a href="#gotovo">Готово, когда</a></li>
+    <li><a href="#istochniki">Источники</a></li>
+  </ul>
+</nav>
+
+<!-- ==================== 00. СЛОВАРЬ ==================== -->
+<section id="slova">
+  <h2>Словарь цикла разработки</h2>
+  <figure class="diagram">
+    <svg width="1040" height="430" viewBox="0 0 1040 430" role="img" aria-labelledby="gloss-title gloss-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="gloss-title">Словарь цикла разработки</title>
+      <desc id="gloss-desc">Термины цикла разработки: агент, спека, карточка, задача-контракт, готово когда, операционный слой, оркестратор, деплой. Для каждого термина указаны суть и аналог в процессах.</desc>
+      <rect x="0" y="0" width="1040" height="430" fill="#f8fafc" />
+
+      <!-- ряд 1 -->
+      <rect x="18" y="56" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="34" y="84" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">АГЕНТ</text>
+      <text x="34" y="118" font-family="system-ui, sans-serif" font-size="13" fill="#475569">работает инструментами: файлы,</text>
+      <text x="34" y="138" font-family="system-ui, sans-serif" font-size="13" fill="#475569">проверки, браузер</text>
+      <text x="34" y="182" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ новый сотрудник проекта</text>
+
+      <rect x="274" y="56" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="290" y="84" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">СПЕКА</text>
+      <text x="290" y="118" font-family="system-ui, sans-serif" font-size="13" fill="#475569">намерение, зафиксированное</text>
+      <text x="290" y="138" font-family="system-ui, sans-serif" font-size="13" fill="#475569">текстом: что делаем и зачем</text>
+      <text x="290" y="182" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ заявка клиента</text>
+
+      <rect x="530" y="56" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="546" y="84" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">КАРТОЧКА</text>
+      <text x="546" y="118" font-family="system-ui, sans-serif" font-size="13" fill="#475569">задача в GitHub issues:</text>
+      <text x="546" y="138" font-family="system-ui, sans-serif" font-size="13" fill="#475569">номер, история, комментарии</text>
+      <text x="546" y="182" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ заказ в трекере</text>
+
+      <rect x="786" y="56" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="802" y="84" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">ЗАДАЧА-КОНТРАКТ</text>
+      <text x="802" y="118" font-family="system-ui, sans-serif" font-size="13" fill="#475569">заказ с приёмкой: цель, входы,</text>
+      <text x="802" y="138" font-family="system-ui, sans-serif" font-size="13" fill="#475569">ограничения, форма, критерии</text>
+      <text x="802" y="182" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ бриф для подрядчика</text>
+
+      <!-- ряд 2 -->
+      <rect x="18" y="226" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="34" y="254" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">ГОТОВО, КОГДА</text>
+      <text x="34" y="288" font-family="system-ui, sans-serif" font-size="13" fill="#475569">признаки принятой работы,</text>
+      <text x="34" y="308" font-family="system-ui, sans-serif" font-size="13" fill="#475569">названные до начала работы</text>
+      <text x="34" y="352" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ акт приёмки в договоре</text>
+
+      <rect x="274" y="226" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="290" y="254" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">ОПЕРАЦИОННЫЙ СЛОЙ</text>
+      <text x="290" y="288" font-family="system-ui, sans-serif" font-size="13" fill="#475569">где живут задачи: issues</text>
+      <text x="290" y="308" font-family="system-ui, sans-serif" font-size="13" fill="#475569">и ритмы их заполнения</text>
+      <text x="290" y="352" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ диспетчерская</text>
+
+      <rect x="530" y="226" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="546" y="254" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">ОРКЕСТРАТОР</text>
+      <text x="546" y="288" font-family="system-ui, sans-serif" font-size="13" fill="#475569">агент-менеджер: делит задачу</text>
+      <text x="546" y="308" font-family="system-ui, sans-serif" font-size="13" fill="#475569">и раздаёт, код не пишет</text>
+      <text x="546" y="352" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ руководитель проектов</text>
+
+      <rect x="786" y="226" width="236" height="150" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="802" y="254" font-family="'PT Mono',ui-monospace,monospace" font-size="11.5" fill="#0284c7">ДЕПЛОЙ</text>
+      <text x="802" y="288" font-family="system-ui, sans-serif" font-size="13" fill="#475569">публикация версии</text>
+      <text x="802" y="308" font-family="system-ui, sans-serif" font-size="13" fill="#475569">и фиксация истории</text>
+      <text x="802" y="352" font-family="system-ui, sans-serif" font-size="12.5" font-style="italic" fill="#64748b">≈ поставка на полки</text>
+
+      <!-- легенда -->
+      <text x="520" y="414" text-anchor="middle" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">термин · суть · аналог в процессах</text>
+    </svg>
+    <figcaption>Рис. 1. Термины цикла разработки: от намерения до публикации.</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 01. СИТУАЦИЯ ==================== -->
+<section id="chat">
+  <h2>Пока задачи живут в чате</h2>
+  <p>Задачи приходят из чатов, звонков и заметок на полях. Через неделю никто уже не помнит, что именно было обещано: формулировка "сделай красиво" ушла агенту, агент отчитался, а проверять результат нечем. Критериев не было, спорить о результате можно бесконечно.</p>
+  <p>Второй риск тише, но дороже: вы сами превращаетесь в парсера собственных поручений. Каждая задача проходит через вас: услышали, пересказали агенту, проверили, переложили в трекер руками. Агенты при этом простаивают.</p>
+  <p><strong>Границы подхода.</strong> Подход складывается из трёх частей. Цикл из шести шагов держит порядок работ. Задача-контракт делает приёмку проверяемой. Операционный слой на GitHub переносит рутину заполнения на агентов. Пропуск любой части возвращает вас в ручную диспетчеризацию: агенты работают, а результат не собирается.</p>
+</section>
+
+<!-- ==================== 02. ШЕСТЬ ШАГОВ ==================== -->
+<section id="shest">
+  <h2>Шесть шагов от намерения до публикации</h2>
+  <p>Разработка продукта собирается в замкнутый круг. Намерение фиксируется текстом, из текста рождается план, план превращается в код, код проходит проверки, результат смотрит человек, версия публикуется. Дальше круг начинается заново: деплой открывает следующую версию.</p>
+
+  <figure class="diagram">
+    <svg width="1040" height="530" viewBox="0 0 1040 530" role="img" aria-labelledby="cycle-title cycle-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="cycle-title">Цикл разработки из шести шагов</title>
+      <desc id="cycle-desc">Замкнутый цикл из шести шагов: спека, план, код, тесты, человек, деплой. Верхний ряд идёт слева направо: спека, план, код. Затем вниз к нижнему ряду, который идёт справа налево: тесты, человек, деплой. От деплоя возвратная стрелка ведёт к спеке с подписью следующая версия. Под каждым шагом подписано, чем он подтверждается. Шаг с человеком выделен как обязательный контроль.</desc>
+      <defs>
+        <marker id="cyc-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+        </marker>
+        <marker id="cyc-arrow-back" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+        </marker>
+      </defs>
+      <rect x="0" y="0" width="1040" height="530" fill="#f8fafc" />
+
+      <!-- верхний ряд -->
+      <rect x="50" y="64" width="280" height="128" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="66" y="86" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">01</text>
+      <text x="66" y="118" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1e293b">Спека</text>
+      <text x="66" y="143" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">что делаем и зачем: сообщение,</text>
+      <text x="66" y="161" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">описание ошибки, запрос пользователя</text>
+      <text x="66" y="181" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">подтверждение: текст спеки</text>
+
+      <rect x="380" y="64" width="280" height="128" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="396" y="86" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">02</text>
+      <text x="396" y="118" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1e293b">План</text>
+      <text x="396" y="143" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">кто, что и в каких файлах;</text>
+      <text x="396" y="161" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">план можно отдать агенту целиком</text>
+      <text x="396" y="181" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">подтверждение: список шагов</text>
+
+      <rect x="710" y="64" width="280" height="128" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="726" y="86" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">03</text>
+      <text x="726" y="118" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1e293b">Код</text>
+      <text x="726" y="143" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">работает агент или человек;</text>
+      <text x="726" y="161" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">изменения живут в отдельной ветке</text>
+      <text x="726" y="181" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">подтверждение: ветка</text>
+
+      <!-- нижний ряд -->
+      <rect x="710" y="330" width="280" height="128" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="726" y="352" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">04</text>
+      <text x="726" y="384" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1e293b">Тесты</text>
+      <text x="726" y="409" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">автоматическая проверка: агент</text>
+      <text x="726" y="427" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">открывает браузер и идёт путём клиента</text>
+      <text x="726" y="447" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">подтверждение: пройденный прогон</text>
+
+      <rect x="380" y="330" width="280" height="128" rx="8" fill="#ffffff" stroke="#b42318" stroke-width="1.5" />
+      <text x="396" y="352" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#b42318">05</text>
+      <text x="396" y="384" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1e293b">Человек</text>
+      <text x="396" y="409" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">проверка глазами владельца на</text>
+      <text x="396" y="427" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">тестовой или живой версии</text>
+      <text x="396" y="447" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">подтверждение: ваша проверка</text>
+
+      <rect x="50" y="330" width="280" height="128" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="66" y="352" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">06</text>
+      <text x="66" y="384" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1e293b">Деплой</text>
+      <text x="66" y="409" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">фиксация истории, публикация</text>
+      <text x="66" y="427" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">версии, начало следующего круга</text>
+      <text x="66" y="447" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">подтверждение: опубликованная версия</text>
+
+      <!-- переходы цикла -->
+      <line x1="330" y1="128" x2="372" y2="128" stroke="#0284c7" stroke-width="2" marker-end="url(#cyc-arrow)" />
+      <line x1="660" y1="128" x2="702" y2="128" stroke="#0284c7" stroke-width="2" marker-end="url(#cyc-arrow)" />
+      <line x1="850" y1="192" x2="850" y2="322" stroke="#0284c7" stroke-width="2" marker-end="url(#cyc-arrow)" />
+      <line x1="710" y1="394" x2="668" y2="394" stroke="#0284c7" stroke-width="2" marker-end="url(#cyc-arrow)" />
+      <line x1="380" y1="394" x2="338" y2="394" stroke="#0284c7" stroke-width="2" marker-end="url(#cyc-arrow)" />
+
+      <!-- возврат: следующая версия -->
+      <line x1="190" y1="330" x2="190" y2="200" stroke="#64748b" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#cyc-arrow-back)" />
+      <text x="206" y="268" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">следующая версия</text>
+
+      <!-- легенда -->
+      <line x1="296" y1="502" x2="326" y2="502" stroke="#0284c7" stroke-width="2" />
+      <text x="334" y="506" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">переход цикла</text>
+      <rect x="450" y="496" width="16" height="12" rx="3" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="474" y="506" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">шаг</text>
+      <rect x="526" y="496" width="16" height="12" rx="3" fill="#ffffff" stroke="#b42318" stroke-width="1.5" />
+      <text x="550" y="506" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">обязательный контроль человека</text>
+    </svg>
+    <figcaption>Рис. 2. Цикл разработки из шести шагов с подтверждением каждого этапа.</figcaption>
+  </figure>
+
+  <blockquote>
+    <p>"Каждый шаг круга можно отдать агенту. Оркестрация живёт в середине круга, от задачи до слияния правок"</p>
+    <p class="quote-source">канон сессии 6, 31.08.2026</p>
+  </blockquote>
+
+  <p>Тот же круг из шести фаз описывает Addy Osmani в разборе Agent Skills: Определи, Спланируй, Реализуй, Проверь, Отревьюй, Выкати. Расхождение одной фазы: на месте командного ревью здесь стоит проверка глазами владельца продукта. Для продакта это удобный признак: цикл описывает вашу работу и не добавляет инженерных обязанностей.</p>
+</section>
+
+<!-- ==================== 03. ЗАДАЧА-КОНТРАКТ ==================== -->
+<section id="kontrakt">
+  <h2>Задача как контракт с приёмкой</h2>
+  <p>Операционную часть цикла держат задачи. На каждую задачу заводится отдельный документ: контракт между вами, проектом и агентом. В контракте шесть пунктов, и порядок у них неслучайный: сначала понятно, кем агент работает и зачем, потом что ему дано и что запрещено, и только потом какой вид результата и по чему работа принимается.</p>
+
+  <figure class="diagram">
+    <svg width="1040" height="470" viewBox="0 0 1040 470" role="img" aria-labelledby="contract-title contract-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="contract-title">Структура задачи-контракта</title>
+      <desc id="contract-desc">Сырая просьба слева превращается в задачу-контракт из шести пунктов: роль, цель, входы, ограничения, форма, критерии успеха. Пункт критерии успеха выделен как обязательный: без него задачи нет. Справа результат: задача, готовая к передаче агенту.</desc>
+      <defs>
+        <marker id="con-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+        </marker>
+      </defs>
+      <rect x="0" y="0" width="1040" height="470" fill="#f8fafc" />
+
+      <!-- вход -->
+      <rect x="30" y="180" width="200" height="70" rx="8" fill="#ffffff" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" />
+      <text x="50" y="209" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#1e293b">Просьба</text>
+      <text x="50" y="232" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">"сделай красиво"</text>
+
+      <!-- карточка контракта -->
+      <rect x="320" y="30" width="440" height="360" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="344" y="64" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#1e293b">Задача-контракт</text>
+      <line x1="344" y1="80" x2="736" y2="80" stroke="#f8fafc" stroke-width="2" />
+
+      <text x="344" y="112" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">РОЛЬ</text>
+      <text x="344" y="132" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">кем работает агент при выполнении</text>
+
+      <text x="344" y="164" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">ЦЕЛЬ</text>
+      <text x="344" y="184" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">итог одной строкой</text>
+
+      <text x="344" y="216" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">ВХОДЫ</text>
+      <text x="344" y="236" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">файлы, страницы, ссылки, доступы</text>
+
+      <text x="344" y="268" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">ОГРАНИЧЕНИЯ</text>
+      <text x="344" y="288" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">что нельзя трогать, какие правила обязательны</text>
+
+      <text x="344" y="320" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">ФОРМА</text>
+      <text x="344" y="340" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">вид результата: таблица, список, страница</text>
+
+      <rect x="336" y="352" width="408" height="30" rx="4" fill="#fdf4f3" stroke="#b42318" stroke-width="1" />
+      <text x="344" y="372" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#b42318">КРИТЕРИИ УСПЕХА · без них задачи нет</text>
+
+      <!-- выход -->
+      <rect x="860" y="180" width="150" height="70" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="878" y="209" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#1e293b">Задача</text>
+      <text x="878" y="232" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">готова к передаче</text>
+
+      <!-- стрелки -->
+      <line x1="230" y1="215" x2="312" y2="215" stroke="#0284c7" stroke-width="2" marker-end="url(#con-arrow)" />
+      <line x1="760" y1="215" x2="852" y2="215" stroke="#0284c7" stroke-width="2" marker-end="url(#con-arrow)" />
+
+      <!-- легенда -->
+      <text x="290" y="440" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">рамка: сырьё и результат · выделено: обязательный пункт приёмки</text>
+    </svg>
+    <figcaption>Рис. 3. Структура задачи-контракта: шесть пунктов постановки и критерии приёмки.</figcaption>
+  </figure>
+
+  <blockquote>
+    <p>"Задача: это заказ с приёмкой. Просьба 'сделай красиво' задачей не считается"</p>
+    <p class="quote-source">слайды сессии 6, 31.08.2026</p>
+  </blockquote>
+
+  <h3>Приёмка в карточке задачи</h3>
+  <figure class="diagram">
+    <svg width="1040" height="310" viewBox="0 0 1040 310" role="img" aria-labelledby="card-title card-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="card-title">Карточка задачи в трекере: поля приёмки и результат</title>
+      <desc id="card-desc">Карточка задачи Дайджест чата потока: результат файл-дайджест с датой недели, отдел учебное производство, сигнал приёмки дайджест лежит в папке потока, срок четверг 18:00 с приоритетом P2. Внизу плашка: закрыта, приёмка пройдена.</desc>
+      <rect x="0" y="0" width="1040" height="310" fill="#f8fafc" />
+
+      <rect x="290" y="30" width="460" height="240" rx="10" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+      <text x="314" y="66" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#1e293b">Дайджест чата потока</text>
+      <line x1="314" y1="84" x2="726" y2="84" stroke="#f8fafc" stroke-width="2" />
+
+      <text x="314" y="118" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">РЕЗУЛЬТАТ</text>
+      <text x="446" y="118" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">файл-дайджест с датой недели</text>
+
+      <text x="314" y="150" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">ОТДЕЛ</text>
+      <text x="446" y="150" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">учебное производство</text>
+
+      <text x="314" y="182" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">СИГНАЛ ПРИЁМКИ</text>
+      <text x="446" y="182" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">дайджест лежит в папке потока</text>
+
+      <text x="314" y="214" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#0284c7">СРОК</text>
+      <text x="446" y="214" font-family="system-ui, sans-serif" font-size="13.5" fill="#475569">четверг 18:00, приоритет P2</text>
+
+      <rect x="314" y="230" width="252" height="26" rx="13" fill="#f8fafc" stroke="#1c4e80" stroke-width="1" />
+      <text x="330" y="247" font-family="'PT Mono',ui-monospace,monospace" font-size="10.5" fill="#33567a">ЗАКРЫТА = ПРИЁМКА ПРОЙДЕНА</text>
+
+      <!-- легенда -->
+      <text x="520" y="298" text-anchor="middle" font-family="'PT Mono',ui-monospace,monospace" font-size="11" fill="#64748b">рамка: карточка в issues · моно: поля приёмки</text>
+    </svg>
+    <figcaption>Рис. 4. Карточка задачи в трекере: поля приёмки и результат.</figcaption>
+  </figure>
+  <p>Закрытая карточка и есть приёмка: результат совпал с сигналом, карточка закрывается без обсуждений.</p>
+
+  <h3>Задача без критериев приёмки</h3>
+  <figure class="diagram">
+    <svg width="1040" height="340" viewBox="0 0 1040 340" role="img" aria-labelledby="diff-title diff-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="diff-title">Сравнение: размытая просьба против контракта с критериями приёмки</title>
+      <desc id="diff-desc">Сравнительная схема двух подходов к постановке задач: слева показана размытая формулировка «сделай красиво», приводящая к спорам о вкусе и зависанию задачи; справа — контракт с бинарными критериями приёмки («готово, когда...»), позволяющий закрыть карточку по факту за 60 секунд.</desc>
+
+      <!-- Фон полотна -->
+      <rect x="0" y="0" width="1040" height="340" fill="#f8fafc" />
+
+      <!-- ==================== ЛЕВАЯ КОЛОНКА: БЫЛО ==================== -->
+      <rect x="50" y="40" width="440" height="230" rx="8" fill="#ffffff" stroke="#b42318" stroke-width="1.5" />
+
+      <!-- Бейдж категории -->
+      <rect x="74" y="58" width="186" height="20" rx="4" fill="#fdf4f3" stroke="#b42318" stroke-width="0.8" />
+      <text x="167" y="72" fill="#b42318" font-family="'PT Mono',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.04em">БЫЛО · РАЗМЫТАЯ ПРОСЬБА</text>
+
+      <!-- Заголовок -->
+      <text x="74" y="104" fill="#1e293b" font-family="system-ui,sans-serif" font-size="16" font-weight="600">"Сделай красиво"</text>
+
+      <!-- Цитата / входная просьба -->
+      <rect x="74" y="116" width="392" height="32" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
+      <text x="86" y="136" fill="#64748b" font-family="'PT Mono',ui-monospace,monospace" font-size="12.5">"поправь главную страницу, сделай красиво"</text>
+
+      <!-- Последствие / поломка -->
+      <text x="74" y="170" fill="#475569" font-family="system-ui,sans-serif" font-size="13">
+        <tspan x="74" dy="0">У проверки нет опоры: приёмка превращается</tspan>
+        <tspan x="74" dy="18">в бесконечный спор о вкусе, работа виснет.</tspan>
+      </text>
+
+      <!-- Статус-пилюля внизу -->
+      <rect x="74" y="222" width="392" height="28" rx="4" fill="#fdf4f3" stroke="#b42318" stroke-width="1" />
+      <text x="270" y="240" fill="#b42318" font-family="'PT Mono',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.06em">ЗАКРЫТЬ НЕЛЬЗЯ · НЕТ СИГНАЛА</text>
+
+      <!-- ==================== ПРАВАЯ КОЛОНКА: СТАЛО ==================== -->
+      <rect x="550" y="40" width="440" height="230" rx="8" fill="#ffffff" stroke="#1c4e80" stroke-width="1.5" />
+
+      <!-- Бейдж категории -->
+      <rect x="574" y="58" width="186" height="20" rx="4" fill="#f0f9ff" stroke="#0284c7" stroke-width="0.8" />
+      <text x="667" y="72" fill="#0284c7" font-family="'PT Mono',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.04em">СТАЛО · БИНАРНАЯ ПРИЁМКА</text>
+
+      <!-- Заголовок -->
+      <text x="574" y="104" fill="#1e293b" font-family="system-ui,sans-serif" font-size="16" font-weight="600">"Готово, когда..."</text>
+
+      <!-- Список критериев приёмки -->
+      <rect x="574" y="116" width="392" height="60" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
+      <text x="586" y="132" fill="#1e293b" font-family="'PT Mono',ui-monospace,monospace" font-size="12">• заголовок читается с телефона</text>
+      <text x="586" y="149" fill="#1e293b" font-family="'PT Mono',ui-monospace,monospace" font-size="12">• кнопка записи видна без прокрутки</text>
+      <text x="586" y="166" fill="#1e293b" font-family="'PT Mono',ui-monospace,monospace" font-size="12">• в консоли браузера 0 ошибок</text>
+
+      <!-- Результат -->
+      <text x="574" y="197" fill="#475569" font-family="system-ui,sans-serif" font-size="13">Проверяется глазами за 60 секунд, споры исключены.</text>
+
+      <!-- Статус-пилюля внизу -->
+      <rect x="574" y="222" width="392" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1" />
+      <text x="770" y="240" fill="#15803d" font-family="'PT Mono',ui-monospace,monospace" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.06em">ПРИЁМКА ПО ФАКТУ · КАРТОЧКА ЗАКРЫТА</text>
+
+      <!-- ==================== ЛЕГЕНДА СХЕМЫ ==================== -->
+      <line x1="50" y1="288" x2="990" y2="288" stroke="#e2e8f0" stroke-width="1" />
+      <text x="520" y="308" fill="#64748b" font-family="'PT Mono',ui-monospace,monospace" font-size="11" text-anchor="middle">красный: размытая просьба без критериев · синий: проверяемый контракт приёмки</text>
+    </svg>
+    <figcaption>Рис. 5. Разница между размытой просьбой и задачей с критериями приёмки.</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 04. ОПЕРАЦИОННЫЙ СЛОЙ ==================== -->
+<section id="sloy">
+  <h2>Ведение задач силами агентов</h2>
+  <p>Операционный слой в этом подходе живёт на GitHub. Issue хранит задачу: номер, историю, комментарии; контекст задачи живёт в карточке, а значит работу можно прервать на неделю и продолжить с того же места. Доска собирает карточки по неделям и проектам; доска опциональна, issues обязательны.</p>
+
+  <blockquote>
+    <p>"Это не я заполняю, это делают агенты"</p>
+    <p class="quote-source">сессия 6, 31.08.2026</p>
+  </blockquote>
+
+  <p>Агенты заводят карточки по настроенным ритмам: читают источники, находят новые задачи, оформляют контракты. Ваша роль в этом слое короче: проверить карточку и закрыть, когда результат совпал с сигналом приёмки.</p>
+
+  <h3>Команда без трекера</h3>
+  <p>Путь наименьшего сопротивления для команды без GitHub: документ остаётся как есть, люди продолжают вести его в привычном виде. Агент по расписанию заглядывает в документ, находит новые записи и заводит карточки. Роль парсера выполняет агент, отдельный конвейер под это не пишется. Первое действие в такой команде: перенести задачи из дока в issues. Агенту карточки просто читать, и только после этого открывается параллельная работа.</p>
+
+  <h3>Ритм дня</h3>
+  <figure class="diagram">
+    <svg width="1040" height="320" viewBox="0 0 1040 320" role="img" aria-labelledby="rhythm-title rhythm-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="rhythm-title">Суточный ритм работы с агентами</title>
+      <desc id="rhythm-desc">Схема замкнутого суточного цикла: Утро (сводка дня из Issues), День (оркестрация задач по субагентам), Вечер (приёмка владельцем и закрытие карточек) с переходом на следующий рабочий день.</desc>
+      
+      <defs>
+        <marker id="arrow-step" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+        </marker>
+        <marker id="arrow-return" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="1040" height="320" fill="#f8fafc" />
+
+      <text x="50" y="34" fill="#64748b" font-family="'PT Mono', ui-monospace, monospace" font-size="11" letter-spacing="0.12em">СУТОЧНЫЙ КОНТУР: ОТ УТРЕННЕГО ПЛАНА ДО ВЕЧЕРНЕЙ ПРИЁМКИ</text>
+
+      <!-- УЗЕЛ 1: УТРО -->
+      <g id="node-morning">
+        <rect x="50" y="60" width="270" height="160" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" />
+        <rect x="66" y="74" width="76" height="18" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.3)" stroke-width="0.8" />
+        <text x="104" y="87" fill="#0284c7" font-family="'PT Mono', ui-monospace, monospace" font-size="11" font-weight="600" text-anchor="middle" letter-spacing="0.04em">01 · УТРО</text>
+        <text x="66" y="114" fill="#1e293b" font-family="system-ui, sans-serif" font-size="16" font-weight="600">Что у меня сегодня?</text>
+        <text x="66" y="136" fill="#475569" font-family="system-ui, sans-serif" font-size="13">Агент собирает картину дня</text>
+        <text x="66" y="153" fill="#475569" font-family="system-ui, sans-serif" font-size="13">из открытых карточек в Issues</text>
+        <rect x="66" y="180" width="238" height="24" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
+        <text x="76" y="196" fill="#1c4e80" font-family="'PT Mono', ui-monospace, monospace" font-size="11">→ сводка задач и приоритеты</text>
+      </g>
+
+      <!-- Коннектор 1 -> 2 -->
+      <path d="M 320,140 H 383" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow-step)" />
+
+      <!-- УЗЕЛ 2: ДЕНЬ -->
+      <g id="node-day">
+        <rect x="385" y="60" width="270" height="160" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" />
+        <rect x="401" y="74" width="76" height="18" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.3)" stroke-width="0.8" />
+        <text x="439" y="87" fill="#0284c7" font-family="'PT Mono', ui-monospace, monospace" font-size="11" font-weight="600" text-anchor="middle" letter-spacing="0.04em">02 · ДЕНЬ</text>
+        <text x="401" y="114" fill="#1e293b" font-family="system-ui, sans-serif" font-size="16" font-weight="600">Оркестрация задач</text>
+        <text x="401" y="136" fill="#475569" font-family="system-ui, sans-serif" font-size="13">Менеджер режет задачи и раздаёт</text>
+        <text x="401" y="153" fill="#475569" font-family="system-ui, sans-serif" font-size="13">агентам в отдельные ветки</text>
+        <rect x="401" y="180" width="238" height="24" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
+        <text x="411" y="196" fill="#1c4e80" font-family="'PT Mono', ui-monospace, monospace" font-size="11">→ параллельные ветки и PR</text>
+      </g>
+
+      <!-- Коннектор 2 -> 3 -->
+      <path d="M 655,140 H 718" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow-step)" />
+
+      <!-- УЗЕЛ 3: ВЕЧЕР -->
+      <g id="node-evening">
+        <rect x="720" y="60" width="270" height="160" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" />
+        <rect x="736" y="74" width="84" height="18" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.3)" stroke-width="0.8" />
+        <text x="778" y="87" fill="#0284c7" font-family="'PT Mono', ui-monospace, monospace" font-size="11" font-weight="600" text-anchor="middle" letter-spacing="0.04em">03 · ВЕЧЕР</text>
+        <text x="736" y="114" fill="#1e293b" font-family="system-ui, sans-serif" font-size="16" font-weight="600">Проверка и сдача</text>
+        <text x="736" y="136" fill="#475569" font-family="system-ui, sans-serif" font-size="13">Владелец смотрит результат</text>
+        <text x="736" y="153" fill="#475569" font-family="system-ui, sans-serif" font-size="13">по критериям успеха</text>
+        <rect x="736" y="180" width="238" height="24" rx="4" fill="rgba(21,128,61,0.06)" stroke="rgba(21,128,61,0.25)" stroke-width="0.8" />
+        <text x="746" y="196" fill="#15803d" font-family="'PT Mono', ui-monospace, monospace" font-size="11" font-weight="600">✓ закрытая карточка = принято</text>
+      </g>
+
+      <!-- ВОЗВРАТНЫЙ СУТОЧНЫЙ ЦИКЛ -->
+      <path d="M 855,220 V 242 Q 855,250 847,250 H 193 Q 185,250 185,242 V 222" 
+            fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6 5" marker-end="url(#arrow-return)" />
+      <rect x="420" y="241" width="200" height="18" rx="3" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.8" />
+      <text x="520" y="254" fill="#64748b" font-family="'PT Mono', ui-monospace, monospace" font-size="11" text-anchor="middle">следующий рабочий день</text>
+
+      <!-- ЛЕГЕНДА -->
+      <line x1="50" y1="278" x2="990" y2="278" stroke="rgba(15,23,42,0.08)" stroke-width="0.8" />
+      <text x="520" y="297" fill="#64748b" font-family="'PT Mono', ui-monospace, monospace" font-size="11" text-anchor="middle">синий: шаги дня · пунктир: суточный цикл воспроизводства</text>
+    </svg>
+    <figcaption>Рис. 6. Суточный ритм работы с агентами: от утренней сводки до вечерней приёмки.</figcaption>
+  </figure>
+  <ol class="plain">
+    <li><strong>Утро.</strong> Спрашиваете у агента "что у меня сегодня?"; он собирает картину дня из открытых карточек.</li>
+    <li><strong>День.</strong> Агент-менеджер режет задачи на части и раздаёт исполнителям, каждый работает в своей копии.</li>
+    <li><strong>Вечер.</strong> Смотрите результаты и закрываете карточки по сигналам приёмки.</li>
+  </ol>
+</section>
+
+<!-- ==================== 05. ЖИВОЙ ПРОГОН ==================== -->
+<section id="progon">
+  <h2>Живой прогон задачи</h2>
+  <p>Задача: автонапоминание о личных встречах в боте уведомлений. Облачный агент сам прочитал карточку, составил план: как делать и какие файлы менять, и вынес открытые вопросы отдельным блоком. До старта агент прогнал развилки через интервью и собрал ответы: спорить о постановке в середине работы не пришлось.</p>
+  <p>Дальше агент открыл ветку и создал запрос на слияние. Тесты запустились и упали; среда не дала влить изменения напрямую, и это сработало как задумано. Команда ушла в одну строку: "Разберись и почини". Агент чинил в своей ветке, рабочая версия бота оставалась нетронутой. Целью был прогон с зелёными тестами, и цель закрылась до того, как человек открыл код.</p>
+  <p class="trap"><strong>Подводный камень:</strong> автоматические проверки стоят лимитов платформы; на бесплатном тарифе квота на запуски к концу недели кончается, и агент отчитывается без логов. Держите запас на квоте или перенесите тяжёлые прогоны на свои условия.</p>
+  <p>Что показывает прогон: цикл ловит ошибку до публикации, приёмка сформулирована до работы, а человек остаётся финальной инстанцией на шаге проверки.</p>
+</section>
+
+<!-- ==================== 06. ПРОМПТЫ ==================== -->
+<section id="prompty">
+  <h2>Промпты для старта</h2>
+
+  <h3>Постановка задачи по шести пунктам</h3>
+  <div class="prompt">
+    <div class="prompt-head">
+      <span class="prompt-name">Задача-контракт</span>
+      <button class="copy-btn" type="button">Скопировать</button>
+    </div>
+    <pre><code>Возьми мою просьбу и преврати в задачу-контракт по шести пунктам:
+Роль: кем ты работаешь.
+Цель: итог одной строкой.
+Входы: файлы, ссылки, доступы.
+Ограничения: что нельзя трогать.
+Форма: вид результата.
+Критерии успеха: по чему принимаем работу.
+Покажи задачу на подтверждение до начала работы.</code></pre>
+  </div>
+  <p class="prompt-src">Источник: слайды сессии 6; шесть пунктов постановки задачи из канона урока.</p>
+
+  <h3>Режим оркестратора</h3>
+  <div class="prompt">
+    <div class="prompt-head">
+      <span class="prompt-name">Оркестратор</span>
+      <button class="copy-btn" type="button">Скопировать</button>
+    </div>
+    <pre><code>Ты оркестратор, ты ничего не делаешь руками, ты только планируешь и думаешь. Для исполнения используешь субагентов на Opus и максимум четыре агента одновременно.</code></pre>
+  </div>
+  <p class="prompt-src">Источник: дословный режим из сессии 6, таймкод 49:09; рабочий режим по умолчанию в практике основателя.</p>
+
+  <h3>Прогон задачи через цикл</h3>
+  <div class="prompt">
+    <div class="prompt-head">
+      <span class="prompt-name">Цикл на одной задаче</span>
+      <button class="copy-btn" type="button">Скопировать</button>
+    </div>
+    <pre><code>Вот задача: [ВСТАВИТЬ_ЗАДАЧУ].
+Пройди цикл: спека в одном абзаце, план по шагам,
+работа в отдельной ветке, автоматические проверки,
+отчёт с разницей "было и стало" и открытыми вопросами.
+Вливать не проси: слияние принимаю я по критериям успеха.</code></pre>
+  </div>
+  <p class="prompt-src">Источник: канон цикла и живой прогон сессии 6; в потоках пока не обкатан.</p>
+</section>
+
+<!-- ==================== 07. ОШИБКИ ==================== -->
+<section id="oshibki">
+  <h2>Типичные ошибки</h2>
+  <figure class="diagram">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 360" width="1040" height="360" role="img" aria-labelledby="errors-title errors-desc">
+      <title id="errors-title">Типичные ошибки при внедрении агентов в разработку</title>
+      <desc id="errors-desc">Сравнительная схема трех архитектурных ловушек (чат вместо трекера, ручное ведение задач, дорогая модель на всех этапах) и системных решений: Было → Стало.</desc>
+
+      <rect x="0" y="0" width="1040" height="360" fill="#f8fafc" />
+
+      <text x="45" y="32" font-family="'PT Mono', ui-monospace, monospace" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.12em">ТРИ АРХИТЕКТУРНЫЕ ЛОВУШКИ: БЫЛО → СТАЛО</text>
+
+      <!-- КАРТОЧКА 1 -->
+      <g id="card-1">
+        <rect x="45" y="55" width="290" height="245" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+        <rect x="61" y="68" width="128" height="18" rx="4" fill="rgba(180,35,24,0.06)" stroke="rgba(180,35,24,0.22)" stroke-width="0.8" />
+        <text x="67" y="81" font-family="'PT Mono', ui-monospace, monospace" font-size="10.5" font-weight="600" fill="#b42318" letter-spacing="0.04em">ОШИБКА 1 · ТРЕКЕР</text>
+        <text x="61" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1e293b">Чат вместо трекера</text>
+        <rect x="61" y="116" width="258" height="28" rx="6" fill="#fdf4f3" stroke="#b42318" stroke-width="0.8" />
+        <text x="73" y="134" font-family="'PT Mono', ui-monospace, monospace" font-size="11" fill="#b42318">«обсудили в трёх чатах»</text>
+        <text x="61" y="158" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">контекст размыт, через неделю</text>
+        <text x="61" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">решение не найти</text>
+        <line x1="190" y1="183" x2="190" y2="193" stroke="#94a3b8" stroke-width="1.2" />
+        <polygon points="186.5,192 190,197 193.5,192" fill="#94a3b8" />
+        <rect x="61" y="202" width="258" height="28" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="0.8" />
+        <text x="73" y="220" font-family="'PT Mono', ui-monospace, monospace" font-size="11" fill="#0284c7">«карточка в Issues»</text>
+        <text x="61" y="246" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#1c4e80">контекст закреплён,</text>
+        <text x="61" y="261" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#1c4e80">агент читает задачу</text>
+      </g>
+
+      <!-- КАРТОЧКА 2 -->
+      <g id="card-2">
+        <rect x="375" y="55" width="290" height="245" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+        <rect x="391" y="68" width="128" height="18" rx="4" fill="rgba(180,35,24,0.06)" stroke="rgba(180,35,24,0.22)" stroke-width="0.8" />
+        <text x="397" y="81" font-family="'PT Mono', ui-monospace, monospace" font-size="10.5" font-weight="600" fill="#b42318" letter-spacing="0.04em">ОШИБКА 2 · РУТИНА</text>
+        <text x="391" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1e293b">Ручное ведение задач</text>
+        <rect x="391" y="116" width="258" height="28" rx="6" fill="#fdf4f3" stroke="#b42318" stroke-width="0.8" />
+        <text x="403" y="134" font-family="'PT Mono', ui-monospace, monospace" font-size="11" fill="#b42318">«человек заполняет трекер»</text>
+        <text x="391" y="158" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">рутина съедает вечер,</text>
+        <text x="391" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">трекер забрасывается</text>
+        <line x1="520" y1="183" x2="520" y2="193" stroke="#94a3b8" stroke-width="1.2" />
+        <polygon points="516.5,192 520,197 523.5,192" fill="#94a3b8" />
+        <rect x="391" y="202" width="258" height="28" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="0.8" />
+        <text x="403" y="220" font-family="'PT Mono', ui-monospace, monospace" font-size="11" fill="#0284c7">«агент заводит по ритму»</text>
+        <text x="391" y="246" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#1c4e80">человек только валидирует</text>
+        <text x="391" y="261" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#1c4e80">и закрывает</text>
+      </g>
+
+      <!-- КАРТОЧКА 3 -->
+      <g id="card-3">
+        <rect x="705" y="55" width="290" height="245" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+        <rect x="721" y="68" width="138" height="18" rx="4" fill="rgba(180,35,24,0.06)" stroke="rgba(180,35,24,0.22)" stroke-width="0.8" />
+        <text x="727" y="81" font-family="'PT Mono', ui-monospace, monospace" font-size="10.5" font-weight="600" fill="#b42318" letter-spacing="0.04em">ОШИБКА 3 · РЕСУРСЫ</text>
+        <text x="721" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#1e293b">Дорогая модель везде</text>
+        <rect x="721" y="116" width="258" height="28" rx="6" fill="#fdf4f3" stroke="#b42318" stroke-width="0.8" />
+        <text x="733" y="134" font-family="'PT Mono', ui-monospace, monospace" font-size="11" fill="#b42318">«Opus на всём цикле»</text>
+        <text x="721" y="158" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">переплата за объёмный</text>
+        <text x="721" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">код и тесты</text>
+        <line x1="850" y1="183" x2="850" y2="193" stroke="#94a3b8" stroke-width="1.2" />
+        <polygon points="846.5,192 850,197 853.5,192" fill="#94a3b8" />
+        <rect x="721" y="202" width="258" height="28" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="0.8" />
+        <text x="731" y="220" font-family="'PT Mono', ui-monospace, monospace" font-size="10.5" fill="#0284c7">«Opus на спеке, Flash на коде»</text>
+        <text x="721" y="246" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#1c4e80">экономия лимитов</text>
+        <text x="721" y="261" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#1c4e80">и параллельные руки</text>
+      </g>
+
+      <line x1="45" y1="318" x2="995" y2="318" stroke="rgba(15,23,42,0.08)" stroke-width="0.8" />
+      <text x="520" y="336" font-family="'PT Mono', ui-monospace, monospace" font-size="11" fill="#64748b" text-anchor="middle">красный: ловушка ручной работы · синий: системный переход на операционку с агентами</text>
+    </svg>
+    <figcaption>Рис. 7. Три типичные ошибки при внедрении агентов в разработку.</figcaption>
+  </figure>
+
+  <h3>Чат вместо трекера задач</h3>
+  <p><strong>Почему ломает:</strong> контекст размазан по сообщениям, через неделю решение не восстановить, агенту нечего читать. <strong>Было:</strong> договорённости живут в трёх чатах и звонке. <strong>Стало:</strong> карточка с историей в issues, чат остался местом обсуждения.</p>
+
+  <h3>Ручное ведение задач без агентов</h3>
+  <p><strong>Почему ломает:</strong> система работает, пока карточки заводятся; вручную это съедает вечер, и однажды вечер не находится. <strong>Было:</strong> "заведу сам, когда до рук дойдёт". <strong>Стало:</strong> агент читает источники по расписанию и заводит карточки, вы проверяете раз в день и закрываете.</p>
+
+  <h3>Дорогая модель на всех этапах</h3>
+  <p><strong>Почему ломает:</strong> переплата за объёмное исполнение, экономии нет. <strong>Было:</strong> одна сильная модель делает всю работу от спеки до тестов. <strong>Стало:</strong> сильная модель планирует, пишет спеки и принимает результат; объёмное исполнение делают исполнители подешевле.</p>
+</section>
+
+<!-- ==================== 08. ГОТОВО, КОГДА ==================== -->
+<section id="gotovo">
+  <h2>Готово, когда</h2>
+  <ul class="plain">
+    <li>У каждой задачи, отданной агенту, есть критерии успеха, названные до старта работы.</li>
+    <li>Рабочая версия продукта отделена от работы агента: ветка или копия проекта.</li>
+    <li>Карточки в issues заводит агент по расписанию; вы проверяете и закрываете по сигналам приёмки.</li>
+    <li>У каждого шага цикла есть подтверждение: текст спеки, план, ветка, пройденный прогон, ваша проверка, опубликованная версия.</li>
+    <li>Слияние проходит только после вашей приёмки по критериям из задачи.</li>
+  </ul>
+</section>
+
+<!-- ==================== 09. ИСТОЧНИКИ ==================== -->
+<section id="istochniki">
+  <h2>Источники</h2>
+  <div class="sources">
+    <ul>
+      <li>Канон сессии 6 менторской программы, 31.08.2026: цикл разработки, задача как контракт, GitHub как операционный слой, живой прогон.</li>
+      <li>Слайды сессии 6: шесть пунктов постановки задачи, схема оркестрации, ритм одного дня.</li>
+      <li>Карточки базы знаний: постановка задачи, критерии готовности, GitHub issues, агентский цикл, контракт.</li>
+      <li>Addy Osmani, Agent Skills, 03.05.2026: внешний контраст по шести фазам цикла.</li>
+    </ul>
+    <p class="src-note">Любое из утверждений здесь можно проверить: попросите своего агента найти первоисточник и сверить формулировку.</p>
+  </div>
+</section>
+</div>
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.prompt').querySelector('pre code').textContent;
+      var done = function () {
+        var t = btn.textContent;
+        btn.textContent = 'Скопировано';
+        setTimeout(function () { btn.textContent = t; }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+  });
+</script>
