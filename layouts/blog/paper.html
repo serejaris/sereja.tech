@@ -31,6 +31,16 @@
 {{ .Content }}
   </main>
 
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  <section class="site-related page" aria-labelledby="related-title">
+    <p class="kicker" id="related-title">Читать дальше</p>
+    <ul class="related-list">
+      {{ with .PrevInSection }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="rmeta">{{ partial "fdate.html" (dict "date" .Date) }}</span></li>{{ end }}
+      {{ range $related }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="rmeta">{{ partial "fdate.html" (dict "date" .Date) }}</span></li>{{ end }}
+    </ul>
+    {{ with .Params.tags }}<p class="rtags">Темы: {{ range $i, $t := . }}{{ if $i }} · {{ end }}<a href="/tags/{{ $t | urlize }}/">{{ $t }}</a>{{ end }}</p>{{ end }}
+  </section>
+
   <footer class="site-bottom">
     <span>© 2026 Сережа Рис · sereja.tech</span>
     <span class="site-links">

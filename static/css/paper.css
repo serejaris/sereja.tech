@@ -98,3 +98,17 @@ table.recipes td:first-child{font-family:'PT Serif',Georgia,serif;font-size:1em;
 .site-bottom{padding:28px 22px 48px;margin-top:8px;border-top:1px solid var(--hairline)}
 .paper header.masthead{padding-top:56px}
 @media (max-width:840px){.site-top{padding-right:72px}}
+
+/* related posts under the article */
+.site-related{padding-top:8px;padding-bottom:40px}
+.related-list{list-style:none;margin:12px 0 0;padding:0}
+.related-list li{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:10px 0;border-top:1px solid var(--hairline)}
+.related-list li:last-child{border-bottom:1px solid var(--hairline)}
+.related-list a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--hairline)}
+.related-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.rmeta,.rtags{font:400 12px/1.5 'PT Mono',monospace;color:var(--muted);white-space:nowrap}
+.rtags{margin:18px 0 0;white-space:normal}
+.rtags a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--hairline)}
+.rtags a:hover{color:var(--ink)}
+/* intrinsic size attributes must not distort scaled media */
+img[height],video[height]{max-width:100%;height:auto}
