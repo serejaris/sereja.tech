@@ -1069,6 +1069,7 @@ Prepare a source-backed Day One article about GPT-6 Astra with the official Open
 - [x] Capture the official Artificial Analysis X thread and all eight attached charts.
 - [x] Verify early user-made Astra videos in X and distinguish author claims from independently measured results.
 - [x] Add local media, an SEO cover, metadata, FAQ schema, internal links, and one CTA.
+- [x] Keep article videos inside the reading column at desktop and mobile widths.
 - [x] Repair the tag-link template so the repository redirect-source audit can inspect the build cleanly.
 - [x] Pass style, structural, fact, persona, Hugo, rendered HTML, and SEO checks.
 - [x] Prepare the change on a feature branch with 840×480 visual review frames.
@@ -1079,3 +1080,4 @@ Prepare a source-backed Day One article about GPT-6 Astra with the official Open
 - The opening distinguishes the completed release from the staged account rollout.
 - Artificial Analysis measurements are scoped to its harness and attributed to the official thread.
 - The user-demo section identifies the author, links the original X post, shows the video, and states the limits of the evidence.
+- Article videos stay within the content column and never overlap the desktop table of contents.
