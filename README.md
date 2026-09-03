@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-09-03 | [GPT-6 Astra: общий тест дороже Sol на 75%](https://sereja.tech/blog/gpt-6-astra/) |
+| 2026-09-03 | [GPT-6 Astra вышла. Переходить с Sol пока рано](https://sereja.tech/blog/gpt-6-astra/) |
 | 2026-08-22 | [Повторил забег агентов: 11/18 стало 17/18](https://sereja.tech/blog/ox-alpha-yesterday-vs-today/) |
 | 2026-08-22 | [ox-alpha: 6 агентов, 3 бенча](https://sereja.tech/blog/ox-alpha-harness-pool/) |
 | 2026-08-18 | [Гайд по использованию Grok Bot](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
