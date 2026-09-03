@@ -38,7 +38,7 @@
       {{ with .PrevInSection }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="rmeta">{{ partial "fdate.html" (dict "date" .Date) }}</span></li>{{ end }}
       {{ range $related }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="rmeta">{{ partial "fdate.html" (dict "date" .Date) }}</span></li>{{ end }}
     </ul>
-    {{ with .Params.tags }}<p class="rtags">Темы: {{ range $i, $t := . }}{{ if $i }} · {{ end }}<a href="/tags/{{ $t | urlize }}/">{{ $t }}</a>{{ end }}</p>{{ end }}
+    {{ with .Params.tags }}<p class="rtags">Темы: {{ range $i, $t := . }}{{ if $i }} · {{ end }}<a href="{{ "/tags/" | relURL }}{{ $t | urlize }}/">{{ $t }}</a>{{ end }}</p>{{ end }}
   </section>
 
   <footer class="site-bottom">

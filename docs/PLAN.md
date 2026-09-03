@@ -1052,3 +1052,30 @@ Publish a source-backed Russian guide to the first Grok Bot workflow with locali
 - The article is live at `/blog/grok-bot-cloud-agents-guide/` with one H1, seven H2 sections, a self-canonical URL, and valid social preview metadata.
 - The body uses exactly three evidence pillars and one expanded example.
 - The production page and cover asset return `200`, and the Telegram announcement is queued through the standard blog pipeline.
+
+---
+
+## M20 — GPT-6 Astra release article
+
+Status: `[x]`
+
+### Goal
+
+Prepare a source-backed Day One article about GPT-6 Astra with the official OpenAI release facts, the complete Artificial Analysis media set, and one concrete live-work evaluation protocol.
+
+### Tasks
+
+- [x] Verify current model access, pricing, limits, and agent features against official OpenAI sources.
+- [x] Capture the official Artificial Analysis X thread and all eight attached charts.
+- [x] Explain the audience expectations and the single live-backlog comparison in plain Russian.
+- [x] Add local media, an SEO cover, metadata, FAQ schema, internal links, and one CTA.
+- [x] Repair the tag-link template so the repository redirect-source audit can inspect the build cleanly.
+- [x] Pass style, structural, fact, persona, Hugo, rendered HTML, and SEO checks.
+- [x] Prepare the change on a feature branch with 840×480 visual review frames.
+
+### Definition of done
+
+- `/blog/gpt-6-astra/` renders with one H1, six H2 sections, trailing-slash canonical, FAQ schema, 12 source images, and the official OpenAI video.
+- The opening distinguishes the completed release from the staged account rollout.
+- Artificial Analysis measurements are scoped to its harness and attributed to the official thread.
+- The live section ends with a decision protocol based on result, time, tokens, cost, interventions, and stops.
