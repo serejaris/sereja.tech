@@ -1073,6 +1073,7 @@ Prepare a source-backed Day One article about GPT-6 Astra with the official Open
 - [x] Repair the tag-link template so the repository redirect-source audit can inspect the build cleanly.
 - [x] Pass style, structural, fact, persona, Hugo, rendered HTML, and SEO checks.
 - [x] Prepare the change on a feature branch with 840×480 visual review frames.
+- [x] Replace the premature Sol migration angle with the actual Day One access question.
 
 ### Definition of done
 

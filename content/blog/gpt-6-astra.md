@@ -1,5 +1,5 @@
 ---
-title: "GPT-6 Astra вышла. Переходить с Sol пока рано"
+title: "GPT-6 Astra вышла. Кому уже открыли доступ"
 slug: "gpt-6-astra"
 date: 2026-09-03
 lastmod: 2026-09-03
