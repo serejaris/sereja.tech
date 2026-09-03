@@ -1061,13 +1061,13 @@ Status: `[x]`
 
 ### Goal
 
-Prepare a source-backed Day One article about GPT-6 Astra with the official OpenAI release facts, the complete Artificial Analysis media set, and one concrete live-work evaluation protocol.
+Prepare a source-backed Day One article about GPT-6 Astra with the official OpenAI release facts, the complete Artificial Analysis media set, and early user-made demonstrations from X.
 
 ### Tasks
 
 - [x] Verify current model access, pricing, limits, and agent features against official OpenAI sources.
 - [x] Capture the official Artificial Analysis X thread and all eight attached charts.
-- [x] Explain the audience expectations and the single live-backlog comparison in plain Russian.
+- [x] Verify early user-made Astra videos in X and distinguish author claims from independently measured results.
 - [x] Add local media, an SEO cover, metadata, FAQ schema, internal links, and one CTA.
 - [x] Repair the tag-link template so the repository redirect-source audit can inspect the build cleanly.
 - [x] Pass style, structural, fact, persona, Hugo, rendered HTML, and SEO checks.
@@ -1075,7 +1075,7 @@ Prepare a source-backed Day One article about GPT-6 Astra with the official Open
 
 ### Definition of done
 
-- `/blog/gpt-6-astra/` renders with one H1, six H2 sections, trailing-slash canonical, FAQ schema, 12 source images, and the official OpenAI video.
+- `/blog/gpt-6-astra/` renders with one H1, six H2 sections, trailing-slash canonical, FAQ schema, 12 source images, the official OpenAI video, and one local user-made Astra video.
 - The opening distinguishes the completed release from the staged account rollout.
 - Artificial Analysis measurements are scoped to its harness and attributed to the official thread.
-- The live section ends with a decision protocol based on result, time, tokens, cost, interventions, and stops.
+- The user-demo section identifies the author, links the original X post, shows the video, and states the limits of the evidence.
