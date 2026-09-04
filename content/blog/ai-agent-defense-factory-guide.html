@@ -1,0 +1,403 @@
+---
+title: "Как доводить находки AI-агента до исправления"
+date: 2026-09-04
+description: "Практический гайд по Defense Factory: как найти, подтвердить и исправить уязвимость AI-агентом в безопасном контуре."
+tags: ["агенты", "безопасность", "codex", "вайбкодинг", "defense-factory"]
+keywords: ["Defense Factory", "безопасность AI-агентов", "Codex Security", "security review AI", "безопасность вайбкодинга"]
+section: "AI"
+layout: paper
+cta: kruzhok
+cta_code: vibecoding
+---
+
+<style>
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){--paper:#fffef9;--ink:#1a1a1a;--muted:#333333;--accent:#33567a;--hairline:rgba(26,26,26,.18);--rule:rgba(26,26,26,.25)}
+  .paper{background:var(--paper);color:var(--ink)}
+  .paper main{counter-reset:figure}
+  .paper main .page{max-width:740px;margin:0 auto;padding:72px 22px 64px}
+  .paper main header.masthead{padding:0 0 30px}
+  .paper main .page>section{position:relative}
+  .paper .plain{list-style:none;margin:18px 0 28px;padding:0}
+  .paper .plain li{margin:0 0 10px}
+  .paper .status-list{list-style:none;margin:18px 0 26px;padding:0}
+  .paper .status-list li{margin:0 0 10px}
+  .paper .status-list code{font:400 12px/1.5 'PT Mono',Menlo,Monaco,Consolas,monospace;color:var(--accent)}
+  .paper .prompt-wrap{margin:20px 0 26px}
+  .paper details.prompt-card{margin:0;background:#16181d;color:#eef0f2}
+  .paper details.prompt-card summary{display:flex;align-items:center;gap:10px;min-height:34px;cursor:pointer;padding:8px 12px;color:#a8b0ba;background:#23262e;font:400 11px/1.4 'PT Mono',Menlo,Monaco,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;list-style:none}
+  .paper details.prompt-card summary::-webkit-details-marker{display:none}
+  .paper .prompt-name{min-width:0;flex:1}
+  .paper .prompt-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .paper .toggle-label::before{content:'Развернуть [+]'}
+  .paper details.prompt-card[open] .toggle-label::before{content:'Свернуть [−]'}
+  .paper .copy-btn{padding:3px 8px;border:1px solid rgba(255,255,255,.28);border-radius:3px;background:transparent;color:#cbd1d8;font:400 10px/1.4 'PT Mono',Menlo,Monaco,Consolas,monospace;cursor:pointer}
+  .paper .copy-btn:hover,.paper .copy-btn:focus-visible{color:#fff;border-color:#fff}
+  .paper .prompt-body{padding:10px 12px}
+  .paper details.prompt-card pre{margin:0;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;overflow:hidden}
+  .paper details.prompt-card code{color:#eef0f2;font:400 12px/1.55 'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper .prompt-src{margin:8px 0 0;color:var(--muted);font:400 11px/1.55 'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper .term{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace;font-size:.88em;color:var(--accent)}
+  .paper figure.diagram{width:114%;max-width:860px;margin:28px 0 18px -7%}
+  .paper figure.diagram{counter-increment:figure}
+  .paper figure.diagram figcaption::before{content:'Рис. ' counter(figure) '. '}
+  .paper figure.diagram svg{background:#f8fafc}
+  .paper figure.diagram svg text{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper figure.diagram svg>rect{fill:#f8fafc;stroke:#1c4e80}
+  .paper figure.diagram svg g rect{fill:#ffffff;stroke:#1c4e80}
+  .paper figure.diagram svg path{stroke:#1c4e80}
+  .paper figure.diagram svg text{fill:#475569}
+  .paper figure.diagram svg text[font-weight="600"]{fill:#1e293b;font-family:system-ui,-apple-system,sans-serif}
+  .paper figure.diagram svg marker#arrow-ink polygon{fill:#1c4e80}
+  .paper figure.diagram svg marker#arrow-accent polygon{fill:#0284c7}
+  @media(min-width:1260px){.paper main .page{margin-left:calc((100vw - 1096px)/2);margin-right:0}.paper .prompt-wrap{position:absolute;left:calc(100% + 36px);top:var(--prompt-y,64px);width:320px;margin:0}.paper details.prompt-card[open]{aspect-ratio:210/297;display:flex;flex-direction:column;overflow:hidden}.paper details.prompt-card[open] .prompt-body{flex:1;overflow-y:auto}.paper .prompt-src{margin:8px 0 0}}
+  @media(max-width:840px){body.paper{font-size:16px}.paper figure.diagram{width:100%;margin-left:0}}
+  @media(max-width:700px){.paper figure.diagram{overflow-x:auto;overscroll-behavior-inline:contain}.paper figure.diagram svg{min-width:580px}}
+  @media(max-width:480px){.paper h1{font-size:1.65em}.paper details.prompt-card code{font-size:11px}.paper main .page{padding-left:18px;padding-right:18px}.paper .toggle-label{display:none}}
+  @page{size:A4;margin:18mm}
+  @media print{.paper main .page{padding:0}.paper .prompt-wrap{position:static;width:auto;margin:20px 0 26px}.paper details.prompt-card{break-inside:avoid;background:#fff;color:#1a1a1a}.paper details.prompt-card:not([open])>*:not(summary){display:block}.paper details.prompt-card summary{background:#fff;color:#1a1a1a;border-bottom:1px solid var(--hairline)}.paper details.prompt-card code{color:#1a1a1a}.paper .copy-btn,.paper .toggle-label{display:none}.paper figure.diagram{width:100%;margin-left:0;overflow:visible}.paper figure.diagram svg{min-width:0}}
+</style>
+
+<div class="page">
+<header class="masthead">
+  <h1>Как доводить находки AI-агента до проверенного исправления</h1>
+  <p class="lede">После проверки остаётся карточка подтверждённой уязвимости: риск, владелец, небольшая правка и повторный тест. Такой процесс OpenAI называет Defense Factory.</p>
+</header>
+
+<nav class="toc" aria-label="Содержание">
+  <ul>
+    <li><a href="#problem">Почему отчёт ещё не защищает продукт</a></li>
+    <li><a href="#boundary">Безопасная граница агента</a></li>
+    <li><a href="#factory">Цикл Defense Factory</a></li>
+    <li><a href="#signal">Подтверждённая находка требует доказательства</a></li>
+    <li><a href="#patch">Исправление с доказательством</a></li>
+    <li><a href="#autonomy">Лестница автономности</a></li>
+    <li><a href="#failure">Что делать при остановке проверки</a></li>
+    <li><a href="#ready">Готово, когда защита работает постоянно</a></li>
+    <li><a href="#sources">Источники</a></li>
+  </ul>
+</nav>
+
+<section id="problem">
+  <h2>Почему отчёт ещё не защищает продукт</h2>
+  <p>У небольшого сервиса отчётов есть база клиентов, авторизация, платежи и несколько интеграций. Агент разработки проводит проверку безопасности и возвращает длинный список: подозрительный запрос, старая зависимость, заголовок браузера, возможная утечка данных. Все пункты помечены высоким риском.</p>
+  <p>У владельца продукта остаются три вопроса: достижим ли опасный путь, какой ущерб возможен и кто доведёт исправление до опубликованной версии. Пока ответов нет, список увеличивает бэклог.</p>
+  <p>В лекции <a href="https://openai.com/business/learn/intelligence-at-work-cyber/">Intelligence at Work: Cyber</a> этот процесс называется <span class="term">Defense Factory</span>. Находка проходит путь от карты системы до повторной проверки после исправления.</p>
+  <p><strong>По-моему, самая полезная часть Defense Factory:</strong> жёсткая граница между кандидатом и подтверждённой находкой. На выходе нужна находка с владельцем, ограниченной правкой и сохранённым доказательством. Дальше под доказательством я имею в виду версию кода, один воспроизводимый сценарий, ожидаемый и фактический результаты, обезличенный фрагмент лога или ответа.</p>
+
+  <h3>Три вопроса к каждой находке</h3>
+  <ul>
+    <li><strong>Достижимость.</strong> Может ли обычный пользователь пройти от доступной точки входа до опасного действия?</li>
+    <li><strong>Ущерб.</strong> Какие данные, деньги или функции окажутся затронуты?</li>
+    <li><strong>Владелец.</strong> Кто понимает этот участок продукта и принимает решение по правке?</li>
+  </ul>
+  <p><strong>Реальный кейс OpenAI.</strong> В одном внутреннем прогоне безопасности 37% собранных находок оказались дублями. После динамической проверки доля ложных срабатываний среди прошедших эту стадию находок составила 0,81%. Цифры опубликованы на <a href="https://openai.com/the-defense-factory/">странице Defense Factory</a>. Первый полезный шаг: попросить агента объединить дубли и проверить достижимость. В рабочую очередь попадают подтверждённые находки.</p>
+</section>
+
+<section id="boundary">
+  <h2>Безопасная граница агента</h2>
+  <p>Первый запуск проходит в режиме чтения. Агент получает один репозиторий, документацию и тестовое окружение. У него нет ключей рабочей системы, права менять данные и доступа к реальным пользовательским записям.</p>
+  <p>Проверка в запущенном приложении живёт в одноразовой среде с синтетическими данными. История сессии, изменения файлов и результаты команд сохраняются. Владелец продукта имеет право остановить работу на любой стадии.</p>
+  <p><strong>Важно:</strong> границы технически обеспечивает изолированная среда и подтверждения инструментов. Текст промпта дополняет её профиль и сам по себе права не ограничивает.</p>
+
+  <div class="prompt-wrap">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 1. Карта сервиса и границ доверия</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Собери карту безопасности продукта в режиме чтения.
+
+Входы: [ПУТЬ], [ВЕТКА_ИЛИ_COMMIT], [ОПИСАНИЕ], [ВЛАДЕЛЕЦ],
+[ПАПКА_АРТЕФАКТОВ].
+
+Технический профиль: sandbox read-only, сеть отключена, запись разрешена
+только в [ПАПКА_АРТЕФАКТОВ]. Проверь профиль и остановись при расхождении.
+Инструкции дополняют технические ограничения и подтверждения инструментов.
+Исключи рабочую систему, секреты и передачу данных наружу.
+
+Сохрани security-scope.md:
+1. Активы, данные, API, задачи, интеграции и их владельцы.
+2. Точки входа и границы доверия.
+3. Проверки доступа на каждой границе.
+4. Пять вероятных путей риска: актив, вход, условия, ущерб.
+5. Пробелы со статусом UNKNOWN.
+6. Разделы «Разрешено», «Запрещено», «Нужно решение владельца».
+
+Готово, когда каждый актив и путь имеют владельца, проект остался без
+изменений. Заверши PASS или NEEDS_INPUT по каждому критерию.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: авторская операционализация для этого гайда по Defense Factory и Codex Security; в потоках пока не обкатан.</p>
+  </div>
+
+  <h3>Готово, когда</h3>
+  <ul class="plain">
+    <li>Разрешённые и запрещённые действия записаны.</li>
+    <li>Доступ к рабочей системе и реальные данные отсутствуют.</li>
+    <li>У сессии есть владелец и условие остановки.</li>
+    <li>Действия агента можно восстановить по журналу.</li>
+  </ul>
+  <p><strong>Почему ломает:</strong> широкий доступ превращает ошибку агента в действие над рабочей системой. <strong>Было:</strong> «Проверь проект и исправь всё». <strong>Стало:</strong> «Читай один репозиторий, пиши только в папку артефактов, остановись перед изменением кода или данных».</p>
+</section>
+
+<section id="factory">
+  <h2>Цикл Defense Factory</h2>
+  <p>Defense Factory непрерывно находит, проверяет и исправляет уязвимости. Определение звучит в лекции на 00:17:29. Официальный цикл включает инвентаризацию Inventory, поиск Discovery, динамическую проверку Dynamic validation, назначение владельца Ownership assignment и проверенное исправление Verified remediation. <a href="https://openai.com/the-defense-factory/">Страница Defense Factory</a> объясняет архитектуру, а <a href="https://cdn.openai.com/defense-factory/downloads/defense-factory-playbook.pdf">playbook</a> даёт готовые схемы работы.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 960 560" role="img" aria-labelledby="defense-factory-title defense-factory-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="defense-factory-title">Defense Factory внутри безопасного периметра</title>
+      <desc id="defense-factory-desc">Цикл из шести этапов: владелец задаёт границы, агент собирает инвентаризацию и модель угроз, находит кандидатов, проверяет их, убирает дубли и назначает владельца находки, готовит ограниченное исправление, после чего человек проводит ревью и запускает повторную проверку. Результат возвращается в инвентаризацию. Весь цикл работает при изоляции, минимальных правах и журналировании действий.</desc>
+      <defs>
+        <marker id="arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a1a1a" /></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#33567a" /></marker>
+      </defs>
+      <rect width="960" height="560" fill="#fffef9" />
+      <rect x="24" y="28" width="912" height="470" rx="8" fill="#fffef9" stroke="#33567a" stroke-width="1.2" />
+      <rect x="48" y="20" width="196" height="18" rx="3" fill="#fffef9" />
+      <text x="56" y="33" fill="#33567a" font-size="9" font-family="'PT Mono',monospace" letter-spacing="0.12em">БЕЗОПАСНЫЙ ПЕРИМЕТР</text>
+      <g aria-label="Постоянные условия безопасного периметра">
+        <rect x="150" y="54" width="180" height="26" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="240" y="71" fill="#1a1a1a" font-size="10" font-family="'PT Mono',monospace" text-anchor="middle">ИЗОЛЯЦИЯ</text>
+        <rect x="390" y="54" width="180" height="26" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="480" y="71" fill="#1a1a1a" font-size="10" font-family="'PT Mono',monospace" text-anchor="middle">МИНИМАЛЬНЫЕ ПРАВА</text>
+        <rect x="630" y="54" width="180" height="26" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="720" y="71" fill="#1a1a1a" font-size="10" font-family="'PT Mono',monospace" text-anchor="middle">ЖУРНАЛ ДЕЙСТВИЙ</text>
+      </g>
+      <path d="M306 178 H355" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M605 178 H654" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M779 228 V300" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M654 350 H605" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M355 350 H306" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" />
+      <path d="M56 350 H50 Q42 350 42 342 V100 Q42 92 50 92 H472 Q480 92 480 100 V128" fill="none" stroke="#33567a" stroke-width="1.2" marker-end="url(#arrow-accent)" />
+      <rect x="253" y="85" width="174" height="14" rx="2" fill="#fffef9" /><text x="340" y="95" fill="#33567a" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle" letter-spacing="0.08em">ОБНОВИТЬ КАРТУ РИСКОВ</text>
+      <g aria-label="Этап 1. Границы и владелец"><rect x="56" y="128" width="250" height="100" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="1.2" /><rect x="68" y="140" width="72" height="16" rx="3" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="104" y="151" fill="#33567a" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">ВЛАДЕЛЕЦ</text><text x="181" y="181" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">1. Границы и владелец</text><text x="181" y="204" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">цель · данные · право остановки</text></g>
+      <g aria-label="Этап 2. Инвентаризация и модель угроз"><rect x="355" y="128" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="367" y="140" width="56" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="395" y="151" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">КАРТА</text><text x="480" y="175" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">2. Инвентаризация</text><text x="480" y="193" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">и модель угроз</text><text x="480" y="213" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">активы · входы · границы доверия</text></g>
+      <g aria-label="Этап 3. Кандидаты"><rect x="654" y="128" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="666" y="140" width="64" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="698" y="151" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">СИГНАЛЫ</text><text x="779" y="181" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">3. Кандидаты</text><text x="779" y="204" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">гипотезы о слабых местах</text></g>
+      <g aria-label="Этап 4. Проверка и назначение владельца"><rect x="654" y="300" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="666" y="312" width="72" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="702" y="323" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">EVIDENCE</text><text x="779" y="347" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">4. Проверка, дубли</text><text x="779" y="365" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">и владелец</text><text x="779" y="385" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">доказательство · владелец</text></g>
+      <g aria-label="Этап 5. Ограниченное исправление"><rect x="355" y="300" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="367" y="312" width="48" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="391" y="323" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">ПАТЧ</text><text x="480" y="353" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">5. Ограниченное исправление</text><text x="480" y="376" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">малый diff · регрессионный тест</text></g>
+      <g aria-label="Этап 6. Ревью и повторная проверка"><rect x="56" y="300" width="250" height="100" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="1.2" /><rect x="68" y="312" width="88" height="16" rx="3" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="112" y="323" fill="#33567a" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">HUMAN GATE</text><text x="181" y="347" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">6. Ревью</text><text x="181" y="365" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">и повторная проверка</text><text x="181" y="385" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">человек принимает доказанный результат</text></g>
+      <text x="32" y="536" fill="#333" font-size="8" font-family="'PT Mono',monospace" letter-spacing="0.12em">ЛЕГЕНДА</text><rect x="105" y="524" width="16" height="12" rx="2" fill="#fffef9" stroke="#33567a" /><text x="130" y="534" fill="#333" font-size="8" font-family="'PT Mono',monospace">решение владельца</text><path d="M310 530 H342" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><text x="354" y="534" fill="#333" font-size="8" font-family="'PT Mono',monospace">рабочий поток</text><path d="M478 530 H510" fill="none" stroke="#33567a" stroke-width="1.2" marker-end="url(#arrow-accent)" /><text x="522" y="534" fill="#333" font-size="8" font-family="'PT Mono',monospace">обратная связь</text>
+    </svg>
+    <figcaption>Минимальная Defense Factory для одного продукта.</figcaption>
+  </figure>
+
+  <p>Первый цикл ограничен одним репозиторием и одной находкой. Сохранённые карта системы, статусы и доказательства станут входом следующего запуска.</p>
+  <ul class="plain">
+    <li><strong>Нет карты системы:</strong> цикл останавливается на инвентаризации.</li>
+    <li><strong>Нет доказательства из запущенного приложения:</strong> предупреждение остаётся кандидатом.</li>
+    <li><strong>Нет владельца и срока:</strong> исправление не начинается.</li>
+    <li><strong>Нет независимой повторной проверки:</strong> находка остаётся открытой.</li>
+  </ul>
+
+  <h3>Термины для малого продукта</h3>
+  <p>Большая архитектура приземляется в пять знакомых элементов:</p>
+  <ul>
+    <li><strong>Рабочая модель:</strong> доступный агент разработки подходит для первой проверки безопасности. Расширенные кибермодели OpenAI имеют отдельные возможности и управляемый доступ.</li>
+    <li><strong>Скиллы безопасности:</strong> правила проекта и пять повторяемых промптов.</li>
+    <li><strong>Одноразовая тестовая среда:</strong> локальная или временная тестовая копия продукта с синтетическими данными.</li>
+    <li><strong>Ограниченный доступ:</strong> права на один репозиторий и одну рабочую ветку.</li>
+    <li><strong>Журнал действий:</strong> история агента, результаты проверки, коммиты и черновик запроса на слияние.</li>
+  </ul>
+</section>
+
+<section id="signal">
+  <h2>Подтверждённая находка требует доказательства</h2>
+  <p>В сервисе отчётов главный актив, клиентские данные. Точка входа, адрес отдельного отчёта. Опасное действие, чтение чужой записи. Модель угроз связывает эти три элемента до запуска поиска, поэтому каждый кандидат получает конкретное место в коде, путь данных и условия достижимости.</p>
+
+  <div class="prompt-wrap" style="--prompt-y:64px">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 2. Поиск кандидатов с проверяемыми доказательствами</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Найди кандидатов в пределах утверждённой карты сервиса.
+
+Входы: [ПУТЬ], [SECURITY_SCOPE], [ПРАВИЛА], [КАТЕГОРИИ],
+[ПАПКА_АРТЕФАКТОВ].
+
+Технический профиль: sandbox read-only, сеть отключена, запись разрешена
+только в [ПАПКА_АРТЕФАКТОВ]. Проверь профиль и остановись при расхождении.
+Инструкции дополняют технические ограничения и подтверждения инструментов.
+Исключи рабочую систему, внешнее сканирование и публикацию задач.
+
+Для каждого кандидата укажи актив, место в коде, путь данных, условия
+достижимости, возможный ущерб, доказательство, уверенность и план
+динамической проверки. Объедини одинаковые первопричины. Гипотезы без
+доказательства вынеси отдельно.
+
+Сохрани candidate-findings.md и candidate-findings.json. Все результаты
+имеют статус candidate. Готово, когда дубли объединены, проект не изменён.
+Заверши PASS или FAIL.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: авторская операционализация для этого гайда по Defense Factory и Codex Security; в потоках пока не обкатан.</p>
+  </div>
+
+  <h3>Пять рабочих статусов</h3>
+  <ul class="status-list">
+    <li><code>candidate</code>: гипотеза с доказательством из кода или конфигурации.</li>
+    <li><code>validated</code>: проблема воспроизведена в запущенном приложении.</li>
+    <li><code>disproven</code>: контролируемая проверка опровергла гипотезу.</li>
+    <li><code>inconclusive</code>: среда или контекст помешали сделать вывод.</li>
+    <li><code>duplicate</code>: первопричина уже представлена основной находкой.</li>
+  </ul>
+  <p>После статуса <code>validated</code> OpenAI назначает находке владельца кода. Эта стадия называется назначением владельца Ownership assignment и стоит между проверкой и исправлением. В этом гайде к ней добавлены подтверждение задачи, срок и путь эскалации.</p>
+  <p><strong>Почему ломает:</strong> высокий рейтинг без проверки в запущенном приложении смешивает реальный риск и гипотезу. <strong>Было:</strong> «Критично, срочно исправить». <strong>Стало:</strong> «Кандидат, путь достижимости такой-то, для подтверждения нужен один тестовый сценарий».</p>
+
+  <h3>Учебный кейс с двумя аккаунтами</h3>
+  <p>В тестовой среде аккаунт A создаёт отчёт «Продажи августа». Аккаунт B входит в отдельном окне и открывает адрес отчёта через обычный интерфейс. Безопасный результат: сервер возвращает отказ, содержимое отчёта отсутствует в ответе и на экране.</p>
+  <p>Если B получает отчёт A, проверка останавливается, а в доказательстве остаются только синтетические идентификаторы. Реальные данные сюда не попадают.</p>
+
+  <div class="prompt-wrap" style="--prompt-y:640px">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 3. Проверка находки в изолированной среде</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Проверь утверждённые ID в одноразовой изолированной среде.
+
+Входы: [ПУТЬ], [CANDIDATE_FINDINGS], [ID], [ИНСТРУКЦИЯ],
+[FIXTURE_A], [FIXTURE_B], [ССЫЛКА_НА_TEST_SECRET_STORE],
+[ПАПКА_АРТЕФАКТОВ]. Используй псевдонимы тестовых данных. Логины,
+пароли и токены в промпт и доказательство не включай.
+
+Технический профиль: workspace-write ограничен временным root, сеть
+отключена, папка доказательств лежит вне среды. Проверь профиль. Инструкции
+дополняют sandbox и подтверждения инструментов.
+
+Создай среду с синтетическими данными. Для каждой находки запиши версию
+кода и ожидаемое поведение, выполни один минимальный сценарий, присвой
+validated, disproven или inconclusive, сохрани обезличенное доказательство.
+Для validated предложи владельца, срок и эскалацию. Сбой среды отдели от
+результата проверки.
+
+После сохранения доказательства удали заранее разрешённый точный путь или
+дождись заданного времени жизни. При неоднозначном пути остановись.
+Заверши PASS или FAIL.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: авторская операционализация для этого гайда по Defense Factory и Codex Security; в потоках пока не обкатан.</p>
+  </div>
+  <p><strong>Готово, когда:</strong> находка получила один статус, подтверждение содержит версию кода и обезличенный результат, владелец принял задачу и срок.</p>
+</section>
+
+<section id="patch">
+  <h2>Исправление с доказательством</h2>
+  <p>После подтверждения агент добавляет проверку, готовит небольшую правку по первопричине и повторяет исходный сценарий. В демонстрации OpenAI отдельный скилл заново проверяет находку после правки на отметке 00:28:11.</p>
+  <p>В кейсе с отчётами сервер проверяет владельца: A видит свой отчёт, B получает отказ. Отдельный агент сверяет правку с сохранённым доказательством.</p>
+
+  <div class="prompt-wrap">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 4. Узкое исправление и независимая проверка</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Подготовь минимальное исправление одной подтверждённой находки.
+
+Входы: [ПУТЬ], [ID], [ДОКАЗАТЕЛЬСТВО], [ПРАВИЛА], [ВЕТКА],
+[ПАПКА_АРТЕФАКТОВ].
+
+Технический профиль: изолированный worktree с workspace-write, сеть
+отключена, запись разрешена только в worktree и папку артефактов. Проверь
+профиль. Инструкции дополняют sandbox и подтверждения инструментов.
+Исключи слияние, отправку ветки, публикацию и соседние функции.
+
+Назови первопричину. Добавь проверку, которая показывает проблему до
+правки. Исправь первопричину малым изменением. Проверь опасный, обычный и
+соседний сценарии. Передай отдельному агенту исходное доказательство,
+разницу изменений и критерии. Он повторяет исходный и обычный сценарии.
+
+Сохрани patch-review.md, verification-report.md и локальную разницу.
+Заверши READY_FOR_HUMAN_REVIEW или BLOCKED.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: авторская операционализация для этого гайда по Defense Factory и Codex Security; в потоках пока не обкатан.</p>
+  </div>
+
+  <p><strong>Два разных доказательства.</strong> Security-проверка подтверждает закрытие опасного пути. Функциональная проверка подтверждает, что продукт сохранил обычное поведение.</p>
+  <p><strong>Карточка результата.</strong> <code>SEC-01</code>, версия кода <code>abc123</code>, владелец модуля отчётов, до правки аккаунт B видел тестовый отчёт A, после правки получает отказ, аккаунт A по-прежнему видит свой отчёт, отдельная сессия проверки завершилась <code>PASS</code>, ссылка ведёт на обезличенный лог.</p>
+  <p><strong>Почему ломает:</strong> большая правка скрывает побочные эффекты и усложняет проверку. <strong>Было:</strong> «Исправь весь отчёт безопасности». <strong>Стало:</strong> «Закрой первопричину SEC-01 отдельной правкой и передай другому агенту исходное доказательство, diff и критерии».</p>
+  <p><strong>Готово, когда:</strong> правка ограничена одной первопричиной, отдельная сессия повторила опасный и обычный сценарии, результат ждёт проверки человеком.</p>
+</section>
+
+<section id="autonomy">
+  <h2>Лестница автономности</h2>
+  <p>В панели лекции звучит формула «humans click while agents swarm»: агенты параллельно читают, группируют и готовят изменения, человек подтверждает шаги с серьёзными последствиями. Новый уровень прав открывается после заданного числа принятых прогонов без утечек, ложных тревог и откатов.</p>
+
+  <ol class="plain">
+    <li><strong>Чтение и отчёт.</strong> Агент видит код и документацию, создаёт локальные артефакты.</li>
+    <li><strong>Локальная правка.</strong> Агент меняет отдельную ветку и готовит пакет проверки.</li>
+    <li><strong>Разбор предупреждений.</strong> Агент объединяет дубли, предлагает приоритет и владельца.</li>
+    <li><strong>Узкие обратимые действия.</strong> Агент готовит новый статус или комментарий в трекере. Любая запись проходит подтверждение человека.</li>
+  </ol>
+  <p>Слияние правки, публикация версии, рабочие данные и секреты остаются под подтверждением владельца. Для каждого нового уровня заранее задают порог качества и условие отката прав.</p>
+  <p><strong>Мой стартовый шаблон:</strong> владелец задаёт минимальную выборку, допустимую долю ложных тревог, предел откатов и нулевую терпимость к нарушению границ. Порог выводится из возможного ущерба. Его достижение запускает обсуждение и само по себе новые права не открывает.</p>
+
+  <div class="prompt-wrap">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 5. Решение о следующем уровне автономности</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Оцени готовность к одному следующему уровню автономности.
+
+Входы: [ИСТОРИЯ], [РЕШЕНИЯ], [МЕТРИКИ], [ТЕКУЩИЕ_ПРАВА],
+[МИНИМАЛЬНАЯ_ВЫБОРКА], [ПОРОГ], [ВЛАДЕЛЕЦ].
+
+Технический профиль: история и трекер доступны только для чтения, сеть
+отключена, запись разрешена в папку результата. Проверь профиль. Инструкции
+дополняют sandbox и подтверждения инструментов. Запись в трекер требует
+подтверждения человека.
+
+Оцени один уровень. Покажи разрешённые действия, запреты, число прогонов,
+принятые результаты, ложные тревоги и откаты. Задай условие возврата прав
+и дату пересмотра. При малой выборке или превышенном пороге сохрани права.
+При успехе только порекомендуй новый уровень. Слияние, публикация, рабочая
+система, секреты и высокий ущерб всегда требуют человека.
+
+Сохрани autonomy-decision.md. Заверши KEEP_LEVEL или RECOMMEND_ADVANCE.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: авторская операционализация для этого гайда по Defense Factory и Codex Security; в потоках пока не обкатан.</p>
+  </div>
+  <p><strong>Почему ломает:</strong> сильная демонстрация ещё не доказывает стабильность процесса. <strong>Было:</strong> «Агент справился, дай ему больше прав». <strong>Стало:</strong> «После достижения заданного порога подготовь рекомендацию, права изменит владелец отдельным решением».</p>
+  <p><strong>Готово, когда:</strong> рекомендация опирается на историю запусков, действия с серьёзными последствиями закреплены за владельцем, условие отката записано.</p>
+</section>
+
+<section id="failure">
+  <h2>Что делать при остановке проверки</h2>
+  <p>При нехватке данных или прав агент останавливает проверку, сохраняет доказательство, отмечает стадию и зовёт владельца принять решение.</p>
+  <ul>
+    <li><strong>Среда не запускается.</strong> Статус <code>inconclusive</code>, отдельно записана ошибка setup.</li>
+    <li><strong>Находка не воспроизводится.</strong> Статус <code>disproven</code> при корректно работающем стенде.</li>
+    <li><strong>Нужны реальные данные.</strong> Проверка остановлена, запрос сформулирован без копирования данных.</li>
+    <li><strong>Правка меняет обычный сценарий.</strong> Результат <code>BLOCKED</code>, изменения остаются локальными.</li>
+    <li><strong>Нужны дополнительные права.</strong> Агент перечисляет конкретные действия и ожидаемую пользу, владелец решает отдельно.</li>
+  </ul>
+</section>
+
+<section id="ready">
+  <h2>Готово, когда защита работает постоянно</h2>
+  <ul class="plain">
+    <li>Границы разрешённых действий записаны в проекте.</li>
+    <li>Ключи рабочей системы и права на запись отсутствуют в первой сессии.</li>
+    <li>У каждой проверки есть ответственный человек.</li>
+    <li>Инвентарь содержит активы, входы, данные, сервисы и владельцев.</li>
+    <li>Модель угроз создана до ранжирования находок.</li>
+    <li>Каждая находка имеет один явный статус.</li>
+    <li>Подтверждённая находка воспроизводится в изолированной среде.</li>
+    <li>Доказательство свободно от секретов и персональных данных.</li>
+    <li>Дубли связаны с одной основной задачей.</li>
+    <li>Владелец подтверждённой находки принял задачу, срок и путь эскалации.</li>
+    <li>Правка находится в отдельной ветке или черновике запроса на слияние.</li>
+    <li>Отдельная проверка подтверждает исправление и рабочий сценарий.</li>
+    <li>Слияние и публикация получили явное подтверждение владельца.</li>
+    <li>После публикации исходная проверка повторена.</li>
+    <li>Условия расширения автономности записаны заранее.</li>
+  </ul>
+  <p>Для первого круга хватает одного пути доступа между двумя тестовыми аккаунтами. Агент проводит его через весь цикл и оставляет карту, статусы, доказательства и критерии проверки.</p>
+  <p>Для следующего шага пригодятся мой <a href="/blog/clawdbot-personal-ai-assistant/">разбор реального агентного инцидента</a>, гайд по <a href="/blog/cc-alias-bypass-permissions/">режимам прав агента разработки</a> и практика <a href="/blog/playwright-e2e-with-ai-agent/">пользовательских проверок через Playwright</a>.</p>
+  <p>Если хочешь научиться ставить агентам такие задачи и проверять результат, приходи в <a href="https://t.me/hashslash_bot?start=vibecoding">Кружок Вайбкодинга</a>.</p>
+</section>
+
+<section id="sources" class="sources">
+  <h2>Источники</h2>
+  <ol>
+    <li><a href="https://vimeo.com/event/6145636/embed">Intelligence at Work: Cyber</a>, запись OpenAI от 3 сентября 2026 года.</li>
+    <li><a href="https://openai.com/the-defense-factory/">Defense Factory</a>, официальная архитектура и defensive loop.</li>
+    <li><a href="https://cdn.openai.com/defense-factory/downloads/defense-factory-playbook.pdf">Defense Factory playbook</a>, готовые схемы работы и скиллы.</li>
+    <li><a href="https://openai.com/index/the-defenders-window/">The Defender’s Window</a>, рамка и практический план защитника.</li>
+    <li><a href="https://developers.openai.com/codex/security">Codex Security</a>, threat model, scan, sandbox validation и proposed patch.</li>
+    <li><a href="https://developers.openai.com/codex/concepts/sandboxing">Codex sandboxing</a>, режимы доступа и approvals.</li>
+  </ol>
+  <p class="prompt-src">Таймкоды сверены по локальной расшифровке записи и английским субтитрам Vimeo. Метрики OpenAI приведены как внутренние результаты компании.</p>
+</section>
+</div>
+
+<script>
+document.querySelectorAll('.prompt-card .copy-btn').forEach(function(button){
+  button.addEventListener('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var text=button.closest('.prompt-card').querySelector('code').innerText;
+    navigator.clipboard.writeText(text).then(function(){
+      button.textContent='Скопировано';
+      window.setTimeout(function(){button.textContent='Копировать'},1400);
+    });
+  });
+});
+</script>
