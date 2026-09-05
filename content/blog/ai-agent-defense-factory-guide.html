@@ -1,0 +1,438 @@
+---
+title: "Как проверить безопасность приложения с помощью AI-агента"
+date: 2026-09-04
+description: "Как поручить AI-агенту проверку приложения перед запуском: ограничить доступ, найти уязвимость, проверить её на тестовых данных и исправить. Подход OpenAI Defense Factory."
+tags: ["агенты", "безопасность", "codex", "вайбкодинг", "defense-factory"]
+keywords: ["Defense Factory", "безопасность AI-агентов", "Codex Security", "security review AI", "безопасность вайбкодинга"]
+section: "AI"
+layout: paper
+cta: kruzhok
+cta_code: vibecoding
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){--paper:#fffef9;--ink:#1a1a1a;--muted:#333333;--accent:#33567a;--hairline:rgba(26,26,26,.18);--rule:rgba(26,26,26,.25)}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body.paper{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.62 'PT Serif',Georgia,'Times New Roman',serif}
+  .paper main,.paper>.page{counter-reset:figure}
+  .paper .page{max-width:740px;margin:0 auto;padding:72px 22px 64px}
+  .paper header.masthead{padding:0 0 30px}
+  .paper h1{font-size:1.9em;line-height:1.15;font-weight:400;margin:0 0 16px}
+  .paper .lede{font-size:1.1em;line-height:1.58;color:var(--muted);margin:0}
+  .paper nav.toc{margin:26px 0 54px}
+  .paper nav.toc ul{list-style:none;margin:0;padding:0}
+  .paper nav.toc li{display:block;font:400 12.5px/2.1 'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper nav.toc a{color:var(--accent);text-decoration:none}
+  .paper nav.toc a:hover{text-decoration:underline;text-underline-offset:2px}
+  .paper section{padding:44px 0 0}
+  .paper section:first-of-type{padding-top:0}
+  .paper .page>section{position:relative}
+  .paper h2{font-size:1.4em;line-height:1.3;font-weight:400;margin:0 0 14px}
+  .paper h3{font-size:1.1em;line-height:1.35;font-weight:700;margin:30px 0 12px}
+  .paper p{margin:0 0 1em}
+  .paper a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+  .paper a:hover{color:var(--ink)}
+  .paper ul,.paper ol{padding-left:1.35em}
+  .paper li{margin:0 0 8px}
+  .paper code{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper .plain{list-style:none;margin:18px 0 28px;padding:0}
+  .paper .plain li{margin:0 0 10px}
+  .paper .status-list{list-style:none;margin:18px 0 26px;padding:0}
+  .paper .status-list li{margin:0 0 10px}
+  .paper .status-list code{font:400 12px/1.5 'PT Mono',Menlo,Monaco,Consolas,monospace;color:var(--accent)}
+  .paper .prompt-wrap{margin:20px 0 26px}
+  .paper details.prompt-card{margin:0;background:#16181d;color:#eef0f2;border-radius:6px;overflow:hidden}
+  .paper details.prompt-card summary{display:flex;align-items:center;gap:10px;min-height:34px;cursor:pointer;padding:8px 12px;color:#a8b0ba;background:#23262e;font:400 11px/1.4 'PT Mono',Menlo,Monaco,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;list-style:none}
+  .paper details.prompt-card summary::-webkit-details-marker{display:none}
+  .paper .prompt-name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .paper .prompt-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .paper .toggle-label::before{content:'Развернуть [+]'}
+  .paper details.prompt-card[open] .toggle-label::before{content:'Свернуть [−]'}
+  .paper .copy-btn{padding:3px 8px;border:1px solid rgba(255,255,255,.28);border-radius:3px;background:transparent;color:#cbd1d8;font:400 10px/1.4 'PT Mono',Menlo,Monaco,Consolas,monospace;cursor:pointer}
+  .paper .copy-btn:hover,.paper .copy-btn:focus-visible{color:#fff;border-color:#fff}
+  .paper .prompt-body{padding:10px 12px}
+  .paper details.prompt-card pre{margin:0;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;overflow:hidden}
+  .paper details.prompt-card code{color:#eef0f2;font:400 12px/1.55 'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper .prompt-src{margin:8px 0 0;color:var(--muted);font:400 11px/1.55 'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper .term{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace;font-size:.88em;color:var(--accent)}
+  .paper figure.diagram{width:114%;max-width:860px;margin:28px 0 18px -7%}
+  .paper figure.diagram{counter-increment:figure}
+  .paper figure.diagram svg{width:100%;height:auto;display:block}
+  .paper figure.diagram figcaption{font:400 11px/1.6 'PT Mono',Menlo,Monaco,Consolas,monospace;color:var(--muted);margin-top:10px;text-align:center}
+  .paper figure.diagram figcaption::before{content:'Рис. ' counter(figure) '. '}
+  .paper figure.diagram svg{background:#f8fafc}
+  .paper figure.diagram svg text{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper figure.diagram svg>rect{fill:#f8fafc;stroke:#1c4e80}
+  .paper figure.diagram svg g rect{fill:#ffffff;stroke:#1c4e80}
+  .paper figure.diagram svg path{stroke:#1c4e80}
+  .paper figure.diagram svg text{fill:#475569}
+  .paper figure.diagram svg text[font-weight="600"]{fill:#1e293b;font-family:system-ui,-apple-system,sans-serif}
+  .paper figure.diagram svg marker#arrow-ink polygon{fill:#1c4e80}
+  .paper figure.diagram svg marker#arrow-accent polygon{fill:#0284c7}
+  .paper .sources{font-size:.96em}
+  .paper .sources li{margin:0 0 8px}
+  @media(min-width:1260px){.paper .page{margin-left:calc((100vw - 1096px)/2);margin-right:0}.paper .prompt-wrap{position:absolute;left:calc(100% + 36px);top:var(--prompt-y,64px);width:320px;margin:0}.paper details.prompt-card[open]{aspect-ratio:210/297;display:flex;flex-direction:column;overflow:hidden}.paper details.prompt-card[open] .prompt-body{flex:1;overflow-y:auto}.paper .prompt-src{margin:8px 0 0}}
+  @media(max-width:840px){body.paper{font-size:16px}.paper .page{padding:48px 18px}.paper figure.diagram{width:100%;max-width:none;margin-left:0}}
+  @media(max-width:700px){.paper figure.diagram{overflow-x:auto;overscroll-behavior-inline:contain}.paper figure.diagram svg{min-width:580px}}
+  @media(max-width:480px){.paper h1{font-size:1.65em}.paper details.prompt-card code{font-size:11px}.paper .page{padding:40px 16px 44px}.paper .toggle-label{display:none}}
+  @page{size:A4;margin:18mm}
+  @media print{body.paper{background:#fff;font-size:10.5pt;line-height:1.55}.paper .page{max-width:none;padding:0}.paper .prompt-wrap{position:static;width:auto;margin:20px 0 26px}.paper details.prompt-card{break-inside:avoid;background:#fff;color:#1a1a1a}.paper details.prompt-card:not([open])>*:not(summary){display:block}.paper details.prompt-card summary{background:#fff;color:#1a1a1a;border-bottom:1px solid var(--hairline)}.paper details.prompt-card code{color:#1a1a1a}.paper .copy-btn,.paper .toggle-label{display:none}.paper figure.diagram{width:100%;margin-left:0;overflow:visible}.paper figure.diagram svg{min-width:0}.paper p{orphans:2;widows:2}.paper h1,.paper h2,.paper h3{break-after:avoid}}
+</style>
+
+<div class="page">
+<header class="masthead">
+  <h1>Как проверить безопасность приложения с помощью AI-агента</h1>
+  <p class="lede">Вы собрали приложение с AI-агентом и собираетесь открыть его пользователям. До запуска нужно проверить, сможет ли один пользователь прочитать чужие данные. Для такой работы OpenAI предлагает цикл Defense Factory.</p>
+</header>
+
+<nav class="toc" aria-label="Содержание">
+  <ul>
+    <li><a href="#problem">С чего начать проверку безопасности</a></li>
+    <li><a href="#boundary">Какие права дать агенту</a></li>
+    <li><a href="#factory">Цикл Defense Factory</a></li>
+    <li><a href="#signal">Как проверить, что уязвимость существует</a></li>
+    <li><a href="#patch">Как исправить уязвимость и проверить результат</a></li>
+    <li><a href="#autonomy">Когда расширять права агента</a></li>
+    <li><a href="#failure">Что делать при остановке проверки</a></li>
+    <li><a href="#ready">Как повторять проверку после изменений</a></li>
+    <li><a href="#sources">Лекция и плейбуки OpenAI</a></li>
+  </ul>
+</nav>
+
+<section id="problem">
+  <h2>С чего начать проверку безопасности</h2>
+  <p>Возьмём сервис, который собирает отчёты для клиентов. Каждый клиент входит в свой аккаунт и видит свои документы. Для проверки безопасности важно выяснить, что произойдёт, если он откроет ссылку на отчёт другой компании.</p>
+  <p>Попросите агента разобраться, где хранятся отчёты и как сервер проверяет доступ к ним. Агенту понадобятся код приложения, описание функций и правила доступа: кто и какие данные должен видеть. По этим материалам он составит карту возможных проблем.</p>
+  <p>Подозрительное место в коде сначала считается гипотезой. Например, агент заметил, что при загрузке отчёта сервер может пропускать проверку владельца. Следующий шаг: запустить тестовую копию приложения и выяснить, действительно ли другой аккаунт получает чужой документ.</p>
+  <p>Если проблема воспроизводится, агент готовит исправление. Затем проверка повторяется: чужой отчёт должен стать недоступным, свой должен открываться. Такой результат можно проверить самому, даже если вы не читаете код.</p>
+</section>
+
+<section id="boundary">
+  <h2>Какие права дать агенту</h2>
+  <p>Первый запуск проходит в режиме чтения: агент изучает код и документацию одного проекта. У него нет ключей рабочей системы, права менять данные и доступа к реальным пользовательским записям.</p>
+  <p>Для запуска проверки нужна отдельная тестовая копия приложения с вымышленными аккаунтами и документами. После работы её можно удалить. История сессии, изменения файлов и результаты проверок сохраняются, чтобы вы могли восстановить действия агента.</p>
+  <p>Права чтения и записи задаются в настройках среды, где работает агент. Просьба в промпте «не трогай рабочую базу» сама по себе доступ к базе не закрывает. Проверьте, что у тестовой среды действительно нет такого подключения.</p>
+
+  <div class="prompt-wrap">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 1. Карта сервиса и границ доверия</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Собери карту безопасности продукта в режиме чтения.
+
+Входы: [ПУТЬ], [ВЕТКА_ИЛИ_COMMIT], [ОПИСАНИЕ], [ВЛАДЕЛЕЦ],
+[ПАПКА_АРТЕФАКТОВ].
+
+Технический профиль: sandbox read-only, сеть отключена, запись разрешена
+только в [ПАПКА_АРТЕФАКТОВ]. Проверь профиль и остановись при расхождении.
+Инструкции дополняют технические ограничения и подтверждения инструментов.
+Исключи рабочую систему, секреты и передачу данных наружу.
+
+Сохрани security-scope.md:
+1. Активы, данные, API, задачи, интеграции и их владельцы.
+2. Точки входа и границы доверия.
+3. Проверки доступа на каждой границе.
+4. Пять вероятных путей риска: актив, вход, условия, ущерб.
+5. Пробелы со статусом UNKNOWN.
+6. Разделы «Разрешено», «Запрещено», «Нужно решение владельца».
+
+Готово, когда каждый актив и путь имеют владельца, проект остался без
+изменений. Заверши PASS или NEEDS_INPUT по каждому критерию.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: составлен по материалам OpenAI; в потоках пока не обкатан.</p>
+  </div>
+
+  <h3>Готово, когда</h3>
+  <ul class="plain">
+    <li>Разрешённые и запрещённые действия записаны.</li>
+    <li>Доступ к рабочей системе и реальные данные отсутствуют.</li>
+    <li>У сессии есть владелец и условие остановки.</li>
+    <li>Действия агента можно восстановить по журналу.</li>
+  </ul>
+  <p><strong>Почему ломает:</strong> широкий доступ превращает ошибку агента в действие над рабочей системой. <strong>Было:</strong> «Проверь проект и исправь всё». <strong>Стало:</strong> «Изучай код этого проекта, пиши только в папку результатов, остановись перед изменением кода или данных».</p>
+</section>
+
+<section id="factory">
+  <h2>Цикл Defense Factory</h2>
+  <p>Defense Factory связывает работу агентов в повторяемый цикл проверки безопасности. Сначала агент описывает приложение и ищет возможные уязвимости. Затем проверяет их в запущенной тестовой копии. Подтверждённую проблему передают тому, кто отвечает за этот участок приложения, и готовят исправление с повторной проверкой.</p>
+  <p>В небольшом проекте ответственным обычно будете вы. Агент может найти ошибку и подготовить правку, а решение о её публикации остаётся за вами. Сохранённые результаты проверки помогают принять это решение: видно, что происходило до изменения и что происходит после.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 960 560" role="img" aria-labelledby="defense-factory-title defense-factory-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="defense-factory-title">Defense Factory внутри безопасного периметра</title>
+      <desc id="defense-factory-desc">Цикл из шести этапов: владелец задаёт границы, агент собирает инвентаризацию и модель угроз, находит кандидатов, проверяет их, убирает дубли и назначает владельца находки, готовит ограниченное исправление, после чего человек проводит ревью и запускает повторную проверку. Результат возвращается в инвентаризацию. Весь цикл работает при изоляции, минимальных правах и журналировании действий.</desc>
+      <defs>
+        <marker id="arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a1a1a" /></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#33567a" /></marker>
+      </defs>
+      <rect width="960" height="560" fill="#fffef9" />
+      <rect x="24" y="28" width="912" height="470" rx="8" fill="#fffef9" stroke="#33567a" stroke-width="1.2" />
+      <rect x="48" y="20" width="196" height="18" rx="3" fill="#fffef9" />
+      <text x="56" y="33" fill="#33567a" font-size="9" font-family="'PT Mono',monospace" letter-spacing="0.12em">БЕЗОПАСНЫЙ ПЕРИМЕТР</text>
+      <g aria-label="Постоянные условия безопасного периметра">
+        <rect x="150" y="54" width="180" height="26" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="240" y="71" fill="#1a1a1a" font-size="10" font-family="'PT Mono',monospace" text-anchor="middle">ИЗОЛЯЦИЯ</text>
+        <rect x="390" y="54" width="180" height="26" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="480" y="71" fill="#1a1a1a" font-size="10" font-family="'PT Mono',monospace" text-anchor="middle">МИНИМАЛЬНЫЕ ПРАВА</text>
+        <rect x="630" y="54" width="180" height="26" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="720" y="71" fill="#1a1a1a" font-size="10" font-family="'PT Mono',monospace" text-anchor="middle">ЖУРНАЛ ДЕЙСТВИЙ</text>
+      </g>
+      <path d="M306 178 H355" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M605 178 H654" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M779 228 V300" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M654 350 H605" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><path d="M355 350 H306" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" />
+      <path d="M56 350 H50 Q42 350 42 342 V100 Q42 92 50 92 H472 Q480 92 480 100 V128" fill="none" stroke="#33567a" stroke-width="1.2" marker-end="url(#arrow-accent)" />
+      <rect x="253" y="85" width="174" height="14" rx="2" fill="#fffef9" /><text x="340" y="95" fill="#33567a" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle" letter-spacing="0.08em">ОБНОВИТЬ КАРТУ РИСКОВ</text>
+      <g aria-label="Этап 1. Границы и владелец"><rect x="56" y="128" width="250" height="100" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="1.2" /><rect x="68" y="140" width="72" height="16" rx="3" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="104" y="151" fill="#33567a" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">ВЛАДЕЛЕЦ</text><text x="181" y="181" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">1. Границы и владелец</text><text x="181" y="204" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">цель · данные · право остановки</text></g>
+      <g aria-label="Этап 2. Инвентаризация и модель угроз"><rect x="355" y="128" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="367" y="140" width="56" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="395" y="151" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">КАРТА</text><text x="480" y="175" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">2. Инвентаризация</text><text x="480" y="193" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">и модель угроз</text><text x="480" y="213" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">активы · входы · границы доверия</text></g>
+      <g aria-label="Этап 3. Кандидаты"><rect x="654" y="128" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="666" y="140" width="64" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="698" y="151" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">СИГНАЛЫ</text><text x="779" y="181" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">3. Кандидаты</text><text x="779" y="204" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">гипотезы о слабых местах</text></g>
+      <g aria-label="Этап 4. Проверка и назначение владельца"><rect x="654" y="300" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="666" y="312" width="72" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="702" y="323" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">EVIDENCE</text><text x="779" y="347" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">4. Проверка, дубли</text><text x="779" y="365" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">и владелец</text><text x="779" y="385" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">доказательство · владелец</text></g>
+      <g aria-label="Этап 5. Ограниченное исправление"><rect x="355" y="300" width="250" height="100" rx="6" fill="#fffef9" stroke="#1a1a1a" /><rect x="367" y="312" width="48" height="16" rx="3" fill="#fffef9" stroke="#1a1a1a" stroke-width="0.8" /><text x="391" y="323" fill="#333" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">ПАТЧ</text><text x="480" y="353" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">5. Ограниченное исправление</text><text x="480" y="376" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">малый diff · регрессионный тест</text></g>
+      <g aria-label="Этап 6. Ревью и повторная проверка"><rect x="56" y="300" width="250" height="100" rx="6" fill="#fffef9" stroke="#33567a" stroke-width="1.2" /><rect x="68" y="312" width="88" height="16" rx="3" fill="#fffef9" stroke="#33567a" stroke-width="0.8" /><text x="112" y="323" fill="#33567a" font-size="8" font-family="'PT Mono',monospace" text-anchor="middle">HUMAN GATE</text><text x="181" y="347" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">6. Ревью</text><text x="181" y="365" fill="#1a1a1a" font-size="14" font-weight="600" font-family="'PT Serif',serif" text-anchor="middle">и повторная проверка</text><text x="181" y="385" fill="#333" font-size="9" font-family="'PT Mono',monospace" text-anchor="middle">человек принимает доказанный результат</text></g>
+      <text x="32" y="536" fill="#333" font-size="8" font-family="'PT Mono',monospace" letter-spacing="0.12em">ЛЕГЕНДА</text><rect x="105" y="524" width="16" height="12" rx="2" fill="#fffef9" stroke="#33567a" /><text x="130" y="534" fill="#333" font-size="8" font-family="'PT Mono',monospace">решение владельца</text><path d="M310 530 H342" fill="none" stroke="#1a1a1a" stroke-width="1.2" marker-end="url(#arrow-ink)" /><text x="354" y="534" fill="#333" font-size="8" font-family="'PT Mono',monospace">рабочий поток</text><path d="M478 530 H510" fill="none" stroke="#33567a" stroke-width="1.2" marker-end="url(#arrow-accent)" /><text x="522" y="534" fill="#333" font-size="8" font-family="'PT Mono',monospace">обратная связь</text>
+    </svg>
+    <figcaption>Минимальная Defense Factory для одного продукта.</figcaption>
+  </figure>
+
+  <p>Начните с одного проекта и одной возможной уязвимости. Это позволит пройти весь цикл и понять, где агенту не хватает контекста. Сохраните карту приложения и результаты проверки для следующего запуска.</p>
+  <ul class="plain">
+    <li><strong>Нет карты системы:</strong> цикл останавливается на инвентаризации.</li>
+    <li><strong>Нет доказательства из запущенного приложения:</strong> предупреждение остаётся кандидатом.</li>
+    <li><strong>Нет владельца и срока:</strong> исправление не начинается.</li>
+    <li><strong>Нет независимой повторной проверки:</strong> находка остаётся открытой.</li>
+  </ul>
+
+  <h3>Что понадобится для своего приложения</h3>
+  <p>Для первого запуска подготовьте агенту код проекта, тестовую копию приложения и правила работы:</p>
+  <ul>
+    <li><strong>Агент разработки:</strong> читает код, запускает проверки и предлагает изменения в пределах выданных прав.</li>
+    <li><strong>Правила и промпты:</strong> описывают задачу, разрешённые действия и ожидаемый результат каждого запуска.</li>
+    <li><strong>Тестовая среда:</strong> отдельная копия приложения с вымышленными данными, которую можно удалить после проверки.</li>
+    <li><strong>Ограниченный доступ:</strong> агент работает только с выбранным проектом. Для правок выделяется ветка, в которой изменения хранятся отдельно от основной версии кода.</li>
+    <li><strong>Журнал действий:</strong> история агента, сохранённые версии кода и результаты тестов. По ним можно восстановить, что агент изменил и проверил.</li>
+  </ul>
+</section>
+
+<section id="signal">
+  <h2>Как проверить, что уязвимость существует</h2>
+  <p>В сервисе отчётов нужно защитить клиентские документы от чужого доступа. Пользователь обращается к ним по ссылке, а сервер решает, выдавать ли содержимое. Чтобы найти слабое место, агенту нужно проследить этот путь и понять, где проверяются права пользователя.</p>
+  <p>Такое описание называют моделью угроз: что защищаем, через какой вход до этого можно добраться и при каких условиях возникает ущерб. Агент использует её, чтобы выбрать проверки. У каждой гипотезы должны быть место в коде и сценарий, который поможет её подтвердить или опровергнуть.</p>
+  <p>Сохраните версию кода, действия тестового пользователя, ожидаемый и фактический результаты. Это и будет доказательством для следующего шага. По нему другой агент или человек сможет повторить проверку.</p>
+
+  <div class="prompt-wrap" style="--prompt-y:64px">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 2. Поиск кандидатов с проверяемыми доказательствами</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Найди кандидатов в пределах утверждённой карты сервиса.
+
+Входы: [ПУТЬ], [SECURITY_SCOPE], [ПРАВИЛА], [КАТЕГОРИИ],
+[ПАПКА_АРТЕФАКТОВ].
+
+Технический профиль: sandbox read-only, сеть отключена, запись разрешена
+только в [ПАПКА_АРТЕФАКТОВ]. Проверь профиль и остановись при расхождении.
+Инструкции дополняют технические ограничения и подтверждения инструментов.
+Исключи рабочую систему, внешнее сканирование и публикацию задач.
+
+Для каждого кандидата укажи актив, место в коде, путь данных, условия
+достижимости, возможный ущерб, доказательство, уверенность и план
+динамической проверки. Объедини одинаковые первопричины. Гипотезы без
+доказательства вынеси отдельно.
+
+Сохрани candidate-findings.md и candidate-findings.json. Все результаты
+имеют статус candidate. Готово, когда дубли объединены, проект не изменён.
+Заверши PASS или FAIL.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: составлен по материалам OpenAI; в потоках пока не обкатан.</p>
+  </div>
+
+  <h3>Пять рабочих статусов</h3>
+  <ul class="status-list">
+    <li><code>candidate</code>: гипотеза с доказательством из кода или конфигурации.</li>
+    <li><code>validated</code>: проблема воспроизведена в запущенном приложении.</li>
+    <li><code>disproven</code>: контролируемая проверка опровергла гипотезу.</li>
+    <li><code>inconclusive</code>: среда или контекст помешали сделать вывод.</li>
+    <li><code>duplicate</code>: первопричина уже представлена основной находкой.</li>
+  </ul>
+  <p>Несколько предупреждений могут указывать на одну ошибку. Попросите агента объединить их, чтобы исправление попало в одну задачу. В одном внутреннем прогоне OpenAI 37% находок оказались дублями. После проверки в запущенном приложении доля ложных срабатываний среди прошедших её находок составила 0,81%. Эти числа относятся к тому прогону.</p>
+  <p>Подтверждённой проблеме нужен ответственный за исправление. В команде это человек, который знает соответствующий участок кода. В собственном проекте вы принимаете задачу и решаете, когда её исправлять. Запишите это решение вместе с результатом проверки.</p>
+  <p><strong>Почему ломает:</strong> оценка «критично» ещё не объясняет, может ли пользователь воспользоваться ошибкой. <strong>Было:</strong> «Критично, срочно исправить». <strong>Стало:</strong> «Сервер может отдавать чужой отчёт. Нужно проверить доступ из второго тестового аккаунта».</p>
+
+  <h3>Учебный кейс с двумя аккаунтами</h3>
+  <p>В тестовой среде аккаунт A создаёт отчёт «Продажи августа». Аккаунт B входит в отдельном окне и открывает адрес отчёта через обычный интерфейс. Безопасный результат: сервер возвращает отказ, содержимое отчёта отсутствует в ответе и на экране.</p>
+  <p>Если B получает отчёт A, проверка останавливается, а в доказательстве остаются только синтетические идентификаторы. Реальные данные сюда не попадают.</p>
+
+  <div class="prompt-wrap" style="--prompt-y:640px">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 3. Проверка находки в изолированной среде</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Проверь утверждённые ID в одноразовой изолированной среде.
+
+Входы: [ПУТЬ], [CANDIDATE_FINDINGS], [ID], [ИНСТРУКЦИЯ],
+[FIXTURE_A], [FIXTURE_B], [ССЫЛКА_НА_TEST_SECRET_STORE],
+[ПАПКА_АРТЕФАКТОВ]. Используй псевдонимы тестовых данных. Логины,
+пароли и токены в промпт и доказательство не включай.
+
+Технический профиль: workspace-write ограничен временным root, сеть
+отключена, папка доказательств лежит вне среды. Проверь профиль. Инструкции
+дополняют sandbox и подтверждения инструментов.
+
+Создай среду с синтетическими данными. Для каждой находки запиши версию
+кода и ожидаемое поведение, выполни один минимальный сценарий, присвой
+validated, disproven или inconclusive, сохрани обезличенное доказательство.
+Для validated предложи владельца, срок и эскалацию. Сбой среды отдели от
+результата проверки.
+
+После сохранения доказательства удали заранее разрешённый точный путь или
+дождись заданного времени жизни. При неоднозначном пути остановись.
+Заверши PASS или FAIL.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: составлен по материалам OpenAI; в потоках пока не обкатан.</p>
+  </div>
+  <p><strong>Готово, когда:</strong> находка получила один статус, подтверждение содержит версию кода и обезличенный результат, владелец принял задачу и срок.</p>
+</section>
+
+<section id="patch">
+  <h2>Как исправить уязвимость и проверить результат</h2>
+  <p>Попросите агента сначала добавить тест, который воспроизводит найденную ошибку, затем исправить её причину. Тест должен показывать проблему до изменения кода и проходить после. Когда код меняется, исходный сценарий проверяют снова.</p>
+  <p>В кейсе с отчётами серверу нужна проверка владельца: A видит свой отчёт, B получает отказ. Отдельному агенту передают описание проблемы и правку. Он повторяет оба сценария, чтобы проверить результат независимо от того, кто менял код. Такой шаг OpenAI показала в демонстрации Defense Factory.</p>
+
+  <div class="prompt-wrap">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 4. Узкое исправление и независимая проверка</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Подготовь минимальное исправление одной подтверждённой находки.
+
+Входы: [ПУТЬ], [ID], [ДОКАЗАТЕЛЬСТВО], [ПРАВИЛА], [ВЕТКА],
+[ПАПКА_АРТЕФАКТОВ].
+
+Технический профиль: изолированный worktree с workspace-write, сеть
+отключена, запись разрешена только в worktree и папку артефактов. Проверь
+профиль. Инструкции дополняют sandbox и подтверждения инструментов.
+Исключи слияние, отправку ветки, публикацию и соседние функции.
+
+Назови первопричину. Добавь проверку, которая показывает проблему до
+правки. Исправь первопричину малым изменением. Проверь опасный, обычный и
+соседний сценарии. Передай отдельному агенту исходное доказательство,
+разницу изменений и критерии. Он повторяет исходный и обычный сценарии.
+
+Сохрани patch-review.md, verification-report.md и локальную разницу.
+Заверши READY_FOR_HUMAN_REVIEW или BLOCKED.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: составлен по материалам OpenAI; в потоках пока не обкатан.</p>
+  </div>
+
+  <p>Проверяйте и запрет, и обычную работу приложения. Исправление, которое закрывает все отчёты для всех пользователей, тоже уберёт утечку. Поэтому нужно убедиться, что владелец по-прежнему видит свой документ.</p>
+  <p>В задаче на исправление достаточно сохранить версию кода, причину ошибки и результаты двух проверок. Например: аккаунт B теперь получает отказ, аккаунт A видит свой отчёт. Добавьте ссылку на результат повторной проверки и укажите, кто принимает правку.</p>
+  <p><strong>Почему ломает:</strong> большая правка скрывает побочные эффекты и усложняет проверку. <strong>Было:</strong> «Исправь весь отчёт безопасности». <strong>Стало:</strong> «Исправь доступ к чужому отчёту отдельной правкой. Передай другому агенту изменения и исходный сценарий для повторного теста».</p>
+  <p><strong>Готово, когда:</strong> правка ограничена одной первопричиной, отдельная сессия повторила опасный и обычный сценарии, результат ждёт проверки человеком.</p>
+</section>
+
+<section id="autonomy">
+  <h2>Когда расширять права агента</h2>
+  <p>Права агента можно расширять по мере накопления опыта работы с ним. Начните с чтения кода и отчёта. Когда результаты удаётся воспроизвести и принять, можно разрешить подготовку правки в отдельной ветке. Публикацию изменений продолжает подтверждать человек.</p>
+
+  <ol class="plain">
+    <li><strong>Чтение и отчёт.</strong> Агент видит код и документацию, сохраняет результаты в папке проекта.</li>
+    <li><strong>Локальная правка.</strong> Агент меняет код в отдельной ветке и сохраняет результаты тестов.</li>
+    <li><strong>Разбор предупреждений.</strong> Агент объединяет дубли, предлагает приоритет и владельца.</li>
+    <li><strong>Изменения в списке задач.</strong> Агент предлагает обновить статус или добавить комментарий к задаче. Запись подтверждает человек.</li>
+  </ol>
+  <p>Включение правки в основную версию кода, публикация и доступ к рабочим данным требуют вашего подтверждения.</p>
+  <p>Заранее решите, сколько запусков вы проверите, какая доля ложных тревог допустима и при каких ошибках отзовёте права. По этой истории будет видно, какую работу можно доверить агенту. При доступе к деньгам или клиентским данным требования к проверке должны учитывать возможный ущерб.</p>
+
+  <div class="prompt-wrap">
+  <details class="prompt-card">
+    <summary><span class="prompt-name">Промпт 5. Решение о следующем уровне автономности</span><span class="prompt-actions"><span class="toggle-label" aria-hidden="true"></span><button class="copy-btn" type="button" aria-label="Скопировать промпт">Копировать</button></span></summary>
+    <div class="prompt-body"><pre><code>Оцени готовность к одному следующему уровню автономности.
+
+Входы: [ИСТОРИЯ], [РЕШЕНИЯ], [МЕТРИКИ], [ТЕКУЩИЕ_ПРАВА],
+[МИНИМАЛЬНАЯ_ВЫБОРКА], [ПОРОГ], [ВЛАДЕЛЕЦ].
+
+Технический профиль: история и трекер доступны только для чтения, сеть
+отключена, запись разрешена в папку результата. Проверь профиль. Инструкции
+дополняют sandbox и подтверждения инструментов. Запись в трекер требует
+подтверждения человека.
+
+Оцени один уровень. Покажи разрешённые действия, запреты, число прогонов,
+принятые результаты, ложные тревоги и откаты. Задай условие возврата прав
+и дату пересмотра. При малой выборке или превышенном пороге сохрани права.
+При успехе только порекомендуй новый уровень. Слияние, публикация, рабочая
+система, секреты и высокий ущерб всегда требуют человека.
+
+Сохрани autonomy-decision.md. Заверши KEEP_LEVEL или RECOMMEND_ADVANCE.</code></pre></div>
+  </details>
+  <p class="prompt-src">Источник: составлен по материалам OpenAI; в потоках пока не обкатан.</p>
+  </div>
+  <p><strong>Почему ломает:</strong> сильная демонстрация ещё не доказывает стабильность процесса. <strong>Было:</strong> «Агент справился, дай ему больше прав». <strong>Стало:</strong> «После достижения заданного порога подготовь рекомендацию, права изменит владелец отдельным решением».</p>
+  <p><strong>Готово, когда:</strong> рекомендация опирается на историю запусков, действия с серьёзными последствиями закреплены за владельцем, условие отката записано.</p>
+</section>
+
+<section id="failure">
+  <h2>Что делать при остановке проверки</h2>
+  <p>При нехватке данных или прав агент останавливает проверку. Он сохраняет полученные результаты и объясняет, что мешает продолжить. Следующий шаг выбирает человек, который отвечает за проект.</p>
+  <ul>
+    <li><strong>Среда не запускается.</strong> Статус <code>inconclusive</code>, отдельно записана причина сбоя запуска.</li>
+    <li><strong>Находка не воспроизводится.</strong> Статус <code>disproven</code> при корректно работающем стенде.</li>
+    <li><strong>Нужны реальные данные.</strong> Проверка остановлена, запрос сформулирован без копирования данных.</li>
+    <li><strong>Правка меняет обычный сценарий.</strong> Результат <code>BLOCKED</code>, изменения остаются локальными.</li>
+    <li><strong>Нужны дополнительные права.</strong> Агент перечисляет конкретные действия и ожидаемую пользу, владелец решает отдельно.</li>
+  </ul>
+</section>
+
+<section id="ready">
+  <h2>Как повторять проверку после изменений</h2>
+  <p>Изменения в авторизации, оплате или обмене данными могут затронуть уже проверенные ограничения доступа. Сохраните тесты и запускайте их после таких правок. Перед публикацией очередной версии проверьте, что у результатов есть доказательства и ответственный человек.</p>
+  <ul class="plain">
+    <li>Карта приложения отражает текущие функции и правила доступа.</li>
+    <li>Агент работает в тестовой среде с согласованными правами.</li>
+    <li>У каждой найденной проблемы есть статус и результат проверки. Повторы объединены.</li>
+    <li>Подтверждённые ошибки получили ответственного и срок исправления.</li>
+    <li>Отдельный агент повторил тесты: чужие данные недоступны, обычные функции работают.</li>
+    <li>Вы проверили правку перед публикацией и повторили исходный сценарий после неё.</li>
+  </ul>
+  <p>Следующий запуск использует сохранённые тесты и карту приложения. Когда добавляется новая функция, обновите правила доступа и поручите агенту проверить её по тому же циклу.</p>
+  <p>Для следующего шага пригодятся мой <a href="/blog/clawdbot-personal-ai-assistant/">разбор реального агентного инцидента</a>, гайд по <a href="/blog/cc-alias-bypass-permissions/">режимам прав агента разработки</a> и практика <a href="/blog/playwright-e2e-with-ai-agent/">пользовательских проверок через Playwright</a>.</p>
+  <p>Если хочешь научиться ставить агентам такие задачи и проверять результат, приходи в <a href="https://t.me/hashslash_bot?start=vibecoding">Кружок Вайбкодинга</a>.</p>
+</section>
+
+<section id="sources" class="sources">
+  <h2>Лекция и плейбуки OpenAI</h2>
+  <ol>
+    <li><a href="https://openai.com/business/learn/intelligence-at-work-cyber/">Intelligence at Work: Cyber</a>: запись лекции OpenAI от 3 сентября 2026 года с демонстрацией проверки приложения.</li>
+    <li><a href="https://openai.com/the-defense-factory/">Defense Factory</a>: устройство цикла и результаты внутренних проверок OpenAI.</li>
+    <li><a href="https://cdn.openai.com/defense-factory/downloads/defense-factory-playbook.pdf">Defense Factory Playbook</a>: схемы работы, устройство тестовых сред и примеры скиллов.</li>
+    <li><a href="https://openai.com/index/the-defenders-window/">The Defender’s Window</a>: план внедрения AI в проверку безопасности.</li>
+    <li><a href="https://developers.openai.com/codex/security">Codex Security</a>: как устроены модель угроз, поиск уязвимостей, проверка и подготовка исправления.</li>
+    <li><a href="https://developers.openai.com/codex/concepts/sandboxing">Изоляция среды Codex</a>: настройка прав агента и подтверждений действий.</li>
+  </ol>
+</section>
+</div>
+
+<script>
+if(location.protocol==='file:'){
+  document.body.classList.add('paper');
+  Array.from(document.body.childNodes).forEach(function(node){
+    if(node.nodeType===Node.TEXT_NODE && /^\s*---[\s\S]*cta_code:/m.test(node.textContent||'')){
+      node.remove();
+    }
+  });
+  document.title='Как проверить безопасность приложения с помощью AI-агента';
+}
+document.querySelectorAll('.prompt-card .copy-btn').forEach(function(button){
+  button.addEventListener('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var text=button.closest('.prompt-card').querySelector('code').innerText;
+    var copy=location.protocol!=='file:'&&navigator.clipboard&&navigator.clipboard.writeText
+      ? navigator.clipboard.writeText(text)
+      : new Promise(function(resolve){
+          var area=document.createElement('textarea');
+          area.value=text;
+          area.style.position='fixed';
+          area.style.opacity='0';
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+          resolve();
+        });
+    copy.then(function(){
+      button.textContent='Скопировано';
+      window.setTimeout(function(){button.textContent='Копировать'},1400);
+    });
+  });
+});
+</script>
