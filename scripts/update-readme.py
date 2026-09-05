@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate the "Последние статьи" table and post count in README.md.
 
-Source of truth: content/blog/*.md frontmatter (title, date, draft).
+Source of truth: content/blog/*.{md,html} frontmatter (title, date, draft, robots).
 Idempotent. Run standalone or from the pre-commit hook.
 
 Anchors (structural, no special markers needed):
@@ -34,13 +34,13 @@ def fail(msg: str) -> int:
 
 
 def parse_frontmatter(text: str) -> dict:
-    """Return {title, date, draft} from the first --- ... --- block."""
+    """Return {title, date, draft, robots} from the first --- ... --- block."""
     m = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
     fm = {}
     if not m:
         return fm
     for line in m.group(1).splitlines():
-        mm = re.match(r"^(title|date|draft):\s*(.*)$", line)
+        mm = re.match(r"^(title|date|draft|robots):\s*(.*)$", line)
         if mm:
             k, v = mm.group(1), mm.group(2).strip()
             v = re.sub(r'^"(.*)"$', r"\1", v)
@@ -51,11 +51,13 @@ def parse_frontmatter(text: str) -> dict:
 
 def collect_posts():
     posts = []
-    for f in sorted(BLOG_DIR.glob("*.md")):
-        if f.name == "_index.md":
+    for f in sorted([*BLOG_DIR.glob("*.md"), *BLOG_DIR.glob("*.html")]):
+        if f.stem == "_index":
             continue
         fm = parse_frontmatter(f.read_text(encoding="utf-8"))
         if str(fm.get("draft", "")).lower() == "true":
+            continue
+        if "noindex" in str(fm.get("robots", "")).lower():
             continue
         title = fm.get("title", "").strip()
         date = fm.get("date", "").strip()

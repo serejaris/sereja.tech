@@ -1082,3 +1082,23 @@ Prepare a source-backed Day One article about GPT-6 Astra with the official Open
 - Artificial Analysis measurements are scoped to its harness and attributed to the official thread.
 - The user-demo section identifies the author, links the original X post, shows the video, and states the limits of the evidence.
 - Article videos stay within the content column and never overlap the desktop table of contents.
+
+## M21 — SDLC article release preparation
+
+Status: `[x]`
+
+### Goal
+
+Publish the founder-approved SDLC guide at `/blog/sdlc-agent-cycle/` through the existing PR #170 and Git-connected Vercel. Editorial tracking and production verification: [corp-content #61](https://github.com/serejaris/corp-content/issues/61).
+
+### Tasks
+
+- [x] Preserve the approved platform-independent task layer and configurable worker model.
+- [x] Correct the bot example against its source: the repeated checks stopped at the platform limit; success is unconfirmed.
+- [x] Add concise search metadata, dated publication metadata, an updated social preview, three contextual outbound links and two inbound links.
+- [x] Verify the article with independent fact and editorial review, Hugo build, rendered metadata and discovery checks.
+- [x] Capture desktop 1440×900 and mobile 390 px visual evidence for PR #170.
+
+### Release evidence
+
+The release status, final commit and live HTTP checks are recorded in corp-content #61. Production uses the existing Git integration; the URL and slash policy stay fixed.
