@@ -3,8 +3,10 @@
 <meta name="author" content="{{ .Site.Params.author }}">
 {{ with .Keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
 <link rel="canonical" href="{{ .Permalink }}">
+{{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ else }}
 {{ if eq .Kind "taxonomy" }}<meta name="robots" content="noindex, follow">{{ end }}
 {{ if eq .Kind "term" }}<meta name="robots" content="noindex, follow">{{ end }}
+{{ end }}
 
 <!-- Open Graph -->
 <meta property="og:title" content="{{ .Title }}">

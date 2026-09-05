@@ -1,5 +1,5 @@
 ---
-title: "Обзор Claude Fable 5.1: бенчмарки, отзывы, промптинг"
+title: "Обзор Claude Fable 5.1 [Вариант 1: Bento Grid]"
 date: 2026-09-02
 description: "Обзор Claude Fable 5.1: бенчмарки против Fable 5, 22 кейса партнёров, системная карта по главам, первые отзывы в X и 14 промптов из гайда Anthropic."
 tags: ["anthropic", "claude-code", "claude-fable-5-1"]
@@ -18,8 +18,23 @@ faq:
     a: "Недельные лимиты подписок сбросили, до 13 сентября 2026 недельный лимит Claude Code выше обычного на 50%. Это видно на экране Usage в аккаунте Max, в анонсе этого нет. Скидка на чтение кэша действует только в API, в подписках Pro и Max лимиты считаются как раньше."
   - q: "Как промптить Fable 5.1?"
     a: "Вместе с моделью Anthropic выпустила официальный гайд по промптингу. В статье 14 промптов из гайда в оригинале, для каждого указано, куда его класть."
+slug: "claude-fable-5-1-v1"
+sitemap_exclude: true
+robots: "noindex, nofollow"
 ---
+
 <button class="theme-btn" id="themeBtn" aria-label="Переключить тему">☾</button>
+
+<nav class="article-variant-switcher" aria-label="Сравнение вариантов статьи">
+  <div class="avs-group">
+    <span class="avs-label">Вариант:</span>
+    <a href="/blog/claude-fable-5-1-v1/" class="avs-link is-active" aria-current="page">1. Bento Grid (Каталог)</a>
+    <a href="/blog/claude-fable-5-1-v2/" class="avs-link">2. Master-Detail (Досье)</a>
+    <a href="/blog/claude-fable-5-1-v3/" class="avs-link">3. Unified Rail (Один слайдер)</a>
+    <a href="/blog/claude-fable-5-1/" class="avs-link" style="opacity:0.65">Было (7 слайдеров)</a>
+  </div>
+  <span class="avs-hint">Концепт 1: Каталог 22 кейсов без каруселей</span>
+</nav>
 
 <div class="page"><header class="masthead">
 <p class="kicker">Fable 5.1 · Релиз 1 сентября 2026</p>
@@ -158,8 +173,7 @@ faq:
 
 </div>
 </header>
-</header>
-<nav class="toc" aria-label="Содержание"><ul><li><a href="#model">Claude Fable 5.1</a></li><li><a href="#reliz">Что вышло</a></li><li><a href="#usilie">Бенчмарки по уровням усилия</a></li><li><a href="#nauka">Три научных результата</a></li><li><a href="#oblasti">Кейсы партнёров по областям работы</a></li><li><a href="#coding">1. Агентный кодинг и долгие автономные прогоны</a></li><li><a href="#debug">2. Отладка и разбор инцидентов</a></li><li><a href="#research">3. Исследовательские задачи</a></li><li><a href="#finance">4. Финансы и документы</a></li><li><a href="#writing">5. Письмо и знаниевая работа</a></li><li><a href="#agents">6. Агенты с инструментами</a></li><li><a href="#price">7. Цена и скорость</a></li><li><a href="#syscard">Системная карта: риски, взломы и лимиты</a></li><li><a href="#prompting">Как промптить Fable 5.1</a></li><li><a href="#otzyvy">Пеликаны Simon Willison</a></li><li><a href="#video-zhir">Самый жир: боевые видео и расход лимитов</a></li><li><a href="#otzyvy-x">Первые отзывы в X</a></li><li><a href="#istochniki">Первоисточник</a></li></ul></nav>
+<nav class="toc" aria-label="Содержание"><ul><li><a href="#model">Claude Fable 5.1</a></li><li><a href="#reliz">Что вышло</a></li><li><a href="#usilie">Бенчмарки по уровням усилия</a></li><li><a href="#nauka">Три научных результата</a></li><li><a href="#oblasti">Кейсы партнёров по областям работы</a></li><li><a href="#coding">1. Агентный кодинг и долгие автономные прогоны</a></li><li><a href="#debug">2. Отладка и разбор инцидентов</a></li><li><a href="#research">3. Исследовательские задачи</a></li><li><a href="#finance">4. Финансы и документы</a></li><li><a href="#writing">5. Письмо и знаниевая работа</a></li><li><a href="#agents">6. Агенты с инструментами</a></li><li><a href="#price">7. Цена и скорость</a></li><li><a href="#syscard">Системная карта: риски, взломы и лимиты</a></li><li><a href="#prompting">Как промптить Fable 5.1</a></li><li><a href="#otzyvy">Пеликаны Simon Willison</a></li><li><a href="#otzyvy-x">Первые отзывы в X</a></li><li><a href="#istochniki">Первоисточник</a></li></ul></nav>
 
 <section id="model" style="padding-top:0"><div class="mcard">
 <div class="mhead"><span class="mname">Claude Fable 5.1</span><span class="mid">claude-fable-5-1</span></div>
@@ -222,18 +236,24 @@ faq:
 </section>
 
 <section id="oblasti"><h2>Кейсы партнёров по областям работы</h2>
-<p>Семь областей, 22 компании. Одна компания попадает в одну область по главному сюжету цитаты. Выбирайте категорию в фильтре ниже, чтобы посмотреть нужные кейсы в Bento-сетке.</p>
+<p>Семь областей, 22 компании. Ниже — интерактивный Bento-каталог: выбирайте категорию или находите нужный кейс через быстрый поиск.</p>
 <figure><svg viewBox="0 0 1040 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Число кейсов по областям">
 <style>.l{font:400 17px 'PT Serif',Georgia,serif;fill:var(--ink)}.n{font:400 14px 'PT Mono',monospace;fill:var(--ink)}.c{font:400 12px 'PT Mono',monospace;fill:var(--bar-text)}rect{fill:var(--bar)}a:hover rect{fill:var(--accent)}</style>
-<g transform="translate(330,10)"><a href="#coding"><g transform="translate(0,0)"><rect width="600" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Агентный кодинг и долгие автономные прогоны</text><text class="n" x="612" y="23">6</text><text class="c" x="10" y="23">Jane Street · Cognition · MongoDB · Ramp · Shopify · SpaceXAI</text></g></a><a href="#debug"><g transform="translate(0,50)"><rect width="400" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Отладка и разбор инцидентов</text><text class="n" x="412" y="23">4</text><text class="c" x="10" y="23">Millennium · Red Hat · Datadog · Plaid</text></g></a><a href="#finance"><g transform="translate(0,150)"><rect width="400" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Финансы и документы</text><text class="n" x="412" y="23">4</text><text class="c" x="10" y="23">Rogo · Samaya · Hebbia · Crosby</text></g></a><a href="#research"><g transform="translate(0,100)"><rect width="300" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Исследовательские задачи</text><text class="n" x="312" y="23">3</text><text class="c" x="10" y="23">IMC · Rakuten · iGent</text></g></a><a href="#writing"><g transform="translate(0,200)"><rect width="200" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Письмо и знаниевая работа</text><text class="n" x="212" y="23">2</text><text class="c" x="10" y="23">Canva · Glean</text></g></a><a href="#agents"><g transform="translate(0,250)"><rect width="200" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Агенты с инструментами</text><text class="n" x="212" y="23">2</text><text class="c" x="10" y="23">Browserbase · Block</text></g></a><a href="#price"><g transform="translate(0,300)"><rect width="100" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Цена и скорость</text><text class="n" x="112" y="23">1</text><text class="c" x="10" y="23">Every</text></g></a></g></svg><figcaption>Число компаний в каждой области. Всего 22 отзыва.</figcaption></figure></section>
+<g transform="translate(330,10)"><a href="#coding"><g transform="translate(0,0)"><rect width="600" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Агентный кодинг и долгие автономные прогоны</text><text class="n" x="612" y="23">6</text><text class="c" x="10" y="23">Jane Street · Cognition · MongoDB · Ramp · Shopify · SpaceXAI</text></g></a><a href="#debug"><g transform="translate(0,50)"><rect width="400" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Отладка и разбор инцидентов</text><text class="n" x="412" y="23">4</text><text class="c" x="10" y="23">Millennium · Red Hat · Datadog · Plaid</text></g></a><a href="#finance"><g transform="translate(0,150)"><rect width="400" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Финансы и документы</text><text class="n" x="412" y="23">4</text><text class="c" x="10" y="23">Rogo · Samaya · Hebbia · Crosby</text></g></a><a href="#research"><g transform="translate(0,100)"><rect width="300" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Исследовательские задачи</text><text class="n" x="312" y="23">3</text><text class="c" x="10" y="23">IMC · Rakuten · iGent</text></g></a><a href="#writing"><g transform="translate(0,200)"><rect width="200" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Письмо и знаниевая работа</text><text class="n" x="212" y="23">2</text><text class="c" x="10" y="23">Canva · Glean</text></g></a><a href="#agents"><g transform="translate(0,250)"><rect width="200" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Агенты с инструментами</text><text class="n" x="212" y="23">2</text><text class="c" x="10" y="23">Browserbase · Block</text></g></a><a href="#price"><g transform="translate(0,300)"><rect width="100" height="34" fill="#1a1a1a"/><text class="l" x="-14" y="23" text-anchor="end">Цена и скорость</text><text class="n" x="112" y="23">1</text><text class="c" x="10" y="23">Every</text></g></a></g></svg><figcaption>Число компаний в каждой области. Всего 22 отзыва.</figcaption></figure>
+</section>
 </div>
 
-</div>
-
-<!-- Bento Grid 22 Partner Cases (Clean Filter Pills Only) -->
 <div class="bento-container" id="bentoApp">
   <div class="bento-filter-sticky" id="bentoFilterBar">
     <div class="bento-filter-inner">
+      <div class="bento-search-row">
+        <div class="bento-search-box">
+          <svg class="bento-search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" class="bento-search-input" id="bentoSearchInput" placeholder="Поиск по 22 компаниям и отзывам..." autocomplete="off" aria-label="Поиск по кейсам">
+          <button type="button" class="bento-search-clear" id="bentoSearchClear" aria-label="Очистить поиск" title="Очистить" style="display:none;">×</button>
+        </div>
+        <div class="bento-counter-badge" id="bentoCounter">22 из 22</div>
+      </div>
       <div class="bento-pills-row" role="tablist" aria-label="Фильтр по категориям">
         <button type="button" class="bento-pill active" data-filter="all" role="tab" aria-selected="true"><span class="pill-dot"></span>Все <span class="bento-pill-count">22</span></button>
         <button type="button" class="bento-pill" data-filter="coding" role="tab" aria-selected="false">Кодинг <span class="bento-pill-count">6</span></button>
@@ -328,7 +348,6 @@ faq:
         </article>
       </div>
     </section>
-
     <section id="debug" class="bento-category-section" data-category="debug">
       <div class="bento-category-head">
         <h2 class="bento-category-title">2. Отладка и разбор инцидентов</h2>
@@ -385,7 +404,6 @@ faq:
         </article>
       </div>
     </section>
-
     <section id="research" class="bento-category-section" data-category="research">
       <div class="bento-category-head">
         <h2 class="bento-category-title">3. Исследовательские задачи</h2>
@@ -430,7 +448,6 @@ faq:
         </article>
       </div>
     </section>
-
     <section id="finance" class="bento-category-section" data-category="finance">
       <div class="bento-category-head">
         <h2 class="bento-category-title">4. Финансы и документы</h2>
@@ -487,7 +504,6 @@ faq:
         </article>
       </div>
     </section>
-
     <section id="writing" class="bento-category-section" data-category="writing">
       <div class="bento-category-head">
         <h2 class="bento-category-title">5. Письмо и знаниевая работа</h2>
@@ -509,7 +525,7 @@ faq:
         <article class="bento-card" data-category="writing" data-partner="Glean">
           <div class="bento-card-header">
             <div class="partner-head">
-              <span class="partner-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2zm6.5 1.5l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"/></svg></span>
+              <span class="partner-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2zm6.5 1.5l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"/></svg></span>
               <span class="partner-name">Glean</span>
             </div>
             <span class="bento-cat-tag">Знания</span>
@@ -520,7 +536,6 @@ faq:
         </article>
       </div>
     </section>
-
     <section id="agents" class="bento-category-section" data-category="agents">
       <div class="bento-category-head">
         <h2 class="bento-category-title">6. Агенты с инструментами</h2>
@@ -553,7 +568,6 @@ faq:
         </article>
       </div>
     </section>
-
     <section id="price" class="bento-category-section" data-category="price">
       <div class="bento-category-head">
         <h2 class="bento-category-title">7. Цена и скорость</h2>
@@ -575,8 +589,13 @@ faq:
       </div>
     </section>
   </div>
-</div>
 
+  <div class="bento-no-results" id="bentoNoResults" style="display:none;">
+    <p class="bento-no-results-title">Ничего не найдено</p>
+    <p class="bento-no-results-text">По запросу <strong id="bentoSearchQueryDisplay"></strong> ничего не найдено среди кейсов партнёров.</p>
+    <button type="button" class="bento-reset-btn" id="bentoResetAllBtn">Сбросить поиск и фильтры</button>
+  </div>
+</div>
 <div class="page"><section id="syscard"><h2>Системная карта: риски, взломы и лимиты</h2>
 <div class="sc-intro">
 <a href="https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20%26%20Claude%20Mythos%205.1%20System%20Card.pdf" target="_blank" rel="noopener"><img width="510" height="660" class="sc-thumb" src="/images/blog/fable51/pervaya-stranica-sistemnoy-karty.png" alt="Первая страница системной карты"></a>
@@ -682,52 +701,6 @@ Instead, when the person has asked for a long or effort-intensive deliverable su
 </div>
 <p>На max появились шлем, корзина с рыбой и ноги по обе стороны рамы. Анимацию он попросил следующим промптом "animate this" на уровне high за $1.37. Сравнения с прошлыми моделями в посте нет, есть одна оговорка: до размаха Gemini 3.7 Flash пеликан не дотягивает. Картинки из его поста.</p>
 </section></div>
-<section id="video-zhir">
-  <div class="page">
-    <h2>Самый жир: боевые видео и расход лимитов</h2>
-    <p class="intro">Два самых резонансных видео первых суток: как Fable 5.1 спалила $218 всего за три промпта и честный баттл против GPT-5.6 Sol в Blender 3D на реальном плане квартиры.</p>
-  </div>
-  <div class="video-zhir-grid">
-    <article class="video-zhir-card">
-      <div class="video-zhir-header">
-        <span class="video-zhir-badge danger">$218 за 3 промпта</span>
-        <h3 class="video-zhir-title">Тестирование агентного расхода</h3>
-        <div class="video-zhir-author"><a href="https://x.com/rileybrown/status/2095005898095653302" target="_blank" rel="noopener">@rileybrown</a> · 1 сентября 2026</div>
-      </div>
-      <div class="video-zhir-media">
-        <video width="900" height="582" controls preload="none" poster="/images/blog/fable51/rileybrown-218-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/rileybrown-218.mp4"></video>
-      </div>
-      <div class="video-zhir-body">
-        <p>Три промпта на Fable 5.1 обошлись в $218. Модель поднимает глубокие циклы рассуждений и сжигает квоты с беспрецедентной скоростью.</p>
-        <div class="video-zhir-stats">
-          <div class="video-zhir-stat-item"><span class="video-zhir-stat-val">$218</span><span class="video-zhir-stat-lbl">Расход API</span></div>
-          <div class="video-zhir-stat-item"><span class="video-zhir-stat-val">3</span><span class="video-zhir-stat-lbl">Промпта</span></div>
-          <div class="video-zhir-stat-item"><span class="video-zhir-stat-val">High</span><span class="video-zhir-stat-lbl">Усилие</span></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="video-zhir-card">
-      <div class="video-zhir-header">
-        <span class="video-zhir-badge battle">3D Blender Shootout</span>
-        <h3 class="video-zhir-title">Fable 5.1 против GPT-5.6 Sol</h3>
-        <div class="video-zhir-author"><a href="https://x.com/ctgptlb/status/2094925117344428232" target="_blank" rel="noopener">@ctgptlb</a> · 1 сентября 2026</div>
-      </div>
-      <div class="video-zhir-media">
-        <video width="900" height="506" controls preload="none" poster="/images/blog/fable51/ctgptlb-blender-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/ctgptlb-blender.mp4"></video>
-      </div>
-      <div class="video-zhir-body">
-        <p>Одна задача обеим моделям: из плана квартиры собрать 3D в Blender, отрендерить кадры и прогулочное видео. Sol: 30 минут, 6 кадров, 36 секунд видео. Fable 5.1: 111 минут, 14 кадров, 44 секунды.</p>
-        <div class="video-zhir-stats">
-          <div class="video-zhir-stat-item"><span class="video-zhir-stat-val">111 мин</span><span class="video-zhir-stat-lbl">Fable 5.1</span></div>
-          <div class="video-zhir-stat-item"><span class="video-zhir-stat-val">30 мин</span><span class="video-zhir-stat-lbl">GPT-5.6 Sol</span></div>
-          <div class="video-zhir-stat-item"><span class="video-zhir-stat-val">14 vs 6</span><span class="video-zhir-stat-lbl">3D кадров</span></div>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
 <section id="otzyvy-x"><div class="page"><h3>Первые отзывы в X</h3>
 <p>33 поста за первые сутки, разложены по полкам. Тексты пересказаны по полным постам, картинки и видео из них.</p></div>
 <div class="page"><h4>Восторг: интеллект и длинные задачи</h4>
@@ -738,7 +711,7 @@ Instead, when the person has asked for a long or effort-intensive deliverable su
 <div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card wide"><p><a href="https://x.com/bridgemindai/status/2094894312370692443" target="_blank" rel="noopener">@bridgemindai</a>. Mario Kart <dfn data-def="One-shot: результат с первого промпта, без правок и уточнений.">одним промптом</dfn>. Автор называет это одним из лучших результатов по геймдеву, что видел, и большим шагом от Fable 5. Самый просматриваемый пост подборки, 222 тысячи просмотров.</p><div class="tw-media"><video width="900" height="546" controls preload="none" poster="/images/blog/fable51/bridgemindai-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/bridgemindai.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/knowixbuilds/status/2094899477626720403" target="_blank" rel="noopener">@knowixbuilds</a>. Средневековое воксельное королевство одним промптом: 2.4 миллиона вокселей, 1500 солдат, 160 NPC с работой, которые реагируют на осаду, интерьеры зданий.</p><div class="tw-media"><video width="900" height="399" controls preload="none" poster="/images/blog/fable51/knowixbuilds-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/knowixbuilds.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/spicey_lemonade/status/2094853588216631612" target="_blank" rel="noopener">@spicey_lemonade</a>. Minecraft одним промптом. Подпись из трёх слов, 228 тысяч просмотров.</p><div class="tw-media"><video width="900" height="592" controls preload="none" poster="/images/blog/fable51/spicey_lemonade-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/spicey_lemonade.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/superalesha/status/2094869490165039243" target="_blank" rel="noopener">@superalesha</a>. Шутер на <dfn data-def="Библиотека для 3D-графики в браузере, на ней собраны почти все игры из подборки.">Three.js</dfn> и веб-шейдерах по короткому промпту в стиле "сделай самый безумный шутер, какой сможешь". Главные требования были стрельба и динамика.</p><div class="tw-media"><video width="900" height="450" controls preload="none" poster="/images/blog/fable51/superalesha-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/superalesha.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/LLMJunky/status/2094894000524156946" target="_blank" rel="noopener">@LLMJunky</a>. Rocket League за два промпта на его постоянном бенчмарке RocketLeagueBench. Оценка автора: по геймдизайну модель безумна.</p><div class="tw-media"><video width="900" height="735" controls preload="none" poster="/images/blog/fable51/llmjunky-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/llmjunky.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/techartist_/status/2094930804296274414" target="_blank" rel="noopener">@techartist_</a>. Фэнтезийное восхождение на Фудзи, 3D-мир целиком из кода одним промптом.</p><div class="tw-media"><video width="900" height="567" controls preload="none" poster="/images/blog/fable51/techartist_-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/techartist_.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/bijanbowen/status/2094931925513261273" target="_blank" rel="noopener">@bijanbowen</a>. Шутер от первого лица в метро, собран через <dfn data-def="Режим Claude Code с оркестрацией многих агентов через workflow.">Ultracode</dfn>.</p><div class="tw-media"><video width="900" height="506" controls preload="none" poster="/images/blog/fable51/bijanbowen-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/bijanbowen.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/HarshithLucky3/status/2094882571083735351" target="_blank" rel="noopener">@HarshithLucky3</a>. Первый тест автора: 3D-модель вертолёта Airbus H145 в Three.js по простому промпту, Fable 5.1 против Fable 5 на high в Claude Code. Результат тянет купить Max.</p><div class="tw-media"><video width="882" height="900" controls preload="none" poster="/images/blog/fable51/harshithlucky3-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/harshithlucky3.mp4"></video></div></article><article class="card wide"><p><a href="https://x.com/holytrinity/status/2094866061212459130" target="_blank" rel="noopener">@holytrinity</a>. Тот же промпт, что раньше дал GLM 5.3 корабль в бутылке. Результат Fable 5.1 автор называет невероятным.</p><div class="tw-media"><video width="900" height="637" controls preload="none" poster="/images/blog/fable51/holytrinity-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/holytrinity.mp4"></video></div></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
 <div class="page"><h4>Жор лимитов и денег</h4>
 <p class="intro">Главный негатив. Цена $10 и $50 та же, обещанные 25% экономии на практике часто мимо.</p></div>
-<div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card"><p><a href="https://x.com/doodlestein/status/2095001666785305066" target="_blank" rel="noopener">@doodlestein</a>. С расходом что-то не так, скорее всего баг кэша в новом Claude Code. Впервые выжег 5-часовые лимиты всех 28 аккаунтов Max 20x, просто гоняя аудиты своих проектов.</p></article><article class="card"><p><a href="https://x.com/ClaudiuDP/status/2094861203424030891" target="_blank" rel="noopener">@ClaudiuDP</a>. На Max 5x модель почти непригодна. Запустил ревью небольших правок, она подняла около 10 агентов, 8 остановил руками: до воскресенья ещё много дней, а Claude Code нужен, пусть и на Opus.</p><div class="tw-media"><figure><img width="775" height="900" src="/images/blog/fable51/skrinshot-iz-posta-claudiudp.jpg" alt="Скриншот из поста @ClaudiuDP" loading="lazy"><figcaption>Экран Usage после одного ревью: сессия израсходована на 70%, недельный лимит Fable на 14%.</figcaption></figure></div></article><article class="card"><p><a href="https://x.com/FaaizJamali/status/2094894732036202677" target="_blank" rel="noopener">@FaaizJamali</a>. Отменил подписку. Пользовался Fable 5.1 минут 15, она без причины подняла 12 субагентов и сожгла лимиты.</p><div class="tw-media"><figure><img width="900" height="68" src="/images/blog/fable51/skrinshot-iz-posta-faaizjamali.jpg" alt="Скриншот из поста @FaaizJamali" loading="lazy"></figure></div></article><article class="card"><p><a href="https://x.com/yang3kc/status/2094979644743205142" target="_blank" rel="noopener">@yang3kc</a>. Usage тает быстрее, хотя Anthropic обещает более дешёвый кэш. Похоже на проблемы кэширования в Claude Code, такие баги уже были.</p></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
+<div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card wide"><p><a href="https://x.com/rileybrown/status/2095005898095653302" target="_blank" rel="noopener">@rileybrown</a>. Три промпта на Fable 5.1 обошлись в $218. Видео из поста.</p><div class="tw-media"><video width="900" height="582" controls preload="none" poster="/images/blog/fable51/rileybrown-218-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/rileybrown-218.mp4"></video></div></article><article class="card"><p><a href="https://x.com/doodlestein/status/2095001666785305066" target="_blank" rel="noopener">@doodlestein</a>. С расходом что-то не так, скорее всего баг кэша в новом Claude Code. Впервые выжег 5-часовые лимиты всех 28 аккаунтов Max 20x, просто гоняя аудиты своих проектов.</p></article><article class="card"><p><a href="https://x.com/ClaudiuDP/status/2094861203424030891" target="_blank" rel="noopener">@ClaudiuDP</a>. На Max 5x модель почти непригодна. Запустил ревью небольших правок, она подняла около 10 агентов, 8 остановил руками: до воскресенья ещё много дней, а Claude Code нужен, пусть и на Opus.</p><div class="tw-media"><figure><img width="775" height="900" src="/images/blog/fable51/skrinshot-iz-posta-claudiudp.jpg" alt="Скриншот из поста @ClaudiuDP" loading="lazy"><figcaption>Экран Usage после одного ревью: сессия израсходована на 70%, недельный лимит Fable на 14%.</figcaption></figure></div></article><article class="card"><p><a href="https://x.com/FaaizJamali/status/2094894732036202677" target="_blank" rel="noopener">@FaaizJamali</a>. Отменил подписку. Пользовался Fable 5.1 минут 15, она без причины подняла 12 субагентов и сожгла лимиты.</p><div class="tw-media"><figure><img width="900" height="68" src="/images/blog/fable51/skrinshot-iz-posta-faaizjamali.jpg" alt="Скриншот из поста @FaaizJamali" loading="lazy"></figure></div></article><article class="card"><p><a href="https://x.com/yang3kc/status/2094979644743205142" target="_blank" rel="noopener">@yang3kc</a>. Usage тает быстрее, хотя Anthropic обещает более дешёвый кэш. Похоже на проблемы кэширования в Claude Code, такие баги уже были.</p></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
 <div class="page"><h4>Гиперактивные субагенты</h4>
 <p class="intro">На среднюю задачу поднимает от 10 до 14 агентов, примеры выше у ClaudiuDP и FaaizJamali. Результат бывает красивый, цена лимит.</p></div>
 <div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card"><p><a href="https://x.com/indrawxyz/status/2095003847844643092" target="_blank" rel="noopener">@indrawxyz</a>. По бенчмаркам модель лучше Fable 5 и Opus 5 при той же цене токенов и кэше вчетверо дешевле. Но на кодинге средней сложности она подняла 11 агентов и работала очень долго, оверкилл. Вопрос: модель только для очень сложных задач?</p></article><article class="card"><p><a href="https://x.com/tuanaiseo/status/2095003586120089962" target="_blank" rel="noopener">@tuanaiseo</a>. В чистом Claude Code без CLAUDE.md, MCP и настроек один промпт поднял 14 агентов, и они собрали на three.js city builder уровня Cities: Skylines. Если игру студийного масштаба можно воспроизвести одним промптом, правила геймдева меняются.</p><div class="tw-media"><figure><img width="900" height="506" src="/images/blog/fable51/skrinshot-iz-posta-tuanaiseo.jpg" alt="Скриншот из поста @tuanaiseo" loading="lazy"><figcaption>City builder на three.js: бухта на закате.</figcaption></figure><figure><img width="900" height="506" src="/images/blog/fable51/skrinshot-iz-posta-tuanaiseo-2.jpg" alt="Скриншот из поста @tuanaiseo" loading="lazy"><figcaption>Тот же город, река днём, панель погоды и графики.</figcaption></figure></div></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
@@ -750,7 +723,7 @@ Instead, when the person has asked for a long or effort-intensive deliverable su
 <div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card"><p><a href="https://x.com/cheatyyyy/status/2094855145024897025" target="_blank" rel="noopener">@cheatyyyy</a>. Выглядит не очень: у Fable 5.1 куча новых инструкций на каждый ход, которых у Fable 5 не было. Часть совпадает с инструкциями Opus 5, и это наводит на мысль, что модель так же "RL deepfried". Самый разошедшийся скептический пост, 74 тысячи просмотров.</p><div class="tw-media"><figure><img width="900" height="840" src="/images/blog/fable51/skrinshot-iz-posta-cheatyyyy.jpg" alt="Скриншот из поста @cheatyyyy" loading="lazy"><figcaption>Вытащенные инструкции Claude Code: блок "Delivering work".</figcaption></figure><figure><img width="900" height="425" src="/images/blog/fable51/skrinshot-iz-posta-cheatyyyy-2.jpg" alt="Скриншот из поста @cheatyyyy" loading="lazy"><figcaption>Блок "Writing for the user": правила текста для пользователя.</figcaption></figure></div></article><article class="card"><p><a href="https://x.com/elder_plinius/status/2094862439653462387" target="_blank" rel="noopener">@elder_plinius</a>. Слил системный промпт Fable 5.1: больше 270 тысяч символов, полный текст на GitHub. Перечислил отличия от версии Opus 5 от 24 июля.</p></article><article class="card"><p><a href="https://x.com/Dimensionscape_/status/2095006474879598666" target="_blank" rel="noopener">@Dimensionscape_</a>. То, что в 2026 называют новой моделью, часто те же веса в лучшей обёртке: посттрейн, ползунок усилия, петли инструментов, память, роутеры безопасности и харнес, выучивший экзамен. За 12 недель после Fable 5 рассуждение без инструментов сдвинулось чуть, композит чуть, удвоился один научный бенч. Так выглядит стек после квартала RL и обвязки.</p></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
 <div class="page"><h4>Сравнения с Sol и Opus</h4>
 <p class="intro">Консенсуса нет.</p></div>
-<div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card"><p><a href="https://x.com/mohitgargai/status/2095005702054162574" target="_blank" rel="noopener">@mohitgargai</a>. GPT-5.6 Sol на Codex всё ещё ощущается заметно лучше Fable 5.1.</p></article><article class="card"><p><a href="https://x.com/theOpusLABS/status/2095006540088402048" target="_blank" rel="noopener">@theOpusLABS</a>. Немного разочарован Fable 5.1, болеет за Astra.</p></article><article class="card"><p><a href="https://x.com/ueyasu/status/2095006475035038012" target="_blank" rel="noopener">@ueyasu</a>. Fable 5.1 хороша, но со вчерашнего дня Opus 5 будто чуть поглупел. Так с каждым релизом начиная с Opus 4.7: выходит новая модель, старая тупеет.</p></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
+<div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card"><p><a href="https://x.com/mohitgargai/status/2095005702054162574" target="_blank" rel="noopener">@mohitgargai</a>. GPT-5.6 Sol на Codex всё ещё ощущается заметно лучше Fable 5.1.</p></article><article class="card wide"><p><a href="https://x.com/ctgptlb/status/2094925117344428232" target="_blank" rel="noopener">@ctgptlb</a>. Одна задача обеим моделям: из плана квартиры собрать 3D в Blender, отрендерить кадры и прогулочное видео. Sol: 30 минут, 6 кадров, 36 секунд видео. Fable 5.1: 111 минут, 14 кадров, 44 секунды. Видео из поста.</p><div class="tw-media"><video width="900" height="506" controls preload="none" poster="/images/blog/fable51/ctgptlb-blender-poster.jpg" src="https://pub-e4f33e98bfb544e39053056c8bb8940a.r2.dev/fable51/ctgptlb-blender.mp4"></video></div></article><article class="card"><p><a href="https://x.com/theOpusLABS/status/2095006540088402048" target="_blank" rel="noopener">@theOpusLABS</a>. Немного разочарован Fable 5.1, болеет за Astra.</p></article><article class="card"><p><a href="https://x.com/ueyasu/status/2095006475035038012" target="_blank" rel="noopener">@ueyasu</a>. Fable 5.1 хороша, но со вчерашнего дня Opus 5 будто чуть поглупел. Так с каждым релизом начиная с Opus 4.7: выходит новая модель, старая тупеет.</p></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
 <div class="page"><h4>Хаки и контрпример</h4>
 <p class="intro">Как выжить с лимитами.</p></div>
 <div class="carousel tw"><button class="nav prev" aria-label="Назад">←</button><div class="track"><article class="card"><p><a href="https://x.com/dotey/status/2094964831061155845" target="_blank" rel="noopener">@dotey</a>. Чтобы токены расходовались медленнее, особенно на Fable 5.1, выключите 1M контекст: переменная CLAUDE_CODE_DISABLE_1M_CONTEXT=1 в env внутри ~/.claude/settings.json.</p><div class="tw-media"><figure><img width="900" height="417" src="/images/blog/fable51/skrinshot-iz-posta-dotey.jpg" alt="Скриншот из поста @dotey" loading="lazy"></figure></div></article><article class="card"><p><a href="https://x.com/kenn/status/2094995273420529676" target="_blank" rel="noopener">@kenn</a>. Главное в релизе: кэш-хит подешевел вчетверо, почти до уровня Sonnet. В Claude Code окно кэша один час, промах стоит запись за $20 против чтения за $0.25, до 80 раз дороже. Поэтому длинный тред выгодно держать живым коротким сообщением, лучше всего "не думай, просто ответь ок".</p><div class="tw-media"><figure><img width="854" height="900" src="/images/blog/fable51/skrinshot-iz-posta-kenn.jpg" alt="Скриншот из поста @kenn" loading="lazy"><figcaption>Таблица цен Anthropic, подчёркнуты запись кэша на час и чтение кэша.</figcaption></figure></div></article><article class="card"><p><a href="https://x.com/petergyang/status/2094987791566622971" target="_blank" rel="noopener">@petergyang</a>. Советует прогнать /claude-api prompt-audit по своим скиллам: находит лишние правила и повторы, которые для новых моделей лучше убрать. Сам прогоняет все свои скиллы.</p></article><article class="card"><p><a href="https://x.com/lanceislux/status/2094990646214107445" target="_blank" rel="noopener">@lanceislux</a>. На Max 20x гонял Fable 5.1 на high в Claude Code CLI без остановки около 10 часов в нескольких терминалах. Ничего похожего на жор: работает лучше ожиданий, расход в норме.</p></article></div><button class="nav next" aria-label="Вперёд">→</button></div>
@@ -762,176 +735,6 @@ Instead, when the person has asked for a long or effort-intensive deliverable su
 <div class="page"><section id="istochniki" class="sources"><h2>Первоисточник</h2>
 <p>Страница релиза <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank" rel="noopener">"Introducing Claude Fable 5.1 and Claude Mythos 5.1"</a> на anthropic.com. Картинки Венеры оттуда же. Цитаты пересказаны по-русски, числа сверены редактором с картой и анонсом.</p>
 </section></div>
-
-<!-- Liquid Glass Floating Navigation Dock -->
-<nav class="liquid-dock" id="liquidDock" aria-label="Быстрая навигация по статье">
-  <!-- Sleek Translucent Drawer / Popover -->
-  <div class="liquid-dock-drawer" id="liquidDockDrawer" role="region" aria-label="Содержание статьи">
-    <div class="liquid-dock-drawer-head">
-      <span class="liquid-dock-drawer-title">Содержание</span>
-      <span class="liquid-dock-drawer-hint">9 разделов</span>
-    </div>
-    <ul class="liquid-dock-list">
-      <li><a href="#model" class="liquid-dock-link is-active" data-section="model"><span class="liquid-num">01</span><span class="liquid-text">Модель Fable 5.1</span></a></li>
-      <li><a href="#usilie" class="liquid-dock-link" data-section="usilie"><span class="liquid-num">02</span><span class="liquid-text">Бенчмарки</span></a></li>
-      <li><a href="#nauka" class="liquid-dock-link" data-section="nauka"><span class="liquid-num">03</span><span class="liquid-text">Научные открытия</span></a></li>
-      <li><a href="#oblasti" class="liquid-dock-link" data-section="oblasti"><span class="liquid-num">04</span><span class="liquid-text">Кейсы партнёров (Bento)</span></a></li>
-      <li><a href="#price" class="liquid-dock-link" data-section="price"><span class="liquid-num">05</span><span class="liquid-text">Видео &amp; Расход</span></a></li>
-      <li><a href="#syscard" class="liquid-dock-link" data-section="syscard"><span class="liquid-num">06</span><span class="liquid-text">Системная карта</span></a></li>
-      <li><a href="#prompting" class="liquid-dock-link" data-section="prompting"><span class="liquid-num">07</span><span class="liquid-text">Промптинг</span></a></li>
-      <li><a href="#otzyvy" class="liquid-dock-link" data-section="otzyvy"><span class="liquid-num">08</span><span class="liquid-text">Пеликаны Simon Willison</span></a></li>
-      <li><a href="#otzyvy-x" class="liquid-dock-link" data-section="otzyvy-x"><span class="liquid-num">09</span><span class="liquid-text">Отзывы в X</span></a></li>
-    </ul>
-  </div>
-
-  <!-- Main Floating Glass Pill -->
-  <div class="liquid-dock-bar">
-    <button class="liquid-dock-trigger" id="liquidDockTrigger" aria-expanded="false" aria-controls="liquidDockDrawer" aria-label="Открыть оглавление">
-      <span class="liquid-dock-pulse" aria-hidden="true"></span>
-      <span class="liquid-dock-cur-num" id="liquidDockCurNum">01</span>
-      <span class="liquid-dock-cur-title" id="liquidDockCurTitle">Модель Fable 5.1</span>
-      <svg class="liquid-dock-chevron" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 6l4 4 4-4"/>
-      </svg>
-    </button>
-    <div class="liquid-dock-sep" aria-hidden="true"></div>
-    <button class="liquid-dock-top" id="liquidDockTop" aria-label="Наверх" title="Наверх">
-      <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M8 12V4M4 8l4-4 4 4"/>
-      </svg>
-    </button>
-  </div>
-</nav>
-
-<script>
-(function(){
-  const dock = document.getElementById('liquidDock');
-  if (!dock) return;
-
-  const trigger = document.getElementById('liquidDockTrigger');
-  const topBtn = document.getElementById('liquidDockTop');
-  const curNum = document.getElementById('liquidDockCurNum');
-  const curTitle = document.getElementById('liquidDockCurTitle');
-  const links = dock.querySelectorAll('.liquid-dock-link');
-  const toc = document.querySelector('nav.toc');
-
-  // Map of tracked section IDs to dock display metadata
-  const sectionMeta = {
-    'model': { num: '01', title: 'Модель Fable 5.1', linkId: 'model' },
-    'reliz': { num: '01', title: 'Что вышло', linkId: 'model' },
-    'usilie': { num: '02', title: 'Бенчмарки', linkId: 'usilie' },
-    'nauka': { num: '03', title: 'Научные открытия', linkId: 'nauka' },
-    'oblasti': { num: '04', title: 'Кейсы партнёров', linkId: 'oblasti' },
-    'coding': { num: '04', title: 'Кейсы: Кодинг', linkId: 'oblasti' },
-    'debug': { num: '04', title: 'Кейсы: Отладка', linkId: 'oblasti' },
-    'research': { num: '04', title: 'Кейсы: Исследования', linkId: 'oblasti' },
-    'finance': { num: '04', title: 'Кейсы: Финансы', linkId: 'oblasti' },
-    'writing': { num: '04', title: 'Кейсы: Письмо', linkId: 'oblasti' },
-    'agents': { num: '04', title: 'Кейсы: Агенты', linkId: 'oblasti' },
-    'price': { num: '05', title: 'Видео & Расход', linkId: 'price' },
-    'syscard': { num: '06', title: 'Системная карта', linkId: 'syscard' },
-    'prompting': { num: '07', title: 'Промптинг', linkId: 'prompting' },
-    'otzyvy': { num: '08', title: 'Пеликаны Simon', linkId: 'otzyvy' },
-    'otzyvy-x': { num: '09', title: 'Отзывы в X', linkId: 'otzyvy-x' },
-    'istochniki': { num: '09', title: 'Первоисточник', linkId: 'otzyvy-x' }
-  };
-
-  function setActiveSection(id) {
-    const meta = sectionMeta[id];
-    if (!meta) return;
-    if (curNum) curNum.textContent = meta.num;
-    if (curTitle) curTitle.textContent = meta.title;
-    links.forEach(l => {
-      if (l.getAttribute('data-section') === meta.linkId) {
-        l.classList.add('is-active');
-      } else {
-        l.classList.remove('is-active');
-      }
-    });
-  }
-
-  // Visibility toggle based on TOC scroll position
-  function checkVisibility() {
-    if (!toc) return;
-    const rect = toc.getBoundingClientRect();
-    if (rect.bottom < 40) {
-      dock.classList.add('is-visible');
-    } else {
-      dock.classList.remove('is-visible');
-      dock.classList.remove('is-open');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  window.addEventListener('scroll', checkVisibility, { passive: true });
-  window.addEventListener('resize', checkVisibility, { passive: true });
-  checkVisibility();
-
-  // IntersectionObserver for tracking active reading section
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, {
-      rootMargin: '-10% 0px -75% 0px',
-      threshold: 0
-    });
-
-    Object.keys(sectionMeta).forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-  }
-
-  // Toggle drawer open/close
-  if (trigger) {
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = dock.classList.toggle('is-open');
-      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  }
-
-  // Close drawer on click outside
-  document.addEventListener('click', (e) => {
-    if (!dock.contains(e.target) && dock.classList.contains('is-open')) {
-      dock.classList.remove('is-open');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // Close drawer on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && dock.classList.contains('is-open')) {
-      dock.classList.remove('is-open');
-      if (trigger) {
-        trigger.setAttribute('aria-expanded', 'false');
-        trigger.focus();
-      }
-    }
-  });
-
-  // Back to top smoothly
-  if (topBtn) {
-    topBtn.addEventListener('click', () => {
-      dock.classList.remove('is-open');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // Close drawer when clicking a jump link
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      dock.classList.remove('is-open');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    });
-  });
-})();
-</script>
 
 <script>
 document.querySelectorAll('.carousel').forEach(c=>{const t=c.querySelector('.track');const cards=()=>t.querySelectorAll('.card');const w=()=>cards()[0].getBoundingClientRect().width+14;
@@ -990,60 +793,462 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',paint);})()
 document.querySelectorAll('.copy-btn').forEach(b=>b.addEventListener('click',async()=>{const code=b.closest('.prompt').querySelector('code').innerText;try{await navigator.clipboard.writeText(code);b.textContent='Скопировано';setTimeout(()=>b.textContent='Скопировать',1500);}catch(e){b.textContent='Не вышло';}}));
 </script>
 
+<style>
+/* --- Article Variant Switcher --- */
+.article-variant-switcher {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  font-family: 'PT Mono', monospace;
+}
+.variant-switcher-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-right: 56px;
+}
+.variant-switcher-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-right: 2px;
+}
+.variant-switcher-note {
+  font-size: 11px;
+  color: var(--muted);
+}
+.variant-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.variant-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--hairline);
+  background: var(--card);
+  transition: all .15s ease;
+}
+.variant-link:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.variant-link.active {
+  color: var(--bar-text);
+  background: var(--bar);
+  border-color: var(--bar);
+  font-weight: 700;
+}
+.variant-link .v-num {
+  font-size: 10px;
+  opacity: .75;
+}
+.variant-link.variant-orig {
+  opacity: .85;
+}
+
+/* --- Bento Grid Catalog Styles --- */
+.bento-container {
+  max-width: 1140px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+}
+.bento-filter-sticky {
+  position: sticky;
+  top: 45px;
+  z-index: 90;
+  background: var(--paper);
+  padding: 14px 0;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--hairline);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.bento-filter-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bento-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bento-search-box {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.bento-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.bento-search-input {
+  width: 100%;
+  padding: 9px 34px 9px 36px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  font: 400 13px/1.4 'PT Mono', monospace;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.bento-search-input:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.bento-search-input::placeholder {
+  color: var(--muted);
+}
+.bento-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+}
+.bento-search-clear:hover {
+  color: var(--ink);
+}
+.bento-counter-badge {
+  font: 400 12px/1.4 'PT Mono', monospace;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.bento-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.bento-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--hairline);
+  background: var(--card);
+  color: var(--ink);
+  font: 400 12px/1.3 'PT Mono', monospace;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.bento-pill:hover {
+  border-color: var(--ink);
+}
+.bento-pill.active {
+  background: var(--bar);
+  color: var(--bar-text);
+  border-color: var(--bar);
+  font-weight: 700;
+}
+.bento-pill-count {
+  font-size: 11px;
+  opacity: .8;
+}
+.bento-category-section {
+  margin-bottom: 36px;
+  scroll-margin-top: 140px;
+}
+.bento-category-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hairline);
+}
+.bento-category-title {
+  font-size: 1.25em;
+  font-weight: 400;
+  margin: 0;
+  color: var(--ink);
+}
+.bento-cat-badge {
+  font: 400 11.5px/1.4 'PT Mono', monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 960px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-filter-sticky {
+    top: 40px;
+  }
+  .bento-pills-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .bento-pills-row::-webkit-scrollbar {
+    display: none;
+  }
+}
+.bento-card {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.bento-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--rule);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.bento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hairline);
+}
+.bento-card-header .partner-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.bento-cat-tag {
+  font: 400 10.5px/1.3 'PT Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  background: var(--paper);
+  padding: 3px 7px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.bento-card-body p {
+  margin: 0;
+  font-size: .95em;
+  line-height: 1.52;
+  color: var(--ink);
+}
+.bento-no-results {
+  text-align: center;
+  padding: 48px 20px;
+  background: var(--card);
+  border: 1px dashed var(--hairline);
+  border-radius: 8px;
+  margin: 24px 0;
+}
+.bento-no-results-title {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.bento-no-results-text {
+  color: var(--muted);
+  font-size: .95em;
+  margin: 0 0 16px;
+}
+.bento-reset-btn {
+  font: 400 12.5px/1.4 'PT Mono', monospace;
+  color: var(--bar-text);
+  background: var(--bar);
+  border: 1px solid var(--bar);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity .15s ease;
+}
+.bento-reset-btn:hover {
+  opacity: .85;
+}
+</style>
+
 <script>
-// Bento Grid Interactive Pill Filter
-(function() {
+(function(){
+  const searchInput = document.getElementById('bentoSearchInput');
+  const searchClear = document.getElementById('bentoSearchClear');
+  const counterEl = document.getElementById('bentoCounter');
   const pills = document.querySelectorAll('.bento-pill');
   const sections = document.querySelectorAll('.bento-category-section');
-  if (!pills.length || !sections.length) return;
+  const cards = document.querySelectorAll('.bento-card');
+  const noResults = document.getElementById('bentoNoResults');
+  const searchDisplay = document.getElementById('bentoSearchQueryDisplay');
+  const resetBtn = document.getElementById('bentoResetAllBtn');
 
-  function applyFilter(cat, updateHash) {
-    pills.forEach(p => {
-      const active = p.dataset.filter === cat;
-      p.classList.toggle('active', active);
-      p.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function update() {
+    const q = searchQuery.toLowerCase().trim();
+    let totalVisible = 0;
 
     sections.forEach(sec => {
-      if (cat === 'all') {
+      const cat = sec.getAttribute('data-category');
+      const catMatches = (activeFilter === 'all' || activeFilter === cat);
+      let secVisibleCards = 0;
+
+      const secCards = sec.querySelectorAll('.bento-card');
+      secCards.forEach(card => {
+        const text = (card.textContent || '').toLowerCase();
+        const textMatches = (!q || text.includes(q));
+
+        if (catMatches && textMatches) {
+          card.style.display = '';
+          secVisibleCards++;
+          totalVisible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (catMatches && secVisibleCards > 0) {
         sec.style.display = '';
+        const badge = sec.querySelector('.bento-cat-badge');
+        if (badge) {
+          badge.textContent = secVisibleCards + ' ' + (secVisibleCards === 1 ? 'кейс' : (secVisibleCards >= 2 && secVisibleCards <= 4 ? 'кейса' : 'кейсов'));
+        }
       } else {
-        sec.style.display = (sec.dataset.category === cat) ? '' : 'none';
+        sec.style.display = 'none';
       }
     });
 
-    if (updateHash && cat !== 'all') {
-      history.replaceState(null, '', '#' + cat);
-    } else if (updateHash && cat === 'all') {
-      history.replaceState(null, '', window.location.pathname);
+    if (counterEl) {
+      counterEl.textContent = totalVisible + ' из 22';
+    }
+
+    if (noResults) {
+      if (totalVisible === 0) {
+        noResults.style.display = 'block';
+        if (searchDisplay) searchDisplay.textContent = q ? '«' + searchQuery + '»' : '';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    if (searchClear) {
+      searchClear.style.display = q ? 'block' : 'none';
     }
   }
 
-  pills.forEach(p => {
-    p.addEventListener('click', () => {
-      const cat = p.dataset.filter;
-      applyFilter(cat, true);
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
+      activeFilter = pill.getAttribute('data-filter');
+      update();
     });
   });
 
-  // Handle URL hash on load or change
-  function checkHash() {
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      update();
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      update();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      activeFilter = 'all';
+      pills.forEach(p => {
+        const isAll = p.getAttribute('data-filter') === 'all';
+        p.classList.toggle('active', isAll);
+        p.setAttribute('aria-selected', isAll ? 'true' : 'false');
+      });
+      update();
+    });
+  }
+
+  window.addEventListener('hashchange', handleHash);
+  function handleHash() {
     const hash = window.location.hash.replace('#', '');
     const validCats = ['coding', 'debug', 'research', 'finance', 'writing', 'agents', 'price'];
     if (validCats.includes(hash)) {
-      applyFilter(hash, false);
+      if (activeFilter !== 'all' && activeFilter !== hash) {
+        activeFilter = 'all';
+        pills.forEach(p => {
+          const isAll = p.getAttribute('data-filter') === 'all';
+          p.classList.toggle('active', isAll);
+          p.setAttribute('aria-selected', isAll ? 'true' : 'false');
+        });
+        update();
+      }
       const targetSec = document.getElementById(hash);
       if (targetSec) {
-        setTimeout(() => targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        targetSec.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }
-
-  window.addEventListener('hashchange', checkHash);
-  if (window.location.hash) checkHash();
+  if (window.location.hash) {
+    setTimeout(handleHash, 100);
+  }
 })();
 </script>
-
 <script>
 (()=>{
   const tabs = document.querySelectorAll('.hero-tab');
