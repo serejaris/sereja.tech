@@ -34,14 +34,16 @@ How-to со скриншотом выложил [Gabriel Chua из OpenAI DX](ht
 
 ## Как я попросил агента включить
 
-Конфиг я руками не ковыряю. Написал агенту в Codex.
+Конфиг я руками не ковыряю. Сначала прошу Codex самого себя осмотреть: версия, флаги, включён ли режим Astra, какой diff он хочет сделать. Потом уже соглашаюсь.
 
-{{< callout insight >}}
-Открой мой ~/.codex/config.toml. Сначала сохрани копию рядом. Потом в секции features.context_management поставь experimental_mode = true. Если секции нет, добавь её. Остальные настройки не трогай.
+{{< callout type="insight" title="Сначала проверка" >}}
+Inspect my installed Codex version and experimental feature flags. Check whether Astra’s new context management is fully enabled. Explain which other features would help my workflow, verify the exact configuration, and show me a proposed diff before changing anything.
+{{< /callout >}}
 
-Проверь, что Codex не старше 0.153.0 и что я залогинен через ChatGPT Plus или Pro, не через API-ключ. Модель для следующей задачи: GPT-6 Astra. После сохранения не продолжай старый тред. Скажи, когда можно открыть новую задачу.
+Если diff ставит `features.context_management.experimental_mode = true`, вход через ChatGPT Plus или Pro, модель Astra, версия не старше 0.153.0, тогда второй промпт.
 
-Если текущая модель Luna или Terra, ничего не меняй и объясни почему.
+{{< callout type="insight" title="Потом включение" >}}
+Примени предложенный diff. Сначала сохрани копию ~/.codex/config.toml рядом. Если текущая модель Luna или Terra, ничего не меняй и объясни почему. После сохранения не продолжай этот тред. Скажи, когда открывать новую задачу на GPT-6 Astra.
 {{< /callout >}}
 
 Дальше агент правит конфиг, я открываю новую задачу. Старый тред этот флаг не подхватит. Так написали в треде r/codex Experimental context setting: на уже живых сессиях контекст сначала поехал, потом кое-как вернулся. Новую задачу открыть спокойнее.
