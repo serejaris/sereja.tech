@@ -1082,3 +1082,26 @@ Prepare a source-backed Day One article about GPT-6 Astra with the official Open
 - Artificial Analysis measurements are scoped to its harness and attributed to the official thread.
 - The user-demo section identifies the author, links the original X post, shows the video, and states the limits of the evidence.
 - Article videos stay within the content column and never overlap the desktop table of contents.
+
+---
+
+## M21 — Defense Factory standalone guide rendering
+
+Status: `[x]`
+
+### Goal
+
+Make the Defense Factory guide open directly from its HTML source with the same paper typography and prompt-card behavior as the Hugo page.
+
+### Tasks
+
+- [x] Add the canonical PT Serif and PT Mono font loading and the 740 px paper layout.
+- [x] Hide Hugo frontmatter during direct `file://` viewing.
+- [x] Preserve the A4 prompt sidecar and copy interaction in direct viewing.
+- [x] Verify direct-file and Hugo rendering at 1440×900.
+
+### Definition of done
+
+- Direct opening shows the H1 first, uses the paper palette and keeps the reading column at 740 px.
+- Five prompt cards start collapsed and the copy control works through `file://`.
+- Hugo renders the same article with one H1 and no horizontal page overflow at 1440 px.

@@ -10,23 +10,45 @@ cta: kruzhok
 cta_code: vibecoding
 ---
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
 <style>
   :root,:root[data-theme="dark"],:root:not([data-theme="light"]){--paper:#fffef9;--ink:#1a1a1a;--muted:#333333;--accent:#33567a;--hairline:rgba(26,26,26,.18);--rule:rgba(26,26,26,.25)}
-  .paper{background:var(--paper);color:var(--ink)}
-  .paper main{counter-reset:figure}
-  .paper main .page{max-width:740px;margin:0 auto;padding:72px 22px 64px}
-  .paper main header.masthead{padding:0 0 30px}
-  .paper main .page>section{position:relative}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body.paper{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.62 'PT Serif',Georgia,'Times New Roman',serif}
+  .paper main,.paper>.page{counter-reset:figure}
+  .paper .page{max-width:740px;margin:0 auto;padding:72px 22px 64px}
+  .paper header.masthead{padding:0 0 30px}
+  .paper h1{font-size:1.9em;line-height:1.15;font-weight:400;margin:0 0 16px}
+  .paper .lede{font-size:1.1em;line-height:1.58;color:var(--muted);margin:0}
+  .paper nav.toc{margin:26px 0 54px}
+  .paper nav.toc ul{list-style:none;margin:0;padding:0}
+  .paper nav.toc li{display:block;font:400 12.5px/2.1 'PT Mono',Menlo,Monaco,Consolas,monospace}
+  .paper nav.toc a{color:var(--accent);text-decoration:none}
+  .paper nav.toc a:hover{text-decoration:underline;text-underline-offset:2px}
+  .paper section{padding:44px 0 0}
+  .paper section:first-of-type{padding-top:0}
+  .paper .page>section{position:relative}
+  .paper h2{font-size:1.4em;line-height:1.3;font-weight:400;margin:0 0 14px}
+  .paper h3{font-size:1.1em;line-height:1.35;font-weight:700;margin:30px 0 12px}
+  .paper p{margin:0 0 1em}
+  .paper a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+  .paper a:hover{color:var(--ink)}
+  .paper ul,.paper ol{padding-left:1.35em}
+  .paper li{margin:0 0 8px}
+  .paper code{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace}
   .paper .plain{list-style:none;margin:18px 0 28px;padding:0}
   .paper .plain li{margin:0 0 10px}
   .paper .status-list{list-style:none;margin:18px 0 26px;padding:0}
   .paper .status-list li{margin:0 0 10px}
   .paper .status-list code{font:400 12px/1.5 'PT Mono',Menlo,Monaco,Consolas,monospace;color:var(--accent)}
   .paper .prompt-wrap{margin:20px 0 26px}
-  .paper details.prompt-card{margin:0;background:#16181d;color:#eef0f2}
+  .paper details.prompt-card{margin:0;background:#16181d;color:#eef0f2;border-radius:6px;overflow:hidden}
   .paper details.prompt-card summary{display:flex;align-items:center;gap:10px;min-height:34px;cursor:pointer;padding:8px 12px;color:#a8b0ba;background:#23262e;font:400 11px/1.4 'PT Mono',Menlo,Monaco,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;list-style:none}
   .paper details.prompt-card summary::-webkit-details-marker{display:none}
-  .paper .prompt-name{min-width:0;flex:1}
+  .paper .prompt-name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .paper .prompt-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
   .paper .toggle-label::before{content:'Развернуть [+]'}
   .paper details.prompt-card[open] .toggle-label::before{content:'Свернуть [−]'}
@@ -39,6 +61,8 @@ cta_code: vibecoding
   .paper .term{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace;font-size:.88em;color:var(--accent)}
   .paper figure.diagram{width:114%;max-width:860px;margin:28px 0 18px -7%}
   .paper figure.diagram{counter-increment:figure}
+  .paper figure.diagram svg{width:100%;height:auto;display:block}
+  .paper figure.diagram figcaption{font:400 11px/1.6 'PT Mono',Menlo,Monaco,Consolas,monospace;color:var(--muted);margin-top:10px;text-align:center}
   .paper figure.diagram figcaption::before{content:'Рис. ' counter(figure) '. '}
   .paper figure.diagram svg{background:#f8fafc}
   .paper figure.diagram svg text{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace}
@@ -49,12 +73,14 @@ cta_code: vibecoding
   .paper figure.diagram svg text[font-weight="600"]{fill:#1e293b;font-family:system-ui,-apple-system,sans-serif}
   .paper figure.diagram svg marker#arrow-ink polygon{fill:#1c4e80}
   .paper figure.diagram svg marker#arrow-accent polygon{fill:#0284c7}
-  @media(min-width:1260px){.paper main .page{margin-left:calc((100vw - 1096px)/2);margin-right:0}.paper .prompt-wrap{position:absolute;left:calc(100% + 36px);top:var(--prompt-y,64px);width:320px;margin:0}.paper details.prompt-card[open]{aspect-ratio:210/297;display:flex;flex-direction:column;overflow:hidden}.paper details.prompt-card[open] .prompt-body{flex:1;overflow-y:auto}.paper .prompt-src{margin:8px 0 0}}
-  @media(max-width:840px){body.paper{font-size:16px}.paper figure.diagram{width:100%;margin-left:0}}
+  .paper .sources{font-size:.96em}
+  .paper .sources li{margin:0 0 8px}
+  @media(min-width:1260px){.paper .page{margin-left:calc((100vw - 1096px)/2);margin-right:0}.paper .prompt-wrap{position:absolute;left:calc(100% + 36px);top:var(--prompt-y,64px);width:320px;margin:0}.paper details.prompt-card[open]{aspect-ratio:210/297;display:flex;flex-direction:column;overflow:hidden}.paper details.prompt-card[open] .prompt-body{flex:1;overflow-y:auto}.paper .prompt-src{margin:8px 0 0}}
+  @media(max-width:840px){body.paper{font-size:16px}.paper .page{padding:48px 18px}.paper figure.diagram{width:100%;max-width:none;margin-left:0}}
   @media(max-width:700px){.paper figure.diagram{overflow-x:auto;overscroll-behavior-inline:contain}.paper figure.diagram svg{min-width:580px}}
-  @media(max-width:480px){.paper h1{font-size:1.65em}.paper details.prompt-card code{font-size:11px}.paper main .page{padding-left:18px;padding-right:18px}.paper .toggle-label{display:none}}
+  @media(max-width:480px){.paper h1{font-size:1.65em}.paper details.prompt-card code{font-size:11px}.paper .page{padding:40px 16px 44px}.paper .toggle-label{display:none}}
   @page{size:A4;margin:18mm}
-  @media print{.paper main .page{padding:0}.paper .prompt-wrap{position:static;width:auto;margin:20px 0 26px}.paper details.prompt-card{break-inside:avoid;background:#fff;color:#1a1a1a}.paper details.prompt-card:not([open])>*:not(summary){display:block}.paper details.prompt-card summary{background:#fff;color:#1a1a1a;border-bottom:1px solid var(--hairline)}.paper details.prompt-card code{color:#1a1a1a}.paper .copy-btn,.paper .toggle-label{display:none}.paper figure.diagram{width:100%;margin-left:0;overflow:visible}.paper figure.diagram svg{min-width:0}}
+  @media print{body.paper{background:#fff;font-size:10.5pt;line-height:1.55}.paper .page{max-width:none;padding:0}.paper .prompt-wrap{position:static;width:auto;margin:20px 0 26px}.paper details.prompt-card{break-inside:avoid;background:#fff;color:#1a1a1a}.paper details.prompt-card:not([open])>*:not(summary){display:block}.paper details.prompt-card summary{background:#fff;color:#1a1a1a;border-bottom:1px solid var(--hairline)}.paper details.prompt-card code{color:#1a1a1a}.paper .copy-btn,.paper .toggle-label{display:none}.paper figure.diagram{width:100%;margin-left:0;overflow:visible}.paper figure.diagram svg{min-width:0}.paper p{orphans:2;widows:2}.paper h1,.paper h2,.paper h3{break-after:avoid}}
 </style>
 
 <div class="page">
@@ -389,12 +415,34 @@ validated, disproven или inconclusive, сохрани обезличенно�
 </div>
 
 <script>
+if(location.protocol==='file:'){
+  document.body.classList.add('paper');
+  Array.from(document.body.childNodes).forEach(function(node){
+    if(node.nodeType===Node.TEXT_NODE && /^\s*---[\s\S]*cta_code:/m.test(node.textContent||'')){
+      node.remove();
+    }
+  });
+  document.title='Как доводить находки AI-агента до исправления';
+}
 document.querySelectorAll('.prompt-card .copy-btn').forEach(function(button){
   button.addEventListener('click',function(event){
     event.preventDefault();
     event.stopPropagation();
     var text=button.closest('.prompt-card').querySelector('code').innerText;
-    navigator.clipboard.writeText(text).then(function(){
+    var copy=location.protocol!=='file:'&&navigator.clipboard&&navigator.clipboard.writeText
+      ? navigator.clipboard.writeText(text)
+      : new Promise(function(resolve){
+          var area=document.createElement('textarea');
+          area.value=text;
+          area.style.position='fixed';
+          area.style.opacity='0';
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+          resolve();
+        });
+    copy.then(function(){
       button.textContent='Скопировано';
       window.setTimeout(function(){button.textContent='Копировать'},1400);
     });
