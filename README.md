@@ -30,13 +30,15 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-119 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+121 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-09-05 | [Цикл разработки с агентами: 6 шагов до деплоя](https://sereja.tech/blog/sdlc-agent-cycle/) |
 | 2026-09-03 | [GPT-6 Astra вышла. Кому уже открыли доступ](https://sereja.tech/blog/gpt-6-astra/) |
+| 2026-09-02 | [Обзор Claude Fable 5.1: бенчмарки, отзывы, промптинг](https://sereja.tech/blog/claude-fable-5-1/) |
 | 2026-08-22 | [Повторил забег агентов: 11/18 стало 17/18](https://sereja.tech/blog/ox-alpha-yesterday-vs-today/) |
 | 2026-08-22 | [ox-alpha: 6 агентов, 3 бенча](https://sereja.tech/blog/ox-alpha-harness-pool/) |
 | 2026-08-18 | [Гайд по использованию Grok Bot](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
@@ -44,8 +46,6 @@
 | 2026-08-05 | [Какую подписку Claude выбрать для работы: $20, $100 или $200](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
 | 2026-08-04 | [Как подключить подписку Anthropic к Hermes](https://sereja.tech/blog/claude-max-hermes-telegram/) |
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
-| 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
-| 2026-07-18 | [База знаний для агентов: вход, слои и обслуживание](https://sereja.tech/blog/agent-knowledge-base/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт

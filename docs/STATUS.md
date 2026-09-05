@@ -294,3 +294,11 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 - `2026-03-13`: issues `#69`, `#70`, and `#71` were created and added to Project `4`; issue `#32` and `#33` moved to `In review`, issue `#66` moved to `Done`.
 - `2026-03-13`: issue `#69` moved to `Done`; issue `#70` is the next `Ready` follow-up on Project `4`.
 - `2026-03-13`: issue `#70` moved to `Done`; issue `#71` is now `Ready` on Project `4`.
+
+## 2026-09-05 — SDLC guide publication preparation
+
+Prepared the approved `/blog/sdlc-agent-cycle/` article for PR #170. Added a 45-character frontmatter title, 127-character description, publication date 2026-09-05, updated 1440×810 social preview, three contextual outbound links and two inbound links. Preserved the general task-system angle and configurable executor model. Source review corrected an unconfirmed successful test run and removed an unsupported timing claim.
+
+Independent fact and voice checks passed; editorial status is `ready_for_autonomous_publish`. Style lint: 875 prose words, score 10/10; structural guide lint passed with the approved nine sections. All seven SVG diagrams parse; desktop 1440×900 and mobile 390 px render without horizontal overflow. Hugo uses Git information for `dateModified`, so final metadata is validated after the release commit. The final deployment and live checks are tracked in [corp-content #61](https://github.com/serejaris/corp-content/issues/61).
+
+The README generator now includes indexable HTML articles, so the pre-commit regeneration retains the SDLC release. Draft and noindex variants stay excluded.
