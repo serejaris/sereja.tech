@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-118 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+119 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-09-03 | [GPT-6 Astra вышла. Кому уже открыли доступ](https://sereja.tech/blog/gpt-6-astra/) |
 | 2026-08-22 | [Повторил забег агентов: 11/18 стало 17/18](https://sereja.tech/blog/ox-alpha-yesterday-vs-today/) |
 | 2026-08-22 | [ox-alpha: 6 агентов, 3 бенча](https://sereja.tech/blog/ox-alpha-harness-pool/) |
 | 2026-08-18 | [Гайд по использованию Grok Bot](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
@@ -45,7 +46,6 @@
 | 2026-08-03 | [Почему агент не может выбрать лучший код](https://sereja.tech/blog/best-practices-code/) |
 | 2026-07-18 | [Kimi K3 за 1:47: сильный агент с одной проблемой](https://sereja.tech/blog/kimi-k3-guide/) |
 | 2026-07-18 | [База знаний для агентов: вход, слои и обслуживание](https://sereja.tech/blog/agent-knowledge-base/) |
-| 2026-07-09 | [GPT-5.6 в работе: Sol, Terra и Luna](https://sereja.tech/blog/gpt-5-6-review/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
