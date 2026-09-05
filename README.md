@@ -37,7 +37,7 @@
 | Дата | Статья |
 |------|--------|
 | 2026-09-05 | [Цикл разработки с агентами: 6 шагов до деплоя](https://sereja.tech/blog/sdlc-agent-cycle/) |
-| 2026-09-05 | [Astra в Codex: официальный флаг для длинных задач](https://sereja.tech/blog/codex-experimental-context-astra/) |
+| 2026-09-05 | [Astra в Codex может помнить длинную задачу](https://sereja.tech/blog/codex-experimental-context-astra/) |
 | 2026-09-03 | [GPT-6 Astra вышла. Кому уже открыли доступ](https://sereja.tech/blog/gpt-6-astra/) |
 | 2026-09-02 | [Обзор Claude Fable 5.1: бенчмарки, отзывы, промптинг](https://sereja.tech/blog/claude-fable-5-1/) |
 | 2026-08-22 | [Повторил забег агентов: 11/18 стало 17/18](https://sereja.tech/blog/ox-alpha-yesterday-vs-today/) |
