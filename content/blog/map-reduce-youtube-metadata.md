@@ -115,4 +115,4 @@ Map-Reduce избегает две проблемы длинного конте�
 
 ---
 
-Видео со сгенерированными метаданными: [youtube.com/@serajaris](https://youtube.com/@serajaris)
+Видео со сгенерированными метаданными: [youtube.com/@serejaris](https://youtube.com/@serejaris)
