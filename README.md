@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-09-05 | [Astra в Codex: официальный флаг для длинных задач](https://sereja.tech/blog/codex-experimental-context-astra/) |
+| 2026-09-05 | [Как включить экспериментальный контекст Astra в Codex](https://sereja.tech/blog/codex-experimental-context-astra/) |
 | 2026-08-22 | [Повторил забег агентов: 11/18 стало 17/18](https://sereja.tech/blog/ox-alpha-yesterday-vs-today/) |
 | 2026-08-22 | [ox-alpha: 6 агентов, 3 бенча](https://sereja.tech/blog/ox-alpha-harness-pool/) |
 | 2026-08-18 | [Гайд по использованию Grok Bot](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
