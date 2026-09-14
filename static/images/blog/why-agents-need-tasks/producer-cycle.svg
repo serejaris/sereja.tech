@@ -1,0 +1,81 @@
+<svg viewBox="0 0 940 560" role="img" aria-labelledby="pc-title pc-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="pc-title">Один проход продюсера и развилка приёмки с кругами правок</title>
+  <desc id="pc-desc">KB: concepts/orchestration
+Слева замкнутый цикл из четырёх шагов, которые продюсер проходит по порядку за один проход: принять сданное, обойти слепые зоны, разобрать входящее, завести новое и запросить найм, и снова принять сданное. Справа ветка приёмки. Исполнитель ставит метку, дальше развилка: принято или возврат. Принято ведёт в узел «закрыто с причиной». Возврат ведёт в круг правок, первый, второй или третий, и стрелка из круга правок возвращается к исполнителю. Из круга правок есть отдельный выход в вопрос владельцу: после третьего круга одна строка и два варианта ответа. Оговорка сбоку: новое входящее ждёт следующего прохода, пока агент внутри задачи, ему никто не пишет.</desc>
+
+  <defs>
+    <marker id="pc-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="pc-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+    <marker id="pc-arrow-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#b42318" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="560" fill="#f8fafc" />
+
+  <text x="24" y="46" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ОДИН ПРОХОД ПРОДЮСЕРА</text>
+  <rect x="24" y="56" width="396" height="384" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+
+  <rect x="96" y="80" width="300" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="116" y="114" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Принять сданное</text>
+
+  <rect x="96" y="168" width="300" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="116" y="202" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Обойти слепые зоны</text>
+
+  <rect x="96" y="256" width="300" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="116" y="290" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Разобрать входящее</text>
+
+  <rect x="96" y="344" width="300" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="116" y="378" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Завести новое и запросить найм</text>
+
+  <path d="M246 136 V168" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#pc-arrow-accent)" />
+  <path d="M246 224 V256" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#pc-arrow-accent)" />
+  <path d="M246 312 V344" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#pc-arrow-accent)" />
+  <path d="M96 372 H64 Q56 372 56 364 V116 Q56 108 64 108 H96" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#pc-arrow-accent)" />
+
+  <text x="460" y="46" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ВЕТКА ПРИЁМКИ</text>
+
+  <rect x="460" y="80" width="200" height="56" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="480" y="114" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Исполнитель</text>
+
+  <rect x="460" y="180" width="200" height="76" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="480" y="192" width="80" height="15" rx="2" fill="#1c4e80" fill-opacity="0.10" stroke="#1c4e80" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="520" y="203" fill="#1c4e80" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">РАЗВИЛКА</text>
+  <text x="480" y="232" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Принято или возврат</text>
+
+  <rect x="700" y="180" width="216" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="720" y="224" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Закрыто с причиной</text>
+
+  <rect x="460" y="300" width="200" height="96" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="480" y="340" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Круг правок</text>
+  <text x="480" y="364" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">первый, второй, третий</text>
+
+  <rect x="700" y="300" width="216" height="96" rx="6" fill="#ffffff" stroke="#b42318" stroke-width="1.2" />
+  <text x="720" y="332" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Вопрос владельцу</text>
+  <text x="720" y="356" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">после третьего круга:</text>
+  <text x="720" y="374" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">одна строка, два ответа</text>
+
+  <path d="M560 136 V180" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#pc-arrow-ink)" />
+  <path d="M660 218 H700" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#pc-arrow-ink)" />
+  <path d="M560 256 V300" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#pc-arrow-ink)" />
+  <path d="M660 348 H700" fill="none" stroke="#b42318" stroke-width="1.4" marker-end="url(#pc-arrow-red)" />
+  <path d="M460 348 H444 Q436 348 436 340 V116 Q436 108 444 108 H460" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#pc-arrow-ink)" />
+
+  <rect x="568" y="140" width="96" height="16" fill="#f8fafc" />
+  <text x="572" y="152" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ставит метку</text>
+
+  <!-- Оговорка -->
+  <rect x="24" y="470" width="3" height="42" fill="#0284c7" />
+  <text x="40" y="484" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Новое входящее ждёт следующего прохода: пока агент внутри задачи,</text>
+  <text x="40" y="504" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ему никто не пишет.</text>
+
+  <text x="24" y="540" fill="#94a3b8" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+  <path d="M108 536 H148" fill="none" stroke="#0284c7" stroke-width="1.4" />
+  <text x="156" y="540" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">шаг внутри прохода</text>
+  <path d="M400 536 H440" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <text x="448" y="540" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">путь сданной работы</text>
+</svg>

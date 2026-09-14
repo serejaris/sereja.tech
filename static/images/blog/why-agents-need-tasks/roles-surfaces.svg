@@ -1,0 +1,104 @@
+<svg viewBox="0 0 940 430" role="img" aria-labelledby="rs-title rs-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="rs-title">Задачи из списка штаба расходятся по ролям, роли сдают работу в поверхности</title>
+  <desc id="rs-desc">KB: concepts/role-incarnation
+Слева слой задач из списка штаба: починить оплату, страница сайта, отчёт продаж, сообщение клиентам, пост в канал. В середине четыре роли агентов, нанятые по брифам: аналитик, инженер, comms, писатель. Линии идут перекрёстно: инженер тянет сразу две задачи, оплату и страницу сайта. Отчёт продаж уходит вверх к аналитику через линии инженера, сообщение клиентам к comms, пост в канал к писателю. Справа поверхности: бот, сайт, рассылки, канал. Это репозитории и площадки без своего списка задач, куда роли сдают результат веткой и пулреквестом. Аналитик соединён с ботом пунктиром: он только читает данные и ничего в поверхность не пишет.</desc>
+
+  <defs>
+    <marker id="rs-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="rs-arrow-muted" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="430" fill="#f8fafc" />
+
+  <text x="24" y="34" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЗАДАЧИ ИЗ СПИСКА ШТАБА</text>
+  <text x="412" y="34" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">РОЛИ АГЕНТОВ · ПО БРИФАМ</text>
+  <text x="740" y="34" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ПОВЕРХНОСТИ · БЕЗ ЗАДАЧ</text>
+
+  <rect x="24" y="44" width="200" height="324" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+  <rect x="412" y="44" width="216" height="324" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+  <rect x="740" y="44" width="192" height="324" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+
+  <!-- Узел: слой задач -->
+  <rect x="40" y="64" width="168" height="282" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="56" y="78" width="124" height="15" rx="2" fill="#1c4e80" fill-opacity="0.10" stroke="#1c4e80" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="118" y="89" fill="#1c4e80" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">ПЯТЬ ЗАДАЧ ЦЕЛИ</text>
+  <text x="56" y="116" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Слой задач</text>
+  <rect x="56" y="141" width="4" height="4" fill="#1c4e80" />
+  <text x="68" y="148" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Починить оплату</text>
+  <rect x="56" y="181" width="4" height="4" fill="#1c4e80" />
+  <text x="68" y="188" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Страница сайта</text>
+  <rect x="56" y="221" width="4" height="4" fill="#1c4e80" />
+  <text x="68" y="228" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Отчёт продаж</text>
+  <rect x="56" y="261" width="4" height="4" fill="#1c4e80" />
+  <text x="68" y="268" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Сообщение клиентам</text>
+  <rect x="56" y="301" width="4" height="4" fill="#1c4e80" />
+  <text x="68" y="308" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Пост в канал</text>
+  <text x="56" y="332" fill="#94a3b8" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">лежат в одном списке</text>
+
+  <!-- Узлы: роли -->
+  <rect x="428" y="64" width="184" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="444" y="88" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Аналитик</text>
+  <text x="444" y="108" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">числа и отчёты</text>
+
+  <rect x="428" y="140" width="184" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="444" y="164" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Инженер</text>
+  <text x="444" y="184" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">код бота и сайта</text>
+
+  <rect x="428" y="216" width="184" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="444" y="240" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Comms</text>
+  <text x="444" y="260" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">пишет клиентам</text>
+
+  <rect x="428" y="292" width="184" height="56" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="444" y="316" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Писатель</text>
+  <text x="444" y="336" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">тексты и посты</text>
+
+  <!-- Узлы: поверхности -->
+  <rect x="756" y="64" width="160" height="56" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="772" y="88" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Бот</text>
+  <text x="772" y="108" fill="#94a3b8" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ветка и пулреквест</text>
+
+  <rect x="756" y="140" width="160" height="56" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="772" y="164" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Сайт</text>
+  <text x="772" y="184" fill="#94a3b8" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ветка и пулреквест</text>
+
+  <rect x="756" y="216" width="160" height="56" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="772" y="240" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Рассылки</text>
+  <text x="772" y="260" fill="#94a3b8" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">очередь сообщений</text>
+
+  <rect x="756" y="292" width="160" height="56" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="772" y="316" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Канал</text>
+  <text x="772" y="336" fill="#94a3b8" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">посты и карточки</text>
+
+  <!-- Связи: задача в свою роль -->
+  <path d="M208 224 H240 Q248 224 248 216 V100 Q248 92 256 92 H428" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M208 144 H288 Q296 144 296 152 Q296 156 304 156 H428" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M208 184 H320 Q328 184 328 180 Q328 180 336 180 H428" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M208 264 H352 Q360 264 360 256 V252 Q360 244 368 244 H428" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M208 304 H384 Q392 304 392 312 Q392 320 400 320 H428" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+
+  <!-- Зазоры на пересечениях: горизонталь уступает вертикали -->
+  <rect x="244.5" y="141" width="7" height="6" fill="#f8fafc" />
+  <rect x="244.5" y="181" width="7" height="6" fill="#f8fafc" />
+  <path d="M248 136 V192" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+
+  <!-- Связи: роль в свою поверхность -->
+  <path d="M612 92 H756" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#rs-arrow-muted)" />
+  <rect x="642" y="66" width="84" height="15" fill="#f8fafc" />
+  <text x="684" y="78" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">только читает</text>
+
+  <path d="M612 156 H652 Q660 156 660 148 V114 Q660 106 668 106 H756" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M612 180 H692 Q700 180 700 174 Q700 168 708 168 H756" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M612 244 H756" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+  <path d="M612 320 H756" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rs-arrow-ink)" />
+
+  <!-- Легенда -->
+  <text x="24" y="406" fill="#94a3b8" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+  <path d="M100 402 H140" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <text x="148" y="406" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">задача и сдача работы</text>
+  <path d="M340 402 H380" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" />
+  <text x="388" y="406" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">чтение без правок</text>
+</svg>

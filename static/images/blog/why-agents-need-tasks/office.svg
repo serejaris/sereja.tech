@@ -1,0 +1,124 @@
+<svg viewBox="0 0 940 648" role="img" aria-labelledby="of-title of-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="of-title">Слово владельца идёт оркестратору, оттуда в список задач штаба, оттуда к продюсеру</title>
+  <desc id="of-desc">KB: concepts/orchestration
+Верхняя полоса это вход. Владелец говорит фразу в чат оркестратору, у Риса это архитектор на модели Fable. Оркестратор кладёт слово владельца в список задач штаба дословно и сам работу руками не делает. Штаб это отдельная папка без кода: в ней список задач цели, реестр воплощений, канал и доска для человека. Нижняя полоса это раздача. Продюсер берёт задачи из списка, заводит задачи ролям и принимает работу; пунктиром оркестратор нанимает его по брифу. Задач пять, и разработка с бизнесом стоят в одном списке вперемешку: починить оплату и страница сайта помечены как разработка, отчёт продаж, сообщение клиентам и пост в канал как бизнес. Главное, что видно по кадру: владелец разговаривает с оркестратором, а не с продюсером.</desc>
+
+  <defs>
+    <marker id="of-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="of-arrow-muted" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="648" fill="#f8fafc" />
+
+  <text x="24" y="46" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ВХОД · СЛОВО ВЛАДЕЛЬЦА ДОЕЗЖАЕТ ДО СПИСКА</text>
+  <rect x="24" y="56" width="892" height="144" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+
+  <!-- Узел: владелец -->
+  <rect x="48" y="72" width="200" height="110" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="68" y="84" width="76" height="15" rx="2" fill="#1c4e80" fill-opacity="0.10" stroke="#1c4e80" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="106" y="95" fill="#1c4e80" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">ЧЕЛОВЕК</text>
+  <text x="68" y="120" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Владелец</text>
+  <text x="68" y="142" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">говорит фразу</text>
+  <text x="68" y="158" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">в чат, а потом</text>
+  <text x="68" y="174" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">жмёт слияние</text>
+
+  <!-- Узел: оркестратор -->
+  <rect x="352" y="72" width="236" height="110" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" stroke-dasharray="4 3" />
+  <rect x="372" y="84" width="112" height="15" rx="2" fill="#64748b" fill-opacity="0.10" stroke="#64748b" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="428" y="95" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">МОДЕЛЬ FABLE</text>
+  <text x="372" y="120" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Оркестратор</text>
+  <text x="372" y="142" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">кладёт слово в список</text>
+  <text x="372" y="158" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">нанимает по брифам</text>
+  <text x="372" y="174" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">руками не работает</text>
+
+  <!-- Узел: штаб -->
+  <rect x="680" y="72" width="212" height="110" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="700" y="84" width="124" height="15" rx="2" fill="#1c4e80" fill-opacity="0.10" stroke="#1c4e80" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="762" y="95" fill="#1c4e80" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">ПАПКА БЕЗ КОДА</text>
+  <text x="700" y="120" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Штаб</text>
+  <text x="700" y="142" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">список задач цели</text>
+  <text x="700" y="158" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">реестр воплощений</text>
+  <text x="700" y="174" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">канал и доска</text>
+
+  <!-- Связь: владелец говорит оркестратору -->
+  <path d="M248 127 H352" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <rect x="250" y="130" width="100" height="18" fill="#f2f4f7" />
+  <text x="300" y="144" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">фраза в чат</text>
+
+  <!-- Связь: оркестратор кладёт слово в список -->
+  <path d="M588 127 H680" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <rect x="582" y="130" width="104" height="34" fill="#f2f4f7" />
+  <text x="634" y="144" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">слово в список</text>
+  <text x="634" y="160" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">дословно</text>
+
+  <!-- Связь: продюсер берёт задачи из списка -->
+  <path d="M786 182 V242 Q786 250 778 250 H476 Q468 250 468 258 V357" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <rect x="548" y="224" width="166" height="18" fill="#f8fafc" />
+  <text x="631" y="238" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">берёт задачи из списка</text>
+
+  <!-- Связь: оркестратор нанимает продюсера -->
+  <path d="M420 182 V357" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#of-arrow-muted)" />
+  <rect x="428" y="204" width="80" height="34" fill="#f8fafc" />
+  <text x="434" y="218" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">нанимает</text>
+  <text x="434" y="234" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">по брифу</text>
+
+  <text x="908" y="260" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end" letter-spacing="0.14em">РАЗДАЧА · РАЗРАБОТКА И БИЗНЕС В ОДНОМ СПИСКЕ</text>
+  <rect x="320" y="268" width="596" height="300" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+
+  <!-- Узел: продюсер -->
+  <rect x="344" y="357" width="212" height="120" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <rect x="364" y="369" width="92" height="15" rx="2" fill="#0284c7" fill-opacity="0.10" stroke="#0284c7" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="410" y="380" fill="#0284c7" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">РОЛЬ, ОДНА</text>
+  <text x="364" y="407" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Продюсер</text>
+  <text x="364" y="429" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">берёт задачи из списка</text>
+  <text x="364" y="445" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">заводит задачи ролям</text>
+  <text x="364" y="461" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">принимает работу</text>
+
+  <!-- Узлы: пять задач -->
+  <rect x="652" y="288" width="256" height="42" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="668" y="315" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Починить оплату</text>
+  <text x="892" y="314" fill="#94a3b8" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end" letter-spacing="0.08em">РАЗРАБОТКА</text>
+
+  <rect x="652" y="342" width="256" height="42" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="668" y="369" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Страница сайта</text>
+  <text x="892" y="368" fill="#94a3b8" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end" letter-spacing="0.08em">РАЗРАБОТКА</text>
+
+  <rect x="652" y="396" width="256" height="42" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="668" y="423" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Отчёт продаж</text>
+  <text x="892" y="422" fill="#94a3b8" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end" letter-spacing="0.08em">БИЗНЕС</text>
+
+  <rect x="652" y="450" width="256" height="42" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="668" y="477" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Сообщение клиентам</text>
+  <text x="892" y="476" fill="#94a3b8" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end" letter-spacing="0.08em">БИЗНЕС</text>
+
+  <rect x="652" y="504" width="256" height="42" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="668" y="531" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Пост в канал</text>
+  <text x="892" y="530" fill="#94a3b8" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end" letter-spacing="0.08em">БИЗНЕС</text>
+
+  <!-- Связи: продюсер в каждую из пяти задач -->
+  <path d="M556 417 H604" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M604 309 V525" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M604 309 H652" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <path d="M604 363 H652" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <path d="M604 417 H652" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <path d="M604 471 H652" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <path d="M604 525 H652" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#of-arrow-ink)" />
+  <circle cx="604" cy="309" r="2.6" fill="#1c4e80" />
+  <circle cx="604" cy="363" r="2.6" fill="#1c4e80" />
+  <circle cx="604" cy="417" r="2.6" fill="#1c4e80" />
+  <circle cx="604" cy="471" r="2.6" fill="#1c4e80" />
+  <circle cx="604" cy="525" r="2.6" fill="#1c4e80" />
+
+  <!-- Легенда -->
+  <text x="24" y="604" fill="#94a3b8" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+  <path d="M108 600 H148" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <text x="156" y="604" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">задача, ветка и пулреквест</text>
+  <path d="M416 600 H456" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" />
+  <text x="464" y="604" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">найм, учёт и чтение</text>
+
+  <text x="24" y="634" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Один список задач на штаб, роли и поверхности общие</text>
+</svg>

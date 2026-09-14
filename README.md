@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-123 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+124 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-09-14 | [Зачем агентам задачи, если им можно просто написать словами](https://sereja.tech/blog/why-agents-need-tasks/) |
 | 2026-09-08 | [ChatGPT Images 2.5: лучший генератор из виденных](https://sereja.tech/blog/chatgpt-images-2-5/) |
 | 2026-09-05 | [Цикл разработки с агентами: 6 шагов до деплоя](https://sereja.tech/blog/sdlc-agent-cycle/) |
 | 2026-09-05 | [Astra в Codex может помнить длинную задачу](https://sereja.tech/blog/codex-experimental-context-astra/) |
@@ -45,7 +46,6 @@
 | 2026-08-22 | [ox-alpha: 6 агентов, 3 бенча](https://sereja.tech/blog/ox-alpha-harness-pool/) |
 | 2026-08-18 | [Гайд по использованию Grok Bot](https://sereja.tech/blog/grok-bot-cloud-agents-guide/) |
 | 2026-08-13 | [Grok 4.6 интересный. Гнаться незачем](https://sereja.tech/blog/grok-46-day-one/) |
-| 2026-08-05 | [Какую подписку Claude выбрать для работы: $20, $100 или $200](https://sereja.tech/blog/claude-max-real-limits-api-cost/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт

@@ -1,0 +1,74 @@
+<svg viewBox="0 0 940 510" role="img" aria-labelledby="si-title si-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="si-title">Что лежит в папке штаба и что остаётся снаружи</title>
+  <desc id="si-desc">KB: concepts/shared-workspace
+Пунктирный контур это папка штаба, папка без кода. Внутри неё четыре вещи. Задачи цели с исполнителем, приоритетом, комментариями и причиной закрытия. Брифы ролей. Реестр воплощений с моделью и бюджетом. Архив переписки. Пятым внутри лежит доска для человека: она собирается одной командой из тех же задач. Снаружи контура стоит код продукта с бейджем «снаружи»: бот, сайт, кабинет, рассылки, и своего списка задач он не держит. Через границу папки ходят ровно две вещи: из задач в код уходит ветка и заявка на слияние, обратно возвращается ссылка на эту заявку. Больше ничего между папкой штаба и репозиториями продукта не ездит.</desc>
+
+  <defs>
+    <marker id="si-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="510" fill="#f8fafc" />
+
+  <text x="24" y="46" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ШТАБ · ПАПКА БЕЗ КОДА</text>
+  <rect x="24" y="56" width="536" height="352" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#1c4e80" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="6 4" />
+
+  <!-- Узел: задачи цели -->
+  <rect x="48" y="80" width="488" height="96" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="68" y="92" width="160" height="15" rx="2" fill="#1c4e80" fill-opacity="0.10" stroke="#1c4e80" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="148" y="103" fill="#1c4e80" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">СОСТОЯНИЕ КОМАНДЫ</text>
+  <text x="68" y="132" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Задачи цели</text>
+  <text x="68" y="154" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">исполнитель, приоритет, комментарии,</text>
+  <text x="68" y="170" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">причина закрытия</text>
+
+  <!-- Узлы: брифы, реестр, архив -->
+  <rect x="48" y="196" width="152" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="68" y="228" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Брифы ролей</text>
+  <text x="68" y="250" fill="#94a3b8" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">границы работы</text>
+
+  <rect x="216" y="196" width="152" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="236" y="228" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Реестр воплощений</text>
+  <text x="236" y="250" fill="#94a3b8" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">модель и бюджет</text>
+
+  <rect x="384" y="196" width="152" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="404" y="228" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Архив переписки</text>
+  <text x="404" y="250" fill="#94a3b8" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">кто что решил</text>
+
+  <!-- Узел: доска -->
+  <rect x="48" y="296" width="488" height="88" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="68" y="332" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Доска для человека</text>
+  <text x="68" y="360" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">собирается одной командой из тех же задач</text>
+
+  <path d="M208 176 V296" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#si-arrow-ink)" />
+
+  <!-- Узел снаружи: код продукта -->
+  <rect x="656" y="100" width="260" height="150" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <rect x="676" y="116" width="84" height="15" rx="2" fill="#64748b" fill-opacity="0.10" stroke="#64748b" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="718" y="127" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">СНАРУЖИ</text>
+  <text x="676" y="158" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Код продукта</text>
+  <text x="676" y="184" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">бот, сайт, кабинет,</text>
+  <text x="676" y="200" fill="#475569" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">рассылки</text>
+  <text x="676" y="228" fill="#94a3b8" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">своего списка задач нет</text>
+
+  <!-- Что ходит через границу -->
+  <path d="M536 112 H656" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#si-arrow-ink)" />
+  <rect x="562" y="74" width="94" height="32" fill="#f8fafc" />
+  <text x="608" y="86" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ветка и заявка</text>
+  <text x="608" y="100" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">на слияние</text>
+
+  <path d="M656 160 H536" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#si-arrow-ink)" />
+  <rect x="550" y="170" width="100" height="32" fill="#f8fafc" />
+  <text x="600" y="182" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ссылка на заявку</text>
+  <text x="600" y="196" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">возвращается</text>
+
+  <!-- Ограничитель -->
+  <rect x="24" y="428" width="3" height="42" fill="#0284c7" />
+  <text x="40" y="442" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Код продукта в штабе не лежит: он живёт в своих репозиториях.</text>
+  <text x="40" y="462" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Через границу ходят только ветка, заявка на слияние и ссылка на неё.</text>
+
+  <!-- Легенда -->
+  <text x="24" y="496" fill="#94a3b8" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+  <path d="M108 492 H148" fill="none" stroke="#1c4e80" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="6 4" />
+  <text x="156" y="496" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">граница папки штаба</text>
+</svg>

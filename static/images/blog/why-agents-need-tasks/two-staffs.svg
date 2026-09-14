@@ -1,0 +1,82 @@
+<svg viewBox="0 0 940 576" role="img" aria-labelledby="ts-title ts-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="ts-title">Два штаба со своими списками задач обмениваются сообщениями и сдают работу в общие поверхности</title>
+  <desc id="ts-desc">KB: concepts/repository
+Два контура рядом. Слева штаб «Учёба», внутри свой список задач, свой продюсер и свои роли. Справа штаб «Исследования» с тем же устройством: свой список, свой продюсер, свои роли. Между контурами две встречные стрелки: заявка уходит сообщением в чужой список, ответ возвращается сообщением в список заказчика. В чужом репозитории отдел пишет только сообщения и файлы чужого списка не трогает. Внизу общая для обоих штабов полоса поверхностей: бот, сайт, рассылки и канал. Это репозитории и площадки без своего списка задач, и роли обоих штабов сдают работу туда. Смысл кадра: списков столько, сколько целей, а поверхности общие и своих задач не держат.</desc>
+
+  <defs>
+    <marker id="ts-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="ts-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="576" fill="#f8fafc" />
+
+  <text x="24" y="46" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ШТАБ · УЧЁБА</text>
+  <text x="544" y="46" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ШТАБ · ИССЛЕДОВАНИЯ</text>
+
+  <rect x="24" y="56" width="372" height="284" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+  <rect x="544" y="56" width="372" height="284" rx="8" fill="#0f172a" fill-opacity="0.025" stroke="#0f172a" stroke-opacity="0.10" stroke-width="0.8" />
+
+  <!-- Штаб слева -->
+  <rect x="48" y="80" width="324" height="64" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="68" y="108" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Свой список задач</text>
+  <text x="68" y="128" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">задачи цели, разработка и бизнес</text>
+
+  <rect x="48" y="164" width="324" height="64" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="68" y="192" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Свой продюсер</text>
+  <text x="68" y="212" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ставит задачи и принимает работу</text>
+
+  <rect x="48" y="248" width="324" height="64" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="68" y="276" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Свои роли</text>
+  <text x="68" y="296" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">нанимаются по брифам этого штаба</text>
+
+  <!-- Штаб справа -->
+  <rect x="568" y="80" width="324" height="64" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="588" y="108" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Свой список задач</text>
+  <text x="588" y="128" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">задачи другой цели, свой список</text>
+
+  <rect x="568" y="164" width="324" height="64" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="588" y="192" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Свой продюсер</text>
+  <text x="588" y="212" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ставит задачи и принимает работу</text>
+
+  <rect x="568" y="248" width="324" height="64" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="588" y="276" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Свои роли</text>
+  <text x="588" y="296" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">нанимаются по брифам этого штаба</text>
+
+  <!-- Обмен между штабами -->
+  <path d="M372 140 H568" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#ts-arrow-accent)" />
+  <rect x="400" y="96" width="140" height="36" fill="#f8fafc" />
+  <text x="470" y="110" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">заявка: сообщение</text>
+  <text x="470" y="124" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в чужом списке</text>
+
+  <path d="M568 268 H372" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#ts-arrow-accent)" />
+  <rect x="400" y="278" width="140" height="36" fill="#f8fafc" />
+  <text x="470" y="292" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ответ: сообщение</text>
+  <text x="470" y="306" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в списке заказчика</text>
+
+  <!-- Сдача работы в общие поверхности -->
+  <path d="M210 312 V404" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ts-arrow-ink)" />
+  <path d="M730 312 V404" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ts-arrow-ink)" />
+
+  <!-- Общая полоса поверхностей -->
+  <rect x="24" y="412" width="892" height="80" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <rect x="48" y="426" width="152" height="15" rx="2" fill="#64748b" fill-opacity="0.10" stroke="#64748b" stroke-opacity="0.40" stroke-width="0.8" />
+  <text x="124" y="437" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">СВОИХ ЗАДАЧ НЕ ДЕРЖАТ</text>
+  <text x="48" y="466" fill="#1e293b" font-size="16" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Поверхности</text>
+  <text x="200" y="465" fill="#475569" font-size="13" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">бот · сайт · рассылки · канал</text>
+  <text x="48" y="484" fill="#94a3b8" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">общие для обоих штабов: сюда сдают работу роли и того, и другого</text>
+
+  <!-- Ограничитель -->
+  <rect x="24" y="512" width="3" height="20" fill="#0284c7" />
+  <text x="40" y="527" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">В чужом списке отдел пишет только сообщения: чужие задачи и файлы он не трогает.</text>
+
+  <!-- Легенда -->
+  <text x="24" y="558" fill="#94a3b8" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+  <path d="M100 554 H140" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <text x="148" y="558" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">сдача работы в поверхность</text>
+  <path d="M368 554 H408" fill="none" stroke="#0284c7" stroke-width="1.4" />
+  <text x="416" y="558" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">сообщение между списками</text>
+</svg>

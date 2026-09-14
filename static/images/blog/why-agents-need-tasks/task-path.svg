@@ -1,0 +1,114 @@
+<svg viewBox="0 0 940 700" role="img" aria-labelledby="tp-title tp-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="tp-title">Путь одной задачи от фразы владельца до кнопки слияния в чужом репозитории</title>
+  <desc id="tp-desc">KB: concepts/shared-workspace
+Пять дорожек слева направо: владелец, оркестратор, продюсер, роль, поверхность. Восемь шагов сверху вниз. Первый: владелец говорит фразу в чат оркестратора. Второй: оркестратор кладёт её в список отдельной задачей и больше руками ничего не делает. Третий: продюсер на своём такте дописывает результат, границы, источники и признак готовности и назначает роль. Четвёртый: оркестратор по заявке продюсера нанимает воплощение роли с брифом. Пятый: роль работает в поверхности, заводит ветку и пулреквест в репозитории без своих задач. Шестой: роль возвращает в ту же задачу ссылку на пулреквест и ставит метку needs-review. Седьмой: продюсер закрывает задачу с причиной либо возвращает её кругом правок. Восьмой: владелец видит одну строку на доске и жмёт слияние. Отдельная оговорка внизу: работающему воплощению никто не пишет, новый запрос ждёт следующего такта продюсера, и это задержка в один такт.</desc>
+
+  <defs>
+    <marker id="tp-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="700" fill="#f8fafc" />
+
+  <text x="24" y="32" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ПЯТЬ ДОРОЖЕК · ВОСЕМЬ ШАГОВ СВЕРХУ ВНИЗ</text>
+
+  <!-- Дорожки -->
+  <rect x="30" y="48" width="164" height="52" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="112" y="74" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Владелец</text>
+  <text x="112" y="91" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">говорит и мержит</text>
+
+  <rect x="210" y="48" width="164" height="52" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="292" y="74" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Оркестратор</text>
+  <text x="292" y="91" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">нанимает, не делает</text>
+
+  <rect x="388" y="48" width="164" height="52" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="470" y="74" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Продюсер</text>
+  <text x="470" y="91" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ставит и принимает</text>
+
+  <rect x="566" y="48" width="164" height="52" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="648" y="74" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Роль</text>
+  <text x="648" y="91" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">одно воплощение</text>
+
+  <rect x="744" y="48" width="164" height="52" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1" />
+  <text x="826" y="74" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Поверхность</text>
+  <text x="826" y="91" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">репозиторий без задач</text>
+
+  <!-- Линии жизни -->
+  <path d="M112 100 V612" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 5" />
+  <path d="M292 100 V612" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 5" />
+  <path d="M470 100 V612" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 5" />
+  <path d="M648 100 V612" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 5" />
+  <path d="M826 100 V612" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 5" />
+
+  <!-- Шаг 1 -->
+  <rect x="128" y="108" width="154" height="34" fill="#f8fafc" />
+  <text x="202" y="121" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">говорит фразу</text>
+  <text x="202" y="136" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в чат оркестратора</text>
+  <path d="M112 146 H292" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="121" y="139" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="128.5" y="149" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">1</text>
+
+  <!-- Шаг 2 -->
+  <path d="M292 182 H326 Q334 182 334 190 V202 Q334 210 326 210 H296" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="340" y="178" width="132" height="32" fill="#f8fafc" />
+  <text x="346" y="190" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">кладёт в список</text>
+  <text x="346" y="205" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">отдельной задачей</text>
+  <rect x="301" y="175" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="308.5" y="185" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">2</text>
+
+  <!-- Шаг 3 -->
+  <path d="M470 248 H504 Q512 248 512 256 V268 Q512 276 504 276 H474" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="518" y="240" width="152" height="62" fill="#f8fafc" />
+  <text x="524" y="252" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">дописывает результат,</text>
+  <text x="524" y="267" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">границы, источники,</text>
+  <text x="524" y="282" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">признак готовности,</text>
+  <text x="524" y="297" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">назначает роль</text>
+  <rect x="479" y="241" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="486.5" y="251" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">3</text>
+
+  <!-- Шаг 4 -->
+  <rect x="350" y="302" width="240" height="34" fill="#f8fafc" />
+  <text x="470" y="315" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">по заявке продюсера</text>
+  <text x="470" y="330" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">нанимает воплощение роли с брифом</text>
+  <path d="M292 340 H648" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="301" y="333" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="308.5" y="343" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">4</text>
+
+  <!-- Шаг 5 -->
+  <rect x="650" y="358" width="176" height="34" fill="#f8fafc" />
+  <text x="737" y="371" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ветка и пулреквест</text>
+  <text x="737" y="386" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в репозитории без задач</text>
+  <path d="M648 396 H826" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="657" y="389" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="664.5" y="399" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">5</text>
+
+  <!-- Шаг 6 -->
+  <rect x="486" y="414" width="148" height="34" fill="#f8fafc" />
+  <text x="559" y="427" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ссылка на пулреквест</text>
+  <text x="559" y="442" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">и метка needs-review</text>
+  <path d="M648 452 H470" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="624" y="445" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="631.5" y="455" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">6</text>
+
+  <!-- Шаг 7 -->
+  <path d="M470 500 H504 Q512 500 512 508 V520 Q512 528 504 528 H474" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="518" y="496" width="130" height="48" fill="#f8fafc" />
+  <text x="524" y="508" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">закрывает задачу</text>
+  <text x="524" y="523" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">с причиной либо</text>
+  <text x="524" y="538" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">возвращает правки</text>
+  <rect x="479" y="493" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="486.5" y="503" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">7</text>
+
+  <!-- Шаг 8 -->
+  <rect x="320" y="556" width="298" height="18" fill="#f8fafc" />
+  <text x="469" y="570" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">видит одну строку на доске и жмёт слияние</text>
+  <path d="M112 582 H826" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#tp-arrow-ink)" />
+  <rect x="121" y="575" width="15" height="14" rx="2" fill="#ffffff" stroke="#1c4e80" stroke-width="0.8" />
+  <text x="128.5" y="585" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">8</text>
+
+  <!-- Оговорка -->
+  <rect x="24" y="636" width="3" height="42" fill="#0284c7" />
+  <text x="40" y="652" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Работающему воплощению никто не пишет: новый запрос ждёт</text>
+  <text x="40" y="670" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">следующего такта продюсера. Это и есть задержка в один такт.</text>
+</svg>
