@@ -36,7 +36,7 @@
 
 | Дата | Статья |
 |------|--------|
-| 2026-09-17 | [Jev и модели System One: разбор анонса TypeSafe](https://sereja.tech/blog/typesafe-system-one-jev/) |
+| 2026-09-17 | [Jev: модель, которая не пишет текст](https://sereja.tech/blog/typesafe-system-one-jev/) |
 | 2026-09-14 | [Зачем агентам задачи, если им можно просто написать словами](https://sereja.tech/blog/why-agents-need-tasks/) |
 | 2026-09-08 | [ChatGPT Images 2.5: лучший генератор из виденных](https://sereja.tech/blog/chatgpt-images-2-5/) |
 | 2026-09-05 | [Цикл разработки с агентами: 6 шагов до деплоя](https://sereja.tech/blog/sdlc-agent-cycle/) |
