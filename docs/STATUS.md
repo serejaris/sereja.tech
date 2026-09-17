@@ -2,7 +2,7 @@
 
 ## Current phase
 
-`M16 completed — rollback governance, Git-connected production rollout, and smoke passed`
+`M22 completed — article covers preserve their source aspect ratio`
 
 ## Done
 
@@ -38,6 +38,7 @@
 - [x] M15 local audit, implementation, and validation completed: issue `#140` reviewed; the production target browser check confirmed title, trailing-slash canonical, `lang="ru"`, description, `BlogPosting` + `BreadcrumbList`, images, and sitemap presence; two explicit contextual donors added; `batch_c` and dynamic priority-batch handling added; full helper stack and local browser smoke passed.
 - [x] M15 release and production smoke completed: commits `4f21fa1` (M14) and `cec1a27` (M15) were pushed with `git push origin main`; the Git-connected production deploy is live. Browser smoke observed `/blog/pipeline-born-by-hand/` self-canonical at `https://sereja.tech/blog/pipeline-born-by-hand/`, index-default, `BlogPosting` + `BreadcrumbList`, sitemap entry, both explicit donors live, and M14 Superpowers plus AGENTS title/description live; an independent URL read confirmed the blog-post-pipeline donor. GSC URL Inspection was skipped due Chrome profile lock; manual follow-up retained and non-blocking.
 - [x] M16 completed: four critics rejected the ungrounded Superpowers winner rewrite; the title, description, opening, and targeted H2 were restored from `4f21fa1^` while preserving the M15 donor. The mandatory AGENTS guardrail and ADR `0001` now govern protected organic winners; clean rollback validation passed, commit `c5182d1` was pushed to `main`, and Git-connected production browser smoke passed. Live GSC URL Inspection was skipped due Chrome profile lock; manual follow-up is optional and non-blocking.
+- [x] M22 completed: Reading Ledger article covers now render at their intrinsic aspect ratio on desktop and mobile; the ChatGPT Images 2.5 cover retains its full `1280 × 720` frame.
 
 ## In progress
 - None.
@@ -60,6 +61,7 @@
   4. search-fit tuning.
 - Trailing-slash canonical policy stays in place.
 - Taxonomy and term pages stay `noindex, follow`.
+- Reading Ledger article covers preserve their intrinsic aspect ratio; fixed-ratio cropping remains limited to card thumbnails.
 - Board and issue sync is best-effort and never blocks repo work.
 - CTR optimization is intentionally deferred until after indexation fundamentals.
 - `context.md` is now the local PRD for this run because the pack referenced it and the file did not exist.
@@ -254,6 +256,7 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-08-18 | M19 full-adaptation fidelity correction | `content/blog/grok-bot-cloud-agents-guide.md`; issue `#159`; commit `ccc2259` | source-to-public structural and visual diff; five deaify critics; current xAI and Hermes fact audit; persona gate; reverse outline; editorial judge; style and structural gates; `hugo --gc --minify`; rendered heading and 25-image-order assertions; full SEO helper stack; production HTML, cover hash, redirect, canonical, sitemap, and 840x480 TL;DR smoke | pass: the live article restores the owner-provided TL;DR opening, 16 H2 + 1 H3, all 25 localized schemes in source order, memory, collaboration, Auto Review, Hermes, macOS, practical-start, and final sections | monitor production and queued announcement |
 | 2026-09-03 | M20 GPT-6 Astra release article | `content/blog/gpt-6-astra.md`, `static/images/blog/gpt-6-astra*`, `static/design-review/gpt-6-astra-*`, `layouts/blog/paper.html`, `layouts/_default/baseof.html`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#171` | Grok CLI X research; five deaify critics; fact, persona, and editorial gates; style and structural gates; `hugo --gc --minify`; rendered metadata and media assertions; full SEO helper stack; deterministic 1200 px overlap check; Playwright browser review at 840×480 | pass locally: article contains 12 attributed source images, official OpenAI video, a responsive local Astra game video, direct Day One verdict, FAQ schema, trailing-slash canonical, and corrected media/tag layout rules | publication and post-deploy evidence are tracked in issue `#171` and PR `#172` |
 | 2026-09-03 | M20 Astra access-angle correction | `content/blog/gpt-6-astra.md`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#171`; PR `#173`; merge `3e3f2fde` | five title critics; style and structural gates; Hugo build; full SEO helper stack; Playwright local and production review at 840×480 | pass: production title states the Day One access question; previous migration framing is absent; Telegram queue item `171741aa` is scheduled for 2026-09-04 08:00 MSK | monitor production and queued announcement |
+| 2026-09-17 | M22 uncropped article covers | `layouts/_default/baseof.html`, `docs/PLAN.md`, `docs/STATUS.md` | `hugo --gc --minify`; rendered cover CSS and `1280 × 720` HTML assertions; SEO helper stack; `git diff --check`; local server smoke | pass; browser CLI unavailable because this runtime blocks Unix sockets, deterministic render checks passed | Git-connected rollout and production smoke |
 
 ## Blocker log
 

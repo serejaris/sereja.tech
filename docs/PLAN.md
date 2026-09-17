@@ -1102,3 +1102,24 @@ Publish the founder-approved SDLC guide at `/blog/sdlc-agent-cycle/` through the
 ### Release evidence
 
 The release status, final commit and live HTTP checks are recorded in corp-content #61. Production uses the existing Git integration; the URL and slash policy stay fixed.
+
+## M22 — Uncropped article covers
+
+Status: `[x]`
+
+### Goal
+
+Render article cover images at their source aspect ratio so the page template never cuts off their content.
+
+### Tasks
+
+- [x] Remove the fixed desktop and mobile aspect ratios from Reading Ledger article covers.
+- [x] Replace cover cropping with `height: auto` and `object-fit: contain` while preserving responsive `width: 100%`.
+- [x] Verify the affected ChatGPT Images 2.5 cover keeps its rendered `1280 × 720` aspect ratio.
+- [x] Pass the Hugo build, rendered-HTML assertions, SEO helper checks, and diff validation.
+
+### Definition of done
+
+- `.post-cover` uses the image's intrinsic aspect ratio at desktop and mobile widths.
+- Article-list cards retain their existing cropped card treatment.
+- `/blog/chatgpt-images-2-5/` renders the complete cover with intrinsic width and height attributes.
