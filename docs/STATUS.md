@@ -315,3 +315,10 @@ Prepared `/blog/jev-voice-browser/` with a scoped `lesson` layout, two inline di
 The owner's latest direction removes required prompt cards from this article and the lesson-guide-writer skill. The article uses concept explanation and concrete observations. Full voice-to-action verification remains explicitly unconfirmed; typed Jev actions and Russian speech recognition were observed separately. Timings distinguish preparation/network/validation from execution dispatch and page loading.
 
 Hugo build passed. CUA browser checks at 1440×900 and 375×900 found no document horizontal overflow; SVGs scroll inside their own containers on mobile. Screenshots are public teaching content only. Production must ship through the connected Git repository; issue #185 records post-deploy evidence.
+
+
+## 2026-09-17 — Jev reader-focused revision
+
+Rewrote the Jev browser article as a self-contained explanation for a general business reader. Answer types are explained through concrete examples; API fields, setup details, research-process commentary and an unnecessary confidence-field detour were removed. Sources remain at the end. The original attributed video, successful typed-command screenshot and false-negative example remain. The prototype is described through observed typed input; voice control is explicitly experimental.
+
+Added a three-step lead diagram with a vertical mobile version. Replaced the infrastructure diagram with model inputs/outputs and simplified execution checks. Existing section anchors remain valid. Independent text fact audit passed. Production-baseURL Hugo build, four SVG accessibility/uniqueness checks, five section anchors, six figure checks and no-code/no-table assertions passed. CUA verified 1440×900 desktop and 375×900 mobile, with no document overflow and a readable mobile lead diagram.
