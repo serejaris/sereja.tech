@@ -2,7 +2,7 @@
 
 ## Current phase
 
-`M22 completed — article covers preserve their source aspect ratio`
+`M22 completed — natural-ratio article covers are live and production smoke passed`
 
 ## Done
 
@@ -38,7 +38,7 @@
 - [x] M15 local audit, implementation, and validation completed: issue `#140` reviewed; the production target browser check confirmed title, trailing-slash canonical, `lang="ru"`, description, `BlogPosting` + `BreadcrumbList`, images, and sitemap presence; two explicit contextual donors added; `batch_c` and dynamic priority-batch handling added; full helper stack and local browser smoke passed.
 - [x] M15 release and production smoke completed: commits `4f21fa1` (M14) and `cec1a27` (M15) were pushed with `git push origin main`; the Git-connected production deploy is live. Browser smoke observed `/blog/pipeline-born-by-hand/` self-canonical at `https://sereja.tech/blog/pipeline-born-by-hand/`, index-default, `BlogPosting` + `BreadcrumbList`, sitemap entry, both explicit donors live, and M14 Superpowers plus AGENTS title/description live; an independent URL read confirmed the blog-post-pipeline donor. GSC URL Inspection was skipped due Chrome profile lock; manual follow-up retained and non-blocking.
 - [x] M16 completed: four critics rejected the ungrounded Superpowers winner rewrite; the title, description, opening, and targeted H2 were restored from `4f21fa1^` while preserving the M15 donor. The mandatory AGENTS guardrail and ADR `0001` now govern protected organic winners; clean rollback validation passed, commit `c5182d1` was pushed to `main`, and Git-connected production browser smoke passed. Live GSC URL Inspection was skipped due Chrome profile lock; manual follow-up is optional and non-blocking.
-- [x] M22 completed: Reading Ledger article covers now render at their intrinsic aspect ratio on desktop and mobile; the ChatGPT Images 2.5 cover retains its full `1280 × 720` frame.
+- [x] M22 completed and released through PR `#184` / squash commit `b9aa0d9`: Reading Ledger article covers now render at their intrinsic aspect ratio on desktop and mobile; production smoke confirmed the ChatGPT Images 2.5 article and full `1280 × 720` cover return `200`.
 
 ## In progress
 - None.
@@ -257,6 +257,7 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-09-03 | M20 GPT-6 Astra release article | `content/blog/gpt-6-astra.md`, `static/images/blog/gpt-6-astra*`, `static/design-review/gpt-6-astra-*`, `layouts/blog/paper.html`, `layouts/_default/baseof.html`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#171` | Grok CLI X research; five deaify critics; fact, persona, and editorial gates; style and structural gates; `hugo --gc --minify`; rendered metadata and media assertions; full SEO helper stack; deterministic 1200 px overlap check; Playwright browser review at 840×480 | pass locally: article contains 12 attributed source images, official OpenAI video, a responsive local Astra game video, direct Day One verdict, FAQ schema, trailing-slash canonical, and corrected media/tag layout rules | publication and post-deploy evidence are tracked in issue `#171` and PR `#172` |
 | 2026-09-03 | M20 Astra access-angle correction | `content/blog/gpt-6-astra.md`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#171`; PR `#173`; merge `3e3f2fde` | five title critics; style and structural gates; Hugo build; full SEO helper stack; Playwright local and production review at 840×480 | pass: production title states the Day One access question; previous migration framing is absent; Telegram queue item `171741aa` is scheduled for 2026-09-04 08:00 MSK | monitor production and queued announcement |
 | 2026-09-17 | M22 uncropped article covers | `layouts/_default/baseof.html`, `docs/PLAN.md`, `docs/STATUS.md` | `hugo --gc --minify`; rendered cover CSS and `1280 × 720` HTML assertions; SEO helper stack; `git diff --check`; local server smoke | pass; browser CLI unavailable because this runtime blocks Unix sockets, deterministic render checks passed | Git-connected rollout and production smoke |
+| 2026-09-17 | M22 Git-connected rollout and production smoke | PR `#184`; squash commit `b9aa0d9`; `docs/PLAN.md`; `docs/STATUS.md` | Vercel commit status; cache-busted production article fetch; production cover asset HEAD; live HTML/CSS assertions | pass: `sereja-tech` deployment succeeded, article and cover return `200`, intrinsic `1280 × 720` dimensions and natural-ratio styles are live | monitor article layout |
 
 ## Blocker log
 

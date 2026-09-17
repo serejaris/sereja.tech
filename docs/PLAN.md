@@ -1123,3 +1123,7 @@ Render article cover images at their source aspect ratio so the page template ne
 - `.post-cover` uses the image's intrinsic aspect ratio at desktop and mobile widths.
 - Article-list cards retain their existing cropped card treatment.
 - `/blog/chatgpt-images-2-5/` renders the complete cover with intrinsic width and height attributes.
+
+### Release evidence
+
+PR `#184` was squash-merged as `b9aa0d9`. The Git-connected `sereja-tech` deployment passed, and production smoke confirmed the article and `1280 × 720` cover asset return `200` with the natural-ratio CSS live.
