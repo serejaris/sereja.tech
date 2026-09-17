@@ -254,6 +254,37 @@ npx skills add typesafe-ai/skills --skill typesafe-ai
 
 [Прямой API](https://docs.typesafe.ai/models) на 17 сентября стоит $0,042 за миллион входных токенов, выход бесплатный. [Карточка Gateway](https://vercel.com/ai-gateway/models/jev) указывает $0,04 за миллион входных токенов; цена выходных токенов здесь не указана. Расходы основного агента и дополнительных моделей оплачиваются отдельно.
 
+## Попробовать Jev через ai-cli
+
+[Chris Tate 17 сентября](https://x.com/ctatedev/status/2100584917092409479) предложил использовать Jev через ai-cli. Эта [утилита Vercel Labs](https://github.com/vercel-labs/ai-cli/blob/main/packages/ai-cli/README.md) позволяет человеку или агенту с доступом к терминалу передать текст и конкретный вопрос одной командой.
+
+Для [ai-cli 0.5.1](https://registry.npmjs.org/ai-cli/0.5.1) нужен Node.js 22 или новее. Установка:
+
+```bash
+npm install -g ai-cli
+```
+
+Для [модельной оценки](https://ai-cli.dev/docs/evaluate) задай в окружении `AI_GATEWAY_API_KEY`: нужен доступ к Jev и средства на запросы в Gateway. По умолчанию используется `typesafe-ai/jev`; установка CLI сама по себе доступа к модели не даёт.
+
+Конкретный [пример Tate](https://x.com/ctatedev/status/2100584917092409479): перед коммитом спросить, ломают ли подготовленные изменения API.
+
+```text
+git diff --cached |
+  ai evaluate \
+    --boolean "api=Breaks the API?"
+```
+
+`git diff --cached` отдаёт текст изменений, добавленных в будущий коммит. [CLI](https://ai-cli.dev/docs/evaluate) передаёт его как состояние Jev; человек задаёт вопрос «Ломает API?» и имя ответа `api`. Флаг `--boolean` просит оценку да/нет. Команда возвращает JSON: `answers.api.probability` содержит вероятность ответа «да». Человек или следующий скрипт читает её и отдельно решает, какие изменения проверить. Успешное завершение команды означает полученный ответ; оно не означает безопасный коммит.
+
+Для этого вопроса нужен достаточный контекст: ожидаемые входы и ответы API, зависимости потребителей. Один diff может их не содержать. Оценка модели не заменяет тесты совместимости; перед отправкой внешнему провайдеру проверь текст на секреты и личные данные.
+
+<figure>
+<a href="/images/blog/typesafe-system-one-jev/ai-cli-ctatedev-original.jpg"><img src="/images/blog/typesafe-system-one-jev/ai-cli-ctatedev-original.jpg" alt="Три команды Chris Tate: оценка изменения API, плана Terraform и текста на фишинг" width="1080" height="1080" loading="lazy"></a>
+<figcaption>Примеры <a href="https://x.com/ctatedev/status/2100584917092409479">Chris Tate</a>: вопрос к Git diff, плану Terraform и тексту из буфера обмена.</figcaption>
+</figure>
+
+[ai-cli](https://ai-cli.dev/docs/evaluate) также принимает вопросы Choice и Score с заданными вариантами или уровнями. Это интерфейс запроса; постоянный контроль действий агента и пороги передачи человеку задаёт приложение. Вызовы оплачиваются по [условиям Gateway](https://vercel.com/ai-gateway/models/jev); расход конкретной команды зависит от входа и вопросов.
+
 ## Проверка на своей задаче даёт основание для внедрения
 
 В [разборе голосового браузера](/blog/jev-voice-browser/) Jev выбирает действие по распознанной команде и подписям элементов страницы.
