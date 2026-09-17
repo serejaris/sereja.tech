@@ -530,11 +530,11 @@
     .copy-page-link i { color: var(--accent); font-size: 15px; }
     .section-blog.kind-page .post-cover {
       width: 100%;
-      aspect-ratio: 24 / 5;
+      height: auto;
       margin: 0 0 20px;
       border: 1px solid var(--line);
       border-radius: 0;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       background: var(--surface);
     }
@@ -795,7 +795,6 @@
       .section-blog.kind-page .post-title { max-width: 100%; margin-bottom: 18px; font-size: clamp(34px, 11vw, 48px); line-height: 1.02; }
       .section-blog.kind-page .post-meta { align-items: flex-start; font-size: 9.5px; }
       .copy-page-link { width: 100%; margin: 3px 0 0; }
-      .section-blog.kind-page .post-cover { aspect-ratio: 16 / 5; }
       .section-blog.kind-page .content h2 { font-size: 21px; }
       .heading-anchor { width: 34px; height: 34px; }
       .section-blog.kind-page table { font-size: 11px; }
