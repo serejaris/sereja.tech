@@ -1138,3 +1138,14 @@ Owner request: publish an explanation of Jev through the working Voice Browser e
 - [x] Use the lesson-guide-writer 1.6.0 concept-first contract with optional prompts; this article contains no prompt cards.
 - [x] Validate the Hugo page and desktop/mobile layout; keep deployment on the Git-connected Vercel path.
 - Production publication and live URL evidence are tracked in issue #185.
+
+
+## Jev explainer reader revision, 2026-09-17
+
+Owner request: explain the concept within the article for a general business audience, remove research-process commentary, and add a simple diagram after the lead.
+
+- [x] Explain predefined answer types through routing, urgency and yes/no examples, without requiring a documentation detour.
+- [x] Replace technical diagrams with reader-facing inputs/outputs and execution checks; add a responsive three-step lead diagram.
+- [x] Preserve the attributed original video, factual screenshots, prototype scope and established section anchors.
+- [x] Pass the Hugo build, SVG/anchor/content assertions and CUA visual checks at 1440×900 and 375×900.
+- Publication follows the connected Git deployment path; refs #185.

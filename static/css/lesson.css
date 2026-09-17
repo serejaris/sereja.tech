@@ -24,6 +24,7 @@ figcaption{font-size:11px;line-height:1.6;color:var(--muted);text-align:center;m
 figcaption::before{content:'Рис. ' counter(figure) '. '}
 img,video{max-width:100%;height:auto}
 .diagram-scroll{max-width:100%;overflow:auto}
+.lead-mobile{display:none}
 code{font-family:'PT Mono',monospace;font-size:.85em;overflow-wrap:anywhere}
 .site-top,.site-bottom{max-width:1116px;margin:0 auto;padding:22px;font-size:11.5px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .site-top span,.site-bottom span:last-child{display:flex;gap:20px;flex-wrap:wrap}
@@ -31,5 +32,6 @@ code{font-family:'PT Mono',monospace;font-size:.85em;overflow-wrap:anywhere}
 @media(max-width:840px){.page{padding-top:48px}figure{width:100%;margin-left:0}}
 @media(max-width:700px){.diagram-scroll svg{min-width:580px}.site-top,.site-bottom{padding:18px 22px}.site-top span,.site-bottom span:last-child{gap:14px}}
 @media(max-width:480px){h1{font-size:1.6em}.page{padding-top:36px}}
+@media(max-width:540px){.lead-desktop{display:none}.lead-mobile{display:block}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{@page{size:A4;margin:18mm}body{font-size:11pt}.page{max-width:none;margin:0;padding:0}.site-top,.site-bottom{display:none}figure{width:100%;margin-left:0;break-inside:avoid}section{padding-top:24px}a{color:var(--ink)}h2,h3{break-after:avoid}.diagram-scroll svg{min-width:0}}
