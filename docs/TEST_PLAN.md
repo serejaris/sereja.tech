@@ -406,3 +406,12 @@ The whole run is accepted only if:
 - [ ] show one restored or redirected ghost URL example
 - [ ] show canonical tag on one priority page
 - [ ] show sitemap sanity
+
+
+## Jev explainer acceptance
+
+- Hugo build passes for `/blog/jev-voice-browser/`; canonical and OG point to the final slash URL.
+- Exactly two accessible inline SVG diagrams, two linked screenshots, zero tables and zero prompt cards in the article.
+- Desktop 1440×900 and mobile 375×900 have no document horizontal overflow; both SVGs remain readable through internal horizontal scroll on mobile.
+- Article facts distinguish typed-action checks, speech recognition and unverified complete voice execution.
+- After Git-connected deployment, check article HTTP 200, image/CSS HTTP 200, sitemap membership and public repository link.

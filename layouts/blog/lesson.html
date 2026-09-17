@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  {{- partial "seo.html" . -}}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#fffef9">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-optimized content">
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="{{ .Site.Title }} RSS">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/lesson.css">
+</head>
+<body class="lesson">
+  <nav class="site-top" aria-label="Основная навигация">
+    <a href="/">Сережа Рис</a>
+    <span><a href="/blog/">Блог</a><a href="/about/">Обо мне</a><a href="https://t.me/ris_ai?utm_source=sereja_tech&utm_medium=link&utm_campaign=article_nav" target="_blank" rel="noopener">Телеграм</a></span>
+  </nav>
+  <main>{{ .Content }}</main>
+  <footer class="site-bottom">
+    <span>© {{ now.Year }} Сережа Рис · sereja.tech</span>
+    <span><a href="https://github.com/serejaris" target="_blank" rel="noopener">GitHub</a><a href="/index.xml">RSS</a></span>
+  </footer>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/analytics.js"></script>
+</body>
+</html>
