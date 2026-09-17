@@ -306,3 +306,12 @@ Prepared the approved `/blog/sdlc-agent-cycle/` article for PR #170. Added a 45-
 Independent fact and voice checks passed; editorial status is `ready_for_autonomous_publish`. Style lint: 875 prose words, score 10/10; structural guide lint passed with the approved nine sections. All seven SVG diagrams parse; desktop 1440×900 and mobile 390 px render without horizontal overflow. Hugo uses Git information for `dateModified`, so final metadata is validated after the release commit. The final deployment and live checks are tracked in [corp-content #61](https://github.com/serejaris/corp-content/issues/61).
 
 The README generator now includes indexable HTML articles, so the pre-commit regeneration retains the SDLC release. Draft and noindex variants stay excluded.
+
+
+## 2026-09-17 — Jev browser decision explainer
+
+Prepared `/blog/jev-voice-browser/` with a scoped `lesson` layout, two inline diagrams and two factual 1440×900 screenshots. The article explains model inputs, choice probabilities, code validation, successful execution and an observed false-negative abstention. It links the existing Jev and Structured Output articles and the public MIT repository `https://github.com/serejaris/voice-browser`. Existing post title, description and intro are preserved; one contextual donor link was added.
+
+The owner's latest direction removes required prompt cards from this article and the lesson-guide-writer skill. The article uses concept explanation and concrete observations. Full voice-to-action verification remains explicitly unconfirmed; typed Jev actions and Russian speech recognition were observed separately. Timings distinguish preparation/network/validation from execution dispatch and page loading.
+
+Hugo build passed. CUA browser checks at 1440×900 and 375×900 found no document horizontal overflow; SVGs scroll inside their own containers on mobile. Screenshots are public teaching content only. Production must ship through the connected Git repository; issue #185 records post-deploy evidence.

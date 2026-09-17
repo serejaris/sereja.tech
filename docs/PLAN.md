@@ -1127,3 +1127,14 @@ Render article cover images at their source aspect ratio so the page template ne
 ### Release evidence
 
 PR `#184` was squash-merged as `b9aa0d9`. The Git-connected `sereja-tech` deployment passed, and production smoke confirmed the article and `1280 × 720` cover asset return `200` with the natural-ratio CSS live.
+
+
+## Jev decision model explainer, 2026-09-17
+
+Owner request: publish an explanation of Jev through the working Voice Browser example, with diagrams, factual screenshots and an open-source repository.
+
+- [x] Explain state, typed questions, candidate choices, probabilities and the code execution boundary.
+- [x] Include two accessible SVG diagrams and two screenshots from actual checks.
+- [x] Use the lesson-guide-writer 1.6.0 concept-first contract with optional prompts; this article contains no prompt cards.
+- [x] Validate the Hugo page and desktop/mobile layout; keep deployment on the Git-connected Vercel path.
+- Production publication and live URL evidence are tracked in issue #185.

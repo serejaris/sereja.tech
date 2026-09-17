@@ -1,0 +1,255 @@
+---
+title: "Как Jev выбирает действие по голосовой команде"
+date: 2026-09-17
+lastmod: 2026-09-17
+description: "Как Jev выбирает действие браузера: состояние, варианты и вероятности. Разбор открытого Voice Browser со схемами, скриншотами и проверками исполнения."
+image: /images/blog/jev-voice-browser/controller.png
+tags: ["Jev", "агенты", "вайбкодинг", "браузер"]
+keywords: ["Jev выбор действия", "Voice Browser", "голосовое управление браузером", "typesafe-ai/jev"]
+section: "AI"
+layout: lesson
+cta: none
+cta_reason: "Объяснение Jev на открытой реализации браузерного пульта."
+---
+
+<article class="page">
+<header class="masthead">
+<h1>Как Jev выбирает действие по голосовой команде</h1>
+<p class="lede">Человек говорит "нажми Документация". Браузер распознаёт речь, Jev выбирает подходящий пункт, код нажимает кнопку. Этот короткий путь показывает, где модель помогает программе принять решение и что остаётся ответственностью программы.</p>
+<p class="meta">17 сентября 2026 · Сережа Рис</p>
+</header>
+<nav class="toc" aria-label="Содержание"><ul>
+<li><a href="#demo">Что показывает голосовой браузер</a></li>
+<li><a href="#input">Из чего складывается запрос Jev</a></li>
+<li><a href="#probabilities">Что означают вероятности</a></li>
+<li><a href="#execution">Кто решает, выполнять ли действие</a></li>
+<li><a href="#limits">Где проходит граница применения</a></li>
+</ul></nav>
+
+<section id="demo">
+<h2>Что показывает голосовой браузер</h2>
+<p>В <a href="https://x.com/moritzkremb/status/2100577979021832365">demo Moritz Kremb</a> человек голосом открывает Wikipedia, выбирает English и возвращается назад. Рядом со страницей находится пульт: распознанная команда, решения Jev и журнал действий. Такой интерфейс позволяет видеть связь между фразой, выбором модели и изменением страницы.</p>
+<p>Точный исходный код и промпт автора в просмотренных публичных источниках найти не удалось. Для проверки идеи мы сделали самостоятельный <a href="https://github.com/serejaris/voice-browser">Voice Browser с открытым кодом</a>: пульт, учебную страницу и расширение Chrome. Инструкция запуска находится в README репозитория. Для настоящей Jev нужен собственный ключ Gateway; режим локальных правил отдельно выполняет ограниченные команды без модели и вероятностей.</p>
+<p>Через настоящую Jev проверены действия по текстовым командам. В установленном расширении отдельно наблюдалось распознавание русской речи после включения микрофона пользователем. Полная цепочка от живой речи до выполненного действия ещё не подтверждена.</p>
+</section>
+
+<section id="input">
+<h2>Из чего складывается запрос Jev</h2>
+<p><a href="https://docs.typesafe.ai/concepts/system-one">Jev относится к моделям типизированных решений</a>. Программа задаёт форму ответа заранее: выбор из вариантов, положение на шкале или вероятность yes/no. Модель оценивает ситуацию и возвращает значения этой формы. Свободный текст полезен для объяснения человеку. Типизированное решение передаёт программе готовое значение для следующего шага. Подробнее о классе моделей и релизе: <a href="/blog/typesafe-system-one-jev/">"Jev: модель, которая не пишет текст"</a>.</p>
+<p>Представьте сотрудника, который получает заявку и перечень доступных операций. Ему нужно выбрать подходящий пункт, затем система исполняет операцию. В браузерном пульте Jev занимает место такого выбора. Список операций готовит код по текущей странице.</p>
+<p>У запроса две части: <code>state</code> и <code>questions</code>. Состояние <code>state</code> описывает ситуацию. Здесь это команда пользователя, заголовок страницы и краткий список видимых элементов. DOM, структура страницы с кнопками, ссылками и полями, служит источником списка. Каждый элемент имеет короткий идентификатор, подпись и тип.</p>
+<p>В <code>questions</code> программа задаёт вопрос о действии. Тип <a href="https://docs.typesafe.ai/primitives/choice"><code>choice</code></a> означает выбор одного пункта. Поле <code>instructions</code> объясняет задачу, а <code>criteria</code> связывает идентификаторы вариантов с описаниями. Для команды "нажми Документация" возможны пункты "Документация", "назад", "прокрутить вниз" и "ничего не делать".</p>
+<p>Такой запрос содержит описание страницы и ограниченный набор действий. Локальный сервер передаёт его в <code>typesafe-ai/jev</code> через <a href="https://vercel.com/docs/ai-gateway/modalities/evaluation">AI Gateway</a>. Пульт инструктирует Jev считать текст страницы данными для оценки. Полученный ответ всё равно проходит проверки кода. Изображение страницы в нашем запросе отсутствует: Jev выбирает по текстовым подписям элементов.</p>
+<figure><div class="diagram-scroll">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 586" role="img" aria-labelledby="voice-data-title voice-data-desc">
+  <title id="voice-data-title">Как команда проходит через Voice Browser</title>
+  <desc id="voice-data-desc">Голос распознаёт браузер, который может обращаться к облачному сервису. Финальный текст или введённая вручную команда поступает в пульт. Пульт получает подписи элементов выбранной вкладки и отправляет команду с вариантами локальному серверу. Сервер хранит ключ и обращается через AI Gateway к Jev. Выбор и вероятности возвращаются через сервер в пульт. После проверки локальный код выполняет действие в выбранной вкладке.</desc>
+  <defs>
+    <marker id="voice-data-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#333333"/></marker>
+    <marker id="voice-data-answer" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#33567a"/></marker>
+    <style>
+      text{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace;fill:#1a1a1a}
+      .zone{fill:#f8f8f4;stroke:#a4aaa9;stroke-width:.8}
+      .node{fill:#ffffff;stroke:#a0a5a5;stroke-width:1;rx:6}
+      .title{font-size:14px;font-weight:600}
+      .sub{font-size:10px;fill:#333333}
+      .badge{font-size:9px;fill:#33567a;letter-spacing:.4px}
+      .zone-label{font-size:10px;fill:#333333;letter-spacing:.8px}
+      .line{fill:none;stroke:#333333;stroke-width:1.4;marker-end:url(#voice-data-arrow)}
+      .answer{fill:none;stroke:#33567a;stroke-width:1.6;marker-end:url(#voice-data-answer)}
+      .label{font-size:10px;fill:#333333}
+    </style>
+  </defs>
+  <rect width="740" height="586" fill="#fffef9"/>
+  <g aria-label="Границы выполнения">
+    <rect class="zone" x="12" y="166" width="478" height="369" rx="8"/>
+    <text class="zone-label" x="26" y="187">НА КОМПЬЮТЕРЕ</text>
+    <rect class="zone" x="500" y="166" width="228" height="369" rx="8" fill="#f3f5f7"/>
+    <text class="zone-label" x="514" y="187">ОБЛАЧНЫЙ API</text>
+  </g>
+  <g aria-label="Поток данных">
+    <path class="line" d="M129 118 V211"/>
+    <rect x="58" y="131" width="142" height="20" fill="#fffef9"/>
+    <text class="label" x="129" y="145" text-anchor="middle">финальный текст</text>
+    <path class="line" d="M552 118 V136 Q552 144 544 144 H216 Q208 144 208 152 V211"/>
+    <path class="line" d="M234 268 H261"/>
+    <path class="line" d="M478 250 H505"/>
+    <path class="answer" d="M512 292 H485"/>
+    <path class="line" d="M590 318 V403"/>
+    <path class="answer" d="M638 410 V325"/>
+    <path class="answer" d="M373 318 V403"/>
+    <rect x="347" y="351" width="52" height="20" fill="#f8f8f4"/>
+    <text class="label" x="373" y="365" text-anchor="middle">ответ</text>
+    <path class="line" d="M268 460 H241"/>
+    <path class="line" d="M129 410 V325"/>
+    <rect x="64" y="344" width="130" height="39" fill="#f8f8f4"/>
+    <text class="label" x="129" y="359" text-anchor="middle">подписи</text>
+    <text class="label" x="129" y="374" text-anchor="middle">элементов</text>
+  </g>
+  <g aria-label="Вход команды">
+    <rect class="node" x="24" y="20" width="320" height="98"/>
+    <text class="badge" x="40" y="42">МИКРОФОН ПО КНОПКЕ</text>
+    <text class="title" x="40" y="65">Голос → распознавание</text>
+    <text class="sub" x="40" y="85">Сервис браузера может</text>
+    <text class="sub" x="40" y="100">обрабатывать речь в облаке</text>
+    <rect class="node" x="388" y="20" width="328" height="98"/>
+    <text class="badge" x="404" y="42">ТЕКСТОВОЕ ПОЛЕ</text>
+    <text class="title" x="404" y="65">Команда с клавиатуры</text>
+    <text class="sub" x="404" y="91">Тот же путь выбора действия</text>
+  </g>
+  <g aria-label="Локальные компоненты">
+    <rect class="node" x="24" y="218" width="210" height="100"/>
+    <text class="badge" x="40" y="240">РАСШИРЕНИЕ</text>
+    <text class="title" x="40" y="265">Пульт</text>
+    <text class="sub" x="40" y="286">Команда, заголовок</text>
+    <text class="sub" x="40" y="302">и подписи элементов</text>
+    <rect class="node" x="268" y="218" width="210" height="100"/>
+    <text class="badge" x="284" y="240">BACKEND</text>
+    <text class="title" x="284" y="265">Локальный сервер</text>
+    <text class="sub" x="284" y="293">Ключ остаётся здесь</text>
+    <rect class="node" x="268" y="410" width="210" height="100"/>
+    <text class="badge" x="284" y="432">РАСШИРЕНИЕ</text>
+    <text class="title" x="284" y="457">Проверка ответа</text>
+    <text class="sub" x="284" y="478">Актуальность, пороги</text>
+    <text class="sub" x="284" y="494">и доступность элемента</text>
+    <rect class="node" x="24" y="410" width="210" height="100"/>
+    <text class="badge" x="40" y="432">ИСПОЛНЯЕТ КОД</text>
+    <text class="title" x="40" y="457">Выбранная вкладка</text>
+    <text class="sub" x="40" y="478">Клик, ввод, прокрутка</text>
+    <text class="sub" x="40" y="494">или переход</text>
+  </g>
+  <g aria-label="Облачные компоненты">
+    <rect class="node" x="512" y="218" width="204" height="100"/>
+    <text class="badge" x="528" y="240">МАРШРУТ ЗАПРОСА</text>
+    <text class="title" x="528" y="265">AI Gateway</text>
+    <text class="sub" x="528" y="293">Передаёт вопрос Jev</text>
+    <rect class="node" x="512" y="410" width="204" height="100"/>
+    <text class="badge" x="528" y="432">МОДЕЛЬ</text>
+    <text class="title" x="528" y="457">Jev</text>
+    <text class="sub" x="528" y="478">Выбирает из вариантов</text>
+    <text class="sub" x="528" y="494">и даёт вероятности</text>
+  </g>
+  <g aria-label="Легенда">
+    <text class="badge" x="24" y="568">ЛЕГЕНДА</text>
+    <path class="line" d="M99 564 H128"/>
+    <text class="label" x="141" y="568">данные или вызов</text>
+    <path class="answer" d="M320 564 H349"/>
+    <text class="label" x="362" y="568">ответ Jev</text>
+  </g>
+</svg>
+
+</div><figcaption>Пульт отправляет команду и варианты в Jev. Ответ возвращается через локальный сервер, действие выполняет код расширения.</figcaption></figure>
+<p>Для новой страницы важно проверить доступность элементов. Кнопка без понятной подписи или элемент canvas может отсутствовать среди вариантов; перефразирование команды само по себе не добавит нужную операцию. Разделение работы модели и кода также разобрано в статье о <a href="/blog/structured-output-llm/">Structured Output</a>. Здесь форма выбора особенно компактна: код получает идентификатор подготовленной операции.</p>
+</section>
+
+<section id="probabilities">
+<h2>Что означают вероятности</h2>
+<p>Ответ <code>choice</code> содержит выбранный вариант и распределение вероятностей по вариантам. Оно показывает оценку модели для подготовленного набора. Эти значения можно использовать в программе: например, выполнить действие при достаточной вероятности и заметном отрыве от второго пункта.</p>
+<p>У TypeSafe есть отдельное поле <a href="https://docs.typesafe.ai/confidence"><code>confidence</code></a>, характеризующее форму распределения. Вероятность конкретного пункта и confidence являются разными полями API. Наш пульт показывает вероятности вариантов и использует их для проверки перед исполнением.</p>
+<figure><a href="/images/blog/jev-voice-browser/controller.png" aria-label="Открыть снимок пульта в полном размере"><img src="/images/blog/jev-voice-browser/controller.png" width="1440" height="900" alt="Voice Browser открыл Документацию: вероятность 98%, решение 555 мс, действие 2 мс." loading="lazy" decoding="async"></a><figcaption>Проверка 17 сентября 2026: текстовая команда открыла Документацию на учебной странице. Микрофон выключен.</figcaption></figure>
+<p>На этом кадре "Документация" получила 98%. Показатель решения составил 555 мс, действия 2 мс. "Решение" включает сбор элементов, сетевой запрос и проверку ответа. "Действие" измеряет вызов исполнения без ожидания полной загрузки новой страницы. Время окончания голосовой фразы сюда не входит.</p>
+<p>Это отдельное собственное измерение. В другой проверке расширение выбрало English на Wikipedia с вероятностью 96%: 611 мс на решение и 30 мс на действие. Скорость зависит от сети, нагрузки и страницы. Несколько таких попыток не дают средней задержки или гарантии надёжности.</p>
+</section>
+
+<section id="execution">
+<h2>Кто решает, выполнять ли действие</h2>
+<p>Код сопоставляет выбранный идентификатор с заранее подготовленной операцией. Ответ модели проходит проверку: вариант входит в список, вероятности допустимы, команда всё ещё актуальна. В нашем пульте действует порог 65% и отрыв минимум 10 процентных пунктов с поправкой на округление ответа.</p>
+<p>Пока идёт запрос, пользователь может отменить команду или отправить новую. Старый ответ после этого теряет право на исполнение. Перед кликом пульт заново проверяет документ и элемент, включая подпись и тип. Такая проверка важна, если страница успела измениться.</p>
+<figure><div class="diagram-scroll">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 666" role="img" aria-labelledby="voice-gate-title voice-gate-desc">
+  <title id="voice-gate-title">Что проверяет пульт перед действием</title>
+  <desc id="voice-gate-desc">После ответа Jev код проверяет актуальность команды, допустимость варианта и вероятностей, наличие выбранного действия с вероятностью не ниже 0.65 и отрывом не меньше 0.10. При необходимости пользователь подтверждает действие. Перед исполнением повторно проверяется страница, а перед кликом и вводом также элемент, его подпись и тип. Любая неудачная проверка или отмена останавливает команду. Успешные проверки разрешают одно действие.</desc>
+  <defs>
+    <marker id="voice-gate-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#33567a"/></marker>
+    <marker id="voice-gate-stop" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#685343"/></marker>
+    <style>
+      text{font-family:'PT Mono',Menlo,Monaco,Consolas,monospace;fill:#1a1a1a}
+      .node{fill:#ffffff;stroke:#a0a5a5;stroke-width:1;rx:6}
+      .title{font-size:14px;font-weight:600}
+      .sub{font-size:10px;fill:#333333}
+      .badge{font-size:9px;fill:#33567a;letter-spacing:.4px}
+      .label{font-size:10px;fill:#333333}
+      .pass{fill:none;stroke:#33567a;stroke-width:1.5;marker-end:url(#voice-gate-arrow)}
+      .halt{fill:none;stroke:#685343;stroke-width:1.3}
+    </style>
+  </defs>
+  <rect width="740" height="666" fill="#fffef9"/>
+  <rect x="12" y="12" width="704" height="613" rx="8" fill="#f8f8f4" stroke="#a4aaa9" stroke-width=".8"/>
+  <g aria-label="Успешные проверки">
+    <path class="pass" d="M214 102 V124"/>
+    <path class="pass" d="M214 204 V226"/>
+    <path class="pass" d="M214 306 V328"/>
+    <path class="pass" d="M214 408 V430"/>
+    <path class="pass" d="M214 510 V532"/>
+  </g>
+  <g aria-label="Остановка при отказе проверки">
+    <path class="halt" d="M404 66 H464 Q472 66 472 74 V474"/>
+    <path class="halt" d="M404 168 H472"/>
+    <path class="halt" d="M404 270 H472"/>
+    <path class="halt" d="M404 372 H472"/>
+    <path class="halt" d="M404 474 H472"/>
+    <path class="halt" d="M472 270 H505" marker-end="url(#voice-gate-stop)"/>
+    <text class="label" x="425" y="55">нет</text>
+    <text class="label" x="425" y="157">нет</text>
+    <text class="label" x="425" y="259">нет</text>
+    <text class="label" x="412" y="361">отмена</text>
+    <text class="label" x="425" y="463">нет</text>
+  </g>
+  <g aria-label="Условия исполнения">
+    <rect class="node" x="24" y="30" width="380" height="72"/>
+    <text class="badge" x="40" y="49">ПОСЛЕ ОТВЕТА JEV</text>
+    <text class="title" x="40" y="71">Команда ещё актуальна?</text>
+    <text class="sub" x="40" y="90">Не пришла новая команда или отмена</text>
+    <rect class="node" x="24" y="132" width="380" height="72"/>
+    <text class="badge" x="40" y="151">ОТВЕТ</text>
+    <text class="title" x="40" y="173">Вариант и вероятности допустимы?</text>
+    <text class="sub" x="40" y="192">Известный вариант, корректные значения</text>
+    <rect class="node" x="24" y="234" width="380" height="72"/>
+    <text class="badge" x="40" y="253">ВЫБОР ДЕЙСТВИЯ</text>
+    <text class="title" x="40" y="275">Действие прошло пороги?</text>
+    <text class="sub" x="40" y="294">p ≥ 0.65 · отрыв ≥ 0.10 · выбор ≠ none</text>
+    <rect class="node" x="24" y="336" width="380" height="72" fill="#f4f1e9"/>
+    <text class="badge" x="40" y="355">ПОДТВЕРЖДЕНИЕ ЧЕЛОВЕКА</text>
+    <text class="title" x="40" y="377">Согласие, когда оно требуется</text>
+    <text class="sub" x="40" y="396">Пульт ждёт на отмеченных действиях</text>
+    <rect class="node" x="24" y="438" width="380" height="72"/>
+    <text class="badge" x="40" y="457">СРАЗУ ПЕРЕД ИСПОЛНЕНИЕМ</text>
+    <text class="title" x="40" y="479">Страница ещё та же?</text>
+    <text class="sub" x="40" y="498">Для клика и ввода: узел, подпись, тип</text>
+    <rect x="24" y="540" width="380" height="72" rx="6" fill="#edf3f7" stroke="#33567a" stroke-width="1.2"/>
+    <text class="badge" x="40" y="559">ИСПОЛНЯЕТ КОД</text>
+    <text class="title" x="40" y="581">Выполнить одно действие</text>
+    <text class="sub" x="40" y="600">Следующая команда проходит проверки снова</text>
+  </g>
+  <g aria-label="Остановка">
+    <rect x="512" y="220" width="188" height="100" rx="6" fill="#f8f1ea" stroke="#8b7460" stroke-width="1.2"/>
+    <text class="badge" x="528" y="242">БЕЗ ДЕЙСТВИЯ</text>
+    <text class="title" x="528" y="267">Остановить</text>
+    <text class="sub" x="528" y="289">Уточните команду</text>
+    <text class="sub" x="528" y="305">или повторите позже</text>
+  </g>
+  <g aria-label="Легенда">
+    <text class="badge" x="24" y="650">ЛЕГЕНДА</text>
+    <path class="pass" d="M99 646 H128"/>
+    <text class="label" x="141" y="650">продолжить</text>
+    <path class="halt" d="M282 646 H311" marker-end="url(#voice-gate-stop)"/>
+    <text class="label" x="324" y="650">остановить</text>
+  </g>
+</svg>
+
+</div><figcaption>Проверки пульта перед исполнением. Отмена, изменившаяся команда или страница, недопустимый ответ и недостаточная вероятность останавливают действие.</figcaption></figure>
+<p>Вариант <code>none</code>, "ничего не делать", даёт модели возможность остановиться. Пороги тоже могут остановить действие. Это условия приложения; выбранный пункт всё равно может оказаться ошибочным.</p>
+<figure><a href="/images/blog/jev-voice-browser/abstention.png" aria-label="Открыть снимок отказа в полном размере"><img src="/images/blog/jev-voice-browser/abstention.png" width="1440" height="900" alt="Jev отказалась заполнять доступное поле: none 63%, поле 36%, Home 1%." loading="lazy" decoding="async"></a><figcaption>Следующий прогон остановился на команде ввода: none 63%, поле 36%, Home 1%. Поле осталось пустым.</figcaption></figure>
+<p>Здесь человек просил ввести текст в доступное поле, но Jev предпочла остановиться. Это ошибочный отказ, при более ранней проверке ввод выполнился. Вероятности помогают увидеть причину остановки. Они не доказывают, что решение модели верно.</p>
+<p>Клики с признаками отправки, оплаты или удаления требуют подтверждения человека в пульте. Проверка по подписи и типу имеет ограничения. Необычно названная операция может пройти без такого подтверждения. Последствия конкретного сайта нужно оценивать отдельно.</p>
+</section>
+
+<section id="limits">
+<h2>Где проходит граница применения</h2>
+<p>В этой архитектуре распознавание отвечает за текст команды, Jev за выбор, программа за допустимые действия и исполнение. Модель не получает права выполнять произвольный код. Для ввода пульт использует дословный текст команды: например, слова после "введи".</p>
+<p>Доступ расширения Chrome связан с выбранной пользователем страницей. При переходе на другой домен временный <a href="https://developer.chrome.com/docs/extensions/develop/concepts/activeTab">activeTab</a> может закончиться. Дополнительный доступ к текущему сайту запрашивается явно. Внутренние страницы Chrome, закрытые Shadow DOM и сторонние вложенные iframe текущая реализация не поддерживает.</p>
+<p>В облачный запрос уходят команда, заголовок и подписи элементов. Значения полей и пароли пульт не собирает, но сами подписи могут содержать личную информацию. Ключ Gateway остаётся на локальном сервере. <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition">Распознавание речи Chrome также может использовать удалённый сервис</a>.</p>
+<p>Подход переносится на небольшой пульт каталога или переключение разделов справочника во время созвона. Это возможные сценарии, не заявленные внедрения. Хорошая исходная задача содержит ясные подписи, ограниченный набор операций и проверяемый результат. Каждое новое приложение требует собственной проверки.</p>
+<p>Для повторения опыта начните с учебной страницы из репозитория. Посмотрите на выполненную команду, затем на ошибочный отказ и отмену ожидающего запроса. Эти наблюдения показывают, как решение Jev становится действием и где программа должна его остановить.</p>
+</section>
+</article>
