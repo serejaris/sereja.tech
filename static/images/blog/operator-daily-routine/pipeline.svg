@@ -1,6 +1,6 @@
-<svg viewBox="0 0 980 540" role="img" aria-labelledby="diagram-title diagram-desc" xmlns="http://www.w3.org/2000/svg">
-  <title id="diagram-title">Архитектура Personal Corp OS: входящие потоки, утренний крон и витрина</title>
-  <desc id="diagram-desc">Четырёхконтурная операционная архитектура: многоканальный сбор сырья, автономный утренний стендап агента, диспетчеризация отделов из HQ и выходная триада.</desc>
+<svg viewBox="0 0 560 520" role="img" aria-labelledby="diagram-title diagram-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="diagram-title">Архитектура Personal Corp OS: входящие потоки и утренний крон</title>
+  <desc id="diagram-desc">Двухконтурная архитектура сбора данных: входящие потоки (Granola, Telegram, Twitter/X, Email, HQ) и автономный утренний крон-стендап с дашбордом CEO.</desc>
   
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
@@ -9,141 +9,88 @@
   </defs>
 
   <!-- Фон полотна -->
-  <rect width="980" height="540" fill="#f8fafc" rx="6" />
+  <rect width="560" height="520" fill="#f8fafc" rx="6" />
 
   <!-- СЛОЙ 1: Входящие потоки -->
-  <rect x="24" y="24" width="210" height="474" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.12)" stroke-width="1" />
-  <text x="129" y="48" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, monospace" font-weight="700" letter-spacing="0.1em" text-anchor="middle">1. ВХОДЯЩИЕ ПОТОКИ</text>
+  <rect x="24" y="24" width="226" height="444" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.12)" stroke-width="1" />
+  <text x="137" y="48" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, monospace" font-weight="700" letter-spacing="0.1em" text-anchor="middle">1. ВХОДЯЩИЕ ПОТОКИ</text>
 
   <!-- 1.1 Granola -->
-  <rect x="38" y="62" width="182" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
+  <rect x="38" y="62" width="198" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
   <rect x="46" y="69" width="76" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
   <text x="84" y="79" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ЖИВЫЕ ЗВОНКИ</text>
-  <text x="129" y="98" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Конспекты Granola</text>
-  <text x="129" y="115" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">1-на-1, звонки, живая речь</text>
+  <text x="137" y="98" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Конспекты Granola</text>
+  <text x="137" y="115" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">1-на-1, звонки, живая речь</text>
 
   <!-- 1.2 Telegram -->
-  <rect x="38" y="142" width="182" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
+  <rect x="38" y="142" width="198" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
   <rect x="46" y="149" width="80" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
   <text x="86" y="159" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">3 УРОВНЯ TELEGRAM</text>
-  <text x="129" y="178" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Алерты, Лиды и Чаты</text>
-  <text x="129" y="195" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">клиенты + экстракция смыслов</text>
+  <text x="137" y="178" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Алерты, Лиды и Чаты</text>
+  <text x="137" y="195" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">клиенты + экстракция смыслов</text>
 
   <!-- 1.3 Twitter / X -->
-  <rect x="38" y="222" width="182" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
+  <rect x="38" y="222" width="198" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
   <rect x="46" y="229" width="76" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
   <text x="84" y="239" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">AI-РАДАР</text>
-  <text x="129" y="258" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Тренды Twitter / X</text>
-  <text x="129" y="275" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">фронтир моделей и утилит</text>
+  <text x="137" y="258" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Тренды Twitter / X</text>
+  <text x="137" y="275" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">фронтир моделей и утилит</text>
 
   <!-- 1.4 Email & Docs -->
-  <rect x="38" y="302" width="182" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
+  <rect x="38" y="302" width="198" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
   <rect x="46" y="309" width="76" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
   <text x="84" y="319" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ВХОДЯЩИЕ</text>
-  <text x="129" y="338" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Email и Релизы</text>
-  <text x="129" y="355" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">алерты вендоров, сделки</text>
+  <text x="137" y="338" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Email и Релизы</text>
+  <text x="137" y="355" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">алерты вендоров, сделки</text>
 
   <!-- 1.5 HQ Core -->
-  <rect x="38" y="382" width="182" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
+  <rect x="38" y="382" width="198" height="66" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
   <rect x="46" y="389" width="82" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
   <text x="87" y="399" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">СОВЕТ ДИРЕКТОРОВ</text>
-  <text x="129" y="418" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">HQ Markdown-ядро</text>
-  <text x="129" y="435" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">цели, OKR и ограничения</text>
+  <text x="137" y="418" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">HQ Markdown-ядро</text>
+  <text x="137" y="435" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">цели, OKR и ограничения</text>
 
   <!-- СЛОЙ 2: Автономный стендап -->
-  <rect x="264" y="24" width="204" height="474" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.12)" stroke-width="1" />
-  <text x="366" y="48" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, monospace" font-weight="700" letter-spacing="0.1em" text-anchor="middle">2. АВТОНОМНЫЙ ТРИАЖ</text>
+  <rect x="280" y="24" width="256" height="444" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.12)" stroke-width="1" />
+  <text x="408" y="48" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, monospace" font-weight="700" letter-spacing="0.1em" text-anchor="middle">2. АВТОНОМНЫЙ ТРИАЖ</text>
 
   <!-- Node 2.1: Pre-wakeup cron -->
-  <rect x="280" y="110" width="172" height="100" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
-  <rect x="288" y="118" width="84" height="13" rx="2" fill="rgba(2,132,199,0.08)" />
-  <text x="330" y="128" fill="#0284c7" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">КРОН-СТЕНДАП</text>
-  <text x="366" y="152" fill="#0f172a" font-size="12.5" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Пред-пробуждение</text>
-  <text x="366" y="172" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">сверка часовых поясов</text>
-  <text x="366" y="188" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">триаж 5 горячих лидов</text>
-  <text x="366" y="202" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">дашборд приоритетов</text>
+  <rect x="298" y="78" width="220" height="136" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
+  <rect x="306" y="86" width="84" height="13" rx="2" fill="rgba(2,132,199,0.08)" />
+  <text x="348" y="96" fill="#0284c7" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">КРОН-СТЕНДАП</text>
+  <text x="408" y="118" fill="#0f172a" font-size="13" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Пред-пробуждение</text>
+  <text x="408" y="138" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">автономный запуск до подъема</text>
+  <text x="408" y="154" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">сверка поясов (Буэнос-Айрес vs Европа)</text>
+  <text x="408" y="170" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">триаж ночных Telegram DMs</text>
+  <text x="408" y="186" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">экстракция горячих лидов и звонков</text>
+  <text x="408" y="202" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">выделение срочных блокеров</text>
 
   <!-- Node 2.2: Daily Focus -->
-  <rect x="280" y="280" width="172" height="96" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
-  <rect x="288" y="288" width="86" height="13" rx="2" fill="rgba(2,132,199,0.08)" />
-  <text x="331" y="298" fill="#0284c7" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ДАШБОРД CEO</text>
-  <text x="366" y="322" fill="#0f172a" font-size="12.5" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Фиксация фокуса</text>
-  <text x="366" y="342" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">топ-3 задачи дня</text>
-  <text x="366" y="358" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">связка с целью недели</text>
-
-  <!-- СЛОЙ 3: Диспетчеризация и гейты -->
-  <rect x="498" y="24" width="204" height="474" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.12)" stroke-width="1" />
-  <text x="600" y="48" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, monospace" font-weight="700" letter-spacing="0.1em" text-anchor="middle">3. ОТДЕЛЫ И ГЕЙТЫ</text>
-
-  <!-- Node 3.1: Диспетчеризация -->
-  <rect x="514" y="76" width="172" height="84" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
-  <rect x="522" y="84" width="84" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
-  <text x="564" y="94" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">МАРШРУТИЗАЦИЯ</text>
-  <text x="600" y="118" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Отделы corp-*</text>
-  <text x="600" y="136" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">content, sales, server</text>
-  <text x="600" y="150" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">правила в AGENTS.md</text>
-
-  <!-- Node 3.2: Гриллинг -->
-  <rect x="514" y="188" width="172" height="84" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
-  <rect x="522" y="196" width="86" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
-  <text x="565" y="206" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ГРИЛЛИНГ И ADR</text>
-  <text x="600" y="230" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">grill-with-docs</text>
-  <text x="600" y="248" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">доменное моделирование</text>
-  <text x="600" y="262" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">снятие допущений</text>
-
-  <!-- Node 3.3: Гейт диаграмм -->
-  <rect x="514" y="300" width="172" height="84" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1" />
-  <rect x="522" y="308" width="84" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
-  <text x="564" y="318" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">diagram-design</text>
-  <text x="600" y="342" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Схемы и Промпты</text>
-  <text x="600" y="360" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">чистый SVG, плотность 4/10</text>
-  <text x="600" y="374" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">Prompt-First в один клик</text>
-
-  <!-- СЛОЙ 4: Выходная триада -->
-  <rect x="732" y="24" width="224" height="474" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.12)" stroke-width="1" />
-  <text x="844" y="48" fill="#1c4e80" font-size="10" font-family="'PT Mono', Menlo, Monaco, monospace" font-weight="700" letter-spacing="0.1em" text-anchor="middle">4. ВЫХОДНАЯ ТРИАДА («ВИТРИНА»)</text>
-
-  <!-- 4.1 Код и боты -->
-  <rect x="748" y="80" width="192" height="74" rx="6" fill="#ffffff" stroke="#166534" stroke-width="1.2" />
-  <rect x="756" y="88" width="68" height="13" rx="2" fill="rgba(22,101,52,0.08)" />
-  <text x="790" y="98" fill="#166534" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ПРОДАКШН</text>
-  <text x="844" y="120" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Системы и Боты</text>
-  <text x="844" y="138" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">работающий код, сервисы, PR</text>
-
-  <!-- 4.2 ADR -->
-  <rect x="748" y="180" width="192" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
-  <rect x="756" y="188" width="68" height="13" rx="2" fill="rgba(28,78,128,0.08)" />
-  <text x="790" y="198" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">АРХИТЕКТУРА</text>
-  <text x="844" y="220" fill="#0f172a" font-size="12" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Внутренние ADR</text>
-  <text x="844" y="238" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">docs/adr/, словарь понятий</text>
-
-  <!-- 4.3 Учебная витрина -->
-  <rect x="748" y="280" width="192" height="96" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.4" />
-  <rect x="756" y="288" width="68" height="13" rx="2" fill="rgba(2,132,199,0.08)" />
-  <text x="790" y="298" fill="#0284c7" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ВИТРИНА</text>
-  <text x="844" y="322" fill="#0f172a" font-size="12.5" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Учебный гайд / Пост</text>
-  <text x="844" y="342" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">HTML в каноне бумаги</text>
-  <text x="844" y="358" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">модель Баухауса для коллег</text>
+  <rect x="298" y="272" width="220" height="136" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <rect x="306" y="280" width="86" height="13" rx="2" fill="rgba(2,132,199,0.08)" />
+  <text x="349" y="290" fill="#0284c7" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">ДАШБОРД CEO</text>
+  <text x="408" y="312" fill="#0f172a" font-size="13" font-family="system-ui, -apple-system, sans-serif" font-weight="600" text-anchor="middle">Фиксация фокуса</text>
+  <text x="408" y="334" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">топ-3 приоритетные задачи дня</text>
+  <text x="408" y="350" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">привязка к недельному OKR в HQ</text>
+  <text x="408" y="366" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">5 срочных контактов (ответ за 15 мин)</text>
+  <text x="408" y="382" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">защита фокуса и личного времени</text>
+  <text x="408" y="398" fill="#64748b" font-size="9.5" font-family="'PT Mono', Menlo, Monaco, monospace" text-anchor="middle">жесткое стоп-правило 18:30</text>
 
   <!-- КОННЕКТОРЫ (Ортогональные, r=8) -->
-  <!-- Granola & Telegram к стендапу -->
-  <path d="M 220 95 H 250 V 160 H 280" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M 220 175 H 280" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M 220 335 H 250 V 160 H 280" fill="none" stroke="#1c4e80" stroke-width="1.2" />
+  <!-- Granola к стендапу -->
+  <path d="M 236 95 H 267 V 126 H 298" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Telegram к стендапу -->
+  <path d="M 236 175 H 298" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Twitter/X к стендапу -->
+  <path d="M 236 255 H 267 V 186 H 298" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Email к дашборду -->
+  <path d="M 236 335 H 267 V 320 H 298" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- HQ Core к дашборду -->
+  <path d="M 236 415 H 267 V 370 H 298" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- Стендап к фокусу -->
-  <path d="M 366 210 V 280" fill="none" stroke="#0284c7" stroke-width="1.2" marker-end="url(#arrow)" />
-
-  <!-- Фокус к отделам -->
-  <path d="M 452 328 H 483 V 118 H 514" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M 452 328 H 483 V 230 H 514" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M 452 328 H 514" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
-
-  <!-- Синтез к выходам -->
-  <path d="M 686 118 H 748" fill="none" stroke="#166534" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M 686 230 H 748" fill="none" stroke="#1c4e80" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M 686 342 H 748" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#arrow)" />
+  <path d="M 408 214 V 272" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#arrow)" />
 
   <!-- ЛЕГЕНДА -->
-  <text x="38" y="522" fill="#64748b" font-size="9" font-family="'PT Mono', Menlo, Monaco, monospace" letter-spacing="0.08em">ЛЕГЕНДА: ОРТОГОНАЛЬНЫЕ СВЯЗИ · СИНЯЯ ЛИНИЯ = ПОТОК ДАННЫХ · ЗЕЛЕНАЯ = ПРОДАКШН-РЕЛИЗ · ГОЛУБАЯ = УЧЕБНАЯ ВИТРИНА</text>
+  <text x="28" y="496" fill="#64748b" font-size="9" font-family="'PT Mono', Menlo, Monaco, monospace" letter-spacing="0.06em">ЛЕГЕНДА: ОРТОГОНАЛЬНЫЕ СВЯЗИ · СИНЯЯ ЛИНИЯ = ВХОДЯЩИЙ ПОТОК · ГОЛУБАЯ = АВТОНОМНЫЙ ТРИАЖ</text>
 </svg>
