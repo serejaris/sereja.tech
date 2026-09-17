@@ -215,6 +215,33 @@ TypeSafe описывает [ограничения Jev 1.13](https://docs.types
 
 [Цена прямого API](https://docs.typesafe.ai/models) на 17 сентября: $0,042 за миллион входных токенов, выход бесплатный. Диапазон 70-500 мс за вызов является [заявлением TypeSafe](https://typesafe.ai/blog/introducing-system-one-models-and-jev) о задержке. Устойчивость цены не установлена; компания не исключает субсидию.
 
+## Как попробовать через официальный skill
+
+[TypeSafe skill](https://docs.typesafe.ai/agent-skill) даёт агенту для работы с проектом инструкции: читать документацию Jev, разбивать задачу на типизированные вопросы и добавлять вызовы API в приложение. Он полезен, если ты уже работаешь с таким агентом и хочешь встроить выбор или оценку в свой проект.
+
+Для [Claude Code](https://docs.typesafe.ai/agent-skill) выполни в терминале две команды:
+
+```bash
+claude plugin marketplace add typesafe-ai/skills
+claude plugin install typesafe@typesafe-ai
+```
+
+Для [Codex и других поддерживаемых агентов](https://docs.typesafe.ai/agent-skill) нужен Node.js с `npx`. Команда предложит выбрать агента; установка по умолчанию относится к текущему проекту:
+
+```bash
+npx skills add typesafe-ai/skills --skill typesafe-ai
+```
+
+[Официальный README](https://github.com/typesafe-ai/skills) предлагает распределять обращения поддержки по отделам, отправляя неоднозначные решения человеку. В Claude Code вызови [/typesafe:typesafe-ai](https://docs.typesafe.ai/agent-skill); в другом агенте обратись к skill по имени. Предложенный первый промпт:
+
+> Используй skill typesafe-ai. Добавь маршрутизацию обращений: поддержка, продажи или платежи. Начни с текста "Платёж не проходит третий день". Jev должна вернуть выбранный отдел и вероятности вариантов. Неоднозначные случаи отправляй человеку; покажи, какие данные и разрешения нужны до подключения API.
+
+Ожидаемый результат интеграции: [ответ Choice](https://docs.typesafe.ai/primitives/choice) с разрешённым вариантом и распределением вероятностей. [Skill](https://raw.githubusercontent.com/typesafe-ai/skills/main/skills/typesafe-ai/SKILL.md) не запускает контроль всех действий агента: порядок запросов, пороги, проверки и исполнение остаются в коде приложения.
+
+Установка инструкций не выдаёт доступ к модели. Для первой пробы открой [playground TypeSafe](https://console.typesafe.ai/playground) и войди в аккаунт. Для [прямого API](https://docs.typesafe.ai/introduction/quickstart) нужен ключ из [настроек аккаунта](https://console.typesafe.ai/settings/keys); фактический доступ зависит от аккаунта. Другой [подтверждённый путь через Vercel AI Gateway](https://vercel.com/changelog/typesafe-ai-jev-now-available-on-ai-gateway) использует ключ Gateway или Vercel OIDC. Ключ TypeSafe и ключ Gateway относятся к разным сервисам. Попроси агента выбрать один маршрут и сверить актуальный quickstart перед интеграцией; ключ не вставляй в публичный код или промпт.
+
+[Прямой API](https://docs.typesafe.ai/models) на 17 сентября стоит $0,042 за миллион входных токенов, выход бесплатный. [Карточка Gateway](https://vercel.com/ai-gateway/models/jev) указывает $0,04 за миллион входных токенов; цена выходных токенов здесь не указана. Расходы основного агента и дополнительных моделей оплачиваются отдельно.
+
 ## Проверка на своей задаче даёт основание для внедрения
 
 В [разборе голосового браузера](/blog/jev-voice-browser/) Jev выбирает действие по распознанной команде и подписям элементов страницы.
