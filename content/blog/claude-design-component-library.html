@@ -1,0 +1,193 @@
+---
+title: "Как связать Claude Design со своими компонентами"
+date: 2026-09-24
+lastmod: 2026-09-24
+description: "Как хранить React-компоненты, токены и состояния в Git, исследовать макеты в Claude Design и принимать изменения только после проверки."
+cta: none
+cta_reason: "Практический гайд с пилотом на одном компоненте; отдельное предложение продукта не предусмотрено."
+tags: ["Claude Design", "Claude Code", "React", "дизайн-система", "вайбкодинг"]
+section: "AI"
+layout: paper
+---
+
+<style>
+.library-guide { counter-reset: guide-figure; }
+.library-guide figure { counter-increment: guide-figure; }
+.library-guide figcaption::before { content: "Рис. " counter(guide-figure) ". "; }
+.library-guide figure.diagram svg text { font-family: 'PT Mono', Menlo, Monaco, Consolas, monospace; }
+.library-guide figure.diagram svg text[font-weight="600"] { font-family: system-ui, -apple-system, sans-serif; }
+@media print {
+  @page { size: A4; }
+  .library-guide figure.diagram svg { min-width: 0 !important; }
+}
+</style>
+<div class="page library-guide">
+<header class="masthead">
+  <h1>Как связать Claude Design со своими компонентами</h1>
+  <p class="lede">Рабочая библиотека живёт в Git: там лежат принятые React-компоненты, токены и примеры состояний. Claude Design помогает исследовать макет, Claude Code меняет приложение в отдельной ветке, а Storybook и браузер показывают последствия. После проверки человеком изменение возвращается в библиотеку и становится основой следующего макета.</p>
+</header>
+
+<nav class="toc" aria-label="Содержание">
+  <ul>
+    <li><a href="#tri-kartochki">Одна карточка должна выдержать три состояния</a></li>
+    <li><a href="#hranenie">Что хранить вместе</a></li>
+    <li><a href="#cikl">Макет возвращается через управляемый цикл</a></li>
+    <li><a href="#pilot">Пилот на карточке урока</a></li>
+    <li><a href="#kopiya">Как заметить копию до слияния</a></li>
+    <li><a href="#gotovo">Библиотека выдерживает новый круг</a></li>
+  </ul>
+</nav>
+
+<section id="tri-kartochki">
+  <h2>Одна карточка должна выдержать три состояния</h2>
+  <p>На макете легко показать одну аккуратную карточку урока. В приложении та же карточка должна выдержать хотя бы три ситуации. Урок доступен, урок откроется позже или доступ к нему не подтверждён. У каждой ситуации свой текст и своё действие. Ошибка появляется, когда макет хранит красивый снимок, а код постепенно обрастает отдельными версиями для каждого экрана.</p>
+  <p>Визуальное сходство проблему не решает. Две карточки могут выглядеть почти одинаково и по-разному переносить длинный заголовок, вести себя на телефоне или показывать закрытый урок. Через несколько итераций команда уже не понимает, какую из версий считать главной.</p>
+  <p>Для устойчивой работы нужна одна библиотека и одна точка проверки. Любой результат Claude Design сначала остаётся предложением. Агент возвращает его в существующий компонент, затем владелец смотрит все состояния в браузере и принимает решение.</p>
+</section>
+
+<section id="hranenie">
+  <h2>Что хранить вместе</h2>
+  <p>Общая библиотека состоит из трёх разных вещей. <strong>React-компонент</strong> задаёт структуру и поведение: какие данные получает карточка, когда показывает кнопку и куда ведёт действие. <strong>Токены</strong> задают повторяемые значения цвета, отступа, радиуса и типографики. <strong>Примеры состояний</strong> сохраняют воспроизводимый вид компонента при конкретных условиях.</p>
+  <p>Эти части дополняют друг друга. Один компонент без состояний легко проверить только на удобных данных. Набор состояний без токенов постепенно получает почти одинаковые цвета и отступы. Токены без рабочего React-компонента превращаются в справочник, который не гарантирует поведение интерфейса.</p>
+  <p>Принятая версия хранится в Git. Это продолжение принципа <a href="/blog/ssot-documentation/">одного источника истины</a>: библиотека меняется через видимый список изменений, который разработчики называют diff, и историю решений. Claude Design получает представление этой системы для работы с макетом. Принятый код продолжает жить в Git.</p>
+  <p>Storybook нужен как каталог наблюдаемых состояний. Он показывает один компонент на разных данных отдельно от страницы. В актуальном Storybook агент также может получить через MCP контекст компонентов, документации и тестов. Это <a href="https://storybook.js.org/blog/storybook-10-3/">возможность Storybook для работы агента</a>. MCP служит каналом передачи контекста в Claude Code. Связь с макетом Claude Design задаётся отдельно.</p>
+</section>
+
+<section id="cikl">
+  <h2>Макет возвращается через управляемый цикл</h2>
+  <p>Anthropic документирует <a href="https://code.claude.com/docs/en/commands"><code>/design-sync</code></a> как загрузку React-дизайн-системы из репозитория в Claude Design. При первой синхронизации компоненты проходят проверку. Этот механизм передаёт материал для работы. Решение о принятии изменения остаётся у человека.</p>
+  <p>Связанные компоненты и стили могут быть собраны в систему из репозитория, как описано в <a href="https://support.claude.com/en/articles/14604397-set-up-your-design-system-in-claude-design">настройке design system</a>. Примеры Storybook остаются отдельной поверхностью проверки. Документация не обещает их автоматическую загрузку в Claude Design.</p>
+
+  <figure class="diagram">
+    <div style="overflow-x:auto" tabindex="0" role="region" aria-label="Схема управляемого цикла библиотеки">
+      <svg viewBox="0 0 740 560" style="min-width:580px" role="img" aria-labelledby="library-cycle-title library-cycle-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="library-cycle-title">Управляемый цикл общей библиотеки React и Claude Design</title>
+        <desc id="library-cycle-desc">Шесть шагов замкнутого цикла. Библиотека React и токены хранятся в Git. Команда design-sync обновляет систему в Claude Design. Макет передаётся в Claude Code через design. Изменения выполняются в отдельной ветке. Состояния проверяются в Storybook и браузере. Только принятые изменения возвращаются в библиотеку, после чего цикл синхронизации повторяется. Непринятые изменения возвращаются на доработку.</desc>
+
+        <defs>
+          <marker id="library-cycle-arrow-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+          </marker>
+          <marker id="library-cycle-arrow-indigo" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+          </marker>
+          <marker id="library-cycle-arrow-muted" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+          </marker>
+        </defs>
+
+        <rect width="740" height="560" fill="#f8fafc" />
+
+        <!-- Logical areas -->
+        <rect x="244" y="38" width="472" height="154" rx="8" fill="#0284c7" fill-opacity="0.025" stroke="#0284c7" stroke-opacity="0.16" stroke-width="0.8" />
+        <rect x="550" y="32" width="116" height="14" rx="2" fill="#f8fafc" />
+        <text x="608" y="42" fill="#64748b" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.14em">МАКЕТ</text>
+
+        <rect x="12" y="294" width="704" height="154" rx="8" fill="#1c4e80" fill-opacity="0.025" stroke="#1c4e80" stroke-opacity="0.14" stroke-width="0.8" />
+        <rect x="542" y="288" width="132" height="14" rx="2" fill="#f8fafc" />
+        <text x="608" y="298" fill="#64748b" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.14em">КОД И ПРОВЕРКА</text>
+
+        <!-- Node 1: source of truth -->
+        <rect x="24" y="72" width="198" height="88" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.3" />
+        <rect x="38" y="84" width="92" height="16" rx="2" fill="#1c4e80" fill-opacity="0.09" stroke="#1c4e80" stroke-opacity="0.38" stroke-width="0.8" />
+        <text x="84" y="95.5" fill="#1c4e80" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">01 КАНОН</text>
+        <text x="38" y="124" fill="#0f172a" font-size="17" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">Библиотека React</text>
+        <text x="38" y="146" fill="#475569" font-size="12" font-family="'PT Mono', ui-monospace, monospace">компоненты + токены в Git</text>
+
+        <!-- Node 2: sync -->
+        <rect x="271" y="72" width="198" height="88" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+        <rect x="285" y="84" width="92" height="16" rx="2" fill="#0284c7" fill-opacity="0.08" stroke="#0284c7" stroke-opacity="0.38" stroke-width="0.8" />
+        <text x="331" y="95.5" fill="#0284c7" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">02 ЗАГРУЗКА</text>
+        <text x="285" y="124" fill="#0f172a" font-size="17" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">/design-sync</text>
+        <text x="285" y="146" fill="#475569" font-size="12" font-family="'PT Mono', ui-monospace, monospace">обновить систему</text>
+
+        <!-- Node 3: visual design -->
+        <rect x="518" y="72" width="198" height="88" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+        <rect x="532" y="84" width="92" height="16" rx="2" fill="#0284c7" fill-opacity="0.08" stroke="#0284c7" stroke-opacity="0.38" stroke-width="0.8" />
+        <text x="578" y="95.5" fill="#0284c7" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">03 МАКЕТ</text>
+        <text x="532" y="124" fill="#0f172a" font-size="17" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">Claude Design</text>
+        <text x="532" y="146" fill="#475569" font-size="12" font-family="'PT Mono', ui-monospace, monospace">макет на общей системе</text>
+
+        <!-- Node 4: handoff -->
+        <rect x="518" y="330" width="198" height="88" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+        <rect x="532" y="342" width="92" height="16" rx="2" fill="#0284c7" fill-opacity="0.08" stroke="#0284c7" stroke-opacity="0.38" stroke-width="0.8" />
+        <text x="578" y="353.5" fill="#0284c7" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">04 ПЕРЕДАЧА</text>
+        <text x="532" y="382" fill="#0f172a" font-size="17" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">Передача в код</text>
+        <text x="532" y="404" fill="#475569" font-size="12" font-family="'PT Mono', ui-monospace, monospace">/design в Claude Code</text>
+
+        <!-- Node 5: branch -->
+        <rect x="271" y="330" width="198" height="88" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+        <rect x="285" y="342" width="92" height="16" rx="2" fill="#1c4e80" fill-opacity="0.09" stroke="#1c4e80" stroke-opacity="0.38" stroke-width="0.8" />
+        <text x="331" y="353.5" fill="#1c4e80" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">05 ВЕТКА</text>
+        <text x="285" y="382" fill="#0f172a" font-size="17" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">Изменения</text>
+        <text x="285" y="404" fill="#475569" font-size="12" font-family="'PT Mono', ui-monospace, monospace">компоненты и токены</text>
+
+        <!-- Node 6: review gate -->
+        <rect x="24" y="330" width="198" height="88" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.4" />
+        <rect x="38" y="342" width="92" height="16" rx="2" fill="#1c4e80" fill-opacity="0.09" stroke="#1c4e80" stroke-opacity="0.38" stroke-width="0.8" />
+        <text x="84" y="353.5" fill="#1c4e80" font-size="9" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">06 ПРИЁМКА</text>
+        <text x="38" y="382" fill="#0f172a" font-size="17" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">Проверка состояний</text>
+        <text x="38" y="404" fill="#475569" font-size="12" font-family="'PT Mono', ui-monospace, monospace">Storybook + браузер</text>
+
+        <!-- Main cycle: strictly orthogonal -->
+        <path d="M222 116 H271" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#library-cycle-arrow-blue)" />
+        <path d="M469 116 H518" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#library-cycle-arrow-blue)" />
+        <path d="M617 160 V330" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#library-cycle-arrow-blue)" />
+        <path d="M518 374 H469" fill="none" stroke="#1c4e80" stroke-width="1.5" marker-end="url(#library-cycle-arrow-indigo)" />
+        <path d="M271 374 H222" fill="none" stroke="#1c4e80" stroke-width="1.5" marker-end="url(#library-cycle-arrow-indigo)" />
+        <path d="M24 374 H12 Q4 374 4 366 V124 Q4 116 12 116 H24" fill="none" stroke="#1c4e80" stroke-width="1.5" marker-end="url(#library-cycle-arrow-indigo)" />
+
+        <!-- Acceptance label masks the return connector -->
+        <rect x="4" y="222" width="88" height="20" rx="2" fill="#f8fafc" />
+        <text x="48" y="236" fill="#1c4e80" font-size="10" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">ПРИНЯТО</text>
+
+        <!-- Rework loop: rejected changes return to the branch -->
+        <path d="M123 418 V464 Q123 472 131 472 H362 Q370 472 370 464 V418" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#library-cycle-arrow-muted)" />
+        <rect x="204" y="462" width="84" height="20" rx="2" fill="#f8fafc" />
+        <text x="246" y="476" fill="#64748b" font-size="10" font-family="'PT Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">НА ПРАВКИ</text>
+
+        <!-- Compact legend -->
+        <text x="24" y="532" fill="#94a3b8" font-size="9.5" font-family="'PT Mono', ui-monospace, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+        <path d="M104 528 H140" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#library-cycle-arrow-blue)" />
+        <text x="150" y="532" fill="#64748b" font-size="10.5" font-family="'PT Mono', ui-monospace, monospace">передача</text>
+        <path d="M252 528 H288" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#library-cycle-arrow-muted)" />
+        <text x="298" y="532" fill="#64748b" font-size="10.5" font-family="'PT Mono', ui-monospace, monospace">возврат на правки</text>
+        <rect x="448" y="518" width="22" height="16" rx="3" fill="#ffffff" stroke="#1c4e80" stroke-width="1.3" />
+        <text x="480" y="532" fill="#64748b" font-size="10.5" font-family="'PT Mono', ui-monospace, monospace">ручная приёмка</text>
+      </svg>
+    </div>
+    <figcaption>Принятые изменения возвращаются в библиотеку только после проверки состояний.</figcaption>
+  </figure>
+
+  <p>После принятия ветки команда снова запускает <code>/design-sync</code>. Команда проверяет в Claude Design, что обновлённый компонент появился и отображается без ошибки. Синхронизация нужна после принятия решения. Движения элементов в макете остаются исследованием до проверки в коде.</p>
+  <p>Обратное направление начинается с <a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design"><code>/design</code></a>. Через эту команду агент импортирует дизайн в кодовую базу. Та же команда умеет экспортировать код как живой прототип. Документация не обещает точного кругового переноса, сохранения каждого свойства и автоматического слияния. Поэтому агент работает в отдельной ветке и показывает список изменений.</p>
+  <p>Перед передачей агент проверяет доступность <code>/design</code>: нужна версия Claude Code 2.1.265 или новее и возможность работать с артефактами Design в аккаунте. Для <code>/design-sync</code> отдельно нужны авторизация через <code>/design-login</code> и доступ к claude.ai. Доступность команд зависит от плана и среды запуска. Если команда недоступна, пилот останавливается до изменения кода. Агент сохраняет ссылку или экспорт макета и фиксирует, что передача через эту команду осталась непроверенной.</p>
+  <p>Архив проекта годится как резервная копия. Надёжный обратный импорт изменённого ZIP в тот же проект документация не подтверждает, поэтому закладывать его в рабочий процесс пока рано.</p>
+</section>
+
+<section id="pilot">
+  <h2>Пилот на карточке урока</h2>
+  <p>Предлагаемый пилот начинается с существующей карточки урока. Агент сначала находит рабочий React-компонент, его токены, места использования и текущие проверки. Если примеров Storybook ещё нет, агент добавляет три состояния вокруг этого же компонента.</p>
+  <p>Перед изменением агент открывает карточку в Storybook и на реальной странице. Этот исходный вид нужен для сравнения. Владелец проверяет ширину телефона 375 пикселей и экран компьютера 1440×900, длинное название, клавиатурный фокус и переходы. Агент фиксирует, какой компонент использует страница и откуда приходит текущий отступ. Такой короткий разбор защищает пилот от удобной подмены: похожая новая карточка может пройти визуальную проверку, хотя приложение продолжит показывать старую.</p>
+  <p>В доступном состоянии карточка показывает «Доступен» и кнопку «Продолжить». Длинное название переносится, кнопка остаётся видна, фокус с клавиатуры заметен. На ширине 375 пикселей карточка должна остаться внутри колонки. Кнопка должна открыть урок.</p>
+  <p>В будущем состоянии написано «Откроется позже». Активной кнопки «Продолжить» нет. Карточка сохраняет знакомую иерархию и явно отличается от доступного урока. В состоянии без доступа появляется понятный текст «Доступ не подтверждён» и безопасное действие «Вернуться к программам». При проверке в браузере это действие должно открыть список программ.</p>
+  <p>Затем <code>/design-sync</code> передаёт компонент и нужные токены в Claude Design. После синхронизации владелец находит карточку по её настоящему имени и проверяет ожидаемые цвета и отступы. Отсутствующий компонент, ошибка проверки или похожая замена требуют исправления до работы с макетом. Три Storybook-примера остаются списком состояний для проверки. Для пилота меняется только одно решение: на телефоне внутренний отступ увеличивается до следующего уже существующего шага системы отступов. Цвет, шрифт, радиус, текст и раскладка на компьютере сохраняются.</p>
+  <p>Перед изменением кода агент создаёт отдельную Git-ветку из принятой версии библиотеки. Затем через <code>/design</code> импортирует выбранный дизайн и показывает список изменённых файлов. Его задача состоит в том, чтобы сопоставить результат с исходной карточкой и изменить существующее адаптивное правило или токен. Сгенерированная отдельная карточка остаётся промежуточным материалом и не подключается к приложению.</p>
+  <p>Storybook должен показать три состояния и карточку с длинным заголовком. Реальный экран должен подтвердить два пользовательских пути: переход в доступный урок и безопасный возврат к программам. После изолированных состояний агент может пройти путь в браузере так же, как в подходе с <a href="/blog/playwright-e2e-with-ai-agent/">E2E-проверкой через Playwright и Claude Code</a>.</p>
+  <p>Проверка охватывает ограничения каждого состояния. Будущее состояние не получает ложную кнопку. Закрытое не открывает урок. Длинный заголовок не создаёт горизонтальную прокрутку. Если хотя бы один сценарий расходится с ожидаемым, ветка возвращается агенту с конкретным наблюдением из браузера. Для приёмки сохраняются ссылки на три примера Storybook, снимки до и после на обеих ширинах, результат двух переходов и список изменённых файлов.</p>
+</section>
+
+<section id="kopiya">
+  <h2>Как заметить копию до слияния</h2>
+  <p>Владелец просит агента показать diff и ответить на два предметных вопроса: какой существующий компонент изменён и какое существующее адаптивное правило или токен использованы. В принятом diff нет второго файла карточки, параллельного набора классов и копии разметки внутри страницы.</p>
+  <p>Названия вроде <code>LessonCardV2</code> или <code>LessonCardDesign</code> сразу показывают обход библиотеки. Такой результат возвращается на правки, даже если на одном снимке варианты совпадают. Иначе следующий экран снова выберет самый удобный файл, и расхождение продолжится.</p>
+  <p>У пилота есть честная граница. Успех подтверждает цикл для одного компонента, одного визуального изменения и трёх состояний. Автоматический перенос всей библиотеки остаётся непроверенным. Формат <a href="https://www.designtokens.org/tr/2025.10/format/">DTCG</a> может стандартизировать обмен токенами между инструментами. React-компоненты, раскладка и поведение требуют отдельной передачи. Масштабировать процесс стоит после маленького и понятного списка изменений.</p>
+</section>
+
+<section id="gotovo">
+  <h2>Библиотека выдерживает новый круг</h2>
+  <p>Работа готова, когда доступное, будущее и закрытое состояния используют один рабочий React-компонент и открываются в Storybook без ручной подмены данных. Длинное название помещается на ширине 375 пикселей. Страница не получает горизонтальную прокрутку. Tab показывает фокус на действии. Enter открывает ожидаемый маршрут; закрытый урок остаётся закрытым.</p>
+  <p>В diff изменено одно существующее адаптивное правило или токен. Нового файла карточки, копии разметки и дублирующего значения нет. Цвет, типографика, радиус, тексты и раскладка на компьютере совпадают с исходной версией.</p>
+  <p>Изменения остаются в ветке до проверки владельцем. Непринятая ветка возвращается на правки. После слияния следующий <code>/design-sync</code> начинает работу от обновлённого канона. Одного компонента достаточно, чтобы проверить границы процесса и решить, готова ли библиотека к следующему кругу.</p>
+</section>
+</div>
