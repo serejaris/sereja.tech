@@ -322,3 +322,12 @@ Hugo build passed. CUA browser checks at 1440×900 and 375×900 found no documen
 Rewrote the Jev browser article as a self-contained explanation for a general business reader. Answer types are explained through concrete examples; API fields, setup details, research-process commentary and an unnecessary confidence-field detour were removed. Sources remain at the end. The original attributed video, successful typed-command screenshot and false-negative example remain. The prototype is described through observed typed input; voice control is explicitly experimental.
 
 Added a three-step lead diagram with a vertical mobile version. Replaced the infrastructure diagram with model inputs/outputs and simplified execution checks. Existing section anchors remain valid. Independent text fact audit passed. Production-baseURL Hugo build, four SVG accessibility/uniqueness checks, five section anchors, six figure checks and no-code/no-table assertions passed. CUA verified 1440×900 desktop and 375×900 mobile, with no document overflow and a readable mobile lead diagram.
+
+
+## 2026-09-24 — Claude Design component library guide
+
+Prepared `/blog/claude-design-component-library/` as a practical guide using the explicitly requested `lesson-guide-writer` structure. The article distinguishes React components, design tokens, Storybook states and the two Claude commands. It proposes a pilot; no successful synchronization or LMS implementation is claimed. The rejected decorative cover is omitted. One accessible inline SVG explains the accepted-change cycle.
+
+Independent fact, specificity and editorial reviews passed against the final HTML SHA-256 `a727acccb304cc73418f6136fa141ff141679c1fd06a03399373a090d8a56a4c`. Mechanical style and structure gates passed at 1241 prose words. Hugo production build and frontmatter validation passed; the expected missing-image warning reflects the owner's cover decision. Playwright verified 1440×900 and 375×900, one H1, six H2, working contents anchors, two internal links, no page horizontal overflow and no browser script errors. The SVG scrolls within its own region on mobile. [Visual evidence](evidence/claude-design-component-library/README.md).
+
+Publication remains pending owner approval under the repository deployment rule. Issue #188 tracks the release. No shared layout, LMS runtime, access behavior or Telegram delivery changed.
