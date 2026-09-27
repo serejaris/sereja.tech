@@ -5,6 +5,9 @@
 - [Все статьи](https://sereja.tech/blog/): полный каталог с тегами
 - [RSS](https://sereja.tech/blog/index.xml): полнотекстовая лента
 - [Полная версия](https://sereja.tech/llms-full.txt): все статьи с описаниями
+{{ range .Site.Params.standalone }}
+- [{{ .title }}]({{ .url | absURL }}): {{ .description }}
+{{- end }}
 {{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
 - [{{ .Title }}]({{ .Permalink }}): {{ .Description }}
 {{- end }}

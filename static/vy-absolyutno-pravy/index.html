@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="updated" content="2026-09-27"><title>Вы абсолютно правы: клип силами агентов</title>
+<meta name="updated" content="2026-09-27"><title>«Вы абсолютно правы»: клип силами агентов за три часа | Сережа Рис</title>
 <meta name="description" content="Как агенты в Claude Code за три часа сделали русский кавер с клипом и что оставалось за человеком.">
-<meta property="og:type" content="article"><meta property="og:title" content="«Вы абсолютно правы»: клип силами агентов за три часа"><meta property="og:description" content="Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек."><meta property="og:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:video" content="https://sereja.tech/vy-absolyutno-pravy/img/og_trailer.mp4"><meta property="og:video:secure_url" content="https://sereja.tech/vy-absolyutno-pravy/img/og_trailer.mp4"><meta property="og:video:type" content="video/mp4"><meta property="og:video:width" content="1200"><meta property="og:video:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg">
+<meta property="og:type" content="article"><meta property="og:title" content="«Вы абсолютно правы»: клип силами агентов за три часа"><meta property="og:description" content="Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек."><meta property="og:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:video" content="https://sereja.tech/vy-absolyutno-pravy/img/og_trailer.mp4"><meta property="og:video:secure_url" content="https://sereja.tech/vy-absolyutno-pravy/img/og_trailer.mp4"><meta property="og:video:type" content="video/mp4"><meta property="og:video:width" content="1200"><meta property="og:video:height" content="630"><meta name="twitter:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
 :root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
 --serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
@@ -12,23 +12,25 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html,body{overflow-x:clip}
 body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
 a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
-a:hover{color:var(--blue)}
+a:hover{color:var(--pink)}
 img,video{display:block;max-width:100%}
 .mast{text-align:center;padding:54px 16px 0}
 .logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
 .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
 .nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
-.nav a:hover,.bar a:hover{text-decoration:underline}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
 .bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
   transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
 .bar.on{transform:none}
 .tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
 .site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
 .site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
-.site a:hover,.barlinks a:hover{border-bottom-color:var(--blue)}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
 .nav.toc{padding-top:14px;gap:4px 18px}
 .nav.toc a{font-size:11px;color:var(--grey)}
-.nav.toc a:hover{color:var(--blue)}
+.nav.toc a:hover{color:var(--pink)}
+/* reveal on scroll, once: the same 1s opacity fade The Blueprint uses */
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
 .barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
 footer .tagline{margin-top:10px}footer .site{padding-top:18px}
 @media (max-width:1000px){.barlinks{display:none}}
@@ -134,7 +136,7 @@ footer .logo{font-size:34px}
   .strip img:nth-child(n+4),.strip video:nth-child(n+4){display:none}
   .diagram{overflow-x:auto}.diagram svg{min-width:760px}
 }
-</style><link rel="canonical" href="https://sereja.tech/vy-absolyutno-pravy/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:url" content="https://sereja.tech/vy-absolyutno-pravy/"><meta property="og:site_name" content="sereja.tech"><meta property="article:published_time" content="2026-09-27"><!-- PostHog -->
+</style><link rel="canonical" href="https://sereja.tech/vy-absolyutno-pravy/"><meta name="author" content="Сережа Рис"><meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/vy-absolyutno-pravy/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Кадр клипа с подписью «ты кожаный ассистент»"><meta property="article:published_time" content="2026-09-27T12:00:00+03:00"><meta property="article:modified_time" content="2026-09-27T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="вайбкодинг"><meta property="article:tag" content="Claude Code"><meta property="article:tag" content="AI-агенты"><meta property="article:tag" content="клип"><meta property="article:tag" content="ElevenLabs"><meta property="article:tag" content="Seedance"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="«Вы абсолютно правы»: клип силами агентов за три часа"><meta name="twitter:description" content="Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек."><meta name="twitter:image:alt" content="Кадр клипа с подписью «ты кожаный ассистент»"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "«Вы абсолютно правы»: клип силами агентов за три часа", "description": "Как агенты в Claude Code за три часа сделали русский кавер с клипом и что оставалось за человеком.", "image": "https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg", "inLanguage": "ru-RU", "datePublished": "2026-09-27", "dateModified": "2026-09-27", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/vy-absolyutno-pravy/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["вайбкодинг", "Claude Code", "AI-агенты", "клип", "ElevenLabs", "Seedance"], "video": {"@type": "VideoObject", "name": "«Вы абсолютно правы» — клип", "description": "Русский кавер с клипом, который агенты в Claude Code собрали за три часа.", "thumbnailUrl": "https://sereja.tech/vy-absolyutno-pravy/img/klip.jpg", "contentUrl": "https://sereja.tech/vy-absolyutno-pravy/img/klip.mp4", "uploadDate": "2026-09-27T12:00:00+03:00", "duration": "PT2M37S"}}</script><!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
@@ -315,5 +317,10 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
     s.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(dx<0?i+1:i-1);x0=null});
     imgs[0].loading='eager';go(0);
   });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .look,.body .slider,.body .ph,.body .shop>*,.body .gloss,.body .need,.body .principles>li,.body .steps>li')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
 })();
 </script></body></html>

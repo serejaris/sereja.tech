@@ -16,6 +16,13 @@ enableGitInfo = true
   description = 'Статьи про вайбкодинг, Claude Code и AI-инструменты'
   twitter = '@riiiiiiiiss'
 
+  # Hand-built pages in static/<slug>/: Hugo does not see them, so list them for sitemap.xml and llms.txt
+  [[params.standalone]]
+    url = 'vy-absolyutno-pravy/'
+    title = '«Вы абсолютно правы»: клип силами агентов за три часа'
+    description = 'Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек'
+    lastmod = '2026-09-27'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'
