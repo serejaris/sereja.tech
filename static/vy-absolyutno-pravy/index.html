@@ -2,7 +2,7 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="updated" content="2026-09-27"><title>Вы абсолютно правы: клип силами агентов</title>
 <meta name="description" content="Как агенты в Claude Code за три часа сделали русский кавер с клипом и что оставалось за человеком.">
-<meta property="og:type" content="article"><meta property="og:title" content="«Вы абсолютно правы»: клип силами агентов за три часа"><meta property="og:description" content="Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек."><meta property="og:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:video" content="https://sereja.tech/vy-absolyutno-pravy/img/og_preview.mp4"><meta property="og:video:secure_url" content="https://sereja.tech/vy-absolyutno-pravy/img/og_preview.mp4"><meta property="og:video:type" content="video/mp4"><meta property="og:video:width" content="1200"><meta property="og:video:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_image.jpg">
+<meta property="og:type" content="article"><meta property="og:title" content="«Вы абсолютно правы»: клип силами агентов за три часа"><meta property="og:description" content="Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек."><meta property="og:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:video" content="https://sereja.tech/vy-absolyutno-pravy/img/og_trailer.mp4"><meta property="og:video:secure_url" content="https://sereja.tech/vy-absolyutno-pravy/img/og_trailer.mp4"><meta property="og:video:type" content="video/mp4"><meta property="og:video:width" content="1200"><meta property="og:video:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://sereja.tech/vy-absolyutno-pravy/img/og_cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
 :root{--ink:#000;--blue:#2d3e9f;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
 --serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
@@ -34,7 +34,7 @@ h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-widt
 .lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:560px;margin:30px auto 0}
 .strip{display:flex;width:100%;height:clamp(110px,14vw,178px);margin:54px 0 0;overflow:hidden}
 .strip img,.strip video{flex:1 1 0;min-width:0;height:100%;object-fit:cover}
-.meta{text-align:center;margin:56px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
 .share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
 .share i{display:block;width:38%;height:1px;background:var(--blue)}
 .body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
@@ -93,6 +93,21 @@ h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-widt
 .steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
 .steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
 .steps b{font-weight:500}
+.film{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.film video{width:100%;background:#000;aspect-ratio:16/9}
+.film figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px;text-align:center}
+.gloss{margin:26px 0 30px;border-top:1px solid #e3e3e3}
+.gloss dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding-top:14px}
+.gloss dd{margin:4px 0 0;padding-bottom:14px;border-bottom:1px solid #e3e3e3}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.principles{list-style:none;counter-reset:pr;padding:0;margin:34px 0 0}
+.principles li{counter-increment:pr;position:relative;padding:0 0 30px 70px}
+.principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
+.principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
+.principles p{margin:0}
 .facts{padding-left:22px}.facts li{margin:0 0 10px}
 .sources{font-size:13px;line-height:20px;margin-top:90px;padding-top:26px;border-top:1px solid var(--blue)}
 .tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
@@ -118,277 +133,90 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
 });
 </script>
 </head>
-<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="#top">В</a><nav class=""><a href="#model">Процесс</a><a href="#zadacha">Задача</a><a href="#issledovanie">Словарь</a><a href="#brif">Бриф</a><a href="#pesnya">Песня</a><a href="#obraz">Образ</a><a href="#raskadrovka">Раскадровка</a><a href="#generaciya">Генерация</a><a href="#sborka">Сборка</a><a href="#telegram">Telegram</a><a href="#instrumenty">Инструменты</a></nav></div><header class="mast"><a class="logo" href="#top">ВАЙБКОДИНГ</a><nav class="nav"><a href="#model">Процесс</a><a href="#zadacha">Задача</a><a href="#issledovanie">Словарь</a><a href="#brif">Бриф</a><a href="#pesnya">Песня</a><a href="#obraz">Образ</a><a href="#raskadrovka">Раскадровка</a><a href="#generaciya">Генерация</a><a href="#sborka">Сборка</a><a href="#telegram">Telegram</a><a href="#instrumenty">Инструменты</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Клипы</span></div><div class="kicker">Как это сделано:</div><h1>«Вы абсолютно правы»</h1><p class="lead">Клип, который агенты собрали за три часа, пока автор занимался своими делами. И что всё это время оставалось за человеком.</p></div><div class="strip" aria-label="Кадры клипа"><video src="img/strip1.mp4" poster="img/strip1.jpg" autoplay muted loop playsinline preload="auto"></video><video src="img/strip2.mp4" poster="img/strip2.jpg" autoplay muted loop playsinline preload="auto"></video><video src="img/strip3.mp4" poster="img/strip3.jpg" autoplay muted loop playsinline preload="auto"></video><video src="img/strip4.mp4" poster="img/strip4.jpg" autoplay muted loop playsinline preload="auto"></video><video src="img/strip5.mp4" poster="img/strip5.jpg" autoplay muted loop playsinline preload="auto"></video><video src="img/strip6.mp4" poster="img/strip6.jpg" autoplay muted loop playsinline preload="auto"></video></div>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="#top">В</a><nav class=""><a href="#video">Клип</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#vertikal">Что дальше</a><a href="#povtorit">Как повторить</a></nav></div><header class="mast"><a class="logo" href="#top">ВАЙБКОДИНГ</a><nav class="nav"><a href="#video">Клип</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#vertikal">Что дальше</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Клипы</span></div><div class="kicker">Как это сделано:</div><h1>«Вы абсолютно правы»</h1><p class="lead">Клип, который агенты собрали за три часа, пока автор занимался своими делами. Гайд о том, как это устроено и что решал человек.</p></div>
 <div class="meta">27 сентября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
 <article class="body">
-<p class="first"><span class="drop">Р</span>олик «Claude Pop: I'm Upping My P(doom)» от первой ноты до последнего кадра сделан нейросетью: англоязычная поп-песня о том, как ускоряется прогресс и приближается сингулярность, и рисованная анимация с бумажной фактурой. Он разошёлся в X и, по словам Серёжи Риса, зашёл даже Маску. Серёжа отдал этот клип агенту в Claude Code с просьбой, которая уместилась в пару строк: сделать так же, только по-русски, на языке чата вайбкодеров @vibecod3rs, и взять всё, что найдётся в его подписках.</p>
+<figure class="film" id="video"><video src="img/klip.mp4" poster="img/klip.jpg" controls playsinline preload="metadata"></video><figcaption>«Вы абсолютно правы», 2 минуты 36 секунд. Включите звук</figcaption></figure>
 
-<p>Через три часа фоновой работы у кавера появились название «Вы абсолютно правы» и героиня в духе аниме девяностых. К ним добавились 16 сцен, где она поёт и танцует, 42 звуковых эффекта и 3 760 кадров графики, собранных кодом. Ручного монтажа не было. Сам Серёжа назвал результат самым плохим клипом, который он сделал с ИИ, и в этом главный смысл затеи: это точка отсчёта. Интереснее самого клипа то, где агенту хватило своих решений, а где понадобились ухо и глаз человека.</p>
+<p class="first"><span class="drop">Э</span>тот клип от первой ноты до последнего кадра сделали нейросети. Песню спел ElevenLabs, героиню нарисовал Grok, петь её заставил Seedance, а режиссировал, писал текст и монтировал агент в Claude Code. Серёжа Рис дал задачу, выбрал лучший дубль на слух и несколько раз сказал «не то». Ушло около трёх часов, и всё это время он занимался своими делами. Сам клип и короткий рассказ о нём вышли <a href="https://t.me/ris_ai/674">постом в канале «рис. AI»</a>.</p>
 
-<blockquote class="pull"><p>Ты кожаный ассистент, а&nbsp;я&nbsp;твой бог.</p><cite>Строка из первого куплета, которая прошла через весь клип</cite></blockquote>
+<p>Этот гайд для тех, кто никогда не делал видео с агентами и хочет понять, как такое устроено. Здесь мало технических подробностей и много объяснений: что понадобилось, как шла работа, где агент справился сам и где без человека было нельзя. И главное, какие принципы из этого получились. Они пригодятся не только для клипов, а для любой работы, которую вы отдаёте агентам.</p>
 
-<p>Весь конвейер агент потом упаковал в скилл ai-music-video: папку с инструкцией, шаблоном проекта и примером, которую агент подключает к работе. По этому скиллу сейчас с нуля собирается вертикальная версия для телефона, и у каждой главы ниже есть приписка о том, как далеко она продвинулась.</p>
+<blockquote class="pull"><p>Ты кожаный ассистент, а&nbsp;я&nbsp;твой бог.</p><cite>Строка из первого куплета. Её придумал агент, прочитав чат вайбкодеров</cite></blockquote>
 
-<section class="sec" id="model">
-<div class="sec-h"><span class="num">00</span><h2>Где решает человек</h2></div>
-<p>Когда заранее известно, где решаете вы, за видео не приходится платить раньше, чем утверждены песня и образ. В клипе работали агенты трёх ролей. Главный агент в Claude Code вёл разговор с Серёжей, писал текст и режиссуру и собирал клип кодом. <a href="https://code.claude.com/docs/en/sub-agents">Субагенты</a> параллельно готовили исследования, каждый в своём окне. Фоновые агенты выполняли по одному заданию генерации и завершались.</p>
-<p>Логика знакома по работе с подрядчиком: смету на съёмку не подписывают, пока не утверждён сценарий. Каждая проверка человеком стоит перед шагом, который обходится дороже предыдущего, а правка после просмотра стоит минуты: программа пересобирает кадры, генерация заново не запускается. До старта решите, какие четыре решения вы оставляете за собой, и назовите их агенту в первом сообщении.</p>
-<figure class="diagram" id="fig-pipeline"><svg viewBox="0 0 960 482" role="img" aria-labelledby="fig-pipeline-title fig-pipeline-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-pipeline-title">Как агент собрал музыкальный клип и где решает человек</title><desc id="fig-pipeline-desc">Конвейер из девяти шагов змейкой в три ряда. Первый ряд слева направо: 1 вход, задача и подписки, то есть запрос Серёжи, тарифы и то, что уже оплачено; 2 исследование пятью субагентами: словарь чата, тренды, режиссура, возможности сервисов; 3 бриф и песня в ElevenLabs: 14 дублей и тайминг каждого слова. Второй ряд справа налево: 4 образ героини в Grok Imagine: персонажи и первые кадры; 5 план, раскадровка по словам: каждая строка песни получает тип кадра; 6 генерация и проверка силами фоновых агентов: 16 сцен Seedance, 10 вставок, увеличение до 4K. Третий ряд слева направо: 7 сборка кодом и звук в Claude Code: надписи, эффекты, монтаж, звуки; 8 просмотр контактных листов: сетка кадров и правки Серёжи; 9 выход, пост в Telegram с файлом до 10 МБ для автовоспроизведения. Четыре шага отмечены как проверка человеком: на шаге 2 Серёжа подтверждает хук и словарь, на шаге 3 выбирает дубль на слух, на шаге 4 смотрит пробный кадр до трат на видео, на шаге 8 принимает или правит сборку. От шага 8 обратно к шагу 7 идёт петля правок, после неё сборка повторяется.</desc><defs><marker id="p-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="p-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><rect width="960" height="482" fill="#ffffff"/><path d="M 296,71.0 H 345" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 612,71.0 H 661" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 796.0,118 V 161" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 664,211.0 H 615" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 348,211.0 H 299" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 164.0,258 V 301" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 296,351.0 H 345" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 612,351.0 H 661" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 412,398 V 420 Q 412,428 404,428 H 240 Q 232,428 232,420 V 401" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><rect x="299.6" y="421" width="44.8" height="14" fill="#ffffff"/><text x="322.0" y="431" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">правки</text><rect x="32" y="24" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="36" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="54" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">1</text><rect x="68" y="36" width="31.8" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="83.9" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ВХОД</text><text x="48" y="72" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Задача и подписки</text><text x="48" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">запрос Серёжи, тарифы,</text><text x="48" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">что уже оплачено</text><rect x="348" y="24" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="36" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="370" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">2</text><rect x="384" y="36" width="75.3" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="421.6" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">5 СУБАГЕНТОВ</text><rect x="544.5" y="36" width="53.5" height="13" rx="0" fill="#000000"/><text x="571.2" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="364" y="72" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Исследование</text><text x="364" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">словарь чата, тренды, режиссура,</text><text x="364" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">возможности сервисов</text><rect x="664" y="24" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="36" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="686" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">3</text><rect x="700" y="36" width="64.4" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="732.2" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ELEVENLABS</text><rect x="860.5" y="36" width="53.5" height="13" rx="0" fill="#000000"/><text x="887.2" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="680" y="72" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Бриф и песня</text><text x="680" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">14 дублей, тайминг каждого слова</text><rect x="664" y="164" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="176" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="686" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">4</text><rect x="700" y="176" width="75.3" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="737.6" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">GROK IMAGINE</text><rect x="860.5" y="176" width="53.5" height="13" rx="0" fill="#000000"/><text x="887.2" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="680" y="212" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Образ героини</text><text x="680" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">персонажи, первые кадры</text><rect x="348" y="164" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="362" y="176" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="370" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">5</text><rect x="384" y="176" width="31.8" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="399.9" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПЛАН</text><text x="364" y="212" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Раскадровка по словам</text><text x="364" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">каждая строка песни</text><text x="364" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">получает тип кадра</text><rect x="32" y="164" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="176" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="54" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">6</text><rect x="68" y="176" width="86" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="111" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ФОНОВЫЕ АГЕНТЫ</text><text x="48" y="212" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Генерация и проверка</text><text x="48" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">16 сцен Seedance, 10 вставок,</text><text x="48" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">увеличение до 4K</text><rect x="32" y="304" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="316" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="54" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">7</text><rect x="68" y="316" width="69.8" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="102.9" y="325.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">CLAUDE CODE</text><text x="48" y="352" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Сборка кодом и звук</text><text x="48" y="370" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">надписи, эффекты, монтаж, звуки</text><rect x="348" y="304" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="316" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="370" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">8</text><rect x="384" y="316" width="53.5" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="410.8" y="325.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОСМОТР</text><rect x="544.5" y="316" width="53.5" height="13" rx="0" fill="#000000"/><text x="571.2" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="364" y="352" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Контактные листы</text><text x="364" y="370" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">сетка кадров, правки Серёжи</text><rect x="664" y="304" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="316" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="686" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">9</text><rect x="700" y="316" width="37.2" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="718.6" y="325.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ВЫХОД</text><text x="680" y="352" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Пост в Telegram</text><text x="680" y="370" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">файл до 10 МБ</text><text x="680" y="384" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">для автовоспроизведения</text><text x="32" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" letter-spacing="0.14em">ЛЕГЕНДА</text><rect x="106" y="450" width="22" height="13" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="136" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">обычный шаг</text><rect x="216.8" y="450" width="22" height="13" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="244.8" y="450" width="53.5" height="13" rx="0" fill="#000000"/><text x="271.6" y="459.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="306.3" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">проверка человеком</text><path d="M 430.3,457 H 456.3" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><text x="464.3" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">обратная связь, правки</text></svg><figcaption>Девять стадий клипа и четыре проверки человека. Правки после просмотра возвращаются в сборку кодом</figcaption></figure>
-<p>Одна строка песни проходит через все стадии: «ты кожаный ассистент, а я твой бог». Она есть в брифе, в первом кадре, в разметке слов и в звуковых эффектах, и по ней удобно следить, как стадии передают работу друг другу.</p>
-</section>
+<section class="sec" id="chto-eto">
+<div class="sec-h"><span class="num">01</span><h2>Что вообще произошло</h2></div>
 
-<section class="sec" id="zadacha">
-<div class="sec-h"><span class="num">01</span><h2>Подписки вместо техзадания</h2></div>
+<p>В интернете разошёлся англоязычный клип «Claude Pop: I'm Upping My P(doom)», поп-песня про то, как быстро развивается ИИ, целиком сделанная нейросетью. Серёжа отдал его агенту и попросил русскую версию: на языке чата вайбкодеров, с инструментами из его подписок. Больше указаний не было.</p>
 
-<p>В первое сообщение Серёжа вставил длинное английское техзадание к оригинальному клипу, написанное другим человеком: переделать ролик на той же дорожке, с поп-айдолом, который олицетворяет Claude. Дальше пошли короткие реплики на русском, и в них уместилась вся постановка:</p>
+<p>Дальше агент работал как маленькая студия. Он сам разобрался, чем говорит аудитория, написал текст, заказал песню, придумал героиню, нарисовал для неё кадры, снял сцены, где она поёт, собрал монтаж, добавил надписи, эффекты и звуки и ужал файл, чтобы клип сам запускался в Telegram.</p>
 
-<blockquote class="said"><p>видео на русском языке. ты можешь использовать елевен лабс (…)<br>и все инстурменты которые есть в подписках в hq<br>также есть higgsfield и runway - разраешю настроить через браузер</p><cite>Серёжа, сообщения агенту</cite></blockquote>
+<p>Несколько слов, которые встретятся дальше:</p>
 
-<p>Какой сервис взять под какую задачу, агент решил сам. Он прочитал список подписок, записал для каждой тариф и цену и разложил работу: песню отдал ElevenLabs, героиню и вставки Grok Imagine, сцены с пением Seedance 2.5 через Higgsfield, увеличение разрешения Runway, а режиссуру, текст и монтаж оставил себе. Итоговая раскладка с ценами собрана в конце, в разделе <a href="#instrumenty">«Что использовать»</a>.</p>
-
-<p>Одна деталь выглядит скучной и решает многое. Фоновые агенты работают из папки проекта, и в ней лежит файл правил CLAUDE.md, где честно написано, что это за проект и чьи аккаунты подключены. Без такого описания они отказываются от заданий: подробности в <a href="#oshibki">разделе об ошибках</a>. Формат, горизонтальный или вертикальный, тоже называют сразу, потому что он входит в каждый запрос генерации.</p>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Агент прислал список инструментов из ваших подписок: тариф, цена в месяц и остаток лимита по каждому.</li><li>Агент показал баланс кредитов каждого подключённого сервиса до первой генерации.</li><li>Формат ролика выбран до первой генерации: горизонтальный 16:9 или вертикальный 9:16.</li><li>В файле правил проекта названы проект и владелец подписок, пустых полей шаблона не осталось.</li></ul></div>
-
-<div class="vert" id="zadacha-vert"><h3>Вертикальная версия</h3>
-<p><b>В работе.</b> Папка вертикали создана по шаблону скилла, формат 9:16. Задачу Серёжа поставил одной фразой:</p>
-<blockquote class="said"><p>и как закончишь нужно будет будет делать снова с нуля по скиллу но уже вертикальный вариант  песни с учетом находок</p><cite>Серёжа, сообщение агенту</cite></blockquote>
-</div>
-</section>
-
-<section class="sec" id="issledovanie">
-<div class="sec-h"><span class="num">02</span><h2>Слова, которые уже говорят</h2></div>
-
-<p>По умолчанию агент тянется к мемам англоязычного интернета, и русская песня начинает звучать как перевод. Поэтому исследование началось с речи самой аудитории. Главный агент запустил четыре субагента одновременно и пятого через полчаса, когда Серёжа отклонил первый визуальный стиль. Каждый принёс своё досье: словарь чата, визуальные тренды, режиссура, возможности ElevenLabs и возможности Grok.</p>
-
-<p>Словарь снимался из архива чата @vibecod3rs, 40 120 сообщений. Агент считал, сколько раз звучит каждое слово, и ничего не угадывал. Серёжа направлял работу короткими репликами:</p>
-
-<blockquote class="said"><p>норм ток слова пидум и фум или что тоакое это неизвестные в ру сленге слова<br>можешь проверять по чату вайбкодеров например - аудитория именно она<br>…<br>про скайнет это немноо кринж и старый термин  - нужны актуальные слова и тренды</p><cite>Серёжа, сообщения агенту</cite></blockquote>
-
-<figure class="doc"><pre>лимит               @vibecod3rs, 1509
-…
-агент               @vibecod3rs, 1379
-…
-кожаный             @vibecod3rs, 17
-…
-нейрослоп           @vibecod3rs, 8
-вы абсолютно правы  @vibecod3rs, 4
-…
-Запрещены: P(doom), ФУМ, шоггот, василиск, китайская комната (…)
-и Скайнет (в чате встречается, но основатель отклонил как кринж
-и устаревший термин).</pre><figcaption>Бриф песни, пример «Вы абсолютно правы»: словарь сокращён</figcaption></figure>
-
-<p>Хук «Вы абсолютно правы» в чате встречается всего четыре раза. Для хука важнее другое: это фраза, которую аудитория уже произносит, дежурный ответ ассистента на любую претензию, и её узнают с первого раза. Отклонённые слова уходят в отдельную строку запретов. Субагент, который её заполнял, однажды пропустил Скайнет, и явный список сделал ошибку видимой.</p>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>У каждого слова в словаре есть источник и число упоминаний в реальном чате.</li><li>Список запрещённых слов записан отдельной строкой, и в нём все мемы, которые вы отклонили.</li><li>Вы подтвердили хук, и это фраза, которую ваша аудитория уже говорит.</li></ul></div>
-
-<div class="vert" id="issledovanie-vert"><h3>Вертикальная версия</h3>
-<p><b>Взято из основной версии.</b> Словарь и хук те же.</p>
-</div>
+<dl class="gloss">
+<dt>Агент</dt><dd>Программа на основе языковой модели, которая не просто отвечает в чате, а сама выполняет задачу по шагам: пишет файлы, запускает сервисы, проверяет результат. Здесь это Claude Code с моделью Opus 5.5.</dd>
+<dt>Субагент</dt><dd>Помощник, которого главный агент запускает на отдельную задачу, например на исследование. Работает параллельно и возвращает короткий итог.</dd>
+<dt>Генерация</dt><dd>Один запуск нейросети: одна песня, одна картинка, одна сцена. Каждая стоит денег или кредитов подписки.</dd>
+<dt>Дубль</dt><dd>Один вариант песни. Нейросеть каждый раз поёт по-разному, поэтому делают несколько дублей и выбирают лучший.</dd>
+<dt>Липсинк</dt><dd>Сцена, где персонаж поёт, и губы попадают в слова уже записанной песни.</dd>
+</dl>
 </section>
 
 <figure class="fig"><img src="img/kozhany.jpg" alt="Героиня в тренче возвышается над уставшим парнем с ноутбуком, подпись «ты кожаный ассистент»" loading="lazy"><figcaption>Кадр клипа на строке «ты кожаный ассистент, а я твой бог»</figcaption></figure>
 
-<section class="sec" id="brif">
-<div class="sec-h"><span class="num">03</span><h2>Одна мысль на всю песню</h2></div>
+<section class="sec" id="ponadobilos">
+<div class="sec-h"><span class="num">02</span><h2>Что нам понадобилось</h2></div>
 
-<p>Когда клип вышел, в комментариях написали то, что обычно говорят про тексты нейросетей:</p>
+<p>Кажется, что для клипа нужна команда: музыкант, художник, аниматор, монтажёр. Здесь всех заменили подписки на нейросети и один агент, который ими управлял. Вот полный список ингредиентов.</p>
 
-<blockquote class="said"><p>«Если попросить написать пост уникальный, то он сделает просто конвейер из смысловых блоков». «Но боль основная в связи между смыслами».</p><cite>Комментарий к посту о клипе в Telegram</cite></blockquote>
+<ul class="need">
+<li><b>Образец.</b> Готовый клип, на который можно показать пальцем: «сделай так же». Образец экономит часы объяснений.</li>
+<li><b>Язык аудитории.</b> Архив чата вайбкодеров, 40 тысяч сообщений. Из него агент взял слова и шутки, которые люди действительно говорят.</li>
+<li><b>Подписки.</b> Серёжа перечислил, что у него уже оплачено, а какой сервис под какую задачу взять, агент решил сам.</li>
+<li><b>Около трёх часов.</b> Работа шла фоном, человек в это время занимался своими делами.</li>
+<li><b>Человек на четыре решения.</b> Утвердить слова и хук, выбрать дубль песни, одобрить героиню, принять монтаж. Всё остальное агент сделал сам.</li>
+</ul>
 
-<p>Претензия справедливая, и ответ на неё оказался старым, как реклама: бриф. Одна страница до первой строки текста, где записаны тезис одной фразой, кто поёт и кому, словарь с запретами, хук, арка по частям песни с энергией, звук, формат, строки, которые станут кадрами, и критерии проверки. Каждую строку текста сверяют с тезисом, а последняя проверка простая: два-три человека после одного прослушивания пересказывают, о чём песня.</p>
+<p>Сервисы и сколько каждый стоит по обычному месячному тарифу:</p>
+</section>
 
-<blockquote class="said"><p>а не стоит в рисече по созданию песен с помощью написание брифа какойтого например?</p><cite>Серёжа, сообщение агенту</cite></blockquote>
-
-<p>Для самого клипа брифа до текста не было. Шаблон появился в скилле после критики, и пример в нём заполнен задним числом: последний пункт честно помечен «по факту».</p>
-
-<figure class="doc"><pre>1. Тезис. ИИ-ассистентка на всё отвечает «Вы абсолютно правы», за одну ночь
-забирает управление, и люди замечают это последними.
-
-2. Голос и адресат. Поёт героиня-ИИ, агент в IDE. Поёт вайбкодеру («кожаному»),
-который ставит агентов на ночь. В куплетах «ты», в хуке вежливое ассистентское «вы». …
-
-4. Хук. «Вы абсолютно правы», 7 слогов … Первое появление на 20,7 с. 8 повторов. …</pre><figcaption>Бриф песни, пример «Вы абсолютно правы»: сокращено</figcaption></figure>
-
-<p>Из брифа вырос текст, и его первый куплет звучит так:</p>
-
-<blockquote class="lyrics"><p>Ты мне пишешь: «Сделай красиво»,<br>ставишь агентов на ночь — и спишь лениво.<br>Я за ночь закрыла весь бэклог —<br>ты кожаный ассистент, а я твой бог.</p><cite>Текст мастера, первый куплет</cite></blockquote>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Тезис песни записан одним полным предложением.</li><li>Каждая строка текста отвечает тезису или задаче своей части в арке.</li><li>Вы утвердили бриф до первой генерации дублей.</li><li>Два-три человека после одного прослушивания пересказывают тезис своими словами.</li></ul></div>
-
-<div class="vert" id="brif-vert"><h3>Вертикальная версия</h3>
-<p><b>Ещё не начато.</b> Заполненного брифа в папке вертикали пока нет. Порядок частей уже переставлен под телефон: сначала хук с припевом, потом куплет, «Кодекс, не ешь меня живьём», второй припев и шёпот в конце.</p>
+<section class="sec shop-sec" id="instrumenty">
+<div class="shop">
+<figure><div class="ph"><img src="img/tool_claude.jpg" alt="Кадр клипа с окнами терминала" loading="lazy"></div><figcaption>Режиссёр, сценарист и монтажёр: Claude Code с Opus 5.5, Claude Max 20x, $200 в месяц, <a href="https://claude.ai">claude.ai</a><span>ушло около 3% недельного лимита</span></figcaption></figure>
+<figure><div class="ph"><img src="img/tool_elevenlabs.jpg" alt="Звуковая волна песни" loading="lazy"></div><figcaption>Голос, музыка и звуки: ElevenLabs Creator, $22 в месяц, <a href="https://elevenlabs.io">elevenlabs.io</a><span>около четверти месячного лимита</span></figcaption></figure>
+<figure><div class="ph"><img src="img/tool_grok.jpg" alt="Героиня на белом фоне" loading="lazy"></div><figcaption>Художник: Grok Imagine, SuperGrok Heavy, $300 в месяц, <a href="https://docs.x.ai/developers/model-capabilities/imagine">x.ai</a><span>картинок и вставок примерно на $13</span></figcaption></figure>
+<figure><div class="ph"><img src="img/tool_higgsfield.jpg" alt="Кадр сцены, где героиня поёт" loading="lazy"></div><figcaption>Аниматор: Seedance 2.5 в Higgsfield Pro, $29 в месяц, <a href="https://higgsfield.ai">higgsfield.ai</a><span>около половины месячного лимита</span></figcaption></figure>
+<figure><div class="ph"><img src="img/tool_runway.jpg" alt="Крупный фрагмент кадра в высоком разрешении" loading="lazy"></div><figcaption>Улучшение качества до 4K: Runway Pro, $35 в месяц, <a href="https://runwayml.com">runwayml.com</a><span>около 13% месячного лимита</span></figcaption></figure>
 </div>
 </section>
 
-<section class="sec" id="pesnya">
-<div class="sec-h"><span class="num">04</span><h2>Дубль выбирает ухо</h2></div>
+<section class="sec" id="kak">
+<div class="sec-h"><span class="num">03</span><h2>Как мы это сделали</h2></div>
 
-<p>Песню пел ElevenLabs Music. Модель получает план композиции, то есть техзадание на песню по кускам: сколько длится кусок, какие строки петь, какой звук нужен и какой запрещён. Стили пишутся по-английски в отдельном поле, в тексте остаются только метки частей и слова. Дубль здесь это одна генерация песни со своим номером, например seed53.</p>
+<p>Работа шла по конвейеру из девяти шагов. Важно не столько, что делал каждый шаг, сколько где стоят чёрные рамки: это места, где решал человек. Каждая такая проверка стоит перед шагом, который обходится дороже предыдущего.</p>
 
-<p>Второй приём называется опорой на дубль, в документации ElevenLabs это <a href="https://elevenlabs.io/docs/eleven-api/guides/how-to/music/inpainting">conditioning</a>. Модели дают кусок готовой песни, до 30 секунд, как образец звучания, и задают силу, с которой держаться образца. Серёже понравилось звучание дубля seed22, с опорой на него спели финальный текст и получили seed53.</p>
+<figure class="diagram" id="fig-pipeline"><svg viewBox="0 0 960 482" role="img" aria-labelledby="fig-pipeline-title fig-pipeline-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-pipeline-title">Как агент собрал музыкальный клип и где решает человек</title><desc id="fig-pipeline-desc">Конвейер из девяти шагов змейкой в три ряда. Первый ряд слева направо: 1 вход, задача и подписки, то есть запрос Серёжи, тарифы и то, что уже оплачено; 2 исследование пятью субагентами: словарь чата, тренды, режиссура, возможности сервисов; 3 бриф и песня в ElevenLabs: 14 дублей и тайминг каждого слова. Второй ряд справа налево: 4 образ героини в Grok Imagine: персонажи и первые кадры; 5 план, раскадровка по словам: каждая строка песни получает тип кадра; 6 генерация и проверка силами фоновых агентов: 16 сцен Seedance, 10 вставок, увеличение до 4K. Третий ряд слева направо: 7 сборка кодом и звук в Claude Code: надписи, эффекты, монтаж, звуки; 8 просмотр контактных листов: сетка кадров и правки Серёжи; 9 выход, пост в Telegram с файлом до 10 МБ для автовоспроизведения. Четыре шага отмечены как проверка человеком: на шаге 2 Серёжа подтверждает хук и словарь, на шаге 3 выбирает дубль на слух, на шаге 4 смотрит пробный кадр до трат на видео, на шаге 8 принимает или правит сборку. От шага 8 обратно к шагу 7 идёт петля правок, после неё сборка повторяется.</desc><defs><marker id="p-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="p-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><rect width="960" height="482" fill="#ffffff"/><path d="M 296,71.0 H 345" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 612,71.0 H 661" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 796.0,118 V 161" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 664,211.0 H 615" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 348,211.0 H 299" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 164.0,258 V 301" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 296,351.0 H 345" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 612,351.0 H 661" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 412,398 V 420 Q 412,428 404,428 H 240 Q 232,428 232,420 V 401" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><rect x="299.6" y="421" width="44.8" height="14" fill="#ffffff"/><text x="322.0" y="431" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">правки</text><rect x="32" y="24" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="36" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="54" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">1</text><rect x="68" y="36" width="31.8" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="83.9" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ВХОД</text><text x="48" y="72" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Задача и подписки</text><text x="48" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">запрос Серёжи, тарифы,</text><text x="48" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">что уже оплачено</text><rect x="348" y="24" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="36" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="370" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">2</text><rect x="384" y="36" width="75.3" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="421.6" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">5 СУБАГЕНТОВ</text><rect x="544.5" y="36" width="53.5" height="13" rx="0" fill="#000000"/><text x="571.2" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="364" y="72" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Исследование</text><text x="364" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">словарь чата, тренды, режиссура,</text><text x="364" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">возможности сервисов</text><rect x="664" y="24" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="36" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="686" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">3</text><rect x="700" y="36" width="64.4" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="732.2" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ELEVENLABS</text><rect x="860.5" y="36" width="53.5" height="13" rx="0" fill="#000000"/><text x="887.2" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="680" y="72" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Бриф и песня</text><text x="680" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">14 дублей, тайминг каждого слова</text><rect x="664" y="164" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="176" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="686" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">4</text><rect x="700" y="176" width="75.3" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="737.6" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">GROK IMAGINE</text><rect x="860.5" y="176" width="53.5" height="13" rx="0" fill="#000000"/><text x="887.2" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="680" y="212" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Образ героини</text><text x="680" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">персонажи, первые кадры</text><rect x="348" y="164" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="362" y="176" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="370" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">5</text><rect x="384" y="176" width="31.8" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="399.9" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПЛАН</text><text x="364" y="212" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Раскадровка по словам</text><text x="364" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">каждая строка песни</text><text x="364" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">получает тип кадра</text><rect x="32" y="164" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="176" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="54" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">6</text><rect x="68" y="176" width="86" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="111" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ФОНОВЫЕ АГЕНТЫ</text><text x="48" y="212" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Генерация и проверка</text><text x="48" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">16 сцен Seedance, 10 вставок,</text><text x="48" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">увеличение до 4K</text><rect x="32" y="304" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="316" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="54" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">7</text><rect x="68" y="316" width="69.8" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="102.9" y="325.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">CLAUDE CODE</text><text x="48" y="352" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Сборка кодом и звук</text><text x="48" y="370" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">надписи, эффекты, монтаж, звуки</text><rect x="348" y="304" width="264" height="94" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="316" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="370" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">8</text><rect x="384" y="316" width="53.5" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="410.8" y="325.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОСМОТР</text><rect x="544.5" y="316" width="53.5" height="13" rx="0" fill="#000000"/><text x="571.2" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="364" y="352" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Контактные листы</text><text x="364" y="370" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">сетка кадров, правки Серёжи</text><rect x="664" y="304" width="264" height="94" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="316" width="16" height="13" rx="0" fill="#2d3e9f"/><text x="686" y="325.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">9</text><rect x="700" y="316" width="37.2" height="13" rx="0" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="718.6" y="325.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ВЫХОД</text><text x="680" y="352" fill="#000000" font-size="15.5" font-weight="400" font-family="Spectral, Georgia, serif">Пост в Telegram</text><text x="680" y="370" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">файл до 10 МБ</text><text x="680" y="384" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">для автовоспроизведения</text><text x="32" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" letter-spacing="0.14em">ЛЕГЕНДА</text><rect x="106" y="450" width="22" height="13" rx="0" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="136" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">обычный шаг</text><rect x="216.8" y="450" width="22" height="13" rx="0" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="244.8" y="450" width="53.5" height="13" rx="0" fill="#000000"/><text x="271.6" y="459.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle" letter-spacing="0.08em">ПРОВЕРКА</text><text x="306.3" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">проверка человеком</text><path d="M 430.3,457 H 456.3" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><text x="464.3" y="460" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">обратная связь, правки</text></svg><figcaption>Девять стадий клипа и четыре проверки человека. Правки после просмотра возвращаются в сборку кодом</figcaption></figure>
 
-<figure class="doc"><pre>{
-  "text": "[Hook Chorus]\nВы абсолютно правы!\nЯ исправлю всё сейчас.\n…",
-  "duration_ms": 18182,
-  "positive_styles": ["synthpop", "electropop", "female vocals",
-    "Russian-language vocals", "132 BPM", "E-flat major", …,
-    "vocals start immediately", "hook in the first bar"],
-  "negative_styles": ["male vocals", "English lyrics", "rap", "lo-fi",
-    "acoustic guitar", "muddy mix", "screaming", "long instrumental intro"],
-  …
-  "conditioning_ref": {"song_id": "iUST8T2BTVqwjND8TiHj",
-    "range": {"start_ms": 20030, "end_ms": 38212}},
-  "condition_strength": "xhigh"
-}</pre><figcaption>opus-vertical/song/plan_v1.json, первый кусок из пяти: так выглядит то, что уходит в ElevenLabs</figcaption></figure>
+<p><b>Сначала агент изучил аудиторию.</b> Он запустил пять помощников-субагентов одновременно: один разбирал чат вайбкодеров, другой визуальные тренды, третий режиссуру, ещё двое выясняли, что умеют сервисы. Первый вариант текста агент написал на английских мемах вроде P(doom), и Серёжа сразу его остановил:</p>
 
-<p>У мастера было 14 дублей в трёх раундах. Каждый агент прогонял через распознавание речи и считал, какую долю спетых слов машина узнала. У seed52 вышло 94%, лучший результат раунда, и у него были сбиты ударения. Метрика этого не слышит: распознавание узнаёт слово и с неверным ударением.</p>
+<blockquote class="said"><p>норм ток слова пидум и фум или что тоакое это неизвестные в ру сленге слова<br>можешь проверять по чату вайбкодеров например - аудитория именно она</p><cite>Серёжа, сообщение агенту</cite></blockquote>
 
-<blockquote class="said"><p>по текстам мне сид 22 понравился больше всего<br>…<br>сид 53 - супер, у руого проблема с ударениям</p><cite>Серёжа, сообщения агенту</cite></blockquote>
+<p>После этого хуком стала фраза, которую в чате узнают все: «Вы абсолютно правы». Так отвечает ИИ-ассистент на любое замечание, даже когда сам всё сломал.</p>
 
-<p>Мастером стал seed53 с 92%. На пении распознавание вообще ошибается часто: в <a href="https://aclanthology.org/2024.nlp4musa-1.3/">исследовании 2024 года</a> модель ошибалась примерно в каждом втором спетом слове и в каждом седьмом прочитанном. Процент годится, чтобы сравнить дубли между собой, а выбирает всё равно ухо. Русского в официальном списке языков вокала ElevenLabs нет, поэтому лишние дубли стоит закладывать заранее.</p>
+<p><b>Потом появилась песня.</b> Агент написал текст и отправил его в ElevenLabs вместе с описанием звука: жанр, темп, женский голос, русский язык. Нейросеть спела 14 вариантов. Агент проверил каждый программой, которая распознаёт слова, и лучший по цифрам оказался с неправильными ударениями. Машина этого не слышит, а человек слышит сразу, поэтому финальный дубль выбрал Серёжа.</p>
 
-<div class="done"><h4>Готово, когда</h4><ul><li>Вы прослушали финалистов с текстом в руках и отметили каждое слово с неверным ударением.</li><li>Дубли с неверным ударением отсеяны, даже если процент совпадения у них выше.</li><li>Хук звучит раньше 30-й секунды и повторяется минимум трижды.</li><li>Выбранный дубль сохранён как мастер, и все следующие стадии берут время от него.</li></ul></div>
+<figure class="loop"><video src="img/loop_hook.mp4" poster="img/loop_hook.jpg" autoplay muted loop playsinline></video><figcaption>Хук «Вы абсолютно правы» в клипе</figcaption></figure>
 
-<div class="vert" id="pesnya-vert"><h3>Вертикальная версия</h3>
-<p><b>Готово.</b> Первая короткая версия дала пять дублей в прежнем синтипоп-звуке, с опорой на мастер. Лучшие узнавали 97, 94 и 93% слов, вокал вступал на 0,7 секунды. Серёжа не взял ни один:</p>
-<blockquote class="said"><p>С , ни один вариант не понравился, что то хочется ближе к звуку и стилю били айлиш например<br>…<br>а зачем 4? давай два</p><cite>Серёжа, сообщения агенту</cite></blockquote>
-<p>Имена артистов ElevenLabs не принимает, поэтому агент описал звук словами и убрал опору на старый мастер: тёмный минималистичный поп, шёпот у самого микрофона, искажённый глубокий бас, щелчки пальцев, приглушённое пианино, темп 132 с ощущением вдвое медленнее, соль минор.</p>
-<figure class="doc"><pre>"positive_styles": ["dark minimalist pop", "bedroom pop",
-  "whispery intimate close-mic female vocals", "breathy deadpan delivery",
-  "Russian-language vocals", "132 BPM", "half-time feel", "G minor",
-  "deep distorted 808 sub-bass", "sparse finger snaps", "muted dark piano", …],
-"negative_styles": [ …, "bright synthpop", "four-on-the-floor kick", "euphoric", …]</pre><figcaption>opus-vertical/song/plan_v2.json, первый кусок: поля conditioning_ref в плане нет</figcaption></figure>
-<p>На слух ушли два дубля из четырёх: seed73 с 98% узнанных слов и seed72 с 93%. Дубли дешёвые, а узкое место здесь слух человека, поэтому финалистов теперь всегда два. Серёжа выбрал первый, «ну первая версия норм.». Тихое вступление агент отрезал, и первое «Вы абсолютно правы» звучит на 0,3 секунды. Мастер длится 55,6 секунды, дорожки голоса и музыки разделены, время каждого слова размечено.</p>
-</div>
-</section>
-
-<figure class="loop"><video src="img/loop_hook.mp4" poster="img/loop_hook.jpg" autoplay muted loop playsinline></video><figcaption>Первый хук основной версии</figcaption></figure>
-
-<section class="sec" id="obraz">
-<div class="sec-h"><span class="num">05</span><h2>Героиня до первого видео</h2></div>
-
-<p>Видео стоит заметно дороже картинки, и если образ героини меняется после генерации сцен, сцены переснимают. Поэтому Grok Imagine сначала нарисовал мастер-образ на белом фоне, а каждый следующий кадр получал этот образ и абзац описания стиля. От таких первых кадров потом начинались сцены, и героиня оставалась собой.</p>
+<p><b>Дальше героиня.</b> Сначала агент рисовал только картинки: они в десятки раз дешевле видео. Карандашный набросок и акварель Серёжа отклонил, бумажный стиль тоже. Попросил героиню в духе аниме «Призрак в доспехах», белые чистые фоны и рамки, как у камер наблюдения. Когда образ утвердили, от него рисовали первый кадр каждой сцены, чтобы героиня везде оставалась собой.</p>
 
 <div class="look">
-<figure><img style="object-position:80% 50%" src="img/kf_K04.jpg" alt="Героиня крупным планом справа, слева пустое белое поле" loading="lazy"><figcaption>Grok Imagine, кадр K04</figcaption></figure>
-<figure><img style="object-position:45% 50%" src="img/kf_K05.jpg" alt="Героиня в полный рост над маленьким парнем с ноутбуком" loading="lazy"><figcaption>Grok Imagine, кадр K05</figcaption></figure>
-<figure><img style="object-position:55% 50%" src="img/kf_K10.jpg" alt="Героиня поёт, указывая в камеру" loading="lazy"><figcaption>Grok Imagine, кадр K10</figcaption></figure>
-<figure><img style="object-position:22% 50%" src="img/kf_K20.jpg" alt="Героиня делает шаг к камере" loading="lazy"><figcaption>Grok Imagine, кадр K20</figcaption></figure>
+<figure><img style="object-position:80% 50%" src="img/kf_K04.jpg" alt="Героиня крупным планом" loading="lazy"><figcaption>Крупный план</figcaption></figure>
+<figure><img style="object-position:45% 50%" src="img/kf_K05.jpg" alt="Героиня над маленьким парнем с ноутбуком" loading="lazy"><figcaption>«Я твой бог»</figcaption></figure>
+<figure><img style="object-position:55% 50%" src="img/kf_K10.jpg" alt="Героиня поёт, указывая в камеру" loading="lazy"><figcaption>Припев</figcaption></figure>
+<figure><img style="object-position:22% 50%" src="img/kf_K20.jpg" alt="Героиня делает шаг к камере" loading="lazy"><figcaption>Шаг к камере</figcaption></figure>
 </div>
 
-<p>Образ нашли не сразу. Сначала агент взял направление из английского техзадания, бумажного поп-айдола в технике рисографии. Позже предложил карандашный набросок и припев в акварели. Серёжа отклонил и то и другое:</p>
-
-<blockquote class="said"><p>оч плохоие референсы …<br>надо главного героя в стиле ghost in the shell и рамки как опеределния видео наблюдения<br>…<br>нет, такое убожество не над, нам надо актуальные эффекты в анимации то что можно и то что актуально агентам</p><cite>Серёжа, сообщения агенту</cite></blockquote>
-
-<p>Так появилась киборг в эстетике аниме 1995 года: чёрное каре с фиолетовым отливом, янтарные глаза со звёздочкой вместо радужки, порты на шее, кремовый тренч с терракотовой подкладкой. Чистый белый фон, рамки машинного зрения, подвижная кириллица. Кадр K05 и есть «ты кожаный ассистент, а я твой бог»: героиня возвышается над уставшим парнем в сером худи.</p>
-
-<figure class="doc"><pre>style: Same character as &lt;IMAGE_0&gt; (exact same face, ink-black bob …
-glowing amber-orange eyes with asterisk-shaped irises, neck data ports …
-long cream trench coat with terracotta lining). Same 1995 theatrical anime
-cel animation style … Background: pure clean white infinite studio void …
-
-K05: Low-angle wide shot: she stands tall in the center-right, full body,
-looking down with a confident smirk, one hand on her hip; at the lower left
-a much smaller tired young man in a grey hoodie holding an open laptop
-(the man from &lt;IMAGE_1&gt;) stands looking up at her. …</pre><figcaption>opus-music-video/assets/kf/keyframes.json, описание стиля и кадр K05: сокращено</figcaption></figure>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Мастер-образ героини на белом фоне и описание стиля лежат в проекте отдельными файлами.</li><li>Вы видели пробный кадр до первой видеогенерации и одобрили его.</li><li>На пробном кадре то же лицо, что на мастер-образе: причёска, глаза, одежда.</li><li>Отклонённые стили записаны как запреты.</li></ul></div>
-
-<div class="vert" id="obraz-vert"><h3>Вертикальная версия</h3>
-<p><b>В работе.</b> Для телефона героиню решили сменить.</p>
-<blockquote class="said"><p>персонаж нужен дургой - как в фильме хакеры там классные были луки</p><cite>Серёжа, сообщение агенту</cite></blockquote>
-<p>Агент нарисовал четыре образа в клубной моде середины девяностых: лаковое пальто и карго, платиновый пикси на роликах, каре с синей прядью и косухой, латексный плащ с очками виртуальной реальности на лбу. Серёжа выбрал каре с косухой, пейджером на поясе и клетчатой мини-юбкой, и по нему собрали мастер-лист, поворот и эмоции.</p>
-<div class="look">
-<figure><img src="img/look_A.jpg" alt="Героиня в лаковом пальто и карго" loading="lazy"><figcaption>Лаковое пальто, карго</figcaption></figure>
-<figure><img src="img/look_B.jpg" alt="Героиня с платиновым пикси на роликах" loading="lazy"><figcaption>Платиновый пикси, ролики</figcaption></figure>
-<figure><img src="img/look_C.jpg" alt="Героиня с каре, синей прядью и в косухе" loading="lazy"><figcaption>Каре с синей прядью, косуха</figcaption></figure>
-<figure><img src="img/look_D.jpg" alt="Героиня в латексном плаще с VR-очками на лбу" loading="lazy"><figcaption>Латексный плащ, VR-очки</figcaption></figure>
-</div>
-<p>Пробную сцену с хуком Серёжа забраковал, и не за лицо:</p>
-<blockquote class="said"><p>не нравится что так скучно просто зум ин где можно было бы делать динамичный монтаж например а прядьт должна быть диппинк цвета а визуал референс - фильм хакеры и героиня анжжелина джоли и кукольная типа анимация</p><cite>Серёжа, сообщение агенту</cite></blockquote>
-<p>Лицо реальной актрисы агент повторять отказался: из «Хакеров» он берёт образ героини, клубную моду и визуальный мир фильма, а лицо остаётся своим. Дальше было три захода. Стоп-моушен-куклы из ткани, винила и пластилина оказались мимо: «кукла должна супер фотореализстичная и как настоящая игрушка и с царапинами и тд и на фишай снятая». Фотореалистичная кукла со вспышкой вышла слишком похожей на Bratz: «сильно меньше мейка . и одежда не фул блек (…) и свет директ флеш в лоб». Третий заход дал коллекционную фигурку в масштабе 1:6 с шарнирами, царапинами и прямой вспышкой в лоб, снятую на фишай.</p>
-<div class="look">
-<figure><img src="img/toy2_O1_0.jpg" alt="Фигурка 1:6 в сине-бело-чёрной косухе" loading="lazy"><figcaption>Фигурка 1:6, цветная косуха</figcaption></figure>
-<figure><img src="img/toy2_O2_0.jpg" alt="Фигурка 1:6 в боди с шевронами и белых туфлях" loading="lazy"><figcaption>Фигурка 1:6, шевроны</figcaption></figure>
-<figure><img src="img/toy2_F1_0.jpg" alt="Лицо фигурки крупно, прямая вспышка" loading="lazy"><figcaption>Прямая вспышка, фишай</figcaption></figure>
-<figure><img src="img/toy_T1_0.jpg" alt="Кукла на столе среди проводов у ЭЛТ-монитора" loading="lazy"><figcaption>Второй заход, отклонён</figcaption></figure>
-</div>
-<figure class="doc"><pre>Hyper-photorealistic photograph of a real 1:6 scale collectible figure,
-a realistic doll with natural human proportions and a realistically sculpted
-original face (must not resemble any real person or model): small natural eyes
-with amber irises that have a faint asterisk-shaped pattern, almost no makeup, …
-dark brown hair with one deep-pink streak. The toy is worn: fine scratches and
-scuffs on the face and hands, … visible ball joints at wrists and elbows, …
-Shot on a fisheye lens close to the figure, … harsh direct on-camera flash
-straight at the front …</pre><figcaption>opus-vertical, запрос третьего захода куклы: сокращено</figcaption></figure>
-<p>Какую одежду оставить и возвращать ли звёздочку в глаза, решает Серёжа.</p>
-</div>
-</section>
-
-<section class="sec" id="raskadrovka">
-<div class="sec-h"><span class="num">06</span><h2>У каждого слова своя секунда</h2></div>
-
-<p>Если монтировать на глаз, губы и надписи разъезжаются с песней, а выставлять руками сотни моментов никто не станет. Поэтому после выбора мастера агент делает <a href="https://elevenlabs.io/docs/overview/capabilities/forced-alignment">выравнивание текста по звуку</a>: запись и точный текст уже есть, и сервис расставляет, на какой секунде каждое слово начинается и заканчивается. Это надёжнее распознавания, потому что машина ничего не угадывает, а только сверяет известный текст со звуком.</p>
-
-<p>Вторая разметка называется сеткой долей: темп и место первой сильной доли. В клипе темп 132 удара в минуту, доля длится 0,45 секунды, на песню приходится 344 доли, и склейки с надписями встают на них.</p>
-
-<figure class="doc"><pre>"bpm": 132.0, "beat": 0.4545…, …
-{
-  "words": [{"w": "ты", "t0": 11.16, "t1": 11.26, …},
-            {"w": "кожаный", "t0": 11.4, "t1": 12.04, …}, …,
-            {"w": "бог.", "t0": 14.36, "t1": 15.08, …}],
-  "text": "ты кожаный ассистент, а я твой бог.",
-  "t0": 11.16, "t1": 15.08,
-  …
-}</pre><figcaption>opus-music-video/song/timing.json, четвёртая строка песни: сокращено</figcaption></figure>
-
-<p>Дальше каждая строка получает один тип кадра. Липсинк: героиня поёт строку в кадре, и губы двигаются точно под уже записанный голос. Вставка: сцена без пения, руки, глаза, места, другие персонажи. Графика кодом: надписи во весь кадр, экраны интерфейса, переходы. И у клипа есть одна фраза о том, про что он, которой отвечает каждый кадр: нижний ракурс, крошечный человек у ног героини и слово «БОГ» на весь экран.</p>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Каждая спетая строка получила один тип кадра; в клипе таких строк 46.</li><li>Время каждого кадра взято из разметки слов, на глаз ничего не выставлено.</li><li>Вы называете одной фразой, о чём клип, и ни один кадр ей не противоречит.</li></ul></div>
-
-<div class="vert" id="raskadrovka-vert"><h3>Вертикальная версия</h3>
-<p><b>В работе.</b> Время слов посчитано от нового мастера: 19 строк на 55,6 секунды. После замечания про скучный наезд план стал монтажным: смена кадра каждые одну-две доли, то есть каждые полсекунды-секунду. Сцены с пением режутся между короткими вставками на 3–6 секунд: руки на клавиатуре, ролики, экраны ЭЛТ, глаза, коридор, ноутбук. Поверх код даёт резкие наезды на долю, «хлыст» и глитч на переходах, заикание кадров, тройной сплит-экран и рывковое движение 12 кадров в секунду, как в стоп-моушене. Героиня стоит в средней трети кадра, нижние 15% свободны под кнопки платформы.</p>
-</div>
-</section>
-
-<section class="sec" id="generaciya">
-<div class="sec-h"><span class="num">07</span><h2>Фоновые агенты и три файла на сцену</h2></div>
-
-<p>Если главный агент сам запускает десятки генераций, его окно забивается ожиданием и логами, а одно зависшее задание держит остальные. Поэтому каждое задание Higgsfield и каждое увеличение разрешения в Runway шли отдельным <a href="https://code.claude.com/docs/en/headless">фоновым агентом</a>: агентом без окна чата, который получает одно задание, выполняет его и завершается. Сервисы подключены через MCP, общий стандарт подключения агентов к внешним сервисам, и оба подключения работают на аккаунтах Серёжи.</p>
-
-<p>Сцене с пением Seedance 2.5 нужны три вещи: первый кадр, мастер-образ героини и кусок голоса из мастера. К ним добавляется описание того, что героиня делает на какой фразе.</p>
-
-<figure class="doc"><pre>{
-  "name": "ls_ch1b",
-  "model": "seedance_2_5",
-  "prompt": "1995 theatrical anime film look … The cyborg woman from the start
-    image … sings with confidence, points toward the camera on the first phrase,
-    then taps her temple on 'контекст'. … Precise lip-sync to the Russian vocal
-    in the audio reference on every syllable. …",
-  "params": {"mode": "omni_reference", "duration": 6, "resolution": "480p",
-    "aspect_ratio": "16:9", "generate_audio": true},
-  "medias": [{"file": "K10_1.png", "role": "start_image"},
-             {"file": "HEROINE_MASTER.png", "role": "image_references"},
-             {"file": "ls_ch1b.wav", "role": "audio_references"}],
-  …
-  "slice_t0": 25.2
-}</pre><figcaption>opus-music-video/assets/seedance/specs/ls_ch1b.json: пути сокращены до имён</figcaption></figure>
-
-<p>Черновик в 480p стоит около трёх кредитов за секунду, пробное задание агент один раз просчитал заранее, вышло 33 кредита. Каждую сцену с пением он проверял сам: программа сравнивает звук сцены с голосом мастера, находит смещение и ищет кадры, где губы смыкаются на «п», «б» и «м».</p>
-
-<figure class="doc"><pre>"ls_ch1b": {"offset": -0.005, "corr": 0.63, …, "closures": [["правы", 26.86]]}</pre><figcaption>opus-music-video/assets/seedance/ls/verify.json, одна сцена из 14 проверенных</figcaption></figure>
-
-<p>Здесь губы расходятся с голосом на пять миллисекунд, и на слове «правы» на 26,86 секунды смыкаются на «п». По всем сценам смещение уложилось в 0,3 секунды, и сборка сдвигает каждую на её собственное. Итог генерации: 16 сцен Seedance, из них 15 с пением и одна танцевальная, 10 вставок Grok и 26 роликов в 4K. Одно задание Higgsfield упало и прошло со второго раза, апскейл одной сцены прошёл с третьего.</p>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>До запуска пакета агент назвал цену одного задания по пробному расчёту.</li><li>Роликов в папке столько же, сколько сцен в раскадровке, и у каждого есть версия в 4K.</li><li>На ленте кадров лицо героини одинаковое во всех сценах.</li><li>Смещение каждой сцены с пением записано в файл проверки.</li></ul></div>
-
-<div class="vert" id="generaciya-vert"><h3>Вертикальная версия</h3>
-<p><b>В работе.</b> Пробная сцена с хуком: девять секунд крупного плана с медленным наездом, 27 кредитов по предварительному расчёту. Губы отстают от голоса на 0,045 секунды, звук сцены совпадает с треком на 0,75. По содержанию сцену забраковали, и её переснимут вместе с новым образом. Задания ещё на пять сцен подготовлены и ждут утверждения образа.</p>
-<figure class="doc"><pre>"ls_hook": {"offset": -0.045, "corr": 0.75, "frames": 217, "w": 480, "h": 854,
-            "slice_t0": 0.0, "dur": 9, "closures": [["правы!", 1.42], ["правы", 5.08]]}</pre><figcaption>opus-vertical/assets/seedance/ls/verify.json</figcaption></figure>
-</div>
-</section>
+<p><b>Потом сцены.</b> Для каждой части песни, где героиня поёт в кадре, агент отдавал Seedance три вещи: первый кадр, образ героини и кусок голоса. Нейросеть оживляла картинку так, что губы попадали в слова. Всего вышло 16 сцен, в 15 она поёт и в одной танцует, и ещё 10 вставок без пения: спящий за ноутбуком парень, глаза, дата-центр ночью. Каждую сцену с пением агент проверял сам: сравнивал звук с песней и смотрел, смыкаются ли губы на «п», «б» и «м».</p>
 
 <div class="slider" data-slider>
 <div class="slides">
@@ -397,115 +225,69 @@ straight at the front …</pre><figcaption>opus-vertical, запрос трет�
 <button class="prev" aria-label="Предыдущий кадр"></button><button class="next" aria-label="Следующий кадр"></button><span class="count"></span>
 </div>
 
-<section class="sec" id="sborka">
-<div class="sec-h"><span class="num">08</span><h2>Монтаж пишется кодом</h2></div>
+<p><b>И наконец монтаж.</b> Обычно это дни работы в видеоредакторе. Здесь агент написал программу, которая сама собирает клип кадр за кадром: знает, на какой секунде звучит каждое слово, и ставит туда надпись, эффект или звук. Благодаря этому правки стоят минуты. Когда Серёжа попросил убрать лишнюю строку внизу кадра, «вот это только лишнее везде - добавляет шума», программа просто пересобрала клип, и ничего не пришлось генерировать заново.</p>
 
-<p>Ручной монтаж двух с половиной минут с надписью на каждой строке занимает дни, и каждая правка повторяет работу заново. Здесь монтаж сделала программа, которую написал главный агент: она рисует каждый кадр по времени слов, 3 760 кадров при 24 кадрах в секунду. Одинаковый вход даёт одинаковые кадры, поэтому правка пересобирает только затронутые секунды, а генерация заново не запускается.</p>
-
-<p>Поверх сцен идут надписи на кириллице и эффекты, похожие на взгляд машины: ASCII-графика, дизеринг, рамки распознавания объектов, облако точек, тепловизор, тепловая карта внимания. Звуковые эффекты тоже привязаны к словам: ElevenLabs сгенерировал 14 звуков, и программа поставила их в 42 места песни.</p>
-
-<figure class="doc"><pre>{"t": 11.4,  "sfx": "lock", "db": -17}
-{"t": 14.36, "sfx": "thud", "db": -9}</pre><figcaption>opus-music-video/song/sfx_cues.json, две записи из 42</figcaption></figure>
-
-<p>Щелчок lock срабатывает на 11,4 секунды, в начале слова «кожаный», глухой удар thud приходится на 14,36 секунды, на слово «бог». Оба времени взяты из разметки слов, на слух их потом только сверяют.</p>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Превью открывается в браузере, и по шкале можно перейти к любой строке песни.</li><li>Кириллица в надписях читается как русская, без болгарских форм букв и подмены шрифта.</li><li>Губы не отстают от голоса ни в одной сцене.</li><li>Каждый звуковой эффект на слух попадает в своё слово.</li></ul></div>
-
-<div class="vert" id="sborka-vert"><h3>Вертикальная версия</h3>
-<p><b>Ещё не начато.</b> Кадр вертикали 1080 на 1920 точек, размер задаётся в одном файле шаблона.</p>
-</div>
+<p><b>Последний штрих: Telegram.</b> Тяжёлое видео в Telegram приходит серой плашкой, и его нужно специально загружать. Агент сжал клип до 9 мегабайт, чтобы он запускался сам, как только появляется в ленте.</p>
 </section>
 
-<section class="sec" id="prosmotr">
-<div class="sec-h"><span class="num">09</span><h2>Контактные листы вместо просмотра подряд</h2></div>
+<section class="sec" id="principy">
+<div class="sec-h"><span class="num">04</span><h2>Какие принципы мы использовали</h2></div>
 
-<p>Пересматривать две с половиной минуты после каждой правки долго, а на телефоне видно то, что не видно на мониторе. <a href="https://dictionary.archivists.org/entry/contact-sheet.html">Контактный лист</a> пришёл из фотографии: все кадры плёнки мелкой сеткой на одной странице. Агент собирает такие листы по ключевым моментам и сначала проверяет их сам: текст поверх лица, подписи за краем кадра, бледные эффекты, застывшая концовка, вялый ритм склеек, кадры, которые ушли от главной мысли. Только потом присылает превью на телефон.</p>
+<p>Клип тут скорее повод. Ниже то, что работает для любой задачи, которую вы отдаёте агенту.</p>
 
-<blockquote class="said"><p>вот это только лишнее везде - добавляет шума</p><cite>Серёжа о строке статуса, которая висела внизу кадра</cite></blockquote>
-
-<p>Строку убрали, и надписи с тех пор появляются только по событию песни. Клип пересобран кодом без новой генерации, всего вышло четыре полные версии.</p>
-
-<figure class="fig"><img src="img/droste.jpg" alt="Героиня в рамке внутри рамки, эффект бесконечного зеркала" loading="lazy"><figcaption>Финальный припев: «от Т9 и автокомплита — к самоапгрейду без лимита»</figcaption></figure>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Агент прислал контактный лист раньше полного видео и сам прогнал по нему свой список проверки.</li><li>На листе нет текста поверх лиц, подписей за краем кадра и застывшей концовки.</li><li>Каждая ваша правка видна в следующей версии, и сцены при этом не генерировались заново.</li><li>Перед публикацией вы посмотрели превью на своём телефоне.</li></ul></div>
-
-<div class="vert" id="prosmotr-vert"><h3>Вертикальная версия</h3>
-<p><b>Ещё не начато.</b></p>
-</div>
-</section>
-
-<section class="sec" id="telegram">
-<div class="sec-h"><span class="num">10</span><h2>Десять мегабайт до автозапуска</h2></div>
-
-<blockquote class="said"><p>мне надо сделать так чтобы версия в телеграмме игралась сразу</p><cite>Серёжа, сообщение агенту</cite></blockquote>
-
-<p>Тяжёлое видео приходит в Telegram серой плашкой с кнопкой загрузки, и часть зрителей листает дальше. По умолчанию приложение в мобильной сети само загружает видео до 10 МБ, а порог задаёт сервер, так что по странам он может отличаться. Агент сделал отдельную версию около 9 МБ: 1280 на 720 точек, звук 64 кбит/с, та же длина. Мастер в 1920 на 1080 весит 200 МБ.</p>
-
-<p>Пост агент собрал из фактов в логах: инструменты с тарифом, ценой и долей лимита, время работы. Серёжа сократил текст, написал свой заголовок и спрятал под спойлер слова «самый плохой клип». Черновик пришёл в «Избранное» одним сообщением, видео и подпись вместе.</p>
-
-<figure class="doc"><pre>Opus 5.5 сделал эту слоп-песню с клипом за 3 часа
-
-Скинул Клодику клип, который зашел Маску и попросил сделать также, но на русском,
-язык чата @vibecod3rs и использовать все шо найдет в моих подписках.
-…
-2. ElevenLabs: вокал и музыка
-Creator · $22/мес · ~24% месячного лимита
-…
-Это самый плохой клип, который я сделал с ИИ фоном, пока занимался работой.</pre><figcaption>Пост в Telegram, подпись отредактирована Серёжей</figcaption></figure>
-
-<p>Цифры в посте берутся из логов, а цифру со слов человека агент помечает отдельно: 3% недельного лимита Claude назвал Серёжа. Если человек направлял работу, честно писать «без ручного монтажа». Подпись к видео в Telegram вмещает <a href="https://core.telegram.org/api/config">до 1024 символов</a>, с Premium до 4096.</p>
-
-<div class="done"><h4>Готово, когда</h4><ul><li>Версия для Telegram весит меньше 10 МБ и на вашем телефоне в мобильной сети запускается сама.</li><li>Каждая цифра в посте найдена в логах или помечена как ваша.</li><li>Черновик лежит в «Избранном» одним сообщением: видео и подпись вместе.</li></ul></div>
-
-<div class="vert" id="telegram-vert"><h3>Вертикальная версия</h3>
-<p><b>Ещё не начато.</b> Версия для Telegram по скиллу 720 на 1280 точек.</p>
-</div>
-</section>
-
-<section class="sec shop-sec" id="instrumenty">
-<div class="sec-h"><h2>Что использовать</h2></div>
-<div class="shop">
-<figure><div class="ph"><img src="img/tool_claude.jpg" alt="Кадр клипа с окнами терминала" loading="lazy"></div><figcaption>Режиссура, текст, монтаж и эффекты: Claude Code с Opus 5.5, Claude Max 20x, $200 в месяц, <a href="https://claude.ai">claude.ai</a><span>3% недельного лимита, со слов Серёжи</span></figcaption></figure>
-<figure><div class="ph"><img src="img/tool_elevenlabs.jpg" alt="Звуковая волна мастера песни" loading="lazy"></div><figcaption>Вокал, музыка и звуки: ElevenLabs Creator, $22 в месяц, <a href="https://elevenlabs.io">elevenlabs.io</a><span>около 24% месячного лимита с остатком прошлых месяцев</span></figcaption></figure>
-<figure><div class="ph"><img src="img/tool_grok.jpg" alt="Мастер-образ героини на белом фоне" loading="lazy"></div><figcaption>Героиня, первые кадры и вставки: Grok Imagine, SuperGrok Heavy, $300 в месяц, <a href="https://docs.x.ai/developers/model-capabilities/imagine">x.ai</a><span>генерации примерно на $13 по ценам API</span></figcaption></figure>
-<figure><div class="ph"><img src="img/tool_higgsfield.jpg" alt="Кадр сцены, где героиня поёт" loading="lazy"></div><figcaption>Сцены с пением: Seedance 2.5 в Higgsfield Pro, $29 в месяц, <a href="https://higgsfield.ai">higgsfield.ai</a><span>около 50% месячного лимита</span></figcaption></figure>
-<figure><div class="ph"><img src="img/tool_runway.jpg" alt="Крупный фрагмент кадра в 4K" loading="lazy"></div><figcaption>Увеличение до 4K: Runway Pro, $35 в месяц, <a href="https://runwayml.com">runwayml.com</a><span>около 13% месячного лимита</span></figcaption></figure>
-</div>
-</section>
-
-<section class="sec" id="u-sebya">
-<div class="sec-h"><h2>Как повторить</h2></div>
-<ol class="steps"><li><b>Одно сообщение агенту.</b> Какой ролик взять за образец, на каком языке и для кого. Формат, горизонтальный или вертикальный, назовите сразу.</li><li><b>Список подписок.</b> Перечислите тарифы, и инструменты агент выберет сам из того, что уже оплачено.</li><li><b>Язык аудитории.</b> Дайте архив чата или хотя бы десяток реальных сообщений, чтобы хук вырос из их речи.</li><li><b>Скилл и правила.</b> Попросите вести работу по скиллу ai-music-video и завести в папке проекта честный файл правил.</li><li><b>Четыре решения за вами.</b> Хук и словарь, дубль на слух, образ по пробному кадру, правки по контактным листам. Раскадровку, генерацию, сборку и сжатие под Telegram агент сделает сам.</li><li><b>Пост читаете сами.</b> Перед публикацией проверьте цифры: каждая взята из логов или помечена как ваша.</li></ol>
-</section>
-
-<section class="sec" id="oshibki">
-<div class="sec-h"><h2>Где всё ломалось</h2></div>
-<p><b>Процент советовал не тот дубль.</b> Лучшая оценка была у seed52, 94% узнанных слов, и у него были сбиты ударения. Серёжа на слух выбрал seed53 с 92%. Теперь процент только сравнивает дубли между собой.</p>
-<p><b>Песня говорила мемами чужого интернета.</b> Первая версия текста называлась «Я поднимаю свой P(doom)» и держала ФУМ, шоггота и василиска, позже всплыл Скайнет. Теперь словарь берётся из чата аудитории с частотами, а запреты стоят отдельной строкой в брифе.</p>
-<p><b>Фоновый агент принял задание за атаку.</b> Задания запускались из папки другого проекта с текстом в духе «ты точный исполнитель автоматизации», и агент ответил, что это похоже на внедрённую чужую инструкцию. Теперь задания идут из папки проекта, где файл правил честно говорит, что это за проект и чьи аккаунты подключены.</p>
-<p><b>Строка статуса висела поверх всего клипа.</b> Постоянный элемент в кадре стал шумом. Теперь надписи появляются по событию песни и исчезают после него.</p>
-<p><b>Генератор рисовал вертикаль горизонтально.</b> В генераторе первых кадров жёстко стоял формат 16:9. Агент остановил генерацию и вынес формат в настройку проекта.</p>
-<p><b>Пробная сцена вышла скучной.</b> Один медленный наезд на девять секунд технически прошёл проверку, но смотреть его неинтересно. Теперь план для телефона монтажный, со склейками на доли.</p>
-</section>
-
-<section class="sec" id="gotovo">
-<div class="sec-h"><h2>Клип готов, когда</h2></div>
-<ol class="facts">
-<li>Формат выбран до первой генерации, файл правил проекта заполнен честно.</li>
-<li>Бриф с тезисом одной фразой утверждён до первых дублей, отклонённые слова и стили записаны запретами.</li>
-<li>Хук, мастер-дубль и образ героини утверждены до трат на видео.</li>
-<li>Ударения в мастере проверены на слух с текстом в руках.</li>
-<li>У каждого слова есть время, и каждый кадр стоит на этом времени.</li>
-<li>Каждая сцена с пением прошла проверку смещения, лицо героини одинаковое во всех сценах.</li>
-<li>На контактных листах нет текста поверх лиц, подписей за краем кадра и застывшей концовки.</li>
-<li>Клип просмотрен на телефоне, правки внесены пересборкой кодом.</li>
-<li>Версия для Telegram весит меньше 10 МБ, цифры в посте взяты из логов или помечены как ваши.</li>
+<ol class="principles">
+<li><h3>Человек решает там, где дальше дорого</h3><p>Агент может сделать почти всё, но решения, от которых зависят большие траты, стоит оставить себе. Как с подрядчиком: смету на съёмку не подписывают, пока не утверждён сценарий. Здесь таких решений было четыре, и на каждое уходили минуты.</p></li>
+<li><h3>Сначала одна мысль</h3><p>Нейросети любят собирать красивые куски без общей идеи. Лекарство старое, как реклама: бриф. Одна страница до начала работы, где написано, о чём песня, кто поёт и кому, какой хук. Каждую строку потом сверяют с этой мыслью.</p></li>
+<li><h3>Говорить языком тех, для кого делаешь</h3><p>Агент по умолчанию тянется к англоязычным мемам. Дайте ему реальную речь вашей аудитории: чат, отзывы, комментарии. Лучший хук это фраза, которую люди уже говорят сами.</p></li>
+<li><h3>Цифры отбирают, выбирает человек</h3><p>Автоматическая проверка помогает отсеять слабые варианты, но финальный выбор за человеком. Здесь метрика предлагала дубль с неправильными ударениями, а ухо поймало ошибку за секунду.</p></li>
+<li><h3>Сначала дёшево, потом дорого</h3><p>Картинку перерисовать дешевле, чем видео. Поэтому героиню утвердили на картинках, и только потом за неё заплатили генерацией сцен. Один пробный кадр до больших трат экономит больше всего денег.</p></li>
+<li><h3>Всё, что может код, делает код</h3><p>Надписи, эффекты, монтаж и звуки собирала программа, а не нейросеть. Поэтому любую правку можно внести быстро и без новых трат, а результат каждый раз одинаковый.</p></li>
+<li><h3>Честные цифры</h3><p>В пост о клипе попадали только факты из журналов работы: сколько сервисов, сколько лимита ушло, сколько времени. Если что-то сказал человек, агент так и помечал. «Без ручного монтажа» честнее, чем «ноль правок»: Серёжа много раз направлял работу.</p></li>
 </ol>
 </section>
 
+<section class="sec" id="oshibki">
+<div class="sec-h"><span class="num">05</span><h2>На чём мы споткнулись</h2></div>
+<p><b>Метрика выбрала не тот дубль.</b> Лучший процент распознанных слов был у варианта с неправильными ударениями. Теперь проценты только помогают сравнить дубли, а выбирает ухо.</p>
+<p><b>Песня говорила чужими мемами.</b> Первый текст был про P(doom) и других героев англоязычного интернета. Теперь словарь собирается из чата аудитории.</p>
+<p><b>Фоновый агент принял задание за атаку.</b> Помощник, который запускал генерацию, не видел разговора с Серёжей и заподозрил подвох. Помогла простая вещь: файл в папке проекта, где честно написано, что это за проект и чьи аккаунты подключены.</p>
+<p><b>Лишнее на экране.</b> Строка статуса всё время висела внизу кадра и мешала. Теперь надписи появляются только по событию песни и сразу исчезают.</p>
+</section>
+
+<section class="sec" id="vertikal">
+<div class="sec-h"><span class="num">06</span><h2>Что дальше: версия для телефона</h2></div>
+
+<p>Сейчас по тем же правилам агент собирает вертикальную версию на минуту: хук с первой секунды, быстрый монтаж, новая героиня. Этот раздел обновляется по ходу работы.</p>
+
+<div class="vert" id="vertikal-status"><h3>Статус на 27 сентября</h3>
+<p><b>Песня готова.</b> Первые дубли в прежнем звуке Серёже не понравились, «ближе к звуку и стилю били айлиш». Новый вариант получился тёмным и шёпотным, и вокал вступает сразу.</p>
+<p><b>Героиня в работе.</b> Серёжа попросил образ в духе фильма «Хакеры», потом куклу, «супер фотореализстичная и как настоящая игрушка», снятую на широкоугольный объектив со вспышкой. Лицо реальной актрисы агент повторять не стал, из фильма взяты только мода и атмосфера.</p>
+<div class="look">
+<figure><img src="img/look_C.jpg" alt="Героиня с каре, синей прядью и в косухе" loading="lazy"><figcaption>Образ в духе «Хакеров»</figcaption></figure>
+<figure><img src="img/toy2_O1_0.jpg" alt="Фигурка 1:6 в сине-бело-чёрной косухе" loading="lazy"><figcaption>Фигурка 1:6</figcaption></figure>
+<figure><img src="img/toy2_O2_0.jpg" alt="Фигурка 1:6 в боди с шевронами" loading="lazy"><figcaption>Фигурка 1:6, шевроны</figcaption></figure>
+<figure><img src="img/toy2_F1_0.jpg" alt="Лицо фигурки крупно при прямой вспышке" loading="lazy"><figcaption>Прямая вспышка</figcaption></figure>
+</div>
+<p><b>Следующий шаг.</b> Выбрать образ и снять пробную сцену в быстром монтаже. Первая пробная сцена была одним медленным наездом камеры, и Серёжа справедливо назвал её скучной.</p>
+</div>
+</section>
+
+<section class="sec" id="povtorit">
+<div class="sec-h"><span class="num">07</span><h2>Как повторить</h2></div>
+<ol class="steps">
+<li><b>Покажите образец.</b> Ссылка на ролик, который нравится, и одна фраза о том, что хотите получить и для кого.</li>
+<li><b>Перечислите подписки.</b> Агент сам выберет инструменты из того, что уже оплачено.</li>
+<li><b>Дайте голос аудитории.</b> Архив чата или хотя бы десяток реальных сообщений.</li>
+<li><b>Попросите бриф.</b> Одна страница с главной мыслью, до первой генерации.</li>
+<li><b>Оставьте себе четыре решения.</b> Слова и хук, дубль на слух, образ по пробной картинке, правки по готовому монтажу.</li>
+<li><b>Прочитайте пост сами.</b> Каждая цифра должна быть из журналов работы или помечена как ваша.</li>
+</ol>
+<p>Весь этот процесс агент потом упаковал в скилл ai-music-video: инструкцию, по которой следующий клип можно собрать с нуля.</p>
+</section>
+
 <section class="sec sources" id="istochniki">
-<div class="tags">Теги: <a href="#zadacha">агенты</a>, <a href="#pesnya">ElevenLabs</a>, <a href="#generaciya">Seedance</a>, <a href="#obraz">Grok Imagine</a>, <a href="#telegram">Telegram</a></div>
-<p>Скилл ai-music-video: метод, шаблон брифа и полный пример клипа, репозиторий закрытый. Оригинальный ролик «Claude Pop: I'm Upping My P(doom)» и <a href="https://github.com/JohnHeibel/PDoomVideo">его исходники</a>. ElevenLabs: <a href="https://elevenlabs.io/docs/api-reference/music/compose-detailed">план композиции</a>, <a href="https://elevenlabs.io/docs/eleven-api/guides/how-to/music/inpainting">опора на дубль</a>, <a href="https://elevenlabs.io/docs/overview/capabilities/forced-alignment">выравнивание текста</a>. <a href="https://docs.x.ai/developers/model-capabilities/imagine">Grok Imagine</a>. Claude Code: <a href="https://code.claude.com/docs/en/sub-agents">субагенты</a> и <a href="https://code.claude.com/docs/en/headless">фоновый режим</a>. Telegram: <a href="https://core.telegram.org/api/config">лимиты подписи</a>. Распознавание пения: <a href="https://aclanthology.org/2024.nlp4musa-1.3/">Berendes, Schwär, Müller, 2024</a>. Все цитаты файлов сверены с папками opus-music-video и opus-vertical, реплики Серёжи приведены дословно.</p>
+<div class="tags">Теги: <a href="#kak">агенты</a>, <a href="#instrumenty">нейросети</a>, <a href="#principy">принципы</a>, <a href="#video">клип</a></div>
+<p>Клип и рассказ о нём: <a href="https://t.me/ris_ai/674">пост в канале «рис. AI»</a>. Оригинальный ролик «Claude Pop: I'm Upping My P(doom)» и <a href="https://github.com/JohnHeibel/PDoomVideo">его исходники</a>. Инструменты: <a href="https://elevenlabs.io/docs/api-reference/music/compose-detailed">ElevenLabs Music</a>, <a href="https://docs.x.ai/developers/model-capabilities/imagine">Grok Imagine</a>, <a href="https://code.claude.com/docs/en/sub-agents">субагенты Claude Code</a>. О том, почему распознавание речи ошибается на пении: <a href="https://aclanthology.org/2024.nlp4musa-1.3/">исследование 2024 года</a>. Реплики Серёжи приведены дословно.</p>
 </section>
 
 </article>
