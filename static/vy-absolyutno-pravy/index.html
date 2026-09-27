@@ -15,13 +15,23 @@ a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-und
 a:hover{color:var(--blue)}
 img,video{display:block;max-width:100%}
 .mast{text-align:center;padding:54px 16px 0}
-.logo{font:400 64px/1 var(--logo);letter-spacing:.06em;color:var(--blue);text-decoration:none;display:inline-block}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--blue);text-decoration:none;display:inline-block}
 .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
 .nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
 .nav a:hover,.bar a:hover{text-decoration:underline}
 .bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
   transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
 .bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{border-bottom-color:var(--blue)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--blue)}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
 .bar .mark{font:400 26px/1 var(--logo);color:var(--blue);text-decoration:none;margin-right:10px}
 .bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
 .bar nav::-webkit-scrollbar{display:none}
@@ -135,7 +145,7 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
 });
 </script>
 </head>
-<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="#top">В</a><nav class=""><a href="#video">Клип</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav></div><header class="mast"><a class="logo" href="#top">ВАЙБКОДИНГ</a><nav class="nav"><a href="#video">Клип</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Клипы</span></div><div class="kicker">Как это сделано:</div><h1>«Вы абсолютно правы»</h1><p class="lead">Клип, который агенты собрали за три часа, пока автор занимался своими делами. Гайд о том, как это устроено и что решал человек.</p></div>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#video">Клип</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#video">Клип</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Клипы</span></div><div class="kicker">Как это сделано:</div><h1>«Вы абсолютно правы»</h1><p class="lead">Клип, который агенты собрали за три часа, пока я занимался своими делами. Гайд о том, как это устроено и что решал человек.</p></div>
 <div class="meta">27 сентября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
 <article class="body">
 <figure class="film" id="video"><video src="img/klip.mp4" poster="img/klip.jpg" controls playsinline preload="metadata"></video><figcaption>«Вы абсолютно правы», 2 минуты 36 секунд. Включите звук</figcaption></figure>
@@ -178,7 +188,7 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
 <ul class="need">
 <li><b>Образец.</b> Готовый клип, на который можно показать пальцем: «сделай так же». Образец экономит часы объяснений.</li>
 <li><b>Язык аудитории.</b> Архив чата вайбкодеров, 40 тысяч сообщений. Из него агент взял слова и шутки, которые люди действительно говорят.</li>
-<li><b>Подписки.</b> Я дал агенту задачу использовать мои подписки. Список всех сервисов с тарифами и ценами у меня лежит в штабе: это папка с файлами, где агенты хранят всё про мою работу, так устроена моя <a href="https://pc.vibecoding.phd/">личная корпорация агентов Personal Corp</a>. Агент прочитал этот список и сам решил, какой сервис под какую задачу взять.</li>
+<li><b>Подписки.</b> Я дал агенту задачу использовать мои подписки. Список всех сервисов с тарифами и ценами у меня лежит <a href="https://pc.vibecoding.phd/">в штабе</a>: это папка с файлами, где агенты хранят всё про мою работу. Так устроена моя личная корпорация агентов <a href="https://pc.vibecoding.phd/">Personal Corp</a>. Агент прочитал этот список и сам решил, какой сервис под какую задачу взять.</li>
 <li><b>Около трёх часов.</b> Работа шла фоном, человек в это время занимался своими делами.</li>
 <li><b>Человек на четыре решения.</b> Утвердить слова и хук, выбрать дубль песни, одобрить героиню, принять монтаж. Всё остальное агент сделал сам.</li>
 </ul>
@@ -279,7 +289,7 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
 </section>
 
 </article>
-<footer><a class="logo" href="#top">ВАЙБКОДИНГ</a></footer>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
 <script>
 (function(){
   function playAll(){if(document.hidden)return;document.querySelectorAll('video[autoplay]').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
