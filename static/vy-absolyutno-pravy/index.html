@@ -77,14 +77,12 @@ h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-widt
 .look figure{margin:0}
 .look img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--ph)}
 .look figcaption{font:300 12px/15px var(--serif);text-transform:uppercase;letter-spacing:.02em;margin-top:9px}
-.slider{position:relative;left:50%;transform:translateX(-50%);width:min(1000px,100vw - 32px);margin:80px 0;aspect-ratio:16/9;background:#000;overflow:hidden}
-.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
-.slides img.on{opacity:1}
-.slider button{position:absolute;top:0;bottom:0;width:18%;border:0;background:transparent;cursor:pointer}
-.slider button::after{content:"";position:absolute;top:50%;width:18px;height:18px;border:solid #fff;border-width:0 0 1px 1px;margin-top:-9px}
-.slider .prev{left:0}.slider .prev::after{left:28px;transform:rotate(45deg)}
-.slider .next{right:0}.slider .next::after{right:28px;transform:rotate(-135deg)}
-.slider .count{position:absolute;right:18px;bottom:14px;font:400 12px/1 var(--sans);letter-spacing:.1em;color:#fff}
+/* 2x2 grid whose cells cross-fade through frames on their own, like The Blueprint's animated-jpg grid */
+.flip{position:relative;left:50%;transform:translateX(-50%);width:min(1000px,100vw - 32px);margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.flip .cell{position:relative;aspect-ratio:16/9;background:var(--ph);overflow:hidden}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.flip img.on{opacity:1}
+@media (max-width:640px){.flip{grid-template-columns:1fr;gap:12px}}
 .shop-sec .sec-h{margin-top:110px}
 .shop-sec .sec-h h2{font:200 16px/39px var(--serif)}
 .shop{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
@@ -240,11 +238,11 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
 
 <p><b>Потом сцены.</b> Для каждой части песни, где героиня поёт в кадре, агент отдавал Seedance три вещи: первый кадр, образ героини и кусок голоса. Нейросеть оживляла картинку так, что губы попадали в слова. Всего вышло 16 сцен, в 15 она поёт и в одной танцует, и ещё 10 вставок без пения: спящий за ноутбуком парень, глаза, дата-центр ночью. Каждую сцену с пением агент проверял сам: сравнивал звук с песней и смотрел, смыкаются ли губы на «п», «б» и «м».</p>
 
-<div class="slider" data-slider>
-<div class="slides">
-<img src="img/sl_6.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_18.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_33.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_45.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_57.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_66.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_87.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_105.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_111.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_132.jpg" alt="Кадр клипа" loading="lazy">
-</div>
-<button class="prev" aria-label="Предыдущий кадр"></button><button class="next" aria-label="Следующий кадр"></button><span class="count"></span>
+<div class="flip" aria-label="Кадры клипа">
+<div class="cell"><img src="img/sl_6.jpg" alt="Кадр клипа" loading="lazy" class="on"><img src="img/sl_57.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_111.jpg" alt="Кадр клипа" loading="lazy"></div>
+<div class="cell"><img src="img/sl_18.jpg" alt="Кадр клипа" loading="lazy" class="on"><img src="img/sl_66.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_132.jpg" alt="Кадр клипа" loading="lazy"></div>
+<div class="cell"><img src="img/sl_33.jpg" alt="Кадр клипа" loading="lazy" class="on"><img src="img/sl_78.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_148.jpg" alt="Кадр клипа" loading="lazy"></div>
+<div class="cell"><img src="img/sl_45.jpg" alt="Кадр клипа" loading="lazy" class="on"><img src="img/sl_87.jpg" alt="Кадр клипа" loading="lazy"><img src="img/sl_105.jpg" alt="Кадр клипа" loading="lazy"></div>
 </div>
 
 <p><b>И наконец монтаж.</b> Обычно это дни работы в видеоредакторе: таймлайн, дорожки, ключевые кадры. Сейчас это всё чаще делают кодом. Видео описывается как веб-страница, которая умеет нарисовать любой кадр по его времени, браузер снимает кадры по одному, и из них склеивается ролик. Писать такой код агентам помогают скиллы, то есть готовые инструкции по конкретному инструменту. В январе 2026 года <a href="https://www.remotion.dev/docs/ai/skills">Remotion выпустил скиллы</a> для Claude Code и других агентов, а HeyGen открыл <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a>, где видео пишется на HTML и в комплекте больше двадцати скиллов. Подключаете скилл, описываете ролик словами, агент пишет код и рендерит.</p>
@@ -307,19 +305,14 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
   var bar=document.getElementById('bar'),mark=document.querySelector('.mast')||document.querySelector('.hero');
   function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
   addEventListener('scroll',onScroll,{passive:true});onScroll();
-  document.querySelectorAll('[data-slider]').forEach(function(s){
-    var imgs=s.querySelectorAll('.slides img'),i=0,c=s.querySelector('.count');
-    function go(n){imgs[i].classList.remove('on');i=(n+imgs.length)%imgs.length;imgs[i].classList.add('on');c.textContent=(i+1)+' / '+imgs.length;
-      var nx=imgs[(i+1)%imgs.length];if(nx.loading==='lazy')nx.loading='eager';}
-    s.querySelector('.prev').onclick=function(){go(i-1)};s.querySelector('.next').onclick=function(){go(i+1)};
-    s.tabIndex=0;s.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')go(i-1);if(e.key==='ArrowRight')go(i+1)});
-    var x0=null;s.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
-    s.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(dx<0?i+1:i-1);x0=null});
-    imgs[0].loading='eager';go(0);
+  document.querySelectorAll('.flip .cell').forEach(function(c,k){
+    var imgs=c.querySelectorAll('img'),i=0;
+    setTimeout(function(){setInterval(function(){if(document.hidden)return;imgs[i].classList.remove('on');i=(i+1)%imgs.length;imgs[i].classList.add('on');
+      var nx=imgs[(i+1)%imgs.length];if(nx.loading==='lazy')nx.loading='eager';},2400);},k*600);
   });
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .look,.body .slider,.body .ph,.body .shop>*,.body .gloss,.body .need,.body .principles>li,.body .steps>li')
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .look,.body .flip,.body .ph,.body .shop>*,.body .gloss,.body .need,.body .principles>li,.body .steps>li')
       .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
   }
 })();
