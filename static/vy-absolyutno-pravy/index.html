@@ -159,9 +159,13 @@ posthog.init('phc_cnUad9BXndQu5MKPPsBpkVPuNb82WniZMeTZl7xKacN', {
 <section class="sec" id="chto-eto">
 <div class="sec-h"><span class="num">01</span><h2>Что вообще произошло</h2></div>
 
-<p>В интернете разошёлся англоязычный клип <a href="https://www.youtube.com/watch?v=8j-hR4fJywU">«Claude Pop: I'm Upping My P(Doom)»</a> от автора <a href="https://x.com/other__reality/status/2102514581684052169">OtherReality</a>, поп-песня про то, как быстро развивается ИИ, целиком сделанная нейросетью. Вот он:</p>
+<p>В интернете разошёлся англоязычный клип <a href="https://www.youtube.com/watch?v=8j-hR4fJywU">«Claude Pop: I'm Upping My P(Doom)»</a> от автора <a href="https://x.com/other__reality/status/2102514581684052169">OtherReality</a>, поп-песня про то, как быстро развивается ИИ. Его сделал тот же Claude Opus 5.5 в Claude Code, и автор <a href="https://github.com/JohnHeibel/PDoomVideo">выложил все исходники</a>. Вот он:</p>
 
 <figure class="film orig"><div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/8j-hR4fJywU" title="Claude Pop: I'm Upping My P(Doom)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><figcaption>Оригинал: OtherReality, «Claude Pop: I'm Upping My P(Doom)»</figcaption></figure>
+
+<p>Интересно, как он устроен. Этот клип целиком нарисован кодом: модель написала программу, которая рисует каждый кадр мазками кисти, а персонажа Клода, анимацию и переходы задаёт сама. Песня при этом взята готовая, её когда-то спела другая нейросеть. Так делали большинство ИИ-клипов до сих пор: либо код рисует графику, либо видеомодель генерирует ролик целиком.</p>
+
+<p>Наш клип собран иначе, из обоих подходов сразу. Песню, текст и голос мы сгенерировали сами. Героиню нарисовала нейросеть для картинок, а сцены, где она поёт и шевелит губами точно в слова, сняла нейросеть для видео. Код остался режиссёром монтажа: он расставляет эти сцены по времени песни и рисует поверх надписи, рамки и эффекты. Поэтому здесь есть живой персонаж, который поёт, и при этом любую правку можно внести за минуты.</p>
 
 <p>Я отдал этот клип агенту и попросил русскую версию: на языке чата вайбкодеров, с инструментами из моих подписок. Больше указаний не было.</p>
 
