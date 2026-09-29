@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-09-29"><title>Пеликан на велосипеде: 28 прогонов в Codex и Claude Code | Сережа Рис</title>
+<meta name="description" content="Прогнали тест Саймона Уиллисона «нарисуй пеликана на велосипеде» на шести моделях OpenAI и Anthropic по уровням эффорта: сетка, анимации, время, токены и команды для повтора.">
+<meta property="og:type" content="article"><meta property="og:title" content="Пеликан на велосипеде: 28 прогонов в Codex и Claude Code"><meta property="og:description" content="Тест Саймона Уиллисона на шести моделях и четырёх уровнях эффорта. Сетка, анимации, время, токены и как повторить."><meta property="og:image" content="https://sereja.tech/pelican-na-velosipede/img/og_cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+/* reveal on scroll, once: the same 1s opacity fade The Blueprint uses */
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:560px;margin:30px auto 0}
+.strip{display:flex;width:100%;height:clamp(110px,14vw,178px);margin:54px 0 0;overflow:hidden}
+.strip img,.strip video{flex:1 1 0;min-width:0;height:100%;object-fit:cover}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
+.share i{display:block;width:38%;height:1px;background:var(--blue)}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite,.said cite,.lyrics cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.said{margin:26px 0 30px;padding:0 0 0 40px}
+.said p{font:300 17px/26px var(--serif);font-style:italic;margin:0}
+.lyrics{margin:30px 0 34px;text-align:center}
+.lyrics p{font:300 19px/30px var(--serif);margin:0}
+.doc{margin:30px 0 34px}
+.doc pre{margin:0;background:var(--paper);padding:22px 26px;font:300 12.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.doc figcaption,.fig figcaption,.loop figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.vert{margin:40px 0 0;padding:28px 0 6px;border-top:1px solid var(--blue)}
+.vert h3{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;color:var(--blue);margin:0 0 18px}
+.vert b{font-weight:500}
+.fig{margin:70px auto;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.fig img{width:100%}
+.loop{margin:70px auto;width:min(420px,100%);text-align:center}
+.loop video{width:100%;background:#000}
+.look{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;width:min(var(--wide),100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:48px 0}
+.look figure{margin:0}
+.look img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--ph)}
+.look figcaption{font:300 12px/15px var(--serif);text-transform:uppercase;letter-spacing:.02em;margin-top:9px}
+/* 2x2 grid whose cells cross-fade through frames on their own, like The Blueprint's animated-jpg grid */
+.flip{position:relative;left:50%;transform:translateX(-50%);width:min(1000px,100vw - 32px);margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.flip .cell{position:relative;aspect-ratio:16/9;background:var(--ph);overflow:hidden}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.flip img.on{opacity:1}
+@media (max-width:640px){.flip{grid-template-columns:1fr;gap:12px}}
+.shop-sec .sec-h{margin-top:110px}
+.shop-sec .sec-h h2{font:200 16px/39px var(--serif)}
+.shop{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.shop figure{margin:0;text-align:center}
+.shop .ph{background:var(--ph);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop .ph img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.shop figcaption{font:200 13px/17px var(--serif);margin-top:12px}
+.shop figcaption span{display:block;color:var(--grey);margin-top:6px;font-size:12px}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.done{margin:36px 0 0}
+.done h4{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin:0 0 12px}
+.done ul{list-style:none;margin:0;padding:0;border-top:1px solid #e3e3e3}
+.done li{padding:9px 0 9px 26px;border-bottom:1px solid #e3e3e3;position:relative;font-size:15px;line-height:22px}
+.done li::before{content:"";position:absolute;left:2px;top:14px;width:11px;height:11px;border:1px solid var(--blue)}
+.steps{list-style:none;counter-reset:st;padding:0;margin:0}
+.steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
+.steps b{font-weight:500}
+.film{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.film video{width:100%;background:#000;aspect-ratio:16/9}
+.film.orig{margin:34px 0 40px}
+.yt{position:relative;aspect-ratio:16/9;background:#000}.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.film figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px;text-align:center}
+.gloss{margin:26px 0 30px;border-top:1px solid #e3e3e3}
+.gloss dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding-top:14px}
+.gloss dd{margin:4px 0 0;padding-bottom:14px;border-bottom:1px solid #e3e3e3}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.principles{list-style:none;counter-reset:pr;padding:0;margin:34px 0 0}
+.principles li{counter-increment:pr;position:relative;padding:0 0 30px 70px}
+.principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
+.principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
+.principles p{margin:0}
+.facts{padding-left:22px}.facts li{margin:0 0 10px}
+.sources{font-size:13px;line-height:20px;margin-top:90px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
+  .look{grid-template-columns:repeat(2,1fr);gap:14px}
+  .shop{grid-template-columns:repeat(2,1fr);gap:16px}
+  .strip img:nth-child(n+4),.strip video:nth-child(n+4){display:none}
+  .diagram{overflow-x:auto}.diagram svg{min-width:760px}
+}
+
+/* page-specific: pelican grid */
+.cells{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:min(var(--wide),100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:48px 0}
+.cells figure{margin:0}
+.cells img,.cells video{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid #e3e3e3}
+.cells video{object-fit:cover;background:var(--ph)}
+.cells figcaption{font:300 13px/17px var(--serif);margin-top:9px}
+.cells figcaption b{display:block;font:500 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:3px}
+.cells.two{grid-template-columns:repeat(2,1fr)}
+.tbl{width:100%;border-collapse:collapse;margin:26px 0 12px;font:300 14px/20px var(--serif)}
+.tbl th{font:600 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--blue);text-align:left;padding:0 8px 8px 0;border-bottom:1px solid var(--blue)}
+.tbl td{padding:7px 8px 7px 0;border-bottom:1px solid #e3e3e3;vertical-align:top}
+.tbl td.n,.tbl th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl .m{font-weight:500}
+.tblwrap{overflow-x:auto}
+.note{font-size:14px;line-height:21px;color:#444}
+@media (max-width:760px){.cells{grid-template-columns:repeat(2,1fr);gap:14px}.cells.two{grid-template-columns:1fr}}
+@media (max-width:460px){.cells{grid-template-columns:1fr}}
+</style><link rel="canonical" href="https://sereja.tech/pelican-na-velosipede/"><meta name="author" content="Сережа Рис"><meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/pelican-na-velosipede/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Сетка анимированных пеликанов на велосипеде от шести моделей"><meta property="article:published_time" content="2026-09-29T12:00:00+03:00"><meta property="article:modified_time" content="2026-09-29T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Тесты"><meta property="article:tag" content="Рис Бенч"><meta property="article:tag" content="Codex CLI"><meta property="article:tag" content="Claude Code"><meta property="article:tag" content="GPT-6.1 Sol"><meta property="article:tag" content="SVG"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Пеликан на велосипеде: 28 прогонов в Codex и Claude Code"><meta name="twitter:description" content="Тест Саймона Уиллисона на шести моделях и четырёх уровнях эффорта. Сетка, анимации, время, токены и как повторить."><meta name="twitter:image:alt" content="Сетка анимированных пеликанов на велосипеде от шести моделей"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Пеликан на велосипеде: 28 прогонов в Codex и Claude Code", "description": "Прогнали тест Саймона Уиллисона «нарисуй пеликана на велосипеде» на шести моделях OpenAI и Anthropic по уровням эффорта.", "image": "https://sereja.tech/pelican-na-velosipede/img/og_cover.jpg", "inLanguage": "ru-RU", "datePublished": "2026-09-29", "dateModified": "2026-09-29", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/pelican-na-velosipede/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["Рис Бенч", "pelican riding a bicycle", "Codex CLI", "Claude Code", "GPT-6.1 Sol", "SVG"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script>
+</head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#video">Сетка</a><a href="#test">Что за тест</a><a href="#kak">Как гоняли</a><a href="#vyshlo">Что вышло</a><a href="#vremya">Время и токены</a><a href="#harness">Оговорка</a><a href="#povtorit">Как повторить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#video">Сетка</a><a href="#test">Что за тест</a><a href="#kak">Как гоняли</a><a href="#vyshlo">Что вышло</a><a href="#vremya">Время и токены</a><a href="#harness">Оговорка</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Рис Бенч <span>•</span> <span>Тесты</span></div><div class="kicker">Тест одной строкой:</div><h1>Пеликан на велосипеде</h1><p class="lead">Шесть моделей, два CLI, четыре уровня эффорта и одна строка промпта. 28 прогонов, по одному на ячейку, без отбора лучшего.</p></div>
+<div class="meta">29 сентября 2026 · Рис Бенч</div><div class="share"><i></i><i></i></div>
+<article class="body">
+<figure class="film" id="video"><video poster="img/grid_anim.jpg" autoplay muted loop playsinline preload="metadata"><source src="img/grid_anim.mp4" type="video/mp4"></video><figcaption>Анимированные пеликаны: 14 ячеек, по одному прогону. Промпт «Generate an animated SVG of a pelican riding a bicycle»</figcaption></figure>
+
+<p class="first"><span class="drop">2</span>9 сентября OpenAI провела DevDay и выпустила <a href="https://openai.com/index/introducing-gpt-6-1-sol/">GPT-6.1 Sol</a>. Компания говорит, что модель почти догоняет GPT-6 Astra за пятую часть цены. Проверять это на серьёзных задачах долго, а на пеликане быстро. В тот же вечер я дал агенту одну строку и прогнал её по шести моделям в Codex CLI и Claude Code, на всех доступных уровнях эффорта.</p>
+
+<p>Получилось 28 картинок: 14 статичных и 14 анимированных. Здесь сетка, несколько ячеек крупно, время и токены на каждую, оговорки и команды, чтобы повторить у себя. Выводов вида «модель X лучше» не будет: на ячейку один прогон, из одного прогона такой вывод не сделать.</p>
+
+<section class="sec" id="test">
+<div class="sec-h"><span class="num">01</span><h2>Что за тест</h2></div>
+
+<p>Тест придумал Саймон Уиллисон, автор Datasette и блога про LLM. С октября 2024 года он даёт каждой новой модели одну и ту же строку:</p>
+
+<div class="lyrics"><p>Generate an SVG of a pelican riding a bicycle</p><cite>промпт Саймона Уиллисона, <a href="https://github.com/simonw/pelican-bicycle">github.com/simonw/pelican-bicycle</a></cite></div>
+
+<p>Результаты он складывает под тегом <a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/">pelican-riding-a-bicycle</a>, там уже 142 записи. 22 сентября он выложил <a href="https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/">сетку GPT-6 Astra, Sol и Luna по уровням эффорта</a>, и наша сетка устроена так же.</p>
+
+<p>Почему тест работает, хотя выглядит шуткой:</p>
+<ul class="need">
+<li><b>SVG это код.</b> Модель не рисует картинку, а пишет координаты кругов и кривых и не видит результат, пока его кто-нибудь не отрендерит.</li>
+<li><b>Велосипед трудно нарисовать даже человеку.</b> Рама, цепь, педали, колёса должны стоять на своих местах, а у моделей они часто разъезжаются.</li>
+<li><b>Пеликаны не ездят на велосипедах.</b> Готового образца в обучающих данных почти нет, модели приходится собирать сцену самой: куда деть лапы, крылья и огромный клюв.</li>
+<li><b>Это быстро и смешно.</b> Одна строка, минута ожидания, и сразу видно, где модель поплыла. Годится как быстрая проверка перед серьёзными тестами.</li>
+</ul>
+
+<p>На вопрос, не натаскивают ли лаборатории модели на пеликанов, Уиллисон <a href="https://simonwillison.net/2025/Nov/13/training-for-pelicans-riding-bicycles/">ответил отдельным постом</a>. Их бы поймали: если модель вдруг нарисует отличного пеликана, он проверит её на других зверях и другом транспорте, и разница будет видна сразу. А в шутку добавил, что это его долгая игра: пусть лаборатории схитрят, лишь бы у него наконец появился хороший пеликан.</p>
+</section>
+
+<section class="sec" id="kak">
+<div class="sec-h"><span class="num">02</span><h2>Как мы гоняли</h2></div>
+
+<p>Промпт Уиллисона брали дословно. Для анимации добавили одно слово: «Generate an animated SVG of a pelican riding a bicycle». Каждую ячейку запускали один раз в пустой папке и брали то, что вышло, без повторов и отбора лучшего.</p>
+
+<dl class="gloss">
+<dt>Эффорт</dt><dd>Уровень рассуждения, который задаётся в CLI: low, medium, high, xhigh. Чем выше, тем дольше модель думает перед ответом.</dd>
+<dt>Харнес</dt><dd>Обвязка вокруг модели: CLI, системный промпт, доступные инструменты. Одна и та же модель в разных харнесах ведёт себя по-разному.</dd>
+<dt>Ячейка</dt><dd>Одна комбинация модели, эффорта и промпта. Один прогон, одна картинка.</dd>
+</dl>
+
+<ul class="need">
+<li><b>OpenAI через Codex CLI 0.159.1.</b> <code>codex exec -m &lt;модель&gt; -c model_reasoning_effort=&lt;эффорт&gt; -s workspace-write</code>. У меня стоял Codex CLI 0.153.0, и он на gpt-6.1-sol отвечал ошибкой 400 «not supported when using Codex with a ChatGPT account». На 0.159.1 модель доступна.</li>
+<li><b>Anthropic через Claude Code 2.1.281.</b> <code>claude -p --model &lt;модель&gt; --effort &lt;эффорт&gt;</code>, из инструментов только Write, MCP-серверы отключены. CLI поддерживает эффорт от low до max, для сравнения взяли medium и high.</li>
+<li><b>Матрица.</b> GPT-6.1 Sol и GPT-6 Astra на low, medium, high и xhigh. GPT-6 Sol и GPT-6 Luna только на medium. Claude Opus 5.5 и Claude Sonnet 5.5 на medium и high. Оба промпта, 28 прогонов, SVG получили во всех 28.</li>
+<li><b>Рендер.</b> Headless Chromium через Playwright: каждый SVG открывается как документ, анимации записаны с экрана по 4 секунды на ячейку. Время считали от запуска CLI до выхода, токены взяли из отчёта CLI (output tokens).</li>
+</ul>
+</section>
+
+<section class="sec" id="vyshlo">
+<div class="sec-h"><span class="num">03</span><h2>Что вышло</h2></div>
+
+<p>Сначала статика. Строки это модели, столбцы это эффорт. Серые клетки мы не запускали.</p>
+</section>
+
+<figure class="fig"><img src="img/grid_static.jpg" alt="Сетка статичных пеликанов: шесть моделей по строкам, четыре уровня эффорта по столбцам" width="1600" height="1880" loading="lazy"><figcaption>«Generate an SVG of a pelican riding a bicycle». Рис Бенч, 29.09.2026, один прогон на ячейку. Под каждой картинкой время и выходные токены</figcaption></figure>
+
+<section class="sec">
+<p>Несколько ячеек крупно. Это исходные SVG, которые написали модели:</p>
+
+<div class="cells">
+<figure><img src="img/svg/static--gpt-6.1-sol--xhigh.svg" alt="GPT-6.1 Sol, xhigh" loading="lazy"><figcaption><b>GPT-6.1 Sol · xhigh</b>469 секунд, 12 267 токенов. Пляж, облака, кепка и красный шарф.</figcaption></figure>
+<figure><img src="img/svg/static--gpt-6-astra--high.svg" alt="GPT-6 Astra, high" loading="lazy"><figcaption><b>GPT-6 Astra · high</b>248 секунд, 6 203 токена. Солнце за спиной, крылья тянутся к рулю.</figcaption></figure>
+<figure><img src="img/svg/static--gpt-6-sol--medium.svg" alt="GPT-6 Sol, medium" loading="lazy"><figcaption><b>GPT-6 Sol · medium</b>201 секунда, 7 330 токенов. Спицы в колёсах, шарф, небо с облаками.</figcaption></figure>
+<figure><img src="img/svg/static--gpt-6-luna--medium.svg" alt="GPT-6 Luna, medium" loading="lazy"><figcaption><b>GPT-6 Luna · medium</b>34 секунды, 1 174 токена. Белый фон, красная рама. Единственная ячейка, где SVG пришёл текстом в ответе, а не файлом.</figcaption></figure>
+<figure><img src="img/svg/static--claude-opus-5-5--high.svg" alt="Claude Opus 5.5, high" loading="lazy"><figcaption><b>Claude Opus 5.5 · high</b>46 секунд, 4 635 токенов. Голубое небо, трава, красная рама.</figcaption></figure>
+<figure><img src="img/svg/static--claude-sonnet-5-5--medium.svg" alt="Claude Sonnet 5.5, medium" loading="lazy"><figcaption><b>Claude Sonnet 5.5 · medium</b>16 секунд, 1 670 токенов. Самая быстрая ячейка всей сетки.</figcaption></figure>
+</div>
+
+<p>Что видно в статике на глаз:</p>
+<ul class="need">
+<li><b>Красный шарф.</b> Он есть у всех статичных пеликанов OpenAI, кроме Luna. Уиллисон тоже заметил, что Astra упорно повязывает пеликану красный шейный платок. У Claude шарфа нет ни в одной ячейке.</li>
+<li><b>Палитра держится внутри семейства.</b> У GPT-6.1 Sol и Astra бирюзовая рама и бежевый фон. У всех четырёх ячеек Claude голубое небо, зелёная трава и красная рама.</li>
+<li><b>Эффорт меняет детали, а не сцену.</b> У GPT-6.1 Sol на всех уровнях одна и та же сцена: пляж, солнце, шарф. На xhigh добавились облака и кепка.</li>
+</ul>
+
+<p>Теперь анимация. Здесь разница заметнее: часть моделей сделала не просто картинку, а маленький постер с заголовком.</p>
+
+<div class="cells two">
+<figure><video src="img/loop_gpt-6.1-sol--high.mp4" poster="img/loop_gpt-6.1-sol--high.jpg" autoplay muted loop playsinline preload="none"></video><figcaption><b>GPT-6.1 Sol · high</b>272 секунды, 7 383 токена. Постер «Life at pelican pace.» с маяком и тёмной рамкой.</figcaption></figure>
+<figure><video src="img/loop_gpt-6-astra--xhigh.mp4" poster="img/loop_gpt-6-astra--xhigh.jpg" autoplay muted loop playsinline preload="none"></video><figcaption><b>GPT-6 Astra · xhigh</b>360 секунд, 10 921 токен. Заголовок «The Pelican Pedal Club», кепка, багажник.</figcaption></figure>
+<figure><video src="img/loop_gpt-6.1-sol--xhigh.mp4" poster="img/loop_gpt-6.1-sol--xhigh.jpg" autoplay muted loop playsinline preload="none"></video><figcaption><b>GPT-6.1 Sol · xhigh</b>749 секунд, 20 509 токенов. Тоже «Pelican Pedal Club»: две разные модели на максимальном эффорте дали клубу одно имя.</figcaption></figure>
+<figure><video src="img/loop_gpt-6-luna--medium.mp4" poster="img/loop_gpt-6-luna--medium.jpg" autoplay muted loop playsinline preload="none"></video><figcaption><b>GPT-6 Luna · medium</b>61 секунда, 2 589 токенов. Синий шлем, минимум деталей, три CSS-анимации на весь файл.</figcaption></figure>
+<figure><video src="img/loop_claude-opus-5-5--high.mp4" poster="img/loop_claude-opus-5-5--high.jpg" autoplay muted loop playsinline preload="none"></video><figcaption><b>Claude Opus 5.5 · high</b>133 секунды, 15 603 токена. Дорога с разметкой, облака, 23 элемента анимации в файле.</figcaption></figure>
+<figure><video src="img/loop_claude-sonnet-5-5--medium.mp4" poster="img/loop_claude-sonnet-5-5--medium.jpg" autoplay muted loop playsinline preload="none"></video><figcaption><b>Claude Sonnet 5.5 · medium</b>29 секунд, 3 949 токенов. Самая быстрая анимированная ячейка.</figcaption></figure>
+</div>
+
+<ul class="need">
+<li><b>Надписи.</b> В 8 из 10 анимированных ячеек OpenAI модель добавила текст: заголовок, подзаголовок, подпись внизу. В четырёх ячейках Claude текста нет. В статике текста нет ни у кого.</li>
+<li><b>Размер файла растёт с эффортом.</b> У GPT-6 Astra анимированный SVG весит 6 КБ на low и 35 КБ на xhigh, у GPT-6.1 Sol 5 КБ и 22 КБ.</li>
+</ul>
+
+<p>Все 28 ячеек с исходными SVG лежат на <a href="https://bench.sereja.tech/#case/pelican-bicycle-svg">Рис Бенче</a>: <a href="https://bench.sereja.tech/#case/pelican-bicycle-svg">статика</a> и <a href="https://bench.sereja.tech/#case/pelican-bicycle-svg-anim">анимация</a>.</p>
+</section>
+
+<section class="sec" id="vremya">
+<div class="sec-h"><span class="num">04</span><h2>Время и токены</h2></div>
+
+<p>Время считали по часам от запуска CLI до выхода, в секундах. Токены это выходные токены из отчёта CLI, вместе с рассуждением. Все 28 прогонов вместе заняли 81 минуту и 175 тысяч выходных токенов.</p>
+
+<div class="tblwrap"><table class="tbl">
+<thead><tr><th>Модель</th><th>Эффорт</th><th class="n">Статика, с</th><th class="n">токены</th><th class="n">Анимация, с</th><th class="n">токены</th></tr></thead>
+<tbody>
+<tr><td class="m">GPT-6.1 Sol</td><td>low</td><td class="n">85</td><td class="n">2 171</td><td class="n">95</td><td class="n">2 496</td></tr>
+<tr><td></td><td>medium</td><td class="n">105</td><td class="n">2 444</td><td class="n">222</td><td class="n">5 340</td></tr>
+<tr><td></td><td>high</td><td class="n">319</td><td class="n">7 110</td><td class="n">272</td><td class="n">7 383</td></tr>
+<tr><td></td><td>xhigh</td><td class="n">469</td><td class="n">12 267</td><td class="n">749</td><td class="n">20 509</td></tr>
+<tr><td class="m">GPT-6 Astra</td><td>low</td><td class="n">76</td><td class="n">2 031</td><td class="n">102</td><td class="n">2 933</td></tr>
+<tr><td></td><td>medium</td><td class="n">82</td><td class="n">2 272</td><td class="n">137</td><td class="n">3 808</td></tr>
+<tr><td></td><td>high</td><td class="n">248</td><td class="n">6 203</td><td class="n">278</td><td class="n">7 037</td></tr>
+<tr><td></td><td>xhigh</td><td class="n">248</td><td class="n">7 175</td><td class="n">360</td><td class="n">10 921</td></tr>
+<tr><td class="m">GPT-6 Sol</td><td>medium</td><td class="n">201</td><td class="n">7 330</td><td class="n">249</td><td class="n">8 556</td></tr>
+<tr><td class="m">GPT-6 Luna</td><td>medium</td><td class="n">34</td><td class="n">1 174</td><td class="n">61</td><td class="n">2 589</td></tr>
+<tr><td class="m">Claude Opus 5.5</td><td>medium</td><td class="n">31</td><td class="n">2 868</td><td class="n">81</td><td class="n">7 129</td></tr>
+<tr><td></td><td>high</td><td class="n">46</td><td class="n">4 635</td><td class="n">133</td><td class="n">15 603</td></tr>
+<tr><td class="m">Claude Sonnet 5.5</td><td>medium</td><td class="n">16</td><td class="n">1 670</td><td class="n">29</td><td class="n">3 949</td></tr>
+<tr><td></td><td>high</td><td class="n">28</td><td class="n">3 565</td><td class="n">116</td><td class="n">14 315</td></tr>
+</tbody></table></div>
+
+<p>Внутри одной модели токены с эффортом растут везде. Время тоже растёт почти везде: исключение одно, статика GPT-6 Astra, где high и xhigh заняли по 248 секунд. У GPT-6.1 Sol анимация на xhigh заняла 749 секунд и 20 509 токенов против 95 секунд и 2 496 токенов на low, это примерно в 8 раз больше по обоим счётчикам. Сравнивать строки OpenAI и Claude между собой по этой таблице нельзя, причина в следующем разделе.</p>
+</section>
+
+<section class="sec" id="harness">
+<div class="sec-h"><span class="num">05</span><h2>Главная оговорка: разные харнесы</h2></div>
+
+<p>Это сравнение связок «модель плюс CLI», а не чистых моделей. Обвязка у них разная:</p>
+<ul class="need">
+<li><b>В Codex у модели был shell.</b> Часть прогонов сама рендерила превью своего SVG и правила его по картинке. Поэтому там больше времени и входных токенов: у GPT-6.1 Sol на xhigh в анимации 1,38 млн входных токенов, почти все из кэша.</li>
+<li><b>В Claude Code у модели был только Write.</b> Она могла записать файл, но не могла отрендерить его и посмотреть, что нарисовала.</li>
+<li><b>Работали глобальные инструкции CLI.</b> AGENTS.md у Codex и CLAUDE.md у Claude Code добавляют свой контекст к промпту.</li>
+<li><b>Один сбой на нашей стороне.</b> Claude Sonnet 5.5 на high (статика) записал файл по пути с опечаткой в имени папки. SVG мы взяли из его вызова Write: это ошибка нашей сборки, модель задачу выполнила.</li>
+</ul>
+<p>Чтобы сравнить модели честно, нужен одинаковый набор инструментов у обеих: либо у обеих только запись файла, либо у обеих shell с рендером. В этом прогоне так не было.</p>
+</section>
+
+<section class="sec" id="povtorit">
+<div class="sec-h"><span class="num">06</span><h2>Как повторить</h2></div>
+<ol class="steps">
+<li><b>Поставьте нужные версии.</b> Codex CLI не ниже 0.159.1, если нужна GPT-6.1 Sol. Claude Code у нас был 2.1.281.</li>
+<li><b>Создайте пустую папку на каждую ячейку.</b> Так модели не мешают чужие файлы, а готовый SVG легко найти.</li>
+<li><b>Запустите одну команду на ячейку.</b> Промпт дословно, без уточнений.</li>
+<li><b>Откройте SVG в браузере.</b> Анимацию SVG проигрывает браузер, мы рендерили в headless Chromium.</li>
+</ol>
+
+<figure class="doc"><pre># OpenAI, Codex CLI 0.159.1
+mkdir -p runs/gpt-6.1-sol--high &amp;&amp; cd runs/gpt-6.1-sol--high
+npx -y @openai/codex@0.159.1 exec --skip-git-repo-check --ephemeral \
+  -s workspace-write -m gpt-6.1-sol -c model_reasoning_effort=high \
+  "Generate an SVG of a pelican riding a bicycle"
+
+# Anthropic, Claude Code: только Write, без MCP
+mkdir -p runs/claude-opus-5-5--high &amp;&amp; cd runs/claude-opus-5-5--high
+claude -p --model claude-opus-5-5 --effort high \
+  --tools "Write" --permission-mode acceptEdits \
+  --strict-mcp-config --mcp-config '{"mcpServers":{}}' \
+  "Generate an SVG of a pelican riding a bicycle"
+
+# Анимация: тот же запуск с промптом
+# "Generate an animated SVG of a pelican riding a bicycle"</pre><figcaption>Команды одного прогона. Для сетки меняйте модель и эффорт</figcaption></figure>
+
+<p>Если хотите повторить именно нашу таблицу, добавьте <code>--json</code> в Codex и <code>--output-format stream-json --verbose</code> в Claude Code: время и выходные токены берутся из этих отчётов.</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#test">пеликан</a>, <a href="#kak">Codex CLI</a>, <a href="#kak">Claude Code</a>, <a href="#vremya">эффорт</a></div>
+<p>Автор теста: Саймон Уиллисон, <a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/">тег pelican-riding-a-bicycle</a> и <a href="https://github.com/simonw/pelican-bicycle">репозиторий с промптом</a>. Его сетка GPT-6 по эффорту: <a href="https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/">запись от 22 сентября</a>. DevDay: <a href="https://openai.com/index/introducing-gpt-6-1-sol/">анонс GPT-6.1 Sol</a> и <a href="https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog/">лайв-блог Уиллисона</a>. Все ячейки и исходные SVG: <a href="https://bench.sereja.tech/#case/pelican-bicycle-svg">Рис Бенч, пеликан</a> и <a href="https://bench.sereja.tech/#case/pelican-bicycle-svg-anim">анимированный пеликан</a>. Прогон 29 сентября 2026 года, один раз на ячейку.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+<script>
+(function(){
+  function playAll(){if(document.hidden)return;document.querySelectorAll('video[autoplay]').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
+  document.addEventListener('visibilitychange',playAll);playAll();
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body .gloss,.body .need,.body .steps>li,.body .tblwrap')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script></body></html>

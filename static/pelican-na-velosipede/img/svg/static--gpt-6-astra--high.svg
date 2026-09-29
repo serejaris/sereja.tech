@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title desc" style="stroke-opacity:1">
+  <title id="title">A pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with a long golden bill and a fluttering coral scarf rides a teal bicycle beneath a pale yellow sun. An original vector illustration on a warm cream background.</desc>
+  <defs>
+    <g id="wheel">
+      <circle r="149" style="fill:#fffdf5;stroke:#233f46;stroke-width:15"/>
+      <circle r="133" style="fill:none;stroke:#b6c9c4;stroke-width:3"/>
+      <g style="stroke:#b6c9c4;stroke-width:3">
+        <path d="M-130 0H130M0-130V130M-92-92 92 92M-92 92 92-92M-120-50 120 50M-120 50 120-50M-50-120 50 120M-50 120 50-120"/>
+      </g>
+      <circle r="13" style="fill:#233f46"/>
+      <circle r="5" style="fill:#fffdf5"/>
+    </g>
+  </defs>
+  <rect width="1440" height="1000" style="fill:#f7f2e6"/>
+  <circle cx="759" cy="440" r="328" style="fill:#f2df9c;opacity:.57"/>
+  <g style="fill:none;stroke:#ded9c8;stroke-width:4;stroke-linecap:round">
+    <path d="M250 879H1210M207 879H225M1233 879H1250"/>
+    <path d="M260 487H363M294 520H342M220 454H323"/>
+  </g>
+  <ellipse cx="735" cy="878" rx="455" ry="17" style="fill:#d9dccc;opacity:.65"/>
+  <g style="fill:none;stroke:#859e88;stroke-width:5;stroke-linecap:round">
+    <path d="M222 876q-2-30-22-41M222 875q5-40 23-52M1221 876q0-23 19-35M1221 873q-5-37-21-46"/>
+  </g>
+  <!-- Wheels and the far pedal. -->
+  <use href="#wheel" x="430" y="725"/>
+  <use href="#wheel" x="1030" y="725"/>
+  <path d="m716 725-46-60" style="fill:none;stroke:#233f46;stroke-width:10;stroke-linecap:round"/>
+  <path d="M643 665h49" style="stroke:#233f46;stroke-width:12;stroke-linecap:round"/>
+  <!-- Far leg, bent towards the raised pedal. -->
+  <path d="m639 472-36 89 66 82" style="fill:none;stroke:#233f46;stroke-width:25;stroke-linecap:round;stroke-linejoin:round"/>
+  <path d="m639 472-36 89 66 82" style="fill:none;stroke:#d9973e;stroke-width:15;stroke-linecap:round;stroke-linejoin:round"/>
+  <path d="m666 633 32 19q9 9-4 12h-57q-8-3 0-12Z" style="fill:#d9973e;stroke:#233f46;stroke-width:5;stroke-linejoin:round"/>
+  <!-- Teal diamond bicycle frame. -->
+  <g style="fill:none;stroke-linecap:round;stroke-linejoin:round">
+    <path d="m430 725 201-201 89 201H430l-0.1 0M631 524h298L720 725M929 524l101 201" style="stroke:#233f46;stroke-width:21"/>
+    <path d="m430 725 201-201 89 201H430M631 524h298L720 725M929 524l101 201" style="stroke:#328d86;stroke-width:12"/>
+    <path d="m631 524-16-49M929 524l-20-67q-6-20 15-20h42q19 0 19 17t-17 17" style="stroke:#233f46;stroke-width:12"/>
+    <path d="M946 437h21q18 0 18 18" style="stroke:#b97950;stroke-width:15"/>
+    <path d="M936 468q54 15 53 72" style="stroke:#233f46;stroke-width:3"/>
+    <path d="M300 605q123-102 244-8M915 604q121-96 232 5" style="stroke:#233f46;stroke-width:9"/>
+    <path d="M300 605q123-102 244-8M915 604q121-96 232 5" style="stroke:#e2ad57;stroke-width:4"/>
+  </g>
+  <path d="M576 466q24-12 49-6l43 7q11 3 9 13H577q-15-5-1-14Z" style="fill:#a66546;stroke:#233f46;stroke-width:6"/>
+  <circle cx="720" cy="725" r="34" style="fill:#f7f2e6;stroke:#233f46;stroke-width:7"/>
+  <circle cx="720" cy="725" r="23" style="fill:#c6d6c8;stroke:#233f46;stroke-width:3"/>
+  <path d="m720 725 48 51" style="stroke:#233f46;stroke-width:10;stroke-linecap:round"/>
+  <path d="M743 784h58" style="stroke:#233f46;stroke-width:12;stroke-linecap:round"/>
+  <!-- Near leg and broad webbed foot. -->
+  <path d="m689 465 71 104-26 130 36 65" style="fill:none;stroke:#233f46;stroke-width:26;stroke-linecap:round;stroke-linejoin:round"/>
+  <path d="m689 465 71 104-26 130 36 65" style="fill:none;stroke:#edac49;stroke-width:16;stroke-linecap:round;stroke-linejoin:round"/>
+  <path d="m763 751 47 20q15 9 3 13h-70q-9-5 1-15Z" style="fill:#edac49;stroke:#233f46;stroke-width:5;stroke-linejoin:round"/>
+  <path d="m781 768 12 12m-28-14 11 14" style="stroke:#c88436;stroke-width:3;stroke-linecap:round"/>
+  <!-- Tail, round body, and the pelican's sweeping neck. -->
+  <path d="m509 389-99-47 29 56-42-7q26 53 99 54" style="fill:#d9e3db;stroke:#233f46;stroke-width:7;stroke-linejoin:round"/>
+  <path d="M473 389q57-77 141-47 36 12 58 16 54 10 53-42l-2-61q-1-69 55-81 56-12 85 33 18 28 2 61-14 27-46 44-29 17-29 58 2 80-51 110-41 25-114 23-118-3-156-64-17-27 4-50Z" style="fill:#fffdf5;stroke:#233f46;stroke-width:7;stroke-linejoin:round"/>
+  <path d="M480 426q86 62 185 42 105-22 101-96-5-68 45-89-35 41-20 89 2 74-51 104-42 25-113 22-113-1-147-72Z" style="fill:#e1e8dc"/>
+  <!-- A long bill and generous throat pouch distinguish the pelican. -->
+  <path d="M838 261 1105 278q-86 84-171 69-59-12-96-86Z" style="fill:#e9a54d;stroke:#233f46;stroke-width:6;stroke-linejoin:round"/>
+  <path d="M856 278q73 44 180 19-68 49-111 30-39-15-69-49Z" style="fill:#f3bd65"/>
+  <path d="M841 246q137 1 274 29 14 4 0 10L837 272Z" style="fill:#f5c653;stroke:#233f46;stroke-width:6;stroke-linejoin:round"/>
+  <path d="m871 258 188 14" style="fill:none;stroke:#fff0ac;stroke-width:5;stroke-linecap:round"/>
+  <circle cx="816" cy="233" r="14" style="fill:#233f46"/>
+  <circle cx="820" cy="228" r="4" style="fill:#fffdf5"/>
+  <path d="M794 209q13-9 26-3" style="fill:none;stroke:#233f46;stroke-width:5;stroke-linecap:round"/>
+  <path d="M749 190q-11-15-6-27m16 20q-2-21 8-28" style="fill:none;stroke:#233f46;stroke-width:6;stroke-linecap:round"/>
+  <!-- Windblown coral scarf. -->
+  <path d="M736 331q-67-28-111-12-36 11-77-6l26 29-22 16q64 17 100-7 39-20 79 6" style="fill:#dc654c;stroke:#233f46;stroke-width:6;stroke-linejoin:round"/>
+  <path d="M741 334q-48 13-66 45l-42-11 9 31q38 7 61-23l45-21" style="fill:#ef795c;stroke:#233f46;stroke-width:6;stroke-linejoin:round"/>
+  <path d="M722 316q28 18 66 11l-3 31q-35 9-66-13Z" style="fill:#ef795c;stroke:#233f46;stroke-width:6;stroke-linejoin:round"/>
+  <!-- A wing stretches forward to hold the handlebar. -->
+  <path d="M538 376q37-31 93-3l100 62q39 24 93 11l98-21q20-6 32 9l-1 19q-50 16-113 27-78 20-132-12l-57-22q-47 6-81-12" style="fill:#fffdf5;stroke:#233f46;stroke-width:7;stroke-linecap:round;stroke-linejoin:round"/>
+  <path d="M554 407q54 27 99 19m-82 1q39 25 73 21m276-7 27-3m-23 14 26-5" style="fill:none;stroke:#9eafa3;stroke-width:4;stroke-linecap:round"/>
+  <!-- Small airborne flourishes. -->
+  <g style="fill:none;stroke:#bca768;stroke-width:4;stroke-linecap:round">
+    <path d="m1013 178 12-19m16 40 24-8M435 278l-14-17"/>
+  </g>
+</svg>

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with an orange beak pedals a teal bicycle beneath a pale blue sky.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#d9f3f5"/>
+      <stop offset="1" stop-color="#f8f3df"/>
+    </linearGradient>
+    <linearGradient id="pouch" x2="0" y2="1">
+      <stop stop-color="#ffcf69"/>
+      <stop offset="1" stop-color="#f19a43"/>
+    </linearGradient>
+    <linearGradient id="frame" x2="0" y2="1">
+      <stop stop-color="#168a91"/>
+      <stop offset="1" stop-color="#08616e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <style>
+      .line{fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .spoke{stroke:#6c8790;stroke-width:3;opacity:.75}
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="#d9f3f5"/>
+  <circle cx="960" cy="160" r="76" fill="#fff3bd" opacity=".9"/>
+  <g fill="#fff" opacity=".8">
+    <ellipse cx="199" cy="180" rx="72" ry="22"/><ellipse cx="155" cy="177" rx="37" ry="30"/><ellipse cx="239" cy="170" rx="42" ry="32"/>
+    <ellipse cx="837" cy="286" rx="58" ry="17"/><ellipse cx="807" cy="279" rx="30" ry="23"/><ellipse cx="865" cy="278" rx="31" ry="23"/>
+  </g>
+  <path d="M0 717 Q280 694 535 720 T1200 708 V900 H0Z" fill="#d6e9c7"/>
+  <path d="M0 773 Q285 747 580 775 T1200 762 V900 H0Z" fill="#bddbb9"/>
+  <ellipse cx="604" cy="766" rx="411" ry="32" fill="#527a78" opacity=".23" filter="url(#shadow)"/>
+
+  <!-- Wheels and hubs -->
+  <g>
+    <circle cx="320" cy="661" r="173" fill="#243e47"/><circle cx="320" cy="661" r="158" fill="#fffdf2"/>
+    <circle cx="880" cy="661" r="173" fill="#243e47"/><circle cx="880" cy="661" r="158" fill="#fffdf2"/>
+    <circle cx="320" cy="661" r="156" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#97bbc0" stroke-width="5"/>
+    <circle cx="880" cy="661" r="156" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#97bbc0" stroke-width="5"/>
+    <g class="spoke">
+      <path d="M320 505v312M164 661h312M210 551l220 220M210 771l220-220M260 517l120 288M176 601l288 120M176 721l288-120M260 805l120-288"/>
+      <path d="M880 505v312M724 661h312M770 551l220 220M770 771l220-220M820 517l120 288M736 601l288 120M736 721l288-120M820 805l120-288"/>
+    </g>
+    <circle cx="320" cy="661" r="21" fill="#204952"/>
+    <circle cx="880" cy="661" r="21" fill="#204952"/>
+  </g>
+
+  <!-- Bicycle frame -->
+    <polygon points="327.7,665.7 466.7,440.7 451.3,431.3 312.3,656.3" fill="#087b84"/>
+    <polygon points="451.4,440.8 592.4,665.8 607.6,656.2 466.6,431.2" fill="#087b84"/>
+    <polygon points="600.0,652.0 320.0,652.0 320.0,670.0 600.0,670.0" fill="#087b84"/>
+    <polygon points="324.6,668.7 687.6,450.7 678.4,435.3 315.4,653.3" fill="#087b84"/>
+    <polygon points="674.6,439.8 591.6,657.8 608.4,664.2 691.4,446.2" fill="#087b84"/>
+    <polygon points="600.0,670.0 880.0,670.0 880.0,652.0 600.0,652.0" fill="#087b84"/>
+    <polygon points="689.8,448.9 733.8,398.9 720.2,387.1 676.2,437.1" fill="#087b84"/>
+    <polygon points="467.4,432.8 452.4,392.8 435.6,399.2 450.6,439.2" fill="#087b84"/>
+  <g fill="none" stroke="#087b84" stroke-width="19" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M320 661 459 436 600 661 320 661 683 443 600 661 880 661" fill="none" stroke="#087b84" stroke-width="19"/>
+    <path d="M683 443 727 393 749 393" fill="none" stroke="#087b84" stroke-width="19"/>
+    <path d="M459 436 444 396" fill="none" stroke="#087b84" stroke-width="19"/>
+  </g>
+  <path d="M706 398q57-31 101-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#263f48" stroke-width="13"/>
+  <path d="M805 394q12 5 16 18" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#263f48" stroke-width="11"/>
+  <path d="M399 387q52-25 104-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#263f48" stroke-width="17"/>
+  <path d="M324 654q-12-36-26-55" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#1e6170" stroke-width="8"/>
+  <path d="M298 599q-5-9-18-7" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#1e6170" stroke-width="8"/>
+
+  <polygon points="705.3,404.5 805.3,399.5 804.7,386.5 704.7,391.5" fill="#263f48"/>
+  <polygon points="398.3,395.0 502.3,391.0 501.7,375.0 397.7,379.0" fill="#263f48"/>
+  <polygon points="603.1,663.5 644.1,613.5 637.9,608.5 596.9,658.5" fill="#263f48"/>
+  <polygon points="596.9,658.5 555.9,708.5 562.1,713.5 603.1,663.5" fill="#263f48"/>
+  <polygon points="619.0,617.0 665.0,617.0 665.0,607.0 619.0,607.0" fill="#263f48"/>
+  <polygon points="535.0,716.0 582.0,716.0 582.0,706.0 535.0,706.0" fill="#263f48"/>
+
+  <!-- Tail, body, wing -->
+  <path d="M430 385q-73-24-109 1 48 6 89 53Z" fill="#dce7dc" stroke="#567075" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M360 385q-30-32-63-22 26 33 66 42" fill="#f8fbef" stroke="#567075" stroke-width="5"/>
+  <path d="M427 336q59-60 128-44 91 24 99 101 1 67-76 80-89 13-160-43-29-24-22-57 3-22 31-37Z" fill="#fffdf1" stroke="#506a70" stroke-width="6"/>
+  <path d="M441 370q65-30 146 27-12 53-73 48-67-8-98-51" fill="#e5ece1" stroke="#617b7c" stroke-width="5"/>
+  <path d="M476 391q53-13 96 20M462 409q48-9 87 17" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#b1c9c6" stroke-width="5"/>
+
+  <!-- Long neck and head -->
+  <path d="M554 334q35-23 53-76 19-56 2-107-8-35 19-59 28-24 72-7 43 16 46 54 2 29-23 47-22 16-51 7 10 61-6 105-15 44-59 76Z" fill="#fffdf1" stroke="#506a70" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M625 205q22 17 48 9" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#d5e4da" stroke-width="9"/>
+  <path d="M650 92q20-23 48-21 9 21-3 37" fill="#fffdf1" stroke="#506a70" stroke-width="5"/>
+  <circle cx="704" cy="131" r="8" fill="#263d44"/>
+  <circle cx="707" cy="128" r="2.5" fill="#fff"/>
+  <path d="M722 162q79 2 175-20-62 39-156 48Z" fill="#f1a047" stroke="#835b3d" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M737 188q43 70 117 11 20-16 43-57-17 91-75 110-58 16-85-64Z" fill="#ffbd60" stroke="#a86b3e" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M752 193q54 30 115-16" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#df8748" stroke-width="4" opacity=".65"/>
+
+  <!-- Wings on handlebars and feet on pedals -->
+  <path d="M551 344q56 13 99 54 29 25 76 13l45-20q19-8 27 7-11 14-29 17l-47 20q-57 19-91-5-49-33-91-36" fill="#fffdf1" stroke="#506a70" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M578 376q53 16 88 50" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#cadbd3" stroke-width="5"/>
+  <path d="M486 454q20 71 71 117l47 44" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#526b71" stroke-width="17"/>
+  <path d="M516 449q39 66 82 94l26 15" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#526b71" stroke-width="17"/>
+  <polygon points="470.5,441.6 537.5,517.6 552.5,504.4 485.5,428.4" fill="#d8e4dc"/>
+  <polygon points="537.9,515.7 598.9,606.7 613.1,597.3 552.1,506.3" fill="#d8e4dc"/>
+  <polygon points="511.8,445.5 575.8,506.5 588.2,493.5 524.2,432.5" fill="#d8e4dc"/>
+  <polygon points="575.6,504.8 617.6,560.8 630.4,551.2 588.4,495.2" fill="#d8e4dc"/>
+  <path d="M586 600q14-19 33-17 18 4 29 28l-13 16-62-2Z" fill="#f2a54f" stroke="#945f3c" stroke-width="5"/>
+  <path d="M610 552q14-18 30-13 18 5 24 25l-14 13-55-1Z" fill="#f2a54f" stroke="#945f3c" stroke-width="5"/>
+
+  <!-- Crank and pedals in front -->
+  <circle cx="600" cy="661" r="38" fill="#e9ca78" stroke="#28515a" stroke-width="9"/>
+  <circle cx="600" cy="661" r="10" fill="#28515a"/>
+  <path d="M600 661 641 611M600 661 559 711" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#273f48" stroke-width="9"/>
+  <path d="M619 612h46M535 711h47" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#273f48" stroke-width="12"/>
+  <path d="M619 617h29M571 706h-20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#edab51" stroke-width="13"/>
+
+  <!-- Small travel scarf -->
+  <path d="M583 287q39 9 75-9l11 20q-38 25-87 11Z" fill="#db6654"/>
+  <path d="M588 300q-59 21-96 7 21 22 68 24 26 3 38-19" fill="#db6654" stroke="#a94a46" stroke-width="3"/>
+</svg>

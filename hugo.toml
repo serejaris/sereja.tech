@@ -23,6 +23,12 @@ enableGitInfo = true
     description = 'Гайд: как агенты в Claude Code сделали русский кавер с клипом и где решает человек'
     lastmod = '2026-09-27'
 
+  [[params.standalone]]
+    url = 'pelican-na-velosipede/'
+    title = 'Пеликан на велосипеде: 28 прогонов в Codex и Claude Code'
+    description = 'Тест Саймона Уиллисона на шести моделях и четырёх уровнях эффорта: сетка, анимации, время, токены и как повторить'
+    lastmod = '2026-09-29'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'
