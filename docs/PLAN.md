@@ -1149,3 +1149,17 @@ Owner request: explain the concept within the article for a general business aud
 - [x] Preserve the attributed original video, factual screenshots, prototype scope and established section anchors.
 - [x] Pass the Hugo build, SVG/anchor/content assertions and CUA visual checks at 1440×900 and 375×900.
 - Publication follows the connected Git deployment path; refs #185.
+
+
+## Claude Design component library guide, 2026-09-24
+
+Owner request: research five component-library architectures for the LMS and write a practical article using `teach-vibecoding`'s `lesson-guide-writer`.
+
+- [x] Verify native Claude Design exchange and distinguish it from Storybook MCP, Figma mapping and token exchange.
+- [x] Explain one proposed lesson-card pilot with three states, a scoped spacing change and observable acceptance checks.
+- [x] Include one accessible SVG; omit the decorative cover rejected by the owner.
+- [x] Pass independent fact, specificity and editorial reviews, mechanical gates, Hugo and desktop/mobile browser checks.
+- [x] Prepare the article and visual evidence on a feature branch for review.
+- [ ] Publish through the Git-connected Vercel path after owner approval and verify the live canonical URL.
+
+Tracking: issue #188. Validation and review images: [evidence](evidence/claude-design-component-library/README.md).
