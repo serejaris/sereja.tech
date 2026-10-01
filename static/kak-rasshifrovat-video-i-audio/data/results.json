@@ -1,0 +1,353 @@
+{
+  "task": "oh1-2026-09-24",
+  "generated_at": "2026-09-30T17:56:23Z",
+  "audio_s": 4207.1,
+  "fx": {
+    "USD_RUB": 84.4283,
+    "EUR_RUB": 96.0625,
+    "date": "2026-09-30",
+    "source": "https://www.cbr.ru/scripts/XML_daily.asp?date_req=30/09/2026"
+  },
+  "prices_checked_at": "2026-09-30",
+  "reference": {
+    "words": 9598,
+    "note": "Scribe v2 без словаря с частичной правкой терминов; человеком дословно не выверен"
+  },
+  "asr": [
+    {
+      "stage": "asr",
+      "id": "elevenlabs-scribe-v2-terms",
+      "engine": "elevenlabs",
+      "model": "scribe_v2",
+      "status": "ok",
+      "wall_s": 49.13,
+      "cpu_s": 0.35,
+      "usd_per_hour": 0.27,
+      "rub_per_hour": 22.8,
+      "cost_basis": "api_price: https://elevenlabs.io/pricing/api",
+      "rtf": 0.0117,
+      "words": 9468,
+      "ref_words": 9598,
+      "wer": 0.0403,
+      "cer": 0.0226,
+      "wer_termnorm": 0.0379,
+      "term_canon": 173,
+      "term_distortions": 14,
+      "term_accuracy": 0.9251,
+      "term_recall": 0.929,
+      "credits_used": 2231
+    },
+    {
+      "stage": "asr",
+      "id": "elevenlabs-scribe-v2",
+      "engine": "elevenlabs",
+      "model": "scribe_v2",
+      "status": "ok",
+      "wall_s": 59.9,
+      "cpu_s": 0.21,
+      "usd_per_hour": 0.22,
+      "rub_per_hour": 18.57,
+      "cost_basis": "api_price: https://elevenlabs.io/pricing/api",
+      "rtf": 0.0142,
+      "words": 9508,
+      "ref_words": 9598,
+      "wer": 0.033,
+      "cer": 0.0172,
+      "wer_termnorm": 0.0321,
+      "term_canon": 132,
+      "term_distortions": 36,
+      "term_accuracy": 0.7857,
+      "term_recall": 0.7811,
+      "credits_used": 1859
+    },
+    {
+      "stage": "asr",
+      "id": "gigaam-v3-e2e-rnnt",
+      "engine": "openai_compat",
+      "model": "gigaam-v3-e2e-rnnt",
+      "status": "ok",
+      "wall_s": 305.89,
+      "cpu_s": 1775,
+      "usd_per_hour": 0.002,
+      "rub_per_hour": 0.17,
+      "cost_basis": "server_share: 1775 CPU-s",
+      "rtf": 0.0727,
+      "words": 9562,
+      "ref_words": 9598,
+      "wer": 0.1274,
+      "cer": 0.0751,
+      "wer_termnorm": 0.122,
+      "term_canon": 66,
+      "term_distortions": 73,
+      "term_accuracy": 0.4748,
+      "term_recall": 0.3669,
+      "credits_used": null
+    },
+    {
+      "stage": "asr",
+      "id": "whisper-large-v3-turbo",
+      "engine": "faster_whisper",
+      "model": "large-v3-turbo",
+      "status": "ok",
+      "wall_s": 2134.85,
+      "cpu_s": 9578.5,
+      "usd_per_hour": 0.0106,
+      "rub_per_hour": 0.9,
+      "cost_basis": "server_share: 9578 CPU-s",
+      "rtf": 0.5074,
+      "words": 9189,
+      "ref_words": 9598,
+      "wer": 0.125,
+      "cer": 0.0756,
+      "wer_termnorm": 0.121,
+      "term_canon": 65,
+      "term_distortions": 72,
+      "term_accuracy": 0.4745,
+      "term_recall": 0.3846,
+      "credits_used": null
+    },
+    {
+      "stage": "asr",
+      "id": "whisper-large-v3-turbo-terms",
+      "engine": "faster_whisper",
+      "model": "large-v3-turbo",
+      "status": "ok",
+      "wall_s": 2055.45,
+      "cpu_s": 9598.2,
+      "usd_per_hour": 0.0107,
+      "rub_per_hour": 0.9,
+      "cost_basis": "server_share: 9598 CPU-s",
+      "rtf": 0.4886,
+      "words": 9272,
+      "ref_words": 9598,
+      "wer": 0.1202,
+      "cer": 0.0721,
+      "wer_termnorm": 0.115,
+      "term_canon": 69,
+      "term_distortions": 81,
+      "term_accuracy": 0.46,
+      "term_recall": 0.4083,
+      "credits_used": null
+    },
+    {
+      "stage": "asr",
+      "id": "openrouter-gemini-3.8-flash",
+      "engine": "openrouter_audio",
+      "model": "google/gemini-3.8-flash",
+      "status": "error",
+      "wall_s": null,
+      "cpu_s": null,
+      "usd_per_hour": 0.1801,
+      "rub_per_hour": 15.21,
+      "cost_basis": "estimate: audio tokens/s × price",
+      "reason": "Баланс OpenRouter исчерпан, HTTP 402; цена рассчитана по токенам, качество и время не измерены."
+    },
+    {
+      "stage": "asr",
+      "id": "openrouter-gpt-audio-mini",
+      "engine": "openrouter_audio",
+      "model": "openai/gpt-audio-mini",
+      "status": "error",
+      "wall_s": null,
+      "cpu_s": null,
+      "cost_basis": "no price",
+      "reason": "Баланс OpenRouter исчерпан, HTTP 402; цена, качество и время не измерены."
+    },
+    {
+      "stage": "asr",
+      "id": "yandex-speechkit-async",
+      "status": "not_run",
+      "usd_per_hour": 0.5638,
+      "rub_per_hour": 47.6,
+      "cost_basis": "api_price: https://yandex.cloud/ru-kz/docs/speechkit/pricing",
+      "reason": "Нет ключа Yandex Cloud; показан прайс."
+    },
+    {
+      "stage": "asr",
+      "id": "salutespeech",
+      "status": "not_run",
+      "usd_per_hour": 0.4264,
+      "rub_per_hour": 36.0,
+      "cost_basis": "api_price: https://developers.sber.ru/docs/ru/salutespeech/tariffs/legal-tariffs",
+      "reason": "Нет ключа; новые тарифы закрыты новым клиентам с 15.07.2026; показан прайс."
+    },
+    {
+      "stage": "asr",
+      "id": "whisper-large-v3",
+      "status": "not_run",
+      "usd_per_hour": null,
+      "rub_per_hour": null,
+      "cost_basis": "not measured",
+      "reason": "Прогон на CPU остановлен; качество, время и цена не измерены."
+    }
+  ],
+  "asr_pairwise_wer": {
+    "elevenlabs-scribe-v2-terms": {
+      "elevenlabs-scribe-v2": 0.0317,
+      "gigaam-v3-e2e-rnnt": 0.1283,
+      "whisper-large-v3-turbo": 0.1191,
+      "whisper-large-v3-turbo-terms": 0.1128
+    },
+    "elevenlabs-scribe-v2": {
+      "elevenlabs-scribe-v2-terms": 0.0316,
+      "gigaam-v3-e2e-rnnt": 0.1277,
+      "whisper-large-v3-turbo": 0.1199,
+      "whisper-large-v3-turbo-terms": 0.1158
+    },
+    "gigaam-v3-e2e-rnnt": {
+      "elevenlabs-scribe-v2-terms": 0.1271,
+      "elevenlabs-scribe-v2": 0.127,
+      "whisper-large-v3-turbo": 0.1454,
+      "whisper-large-v3-turbo-terms": 0.1411
+    },
+    "whisper-large-v3-turbo": {
+      "elevenlabs-scribe-v2-terms": 0.1228,
+      "elevenlabs-scribe-v2": 0.1241,
+      "gigaam-v3-e2e-rnnt": 0.1513,
+      "whisper-large-v3-turbo-terms": 0.0811
+    },
+    "whisper-large-v3-turbo-terms": {
+      "elevenlabs-scribe-v2-terms": 0.1152,
+      "elevenlabs-scribe-v2": 0.1187,
+      "gigaam-v3-e2e-rnnt": 0.1455,
+      "whisper-large-v3-turbo": 0.0803
+    }
+  },
+  "llm": [
+    {
+      "stage": "llm",
+      "id": "canon-glm-5.3",
+      "author": "zai/glm-5.3",
+      "author_models": [
+        "glm-5.3"
+      ],
+      "status": "ok",
+      "author_wall_s": 932.1,
+      "canon_wall_s": 932.12,
+      "author_turns": 48,
+      "tokens": {
+        "input_tokens": 263482,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 2469760,
+        "output_tokens": 69487
+      },
+      "usd_run": 1.3168,
+      "usd_per_hour": 1.1267,
+      "rub_per_hour": 95.13,
+      "cost_basis": "tokens × zai list price",
+      "checks_first_failed": [],
+      "fix_rounds": 0,
+      "checks_final_failed": [],
+      "checks_ok": true,
+      "judges": [
+        {
+          "provider": "anthropic-local",
+          "model": "default",
+          "verdict": "pass",
+          "critical": 0,
+          "major": 0,
+          "minor": 4,
+          "wall_s": 46.09,
+          "usd": 0.527,
+          "cost_basis": "reported: Claude Code at Anthropic list prices"
+        }
+      ],
+      "artifacts": {
+        "lesson_kb": 21.5,
+        "sections": 14,
+        "chapters": 14,
+        "asr_input": "elevenlabs-scribe-v2-terms"
+      }
+    },
+    {
+      "stage": "llm",
+      "id": "canon-glm-5.3-flash",
+      "author": "zai/glm-5.3-flash",
+      "author_models": [
+        "glm-5.3-flash"
+      ],
+      "status": "ok",
+      "author_wall_s": 1080.0,
+      "canon_wall_s": 1079.98,
+      "author_turns": 41,
+      "tokens": {
+        "input_tokens": 171139,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 1999232,
+        "output_tokens": 46791
+      },
+      "usd_run": 0.349,
+      "usd_per_hour": 0.2986,
+      "rub_per_hour": 25.21,
+      "cost_basis": "tokens × zai list price",
+      "checks_first_failed": [],
+      "fix_rounds": 0,
+      "checks_final_failed": [],
+      "checks_ok": true,
+      "judges": [
+        {
+          "provider": "anthropic-local",
+          "model": "default",
+          "verdict": "pass",
+          "critical": 0,
+          "major": 0,
+          "minor": 8,
+          "wall_s": 65.86,
+          "usd": 0.5748,
+          "cost_basis": "reported: Claude Code at Anthropic list prices"
+        }
+      ],
+      "artifacts": {
+        "lesson_kb": 22.3,
+        "sections": 15,
+        "chapters": 14,
+        "asr_input": "elevenlabs-scribe-v2-terms"
+      }
+    },
+    {
+      "stage": "llm",
+      "id": "canon-claude",
+      "author": "anthropic-local/default",
+      "author_models": [
+        "claude-opus-5-5"
+      ],
+      "status": "ok",
+      "author_wall_s": 234.0,
+      "canon_wall_s": 233.99,
+      "author_turns": 21,
+      "tokens": {
+        "input_tokens": 38,
+        "cache_creation_input_tokens": 92534,
+        "cache_read_input_tokens": 1226353,
+        "output_tokens": 22117
+      },
+      "usd_run": 1.428,
+      "usd_per_hour": 1.222,
+      "rub_per_hour": 103.17,
+      "cost_basis": "reported: Claude Code at Anthropic list prices",
+      "checks_first_failed": [],
+      "fix_rounds": 0,
+      "checks_final_failed": [],
+      "checks_ok": true,
+      "judges": [
+        {
+          "provider": "zai",
+          "model": "glm-5.3",
+          "verdict": "pass",
+          "critical": 0,
+          "major": 0,
+          "minor": 1,
+          "wall_s": 237.21,
+          "usd": 0.2545,
+          "cost_basis": "tokens × zai list price"
+        }
+      ],
+      "artifacts": {
+        "lesson_kb": 25.1,
+        "sections": 16,
+        "chapters": 14,
+        "asr_input": "elevenlabs-scribe-v2-terms"
+      }
+    }
+  ]
+}

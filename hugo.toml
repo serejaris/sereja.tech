@@ -29,6 +29,12 @@ enableGitInfo = true
     description = 'Тест Саймона Уиллисона на шести моделях и четырёх уровнях эффорта: сетка, анимации, время, токены и как повторить'
     lastmod = '2026-09-29'
 
+  [[params.standalone]]
+    url = 'kak-rasshifrovat-video-i-audio/'
+    title = 'Как расшифровать видео и аудио: на своём Mac или через API'
+    description = 'Как расшифровать видео и аудио на своём Mac или через API: цена часа, точность терминов и конспект. Замер на русской речи с английскими терминами.'
+    lastmod = '2026-09-30'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'

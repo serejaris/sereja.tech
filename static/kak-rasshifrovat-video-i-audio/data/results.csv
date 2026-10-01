@@ -1,0 +1,14 @@
+stage,id,status,wall_s,author_wall_s,cpu_s,usd_per_hour,rub_per_hour,rtf,wer,cer,term_accuracy,term_canon,term_distortions,credits_used,usd_run,checks_ok,cost_basis
+asr,elevenlabs-scribe-v2-terms,ok,49.13,,0.35,0.27,22.8,0.0117,0.0403,0.0226,0.9251,173,14,2231,,,api_price: https://elevenlabs.io/pricing/api
+asr,elevenlabs-scribe-v2,ok,59.9,,0.21,0.22,18.57,0.0142,0.033,0.0172,0.7857,132,36,1859,,,api_price: https://elevenlabs.io/pricing/api
+asr,gigaam-v3-e2e-rnnt,ok,305.89,,1775,0.002,0.17,0.0727,0.1274,0.0751,0.4748,66,73,,,,server_share: 1775 CPU-s
+asr,whisper-large-v3-turbo,ok,2134.85,,9578.5,0.0106,0.9,0.5074,0.125,0.0756,0.4745,65,72,,,,server_share: 9578 CPU-s
+asr,whisper-large-v3-turbo-terms,ok,2055.45,,9598.2,0.0107,0.9,0.4886,0.1202,0.0721,0.46,69,81,,,,server_share: 9598 CPU-s
+asr,openrouter-gemini-3.8-flash,error,,,,0.1801,15.21,,,,,,,,,,estimate: audio tokens/s × price
+asr,openrouter-gpt-audio-mini,error,,,,,,,,,,,,,,,no price
+asr,yandex-speechkit-async,not_run,,,,0.5638,47.6,,,,,,,,,,api_price: https://yandex.cloud/ru-kz/docs/speechkit/pricing
+asr,salutespeech,not_run,,,,0.4264,36.0,,,,,,,,,,api_price: https://developers.sber.ru/docs/ru/salutespeech/tariffs/legal-tariffs
+asr,whisper-large-v3,not_run,,,,,,,,,,,,,,,not measured
+llm,canon-glm-5.3,ok,,932.1,,1.1267,95.13,,,,,,,,1.3168,True,tokens × zai list price
+llm,canon-glm-5.3-flash,ok,,1080.0,,0.2986,25.21,,,,,,,,0.349,True,tokens × zai list price
+llm,canon-claude,ok,,234.0,,1.222,103.17,,,,,,,,1.428,True,reported: Claude Code at Anthropic list prices
