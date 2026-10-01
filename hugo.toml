@@ -35,6 +35,12 @@ enableGitInfo = true
     description = 'Как расшифровать видео и аудио на своём Mac или через API: цена часа, точность терминов и конспект. Замер на русской речи с английскими терминами.'
     lastmod = '2026-09-30'
 
+  [[params.standalone]]
+    url = 'kak-agent-vedet-dela/'
+    title = 'Как агент ведёт мои дела: daily, manager, retro'
+    description = 'Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду.'
+    lastmod = '2026-10-01'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'

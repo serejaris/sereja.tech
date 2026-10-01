@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как агент ведёт мои дела: daily, manager, retro | Сережа Рис</title>
+<meta name="description" content="Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду.">
+<meta name="author" content="Сережа Рис"><meta name="updated" content="2026-10-01">
+<link rel="canonical" href="https://sereja.tech/kak-agent-vedet-dela/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог">
+<meta property="og:type" content="article"><meta property="og:url" content="https://sereja.tech/kak-agent-vedet-dela/">
+<meta property="og:title" content="Как агент ведёт мои дела: daily, manager, retro"><meta property="og:description" content="Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду.">
+<meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://sereja.tech/kak-agent-vedet-dela/img/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Как агент ведёт мои дела: daily, manager, retro">
+<meta property="article:published_time" content="2026-10-01"><meta property="article:modified_time" content="2026-10-01"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Как агент ведёт мои дела: daily, manager, retro"><meta name="twitter:description" content="Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду."><meta name="twitter:image" content="https://sereja.tech/kak-agent-vedet-dela/img/og-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#767676;--paper:#f4f4f2;--line:#e3e3e3;--col:760px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:300 18px/28px var(--serif)}
+a{color:var(--blue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+code{font:400 .82em/1 var(--mono);background:var(--paper);padding:2px 5px}
+.mast{text-align:center;padding:40px 16px 0}
+.logo{font:400 44px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none}
+.toc{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 20px;padding:20px 16px 0}
+.toc a{font:500 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none}
+.toc a:hover{color:var(--pink)}
+.head{text-align:center;padding:44px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em}
+.rubric span{font-weight:400}
+h1{font:800 clamp(40px,6vw,72px)/1.04 var(--serif);margin:22px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2vw,24px)/1.3 var(--serif);max-width:620px;margin:24px auto 0}
+.meta{text-align:center;margin:28px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em}
+.share{display:flex;justify-content:space-between;max-width:840px;margin:26px auto 0;padding:0 16px}
+.share i{display:block;width:38%;height:1px;background:var(--blue)}
+.body{max-width:var(--col);margin:0 auto;padding:30px 16px 40px}
+.body p{margin:0 0 20px}
+.drop{float:left;font:500 58px/46px var(--serif);margin:4px 10px 0 0}
+.sec-h{text-align:center;margin:76px 0 34px}
+.sec-h .num{display:block;font:600 9px/10px var(--sans);letter-spacing:5px;margin-bottom:12px}
+.sec-h h2{font:300 clamp(28px,3.2vw,36px)/1.15 var(--serif);margin:0}
+.doc{margin:24px 0 30px}
+.doc pre{margin:0;background:var(--paper);padding:20px 24px;font:400 14px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.doc figcaption{font:400 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.principles{list-style:none;padding:0;margin:20px 0 0}
+.principles li{position:relative;padding:0 0 26px 0;border-top:1px solid var(--blue);padding-top:18px}
+.principles h3{font:400 23px/1.25 var(--serif);margin:0 0 8px}
+.principles h3 code{font-size:.75em}
+.principles p{margin:0}.principles p+p{margin-top:12px}
+.diagram{margin:40px 0 30px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font:400 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:20px 0 26px}
+.nums div{border-top:1px solid var(--blue);padding-top:14px}
+.nums b{display:block;font:400 64px/1 var(--logo);color:var(--blue)}
+.nums span{display:block;font:300 16px/22px var(--serif);margin-top:10px}
+.nums small{display:block;font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-top:6px}
+.note{font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--grey);text-align:center}
+.trips{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.trips li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:center}
+.ico{width:140px;height:auto;display:block}
+.mini{margin:4px 0 26px}
+.mini svg{width:100%;height:auto;display:block}
+.card .mini{margin:0 0 10px}
+.mini figcaption{font:400 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:8px}
+.mini .xs{font-size:10px}
+.win{border:1px solid #c9cbd6;background:#fff;margin:0 0 12px}
+.win .bar{border-bottom:1px solid #c9cbd6;background:var(--paper);padding:5px 10px;font:400 12px/18px var(--mono);color:#555;display:flex;gap:5px;align-items:center;overflow-wrap:anywhere}
+.win .bar i{flex:none;width:8px;height:8px;border-radius:50%;border:1px solid #b5b5b5}
+.win .bar span{margin-left:6px}
+.win pre{margin:0;padding:10px 12px;font:400 12.5px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:#1d1d1d}
+.win .me{color:var(--blue);font-weight:500}
+.win .hl{display:block;background:#fff0f7;border-left:3px solid var(--pink);margin:0 -12px;padding:0 9px}
+.win .ok{color:var(--blue)}.win .no{color:var(--grey)}
+.ladder{list-style:none;padding:0;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:10px 0 24px}
+.ladder li{display:grid;grid-template-columns:44px 1fr 340px;gap:16px;align-items:center;margin:0 0 10px calc(var(--i)*28px);padding:10px 14px;border-left:3px solid var(--blue);border-bottom:1px solid var(--line)}
+.ladder .n{font:400 34px/1 var(--logo);color:var(--blue)}
+.ladder b{display:block;font-weight:500;font-size:18px;line-height:24px}
+.ladder small{display:block;font:400 13px/18px var(--sans);color:var(--grey);margin-top:2px}
+.ladder .here{display:inline-block;font:600 10px/1 var(--sans);font-style:normal;text-transform:uppercase;letter-spacing:.1em;background:var(--pink);color:#fff;padding:4px 7px;margin-top:6px}
+.ladder .win{margin:0}
+.ladder .win pre{font-size:12px;padding:7px 10px}
+.ladder li.done{border-left-color:#c9cbd6;background:var(--paper)}
+.ladder li.done .n,.ladder li.done b{color:#8b8b8b}
+.lp{display:grid;grid-template-columns:150px 1fr;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:0 0 24px}
+.lp .ladder{width:auto;left:auto;transform:none;margin:0}
+.ladder:has(+ .lp){margin-bottom:0}
+.lr{display:grid;grid-template-columns:1fr 104px}
+.gut,.loop{position:relative}
+.gut::before{content:"";position:absolute;right:4px;top:38px;bottom:42px;width:16px;border:1.5px dashed var(--blue);border-right:none}
+.gut::after{content:"";position:absolute;right:-4px;top:33px;border:6px solid transparent;border-left:9px solid var(--blue);border-right:0}
+.gut span{position:absolute;left:0;right:30px;top:50%;transform:translateY(-50%);font:400 13px/18px var(--sans);color:var(--blue)}
+.loop::before{content:"";position:absolute;left:8px;top:38px;bottom:42px;width:16px;border:1.5px solid var(--blue);border-left:none}
+.loop::after{content:"";position:absolute;left:0;top:33px;border:6px solid transparent;border-right:9px solid var(--blue);border-left:0}
+.loop span{position:absolute;left:32px;right:0;top:50%;transform:translateY(-50%);font:600 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
+@media (max-width:760px){.ladder li{grid-template-columns:34px 1fr;margin-left:0}.ladder .win{grid-column:1/-1}
+.lp{display:flex;flex-direction:column}.gut{order:2}.lr{display:block}
+.gut::before,.gut::after,.loop::before,.loop::after{display:none}
+.gut span,.loop span{position:static;transform:none;display:block;padding:6px 0 10px;border-left:3px dashed var(--blue);padding-left:12px;margin-bottom:10px}}
+.cmdrow{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;padding:26px 0 14px;border-top:1px solid var(--blue)}
+.cmdrow h3{margin:0}.cmdrow h3 code{font:500 30px/1.1 var(--mono);color:var(--blue);background:none;padding:0}
+.cmdrow .say{font:300 21px/1.35 var(--serif);margin:10px 0 16px}
+.f3{list-style:none;padding:0;margin:0;font:400 15px/22px var(--sans)}
+.f3 li{padding:7px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.f3 li::before{content:"▸ ";color:var(--pink)}
+.f3 code{font-size:12.5px}
+.g2{color:var(--grey)}
+.cmdhead{grid-column:1/-1}
+.why{display:grid;grid-template-columns:130px 1fr;gap:18px;align-items:start;margin:0 0 16px}
+.why p{margin:0;font-size:16px;line-height:24px}
+.mini2{width:130px;height:auto}
+.mini2 rect,.mini2 path,.mini2 circle{fill:none;stroke:#2d3e9f;stroke-width:1.3;stroke-linecap:round}
+.mini2 rect.pk{stroke:#ff1493}
+.mini2 .t{font:400 8px var(--sans);fill:#767676}
+.win .same{display:block;background:#eef0fb;border-left:3px solid var(--blue);margin:0 -12px;padding:0 9px}
+.win .mat{display:block;color:var(--grey);margin:4px 0;border-left:3px dashed #c9cbd6;margin-left:-12px;padding-left:9px}
+.win .mat .ic{opacity:.55}
+.tplh{font:600 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);text-align:center;margin:28px 0 0}
+.legend{font:400 13px/18px var(--sans);color:var(--grey);margin:4px 0 0}
+.legend .sw{display:inline-block;width:14px;height:12px;vertical-align:-1px;margin:0 6px 0 0}
+.legend .sw.same{background:#eef0fb;border-left:3px solid var(--blue)}
+.legend .sw.mat{border-left:3px dashed #c9cbd6;margin-left:14px}
+.win .chat{padding:10px 14px;font:400 15px/1.55 var(--sans)}
+.win .chat .c{font:500 13px var(--mono);color:var(--blue)}
+.win .chat b{font-weight:500;color:var(--blue)}
+.win .lines{padding:8px 14px;font:400 14px/1.6 var(--sans)}
+.win .lines .hl{margin:0 -14px;padding:0 11px}
+@media (max-width:760px){.cmdrow{grid-template-columns:1fr}}
+.ic{width:1.05em;height:1.05em;vertical-align:-.18em;margin-right:.4em;flex:none}
+.win .bar span{display:inline-flex;align-items:center}
+.dz{padding:16px 18px 18px;font:400 15px/1.4 var(--sans)}
+.dz .ask code{background:rgba(255,255,255,.18);color:#fff}
+.dz .ask{margin-left:auto;width:max-content;max-width:80%;background:var(--blue);color:#fff;padding:7px 14px;border-radius:14px 14px 2px 14px}
+.dz .dhead{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin-top:14px}
+.dz .dhead b{font:500 22px/1.2 var(--serif)}
+.dz .dhead span{color:var(--grey);font-size:13px}
+.dz .tl{position:relative;height:40px;margin:10px 0 4px;border-top:2px solid var(--line);top:8px}
+.dz .tl i{position:absolute;top:-7px;width:12px;height:12px;border-radius:50%;margin-left:-6px}
+.dz .tl .now{background:var(--blue)}
+.dz .tl .ev{background:#fff;border:2px solid var(--blue)}
+.dz .tl .lb{position:absolute;top:8px;font-size:12px;color:var(--blue);transform:translateX(-50%);white-space:nowrap}
+.dz .tl .ev2{transform:none;margin-left:-6px;top:22px}
+.dz h4{font:600 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:16px 0 8px}
+.dz .c2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dz .c{border:1px solid var(--blue);padding:10px 12px}
+.dz .c b{display:block;font-weight:500}
+.dz .c span{display:block;color:var(--grey);font-size:13px;margin-top:4px}
+.dz .c.late{border-color:var(--pink)}
+.dz .c em{display:inline-block;font-style:normal;background:var(--pink);color:#fff;font:600 10px/1 var(--sans);text-transform:uppercase;letter-spacing:.1em;padding:4px 7px;margin-bottom:6px}
+.dz .chips{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.dz .chips li{border:1px solid var(--line);padding:5px 12px 5px 8px;font-size:14px}
+.dz .chips li::before{content:"";display:inline-block;width:11px;height:11px;border:1px solid var(--blue);margin-right:8px;vertical-align:-1px}
+.dz .decide{margin-top:14px;border-left:3px solid var(--pink);background:#fff0f7;padding:8px 12px;font-weight:500}
+.dz .sum{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:10px;border-top:2px solid var(--blue)}
+.dz .sum b{font:500 20px/1 var(--serif)}
+.dz .sum span{border:1px solid var(--line);padding:3px 9px;font-size:12px;color:var(--grey)}
+@media (max-width:560px){.dz .c2{grid-template-columns:1fr}}
+.cap{font:400 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin:-4px 0 14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:18px 0 10px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.mini rect,.mini path,.mini line,.ico rect,.ico path,.ico line{fill:none;stroke:#2d3e9f;stroke-width:1.3}
+.mini text,.ico text{font:400 13px var(--sans);fill:#000;stroke:none}
+.mini .m,.ico .m{font:400 12px var(--mono)}
+.mini .s,.ico .s{font-size:11px}
+.mini .h{font:600 11px var(--sans);letter-spacing:1.2px;fill:#2d3e9f}
+.mini .g,.ico .g{fill:#767676}
+.mini .p,.ico .p{stroke:#ff1493}
+.mini text.p,.ico text.p{fill:#ff1493;stroke:none}
+.mini rect.f,.ico rect.f{fill:#f4f4f2}
+.mini .d,.ico .d{stroke-dasharray:4 3}
+.mini .ar,.ico .ar{marker-end:url(#mk)}
+.mini .arp,.ico .arp{marker-end:url(#mkp)}
+.trips b{font-weight:500}
+.trips cite{display:block;font:400 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);font-style:normal;margin-top:6px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:30px 0 10px}
+.card{border-top:3px solid var(--blue);padding-top:16px}
+.card h3{font:500 28px/1 var(--mono);color:var(--blue);margin:0 0 14px}
+.card dl{margin:0}
+.card dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--pink);padding-top:12px;border-top:1px solid var(--line)}
+.card dd{margin:4px 0 12px;font-size:16px;line-height:24px}
+.card dd code{font-size:13px}
+.vert{margin:34px 0 0;padding:20px 0 4px;border-top:1px solid var(--blue)}
+.vert h3{font:600 9px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;color:var(--blue);margin:0 0 14px}
+.prompt{background:var(--paper);border-left:3px solid var(--pink);padding:16px 20px;font:400 italic 19px/28px var(--serif);margin:16px 0 20px}
+.links{list-style:none;padding:0;margin:0}
+.links li{padding:10px 0;border-bottom:1px solid var(--line);font:400 15px/22px var(--mono)}
+footer{text-align:center;padding:50px 16px 60px}
+footer .logo{font-size:30px}
+@media (max-width:900px){.cards{grid-template-columns:1fr}.nums{grid-template-columns:repeat(2,1fr)}.diagram{overflow-x:auto}.diagram svg{min-width:900px}}
+/* file tree: comment wraps under its own row, indent kept */
+.tree{padding:10px 12px;font:400 12.5px/1.6 var(--mono);color:#1d1d1d}
+.ladder .tree{font-size:12px;padding:7px 10px}
+.tree .r{display:flex;flex-wrap:wrap;column-gap:.7em;padding-left:calc(var(--d,0)*1.5em)}
+.tree .nm{white-space:nowrap}
+.tree .r2 .no{flex-basis:100%;padding-left:1.5em}
+.tree .st{display:grid;grid-template-columns:6.5em 1fr;column-gap:.6em}
+.tree .tt{font:600 11px/1.6 var(--sans);letter-spacing:.1em;color:var(--blue)}
+.win .tree .same,.win .tree .hl{margin:0 -12px}
+.ladder .win .tree .hl,.ladder .win pre .hl{margin:0 -10px;padding:0 7px}
+/* arrows */
+.to{position:relative;display:block;height:0;border-top:1.3px solid var(--blue);width:100%}
+.to::after{content:"";position:absolute;right:-1px;top:-5.5px;border:5px solid transparent;border-left:8px solid var(--blue);border-right:0}
+.to.p{border-color:var(--pink)}.to.p::after{border-color:transparent;border-left-color:var(--pink)}
+.bx{border:1px solid var(--blue);padding:8px 12px;font:400 14px/1.35 var(--sans);background:#fff}
+.bx.f{background:var(--paper)}.bx.d{border-style:dashed}.bx.m{font:400 12.5px/1.4 var(--mono)}
+.bx.p{border-color:var(--pink);color:var(--pink)}.bx.g{color:var(--grey)}
+.bx small{display:block;font:400 12px/16px var(--sans);color:var(--grey);margin-top:2px}
+.dn{position:relative;display:block;height:20px;width:0;border-left:1.3px solid var(--blue);margin:0 auto}
+.dn::after{content:"";position:absolute;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:8px solid var(--blue);border-bottom:0}
+/* 01: hq -> department */
+.hq2{display:grid;grid-template-columns:1fr 36px 1.45fr;align-items:center;gap:0 8px;margin:4px 0 26px}
+.hq2 .win{margin:0}
+/* 01: week as small multiples */
+.week{width:min(1080px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:20px 0 10px}
+.wk{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto auto;grid-auto-flow:column;gap:0 16px;align-items:start}
+.wk .day{font:600 11px/14px var(--sans);letter-spacing:.1em;color:var(--blue);border-bottom:1px solid var(--blue);padding:0 0 10px;margin-bottom:14px}
+.wk .bx{position:relative}
+.wk .bx.go{margin-bottom:24px}
+.wk .bx.go::before{content:"";position:absolute;left:50%;top:100%;height:16px;border-left:1.3px solid var(--blue)}
+.wk .bx.go::after{content:"";position:absolute;left:calc(50% - 5px);top:calc(100% + 13px);border:5px solid transparent;border-top:8px solid var(--blue);border-bottom:0}
+.wk .out{display:grid;gap:10px}
+.fb{background:var(--paper);border:1px solid var(--blue);padding:8px 12px 10px;font:400 14px/20px var(--sans)}
+.fb .fl{font:400 11.5px/18px var(--mono);margin-bottom:8px;overflow-wrap:anywhere}
+.fb .k{display:block;color:var(--grey);font-size:13px;margin-top:4px}
+.fb .pk{color:var(--pink)}
+.wk .sub{font:400 13px/18px var(--sans);color:var(--grey);padding:8px 0 0}
+.week figcaption{font:400 11px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:16px;text-align:center}
+/* 03: line present / absent */
+.yn{display:grid;grid-template-columns:1fr 48px 1fr;align-items:center;gap:10px 0;margin:6px 0 26px}
+.yn .to{width:calc(100% - 8px);margin-left:4px}
+/* 03: one skills folder */
+.sym{display:grid;grid-template-columns:auto 70px auto 70px auto;align-items:center;justify-content:start;gap:0;margin:26px 0 26px}
+.sym .cs{grid-area:2/1}.sym .a1{grid-area:2/2}.sym .main{grid-area:2/3}.sym .a2{grid-area:2/4}.sym .cx{grid-area:2/5}
+.sym .a1,.sym .a2{padding:0 6px;text-align:center;font:400 12px/16px var(--sans);color:var(--grey)}
+.sym .a2 .to{transform:scaleX(-1)}
+.sym .ccw{grid-area:1/1;display:flex;flex-direction:column;align-items:center}
+@media (max-width:560px){
+.hq2{grid-template-columns:1fr}.hq2 .to{width:0;height:22px;border-top:0;border-left:1.3px solid var(--blue);margin:6px auto}
+.hq2 .to::after{right:auto;top:auto;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:8px solid var(--blue);border-bottom:0}
+.wk{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
+.wk .day{margin-top:22px}.wk .day:first-child{margin-top:0}
+.why{grid-template-columns:1fr;gap:6px}.mini2{width:120px}
+.yn{grid-template-columns:1fr 30px 1fr}.yn .bx{font-size:13px;padding:7px 9px}
+.sym{grid-template-columns:1fr;justify-items:center}
+.sym .ccw,.sym .cs,.sym .a1,.sym .main,.sym .a2,.sym .cx{grid-area:auto}
+.sym .a1,.sym .a2{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0}
+.sym .a1 .to,.sym .a2 .to{width:0;height:22px;border-top:0;border-left:1.3px solid var(--blue)}
+.sym .a1 .to::after{right:auto;top:auto;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:8px solid var(--blue);border-bottom:0}
+.sym .a2 .to{transform:none}
+.sym .a2 .to::after{right:auto;left:-5.5px;top:-1px;border:5px solid transparent;border-bottom:8px solid var(--blue);border-top:0}
+.trips li{grid-template-columns:1fr;gap:8px}.trips .ico{width:160px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2d3e9f"/></marker>
+<marker id="mkp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ff1493"/></marker>
+<symbol id="icD" viewBox="0 0 16 16"><path d="M1.5 3.5h4.5l1.5 1.5h7v8h-13z" fill="none" stroke="#2d3e9f" stroke-width="1.2" stroke-linejoin="round"/></symbol>
+<symbol id="icF" viewBox="0 0 16 16"><path d="M3.5 1.5h6l3 3v10h-9z M9.5 1.5v3h3" fill="none" stroke="#2d3e9f" stroke-width="1.2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<header class="mast">
+<a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a>
+<nav class="toc">
+<a href="#proshlyj">Прошлый урок</a>
+<a href="#prijti">Как прийти</a>
+<a href="#nedelya">Неделя урока</a>
+<a href="#komandy">Три команды</a>
+<a href="#postavit">Что нужно и как поставить</a>
+<a href="#spotknetes">Где споткнётесь</a>
+<a href="#ssylki">Ссылки</a>
+</nav>
+</header>
+
+<div class="head">
+<div class="rubric">Personal Corp 3 <span>•</span> <span>Office Hours #2</span></div>
+<h1>Как агент ведёт мои дела: daily, manager, retro</h1>
+<p class="lead">Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду.</p>
+</div>
+<div class="meta">1 октября 2026 · кейс и инструкция</div>
+<div class="share"><i></i><i></i></div>
+
+<article class="body" style="padding-bottom:0">
+<section id="proshlyj">
+<div class="sec-h" style="margin-top:50px"><h2>На прошлом уроке</h2></div>
+<p>Рядом со штабом собрали отдел обучения <code>corp-learn/</code>: скилл corp-new задал вопросы через grill-me и разложил папку отдела по местам.</p>
+<p class="tplh">Это шаблон: ваш отдел устроен так же</p>
+</section>
+</article>
+<div class="pair">
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>corp-learn/</span></div>
+<div class="tree"><div class="same">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>AGENTS.md</span><span class="no">— правила отдела, ссылка на штаб</span></div>
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>CLAUDE.md</span><span class="no">— ярлык на AGENTS.md</span></div>
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>README.md</span></div>
+</div><div class="mat">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icD"/></svg>programs/</span><span>— материалы</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icD"/></svg>pc3/</span></div>
+<div class="r" style="--d:2"><span class="nm"><svg class="ic"><use href="#icF"/></svg>README.md</span></div>
+<div class="r" style="--d:2"><span class="nm"><svg class="ic"><use href="#icD"/></svg>transcripts/</span><span>— транскрипты уроков, сырьё</span></div>
+<div class="r" style="--d:2"><span class="nm"><svg class="ic"><use href="#icD"/></svg>book/</span><span>— главы из транскриптов</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icD"/></svg>spanish/</span></div>
+</div><div class="same">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icD"/></svg>tasks/</span><span class="no">— одна задача = один файл</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>_template.md</span><span class="no">— шаблон задачи</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-09-29-lesson-01-terms.md</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-09-29-pc3-book.md</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-09-29-task-system.md</span></div>
+</div></div></div>
+<p class="cap">Отдел после урока 2</p>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icF"/></svg>штаб/AGENTS.md</span></div>
+<pre>## Отделы corp-*
+…
+<span class="hl">| corp-learn | отдел обучения: здесь мы учимся новым вещам |</span>…</pre></div>
+<p class="cap">Штаб знает про отдел</p>
+</div>
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>corp-sales/  · ваш отдел</span></div>
+<div class="tree"><div class="same">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>AGENTS.md</span><span class="no">— правила отдела, ссылка на штаб</span></div>
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>CLAUDE.md</span><span class="no">— ярлык на AGENTS.md</span></div>
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>README.md</span></div>
+</div><div class="mat">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icD"/></svg>&lt;ваши материалы&gt;/</span><span>— например clients/</span></div>
+</div><div class="same">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icD"/></svg>tasks/</span><span class="no">— одна задача = один файл</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>_template.md</span><span class="no">— шаблон задачи</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-02-&lt;задача&gt;.md</span></div>
+</div></div></div>
+<p class="cap">Ваш отдел, например продажи</p>
+<p class="legend"><span class="sw same"></span>одинаково в любом отделе <span class="sw mat"></span>меняется: ваши материалы</p>
+</div>
+</div>
+<article class="body" style="padding-top:0;padding-bottom:0">
+<p>Домашка: такой же отдел для своего процесса, с папкой <code>tasks/</code>. Сегодня учим агента вести эти задачи.</p>
+</article>
+
+<article class="body">
+<div class="win" style="margin-top:20px"><div class="bar"><i></i><i></i><i></i><span>разговор с агентом</span></div>
+<div class="dz">
+<div class="ask">что на сегодня?</div>
+<div class="dhead"><b>Сегодня · 10:47</b><span>утренние дела закрыты</span></div>
+<div class="tl"><i class="now" style="left:23%"></i><span class="lb" style="left:23%">сейчас</span><i class="ev" style="left:33%"></i><span class="lb ev2" style="left:33%">12:00 Office Hours</span></div>
+<h4>Главное</h4>
+<div class="c2">
+<div class="c"><b>Office Hours #2</b><span>12:00 · через 1 ч 13 мин</span></div>
+<div class="c late"><em>просрочено</em><b>Обратная связь по домашке первой недели</b><span>≈0,5 ч · обещание недели</span></div>
+</div>
+<h4>Потом · ≈1,7 ч</h4>
+<ul class="chips">
+<li>ответить на запрос участника</li>
+<li>согласовать слот совместного стрима</li>
+<li>решить судьбу просроченного гайда</li>
+<li>принять выпуск рассылки</li>
+</ul>
+<div class="decide">Решить сегодня: «го» на дроп 02.10</div>
+<div class="sum"><b>Всё ≈4,5 ч</b><span>йога 15 мин</span></div>
+</div></div>
+<p>Так начинается мой день: один вопрос — и агент собрал дела из всех отделов.</p>
+</article>
+
+<article class="body" style="padding-top:0">
+<section id="prijti">
+<div class="sec-h"><h2>Как к этому прийти</h2></div>
+</section>
+</article>
+<ol class="ladder">
+<li class="done" style="--i:0"><span class="n">1</span><div><b>Штаб — папка с правилами для агента</b><small>урок 1 · уже есть ✓</small></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>штаб/</span></div><div class="tree"><div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>AGENTS.md</span><span class="no">— правила для агента</span></div></div></div></li>
+<li class="done" style="--i:1"><span class="n">2</span><div><b>Отдел с папкой <code>tasks/</code>: одна задача — один файл</b><small>урок 2 · уже есть ✓</small><em class="here">вы здесь</em></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>corp-learn/tasks/</span></div><div class="tree">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-provesti-efir.md</span><span class="no">— «Провести эфир»</span></div>
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-vylozhit-zapis.md</span><span class="no">— «Выложить запись»</span></div></div></div></li>
+</ol>
+<div class="lp">
+<div class="gut"><span>по итогам ретро правите задачи, правила штаба или сам скилл под себя</span></div>
+<div>
+<ol class="ladder" start="3">
+<li style="--i:0"><span class="n">3</span><div><b>Строка в правилах штаба: где лежат задачи отдела</b></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icF"/></svg>штаб/AGENTS.md</span></div><pre><span class="hl">Задачи отдела лежат в ../corp-learn/tasks/.</span></pre></div></li>
+</ol>
+<div class="lr">
+<ol class="ladder" start="4">
+<li style="--i:1"><span class="n">4</span><div><b><code>/manager</code> после каждого разговора</b><small>в задачах видно, где остановились</small></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор</span></div><pre><span class="me">&gt; /manager</span>
+✓ сделано: запись на платформе</pre></div></li>
+<li style="--i:2"><span class="n">5</span><div><b><code>/daily</code> утром</b><small>агент собирает из задач план дня, как выше</small></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор</span></div><pre><span class="me">&gt; /daily</span>
+Сегодня: бриф, эфир.</pre></div></li>
+<li style="--i:3"><span class="n">6</span><div><b><code>/retro</code> в воскресенье</b><small>неделя разобрана, лишнее снято</small></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор</span></div><pre><span class="me">&gt; /retro</span>
+Застряло: обратная связь по домашке.</pre></div></li>
+</ol>
+<div class="loop"><span>следующая неделя</span></div>
+</div>
+</div>
+</div>
+<article class="body" style="padding-top:0">
+<p>Шаги 4–6 повторяются каждую неделю. После ретро вы подправляете правила под себя, и следующий круг идёт точнее. Ниже каждый скилл на примере недели урока.</p>
+</article>
+
+<article class="body" style="padding-top:0">
+<section id="nedelya">
+<div class="sec-h"><span class="num">01</span><h2>Неделя урока</h2></div>
+<p><span class="drop">О</span>тдел обучения ведёт урок 2 потока. Задачи урока лежат обычными файлами в папке <code>corp-learn/tasks/</code>, по файлу на задачу.</p>
+<figure class="hq2" aria-label="Штаб и задачи отдела обучения">
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>штаб/</span></div>
+<div class="tree">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icF"/></svg>AGENTS.md</span><span class="no">правила</span></div>
+<div class="r"><span class="nm"><svg class="ic"><use href="#icD"/></svg>tasks/</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-06.md</span><span class="no">файл дня</span></div>
+</div></div>
+<i class="to"></i>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>corp-learn/tasks/</span><span class="no">отдел обучения</span></div>
+<div class="tree">
+<div class="r r2"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-brif-uroka.md</span><span class="no">«Подготовить бриф и материалы урока»</span></div>
+<div class="r r2"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-provesti-efir.md</span><span class="no">«Провести эфир»</span></div>
+<div class="r r2"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-vylozhit-zapis.md</span><span class="no">«Выложить запись на платформу»</span></div>
+<div class="r r2"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-obratnaya-svyaz.md</span><span class="no">«Отдать обратную связь по домашке»</span></div>
+</div></div>
+</figure>
+</section>
+</article>
+
+<figure class="week" aria-label="Неделя урока 2 потока">
+<div class="wk">
+<div class="day">ВТ · УТРО</div>
+<div class="bx m go">/daily</div>
+<div class="out"><div class="fb"><div class="fl"><svg class="ic"><use href="#icF"/></svg>tasks/2026-10-06.md</div><span class="k">в работе:</span>бриф, эфир<span class="k">просрочено:</span><span class="pk">обратная связь</span></div></div>
+
+<div class="day">СР</div>
+<div class="bx d">эфир урока</div>
+<div class="out"><div class="sub">урок 2 потока</div></div>
+
+<div class="day">ЧТ · ПОСЛЕ РАЗГОВОРА</div>
+<div class="bx m go">/manager</div>
+<div class="out"><div class="fb"><div class="fl"><svg class="ic"><use href="#icF"/></svg>2026-10-05-vylozhit-zapis.md</div><span class="k">Следующий шаг:</span><span class="pk">проверить ссылку</span></div>
+<div class="fb"><div class="fl"><svg class="ic"><use href="#icF"/></svg>tasks/2026-10-08.md</div>+ обучение: запись выложена</div></div>
+
+<div class="day">ВС</div>
+<div class="bx m go">/retro</div>
+<div class="out"><div class="fb"><div class="fl"><svg class="ic"><use href="#icF"/></svg>tasks/retro-2026-W41.md</div><span class="k">сделано:</span>эфир, запись<span class="k">застряло:</span><span class="pk">обратная связь по домашке</span></div></div>
+</div>
+<figcaption>Под каждым днём — файл, который пишет агент</figcaption></figure>
+
+<article class="body" style="padding-top:0;padding-bottom:16px">
+<div class="vert" id="urovni">
+<h3>Где лежат задачи: два уровня</h3>
+</div>
+</article>
+<div class="pair">
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icD"/></svg>corp-learn/</span></div>
+<div class="tree">
+<div class="r"><span class="nm"><svg class="ic"><use href="#icD"/></svg>tasks/</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-brif-uroka.md</span><span class="no">— «Подготовить бриф»</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-provesti-efir.md</span><span class="no">— «Провести эфир»</span></div>
+<div class="r" style="--d:1"><span class="nm"><svg class="ic"><use href="#icF"/></svg>2026-10-05-vylozhit-zapis.md</span><span class="no">— «Выложить запись»</span></div></div></div>
+<p class="cap">Уровень 1, файлы: с этого начинаете вы</p>
+</div>
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>GitHub · задачи</span></div>
+<div class="tree">
+<div class="st"><span class="no">○ закрыта</span><span>Подготовить бриф и материалы урока</span></div>
+<div class="st"><span class="no">○ закрыта</span><span>Провести эфир</span></div>
+<div class="st"><span class="ok">● открыта</span><span>Выложить запись на платформу</span></div></div></div>
+<p class="cap">Уровень 2, GitHub: так у меня</p>
+</div>
+</div>
+<article class="body" style="padding-top:0">
+<p>GitHub — сервис, где команды ведут задачи. Скиллы на обоих уровнях одни и те же. Где лежат задачи, агент узнаёт из правил штаба: manager первым делом проверяет, у вас файлы или GitHub.</p>
+
+<section id="komandy">
+<div class="sec-h"><span class="num">02</span><h2>Три команды</h2></div>
+
+<div class="cmdrow">
+<div class="cmdhead">
+<h3><code>/daily</code></h3>
+<p class="say">Утром спрашиваете, получаете список дел на сегодня.</p>
+<div class="why"><svg class="mini2" viewBox="0 0 120 80" aria-hidden="true">
+<rect x="52" y="8" width="64" height="46"/><path d="M60 20h44M60 30h36M60 40h40"/><circle cx="60" cy="20" r="0"/>
+<circle cx="18" cy="34" r="6"/><path d="M18 40v20M18 46l12-8M18 60l-6 14M18 60l6 14"/>
+<circle cx="38" cy="38" r="6"/><path d="M38 44v18M38 62l-5 12M38 62l5 12"/>
+<text x="62" y="68" class="t">сегодня</text></svg>
+<p>Зачем: чтобы день начинался с главного. В компании это утренняя планёрка: руководитель до начала дня обходит отделы и говорит, что сегодня главное и что горит. <code>/daily</code> делает то же: собирает задачи всех отделов и показывает, что на сегодня. В правилах вы пишете свои приоритеты, по ним агент и отбирает дела.</p></div>
+</div>
+<div>
+<ul class="f3">
+<li>запускать: в папке штаба</li>
+<li>появится: <svg class="ic"><use href="#icF"/></svg><code>tasks/2026-10-06.md</code> <span class="g2">— файл дня</span></li>
+<li>не делает: не меняет статусы задач</li>
+</ul>
+</div>
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор в штабе</span></div>
+<div class="chat"><span class="c">&gt; /daily</span><br>Ждёт решения: утвердить тексты презентации.<br>Сегодня: бриф, эфир.<br>Просрочено: обратная связь по домашке.</div></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icF"/></svg>tasks/2026-10-06.md</span></div>
+<div class="lines">В работе: бриф, эфир<br><span class="hl">Просрочено: обратная связь по домашке</span></div></div>
+</div>
+</div>
+
+<div class="cmdrow">
+<div class="cmdhead">
+<h3><code>/manager</code></h3>
+<p class="say">В конце разговора агент отмечает, что сделано и что дальше.</p>
+<div class="why"><svg class="mini2" viewBox="0 0 120 80" aria-hidden="true">
+<circle cx="24" cy="22" r="7"/><path d="M24 29v24M24 36l18 6M24 53l-7 18M24 53l7 18"/>
+<rect x="46" y="12" width="66" height="58"/><path d="M54 26l3 3 5-6M66 27h38M54 40l3 3 5-6M66 41h38M54 54h8M66 55h30"/>
+</svg>
+<p>Зачем: чтобы следующий разговор продолжил с того же места. В компании менеджер в конце дня просит команду обновить задачи: что сделано и что дальше, — чтобы завтра не начинать заново. <code>/manager</code> делает это за вас: записывает в задачу, где остановились и какой следующий шаг. В новом разговоре агент открывает этот файл и продолжает.</p></div>
+</div>
+<div>
+<ul class="f3">
+<li>запускать: в папке отдела, в конце разговора</li>
+<li>появится: запись в <svg class="ic"><use href="#icF"/></svg><code>corp-learn/tasks/2026-10-05-vylozhit-zapis.md</code> и строка в файле дня</li>
+<li>не делает: не решает за вас</li>
+</ul>
+</div>
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор в отделе обучения</span></div>
+<div class="chat"><span class="c">&gt; /manager</span><br>✓ сделано: запись на платформе, пост в группе<br>✎ ждёт человека: —<br>дальше: проверить ссылку</div></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icF"/></svg>2026-10-05-vylozhit-zapis.md</span></div>
+<div class="lines"><span class="hl">Текущее состояние: запись на платформе, пост в группе.</span><span class="hl">Следующий шаг: проверить ссылку.</span></div></div>
+</div>
+</div>
+
+<div class="cmdrow">
+<div class="cmdhead">
+<h3><code>/retro</code></h3>
+<p class="say">В воскресенье агент разбирает неделю и спрашивает, что снять.</p>
+<div class="why"><svg class="mini2" viewBox="0 0 120 80" aria-hidden="true">
+<rect x="44" y="4" width="74" height="56"/><path d="M81 4v56"/>
+<text x="48" y="15" class="t">сделано</text><text x="85" y="15" class="t">застряло</text>
+<rect x="50" y="22" width="12" height="10"/><rect x="65" y="22" width="12" height="10"/><rect x="50" y="38" width="12" height="10"/>
+<rect x="88" y="22" width="12" height="10" class="pk"/>
+<circle cx="14" cy="38" r="6"/><path d="M14 44v18M14 62l-5 12M14 62l5 12"/>
+<circle cx="32" cy="38" r="6"/><path d="M32 44v18M32 50l14-10M32 62l-5 12M32 62l5 12"/>
+</svg>
+<p>Зачем: чтобы раз в неделю увидеть, что получилось и что застряло. В компании команда раз в одну-две недели собирается у стены со стикерами: что сделали, что нет, почему, что поменять. <code>/retro</code> собирает задачи недели и раскладывает их так же. В конце задаёт один вопрос: что из застрявшего снять, упростить или продолжить.</p></div>
+</div>
+<div>
+<ul class="f3">
+<li>запускать: в папке штаба, раз в неделю</li>
+<li>появится: <svg class="ic"><use href="#icF"/></svg><code>tasks/retro-2026-W41.md</code></li>
+<li>не делает: не меняет задачи без вашего решения</li>
+</ul>
+</div>
+<div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор в штабе</span></div>
+<div class="chat"><span class="c">&gt; /retro</span><br>Сделано: эфир, запись, сообщения недели.<br>Застряло: обратная связь по домашке.<br><b>Что из застрявшего снять, упростить или продолжить?</b></div></div>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icF"/></svg>tasks/retro-2026-W41.md</span></div>
+<div class="lines"><span class="hl">Застряло: обратная связь по домашке</span>Повторяется: обещания голосом без срока</div></div>
+</div>
+</div>
+</section>
+</article>
+
+<article class="body">
+<section id="postavit">
+<div class="sec-h"><span class="num">03</span><h2>Что нужно и как поставить</h2></div>
+<p>В файле правил штаба <code>AGENTS.md</code> — по строке на каждый отдел: где лежат его задачи.</p>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#icF"/></svg>штаб/AGENTS.md</span></div>
+<pre># Штаб
+
+## Отделы
+<span class="hl">Обучение: ../corp-learn. Задачи отдела лежат в ../corp-learn/tasks/.</span></pre></div>
+<p class="cap">Без этой строки daily и retro останавливаются, manager спрашивает</p>
+<figure class="yn" aria-label="Есть строка и нет строки">
+<div class="bx f m">Задачи отдела лежат в …</div><i class="to"></i><div class="bx">daily, retro работают</div>
+<div class="bx d g">строки нет</div><i class="to p"></i><div class="bx p">стоп: просит дописать строку</div>
+</figure>
+<p>Ставьте по одному скиллу: сначала агент рассказывает, потом устанавливает.</p>
+<div class="win"><div class="bar"><i></i><i></i><i></i><span>разговор в штабе</span></div>
+<div class="dz">
+<div class="ask">Вот скилл: github.com/serejaris/personal-corp-os/tree/main/skills/daily. Расскажи, что за скилл и как он мне может быть полезен</div>
+<div class="ask" style="margin-top:12px">Установи его в штаб, в <code>.agents/skills</code>. Сделай так, чтобы его видели и Claude Code, и Codex, через символическую ссылку. Не копируй файлы</div>
+</div></div>
+<p class="cap">Повторите для каждого скилла</p>
+<ul class="links" id="ssylki">
+<li><a href="https://github.com/serejaris/personal-corp-os/tree/main/skills/daily">personal-corp-os/skills/daily</a></li>
+<li><a href="https://github.com/serejaris/personal-corp-os/tree/main/skills/manager">personal-corp-os/skills/manager</a></li>
+<li><a href="https://github.com/serejaris/personal-corp-os/tree/main/skills/retro">personal-corp-os/skills/retro</a></li>
+</ul>
+<figure class="sym" aria-label="Claude Code и Codex видят одну папку скиллов">
+<div class="ccw"><div class="bx">Claude Code</div><i class="dn"></i></div>
+<div class="bx d m cs"><svg class="ic"><use href="#icD"/></svg>.claude/skills</div>
+<div class="a1"><i class="to"></i><span>ярлык</span></div>
+<div class="bx f m main"><svg class="ic"><use href="#icD"/></svg>.agents/skills/<small>одна папка скиллов</small></div>
+<div class="a2"><i class="to"></i></div>
+<div class="bx cx">Codex</div>
+</figure>
+<p><code>CLAUDE.md</code> — ярлык на <code>AGENTS.md</code>, его читает Claude Code.</p>
+<p>Разговор с агентом начинайте в папке штаба. Сам агент скиллы не запускает, только по вашей команде.</p>
+</section>
+
+<section id="spotknetes">
+<div class="sec-h"><span class="num">04</span><h2>Где споткнётесь</h2></div>
+<ul class="trips">
+<li><svg class="ico" viewBox="0 0 110 56" aria-hidden="true"><rect x="2" y="8" width="44" height="26" class="p d"/><text x="12" y="25" class="s p">чат</text><text x="18" y="52" class="p">✕</text><line x1="48" y1="21" x2="60" y2="21" class="ar"/><rect x="62" y="8" width="46" height="26" class="f"/><text x="70" y="25" class="s">файл</text><text x="78" y="52">✓</text></svg><div><b>«Зафиксировал» без записи.</b> Если агент не записал в файл, этого не было. В чате «Запись выложена», а в <code>vylozhit-zapis.md</code> пусто — задача не сделана. Правило: записывать в файл сразу.</div></li>
+<li><svg class="ico" viewBox="0 0 110 56" aria-hidden="true"><rect x="2" y="6" width="50" height="24"/><text x="8" y="22" class="s">урок ✓</text><rect x="58" y="6" width="50" height="24" class="p d"/><text x="64" y="22" class="s p">пост?</text><text x="4" y="48" class="s p">обещание открыто</text></svg><div><b>Обещание без подтверждения.</b> Урок проведён, а запись в группе «не видна». Обещание открыто, пока нет подтверждения: ссылки на пост или на запись.</div></li>
+</ul>
+</section>
+</article>
+
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a></footer>
+<script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script>
+</body>
+</html>
