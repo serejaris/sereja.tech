@@ -2,7 +2,7 @@
 
 ## Current phase
 
-`M22 completed — natural-ratio article covers are live and production smoke passed`
+`M16 completed — rollback governance, Git-connected production rollout, and smoke passed`
 
 ## Done
 
@@ -38,7 +38,6 @@
 - [x] M15 local audit, implementation, and validation completed: issue `#140` reviewed; the production target browser check confirmed title, trailing-slash canonical, `lang="ru"`, description, `BlogPosting` + `BreadcrumbList`, images, and sitemap presence; two explicit contextual donors added; `batch_c` and dynamic priority-batch handling added; full helper stack and local browser smoke passed.
 - [x] M15 release and production smoke completed: commits `4f21fa1` (M14) and `cec1a27` (M15) were pushed with `git push origin main`; the Git-connected production deploy is live. Browser smoke observed `/blog/pipeline-born-by-hand/` self-canonical at `https://sereja.tech/blog/pipeline-born-by-hand/`, index-default, `BlogPosting` + `BreadcrumbList`, sitemap entry, both explicit donors live, and M14 Superpowers plus AGENTS title/description live; an independent URL read confirmed the blog-post-pipeline donor. GSC URL Inspection was skipped due Chrome profile lock; manual follow-up retained and non-blocking.
 - [x] M16 completed: four critics rejected the ungrounded Superpowers winner rewrite; the title, description, opening, and targeted H2 were restored from `4f21fa1^` while preserving the M15 donor. The mandatory AGENTS guardrail and ADR `0001` now govern protected organic winners; clean rollback validation passed, commit `c5182d1` was pushed to `main`, and Git-connected production browser smoke passed. Live GSC URL Inspection was skipped due Chrome profile lock; manual follow-up is optional and non-blocking.
-- [x] M22 completed and released through PR `#184` / squash commit `b9aa0d9`: Reading Ledger article covers now render at their intrinsic aspect ratio on desktop and mobile; production smoke confirmed the ChatGPT Images 2.5 article and full `1280 × 720` cover return `200`.
 
 ## In progress
 - None.
@@ -61,7 +60,6 @@
   4. search-fit tuning.
 - Trailing-slash canonical policy stays in place.
 - Taxonomy and term pages stay `noindex, follow`.
-- Reading Ledger article covers preserve their intrinsic aspect ratio; fixed-ratio cropping remains limited to card thumbnails.
 - Board and issue sync is best-effort and never blocks repo work.
 - CTR optimization is intentionally deferred until after indexation fundamentals.
 - `context.md` is now the local PRD for this run because the pack referenced it and the file did not exist.
@@ -254,10 +252,6 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 | 2026-08-18 | M19 Grok Bot guide publication | `content/blog/grok-bot-cloud-agents-guide.md`, `static/images/blog/grok-bot-cloud-agents-guide-preview.png`, `static/images/blog/grok-bot/*.webp`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#159`; commit `a65d14e` | style and editorial gates; independent fact, persona, and editorial reviews; `hugo build --gc --minify`; rendered-HTML assertions; full SEO helper stack; `git diff --check`; Git-connected `main` push; production HTML, cover, redirect, canonical, sitemap, and 840x480 browser smoke; Telegram queue add | pass: guide live with one H1, seven H2 sections, 24 localized diagrams in the body, self-canonical URL, valid OG cover, and Telegram queue item `e2fbbf7c` for 2026-08-19 08:00 MSK | monitor production and queued announcement |
 | 2026-08-18 | M19 owner-feedback rewrite and exact-title rollout | `content/blog/grok-bot-cloud-agents-guide.md`, `static/images/blog/grok-bot-cloud-agents-guide-preview.png`, `README.md`; issue `#159`; site commit `d95c36e`; corp-media commit `0f46c82` | exact title check; 1365-word style and editorial gates; independent fact and persona reviews; `hugo --gc --minify`; rendered article assertions; JavaScript syntax; full SEO helper stack; Git-connected `main` push; production HTML, cover hash, 308 redirect, canonical, sitemap, 24-figure count, and 840x480 browser smoke | pass: «Гайд по использованию Grok Bot» is live with the expanded standalone guide and corrected cover; existing Telegram queue item `e2fbbf7c` remains scheduled for 2026-08-19 08:00 MSK | monitor production and queued announcement |
 | 2026-08-18 | M19 full-adaptation fidelity correction | `content/blog/grok-bot-cloud-agents-guide.md`; issue `#159`; commit `ccc2259` | source-to-public structural and visual diff; five deaify critics; current xAI and Hermes fact audit; persona gate; reverse outline; editorial judge; style and structural gates; `hugo --gc --minify`; rendered heading and 25-image-order assertions; full SEO helper stack; production HTML, cover hash, redirect, canonical, sitemap, and 840x480 TL;DR smoke | pass: the live article restores the owner-provided TL;DR opening, 16 H2 + 1 H3, all 25 localized schemes in source order, memory, collaboration, Auto Review, Hermes, macOS, practical-start, and final sections | monitor production and queued announcement |
-| 2026-09-03 | M20 GPT-6 Astra release article | `content/blog/gpt-6-astra.md`, `static/images/blog/gpt-6-astra*`, `static/design-review/gpt-6-astra-*`, `layouts/blog/paper.html`, `layouts/_default/baseof.html`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#171` | Grok CLI X research; five deaify critics; fact, persona, and editorial gates; style and structural gates; `hugo --gc --minify`; rendered metadata and media assertions; full SEO helper stack; deterministic 1200 px overlap check; Playwright browser review at 840×480 | pass locally: article contains 12 attributed source images, official OpenAI video, a responsive local Astra game video, direct Day One verdict, FAQ schema, trailing-slash canonical, and corrected media/tag layout rules | publication and post-deploy evidence are tracked in issue `#171` and PR `#172` |
-| 2026-09-03 | M20 Astra access-angle correction | `content/blog/gpt-6-astra.md`, `README.md`, `docs/PLAN.md`, `docs/STATUS.md`; issue `#171`; PR `#173`; merge `3e3f2fde` | five title critics; style and structural gates; Hugo build; full SEO helper stack; Playwright local and production review at 840×480 | pass: production title states the Day One access question; previous migration framing is absent; Telegram queue item `171741aa` is scheduled for 2026-09-04 08:00 MSK | monitor production and queued announcement |
-| 2026-09-17 | M22 uncropped article covers | `layouts/_default/baseof.html`, `docs/PLAN.md`, `docs/STATUS.md` | `hugo --gc --minify`; rendered cover CSS and `1280 × 720` HTML assertions; SEO helper stack; `git diff --check`; local server smoke | pass; browser CLI unavailable because this runtime blocks Unix sockets, deterministic render checks passed | Git-connected rollout and production smoke |
-| 2026-09-17 | M22 Git-connected rollout and production smoke | PR `#184`; squash commit `b9aa0d9`; `docs/PLAN.md`; `docs/STATUS.md` | Vercel commit status; cache-busted production article fetch; production cover asset HEAD; live HTML/CSS assertions | pass: `sereja-tech` deployment succeeded, article and cover return `200`, intrinsic `1280 × 720` dimensions and natural-ratio styles are live | monitor article layout |
 
 ## Blocker log
 
@@ -299,26 +293,42 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 - `2026-03-13`: issue `#69` moved to `Done`; issue `#70` is the next `Ready` follow-up on Project `4`.
 - `2026-03-13`: issue `#70` moved to `Done`; issue `#71` is now `Ready` on Project `4`.
 
-## 2026-09-05 — SDLC guide publication preparation
 
-Prepared the approved `/blog/sdlc-agent-cycle/` article for PR #170. Added a 45-character frontmatter title, 127-character description, publication date 2026-09-05, updated 1440×810 social preview, three contextual outbound links and two inbound links. Preserved the general task-system angle and configurable executor model. Source review corrected an unconfirmed successful test run and removed an unsupported timing claim.
+## 2026-09-05 — M20 paper design visual plan
 
-Independent fact and voice checks passed; editorial status is `ready_for_autonomous_publish`. Style lint: 875 prose words, score 10/10; structural guide lint passed with the approved nine sections. All seven SVG diagrams parse; desktop 1440×900 and mobile 390 px render without horizontal overflow. Hugo uses Git information for `dateModified`, so final metadata is validated after the release commit. The final deployment and live checks are tracked in [corp-content #61](https://github.com/serejaris/corp-content/issues/61).
-
-The README generator now includes indexable HTML articles, so the pre-commit regeneration retains the SDLC release. Draft and noindex variants stay excluded.
-
-
-## 2026-09-17 — Jev browser decision explainer
-
-Prepared `/blog/jev-voice-browser/` with a scoped `lesson` layout, two inline diagrams and two factual 1440×900 screenshots. The article explains model inputs, choice probabilities, code validation, successful execution and an observed false-negative abstention. It links the existing Jev and Structured Output articles and the public MIT repository `https://github.com/serejaris/voice-browser`. Existing post title, description and intro are preserved; one contextual donor link was added.
-
-The owner's latest direction removes required prompt cards from this article and the lesson-guide-writer skill. The article uses concept explanation and concrete observations. Full voice-to-action verification remains explicitly unconfirmed; typed Jev actions and Russian speech recognition were observed separately. Timings distinguish preparation/network/validation from execution dispatch and page loading.
-
-Hugo build passed. CUA browser checks at 1440×900 and 375×900 found no document horizontal overflow; SVGs scroll inside their own containers on mobile. Screenshots are public teaching content only. Production must ship through the connected Git repository; issue #185 records post-deploy evidence.
+- User scope: visual plan first; lesson-guide-writer visual system; first version desktop only.
+- Added `docs/design-plans/2026-09-05-paper/`: standalone `plan.html`, nine prototypes, production before screenshots, after renders, source data, generators and validation notes.
+- Coverage: home, standard article, archive, interactive article excerpt, about, links, tags, tag selection, 404; six additional search/content/prompt/chart states.
+- Adopted assumptions: compare against live production; keep article text and canonical URL policy; prototype the main column at 740 px; lead the home page with articles; show videos as links pending design selection; use title-only prototype search; make the rich article a disclosed excerpt.
+- Playwright passed at 1440 × 900: one H1 and no horizontal overflow across nine prototypes; zero tables; no JavaScript errors; three plan modes; nine page selectors; seven stages; zoom/Escape; embedded navigation; search and empty states; topic filtering/reset; prompt toggle/copy; next chart. Independent review finding in srcdoc History API handled safely and rechecked via HTTP and file://.
+- Skipped: mobile at user request; Hugo/SEO checks because runtime/content/config/templates were unchanged; deployment outside this planning scope.
+- board-sync: skipped (no external tracker update requested for this local design artifact).
+- Next action: choose the visual direction in the artifact, then implement the planned stages. No production design change is marked complete.
 
 
-## 2026-09-17 — Jev reader-focused revision
+## 2026-09-05 — M20 owner-feedback correction
 
-Rewrote the Jev browser article as a self-contained explanation for a general business reader. Answer types are explained through concrete examples; API fields, setup details, research-process commentary and an unnecessary confidence-field detour were removed. Sources remain at the end. The original attributed video, successful typed-command screenshot and false-negative example remain. The prototype is described through observed typed input; voice control is explicitly experimental.
+- Root cause of misleading «current» comparison: capture forced `color_scheme=light`, while the user's browser uses dark mode. Verified the actual open production tab; recaptured nine pages via CUA with dark mode and measured CSS viewport 1440 × 900.
+- Replaced plan chrome with the lesson-guide-writer paper document, 740 px column, PT Serif/PT Mono, regular TOC, sequential screen pairs. No board, tabs, modal viewer or scripts in the current plan, following the user's more specific correction.
+- Browser comments implemented in isolated mockups: video player restored before homepage articles; standard post cover moved above H1.
+- Updated `build_plan.py`, `build_prototypes.py`, `after-*.html`, 11 before/after captures, manifest, README and evidence in `docs/design-plans/2026-09-05-paper/`.
+- CUA verification: 18 images measured 1440 × 900; one paper column; no broken TOC anchors or horizontal page overflow; video iframe present; article image bottom lies above H1 top. User's existing plan tab reloaded; temporary capture tab closed and viewport override reset. Mobile explicitly skipped. Hugo/SEO/release not applicable to this docs-only revision.
+- `check_plan.py`: image bytes match source files; all local artifact links and anchor targets exist. Earlier M20 board claims describe superseded v1 only.
 
-Added a three-step lead diagram with a vertical mobile version. Replaced the infrastructure diagram with model inputs/outputs and simplified execution checks. Existing section anchors remain valid. Independent text fact audit passed. Production-baseURL Hugo build, four SVG accessibility/uniqueness checks, five section anchors, six figure checks and no-code/no-table assertions passed. CUA verified 1440×900 desktop and 375×900 mobile, with no document overflow and a readable mobile lead diagram.
+
+## 2026-09-05 — M20 opening diagram
+
+- Added `transition-diagram.svg` through the diagram-design illustrator role and embedded it via `build_plan.py` immediately after the masthead. Six steps show current site, mockups, author selection, implementation, verification and release.
+- Added a short practical paragraph after the figure and retained the regular TOC below it.
+- CUA verification at CSS viewport 1440 × 900: accessible SVG title/description present; every text label inside the SVG bounds; header → figure → paragraph → TOC; no page overflow. Screenshot: `screens/plan-opening-diagram.png`; evidence: `diagram-validation.json`.
+- `check_plan.py` still passes the 18 source-image comparisons and artifact links. Mobile remains skipped by user request; Hugo/SEO/deploy are outside this documentation-only change.
+
+
+## 2026-09-05 — M20 side-by-side comparison rule
+
+- Owner request recorded in `/Users/ris/.claude/skills/visual-plan/SKILL.md`: two simultaneously visible images, before left and future/verified-after right; equal viewport and scale; compatible with lesson-guide-writer.
+- Updated `build_plan.py` and regenerated `plan.html`: nine wide comparison pairs, paper text column and opening diagram preserved. README refreshed.
+- Skill scenario check: before the edit the reader permitted vertical stacking; after the edit it produced two equal columns, correct planned/implemented labels and no mandatory board/timeline.
+- `check_plan.py` passed: all 18 embedded images match source files and local links resolve. CUA at 1440 × 900 verified all nine image pairs share y-position and dimensions, original images are 1440 × 900, no horizontal overflow. Evidence: `comparison-validation.json`, `screens/plan-side-by-side.jpg`.
+- Restarted the local artifact server after empty responses; opened the updated plan in a fresh tab after the old tab remained on its error document.
+- Mobile skipped by request; Hugo/SEO/deployment skipped for this skill/docs-only change.

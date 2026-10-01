@@ -1053,99 +1053,41 @@ Publish a source-backed Russian guide to the first Grok Bot workflow with locali
 - The body uses exactly three evidence pillars and one expanded example.
 - The production page and cover asset return `200`, and the Telegram announcement is queued through the standard blog pipeline.
 
+
 ---
 
-## M20 — GPT-6 Astra release article
+## M20 — Paper design visual plan
 
 Status: `[x]`
 
-### Goal
+### Scope
 
-Prepare a source-backed Day One article about GPT-6 Astra with the official OpenAI release facts, the complete Artificial Analysis media set, and early user-made demonstrations from X.
-
-### Tasks
-
-- [x] Verify current model access, pricing, limits, and agent features against official OpenAI sources.
-- [x] Capture the official Artificial Analysis X thread and all eight attached charts.
-- [x] Verify early user-made Astra videos in X and distinguish author claims from independently measured results.
-- [x] Add local media, an SEO cover, metadata, FAQ schema, internal links, and one CTA.
-- [x] Keep article videos inside the reading column at desktop and mobile widths.
-- [x] Repair the tag-link template so the repository redirect-source audit can inspect the build cleanly.
-- [x] Pass style, structural, fact, persona, Hugo, rendered HTML, and SEO checks.
-- [x] Prepare the change on a feature branch with 840×480 visual review frames.
-- [x] Replace the premature Sol migration angle with the actual Day One access question.
-
-### Definition of done
-
-- `/blog/gpt-6-astra/` renders with one H1, six H2 sections, trailing-slash canonical, FAQ schema, 12 source images, the official OpenAI video, and one local user-made Astra video.
-- The opening distinguishes the completed release from the staged account rollout.
-- Artificial Analysis measurements are scoped to its harness and attributed to the official thread.
-- The user-demo section identifies the author, links the original X post, shows the video, and states the limits of the evidence.
-- Article videos stay within the content column and never overlap the desktop table of contents.
-
-## M21 — SDLC article release preparation
-
-Status: `[x]`
-
-### Goal
-
-Publish the founder-approved SDLC guide at `/blog/sdlc-agent-cycle/` through the existing PR #170 and Git-connected Vercel. Editorial tracking and production verification: [corp-content #61](https://github.com/serejaris/corp-content/issues/61).
+Explicit user request on 2026-09-05: prepare a visual plan before site implementation, using the lesson-guide-writer paper visual canon and visual-plan board/timeline. Desktop only for this first version.
 
 ### Tasks
 
-- [x] Preserve the approved platform-independent task layer and configurable worker model.
-- [x] Correct the bot example against its source: the repeated checks stopped at the platform limit; success is unconfirmed.
-- [x] Add concise search metadata, dated publication metadata, an updated social preview, three contextual outbound links and two inbound links.
-- [x] Verify the article with independent fact and editorial review, Hugo build, rendered metadata and discovery checks.
-- [x] Capture desktop 1440×900 and mobile 390 px visual evidence for PR #170.
+- [x] Inventory the current page templates and capture production at 1440 × 900.
+- [x] Create nine isolated HTML page mockups and six additional comparison states.
+- [x] Build a standalone plan with before/after views, working prototype previews, board and timeline.
+- [x] Check desktop rendering, navigation, search states, prompt copying and graph controls.
+- [x] Resolve the independent audit finding in embedded topic filtering.
+- [x] Save the artifact and validation notes in `docs/design-plans/2026-09-05-paper/` and `docs/STATUS.md`.
 
-### Release evidence
+### Boundary
 
-The release status, final commit and live HTTP checks are recorded in corp-content #61. Production uses the existing Git integration; the URL and slash policy stay fixed.
-
-## M22 — Uncropped article covers
-
-Status: `[x]`
-
-### Goal
-
-Render article cover images at their source aspect ratio so the page template never cuts off their content.
-
-### Tasks
-
-- [x] Remove the fixed desktop and mobile aspect ratios from Reading Ledger article covers.
-- [x] Replace cover cropping with `height: auto` and `object-fit: contain` while preserving responsive `width: 100%`.
-- [x] Verify the affected ChatGPT Images 2.5 cover keeps its rendered `1280 × 720` aspect ratio.
-- [x] Pass the Hugo build, rendered-HTML assertions, SEO helper checks, and diff validation.
-
-### Definition of done
-
-- `.post-cover` uses the image's intrinsic aspect ratio at desktop and mobile widths.
-- Article-list cards retain their existing cropped card treatment.
-- `/blog/chatgpt-images-2-5/` renders the complete cover with intrinsic width and height attributes.
-
-### Release evidence
-
-PR `#184` was squash-merged as `b9aa0d9`. The Git-connected `sereja-tech` deployment passed, and production smoke confirmed the article and `1280 × 720` cover asset return `200` with the natural-ratio CSS live.
+Deliverable: `docs/design-plans/2026-09-05-paper/plan.html`. Production design implementation and release remain future stages inside the plan. Mobile validation was explicitly deferred by the user. Existing content, templates, analytics and URL policy were not changed.
 
 
-## Jev decision model explainer, 2026-09-17
+### M20 revision — owner feedback
 
-Owner request: publish an explanation of Jev through the working Voice Browser example, with diagrams, factual screenshots and an open-source repository.
+- [x] Replace the forced-light baseline with dark production captures matching the user's browser; record theme and CSS viewport evidence.
+- [x] Replace the dashboard presentation with the lesson-guide-writer paper document: 740 px column, PT Serif/PT Mono, in-flow TOC and sequential before/after screens.
+- [x] Restore the homepage video block before articles.
+- [x] Position the article cover above its H1.
+- [x] Verify 18 current image references, desktop rendering and navigation; refresh the user's open plan.
 
-- [x] Explain state, typed questions, candidate choices, probabilities and the code execution boundary.
-- [x] Include two accessible SVG diagrams and two screenshots from actual checks.
-- [x] Use the lesson-guide-writer 1.6.0 concept-first contract with optional prompts; this article contains no prompt cards.
-- [x] Validate the Hugo page and desktop/mobile layout; keep deployment on the Git-connected Vercel path.
-- Production publication and live URL evidence are tracked in issue #185.
+The linear paper plan supersedes M20's original board/timeline presentation at the user's explicit request. Desktop-only scope remains in force.
 
+- [x] Add the user-requested opening process diagram after H1/lede and before the TOC; verify accessible SVG and desktop rendering.
 
-## Jev explainer reader revision, 2026-09-17
-
-Owner request: explain the concept within the article for a general business audience, remove research-process commentary, and add a simple diagram after the lead.
-
-- [x] Explain predefined answer types through routing, urgency and yes/no examples, without requiring a documentation detour.
-- [x] Replace technical diagrams with reader-facing inputs/outputs and execution checks; add a responsive three-step lead diagram.
-- [x] Preserve the attributed original video, factual screenshots, prototype scope and established section anchors.
-- [x] Pass the Hugo build, SVG/anchor/content assertions and CUA visual checks at 1440×900 and 375×900.
-- Publication follows the connected Git deployment path; refs #185.
+- [x] Persist the owner’s web comparison rule in visual-plan and show all nine screenshot pairs side by side: before left, proposed right; verify at 1440 × 900.
