@@ -1,0 +1,92 @@
+[
+  {
+    "key": "home",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Сережа Рис",
+    "height": 900,
+    "url": "https://sereja.tech/",
+    "width": 1440
+  },
+  {
+    "key": "post",
+    "background": "rgb(16, 17, 17)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Почему агент не может выбрать лучший код",
+    "height": 900,
+    "url": "https://sereja.tech/blog/best-practices-code/",
+    "width": 1440
+  },
+  {
+    "key": "blog",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Блог",
+    "height": 900,
+    "url": "https://sereja.tech/blog/",
+    "width": 1440
+  },
+  {
+    "key": "about",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Обо мне",
+    "height": 900,
+    "url": "https://sereja.tech/about/",
+    "width": 1440
+  },
+  {
+    "key": "links",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Мои ссылки",
+    "height": 900,
+    "url": "https://sereja.tech/links/",
+    "width": 1440
+  },
+  {
+    "key": "tags",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Теги",
+    "height": 900,
+    "url": "https://sereja.tech/tags/",
+    "width": 1440
+  },
+  {
+    "key": "topic",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Claude-Code",
+    "height": 900,
+    "url": "https://sereja.tech/tags/claude-code/",
+    "width": 1440
+  },
+  {
+    "key": "error",
+    "background": "rgb(17, 18, 18)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "404",
+    "height": 900,
+    "url": "https://sereja.tech/404/",
+    "width": 1440
+  },
+  {
+    "key": "rich",
+    "background": "rgb(20, 20, 20)",
+    "dark": true,
+    "fonts": "loaded",
+    "h1": "Разбираю Claude Fable 5.1: бенчмарки, отзывы, системная карта и промптинг",
+    "height": 900,
+    "url": "https://sereja.tech/blog/claude-fable-5-1/",
+    "width": 1440
+  }
+]

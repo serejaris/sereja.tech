@@ -1,0 +1,173 @@
+{
+  "captured_at": "2026-07-17T23:49:48Z",
+  "source": "Kimi WebBridge, Google Search Console Page indexing report for sc-domain:sereja.tech",
+  "report": {
+    "name": "Page indexing",
+    "filter": "All known pages",
+    "last_update": "2026-07-09",
+    "indexed": 57,
+    "not_indexed": 243,
+    "not_indexed_reasons_count": 7,
+    "delta_vs_2026-05-07": {
+      "indexed": -18,
+      "not_indexed": 36
+    }
+  },
+  "url_inspections": [
+    {
+      "url": "https://sereja.tech/blog/pipeline-born-by-hand/",
+      "status": "URL is on Google",
+      "page_indexing": "Page is indexed",
+      "last_crawl": "Jul 8, 2026, 5:08:32 PM",
+      "crawled_as": "Googlebot smartphone",
+      "page_fetch": "Successful",
+      "indexing_allowed": "Yes",
+      "user_declared_canonical": "https://sereja.tech/blog/pipeline-born-by-hand/",
+      "google_selected_canonical": "Inspected URL",
+      "sitemaps": ["https://sereja.tech/sitemap.xml"],
+      "referring_pages": ["https://sereja.tech/blog/"]
+    },
+    {
+      "url": "https://sereja.tech/blog/superpowers-brainstorming-workflow/",
+      "status": "URL is on Google",
+      "page_indexing": "Page is indexed",
+      "last_crawl": "Jul 15, 2026, 12:39:59 AM",
+      "crawled_as": "Googlebot smartphone",
+      "page_fetch": "Successful",
+      "indexing_allowed": "Yes",
+      "user_declared_canonical": "https://sereja.tech/blog/superpowers-brainstorming-workflow/",
+      "google_selected_canonical": "Inspected URL",
+      "sitemaps": ["https://sereja.tech/sitemap.xml"],
+      "referring_pages": [
+        "https://www.sereja.tech/blog/",
+        "https://sereja.tech/blog"
+      ]
+    }
+  ],
+  "reasons": [
+    {
+      "reason": "Crawled - currently not indexed",
+      "item_key": "CAMYFyAC",
+      "source": "Google systems",
+      "affected_pages": 112,
+      "validation": "Failed",
+      "validation_started": "2026-05-07",
+      "validation_failed": "2026-05-12",
+      "examples": [
+        {"url": "https://sereja.tech/blog/personal-os-project-audit/", "last_crawled": "Jun 21, 2026"},
+        {"url": "https://sereja.tech/blog/seo-audit-hugo-vercel-checklist/", "last_crawled": "Jun 14, 2026"},
+        {"url": "https://sereja.tech/blog/youtube-chapters-split-concern/", "last_crawled": "Jun 14, 2026"},
+        {"url": "https://sereja.tech/blog/undercast-obs-overlay-fable-5/", "last_crawled": "Jun 13, 2026"},
+        {"url": "https://sereja.tech/blog/ai-writing-pipelines/", "last_crawled": "May 18, 2026"},
+        {"url": "https://sereja.tech/blog/ssot-documentation/", "last_crawled": "May 18, 2026"},
+        {"url": "https://sereja.tech/blog/notebooklm-claude-code-rag/", "last_crawled": "Apr 27, 2026"},
+        {"url": "https://sereja.tech/blog/midi-obs-claude-code/", "last_crawled": "Apr 24, 2026"},
+        {"url": "https://sereja.tech/blog/data-layer-for-agents/", "last_crawled": "Apr 23, 2026"},
+        {"url": "https://live.sereja.tech/feed.xml", "last_crawled": "Apr 21, 2026"}
+      ]
+    },
+    {
+      "reason": "Excluded by 'noindex' tag",
+      "item_key": "CAMYCCAC",
+      "source": "Website",
+      "affected_pages": 93,
+      "validation": "Not Started",
+      "first_detected": "2026-02-21",
+      "note": "Examples shown are taxonomy/tag pages - expected under noindex, follow policy",
+      "examples": [
+        {"url": "https://sereja.tech/tags/блог/", "last_crawled": "Jun 26, 2026"},
+        {"url": "https://sereja.tech/tags/tui/", "last_crawled": "Jun 26, 2026"},
+        {"url": "https://sereja.tech/tags/llms-txt/", "last_crawled": "Jun 25, 2026"},
+        {"url": "https://sereja.tech/tags/websocket/", "last_crawled": "Jun 25, 2026"},
+        {"url": "https://sereja.tech/tags/setup/", "last_crawled": "Jun 23, 2026"},
+        {"url": "https://sereja.tech/tags/онлайн-курсы/", "last_crawled": "Jun 22, 2026"},
+        {"url": "https://sereja.tech/tags/decision-making/", "last_crawled": "May 12, 2026"},
+        {"url": "https://sereja.tech/tags/context-engineering/", "last_crawled": "Apr 28, 2026"},
+        {"url": "https://sereja.tech/tags/vibe-coding/", "last_crawled": "Apr 28, 2026"},
+        {"url": "https://sereja.tech/tags/software-for-one/", "last_crawled": "Apr 28, 2026"}
+      ]
+    },
+    {
+      "reason": "Page with redirect",
+      "item_key": "CAMYCyAC",
+      "source": "Website",
+      "affected_pages": 30,
+      "validation": "Failed",
+      "validation_started": "2026-05-07",
+      "validation_failed": "2026-05-12",
+      "examples": [
+        {"url": "http://sereja.tech/", "last_crawled": "Jul 11, 2026"},
+        {"url": "http://www.sereja.tech/", "last_crawled": "Jul 8, 2026"},
+        {"url": "https://www.sereja.tech/", "last_crawled": "Jul 8, 2026"},
+        {"url": "https://sereja.tech/blog/github-issues-project-context", "last_crawled": "Jul 5, 2026"},
+        {"url": "https://sereja.tech/blog/telegram-autoposter", "last_crawled": "Jul 2, 2026"},
+        {"url": "https://sereja.tech/blog/tui-presentation-claude-code", "last_crawled": "Jun 27, 2026"},
+        {"url": "https://sereja.tech/blog/telegram-api-vs-json-export", "last_crawled": "Jun 20, 2026"},
+        {"url": "https://sereja.tech/blog/blog-to-telegram-skill", "last_crawled": "Jun 11, 2026"},
+        {"url": "https://sereja.tech/blog/skills-knowledge-transfer", "last_crawled": "Jun 9, 2026"},
+        {"url": "https://sereja.tech/blog/claude-code-logs-stack", "last_crawled": "May 10, 2026"}
+      ]
+    },
+    {
+      "reason": "Duplicate, Google chose different canonical than user",
+      "item_key": "CAMYECAC",
+      "source": "Google systems",
+      "affected_pages": 4,
+      "validation": "Started",
+      "validation_started": "2026-05-07",
+      "examples": [
+        {"url": "https://sereja.tech/blog/ai-writing-pipelines", "last_crawled": "Feb 8, 2026"},
+        {"url": "https://sereja.tech/blog/react-presentation-no-build", "last_crawled": "Feb 8, 2026"},
+        {"url": "https://sereja.tech/blog/dev-script-health-checks", "last_crawled": "Feb 7, 2026"},
+        {"url": "https://sereja.tech/blog/document-conversations-not-code", "last_crawled": "Feb 7, 2026"}
+      ]
+    },
+    {
+      "reason": "Not found (404)",
+      "item_key": null,
+      "source": "Website",
+      "affected_pages": 2,
+      "validation": "Not Started",
+      "examples": []
+    },
+    {
+      "reason": "Alternate page with proper canonical tag",
+      "item_key": null,
+      "source": "Website",
+      "affected_pages": 1,
+      "validation": "Passed",
+      "examples": []
+    },
+    {
+      "reason": "Discovered - currently not indexed",
+      "item_key": null,
+      "source": "Google systems",
+      "affected_pages": 1,
+      "validation": "Passed",
+      "examples": []
+    }
+  ],
+  "performance_top_pages": {
+    "report": "Performance > Search results > Pages",
+    "period": "Last 28 days",
+    "search_type": "Web",
+    "totals": {
+      "clicks": 881,
+      "impressions": 25100,
+      "ctr": "3.5%",
+      "average_position": 6.8
+    },
+    "pages": [
+      {"url": "https://sereja.tech/blog/superpowers-brainstorming-workflow/", "clicks": 495, "impressions": 11307},
+      {"url": "https://sereja.tech/blog/cc-alias-bypass-permissions/", "clicks": 99, "impressions": 4512},
+      {"url": "https://sereja.tech/", "clicks": 68, "impressions": 455},
+      {"url": "https://sereja.tech/blog/agents-md-source-of-truth/", "clicks": 49, "impressions": 2054},
+      {"url": "https://sereja.tech/blog/telegram-single-message-digest/", "clicks": 25, "impressions": 1092},
+      {"url": "https://sereja.tech/blog/chrome-devtools-mcp-setup/", "clicks": 21, "impressions": 1114},
+      {"url": "https://sereja.tech/blog/orca-menedzher-agentov/", "clicks": 20, "impressions": 186},
+      {"url": "https://sereja.tech/blog/telegram-api-vs-json-export/", "clicks": 14, "impressions": 1147},
+      {"url": "https://sereja.tech/blog/blog-to-telegram-skill/", "clicks": 14, "impressions": 361},
+      {"url": "https://sereja.tech/blog/omp-orchestration/", "clicks": 11, "impressions": 141}
+    ]
+  }
+}

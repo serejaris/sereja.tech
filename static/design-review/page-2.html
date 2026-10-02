@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sereja.tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0d10;
+            --text: #e9edf1;
+            --muted: #8a9199;
+            --accent: #ff1341;
+            --font-display: 'Unbounded', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+            --container: 1200px;
+        }
+
+        /* Reset & Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--accent); }
+        ul { list-style: none; }
+        img, video, iframe { max-width: 100%; display: block; border: none; }
+        
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 160px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 120px;
+        }
+        .hero-top {
+            margin-bottom: 64px;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 11vw, 9rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            color: var(--text);
+        }
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 48px;
+        }
+        .hero-desc {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--muted);
+            max-width: 600px;
+            line-height: 1.4;
+        }
+        .hero-desc span, .hero-desc a {
+            color: var(--text);
+            font-weight: 600;
+        }
+        .hero-desc a {
+            border-bottom: 1px solid rgba(233, 237, 241, 0.3);
+        }
+        .hero-desc a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .hero-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            max-width: 500px;
+        }
+        .pill-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 100px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+        .pill-link:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* General Section */
+        section {
+            margin-bottom: 140px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 48px;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        .section-subtitle {
+            color: var(--muted);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Videos Section */
+        .video-main {
+            aspect-ratio: 16 / 9;
+            margin-bottom: 24px;
+            background: #111;
+        }
+        .video-main iframe {
+            width: 100%;
+            height: 100%;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .video-card {
+            display: block;
+            position: relative;
+        }
+        .video-thumb {
+            aspect-ratio: 16 / 9;
+            background: #111;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .video-card:hover .video-thumb img {
+            transform: scale(1.05);
+        }
+        .video-meta {
+            color: var(--muted);
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .video-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+        .video-card:hover .video-title {
+            color: var(--accent);
+        }
+
+        /* Poster Gallery (Popular & Latest) */
+        .poster-grid-popular {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+        }
+        .poster-grid-popular .poster-card:nth-child(1),
+        .poster-grid-popular .poster-card:nth-child(2) {
+            grid-column: span 3; /* Half width */
+        }
+        .poster-grid-popular .poster-card:nth-child(n+3) {
+            grid-column: span 2; /* Third width */
+        }
+
+        .poster-grid-latest {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        /* Editorial masonry pattern */
+        @media (min-width: 901px) {
+            .poster-grid-latest .poster-card:nth-child(3n+1) {
+                grid-column: span 2;
+            }
+        }
+
+        .poster-card {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            aspect-ratio: 1200 / 630;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .poster-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+        }
+        .poster-card:hover img {
+            transform: scale(1.02);
+            filter: brightness(1.15);
+        }
+        .poster-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(11, 13, 16, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .poster-card:hover .poster-badge {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+        .poster-badge svg {
+            width: 0;
+            height: 16px;
+            fill: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            margin-left: 0;
+        }
+        .poster-card:hover .poster-badge svg {
+            width: 16px;
+            opacity: 1;
+            margin-left: 12px;
+        }
+
+        .all-articles-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 48px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        .all-articles-link:hover {
+            gap: 24px;
+        }
+
+        /* Links Section */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .link-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .link-row:first-child {
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .link-row:hover {
+            color: var(--accent);
+            padding-left: 32px;
+            padding-right: 32px;
+            background: rgba(255, 19, 65, 0.03);
+        }
+        .link-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        .link-desc {
+            color: var(--muted);
+            text-align: right;
+            max-width: 400px;
+            font-size: 1.125rem;
+            transition: color 0.3s ease;
+        }
+        .link-row:hover .link-desc {
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.875rem;
+            margin-bottom: 24px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+            .hero-links { justify-content: flex-start; }
+            .poster-grid-popular .poster-card { grid-column: span 6 !important; }
+            .poster-grid-latest { grid-template-columns: 1fr; }
+            .video-grid { grid-template-columns: 1fr; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .section-title { font-size: 2.5rem; }
+            .link-row { flex-direction: column; align-items: flex-start; gap: 12px; padding: 32px 0; }
+            .link-desc { text-align: left; }
+            .link-row:hover { padding-left: 16px; padding-right: 16px; }
+            footer { flex-direction: column; gap: 24px; text-align: center; }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+            .poster-card:hover img, .video-card:hover .video-thumb img { transform: none !important; }
+            .pill-link:hover { transform: none !important; }
+            .poster-badge svg { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">sereja.tech</a>
+            <nav class="nav-links">
+                <a href="/blog/">Блог</a>
+                <a href="/about/">Обо мне</a>
+                <a href="https://t.me/ris_ai">Телеграм</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-top">
+                    <h1 class="hero-title">Сережа Рис</h1>
+                </div>
+                <div class="hero-bottom">
+                    <p class="hero-desc">Архитектор агентных систем на <span>Claude Code</span>. Веду <a href="https://t.me/ris_ai">телеграм-канал</a>, <a href="https://www.youtube.com/@serejaris">YouTube</a> и лучшее <a href="https://t.me/vibecod3rs">сообщество вайбкодеров</a>.</p>
+                    <div class="hero-links">
+                        <a href="https://t.me/ris_ai" class="pill-link">Канал</a>
+                        <a href="https://www.youtube.com/@serejaris" class="pill-link">YouTube</a>
+                        <a href="https://t.me/vibecod3rs" class="pill-link">Сообщество</a>
+                        <a href="/blog/" class="pill-link">Блог</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Видео -->
+            <section class="videos">
+                <div class="section-header">
+                    <h2 class="section-title">Видео</h2>
+                </div>
+                <div class="video-main">
+                    <iframe src="https://www.youtube-nocookie.com/embed/B1zEAJC6OdU" title="GPT-5.6 в оркестре OMP: Sol, Terra, Luna" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-grid">
+                    <a href="https://www.youtube.com/watch?v=Nh6Qui9VSUk" class="video-card">
+                        <div class="video-thumb"><img src="https://i.ytimg.com/vi/Nh6Qui9VSUk/maxresdefault.jpg" alt="Claude Fable 5, день 4: карта агентов — кому отдать руки"></div>
+                        <div class="video-meta">4 июл</div>
+                        <h3 class="video-title">Claude Fable 5, день 4: карта агентов — кому отдать руки</h3>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=FqxeJHDuJ1U" class="video-card">
+                        <div class="video-thumb"><img src="https://i.ytimg.com/vi/FqxeJHDuJ1U/maxresdefault.jpg" alt="Claude Fable вернулся — лимиты урезали: как экономить токены"></div>
+                        <div class="video-meta">1 июл</div>
+                        <h3 class="video-title">Claude Fable вернулся — лимиты урезали: как экономить токены</h3>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=L_W3FTVEa2c" class="video-card">
+                        <div class="video-thumb"><img src="https://i.ytimg.com/vi/L_W3FTVEa2c/maxresdefault.jpg" alt="Sonnet 5: худший релиз Антропиков?"></div>
+                        <div class="video-meta">30 июн</div>
+                        <h3 class="video-title">Sonnet 5: худший релиз Антропиков?</h3>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Популярное -->
+            <section class="popular">
+                <div class="section-header">
+                    <h2 class="section-title">Популярное</h2>
+                    <span class="section-subtitle">— выбор автора</span>
+                </div>
+                <div class="poster-grid-popular">
+                    <a href="/blog/modular-rules-claude-md/" class="poster-card">
+                        <img src="/images/blog/modular-rules-claude-md-preview.png" alt="Модульные правила: как не утонуть в CLAUDE.md">
+                        <div class="poster-badge">17 янв <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/claude-code-vs-codex-cli/" class="poster-card">
+                        <img src="/images/blog/claude-code-vs-codex-cli-preview.png" alt="Claude Code — напарник, Codex — исполнитель">
+                        <div class="poster-badge">9 фев <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/personal-corporation-event-driven-agents/" class="poster-card">
+                        <img src="/images/blog/personal-corporation-event-driven-agents-preview.png" alt="Личная корпорация: сотрудники живут в компьютере">
+                        <div class="poster-badge">12 фев <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/app-types-guide/" class="poster-card">
+                        <img src="/images/blog/app-types-guide-preview.png" alt="Информация или функция: какое приложение ты строишь">
+                        <div class="poster-badge">13 янв <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/subagent-model-cost/" class="poster-card">
+                        <img src="/images/blog/subagent-model-cost-preview.png" alt="Haiku, Sonnet, Opus: какую модель ставить субагенту">
+                        <div class="poster-badge">5 мар <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Последнее из блога -->
+            <section class="latest">
+                <div class="section-header">
+                    <h2 class="section-title">Последнее из блога</h2>
+                </div>
+                <div class="poster-grid-latest">
+                    <a href="/blog/gpt-5-6-review/" class="poster-card">
+                        <img src="/images/blog/gpt-5-6-review-preview.webp" alt="GPT-5.6 в работе: Sol, Terra и Luna">
+                        <div class="poster-badge">9 июл <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/pipeline-born-by-hand/" class="poster-card">
+                        <img src="/images/blog/pipeline-born-by-hand-preview.png" alt="Почему автоматизация не работает без рецепта">
+                        <div class="poster-badge">8 июл <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/omp-orchestration/" class="poster-card">
+                        <img src="/images/blog/omp-orchestration-preview.png" alt="Как я гоняю команду агентов из терминала в omp">
+                        <div class="poster-badge">4 июл <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/lichnaya-korporatsiya/" class="poster-card">
+                        <img src="/images/blog/lichnaya-korporatsiya-preview.png" alt="Личная корпорация: кодекс компании из одного человека">
+                        <div class="poster-badge">2 июл <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/claude-sonnet-5-review/" class="poster-card">
+                        <img src="/images/blog/claude-sonnet-5-review-preview.png" alt="Sonnet 5: скучный релиз с одним полезным навыком">
+                        <div class="poster-badge">1 июл <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/orchestration-without-goals/" class="poster-card">
+                        <img src="/images/blog/orchestration-without-goals-preview.png" alt="Сто агентов, ноль результата">
+                        <div class="poster-badge">30 июн <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/text-evals-grader/" class="poster-card">
+                        <img src="/images/blog/text-evals-grader-preview.png" alt="Как тестировать LLM модели для написания текстов?">
+                        <div class="poster-badge">30 июн <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/orca-menedzher-agentov/" class="poster-card">
+                        <img src="/images/blog/orca-menedzher-agentov-preview.png" alt="Orca вместо четырёх терминалов">
+                        <div class="poster-badge">29 июн <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/youtube-chapters-split-concern/" class="poster-card">
+                        <img src="/images/blog/youtube-chapters-split-concern-preview.png" alt="Генерируем таймкоды для YouTube из транскрипта с помощью AI">
+                        <div class="poster-badge">13 июн <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                    <a href="/blog/ai-radio-agents/" class="poster-card">
+                        <img src="/images/blog/ai-radio-agents-preview.png" alt="Запустил AI-радио, которое делают агенты">
+                        <div class="poster-badge">12 июн <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    </a>
+                </div>
+                <a href="/blog/" class="all-articles-link">
+                    Все статьи 
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </section>
+
+            <!-- Ссылки -->
+            <section class="links">
+                <div class="section-header">
+                    <h2 class="section-title">Ссылки</h2>
+                </div>
+                <div class="links-list">
+                    <a href="https://t.me/ris_ai" class="link-row">
+                        <span class="link-title">рис. AI</span>
+                        <span class="link-desc">Телеграм-канал про AI, вайбкодинг и эксперименты</span>
+                    </a>
+                    <a href="https://t.me/vibecod3rs" class="link-row">
+                        <span class="link-title">Сообщество Вайбкодеров</span>
+                        <span class="link-desc">2000+ человек, обсуждения и взаимопомощь</span>
+                    </a>
+                    <a href="https://www.youtube.com/@serejaris" class="link-row">
+                        <span class="link-title">YouTube</span>
+                        <span class="link-desc">Туториалы и стримы про вайбкодинг</span>
+                    </a>
+                    <a href="https://vibecoding.phd" class="link-row">
+                        <span class="link-title">Кружок Вайбкодинга</span>
+                        <span class="link-desc">Обучение разработке с AI</span>
+                    </a>
+                    <a href="https://hsl.sh" class="link-row">
+                        <span class="link-title">HSL</span>
+                        <span class="link-desc">AI-студия, делаем креативные проекты на заказ</span>
+                    </a>
+                    <a href="https://x.com/riiiiiiiiss" class="link-row">
+                        <span class="link-title">Twitter</span>
+                        <span class="link-desc">Генеративное искусство и код-арт</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div>© 2026 Сережа Рис · sereja.tech</div>
+            <div class="footer-links">
+                <a href="https://t.me/ris_ai">Телеграм</a>
+                <a href="https://www.youtube.com/@serejaris">YouTube</a>
+                <a href="https://github.com/serejaris">GitHub</a>
+                <a href="/index.xml">RSS</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{{- /* Лёгкая замена встроенного youtube-шорткода: iframe грузится лениво,
+     а до клика показывается srcdoc-фасад с превью i.ytimg.com (lite-youtube-embed). */ -}}
+{{- $id := .Get 0 | default (.Get "id") -}}
+{{- if not $id }}{{ errorf "youtube shortcode: missing video id (positional 0 or id=)" }}{{ end -}}
+{{- $title := .Get "title" | default "YouTube video" -}}
+{{- $srcdoc := printf `<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%%}img,span{position:absolute;width:100%%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 .5em black}</style><a href="https://www.youtube-nocookie.com/embed/%s?autoplay=1"><img src="https://i.ytimg.com/vi/%s/hqdefault.jpg" alt="%s"><span>&#9654;</span></a>` $id $id $title -}}
+<iframe
+  src="https://www.youtube-nocookie.com/embed/{{ $id }}"
+  srcdoc="{{ $srcdoc }}"
+  title="{{ $title }}"
+  loading="lazy"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+  style="width:100%;aspect-ratio:16/9;border:0;display:block;margin:26px 0;">
+</iframe>

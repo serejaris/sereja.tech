@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sereja.tech — Журнал</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --fg: #e9edf1;
+      --muted: #8a9199;
+      --accent: #ff1341;
+      --border: rgba(138, 145, 153, 0.2);
+      
+      --font-display: 'Playfair Display', serif;
+      --font-ui: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    .header .logo {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-transform: none;
+    }
+    .header nav {
+      display: flex;
+      gap: 32px;
+    }
+    
+    /* HERO */
+    .hero {
+      padding: 80px 0 100px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-title {
+      grid-column: 1 / 9;
+      font-family: var(--font-display);
+      font-size: clamp(80px, 12vw, 160px);
+      line-height: 0.9;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+    .hero-intro {
+      grid-column: 9 / 13;
+      align-self: end;
+      font-size: 18px;
+      line-height: 1.6;
+      padding-bottom: 16px;
+    }
+    .hero-intro a {
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 4px;
+    }
+    .hero-intro a:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    /* SECTION TITLES */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 48px;
+      padding-top: 48px;
+      border-top: 2px solid var(--fg);
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .section-header .meta {
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* VIDEO SECTION */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+    .video-main {
+      grid-column: 1 / 9;
+    }
+    .video-main iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+    .video-main iframe:hover {
+      filter: grayscale(0%);
+    }
+    .video-main-meta {
+      margin-top: 16px;
+    }
+    .video-main-meta h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .video-main-meta .date {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .video-list {
+      grid-column: 9 / 13;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+    .video-item {
+      display: block;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .video-item h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      transition: color 0.3s;
+    }
+    .video-item:hover h4 {
+      color: var(--accent);
+    }
+    .video-item .date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* POPULAR SECTION */
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+    .popular-item {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid var(--border);
+    }
+    .popular-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(80%) contrast(1.1);
+      transition: transform 0.7s ease, filter 0.7s ease;
+    }
+    .popular-item:hover img {
+      transform: scale(1.03);
+      filter: grayscale(0%) contrast(1);
+    }
+    .popular-item .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+    
+    /* Fixing popular layout explicitly */
+    .popular-item-1 { grid-column: 1 / 9; grid-row: 1 / 3; aspect-ratio: 16 / 9; }
+    .popular-item-2 { grid-column: 9 / 13; grid-row: 1 / 2; aspect-ratio: 1200 / 630; }
+    .popular-item-3 { grid-column: 9 / 13; grid-row: 2 / 3; aspect-ratio: 1200 / 630; }
+    .popular-item-4 { grid-column: 1 / 7; grid-row: 3 / 4; aspect-ratio: 1200 / 630; }
+    .popular-item-5 { grid-column: 7 / 13; grid-row: 3 / 4; aspect-ratio: 1200 / 630; }
+
+    /* LATEST SECTION */
+    .latest-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+      margin-bottom: 40px;
+    }
+    .latest-item {
+      display: flex;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .latest-item:first-child, .latest-item:nth-child(2) {
+      border-top: 1px solid var(--border);
+    }
+    .latest-item .date {
+      flex: 0 0 80px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .latest-item h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    .latest-item:hover h3 {
+      color: var(--accent);
+    }
+    
+    .all-articles {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      margin-bottom: 80px;
+      color: var(--fg);
+    }
+    .all-articles:hover {
+      color: var(--accent);
+    }
+
+    /* LINKS SECTION */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 100px;
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+    }
+    .link-item {
+      display: block;
+    }
+    .link-item h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      transition: color 0.3s;
+    }
+    .link-item:hover h3 {
+      color: var(--accent);
+    }
+    .link-item p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .hero-title { grid-column: 1 / -1; }
+      .hero-intro { grid-column: 1 / -1; }
+      
+      .video-grid { grid-template-columns: 1fr; }
+      .video-main, .video-list { grid-column: 1 / -1; }
+      
+      .popular-grid { display: flex; flex-direction: column; }
+      
+      .latest-list { grid-template-columns: 1fr; }
+      .latest-item:nth-child(2) { border-top: none; }
+      
+      .links-grid { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 600px) {
+      .header { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .links-grid { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; gap: 24px; align-items: flex-start; }
+      .hero-title { font-size: 16vw; }
+      .section-header { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <a href="/" class="logo">sereja.tech</a>
+      <nav>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">Обо мне</a>
+        <a href="https://t.me/ris_ai" target="_blank" rel="noopener">Телеграм</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1 class="hero-title">Сережа<br>Рис.</h1>
+      <div class="hero-intro">
+        <p>Архитектор агентных систем на Claude Code. Веду <a href="https://t.me/ris_ai" target="_blank" rel="noopener">телеграм-канал</a>, <a href="https://www.youtube.com/@serejaris" target="_blank" rel="noopener">YouTube</a> и <a href="https://t.me/vibecod3rs" target="_blank" rel="noopener">лучшее сообщество вайбкодеров</a>.</p>
+      </div>
+    </section>
+
+    <div class="section-header">
+      <h2>Свежее видео</h2>
+      <span class="meta">— YouTube</span>
+    </div>
+    <section class="video-grid">
+      <div class="video-main">
+        <iframe src="https://www.youtube-nocookie.com/embed/B1zEAJC6OdU" title="GPT-5.6 в оркестре OMP: Sol, Terra, Luna" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-main-meta">
+          <h3>GPT-5.6 в оркестре OMP: Sol, Terra, Luna</h3>
+          <span class="date">9 июл</span>
+        </div>
+      </div>
+      <div class="video-list">
+        <a href="https://www.youtube.com/watch?v=Nh6Qui9VSUk" class="video-item" target="_blank" rel="noopener">
+          <h4>Claude Fable 5, день 4: карта агентов — кому отдать руки</h4>
+          <span class="date">4 июл</span>
+        </a>
+        <a href="https://www.youtube.com/watch?v=FqxeJHDuJ1U" class="video-item" target="_blank" rel="noopener">
+          <h4>Claude Fable вернулся — лимиты урезали: как экономить токены</h4>
+          <span class="date">1 июл</span>
+        </a>
+        <a href="https://www.youtube.com/watch?v=L_W3FTVEa2c" class="video-item" target="_blank" rel="noopener">
+          <h4>Sonnet 5: худший релиз Антропиков?</h4>
+          <span class="date">30 июн</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="section-header">
+      <h2>Популярное</h2>
+      <span class="meta">— Выбор автора</span>
+    </div>
+    <section class="popular-grid">
+      <a href="/blog/modular-rules-claude-md/" class="popular-item popular-item-1">
+        <img src="/images/blog/modular-rules-claude-md-preview.png" alt="Модульные правила: как не утонуть в CLAUDE.md" loading="lazy">
+        <div class="sr-only">
+          <h3>Модульные правила: как не утонуть в CLAUDE.md</h3>
+          <span>17 янв</span>
+        </div>
+      </a>
+      <a href="/blog/claude-code-vs-codex-cli/" class="popular-item popular-item-2">
+        <img src="/images/blog/claude-code-vs-codex-cli-preview.png" alt="Claude Code — напарник, Codex — исполнитель" loading="lazy">
+        <div class="sr-only">
+          <h3>Claude Code — напарник, Codex — исполнитель</h3>
+          <span>9 фев</span>
+        </div>
+      </a>
+      <a href="/blog/personal-corporation-event-driven-agents/" class="popular-item popular-item-3">
+        <img src="/images/blog/personal-corporation-event-driven-agents-preview.png" alt="Личная корпорация: сотрудники живут в компьютере" loading="lazy">
+        <div class="sr-only">
+          <h3>Личная корпорация: сотрудники живут в компьютере</h3>
+          <span>12 фев</span>
+        </div>
+      </a>
+      <a href="/blog/app-types-guide/" class="popular-item popular-item-4">
+        <img src="/images/blog/app-types-guide-preview.png" alt="Информация или функция: какое приложение ты строишь" loading="lazy">
+        <div class="sr-only">
+          <h3>Информация или функция: какое приложение ты строишь</h3>
+          <span>13 янв</span>
+        </div>
+      </a>
+      <a href="/blog/subagent-model-cost/" class="popular-item popular-item-5">
+        <img src="/images/blog/subagent-model-cost-preview.png" alt="Haiku, Sonnet, Opus: какую модель ставить субагенту" loading="lazy">
+        <div class="sr-only">
+          <h3>Haiku, Sonnet, Opus: какую модель ставить субагенту</h3>
+          <span>5 мар</span>
+        </div>
+      </a>
+    </section>
+
+    <div class="section-header">
+      <h2>Последнее</h2>
+      <span class="meta">— Из блога</span>
+    </div>
+    <section class="latest">
+      <div class="latest-list">
+        <a href="/blog/gpt-5-6-review/" class="latest-item">
+          <span class="date">9 июл</span>
+          <h3>GPT-5.6 в работе: Sol, Terra и Luna</h3>
+        </a>
+        <a href="/blog/pipeline-born-by-hand/" class="latest-item">
+          <span class="date">8 июл</span>
+          <h3>Почему автоматизация не работает без рецепта</h3>
+        </a>
+        <a href="/blog/omp-orchestration/" class="latest-item">
+          <span class="date">4 июл</span>
+          <h3>Как я гоняю команду агентов из терминала в omp</h3>
+        </a>
+        <a href="/blog/lichnaya-korporatsiya/" class="latest-item">
+          <span class="date">2 июл</span>
+          <h3>Личная корпорация: кодекс компании из одного человека</h3>
+        </a>
+        <a href="/blog/claude-sonnet-5-review/" class="latest-item">
+          <span class="date">1 июл</span>
+          <h3>Sonnet 5: скучный релиз с одним полезным навыком</h3>
+        </a>
+        <a href="/blog/orchestration-without-goals/" class="latest-item">
+          <span class="date">30 июн</span>
+          <h3>Сто агентов, ноль результата</h3>
+        </a>
+        <a href="/blog/text-evals-grader/" class="latest-item">
+          <span class="date">30 июн</span>
+          <h3>Как тестировать LLM модели для написания текстов?</h3>
+        </a>
+        <a href="/blog/orca-menedzher-agentov/" class="latest-item">
+          <span class="date">29 июн</span>
+          <h3>Orca вместо четырёх терминалов</h3>
+        </a>
+        <a href="/blog/youtube-chapters-split-concern/" class="latest-item">
+          <span class="date">13 июн</span>
+          <h3>Генерируем таймкоды для YouTube из транскрипта с помощью AI</h3>
+        </a>
+        <a href="/blog/ai-radio-agents/" class="latest-item">
+          <span class="date">12 июн</span>
+          <h3>Запустил AI-радио, которое делают агенты</h3>
+        </a>
+      </div>
+      <a href="/blog/" class="all-articles">Все статьи &rarr;</a>
+    </section>
+
+    <section class="links-grid">
+      <a href="https://t.me/ris_ai" class="link-item" target="_blank" rel="noopener">
+        <h3>рис. AI</h3>
+        <p>Телеграм-канал про AI, вайбкодинг и эксперименты</p>
+      </a>
+      <a href="https://t.me/vibecod3rs" class="link-item" target="_blank" rel="noopener">
+        <h3>Сообщество Вайбкодеров</h3>
+        <p>2000+ человек, обсуждения и взаимопомощь</p>
+      </a>
+      <a href="https://www.youtube.com/@serejaris" class="link-item" target="_blank" rel="noopener">
+        <h3>YouTube</h3>
+        <p>Туториалы и стримы про вайбкодинг</p>
+      </a>
+      <a href="https://vibecoding.phd" class="link-item" target="_blank" rel="noopener">
+        <h3>Кружок Вайбкодинга</h3>
+        <p>Обучение разработке с AI</p>
+      </a>
+      <a href="https://hsl.sh" class="link-item" target="_blank" rel="noopener">
+        <h3>HSL</h3>
+        <p>AI-студия, делаем креативные проекты на заказ</p>
+      </a>
+      <a href="https://x.com/riiiiiiiiss" class="link-item" target="_blank" rel="noopener">
+        <h3>Twitter</h3>
+        <p>Генеративное искусство и код-арт</p>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="copyright">
+        &copy; 2026 Сережа Рис &middot; sereja.tech
+      </div>
+      <div class="footer-links">
+        <a href="https://t.me/ris_ai" target="_blank" rel="noopener">Телеграм</a>
+        <a href="https://www.youtube.com/@serejaris" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://github.com/serejaris" target="_blank" rel="noopener">GitHub</a>
+        <a href="/index.xml">RSS</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

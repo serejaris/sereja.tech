@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sereja.tech — Сережа Рис</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --text: #e9edf1;
+      --muted: #8a9199;
+      --accent: #ff1341;
+      --border: rgba(233, 237, 241, 0.08);
+      --font: 'Manrope', sans-serif;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(11, 13, 16, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .site-header .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .main-nav a {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .main-nav a:hover {
+      color: var(--text);
+    }
+
+    .layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 80px 40px 80px 40px;
+      position: sticky;
+      top: 77px;
+      height: calc(100vh - 77px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-wrapper h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: transparent;
+      padding-left: 0;
+      padding-right: 0;
+      display: inline-flex;
+      justify-content: flex-start;
+      color: var(--muted);
+    }
+
+    .btn-outline::after {
+      content: "→";
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-outline:hover::after {
+      transform: translateX(4px);
+    }
+
+    .toc {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .toc a {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toc a::before {
+      content: "";
+      display: block;
+      width: 12px;
+      height: 1px;
+      background-color: var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .toc a:hover,
+    .toc a.active {
+      color: var(--text);
+    }
+
+    .toc a:hover::before,
+    .toc a.active::before {
+      width: 24px;
+      background-color: var(--accent);
+    }
+
+    .content {
+      padding: 0;
+    }
+
+    .section {
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .section-title .badge {
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--text);
+    }
+
+    .video-main {
+      margin-bottom: 48px;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #12151a;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+    }
+
+    .video-main h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+    }
+
+    .video-item {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .v-img {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: #12151a;
+      border: 1px solid var(--border);
+    }
+
+    .v-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .video-item:hover .v-img img {
+      transform: scale(1.03);
+    }
+
+    .video-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .video-item:hover h4 {
+      color: var(--accent);
+    }
+
+    .meta {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .popular-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .popular-card.featured {
+      grid-column: 1 / -1;
+    }
+
+    .popular-card {
+      display: block;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #12151a;
+      border: 1px solid var(--border);
+    }
+
+    .img-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 52.5%;
+    }
+
+    .img-wrapper img {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s;
+    }
+    
+    .badge-static {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(11,13,16,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text);
+      z-index: 2;
+      border: 1px solid rgba(255,255,255,0.1);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 13, 16, 0.9) 0%, rgba(11, 13, 16, 0.2) 60%, rgba(11, 13, 16, 0) 100%);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px;
+      transition: opacity 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      .popular-card:hover .img-wrapper img {
+        transform: scale(1.02);
+        filter: blur(2px) brightness(0.8);
+      }
+      .popular-card:hover .overlay {
+        opacity: 1;
+      }
+      .popular-card:hover .badge-static {
+        opacity: 0;
+      }
+    }
+
+    .overlay .date {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      transform: translateY(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .overlay .read-btn {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(10px);
+      transition: transform 0.3s ease 0.05s;
+    }
+
+    .popular-card:hover .overlay .date,
+    .popular-card:hover .overlay .read-btn {
+      transform: translateY(0);
+    }
+
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .recent-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 30px;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .r-date {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .r-title {
+      font-size: 1.125rem;
+      font-weight: 500;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .r-arrow {
+      color: var(--muted);
+      text-align: right;
+      font-size: 1.25rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .recent-row:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    .recent-row:hover .r-title {
+      color: var(--text);
+      transform: translateX(10px);
+    }
+
+    .recent-row:hover .r-arrow {
+      color: var(--accent);
+      transform: translate(5px, -5px);
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .link-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .link-card:hover {
+      background: rgba(255,19,65,0.05);
+      border-color: rgba(255,19,65,0.3);
+      transform: translateY(-4px);
+    }
+
+    .lc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      color: var(--muted);
+    }
+
+    .lc-platform {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .link-card:hover .lc-top {
+      color: var(--accent);
+    }
+
+    .lc-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .lc-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .site-footer {
+      padding: 40px 60px;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .f-right {
+      display: flex;
+      gap: 24px;
+    }
+
+    .f-right a:hover {
+      color: var(--text);
+    }
+
+    /* Mobile */
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 60px 40px;
+      }
+      .toc {
+        display: none;
+      }
+      .section {
+        padding: 60px 40px;
+      }
+      .popular-grid {
+        grid-template-columns: 1fr;
+      }
+      .popular-card.featured {
+        grid-column: 1;
+      }
+      .recent-row {
+        grid-template-columns: 60px 1fr 20px;
+        gap: 12px;
+      }
+      .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .site-header {
+        padding: 20px;
+      }
+      .main-nav {
+        gap: 16px;
+      }
+      .sidebar {
+        padding: 40px 20px;
+      }
+      .section {
+        padding: 40px 20px;
+      }
+      .hero-wrapper h1 {
+        font-size: 2.25rem;
+      }
+      .site-footer {
+        padding: 40px 20px;
+      }
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">sereja.tech</a>
+    <nav class="main-nav">
+      <a href="/blog/">Блог</a>
+      <a href="/about/">Обо мне</a>
+      <a href="https://t.me/ris_ai" target="_blank" rel="noopener">Телеграм</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="hero-wrapper">
+        <h1>Сережа Рис</h1>
+        <p class="hero-desc">Архитектор агентных систем на Claude Code. Веду телеграм-канал, YouTube и лучшее сообщество вайбкодеров.</p>
+        <div class="hero-actions">
+          <a href="https://t.me/ris_ai" class="btn" target="_blank" rel="noopener">Телеграм-канал</a>
+          <a href="https://www.youtube.com/@serejaris" class="btn" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://t.me/vibecod3rs" class="btn" target="_blank" rel="noopener">Сообщество</a>
+          <a href="/blog/" class="btn btn-outline">Читать блог</a>
+        </div>
+      </div>
+      <nav class="toc">
+        <a href="#video">Видео</a>
+        <a href="#popular">Популярное</a>
+        <a href="#recent">Последнее из блога</a>
+        <a href="#links">Ссылки</a>
+      </nav>
+    </aside>
+
+    <div class="content">
+      <!-- Видео -->
+      <section id="video" class="section">
+        <h2 class="section-title">Видео</h2>
+        <div class="video-main">
+          <div class="iframe-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/B1zEAJC6OdU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>GPT-5.6 в оркестре OMP: Sol, Terra, Luna</h3>
+          <span class="meta">9 июл</span>
+        </div>
+        <div class="video-list">
+          <a href="https://www.youtube.com/watch?v=Nh6Qui9VSUk" class="video-item" target="_blank" rel="noopener">
+            <div class="v-img">
+              <img src="https://i.ytimg.com/vi/Nh6Qui9VSUk/mqdefault.jpg" alt="Обложка">
+            </div>
+            <div>
+              <h4>Claude Fable 5, день 4: карта агентов — кому отдать руки</h4>
+              <span class="meta">4 июл</span>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=FqxeJHDuJ1U" class="video-item" target="_blank" rel="noopener">
+            <div class="v-img">
+              <img src="https://i.ytimg.com/vi/FqxeJHDuJ1U/mqdefault.jpg" alt="Обложка">
+            </div>
+            <div>
+              <h4>Claude Fable вернулся — лимиты урезали: как экономить токены</h4>
+              <span class="meta">1 июл</span>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=L_W3FTVEa2c" class="video-item" target="_blank" rel="noopener">
+            <div class="v-img">
+              <img src="https://i.ytimg.com/vi/L_W3FTVEa2c/mqdefault.jpg" alt="Обложка">
+            </div>
+            <div>
+              <h4>Sonnet 5: худший релиз Антропиков?</h4>
+              <span class="meta">30 июн</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Популярное -->
+      <section id="popular" class="section">
+        <h2 class="section-title">Популярное <span class="badge">— выбор автора</span></h2>
+        <div class="popular-grid">
+          <a href="/blog/modular-rules-claude-md/" class="popular-card featured" aria-label="Модульные правила: как не утонуть в CLAUDE.md">
+            <div class="img-wrapper">
+               <img src="/images/blog/modular-rules-claude-md-preview.png" alt="">
+               <span class="badge-static">17 янв</span>
+               <div class="overlay">
+                 <span class="date">17 янв</span>
+                 <span class="read-btn">Читать статью →</span>
+               </div>
+            </div>
+          </a>
+          <a href="/blog/claude-code-vs-codex-cli/" class="popular-card" aria-label="Claude Code — напарник, Codex — исполнитель">
+            <div class="img-wrapper">
+               <img src="/images/blog/claude-code-vs-codex-cli-preview.png" alt="">
+               <span class="badge-static">9 фев</span>
+               <div class="overlay">
+                 <span class="date">9 фев</span>
+                 <span class="read-btn">Читать →</span>
+               </div>
+            </div>
+          </a>
+          <a href="/blog/personal-corporation-event-driven-agents/" class="popular-card" aria-label="Личная корпорация: сотрудники живут в компьютере">
+            <div class="img-wrapper">
+               <img src="/images/blog/personal-corporation-event-driven-agents-preview.png" alt="">
+               <span class="badge-static">12 фев</span>
+               <div class="overlay">
+                 <span class="date">12 фев</span>
+                 <span class="read-btn">Читать →</span>
+               </div>
+            </div>
+          </a>
+          <a href="/blog/app-types-guide/" class="popular-card" aria-label="Информация или функция: какое приложение ты строишь">
+            <div class="img-wrapper">
+               <img src="/images/blog/app-types-guide-preview.png" alt="">
+               <span class="badge-static">13 янв</span>
+               <div class="overlay">
+                 <span class="date">13 янв</span>
+                 <span class="read-btn">Читать →</span>
+               </div>
+            </div>
+          </a>
+          <a href="/blog/subagent-model-cost/" class="popular-card" aria-label="Haiku, Sonnet, Opus: какую модель ставить субагенту">
+            <div class="img-wrapper">
+               <img src="/images/blog/subagent-model-cost-preview.png" alt="">
+               <span class="badge-static">5 мар</span>
+               <div class="overlay">
+                 <span class="date">5 мар</span>
+                 <span class="read-btn">Читать →</span>
+               </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Последнее из блога -->
+      <section id="recent" class="section">
+        <h2 class="section-title">Последнее из блога</h2>
+        <div class="recent-list">
+          <a href="/blog/gpt-5-6-review/" class="recent-row">
+            <span class="r-date">9 июл</span>
+            <h3 class="r-title">GPT-5.6 в работе: Sol, Terra и Luna</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/pipeline-born-by-hand/" class="recent-row">
+            <span class="r-date">8 июл</span>
+            <h3 class="r-title">Почему автоматизация не работает без рецепта</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/omp-orchestration/" class="recent-row">
+            <span class="r-date">4 июл</span>
+            <h3 class="r-title">Как я гоняю команду агентов из терминала в omp</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/lichnaya-korporatsiya/" class="recent-row">
+            <span class="r-date">2 июл</span>
+            <h3 class="r-title">Личная корпорация: кодекс компании из одного человека</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/claude-sonnet-5-review/" class="recent-row">
+            <span class="r-date">1 июл</span>
+            <h3 class="r-title">Sonnet 5: скучный релиз с одним полезным навыком</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/orchestration-without-goals/" class="recent-row">
+            <span class="r-date">30 июн</span>
+            <h3 class="r-title">Сто агентов, ноль результата</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/text-evals-grader/" class="recent-row">
+            <span class="r-date">30 июн</span>
+            <h3 class="r-title">Как тестировать LLM модели для написания текстов?</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/orca-menedzher-agentov/" class="recent-row">
+            <span class="r-date">29 июн</span>
+            <h3 class="r-title">Orca вместо четырёх терминалов</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/youtube-chapters-split-concern/" class="recent-row">
+            <span class="r-date">13 июн</span>
+            <h3 class="r-title">Генерируем таймкоды для YouTube из транскрипта с помощью AI</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+          <a href="/blog/ai-radio-agents/" class="recent-row">
+            <span class="r-date">12 июн</span>
+            <h3 class="r-title">Запустил AI-радио, которое делают агенты</h3>
+            <span class="r-arrow">↗</span>
+          </a>
+        </div>
+        <div>
+          <a href="/blog/" class="btn btn-outline" style="font-size: 1rem; color: var(--text);">Все статьи</a>
+        </div>
+      </section>
+
+      <!-- Ссылки -->
+      <section id="links" class="section">
+        <h2 class="section-title">Ссылки</h2>
+        <div class="links-grid">
+          <a href="https://t.me/ris_ai" class="link-card" target="_blank" rel="noopener">
+            <div class="lc-top">
+              <span class="lc-platform">Telegram</span>
+              <span style="font-size: 1.25rem;">↗</span>
+            </div>
+            <h3 class="lc-title">рис. AI</h3>
+            <p class="lc-desc">Канал про AI, вайбкодинг и эксперименты</p>
+          </a>
+          <a href="https://t.me/vibecod3rs" class="link-card" target="_blank" rel="noopener">
+            <div class="lc-top">
+              <span class="lc-platform">Telegram</span>
+              <span style="font-size: 1.25rem;">↗</span>
+            </div>
+            <h3 class="lc-title">Сообщество Вайбкодеров</h3>
+            <p class="lc-desc">2000+ человек, обсуждения и взаимопомощь</p>
+          </a>
+          <a href="https://www.youtube.com/@serejaris" class="link-card" target="_blank" rel="noopener">
+            <div class="lc-top">
+              <span class="lc-platform">YouTube</span>
+              <span style="font-size: 1.25rem;">↗</span>
+            </div>
+            <h3 class="lc-title">YouTube</h3>
+            <p class="lc-desc">Туториалы и стримы про вайбкодинг</p>
+          </a>
+          <a href="https://vibecoding.phd" class="link-card" target="_blank" rel="noopener">
+            <div class="lc-top">
+              <span class="lc-platform">Web</span>
+              <span style="font-size: 1.25rem;">↗</span>
+            </div>
+            <h3 class="lc-title">Кружок Вайбкодинга</h3>
+            <p class="lc-desc">Обучение разработке с AI</p>
+          </a>
+          <a href="https://hsl.sh" class="link-card" target="_blank" rel="noopener">
+            <div class="lc-top">
+              <span class="lc-platform">Studio</span>
+              <span style="font-size: 1.25rem;">↗</span>
+            </div>
+            <h3 class="lc-title">HSL</h3>
+            <p class="lc-desc">AI-студия, делаем креативные проекты на заказ</p>
+          </a>
+          <a href="https://x.com/riiiiiiiiss" class="link-card" target="_blank" rel="noopener">
+            <div class="lc-top">
+              <span class="lc-platform">Twitter (X)</span>
+              <span style="font-size: 1.25rem;">↗</span>
+            </div>
+            <h3 class="lc-title">Twitter</h3>
+            <p class="lc-desc">Генеративное искусство и код-арт</p>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="f-left">
+        © 2026 Сережа Рис · sereja.tech
+      </div>
+      <div class="f-right">
+        <a href="https://t.me/ris_ai" target="_blank" rel="noopener">Телеграм</a>
+        <a href="https://www.youtube.com/@serejaris" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://github.com/serejaris" target="_blank" rel="noopener">GitHub</a>
+        <a href="/index.xml">RSS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.toc a');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href').substring(1) === entry.target.id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "-20% 0px -70% 0px" });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>

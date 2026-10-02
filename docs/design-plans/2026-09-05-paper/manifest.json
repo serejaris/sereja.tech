@@ -1,0 +1,68 @@
+{
+  "captured": "2026-09-05",
+  "baseline": "https://sereja.tech",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "mobile": "skipped at user request",
+  "pages": [
+    {
+      "key": "home",
+      "url": "https://sereja.tech/",
+      "status": 200,
+      "title": "Сережа Рис"
+    },
+    {
+      "key": "post",
+      "url": "https://sereja.tech/blog/best-practices-code/",
+      "status": 200,
+      "title": "Почему агент не может выбрать лучший код"
+    },
+    {
+      "key": "blog",
+      "url": "https://sereja.tech/blog/",
+      "status": 200,
+      "title": "Блог"
+    },
+    {
+      "key": "about",
+      "url": "https://sereja.tech/about/",
+      "status": 200,
+      "title": "Обо мне"
+    },
+    {
+      "key": "links",
+      "url": "https://sereja.tech/links/",
+      "status": 200,
+      "title": "Мои ссылки"
+    },
+    {
+      "key": "tags",
+      "url": "https://sereja.tech/tags/",
+      "status": 200,
+      "title": "Теги"
+    },
+    {
+      "key": "topic",
+      "url": "https://sereja.tech/tags/claude-code/",
+      "status": 200,
+      "title": "Claude-Code"
+    },
+    {
+      "key": "error",
+      "url": "https://sereja.tech/404/",
+      "status": 200,
+      "title": "404"
+    },
+    {
+      "key": "rich",
+      "url": "https://sereja.tech/blog/claude-fable-5-1/",
+      "status": 200,
+      "title": "Разбираю Claude Fable 5.1: бенчмарки, отзывы, системная карта и промптинг"
+    }
+  ],
+  "theme": "dark, verified against the user browser",
+  "revision": 2,
+  "capture_method": "CUA user browser; CSS viewport verified"
+}

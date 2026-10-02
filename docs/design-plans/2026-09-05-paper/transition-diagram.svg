@@ -1,0 +1,68 @@
+<svg class="transition-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 320" role="img" aria-labelledby="transition-title transition-desc">
+  <title id="transition-title">Переход к бумажному оформлению сайта</title>
+  <desc id="transition-desc">Шесть последовательных этапов. Верхний ряд слева направо: снимки текущего сайта, макеты главной и постов, выбор оформления автором. Далее нижний ряд справа налево: внедрение на всех страницах, проверка чтения и переходов, выпуск обновлённого сайта. Решение автора выделено голубым контуром.</desc>
+  <defs>
+    <marker id="transition-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L6 3.5 L1 6" fill="none" stroke="#1c4e80" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .transition-diagram text { font-family: 'PT Mono', Menlo, Monaco, Consolas, monospace; }
+      .transition-diagram text[font-weight="600"] { font-family: system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <rect width="740" height="320" rx="8" fill="#f8fafc"/>
+  <g fill="none" stroke="#1c4e80" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#transition-arrow)">
+    <path d="M234 72 H260"/>
+    <path d="M480 72 H506"/>
+    <path d="M616 128 V176"/>
+    <path d="M506 232 H480"/>
+    <path d="M260 232 H234"/>
+  </g>
+  <g>
+    <rect x="22" y="24" width="204" height="96" rx="6" fill="#fff" stroke="#1c4e80"/>
+    <rect x="36" y="36" width="27" height="18" rx="3" fill="#f8fafc" stroke="#1c4e80" stroke-opacity=".3"/>
+    <text x="49.5" y="49" text-anchor="middle" font-size="10" fill="#1c4e80">01</text>
+    <text x="36" y="78" font-size="14" font-weight="600" fill="#1e293b">Текущий сайт</text>
+    <text x="36" y="99" font-size="10.5" fill="#475569">снимки страниц</text>
+  </g>
+  <g>
+    <rect x="268" y="24" width="204" height="96" rx="6" fill="#fff" stroke="#1c4e80"/>
+    <rect x="282" y="36" width="27" height="18" rx="3" fill="#f8fafc" stroke="#1c4e80" stroke-opacity=".3"/>
+    <text x="295.5" y="49" text-anchor="middle" font-size="10" fill="#1c4e80">02</text>
+    <text x="282" y="78" font-size="14" font-weight="600" fill="#1e293b">Макеты</text>
+    <text x="282" y="99" font-size="10.5" fill="#475569">главная и посты</text>
+  </g>
+  <g>
+    <rect x="514" y="24" width="204" height="96" rx="6" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+    <rect x="528" y="36" width="27" height="18" rx="3" fill="#0284c7"/>
+    <text x="541.5" y="49" text-anchor="middle" font-size="10" fill="#fff">03</text>
+    <text x="528" y="78" font-size="14" font-weight="600" fill="#1e293b">Выбор оформления</text>
+    <text x="528" y="99" font-size="10.5" fill="#475569">решение автора</text>
+  </g>
+  <g>
+    <rect x="514" y="184" width="204" height="96" rx="6" fill="#fff" stroke="#1c4e80"/>
+    <rect x="528" y="196" width="27" height="18" rx="3" fill="#f8fafc" stroke="#1c4e80" stroke-opacity=".3"/>
+    <text x="541.5" y="209" text-anchor="middle" font-size="10" fill="#1c4e80">04</text>
+    <text x="528" y="238" font-size="14" font-weight="600" fill="#1e293b">Внедрение</text>
+    <text x="528" y="259" font-size="10.5" fill="#475569">все страницы</text>
+  </g>
+  <g>
+    <rect x="268" y="184" width="204" height="96" rx="6" fill="#fff" stroke="#1c4e80"/>
+    <rect x="282" y="196" width="27" height="18" rx="3" fill="#f8fafc" stroke="#1c4e80" stroke-opacity=".3"/>
+    <text x="295.5" y="209" text-anchor="middle" font-size="10" fill="#1c4e80">05</text>
+    <text x="282" y="238" font-size="14" font-weight="600" fill="#1e293b">Проверка</text>
+    <text x="282" y="259" font-size="10.5" fill="#475569">чтение и переходы</text>
+  </g>
+  <g>
+    <rect x="22" y="184" width="204" height="96" rx="6" fill="#fff" stroke="#1c4e80"/>
+    <rect x="36" y="196" width="27" height="18" rx="3" fill="#f8fafc" stroke="#1c4e80" stroke-opacity=".3"/>
+    <text x="49.5" y="209" text-anchor="middle" font-size="10" fill="#1c4e80">06</text>
+    <text x="36" y="238" font-size="14" font-weight="600" fill="#1e293b">Выпуск</text>
+    <text x="36" y="259" font-size="10.5" fill="#475569">обновлённый сайт</text>
+  </g>
+  <g font-size="10" fill="#475569">
+    <text x="22" y="306" letter-spacing=".08em">ЛЕГЕНДА</text>
+    <rect x="93" y="295" width="14" height="14" rx="3" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="116" y="306">решение автора</text>
+  </g>
+</svg>

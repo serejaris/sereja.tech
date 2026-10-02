@@ -1,0 +1,69 @@
+[
+  {
+    "page": "home",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "post",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "blog",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": [],
+    "search_results": "Найдено статей: 36",
+    "empty_state": true,
+    "topic_results": "Найдено статей: 36"
+  },
+  {
+    "page": "about",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "links",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "tags",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "topic",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "error",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": []
+  },
+  {
+    "page": "rich",
+    "h1": 1,
+    "overflow": false,
+    "tables": 0,
+    "errors": [],
+    "chart_next": "2 / 3"
+  }
+]

@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лаборатория UX: 3 альтернативы 7 слайдерам · Claude Fable 5.1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/paper.css">
+  <style>
+    /* Global Workbench Controls */
+    :root {
+      --wb-accent: #3b82f6;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'PT Serif', Georgia, serif;
+      transition: background-color .2s ease, color .2s ease;
+    }
+    .wb-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 2px solid var(--hairline);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      flex-wrap: wrap;
+    }
+    .wb-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wb-badge {
+      font: 700 11px/1 'PT Mono', monospace;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--ink);
+      color: var(--paper);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .wb-title {
+      font: 700 15px/1.2 'PT Mono', monospace;
+      letter-spacing: .02em;
+      margin: 0;
+    }
+    .wb-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--card);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--hairline);
+    }
+    .wb-tab-btn {
+      font: 600 12px/1.2 'PT Mono', monospace;
+      padding: 8px 14px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .15s ease;
+      white-space: nowrap;
+    }
+    .wb-tab-btn:hover {
+      color: var(--ink);
+    }
+    .wb-tab-btn.is-active {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      border: 1px solid var(--hairline);
+    }
+    .wb-theme-btn {
+      font: 700 12px/1 'PT Mono', monospace;
+      padding: 8px 12px;
+      border: 1px solid var(--hairline);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .wb-desc-bar {
+      background: var(--card);
+      border-bottom: 1px solid var(--hairline);
+      padding: 12px 24px;
+      font: 400 13px/1.5 'PT Mono', monospace;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .wb-desc-bar strong {
+      color: var(--ink);
+    }
+    .wb-variant-view {
+      display: none;
+      padding: 24px 20px 80px;
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+    .wb-variant-view.is-visible {
+      display: block;
+      animation: fadeIn .2s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Card Styling */
+    .partner-logo-box {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+    .partner-logo-box svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+      display: block;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* VARIANT 1: BENTO GRID STYLES                                  */
+    /* ------------------------------------------------------------- */
+    .v1-toolbar {
+      position: sticky;
+      top: 65px;
+      z-index: 10;
+      background: var(--paper);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    }
+    .v1-toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .v1-search {
+      flex: 1;
+      min-width: 240px;
+      height: 38px;
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      padding: 0 14px;
+      font: 400 13px 'PT Mono', monospace;
+      color: var(--ink);
+      outline: none;
+    }
+    .v1-search:focus { border-color: var(--ink); }
+    .v1-stats {
+      font: 400 12px 'PT Mono', monospace;
+      color: var(--muted);
+      letter-spacing: .05em;
+    }
+    .v1-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .v1-pills::-webkit-scrollbar { display: none; }
+    .v1-pill {
+      font: 400 12px 'PT Mono', monospace;
+      padding: 6px 12px;
+      border: 1px solid var(--hairline);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s ease;
+    }
+    .v1-pill:hover { border-color: var(--ink); }
+    .v1-pill.is-active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .v1-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 1060px) { .v1-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 680px) { .v1-grid { grid-template-columns: 1fr; } }
+    .v1-card {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all .2s ease;
+    }
+    .v1-card:hover {
+      border-color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+    @media (min-width: 1061px) {
+      .v1-card.span-2 { grid-column: span 2; }
+    }
+    .v1-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .v1-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .v1-brand-name {
+      font: 700 13px 'PT Mono', monospace;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .v1-tag {
+      font: 400 11px 'PT Mono', monospace;
+      color: var(--muted);
+      padding: 3px 6px;
+      background: var(--paper);
+      border: 1px solid var(--hairline);
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .v1-card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .v1-card.is-hidden { display: none !important; }
+
+    /* ------------------------------------------------------------- */
+    /* VARIANT 2: MASTER-DETAIL DOSSIER STYLES                       */
+    /* ------------------------------------------------------------- */
+    .v2-split {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    @media (max-width: 960px) {
+      .v2-split { grid-template-columns: 1fr; }
+    }
+    .v2-sidebar {
+      position: sticky;
+      top: 75px;
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .v2-side-title {
+      font: 700 11px 'PT Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .v2-cat-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all .15s ease;
+    }
+    .v2-cat-btn:hover {
+      background: var(--paper);
+    }
+    .v2-cat-btn.is-active {
+      background: var(--paper);
+      border-color: var(--hairline);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .v2-btn-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .v2-btn-name {
+      font: 600 12.5px 'PT Mono', monospace;
+      color: var(--ink);
+    }
+    .v2-btn-count {
+      font: 700 11px 'PT Mono', monospace;
+      padding: 2px 6px;
+      border-radius: 10px;
+      background: var(--hairline);
+      color: var(--ink);
+    }
+    .v2-cat-btn.is-active .v2-btn-count {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .v2-meter {
+      height: 3px;
+      background: var(--hairline);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .v2-meter-fill {
+      height: 100%;
+      background: var(--ink);
+    }
+    .v2-content-area {
+      min-width: 0;
+    }
+    .v2-panel {
+      display: none;
+    }
+    .v2-panel.is-active {
+      display: block;
+    }
+    .v2-panel-header {
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .v2-panel-tag {
+      font: 700 11px 'PT Mono', monospace;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .v2-panel-title {
+      font: 700 22px/1.3 'PT Serif', Georgia, serif;
+      margin: 0;
+    }
+    .v2-dossier-card {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 22px 26px;
+      margin-bottom: 16px;
+      transition: border-color .15s ease;
+    }
+    .v2-dossier-card:hover {
+      border-color: var(--ink);
+    }
+    .v2-dossier-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .v2-dossier-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .v2-dossier-name {
+      font: 700 14px 'PT Mono', monospace;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .v2-quote {
+      font-size: 16.5px;
+      line-height: 1.6;
+      margin: 0 0 16px;
+      color: var(--ink);
+    }
+    .v2-takeaway {
+      background: var(--paper);
+      border-left: 3px solid var(--ink);
+      padding: 8px 12px;
+      border-radius: 0 4px 4px 0;
+    }
+    .v2-takeaway-lbl {
+      font: 700 10px 'PT Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .v2-takeaway-text {
+      font: 400 12.5px 'PT Mono', monospace;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* VARIANT 3: UNIFIED BRAND RAIL + STEPPER                       */
+    /* ------------------------------------------------------------- */
+    .v3-box {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .v3-stepper {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 12px 18px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .v3-stepper::-webkit-scrollbar { display: none; }
+    .v3-step-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font: 400 12px 'PT Mono', monospace;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s ease;
+    }
+    .v3-step-btn:hover { color: var(--ink); background: rgba(128,128,128,0.08); }
+    .v3-step-btn.is-active {
+      background: var(--card);
+      border-color: var(--hairline);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .v3-step-btn .cnt {
+      font-size: 10px;
+      background: var(--hairline);
+      padding: 2px 5px;
+      border-radius: 8px;
+      color: var(--ink);
+    }
+    .v3-rail {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 10px 18px;
+      background: var(--card);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .v3-rail::-webkit-scrollbar { display: none; }
+    .v3-rail-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--paper);
+      border: 1px solid var(--hairline);
+      border-radius: 20px;
+      font: 400 11.5px 'PT Mono', monospace;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s ease;
+      flex-shrink: 0;
+    }
+    .v3-rail-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .v3-rail-btn.is-active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+      font-weight: 700;
+    }
+    .v3-view-wrap {
+      position: relative;
+      padding: 32px 64px;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 680px) {
+      .v3-view-wrap { padding: 24px 20px; }
+    }
+    .v3-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--hairline);
+      background: var(--paper);
+      color: var(--ink);
+      font: 700 16px 'PT Mono', monospace;
+      cursor: pointer;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s ease;
+    }
+    .v3-nav-btn:hover { background: var(--ink); color: var(--paper); }
+    .v3-nav-prev { left: 16px; }
+    .v3-nav-next { right: 16px; }
+    .v3-card-display {
+      max-width: 860px;
+      width: 100%;
+    }
+    .v3-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .v3-meta-cat {
+      font: 700 11px 'PT Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .v3-meta-num {
+      font: 700 12px 'PT Mono', monospace;
+      color: var(--ink);
+    }
+    .v3-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .v3-brand-title {
+      font: 700 18px 'PT Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .v3-quote-text {
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin: 0;
+    }
+    .v3-footer {
+      background: var(--paper);
+      border-top: 1px solid var(--hairline);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font: 400 11.5px 'PT Mono', monospace;
+      color: var(--muted);
+    }
+    .v3-prog-bar {
+      height: 3px;
+      background: var(--hairline);
+      width: 100%;
+    }
+    .v3-prog-fill {
+      height: 100%;
+      background: var(--ink);
+      transition: width .2s ease;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* VARIANT 4: CURRENT 7 SLIDERS (FOR SIDE-BY-SIDE COMPARISON)    */
+    /* ------------------------------------------------------------- */
+    .v4-notice {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      font: 400 13px 'PT Mono', monospace;
+      color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Controls Header -->
+  <header class="wb-header">
+    <div class="wb-title-group">
+      <span class="wb-badge">UX LAB</span>
+      <h1 class="wb-title">Кейсы Fable 5.1: 3 концепта против 7 слайдеров</h1>
+    </div>
+
+    <div class="wb-tabs" role="tablist">
+      <button class="wb-tab-btn is-active" data-target="view-v1">1. Bento Grid (Каталог)</button>
+      <button class="wb-tab-btn" data-target="view-v2">2. Master-Detail (Досье)</button>
+      <button class="wb-tab-btn" data-target="view-v3">3. Unified Rail (Один слайдер)</button>
+      <button class="wb-tab-btn" data-target="view-v4" style="opacity: 0.7;">4. Было (7 слайдеров)</button>
+    </div>
+
+    <button id="themeToggle" class="wb-theme-btn" title="Сменить тему (Светлая / Тёмная)">☾ ТЕМА</button>
+  </header>
+
+  <!-- Explanatory Context Bar -->
+  <div class="wb-desc-bar">
+    <div id="viewDesc">
+      <strong>Концепт 1: Bento Grid с фильтрами и поиском.</strong> Все 22 кейса на одном экране. Никаких горизонтальных каруселей, поиск по названию компании в реальном времени, швейцарские pill-фильтры.
+    </div>
+    <div>
+      <a href="/blog/claude-fable-5-1/" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--hairline)">← Вернуться в статью</a>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- VIEW 1: BENTO GRID                                            -->
+  <!-- ============================================================= -->
+  <main id="view-v1" class="wb-variant-view is-visible">
+    <div class="v1-toolbar">
+      <div class="v1-toolbar-row">
+        <input type="text" id="v1Search" class="v1-search" placeholder="Поиск компании (например: Cognition, Red Hat, Rogo, Canva...)" aria-label="Поиск по компаниям">
+        <div class="v1-stats">Показано <strong id="v1Count">22</strong> из 22 кейсов</div>
+      </div>
+      <div class="v1-pills" id="v1Pills">
+        <button class="v1-pill is-active" data-cat="all">Все (22)</button>
+        <button class="v1-pill" data-cat="coding">Кодинг (6)</button>
+        <button class="v1-pill" data-cat="debug">Отладка (4)</button>
+        <button class="v1-pill" data-cat="research">Исследования (3)</button>
+        <button class="v1-pill" data-cat="finance">Финансы (4)</button>
+        <button class="v1-pill" data-cat="writing">Знания (2)</button>
+        <button class="v1-pill" data-cat="agents">Агенты (2)</button>
+        <button class="v1-pill" data-cat="price">Экономика (1)</button>
+      </div>
+    </div>
+
+    <div class="v1-grid" id="v1Grid">
+      <!-- 1. Jane Street (Coding, Span 2) -->
+      <article class="v1-card span-2" data-cat="coding" data-name="jane street">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 4h5v11.5a3.5 3.5 0 0 1-7 0V13h3.5v2.5a1 1 0 0 0 2 0V4zm11 0h5a3.5 3.5 0 0 1 0 7h-2.5v1.5H20V16h-5a3.5 3.5 0 0 1 0-7h2.5V7.5H15V4z"/></svg></span>
+            <span class="v1-brand-name">Jane Street</span>
+          </div>
+          <span class="v1-tag">Кодинг</span>
+        </div>
+        <p>На внутренних тестах насчитали больше решённых задач по коду, чем у Fable 5 и Opus 5, и отметили, что ход работы остаётся понятным на длинных многошаговых задачах.</p>
+      </article>
+
+      <!-- 2. Cognition (Coding) -->
+      <article class="v1-card" data-cat="coding" data-name="cognition">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L3.5 6.87v9.74L12 21.5l8.5-4.89V6.87L12 2zm0 2.3l6.5 3.73-2.6 1.5-6.5-3.74L12 4.3zM5.5 8.04l5.5 3.16v6.32l-5.5-3.16V8.04zm13 6.32l-5.5 3.16v-6.32l5.5-3.16v6.32z"/></svg></span>
+            <span class="v1-brand-name">Cognition</span>
+          </div>
+          <span class="v1-tag">Кодинг</span>
+        </div>
+        <p>Переводит Devin с Opus 5 на Fable 5.1 с первого дня: в тестах не хуже Fable 5 при меньшей цене за задачу благодаря дешёвому кэшу.</p>
+      </article>
+
+      <!-- 3. MongoDB (Coding) -->
+      <article class="v1-card" data-cat="coding" data-name="mongodb">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M17.182 9.518c-.89-3.92-3.05-6.517-4.78-7.518h-.002v19.467c.36.215.71.397 1.05.533 1.15-4.59 4.7-6.22 3.732-12.482zm-5.584-7.518c-1.73 1.001-3.89 3.598-4.78 7.518-.968 6.262 2.582 7.892 3.73 12.482.34-.136.69-.318 1.05-.533V2z"/></svg></span>
+            <span class="v1-brand-name">MongoDB</span>
+          </div>
+          <span class="v1-tag">Кодинг</span>
+        </div>
+        <p>Прототип для MongoDB модель собрала за три дня, работая ночами без человека. Утром инженер получал готовую фазу с визуальным разбором.</p>
+      </article>
+
+      <!-- 4. Millennium (Debug, Span 2) -->
+      <article class="v1-card span-2" data-cat="debug" data-name="millennium">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M2 5v14h3.5V9.5l3 5h2l3-5V19H17V5h-3.5L10 11 6.5 5H2zm16 0v14h4V5h-4z"/></svg></span>
+            <span class="v1-brand-name">Millennium</span>
+          </div>
+          <span class="v1-tag">Отладка</span>
+        </div>
+        <p>В Millennium модель нашла причину сбоя раз в миллион запусков, который четыре-пять лет никто не мог объяснить: разобрала вендорскую библиотеку по машинному коду.</p>
+      </article>
+
+      <!-- 5. Ramp (Coding) -->
+      <article class="v1-card" data-cat="coding" data-name="ramp">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M3 18.5h4.8L17.2 5.5H12.4L3 18.5zm13.2 0H21L12.6 5.5H7.8l8.4 13z"/></svg></span>
+            <span class="v1-brand-name">Ramp</span>
+          </div>
+          <span class="v1-tag">Кодинг</span>
+        </div>
+        <p>38 часов без присмотра над ML-задачей: модель нашла ошибку в разметке, запустила шесть экспериментов и вернулась с результатом.</p>
+      </article>
+
+      <!-- 6. Shopify (Coding) -->
+      <article class="v1-card" data-cat="coding" data-name="shopify">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M19.64 5.41c-.05-.33-.31-.59-.64-.63l-4.77-.5c-.32-.03-.62.15-.75.44l-2.02 4.41-1.63-.53c-.3-.1-.63.02-.8.29l-4.94 7.68c-.14.22-.15.5-.02.73.13.23.37.37.64.37h13.2c.38 0 .7-.3.73-.68l.97-11.58zM12.4 3.25c.66 0 1.25.43 1.45 1.07l.22.72-2.8-.29.6-1.32c.11-.11.31-.18.53-.18zm-2.85 9.77c.36-.21.84-.46 1.47-.46.95 0 1.43.51 1.43 1.13 0 .86-.77 1.2-1.4 1.52-.69.35-1.12.69-1.12 1.28 0 .73.6 1.22 1.5 1.22.76 0 1.29-.3 1.57-.48l.28.84c-.38.25-1.03.53-1.92.53-1.54 0-2.45-.88-2.45-2.03 0-1.11.83-1.63 1.59-2.03.62-.33 1.01-.6 1.01-1.02 0-.46-.38-.79-.98-.79-.53 0-.99.2-1.34.42l-.34-.97z"/></svg></span>
+            <span class="v1-brand-name">Shopify</span>
+          </div>
+          <span class="v1-tag">Кодинг</span>
+        </div>
+        <p>По опыту Shopify модель ведёт записи по ходу работы, меняет приоритеты и продолжает после перерыва.</p>
+      </article>
+
+      <!-- 7. SpaceXAI (Coding) -->
+      <article class="v1-card" data-cat="coding" data-name="spacexai">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M2.5 19h3.8l4.4-6.4L6.3 6h-3.8l4.4 6.5L2.5 19zm14.8-13h-3.7l-2.4 3.5 2.1 3.1 4-6.6zm-1.8 13h3.7L11.5 8.1c3.8-2.6 8.3-2.7 10-.1-1.8.8-4.2 2.6-6.1 5.3L15.5 19z"/></svg></span>
+            <span class="v1-brand-name">SpaceXAI</span>
+          </div>
+          <span class="v1-tag">Кодинг</span>
+        </div>
+        <p>На CursorBench 3.2 набрала 73.4% и сама проверяет свою работу до конца задачи.</p>
+      </article>
+
+      <!-- 8. Red Hat (Debug) -->
+      <article class="v1-card" data-cat="debug" data-name="red hat">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12.72 2.29c2.32 0 4.8 1.05 6.09 2.76 1.28 1.7 1.13 3.65-.34 4.54-1.48.88-3.79.88-6.11.88-2.32 0-4.63 0-6.11-.88-1.47-.89-1.62-2.84-.34-4.54 1.29-1.71 3.77-2.76 6.09-2.76v-.01zM2.14 14.15c.61-1.76 2.37-3.07 4.96-3.87.52-.16 1.09-.29 1.7-.39-.12.43-.19.88-.19 1.35 0 2.87 2.33 5.2 5.2 5.2 2.87 0 5.2-2.33 5.2-5.2 0-.47-.07-.92-.19-1.35.61.1 1.18.23 1.7.39 2.59.8 4.35 2.11 4.96 3.87.35 1.01.17 2.14-.52 3.09-1.39 1.91-4.78 3.16-9.15 3.16s-7.76-1.25-9.15-3.16c-.69-.95-.87-2.08-.52-3.09z"/></svg></span>
+            <span class="v1-brand-name">Red Hat</span>
+          </div>
+          <span class="v1-tag">Отладка</span>
+        </div>
+        <p>В Red Hat прогнали сломанные сборки через Claude Code: причина найдена в каждой на всех уровнях усилия, отчёты стали короче.</p>
+      </article>
+
+      <!-- 9. Datadog (Debug) -->
+      <article class="v1-card" data-cat="debug" data-name="datadog">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.14 2.52 7.69 6.1 9.17l-.37-2.07c-.06-.32.06-.65.31-.85l2.4-1.93c.3-.24.73-.24 1.03 0l2.4 1.93c.25.2.37.53.31.85l-.37 2.07C17.48 19.69 20 16.14 20 12c0-5.52-4.48-10-10-10zm-1.5 6.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span>
+            <span class="v1-brand-name">Datadog</span>
+          </div>
+          <span class="v1-tag">Отладка</span>
+        </div>
+        <p>В Datadog проверяли модель на реальных инцидентах, она справилась с самыми сложными случаями из набора.</p>
+      </article>
+
+      <!-- 10. Plaid (Debug) -->
+      <article class="v1-card" data-cat="debug" data-name="plaid">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 4h4.8v4.8H4zm5.6 0h4.8v4.8H9.6zm5.6 0H20v4.8h-4.8zM4 9.6h4.8v4.8H4zm5.6 0h4.8v4.8H9.6zm5.6 0H20v4.8h-4.8zM4 15.2h4.8V20H4zm5.6 0h4.8V20H9.6zm5.6 0H20V20h-4.8z"/></svg></span>
+            <span class="v1-brand-name">Plaid</span>
+          </div>
+          <span class="v1-tag">Отладка</span>
+        </div>
+        <p>Изменение в Plaid больше чем через восемь сервисов и три репозитория модель проследила до строк в базе без ошибок.</p>
+      </article>
+
+      <!-- 11. IMC (Research) -->
+      <article class="v1-card" data-cat="research" data-name="imc">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4V6zm0 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4v-2zm0 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2H4v-2z"/></svg></span>
+            <span class="v1-brand-name">IMC</span>
+          </div>
+          <span class="v1-tag">Исследования</span>
+        </div>
+        <p>Исследователи IMC получили решение с подхода, который раньше не предлагали ни модели, ни люди, результат ушёл выше прежнего потолка.</p>
+      </article>
+
+      <!-- 12. Rakuten (Research) -->
+      <article class="v1-card" data-cat="research" data-name="rakuten">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5h3.8c1.8 0 3.2 1.1 3.2 2.8 0 1.3-.8 2.3-2 2.6l2.3 4.1h-2.3l-2-3.8h-1.5v3.8h-1.5V7zm1.5 4.1h2.2c.9 0 1.6-.5 1.6-1.3s-.7-1.3-1.6-1.3H12v2.6zM7.5 18.5l4.5-1.8 4.5 1.8-4.5-1.2-4.5 1.2z"/></svg></span>
+            <span class="v1-brand-name">Rakuten</span>
+          </div>
+          <span class="v1-tag">Исследования</span>
+        </div>
+        <p>Rakuten: модель нашла пробел в клиническом проекте после трёх других моделей и предложила новую гипотезу за день.</p>
+      </article>
+
+      <!-- 13. iGent (Research) -->
+      <article class="v1-card" data-cat="research" data-name="igent">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2l7.5 4.33v8.66L12 19.33 4.5 15V6.33L12 2zm0 3.5L7 8.38v5.74l5 2.88 5-2.88V8.38L12 5.5zm0 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg></span>
+            <span class="v1-brand-name">iGent</span>
+          </div>
+          <span class="v1-tag">Исследования</span>
+        </div>
+        <p>Задачу, стоявшую в iGent полтора года, модель продвинула и ускорила кернел на 35%.</p>
+      </article>
+
+      <!-- 14. Rogo (Finance, Span 2) -->
+      <article class="v1-card span-2" data-cat="finance" data-name="rogo">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L3 8.5l9 13.5 9-13.5L12 2zm0 3.2l5.7 4.1H6.3L12 5.2zm-6.8 5.6h4.5l-3.2 7.2-1.3-7.2zm6.8 8.1l-3.3-7.1h6.6L12 18.9zm1.5-8.1h4.5l-1.3 7.2-3.2-7.2z"/></svg></span>
+            <span class="v1-brand-name">Rogo</span>
+          </div>
+          <span class="v1-tag">Финансы</span>
+        </div>
+        <p>У Rogo точность как у Fable 5 при 20% меньше токенов, слайды стали понятнее банкирам.</p>
+      </article>
+
+      <!-- 15. Samaya (Finance) -->
+      <article class="v1-card" data-cat="finance" data-name="samaya">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <span class="v1-brand-name">Samaya</span>
+          </div>
+          <span class="v1-tag">Финансы</span>
+        </div>
+        <p>На FrontierFinance у Samaya 55.9% против 49.2% у Fable 5: модель идёт в транскрипт звонка и берёт точные цифры.</p>
+      </article>
+
+      <!-- 16. Hebbia (Finance) -->
+      <article class="v1-card" data-cat="finance" data-name="hebbia">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 4h6.5v6.5H4zm9.5 0H20v6.5h-6.5zM4 13.5h6.5V20H4zm9.5 0H20V20h-6.5z"/></svg></span>
+            <span class="v1-brand-name">Hebbia</span>
+          </div>
+          <span class="v1-tag">Финансы</span>
+        </div>
+        <p>В Hebbia отметили лучшие презентации на PowerPoint-тесте и лучшую точность фактов по финансовым документам.</p>
+      </article>
+
+      <!-- 17. Crosby (Finance) -->
+      <article class="v1-card" data-cat="finance" data-name="crosby">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h3v1.5H8V10z"/></svg></span>
+            <span class="v1-brand-name">Crosby</span>
+          </div>
+          <span class="v1-tag">Финансы</span>
+        </div>
+        <p>RedlineBench в Crosby вырос с 47.9 до 57.0, правки короче и чаще принимаются контрагентом.</p>
+      </article>
+
+      <!-- 18. Canva (Writing) -->
+      <article class="v1-card" data-cat="writing" data-name="canva">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 14.3c-1.2 1-2.7 1.5-4.3 1.5-3.3 0-5.5-2.2-5.5-5.8 0-3.8 2.6-6.2 6.2-6.2 1.6 0 2.9.5 3.8 1.4l-1.3 1.5c-.7-.6-1.5-1-2.5-1-2.2 0-3.8 1.5-3.8 4.2 0 2.5 1.4 3.9 3.5 3.9 1.1 0 2-.4 2.7-1l1.2 1.5z"/></svg></span>
+            <span class="v1-brand-name">Canva</span>
+          </div>
+          <span class="v1-tag">Знания</span>
+        </div>
+        <p>Тексты для Canva стали понятнее и лучше следуют гайду по стилю, в Canva Code модель собрала ритм-игру с музыкой в такт.</p>
+      </article>
+
+      <!-- 19. Glean (Writing) -->
+      <article class="v1-card" data-cat="writing" data-name="glean">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 20zm6.5 1.5l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"/></svg></span>
+            <span class="v1-brand-name">Glean</span>
+          </div>
+          <span class="v1-tag">Знания</span>
+        </div>
+        <p>Судьи Glean предпочли ответы Fable 5.1 примерно 2:1 над Fable 5 с лучшей опорой на источники.</p>
+      </article>
+
+      <!-- 20. Browserbase (Agents) -->
+      <article class="v1-card" data-cat="agents" data-name="browserbase">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M3 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3zm0 2h18v3H3V6zm0 5h18v7H3v-7zm3 2l2.5 2L6 17v-1.2l1-0.8-1-0.8V13zm4.5 3.5h3.5v1.2h-3.5v-1.2z"/></svg></span>
+            <span class="v1-brand-name">Browserbase</span>
+          </div>
+          <span class="v1-tag">Агенты</span>
+        </div>
+        <p>82% задач на браузерном бенчмарке Browserbase против 74% у Opus 5 и 57% у Fable 5, ни одной пробитой стоп-точки.</p>
+      </article>
+
+      <!-- 21. Block (Agents) -->
+      <article class="v1-card" data-cat="agents" data-name="block">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2.2L3.5 7.1v9.8L12 21.8l8.5-4.9V7.1L12 2.2zm0 2.5l6.3 3.6-6.3 3.6-6.3-3.6 6.3-3.6zM5.5 8.9l5.5 3.1v6.7L5.5 15.6V8.9zm13 6.7l-5.5 3.1v-6.7l5.5-3.1v6.7z"/></svg></span>
+            <span class="v1-brand-name">Block</span>
+          </div>
+          <span class="v1-tag">Агенты</span>
+        </div>
+        <p>В 30-дневной симуляции бизнеса Block с инструментами Square модель экономнее Opus 5 на токен.</p>
+      </article>
+
+      <!-- 22. Every (Price/Speed) -->
+      <article class="v1-card" data-cat="price" data-name="every">
+        <div class="v1-card-head">
+          <div class="v1-brand">
+            <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.2 15.5c-3.1 0-5.2-1.9-5.2-4.8 0-3.2 2.4-5.2 5.5-5.2 2.8 0 4.6 1.7 4.6 4.4 0 .4 0 .7-.1.9H10.1c.2 2 1.6 3.1 3.2 3.1 1.2 0 2.2-.5 2.8-1.3l1.5 1c-.9 1.2-2.5 1.9-4.4 1.9zm2.4-6.1c-.1-1.6-1.1-2.5-2.4-2.5-1.4 0-2.5.9-2.8 2.5h5.2z"/></svg></span>
+            <span class="v1-brand-name">Every</span>
+          </div>
+          <span class="v1-tag">Экономика</span>
+        </div>
+        <p>Every описывает релиз как интеллект Fable по цене Opus на скорости Sonnet: вдвое быстрее Opus 5 при половине токенов.</p>
+      </article>
+    </div>
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- VIEW 2: MASTER-DETAIL DOSSIER                                 -->
+  <!-- ============================================================= -->
+  <main id="view-v2" class="wb-variant-view">
+    <div class="v2-split">
+      <!-- Master Sticky Sidebar -->
+      <aside class="v2-sidebar">
+        <div class="v2-side-title">
+          <span>ОБЛАСТИ ВНЕДРЕНИЯ</span>
+          <span>22 КЕЙСА</span>
+        </div>
+        <button class="v2-cat-btn is-active" data-panel="p-coding">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">01. Агентный кодинг</span>
+            <span class="v2-btn-count">6</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:100%"></div></div>
+        </button>
+        <button class="v2-cat-btn" data-panel="p-debug">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">02. Отладка и инциденты</span>
+            <span class="v2-btn-count">4</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:66%"></div></div>
+        </button>
+        <button class="v2-cat-btn" data-panel="p-research">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">03. Исследования</span>
+            <span class="v2-btn-count">3</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:50%"></div></div>
+        </button>
+        <button class="v2-cat-btn" data-panel="p-finance">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">04. Финансы и документы</span>
+            <span class="v2-btn-count">4</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:66%"></div></div>
+        </button>
+        <button class="v2-cat-btn" data-panel="p-writing">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">05. Знания и письмо</span>
+            <span class="v2-btn-count">2</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:33%"></div></div>
+        </button>
+        <button class="v2-cat-btn" data-panel="p-agents">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">06. Агенты с тулами</span>
+            <span class="v2-btn-count">2</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:33%"></div></div>
+        </button>
+        <button class="v2-cat-btn" data-panel="p-price">
+          <div class="v2-btn-top">
+            <span class="v2-btn-name">07. Цена и скорость</span>
+            <span class="v2-btn-count">1</span>
+          </div>
+          <div class="v2-meter"><div class="v2-meter-fill" style="width:16%"></div></div>
+        </button>
+      </aside>
+
+      <!-- Details Content Area -->
+      <div class="v2-content-area">
+        <!-- Panel 1: Coding -->
+        <div class="v2-panel is-active" id="p-coding">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 01 · 6 КЕЙСОВ</div>
+            <h2 class="v2-panel-title">Агентный кодинг и долгие автономные прогоны</h2>
+          </div>
+          
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 4h5v11.5a3.5 3.5 0 0 1-7 0V13h3.5v2.5a1 1 0 0 0 2 0V4zm11 0h5a3.5 3.5 0 0 1 0 7h-2.5v1.5H20V16h-5a3.5 3.5 0 0 1 0-7h2.5V7.5H15V4z"/></svg></span>
+                <span class="v2-dossier-name">Jane Street</span>
+              </div>
+              <span class="v1-tag">QUANT & TRADING</span>
+            </div>
+            <p class="v2-quote">«На внутренних тестах насчитали больше решённых задач по коду, чем у Fable 5 и Opus 5, и отметили, что ход работы остаётся понятным на длинных многошаговых задачах.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Обход флагманов по числу решенных задач при сохранении прозрачности многошаговой логики.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L3.5 6.87v9.74L12 21.5l8.5-4.89V6.87L12 2zm0 2.3l6.5 3.73-2.6 1.5-6.5-3.74L12 4.3zM5.5 8.04l5.5 3.16v6.32l-5.5-3.16V8.04zm13 6.32l-5.5 3.16v-6.32l5.5-3.16v6.32z"/></svg></span>
+                <span class="v2-dossier-name">Cognition</span>
+              </div>
+              <span class="v1-tag">DEVIN AGENT</span>
+            </div>
+            <p class="v2-quote">«Переводит Devin с Opus 5 на Fable 5.1 с первого дня: в тестах не хуже Fable 5 при меньшей цене за задачу благодаря дешёвому кэшу.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Мгновенный перевод Devin в прод с удешевлением стоимости запуска через промпт-кэш.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M17.182 9.518c-.89-3.92-3.05-6.517-4.78-7.518h-.002v19.467c.36.215.71.397 1.05.533 1.15-4.59 4.7-6.22 3.732-12.482zm-5.584-7.518c-1.73 1.001-3.89 3.598-4.78 7.518-.968 6.262 2.582 7.892 3.73 12.482.34-.136.69-.318 1.05-.533V2z"/></svg></span>
+                <span class="v2-dossier-name">MongoDB</span>
+              </div>
+              <span class="v1-tag">DATABASE</span>
+            </div>
+            <p class="v2-quote">«Прототип для MongoDB модель собрала за три дня, работая ночами без человека. Утром инженер получал готовую фазу с визуальным разбором.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Автономные ночные смены без оператора со сборкой рабочей фазы за 3 суток.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M3 18.5h4.8L17.2 5.5H12.4L3 18.5zm13.2 0H21L12.6 5.5H7.8l8.4 13z"/></svg></span>
+                <span class="v2-dossier-name">Ramp</span>
+              </div>
+              <span class="v1-tag">FINTECH & ML</span>
+            </div>
+            <p class="v2-quote">«38 часов без присмотра над ML-задачей: модель нашла ошибку в разметке, запустила шесть экспериментов и вернулась с результатом.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">38-часовой автономный цикл без участия человека: исправление разметки + 6 серий тестов.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M19.64 5.41c-.05-.33-.31-.59-.64-.63l-4.77-.5c-.32-.03-.62.15-.75.44l-2.02 4.41-1.63-.53c-.3-.1-.63.02-.8.29l-4.94 7.68c-.14.22-.15.5-.02.73.13.23.37.37.64.37h13.2c.38 0 .7-.3.73-.68l.97-11.58zM12.4 3.25c.66 0 1.25.43 1.45 1.07l.22.72-2.8-.29.6-1.32c.11-.11.31-.18.53-.18zm-2.85 9.77c.36-.21.84-.46 1.47-.46.95 0 1.43.51 1.43 1.13 0 .86-.77 1.2-1.4 1.52-.69.35-1.12.69-1.12 1.28 0 .73.6 1.22 1.5 1.22.76 0 1.29-.3 1.57-.48l.28.84c-.38.25-1.03.53-1.92.53-1.54 0-2.45-.88-2.45-2.03 0-1.11.83-1.63 1.59-2.03.62-.33 1.01-.6 1.01-1.02 0-.46-.38-.79-.98-.79-.53 0-.99.2-1.34.42l-.34-.97z"/></svg></span>
+                <span class="v2-dossier-name">Shopify</span>
+              </div>
+              <span class="v1-tag">ECOMMERCE</span>
+            </div>
+            <p class="v2-quote">«По опыту Shopify модель ведёт записи по ходу работы, меняет приоритеты и продолжает после перерыва.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Автономное логирование прогресса и устойчивое возобновление задач после пауз.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M2.5 19h3.8l4.4-6.4L6.3 6h-3.8l4.4 6.5L2.5 19zm14.8-13h-3.7l-2.4 3.5 2.1 3.1 4-6.6zm-1.8 13h3.7L11.5 8.1c3.8-2.6 8.3-2.7 10-.1-1.8.8-4.2 2.6-6.1 5.3L15.5 19z"/></svg></span>
+                <span class="v2-dossier-name">SpaceXAI</span>
+              </div>
+              <span class="v1-tag">DEV TOOLS</span>
+            </div>
+            <p class="v2-quote">«На CursorBench 3.2 набрала 73.4% и сама проверяет свою работу до конца задачи.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">73.4% на CursorBench 3.2 с полной внутренней самопроверкой до финального коммита.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Panel 2: Debug -->
+        <div class="v2-panel" id="p-debug">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 02 · 4 КЕЙСА</div>
+            <h2 class="v2-panel-title">Отладка и разбор инцидентов</h2>
+          </div>
+          
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M2 5v14h3.5V9.5l3 5h2l3-5V19H17V5h-3.5L10 11 6.5 5H2zm16 0v14h4V5h-4z"/></svg></span>
+                <span class="v2-dossier-name">Millennium</span>
+              </div>
+              <span class="v1-tag">HFT & TRADING</span>
+            </div>
+            <p class="v2-quote">«В Millennium модель нашла причину сбоя раз в миллион запусков, который четыре-пять лет никто не мог объяснить: разобрала вендорскую библиотеку по машинному коду.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Анализ скомпилированного машинного кода и локализация 5-летнего бага 1:1,000,000.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12.72 2.29c2.32 0 4.8 1.05 6.09 2.76 1.28 1.7 1.13 3.65-.34 4.54-1.48.88-3.79.88-6.11.88-2.32 0-4.63 0-6.11-.88-1.47-.89-1.62-2.84-.34-4.54 1.29-1.71 3.77-2.76 6.09-2.76v-.01zM2.14 14.15c.61-1.76 2.37-3.07 4.96-3.87.52-.16 1.09-.29 1.7-.39-.12.43-.19.88-.19 1.35 0 2.87 2.33 5.2 5.2 5.2 2.87 0 5.2-2.33 5.2-5.2 0-.47-.07-.92-.19-1.35.61.1 1.18.23 1.7.39 2.59.8 4.35 2.11 4.96 3.87.35 1.01.17 2.14-.52 3.09-1.39 1.91-4.78 3.16-9.15 3.16s-7.76-1.25-9.15-3.16c-.69-.95-.87-2.08-.52-3.09z"/></svg></span>
+                <span class="v2-dossier-name">Red Hat</span>
+              </div>
+              <span class="v1-tag">LINUX PLATFORM</span>
+            </div>
+            <p class="v2-quote">«В Red Hat прогнали сломанные сборки через Claude Code: причина найдена в каждой на всех уровнях усилия, отчёты стали короче.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">100% нахождение причин сломанных билдов при кратких емких отчетах для инженеров.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.14 2.52 7.69 6.1 9.17l-.37-2.07c-.06-.32.06-.65.31-.85l2.4-1.93c.3-.24.73-.24 1.03 0l2.4 1.93c.25.2.37.53.31.85l-.37 2.07C17.48 19.69 20 16.14 20 12c0-5.52-4.48-10-10-10zm-1.5 6.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span>
+                <span class="v2-dossier-name">Datadog</span>
+              </div>
+              <span class="v1-tag">OBSERVABILITY</span>
+            </div>
+            <p class="v2-quote">«В Datadog проверяли модель на реальных инцидентах, она справилась с самыми сложными случаями из набора.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Успешное разрешение критических сценариев из реального набора продакшн-аварий.</p>
+            </div>
+          </article>
+
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand">
+                <span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 4h4.8v4.8H4zm5.6 0h4.8v4.8H9.6zm5.6 0H20v4.8h-4.8zM4 9.6h4.8v4.8H4zm5.6 0h4.8v4.8H9.6zm5.6 0H20v4.8h-4.8zM4 15.2h4.8V20H4zm5.6 0h4.8V20H9.6zm5.6 0H20V20h-4.8z"/></svg></span>
+                <span class="v2-dossier-name">Plaid</span>
+              </div>
+              <span class="v1-tag">FINTECH API</span>
+            </div>
+            <p class="v2-quote">«Изменение в Plaid больше чем через восемь сервисов и три репозитория модель проследила до строк в базе без ошибок.»</p>
+            <div class="v2-takeaway">
+              <span class="v2-takeaway-lbl">КЛЮЧЕВОЙ ЭФФЕКТ</span>
+              <p class="v2-takeaway-text">Трассировка изменений сквозь 8 микросервисов и 3 репозитория прямо до строк в БД.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Panels 3-7 (Research, Finance, Writing, Agents, Price) -->
+        <div class="v2-panel" id="p-research">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 03 · 3 КЕЙСА</div>
+            <h2 class="v2-panel-title">Исследовательские задачи</h2>
+          </div>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4V6zm0 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4v-2zm0 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2H4v-2z"/></svg></span><span class="v2-dossier-name">IMC</span></div>
+              <span class="v1-tag">RESEARCH</span>
+            </div>
+            <p class="v2-quote">«Исследователи IMC получили решение с подхода, который раньше не предлагали ни модели, ни люди, результат ушёл выше прежнего потолка.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5h3.8c1.8 0 3.2 1.1 3.2 2.8 0 1.3-.8 2.3-2 2.6l2.3 4.1h-2.3l-2-3.8h-1.5v3.8h-1.5V7zm1.5 4.1h2.2c.9 0 1.6-.5 1.6-1.3s-.7-1.3-1.6-1.3H12v2.6zM7.5 18.5l4.5-1.8 4.5 1.8-4.5-1.2-4.5 1.2z"/></svg></span><span class="v2-dossier-name">Rakuten</span></div>
+              <span class="v1-tag">CLINICAL</span>
+            </div>
+            <p class="v2-quote">«Rakuten: модель нашла пробел в клиническом проекте после трёх других моделей и предложила новую гипотезу за день.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head">
+              <div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2l7.5 4.33v8.66L12 19.33 4.5 15V6.33L12 2zm0 3.5L7 8.38v5.74l5 2.88 5-2.88V8.38L12 5.5zm0 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg></span><span class="v2-dossier-name">iGent</span></div>
+              <span class="v1-tag">GPU OPT</span>
+            </div>
+            <p class="v2-quote">«Задачу, стоявшую в iGent полтора года, модель продвинула и ускорила кернел на 35%.»</p>
+          </article>
+        </div>
+
+        <div class="v2-panel" id="p-finance">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 04 · 4 КЕЙСА</div>
+            <h2 class="v2-panel-title">Финансы и документы</h2>
+          </div>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L3 8.5l9 13.5 9-13.5L12 2zm0 3.2l5.7 4.1H6.3L12 5.2zm-6.8 5.6h4.5l-3.2 7.2-1.3-7.2zm6.8 8.1l-3.3-7.1h6.6L12 18.9zm1.5-8.1h4.5l-1.3 7.2-3.2-7.2z"/></svg></span><span class="v2-dossier-name">Rogo</span></div><span class="v1-tag">BANKING</span></div>
+            <p class="v2-quote">«У Rogo точность как у Fable 5 при 20% меньше токенов, слайды стали понятнее банкирам.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2"/></svg></span><span class="v2-dossier-name">Samaya</span></div><span class="v1-tag">FINTECH</span></div>
+            <p class="v2-quote">«На FrontierFinance у Samaya 55.9% против 49.2% у Fable 5: модель идёт в транскрипт звонка и берёт точные цифры.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M4 4h6.5v6.5H4zm9.5 0H20v6.5h-6.5zM4 13.5h6.5V20H4zm9.5 0H20V20h-6.5z"/></svg></span><span class="v2-dossier-name">Hebbia</span></div><span class="v1-tag">ENTERPRISE</span></div>
+            <p class="v2-quote">«В Hebbia отметили лучшие презентации на PowerPoint-тесте и лучшую точность фактов по финансовым документам.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h3v1.5H8V10z"/></svg></span><span class="v2-dossier-name">Crosby</span></div><span class="v1-tag">LEGAL</span></div>
+            <p class="v2-quote">«RedlineBench в Crosby вырос с 47.9 до 57.0, правки короче и чаще принимаются контрагентом.»</p>
+          </article>
+        </div>
+
+        <div class="v2-panel" id="p-writing">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 05 · 2 КЕЙСА</div>
+            <h2 class="v2-panel-title">Письмо и знаниевая работа</h2>
+          </div>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 14.3c-1.2 1-2.7 1.5-4.3 1.5-3.3 0-5.5-2.2-5.5-5.8 0-3.8 2.6-6.2 6.2-6.2 1.6 0 2.9.5 3.8 1.4l-1.3 1.5c-.7-.6-1.5-1-2.5-1-2.2 0-3.8 1.5-3.8 4.2 0 2.5 1.4 3.9 3.5 3.9 1.1 0 2-.4 2.7-1l1.2 1.5z"/></svg></span><span class="v2-dossier-name">Canva</span></div><span class="v1-tag">CREATIVE</span></div>
+            <p class="v2-quote">«Тексты для Canva стали понятнее и лучше следуют гайду по стилю, в Canva Code модель собрала ритм-игру с музыкой в такт.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 20zm6.5 1.5l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"/></svg></span><span class="v2-dossier-name">Glean</span></div><span class="v1-tag">SEARCH</span></div>
+            <p class="v2-quote">«Судьи Glean предпочли ответы Fable 5.1 примерно 2:1 над Fable 5 с лучшей опорой на источники.»</p>
+          </article>
+        </div>
+
+        <div class="v2-panel" id="p-agents">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 06 · 2 КЕЙСА</div>
+            <h2 class="v2-panel-title">Агенты с инструментами</h2>
+          </div>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M3 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3zm0 2h18v3H3V6zm0 5h18v7H3v-7zm3 2l2.5 2L6 17v-1.2l1-0.8-1-0.8V13zm4.5 3.5h3.5v1.2h-3.5v-1.2z"/></svg></span><span class="v2-dossier-name">Browserbase</span></div><span class="v1-tag">BROWSER</span></div>
+            <p class="v2-quote">«82% задач на браузерном бенчмарке Browserbase против 74% у Opus 5 и 57% у Fable 5, ни одной пробитой стоп-точки.»</p>
+          </article>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2.2L3.5 7.1v9.8L12 21.8l8.5-4.9V7.1L12 2.2zm0 2.5l6.3 3.6-6.3 3.6-6.3-3.6 6.3-3.6zM5.5 8.9l5.5 3.1v6.7L5.5 15.6V8.9zm13 6.7l-5.5 3.1v-6.7l5.5-3.1v6.7z"/></svg></span><span class="v2-dossier-name">Block</span></div><span class="v1-tag">FINANCE</span></div>
+            <p class="v2-quote">«В 30-дневной симуляции бизнеса Block с инструментами Square модель экономнее Opus 5 на токен.»</p>
+          </article>
+        </div>
+
+        <div class="v2-panel" id="p-price">
+          <div class="v2-panel-header">
+            <div class="v2-panel-tag">ОБЛАСТЬ 07 · 1 КЕЙС</div>
+            <h2 class="v2-panel-title">Цена и скорость</h2>
+          </div>
+          <article class="v2-dossier-card">
+            <div class="v2-dossier-head"><div class="v2-dossier-brand"><span class="partner-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.2 15.5c-3.1 0-5.2-1.9-5.2-4.8 0-3.2 2.4-5.2 5.5-5.2 2.8 0 4.6 1.7 4.6 4.4 0 .4 0 .7-.1.9H10.1c.2 2 1.6 3.1 3.2 3.1 1.2 0 2.2-.5 2.8-1.3l1.5 1c-.9 1.2-2.5 1.9-4.4 1.9zm2.4-6.1c-.1-1.6-1.1-2.5-2.4-2.5-1.4 0-2.5.9-2.8 2.5h5.2z"/></svg></span><span class="v2-dossier-name">Every</span></div><span class="v1-tag">SPEED & COST</span></div>
+            <p class="v2-quote">«Every описывает релиз как интеллект Fable по цене Opus на скорости Sonnet: вдвое быстрее Opus 5 при половине токенов.»</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- VIEW 3: UNIFIED RAIL SLIDER                                   -->
+  <!-- ============================================================= -->
+  <main id="view-v3" class="wb-variant-view">
+    <div class="v3-box">
+      <!-- Stepper Categories -->
+      <div class="v3-stepper" id="v3Stepper">
+        <button class="v3-step-btn is-active" data-first="0">01 Кодинг <span class="cnt">6</span></button>
+        <button class="v3-step-btn" data-first="6">02 Отладка <span class="cnt">4</span></button>
+        <button class="v3-step-btn" data-first="10">03 Исследования <span class="cnt">3</span></button>
+        <button class="v3-step-btn" data-first="13">04 Финансы <span class="cnt">4</span></button>
+        <button class="v3-step-btn" data-first="17">05 Знания <span class="cnt">2</span></button>
+        <button class="v3-step-btn" data-first="19">06 Агенты <span class="cnt">2</span></button>
+        <button class="v3-step-btn" data-first="21">07 Цена <span class="cnt">1</span></button>
+      </div>
+
+      <!-- Brand Ribbon -->
+      <div class="v3-rail" id="v3Rail">
+        <!-- 22 Brands -->
+        <button class="v3-rail-btn is-active" data-idx="0">Jane Street</button>
+        <button class="v3-rail-btn" data-idx="1">Cognition</button>
+        <button class="v3-rail-btn" data-idx="2">MongoDB</button>
+        <button class="v3-rail-btn" data-idx="3">Ramp</button>
+        <button class="v3-rail-btn" data-idx="4">Shopify</button>
+        <button class="v3-rail-btn" data-idx="5">SpaceXAI</button>
+        <button class="v3-rail-btn" data-idx="6">Millennium</button>
+        <button class="v3-rail-btn" data-idx="7">Red Hat</button>
+        <button class="v3-rail-btn" data-idx="8">Datadog</button>
+        <button class="v3-rail-btn" data-idx="9">Plaid</button>
+        <button class="v3-rail-btn" data-idx="10">IMC</button>
+        <button class="v3-rail-btn" data-idx="11">Rakuten</button>
+        <button class="v3-rail-btn" data-idx="12">iGent</button>
+        <button class="v3-rail-btn" data-idx="13">Rogo</button>
+        <button class="v3-rail-btn" data-idx="14">Samaya</button>
+        <button class="v3-rail-btn" data-idx="15">Hebbia</button>
+        <button class="v3-rail-btn" data-idx="16">Crosby</button>
+        <button class="v3-rail-btn" data-idx="17">Canva</button>
+        <button class="v3-rail-btn" data-idx="18">Glean</button>
+        <button class="v3-rail-btn" data-idx="19">Browserbase</button>
+        <button class="v3-rail-btn" data-idx="20">Block</button>
+        <button class="v3-rail-btn" data-idx="21">Every</button>
+      </div>
+
+      <!-- Master Viewport Card -->
+      <div class="v3-view-wrap">
+        <button class="v3-nav-btn v3-nav-prev" id="v3Prev">←</button>
+        <div class="v3-card-display">
+          <div class="v3-card-meta">
+            <span class="v3-meta-cat" id="v3MetaCat">01 · Агентный кодинг и долгие автономные прогоны</span>
+            <span class="v3-meta-num" id="v3MetaNum">01 / 22</span>
+          </div>
+          <div class="v3-brand-row">
+            <span class="partner-logo-box" id="v3Logo"><svg viewBox="0 0 24 24"><path d="M4 4h5v11.5a3.5 3.5 0 0 1-7 0V13h3.5v2.5a1 1 0 0 0 2 0V4zm11 0h5a3.5 3.5 0 0 1 0 7h-2.5v1.5H20V16h-5a3.5 3.5 0 0 1 0-7h2.5V7.5H15V4z"/></svg></span>
+            <span class="v3-brand-title" id="v3BrandTitle">Jane Street</span>
+          </div>
+          <p class="v3-quote-text" id="v3Quote">На внутренних тестах насчитали больше решённых задач по коду, чем у Fable 5 и Opus 5, и отметили, что ход работы остаётся понятным на длинных многошаговых задачах.</p>
+        </div>
+        <button class="v3-nav-btn v3-nav-next" id="v3Next">→</button>
+      </div>
+
+      <!-- Progress Line -->
+      <div class="v3-prog-bar"><div class="v3-prog-fill" id="v3ProgFill" style="width: 4.54%"></div></div>
+
+      <!-- Footer Info -->
+      <div class="v3-footer">
+        <span id="v3FooterText">Кейс <strong>Jane Street</strong> · Агентный кодинг</span>
+        <span>Листайте стрелками <kbd>←</kbd> <kbd>→</kbd> или кликайте по логотипам</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- VIEW 4: CURRENT 7 SLIDERS (BASELINE)                          -->
+  <!-- ============================================================= -->
+  <main id="view-v4" class="wb-variant-view">
+    <div class="v4-notice">
+      ⚠️ <strong>Текущая версия (Baseline):</strong> 7 отдельных каруселей одна под другой. 14 стрелок, монотонный вертикальный скролл, тяжело окинуть взглядом все кейсы.
+    </div>
+
+    <div style="opacity: 0.85;">
+      <h3>1. Агентный кодинг и долгие автономные прогоны</h3>
+      <div class="carousel tw"><div class="track" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px">
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Jane Street</strong>: На внутренних тестах насчитали больше решённых задач по коду...</div>
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Cognition</strong>: Переводит Devin с Opus 5 на Fable 5.1 с первого дня...</div>
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>MongoDB</strong>: Прототип для MongoDB модель собрала за три дня...</div>
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Ramp</strong>: 38 часов без присмотра над ML-задачей...</div>
+      </div></div>
+
+      <h3 style="margin-top:32px">2. Отладка и разбор инцидентов</h3>
+      <div class="carousel tw"><div class="track" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px">
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Millennium</strong>: В Millennium модель нашла причину сбоя раз в миллион запусков...</div>
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Red Hat</strong>: В Red Hat прогнали сломанные сборки через Claude Code...</div>
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Datadog</strong>: В Datadog проверяли модель на реальных инцидентах...</div>
+      </div></div>
+
+      <h3 style="margin-top:32px">3. Исследовательские задачи</h3>
+      <div class="carousel tw"><div class="track" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px">
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>IMC</strong>: Исследователи IMC получили решение с подхода...</div>
+        <div class="card" style="min-width:320px;padding:16px;background:var(--card);border:1px solid var(--hairline)"><strong>Rakuten</strong>: Rakuten: модель нашла пробел в клиническом проекте...</div>
+      </div></div>
+    </div>
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- SCRIPTS CONTROLLER                                            -->
+  <!-- ============================================================= -->
+  <script>
+    // 1. Data Dictionary for Unified Slider (Variant 3)
+    const CASES_DATA = [
+      { num: '01', cat: '01 · Агентный кодинг', name: 'Jane Street', quote: 'На внутренних тестах насчитали больше решённых задач по коду, чем у Fable 5 и Opus 5, и отметили, что ход работы остаётся понятным на длинных многошаговых задачах.', path: 'M4 4h5v11.5a3.5 3.5 0 0 1-7 0V13h3.5v2.5a1 1 0 0 0 2 0V4zm11 0h5a3.5 3.5 0 0 1 0 7h-2.5v1.5H20V16h-5a3.5 3.5 0 0 1 0-7h2.5V7.5H15V4z' },
+      { num: '02', cat: '01 · Агентный кодинг', name: 'Cognition', quote: 'Переводит Devin с Opus 5 на Fable 5.1 с первого дня: в тестах не хуже Fable 5 при меньшей цене за задачу благодаря дешёвому кэшу.', path: 'M12 2L3.5 6.87v9.74L12 21.5l8.5-4.89V6.87L12 2zm0 2.3l6.5 3.73-2.6 1.5-6.5-3.74L12 4.3zM5.5 8.04l5.5 3.16v6.32l-5.5-3.16V8.04zm13 6.32l-5.5 3.16v-6.32l5.5-3.16v6.32z' },
+      { num: '03', cat: '01 · Агентный кодинг', name: 'MongoDB', quote: 'Прототип для MongoDB модель собрала за три дня, работая ночами без человека. Утром инженер получал готовую фазу с визуальным разбором.', path: 'M17.182 9.518c-.89-3.92-3.05-6.517-4.78-7.518h-.002v19.467c.36.215.71.397 1.05.533 1.15-4.59 4.7-6.22 3.732-12.482zm-5.584-7.518c-1.73 1.001-3.89 3.598-4.78 7.518-.968 6.262 2.582 7.892 3.73 12.482.34-.136.69-.318 1.05-.533V2z' },
+      { num: '04', cat: '01 · Агентный кодинг', name: 'Ramp', quote: '38 часов без присмотра над ML-задачей: модель нашла ошибку в разметке, запустила шесть экспериментов и вернулась с результатом.', path: 'M3 18.5h4.8L17.2 5.5H12.4L3 18.5zm13.2 0H21L12.6 5.5H7.8l8.4 13z' },
+      { num: '05', cat: '01 · Агентный кодинг', name: 'Shopify', quote: 'По опыту Shopify модель ведёт записи по ходу работы, меняет приоритеты и продолжает после перерыва.', path: 'M19.64 5.41c-.05-.33-.31-.59-.64-.63l-4.77-.5c-.32-.03-.62.15-.75.44l-2.02 4.41-1.63-.53c-.3-.1-.63.02-.8.29l-4.94 7.68c-.14.22-.15.5-.02.73.13.23.37.37.64.37h13.2c.38 0 .7-.3.73-.68l.97-11.58z' },
+      { num: '06', cat: '01 · Агентный кодинг', name: 'SpaceXAI', quote: 'На CursorBench 3.2 набрала 73.4% и сама проверяет свою работу до конца задачи.', path: 'M2.5 19h3.8l4.4-6.4L6.3 6h-3.8l4.4 6.5L2.5 19zm14.8-13h-3.7l-2.4 3.5 2.1 3.1 4-6.6zm-1.8 13h3.7L11.5 8.1c3.8-2.6 8.3-2.7 10-.1-1.8.8-4.2 2.6-6.1 5.3L15.5 19z' },
+      { num: '07', cat: '02 · Отладка инцидентов', name: 'Millennium', quote: 'В Millennium модель нашла причину сбоя раз в миллион запусков, который четыре-пять лет никто не мог объяснить: разобрала вендорскую библиотеку по машинному коду.', path: 'M2 5v14h3.5V9.5l3 5h2l3-5V19H17V5h-3.5L10 11 6.5 5H2zm16 0v14h4V5h-4z' },
+      { num: '08', cat: '02 · Отладка инцидентов', name: 'Red Hat', quote: 'В Red Hat прогнали сломанные сборки через Claude Code: причина найдена в каждой на всех уровнях усилия, отчёты стали короче.', path: 'M12.72 2.29c2.32 0 4.8 1.05 6.09 2.76 1.28 1.7 1.13 3.65-.34 4.54-1.48.88-3.79.88-6.11.88-2.32 0-4.63 0-6.11-.88-1.47-.89-1.62-2.84-.34-4.54 1.29-1.71 3.77-2.76 6.09-2.76v-.01z' },
+      { num: '09', cat: '02 · Отладка инцидентов', name: 'Datadog', quote: 'В Datadog проверяли модель на реальных инцидентах, она справилась с самыми сложными случаями из набора.', path: 'M12 2C6.48 2 2 6.48 2 12c0 4.14 2.52 7.69 6.1 9.17l-.37-2.07c-.06-.32.06-.65.31-.85l2.4-1.93c.3-.24.73-.24 1.03 0l2.4 1.93c.25.2.37.53.31.85l-.37 2.07C17.48 19.69 20 16.14 20 12c0-5.52-4.48-10-10-10zm-1.5 6.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z' },
+      { num: '10', cat: '02 · Отладка инцидентов', name: 'Plaid', quote: 'Изменение в Plaid больше чем через восемь сервисов и три репозитория модель проследила до строк в базе без ошибок.', path: 'M4 4h4.8v4.8H4zm5.6 0h4.8v4.8H9.6zm5.6 0H20v4.8h-4.8zM4 9.6h4.8v4.8H4zm5.6 0h4.8v4.8H9.6zm5.6 0H20v4.8h-4.8zM4 15.2h4.8V20H4zm5.6 0h4.8V20H9.6zm5.6 0H20V20h-4.8z' },
+      { num: '11', cat: '03 · Исследования', name: 'IMC', quote: 'Исследователи IMC получили решение с подхода, который раньше не предлагали ни модели, ни люди, результат ушёл выше прежнего потолка.', path: 'M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4V6zm0 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H4v-2zm0 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2H4v-2z' },
+      { num: '12', cat: '03 · Исследования', name: 'Rakuten', quote: 'Rakuten: модель нашла пробел в клиническом проекте после трёх других моделей и предложила новую гипотезу за день.', path: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5h3.8c1.8 0 3.2 1.1 3.2 2.8 0 1.3-.8 2.3-2 2.6l2.3 4.1h-2.3l-2-3.8h-1.5v3.8h-1.5V7zm1.5 4.1h2.2c.9 0 1.6-.5 1.6-1.3s-.7-1.3-1.6-1.3H12v2.6zM7.5 18.5l4.5-1.8 4.5 1.8-4.5-1.2-4.5 1.2z' },
+      { num: '13', cat: '03 · Исследования', name: 'iGent', quote: 'Задачу, стоявшую в iGent полтора года, модель продвинула и ускорила кернел на 35%.', path: 'M12 2l7.5 4.33v8.66L12 19.33 4.5 15V6.33L12 2zm0 3.5L7 8.38v5.74l5 2.88 5-2.88V8.38L12 5.5zm0 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z' },
+      { num: '14', cat: '04 · Финансы и документы', name: 'Rogo', quote: 'У Rogo точность как у Fable 5 при 20% меньше токенов, слайды стали понятнее банкирам.', path: 'M12 2L3 8.5l9 13.5 9-13.5L12 2zm0 3.2l5.7 4.1H6.3L12 5.2zm-6.8 5.6h4.5l-3.2 7.2-1.3-7.2zm6.8 8.1l-3.3-7.1h6.6L12 18.9zm1.5-8.1h4.5l-1.3 7.2-3.2-7.2z' },
+      { num: '15', cat: '04 · Финансы и документы', name: 'Samaya', quote: 'На FrontierFinance у Samaya 55.9% против 49.2% у Fable 5: модель идёт в транскрипт звонка и берёт точные цифры.', path: 'M12 2C6.48 2 2 6.48 2 12c0 4.14 2.52 7.69 6.1 9.17l-.37-2.07c-.06-.32.06-.65.31-.85l2.4-1.93c.3-.24.73-.24 1.03 0l2.4 1.93c.25.2.37.53.31.85l-.37 2.07C17.48 19.69 20 16.14 20 12c0-5.52-4.48-10-10-10zm-1.5 6.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z' },
+      { num: '16', cat: '04 · Финансы и документы', name: 'Hebbia', quote: 'В Hebbia отметили лучшие презентации на PowerPoint-тесте и лучшую точность фактов по финансовым документам.', path: 'M4 4h6.5v6.5H4zm9.5 0H20v6.5h-6.5zM4 13.5h6.5V20H4zm9.5 0H20V20h-6.5z' },
+      { num: '17', cat: '04 · Финансы и документы', name: 'Crosby', quote: 'RedlineBench в Crosby вырос с 47.9 до 57.0, правки короче и чаще принимаются контрагентом.', path: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h3v1.5H8V10z' },
+      { num: '18', cat: '05 · Знания и письмо', name: 'Canva', quote: 'Тексты для Canva стали понятнее и лучше следуют гайду по стилю, в Canva Code модель собрала ритм-игру с музыкой в такт.', path: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 14.3c-1.2 1-2.7 1.5-4.3 1.5-3.3 0-5.5-2.2-5.5-5.8 0-3.8 2.6-6.2 6.2-6.2 1.6 0 2.9.5 3.8 1.4l-1.3 1.5c-.7-.6-1.5-1-2.5-1-2.2 0-3.8 1.5-3.8 4.2 0 2.5 1.4 3.9 3.5 3.9 1.1 0 2-.4 2.7-1l1.2 1.5z' },
+      { num: '19', cat: '05 · Знания и письмо', name: 'Glean', quote: 'Судьи Glean предпочли ответы Fable 5.1 примерно 2:1 над Fable 5 с лучшей опорой на источники.', path: 'M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 20zm6.5 1.5l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z' },
+      { num: '20', cat: '06 · Агенты с тулами', name: 'Browserbase', quote: '82% задач на браузерном бенчмарке Browserbase против 74% у Opus 5 и 57% у Fable 5, ни одной пробитой стоп-точки.', path: 'M3 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3zm0 2h18v3H3V6zm0 5h18v7H3v-7zm3 2l2.5 2L6 17v-1.2l1-0.8-1-0.8V13zm4.5 3.5h3.5v1.2h-3.5v-1.2z' },
+      { num: '21', cat: '06 · Агенты с тулами', name: 'Block', quote: 'В 30-дневной симуляции бизнеса Block с инструментами Square модель экономнее Opus 5 на токен.', path: 'M12 2.2L3.5 7.1v9.8L12 21.8l8.5-4.9V7.1L12 2.2zm0 2.5l6.3 3.6-6.3 3.6-6.3-3.6 6.3-3.6zM5.5 8.9l5.5 3.1v6.7L5.5 15.6V8.9zm13 6.7l-5.5 3.1v-6.7l5.5-3.1v6.7z' },
+      { num: '22', cat: '07 · Цена и скорость', name: 'Every', quote: 'Every описывает релиз как интеллект Fable по цене Opus на скорости Sonnet: вдвое быстрее Opus 5 при половине токенов.', path: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.2 15.5c-3.1 0-5.2-1.9-5.2-4.8 0-3.2 2.4-5.2 5.5-5.2 2.8 0 4.6 1.7 4.6 4.4 0 .4 0 .7-.1.9H10.1c.2 2 1.6 3.1 3.2 3.1 1.2 0 2.2-.5 2.8-1.3l1.5 1c-.9 1.2-2.5 1.9-4.4 1.9zm2.4-6.1c-.1-1.6-1.1-2.5-2.4-2.5-1.4 0-2.5.9-2.8 2.5h5.2z' }
+    ];
+
+    // 2. View Tab Switching
+    const tabBtns = document.querySelectorAll('.wb-tab-btn');
+    const views = document.querySelectorAll('.wb-variant-view');
+    const descEl = document.getElementById('viewDesc');
+    const descriptions = {
+      'view-v1': '<strong>Концепт 1: Bento Grid с фильтрами и поиском.</strong> Все 22 кейса на одном экране. Никаких горизонтальных каруселей, поиск по названию компании в реальном времени, швейцарские pill-фильтры.',
+      'view-v2': '<strong>Концепт 2: Master-Detail Досье.</strong> Двухколоночный терминал. Слева — навигатор областей со счетчиками и шкалами веса, справа — карточки-досье с цитатами и ключевыми выводами.',
+      'view-v3': '<strong>Концепт 3: Unified Rail Slider (Один мастер-слайдер).</strong> Вместо 7 мелких слайдеров — один большой экран с бренд-лентой всех 22 логотипов и прыжками по 7 категориям.',
+      'view-v4': '<strong>Было: 7 слайдеров подряд.</strong> Длинная лента с 14 стрелками и обрезкой текста, утомляющая при прокрутке.'
+    };
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('is-active'));
+        views.forEach(v => v.classList.remove('is-visible'));
+        btn.classList.add('is-active');
+        const targetId = btn.getAttribute('data-target');
+        const targetView = document.getElementById(targetId);
+        if (targetView) targetView.classList.add('is-visible');
+        if (descEl && descriptions[targetId]) descEl.innerHTML = descriptions[targetId];
+      });
+    });
+
+    // 3. Theme Toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'dark' ? '☾ ТЕМА' : '☀ ТЕМА';
+    });
+
+    // 4. Variant 1 (Bento Grid) Logic
+    const v1Search = document.getElementById('v1Search');
+    const v1Count = document.getElementById('v1Count');
+    const v1Pills = document.querySelectorAll('.v1-pill');
+    const v1Cards = document.querySelectorAll('.v1-card');
+    let v1CurrentCat = 'all';
+
+    function updateV1() {
+      const q = (v1Search.value || '').toLowerCase().trim();
+      let shown = 0;
+      v1Cards.forEach(c => {
+        const cat = c.getAttribute('data-cat');
+        const name = c.getAttribute('data-name');
+        const text = c.textContent.toLowerCase();
+        const matchesCat = (v1CurrentCat === 'all' || cat === v1CurrentCat);
+        const matchesQuery = (!q || name.includes(q) || text.includes(q));
+        if (matchesCat && matchesQuery) {
+          c.classList.remove('is-hidden');
+          shown++;
+        } else {
+          c.classList.add('is-hidden');
+        }
+      });
+      if (v1Count) v1Count.textContent = shown;
+    }
+
+    v1Pills.forEach(p => {
+      p.addEventListener('click', () => {
+        v1Pills.forEach(x => x.classList.remove('is-active'));
+        p.classList.add('is-active');
+        v1CurrentCat = p.getAttribute('data-cat');
+        updateV1();
+      });
+    });
+    if (v1Search) v1Search.addEventListener('input', updateV1);
+
+    // 5. Variant 2 (Master-Detail) Logic
+    const v2Btns = document.querySelectorAll('.v2-cat-btn');
+    const v2Panels = document.querySelectorAll('.v2-panel');
+    v2Btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        v2Btns.forEach(b => b.classList.remove('is-active'));
+        v2Panels.forEach(p => p.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const pid = btn.getAttribute('data-panel');
+        const panel = document.getElementById(pid);
+        if (panel) panel.classList.add('is-active');
+      });
+    });
+
+    // 6. Variant 3 (Unified Rail Slider) Logic
+    let v3CurrentIdx = 0;
+    const v3MetaCat = document.getElementById('v3MetaCat');
+    const v3MetaNum = document.getElementById('v3MetaNum');
+    const v3BrandTitle = document.getElementById('v3BrandTitle');
+    const v3Quote = document.getElementById('v3Quote');
+    const v3Logo = document.getElementById('v3Logo');
+    const v3ProgFill = document.getElementById('v3ProgFill');
+    const v3FooterText = document.getElementById('v3FooterText');
+    const v3RailBtns = document.querySelectorAll('.v3-rail-btn');
+    const v3StepBtns = document.querySelectorAll('.v3-step-btn');
+
+    function renderV3(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= CASES_DATA.length) idx = CASES_DATA.length - 1;
+      v3CurrentIdx = idx;
+      const d = CASES_DATA[idx];
+      v3MetaCat.textContent = d.cat;
+      v3MetaNum.textContent = `${d.num} / 22`;
+      v3BrandTitle.textContent = d.name;
+      v3Quote.textContent = d.quote;
+      v3Logo.innerHTML = `<svg viewBox="0 0 24 24"><path d="${d.path}"/></svg>`;
+      const pct = ((idx + 1) / CASES_DATA.length) * 100;
+      v3ProgFill.style.width = pct + '%';
+      v3FooterText.innerHTML = `Кейс <strong>${d.name}</strong> · ${d.cat}`;
+
+      v3RailBtns.forEach((b, i) => {
+        b.classList.toggle('is-active', i === idx);
+        if (i === idx) b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+
+      // Highlight active stepper
+      v3StepBtns.forEach(sb => {
+        const first = parseInt(sb.getAttribute('data-first'), 10);
+        // Find if idx is in this stepper
+        sb.classList.remove('is-active');
+      });
+      if (idx < 6) v3StepBtns[0].classList.add('is-active');
+      else if (idx < 10) v3StepBtns[1].classList.add('is-active');
+      else if (idx < 13) v3StepBtns[2].classList.add('is-active');
+      else if (idx < 17) v3StepBtns[3].classList.add('is-active');
+      else if (idx < 19) v3StepBtns[4].classList.add('is-active');
+      else if (idx < 21) v3StepBtns[5].classList.add('is-active');
+      else v3StepBtns[6].classList.add('is-active');
+    }
+
+    document.getElementById('v3Prev').addEventListener('click', () => renderV3(v3CurrentIdx - 1));
+    document.getElementById('v3Next').addEventListener('click', () => renderV3(v3CurrentIdx + 1));
+
+    v3RailBtns.forEach((b, i) => {
+      b.addEventListener('click', () => renderV3(i));
+    });
+
+    v3StepBtns.forEach(sb => {
+      sb.addEventListener('click', () => {
+        const first = parseInt(sb.getAttribute('data-first'), 10);
+        renderV3(first);
+      });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const v3 = document.getElementById('view-v3');
+      if (v3 && v3.classList.contains('is-visible')) {
+        if (e.key === 'ArrowLeft') renderV3(v3CurrentIdx - 1);
+        if (e.key === 'ArrowRight') renderV3(v3CurrentIdx + 1);
+      }
+    });
+
+  </script>
+</body>
+</html>

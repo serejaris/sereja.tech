@@ -1,0 +1,396 @@
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Claude-Code · Макет</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet"><style>
+:root{--paper:#fffef9;--ink:#1a1a1a;--muted:#333333;--accent:#33567a;--hairline:rgba(26,26,26,.18);--rule:rgba(26,26,26,.25)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.62 'PT Serif',Georgia,serif}.page{max-width:740px;margin:0 auto;padding:72px 22px 64px}a{color:var(--accent);text-underline-offset:2px;text-decoration-thickness:1px}a:hover{color:var(--ink)}button,input{font:inherit}button,a,input,summary{outline-offset:5px}.site-nav{display:flex;justify-content:space-between;align-items:center;gap:24px;font:400 12px/1.6 'PT Mono',monospace;margin-bottom:52px}.site-nav a{text-decoration:none}.site-nav div{display:flex;gap:21px}.wordmark{color:var(--ink)}h1{font-size:1.9em;line-height:1.15;font-weight:400;margin:0 0 16px}h2{font-size:1.4em;line-height:1.3;font-weight:400;margin:44px 0 14px}h3{font-size:1.1em;font-weight:700;margin:30px 0 12px}p{margin:0 0 1em}.masthead{padding-bottom:30px}.lede{font-size:1.1em;line-height:1.58;color:var(--muted);margin:0}.meta,.date,.caption,figcaption{font:400 11.5px/1.6 'PT Mono',monospace;color:var(--muted)}.meta{margin:18px 0 0}nav.toc{margin:26px 0 54px}nav.toc ul{list-style:none;margin:0;padding:0}nav.toc li{font:400 12.5px/2.1 'PT Mono',ui-monospace,monospace}nav.toc a{color:var(--accent);text-decoration:none}nav.toc a:hover{text-decoration:underline;text-underline-offset:2px}.mono-links{font:400 12.5px/2.1 'PT Mono',monospace;list-style:none;padding:0;margin:0}.mono-links a{text-decoration:none}.mono-links a:hover{text-decoration:underline}.posts,.links,.plain{list-style:none;margin:0;padding:0}.posts li{margin:0 0 14px;display:flex;gap:20px;align-items:baseline}.posts a{text-decoration:none}.posts a:hover{text-decoration:underline}.date{flex:0 0 58px}.featured li{margin-bottom:12px}.links li,.plain li{margin-bottom:12px}.links .desc{color:var(--muted);font-size:.96em}.site-footer{margin-top:58px;padding-top:22px;border-top:1px solid var(--hairline);font:400 11.5px/1.8 'PT Mono',monospace}.site-footer .socials{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}.site-footer a{text-decoration:none}.search{width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--rule);border-radius:0;background:transparent;color:var(--ink);font:400 14px/1.6 'PT Mono',monospace;margin:0 0 24px}.search::placeholder{color:var(--muted)}.topics{margin-bottom:24px}.topic-link{display:block;font:400 12.5px/2.1 'PT Mono',monospace;text-decoration:none}.topic-link[aria-current=true]{text-decoration:underline}.tags a{display:inline-block;margin:0 20px 10px 0;font:400 12px/1.7 'PT Mono',monospace;text-decoration:none}.tags .count{color:var(--muted);margin-left:8px}summary{cursor:pointer;color:var(--accent);font:400 12.5px/2.1 'PT Mono',monospace}details:not(.prompt-card){margin:20px 0}details .tags{margin-top:18px}.crumb{font:400 12px/1.6 'PT Mono',monospace;margin:0 0 26px}.intro{color:var(--muted)}img{max-width:100%;height:auto}.post-cover{display:block;width:100%;height:auto}figure{margin:26px 0}figcaption{text-align:center;margin-top:10px}blockquote{margin:22px 0;padding:0;color:var(--muted);font-size:.96em}.heading-anchor{font:400 12px 'PT Mono',monospace;opacity:.55;margin-left:8px;text-decoration:none}.content>h2:first-child{margin-top:0}.article-sequence{margin-top:44px}.sequence-link{display:block;margin-bottom:22px;text-decoration:none}.sequence-link span{display:block;font:400 11.5px/1.8 'PT Mono',monospace;color:var(--muted)}.sequence-link strong{font-weight:400}.related-row{display:block;margin:0 0 16px;text-decoration:none}.related-meta{display:block;font:400 11px/1.6 'PT Mono',monospace;color:var(--muted)}.article-tags a{font:400 12px/1.9 'PT Mono',monospace;margin-right:18px}.prompt-wrap{position:relative;margin:26px 0}.prompt-card{background:#16181d;border-radius:4px;overflow:hidden;color:#b7bec7;margin:0}.prompt-card summary{list-style:none;display:flex;gap:12px;align-items:center;background:#23262e;padding:7px 12px;color:#a8b0ba;font:400 11px/1.6 'PT Mono',monospace}.prompt-card summary::-webkit-details-marker{display:none}.prompt-name{flex:1;text-transform:uppercase}.toggle{white-space:nowrap}.copy{background:transparent;border:1px solid rgba(255,255,255,.28);border-radius:3px;color:#c3c9d1;font:400 11px 'PT Mono',monospace;padding:4px 8px;cursor:pointer}.prompt-body{padding:10px 12px;white-space:pre-wrap;overflow-wrap:anywhere;font:400 12px/1.55 'PT Mono',monospace;margin:0}.prompt-src{font:400 11px/1.6 'PT Mono',monospace;color:var(--muted);margin:12px 0 26px}.value-list{list-style:none;padding:0;margin:22px 0}.value-list li{margin:0 0 18px}.value-list strong{font-weight:700}code{font-family:'PT Mono',monospace;font-size:.8em}pre{white-space:pre-wrap;overflow-wrap:anywhere}.chart svg{display:block;width:100%;height:auto}.chart-controls{display:flex;gap:18px;align-items:center;font:400 12px 'PT Mono',monospace;margin:20px 0}.chart-controls button,.text-btn{border:0;background:none;color:var(--accent);font:400 12px 'PT Mono',monospace;padding:4px 0;cursor:pointer;text-decoration:underline}.chart-slide[hidden]{display:none}.label{font:400 11px/1.6 'PT Mono',monospace}.legend{display:flex;gap:22px;font:400 11px/1.6 'PT Mono',monospace;margin:12px 0}dfn{font-style:normal;text-decoration:underline dotted;cursor:help}.chart-slide>p{margin-top:20px}dl{margin:22px 0}dl>div{padding:10px 0;border-bottom:1px solid var(--hairline)}dt{font:400 12px/1.6 'PT Mono',monospace}dd{margin:5px 0 0}.mhead{display:none}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(min-width:1260px){.prompt-card{position:absolute;left:calc(100% + 36px);top:0;width:320px}.prompt-card[open]{aspect-ratio:210/297;display:flex;flex-direction:column}.prompt-card[open] .prompt-body{overflow-y:auto;max-height:405px}.prompt-card summary{flex-wrap:wrap}.prompt-card .prompt-name{flex-basis:100%}.prompt-src{max-width:90%}}
+@media print{@page{size:A4;margin:20mm 17mm}body{font-size:10.5pt}.page{max-width:none;padding:0}.site-nav,.site-footer,.copy,.chart-controls{display:none}.prompt-card{position:static;background:var(--paper);color:var(--ink)}.prompt-card summary{background:var(--paper);color:var(--ink)}.prompt-body{display:block}h1,h2,h3{break-after:avoid}p{orphans:2;widows:2}}
+@media(min-width:1260px) and (max-width:1439px){.prompt-card{position:static;width:100%}.prompt-card[open]{aspect-ratio:auto}.prompt-card[open] .prompt-body{max-height:none}}</style></head><body><main class="page"><nav class="site-nav" aria-label="Основная навигация"><a class="wordmark" href="after-home.html">Сережа Рис</a><div><a href="after-blog.html">Блог</a><a href="https://bench.sereja.tech/">Бенч</a><a href="after-about.html">Обо мне</a><a href="https://t.me/ris_ai">Телеграм</a></div></nav><p class="crumb"><a href="after-blog.html">← Блог</a></p>
+<h1>Claude-Code</h1>
+<p class="intro">75 статей с тегом «Claude-Code»</p>
+<ul class="posts">
+  
+  <li>
+    <span class="date">2 сен</span>
+    <a href="after-rich.html">Обзор Claude Fable 5.1: бенчмарки, отзывы, промптинг</a>
+  </li>
+  
+  <li>
+    <span class="date">5 авг</span>
+    <a href="https://sereja.tech/blog/claude-max-real-limits-api-cost/">Какую подписку Claude выбрать для работы: $20, $100 или $200</a>
+  </li>
+  
+  <li>
+    <span class="date">4 авг</span>
+    <a href="https://sereja.tech/blog/claude-max-hermes-telegram/">Как подключить подписку Anthropic к Hermes</a>
+  </li>
+  
+  <li>
+    <span class="date">18 июл</span>
+    <a href="https://sereja.tech/blog/agent-knowledge-base/">База знаний для агентов: вход, слои и обслуживание</a>
+  </li>
+  
+  <li>
+    <span class="date">1 июл</span>
+    <a href="https://sereja.tech/blog/claude-sonnet-5-review/">Sonnet 5: скучный релиз с одним полезным навыком</a>
+  </li>
+  
+  <li>
+    <span class="date">30 июн</span>
+    <a href="https://sereja.tech/blog/orchestration-without-goals/">Сто агентов, ноль результата</a>
+  </li>
+  
+  <li>
+    <span class="date">30 июн</span>
+    <a href="https://sereja.tech/blog/text-evals-grader/">Как тестировать LLM модели для написания текстов?</a>
+  </li>
+  
+  <li>
+    <span class="date">29 июн</span>
+    <a href="https://sereja.tech/blog/orca-menedzher-agentov/">Orca вместо четырёх терминалов</a>
+  </li>
+  
+  <li>
+    <span class="date">13 июн</span>
+    <a href="https://sereja.tech/blog/youtube-chapters-split-concern/">Генерируем таймкоды для YouTube из транскрипта с помощью AI</a>
+  </li>
+  
+  <li>
+    <span class="date">13 июн</span>
+    <a href="https://sereja.tech/blog/undercast-obs-overlay-fable-5/">undercast: оверлей для OBS, сделанный Fable 5</a>
+  </li>
+  
+  <li>
+    <span class="date">12 июн</span>
+    <a href="https://sereja.tech/blog/ai-radio-agents/">Запустил AI-радио, которое делают агенты</a>
+  </li>
+  
+  <li>
+    <span class="date">10 июн</span>
+    <a href="https://sereja.tech/blog/claude-fable-5-review/">Перешёл на Claude Fable 5: цены, effort, кейсы</a>
+  </li>
+  
+  <li>
+    <span class="date">30 апр</span>
+    <a href="https://sereja.tech/blog/claude-code-skills-grafana/">OTel для Claude Code — рентген твоих скиллов</a>
+  </li>
+  
+  <li>
+    <span class="date">27 апр</span>
+    <a href="https://sereja.tech/blog/svoy-miro-za-30-minut/">Свой Miro за 30 минут вместо подписки</a>
+  </li>
+  
+  <li>
+    <span class="date">22 апр</span>
+    <a href="https://sereja.tech/blog/claude-code-techno-strudel-mcp/">Как я научил Claude Code писать техно-музыку</a>
+  </li>
+  
+  <li>
+    <span class="date">22 апр</span>
+    <a href="https://sereja.tech/blog/tracking-tasks-agent-multi-repo/">Как трекать задачи агентом в нескольких репо</a>
+  </li>
+  
+  <li>
+    <span class="date">8 апр</span>
+    <a href="https://sereja.tech/blog/cc-alias-bypass-permissions/">Как я включил Claude Code в режим без вопросов</a>
+  </li>
+  
+  <li>
+    <span class="date">29 мар</span>
+    <a href="https://sereja.tech/blog/product-data-audit-skill/">Написал скилл для аудита продукта в Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">19 мар</span>
+    <a href="https://sereja.tech/blog/software-for-one-personal-tools/">Software for One: софт, который нужен только тебе</a>
+  </li>
+  
+  <li>
+    <span class="date">16 мар</span>
+    <a href="https://sereja.tech/blog/context-architecture-lifecycle-split/">Слои контекста: организуем файлы по скорости изменения</a>
+  </li>
+  
+  <li>
+    <span class="date">14 мар</span>
+    <a href="https://sereja.tech/blog/agents-md-source-of-truth/">AGENTS.md: что это и как подружить Claude Code с Codex</a>
+  </li>
+  
+  <li>
+    <span class="date">12 мар</span>
+    <a href="https://sereja.tech/blog/notebooklm-claude-code-rag/">NotebookLM + Claude Code: бесплатный RAG за 5 минут</a>
+  </li>
+  
+  <li>
+    <span class="date">5 мар</span>
+    <a href="https://sereja.tech/blog/subagent-model-cost/">Haiku, Sonnet, Opus: какую модель ставить субагенту</a>
+  </li>
+  
+  <li>
+    <span class="date">4 мар</span>
+    <a href="https://sereja.tech/blog/board-of-advisors-subagents/">Как я собрал совет директоров из субагентов</a>
+  </li>
+  
+  <li>
+    <span class="date">1 мар</span>
+    <a href="https://sereja.tech/blog/llms-txt-agent-readable-web/">llms.txt: делаю блог читаемым для агентов</a>
+  </li>
+  
+  <li>
+    <span class="date">28 фев</span>
+    <a href="https://sereja.tech/blog/data-layer-for-agents/">Один JSON кормит всех: как строить data layer для агентов</a>
+  </li>
+  
+  <li>
+    <span class="date">25 фев</span>
+    <a href="https://sereja.tech/blog/launchd-macos-agent-scheduler/">Персональная корпорация: ставим агентов на расписание</a>
+  </li>
+  
+  <li>
+    <span class="date">22 фев</span>
+    <a href="https://sereja.tech/blog/sync-claude-code-four-machines/">Как я синхронизирую Claude Code на четырёх компах</a>
+  </li>
+  
+  <li>
+    <span class="date">21 фев</span>
+    <a href="https://sereja.tech/blog/claude-code-hooks-github-issues/">Хуки Claude Code: агент сам ведёт задачи</a>
+  </li>
+  
+  <li>
+    <span class="date">20 фев</span>
+    <a href="https://sereja.tech/blog/chrome-devtools-mcp-setup/">Как научить Claude Code управлять твоим Chrome</a>
+  </li>
+  
+  <li>
+    <span class="date">18 фев</span>
+    <a href="https://sereja.tech/blog/homebrew-cli-vibecoding/">Homebrew: тысяча инструментов для агента</a>
+  </li>
+  
+  <li>
+    <span class="date">16 фев</span>
+    <a href="https://sereja.tech/blog/agent-consilium-independent-opinions/">Консилиум: три агента нашли разные проблемы в проекте</a>
+  </li>
+  
+  <li>
+    <span class="date">12 фев</span>
+    <a href="https://sereja.tech/blog/telegram-autopublisher/">Мой редотдел из трёх промптов</a>
+  </li>
+  
+  <li>
+    <span class="date">11 фев</span>
+    <a href="https://sereja.tech/blog/personal-os-project-audit/">Как я начал строить Personal OS с аудита проектов</a>
+  </li>
+  
+  <li>
+    <span class="date">10 фев</span>
+    <a href="https://sereja.tech/blog/llm-evals-for-vibecoder/">Evals: автоматическая проверка качества AI-агентов</a>
+  </li>
+  
+  <li>
+    <span class="date">9 фев</span>
+    <a href="https://sereja.tech/blog/context-lat-90-minutes/">Запускаю context.lat: почему половина из 90 минут — не код</a>
+  </li>
+  
+  <li>
+    <span class="date">9 фев</span>
+    <a href="https://sereja.tech/blog/superpowers-brainstorming-workflow/">Superpowers: скиллы для Claude Code, которые экономят часы</a>
+  </li>
+  
+  <li>
+    <span class="date">9 фев</span>
+    <a href="https://sereja.tech/blog/claude-code-auto-memory/">Claude Code получил память между сессиями</a>
+  </li>
+  
+  <li>
+    <span class="date">9 фев</span>
+    <a href="https://sereja.tech/blog/claude-code-vs-codex-cli/">Claude Code — напарник, Codex — исполнитель</a>
+  </li>
+  
+  <li>
+    <span class="date">7 фев</span>
+    <a href="https://sereja.tech/blog/claude-code-token-optimization/">Как перестать сжигать контекст Claude Code впустую</a>
+  </li>
+  
+  <li>
+    <span class="date">7 фев</span>
+    <a href="https://sereja.tech/blog/seo-audit-hugo-vercel-checklist/">SEO-аудит блога за одну сессию Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">6 фев</span>
+    <a href="https://sereja.tech/blog/youtube-metadata-relevance-fix/">Почему AI неправильно понимает длинные тексты</a>
+  </li>
+  
+  <li>
+    <span class="date">6 фев</span>
+    <a href="https://sereja.tech/blog/content-plan-subagents-exa/">Контент-план для канала: от одного поста к субагентам</a>
+  </li>
+  
+  <li>
+    <span class="date">6 фев</span>
+    <a href="https://sereja.tech/blog/youtube-thumbnails-html-code/">YouTube-обложки генерирует LLM, не Midjourney</a>
+  </li>
+  
+  <li>
+    <span class="date">5 фев</span>
+    <a href="https://sereja.tech/blog/digest-subagents-mapreduce/">Дайджесты чатов с субагентами и дешёвыми моделями</a>
+  </li>
+  
+  <li>
+    <span class="date">5 фев</span>
+    <a href="https://sereja.tech/blog/agent-teams-opus-4-6/">Agent Teams в Claude Code: команда агентов за 5 минут</a>
+  </li>
+  
+  <li>
+    <span class="date">3 фев</span>
+    <a href="https://sereja.tech/blog/blog-post-pipeline/">Пайплайн для статей: 5 фаз от идеи до Telegram</a>
+  </li>
+  
+  <li>
+    <span class="date">2 фев</span>
+    <a href="https://sereja.tech/blog/document-conversations-not-code/">Документируй разговоры с агентом, а не код</a>
+  </li>
+  
+  <li>
+    <span class="date">1 фев</span>
+    <a href="https://sereja.tech/blog/fix-once-rule-forever/">Правка → Правило: как научить агента не повторять ошибки</a>
+  </li>
+  
+  <li>
+    <span class="date">1 фев</span>
+    <a href="https://sereja.tech/blog/telegram-autoposter/">Автопостер для Telegram — очередь постов на Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">1 фев</span>
+    <a href="https://sereja.tech/blog/skills-knowledge-transfer/">Skills: как не терять опыт между проектами</a>
+  </li>
+  
+  <li>
+    <span class="date">1 фев</span>
+    <a href="https://sereja.tech/blog/github-projects-ai-agent-memory/">GitHub Projects как память для AI-агента</a>
+  </li>
+  
+  <li>
+    <span class="date">31 янв</span>
+    <a href="https://sereja.tech/blog/claude-code-marketing-ops/">Claude Code как операционка марафона: рассылки, аналитика</a>
+  </li>
+  
+  <li>
+    <span class="date">27 янв</span>
+    <a href="https://sereja.tech/blog/pipeline-reliability-state-persistence/">Пайплайны на скиллах падают. Вот как это исправить</a>
+  </li>
+  
+  <li>
+    <span class="date">27 янв</span>
+    <a href="https://sereja.tech/blog/ai-coding-tools-economics-2026/">AI для кодинга в 2026: инструменты, контекст и экономика</a>
+  </li>
+  
+  <li>
+    <span class="date">26 янв</span>
+    <a href="https://sereja.tech/blog/clawdbot-personal-ai-assistant/">Clawdbot: личный AI-ассистент с дырой в безопасности</a>
+  </li>
+  
+  <li>
+    <span class="date">25 янв</span>
+    <a href="https://sereja.tech/blog/carousel-cards-playwright/">Как я делаю карточки для Telegram-каруселей без Figma</a>
+  </li>
+  
+  <li>
+    <span class="date">25 янв</span>
+    <a href="https://sereja.tech/blog/tui-presentation-claude-code/">TUI-презентация прямо в Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">24 янв</span>
+    <a href="https://sereja.tech/blog/claude-code-voice-assistant/">Как я сделал голосового ассистента из Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">23 янв</span>
+    <a href="https://sereja.tech/blog/blog-to-telegram-skill/">Skill для автопостинга в Telegram: завайбкодил за стрим</a>
+  </li>
+  
+  <li>
+    <span class="date">23 янв</span>
+    <a href="https://sereja.tech/blog/playwright-e2e-with-ai-agent/">E2E тесты пишет агент: Playwright + Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">21 янв</span>
+    <a href="https://sereja.tech/blog/github-issues-project-context/">Контекст проекта в GitHub Issues: делегируй агенту</a>
+  </li>
+  
+  <li>
+    <span class="date">20 янв</span>
+    <a href="https://sereja.tech/blog/local-rag-embeddings-m1/">Почему GPT не умеет искать: эмбединги на M1</a>
+  </li>
+  
+  <li>
+    <span class="date">18 янв</span>
+    <a href="https://sereja.tech/blog/dev-script-health-checks/">Один скрипт вместо трёх терминалов</a>
+  </li>
+  
+  <li>
+    <span class="date">18 янв</span>
+    <a href="https://sereja.tech/blog/ascii-dashboard-analytics/">ASCII-дашборды вместо веб-интерфейсов</a>
+  </li>
+  
+  <li>
+    <span class="date">17 янв</span>
+    <a href="https://sereja.tech/blog/modular-rules-claude-md/">Модульные правила: как не утонуть в CLAUDE.md</a>
+  </li>
+  
+  <li>
+    <span class="date">16 янв</span>
+    <a href="https://sereja.tech/blog/claude-code-logs-project-status/">Логи Claude Code — твоя карта проектов</a>
+  </li>
+  
+  <li>
+    <span class="date">16 янв</span>
+    <a href="https://sereja.tech/blog/claude-code-skills-distribution/">Как делиться скиллами Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">15 янв</span>
+    <a href="https://sereja.tech/blog/claude-code-logs-stack/">Мой стек для анализа логов Claude Code</a>
+  </li>
+  
+  <li>
+    <span class="date">14 янв</span>
+    <a href="https://sereja.tech/blog/video-pipeline-claude-code/">Видео-пайплайн на Claude Code: от записи до YouTube</a>
+  </li>
+  
+  <li>
+    <span class="date">14 янв</span>
+    <a href="https://sereja.tech/blog/mapreduce-subagents/">MapReduce для субагентов: 12800 строк без потери контекста</a>
+  </li>
+  
+  <li>
+    <span class="date">11 янв</span>
+    <a href="https://sereja.tech/blog/multi-agent-text-deaify/">Убираем аишность: параллельные критики вместо rewriter</a>
+  </li>
+  
+  <li>
+    <span class="date">11 янв</span>
+    <a href="https://sereja.tech/blog/vibecoder-diary/">Дневник вайбкодера: каждая сессия — статья</a>
+  </li>
+  
+  <li>
+    <span class="date">11 янв</span>
+    <a href="https://sereja.tech/blog/midi-obs-claude-code/">MIDI + OBS + Claude Code: за 3 часа от идеи до решения</a>
+  </li>
+  
+  <li>
+    <span class="date">10 янв</span>
+    <a href="https://sereja.tech/blog/slash-commands-subagents/">Почему model: в slash-командах — это ловушка</a>
+  </li>
+  
+</ul>
+
+  <footer class="site-footer"><span>© 2026 Сережа Рис · sereja.tech</span><div class="socials"><a href="https://t.me/ris_ai">Телеграм</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Вайбкодеры</a><a href="https://github.com/serejaris">GitHub</a><a href="https://sereja.tech/index.xml">RSS</a></div></footer></main><script>
+for(const c of document.querySelectorAll('.prompt-card')){c.addEventListener('toggle',()=>{c.querySelector('.toggle').textContent=c.open?'Свернуть [−]':'Развернуть [+]'})}
+for(const b of document.querySelectorAll('.copy'))b.addEventListener('click',async e=>{e.preventDefault();e.stopPropagation();try{await navigator.clipboard.writeText(b.closest('.prompt-card').querySelector('code').textContent);b.textContent='Скопировано'}catch{b.textContent='Выделите текст'}setTimeout(()=>b.textContent='Скопировать',1800)});
+for(const d of document.querySelectorAll('dfn[data-def]'))d.title=d.dataset.def;
+const slides=[...document.querySelectorAll('.chart-slide')];let slide=0;
+function showSlide(n){slide=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.hidden=i!==slide);document.getElementById('chart-count').textContent=(slide+1)+' / '+slides.length}
+if(slides.length){document.getElementById('prev-chart').onclick=()=>showSlide(slide-1);document.getElementById('next-chart').onclick=()=>showSlide(slide+1);document.querySelector('.chart-gallery').onkeydown=e=>{if(e.key==='ArrowRight')showSlide(slide+1);if(e.key==='ArrowLeft')showSlide(slide-1)};showSlide(0)}
+const input=document.getElementById('search');if(input){const lists=[...document.querySelectorAll('#browse .posts')], headings=[...document.querySelectorAll('#browse .month-head')],rows=[...document.querySelectorAll('#browse .posts li')];let terms=[];const normalize=s=>s.toLowerCase().replace(/ё/g,'е');function search(){let q=normalize(input.value.trim()),count=0;rows.forEach(row=>{const t=normalize(row.textContent);const hit=(!q||t.includes(q))&&(!terms.length||terms.some(term=>t.includes(term)));row.hidden=!hit;if(hit)count++});lists.forEach(l=>l.hidden=![...l.children].some(li=>!li.hidden));headings.forEach(h=>h.hidden=h.nextElementSibling?.hidden);document.getElementById('empty').hidden=count>0;document.getElementById('result-count').textContent=(q||terms.length)?'Найдено статей: '+count:'';document.getElementById('reset').hidden=!q&&!terms.length}input.oninput=search;document.querySelectorAll('[data-topic]').forEach(a=>a.onclick=e=>{e.preventDefault();terms=a.dataset.terms.split(',');document.querySelectorAll('[data-topic]').forEach(z=>z.setAttribute('aria-current',String(z===a)));try{history.replaceState(null,'','?topic='+a.dataset.topic)}catch{};search()});document.getElementById('reset').onclick=()=>{input.value='';terms=[];document.querySelectorAll('[data-topic]').forEach(z=>z.removeAttribute('aria-current'));try{history.replaceState(null,'',location.pathname)}catch{};search()};const requested=new URLSearchParams(location.search).get('topic');if(requested)document.querySelector('[data-topic="'+CSS.escape(requested)+'"]')?.click();search()}
+</script></body></html>

@@ -1,0 +1,111 @@
+{
+  "plan": {
+    "brokenAnchors": 0,
+    "buttons": 0,
+    "column": "740px",
+    "figures": 18,
+    "font": "\"PT Serif\", Georgia, \"Times New Roman\", serif",
+    "height": 900,
+    "imageSizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "overflow": false,
+    "paper": "rgb(255, 254, 249)",
+    "scripts": 0,
+    "sections": 10,
+    "title": "Бумажный дизайн sereja.tech",
+    "width": 1440
+  },
+  "prototypes": [
+    {
+      "page": "home",
+      "coverBeforeTitle": null,
+      "h1": 1,
+      "height": 900,
+      "overflow": false,
+      "video": true,
+      "width": 1440
+    },
+    {
+      "page": "post",
+      "coverBeforeTitle": true,
+      "h1": 1,
+      "height": 900,
+      "overflow": false,
+      "video": false,
+      "width": 1440
+    }
+  ],
+  "mobile": "skipped at user request"
+}

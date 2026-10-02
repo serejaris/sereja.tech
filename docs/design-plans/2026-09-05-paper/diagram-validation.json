@@ -1,0 +1,16 @@
+{
+  "description": true,
+  "followingParagraph": "P",
+  "height": 900,
+  "overflow": false,
+  "position": [
+    "HEADER",
+    "FIGURE",
+    "P",
+    "NAV"
+  ],
+  "svg": true,
+  "textWithinSvg": true,
+  "title": "Переход к бумажному оформлению сайта",
+  "width": 1440
+}
