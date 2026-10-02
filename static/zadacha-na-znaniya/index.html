@@ -48,7 +48,7 @@ h1{font:800 clamp(38px,6vw,68px)/1.05 var(--serif);margin:22px auto 0;max-width:
 .body p{margin:0 0 20px}
 .drop{float:left;font:500 58px/46px var(--serif);margin:4px 10px 0 0}
 .sec-h{text-align:center;margin:76px 0 34px}
-.sec-h .num{display:block;font:600 9px/10px var(--sans);letter-spacing:5px;margin-bottom:12px}
+.sec-h .num{display:block;font:600 11px/12px var(--sans);letter-spacing:5px;margin-bottom:12px}
 .sec-h h2{font:300 clamp(27px,3.2vw,36px)/1.18 var(--serif);margin:0}
 .sec-h .kick{display:block;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-top:12px}
 h3{font:500 21px/1.3 var(--serif);margin:34px 0 12px}
@@ -71,10 +71,15 @@ h3{font:500 21px/1.3 var(--serif);margin:34px 0 12px}
 .tbl .was{color:var(--grey)}
 .tbl tr.hi th{color:var(--blue)}
 .tbl tr.up th{color:var(--pinkt)}
-.cap{font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin:8px 0 26px}
+.cap{font:400 13px/19px var(--sans);color:var(--grey);margin:8px 0 26px}
+.tbl tr.na th,.tbl tr.na td{color:var(--grey)}
 .wide{width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
 .cheat td.w{font-size:14px;line-height:20px;max-width:320px;padding-left:24px}
 .cheat th.w{padding-left:24px}
+.cheat td.e{--k:5px}.cheat td.m{--k:2.4px}
+.cheat td.e::after,.cheat td.m::after{content:"";display:block;height:4px;width:calc(var(--v) * var(--k));margin:6px 0 2px auto;background:#8a8a8a}
+.cheat tr.hi td.e::after,.cheat tr.hi td.m::after{background:var(--blue)}
+.cheat tr.hi td.e,.cheat tr.hi td.m{font-weight:500}
 .copyrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:30px 0 4px}
 .copyrow .t{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
 .copy{font:500 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;background:#fff;color:var(--blue);border:1px solid var(--blue);padding:6px 12px;cursor:pointer;flex:none}
@@ -89,7 +94,7 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 .bx small{display:block;font:400 13px/18px var(--sans);color:var(--grey);margin-top:3px}
 .bx.m{border-color:var(--pink)}
 .bx.d{border-style:dashed}
-.tag{display:inline-block;font:600 10px/1 var(--sans);text-transform:uppercase;letter-spacing:.1em;padding:3px 6px;margin-right:8px;vertical-align:1px}
+.tag{display:inline-block;font:600 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.1em;padding:3px 6px;margin-right:8px;vertical-align:1px}
 .tag.k{background:var(--blue);color:#fff}
 .tag.m{background:#fff0f7;color:var(--pinkt);border:1px solid var(--pink)}
 .dn{position:relative;display:block;height:16px;width:0;border-left:1.3px solid var(--blue);margin:0 auto}
@@ -103,17 +108,17 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 .f3 li{padding:8px 0;border-top:1px solid var(--line)}
 .f3 li b{font-weight:600}
 /* slope */
-.slope{max-width:560px;margin:26px auto 28px}
+.slope{max-width:470px;margin:26px auto 28px}
 .slope svg{width:100%;height:auto;display:block}
-.slope .hd{font:600 12px var(--sans);letter-spacing:1.5px;fill:#2d3e9f}
+.slope .hd{font:600 13.5px var(--sans);letter-spacing:1.5px;fill:#2d3e9f}
 .slope .ax{stroke:#e3e3e3;stroke-width:1}
 .slope .ln{stroke-width:1.4;fill:none}
 .slope .ln.lo{stroke:#b5b5b5}.slope .ln.hi{stroke:#2d3e9f;stroke-width:2.4}.slope .ln.up{stroke:#ff1493;stroke-width:2.4}
 .slope .dt.lo{fill:#b5b5b5}.slope .dt.hi{fill:#2d3e9f}.slope .dt.up{fill:#ff1493}
-.slope text.v,.slope text.n{font:400 15px var(--sans)}
+.slope text.v,.slope text.n{font:400 14px var(--sans)}
 .slope .v{font-variant-numeric:tabular-nums}
 .slope text.lo{fill:#555}.slope text.hi{fill:#2d3e9f;font-weight:600}.slope text.up{fill:#c4006a;font-weight:600}
-.slope figcaption{font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-top:10px;text-align:center}
+.slope figcaption{font:400 13px/19px var(--sans);color:var(--grey);margin-top:10px;text-align:center}
 /* оговорки */
 .note{border-left:3px solid var(--blue);background:var(--paper);padding:14px 18px 4px;margin:26px 0;font:400 16px/24px var(--sans)}
 .note h3{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 8px}
@@ -130,7 +135,7 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 .loop .fork .bx{text-align:center}
 .loop .back{margin-top:12px;border:1.3px dashed var(--blue);border-top:0;height:22px;position:relative}
 .loop .back span{position:absolute;left:50%;top:30px;transform:translateX(-50%);white-space:nowrap;font:600 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
-.loop figcaption{font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin-top:46px;text-align:center}
+.loop figcaption{font:400 13px/19px var(--sans);color:var(--grey);margin-top:46px;text-align:center}
 ol.steps{padding-left:22px;margin:0 0 24px}
 ol.steps li{margin:0 0 12px}
 /* споткнётесь */
@@ -145,24 +150,28 @@ ol.steps li{margin:0 0 12px}
 .cta{border-top:3px solid var(--blue);margin:44px 0 0;padding:18px 0 0;font:300 20px/30px var(--serif)}
 footer{text-align:center;padding:50px 16px 60px}
 footer .logo{font-size:30px}
+@media (min-width:761px){
+.ba>div:first-child{display:flex;flex-direction:column}
+.ba>div:first-child .tok{margin-top:auto}
+}
 @media (max-width:760px){
 .ba{grid-template-columns:1fr;gap:26px}
 .side{grid-template-columns:1fr}
 }
 @media (max-width:640px){
 body{font-size:17px;line-height:27px}
-.cheat thead{display:none}
-.cheat,.cheat tbody{display:block}
-.cheat tr{display:grid;grid-template-columns:repeat(3,1fr);column-gap:10px;border-bottom:1px solid var(--line);padding:12px 0}
-.cheat th,.cheat td{border:0;padding:2px 0}
-.cheat tbody th{grid-column:1/-1;padding-bottom:6px}
-.cheat td.n{text-align:left}
-.cheat td.n::before{content:attr(data-l);display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--grey)}
-.cheat td.w{grid-column:1/-1;max-width:none;padding:8px 0 0}
+.cheat,.cheat thead,.cheat tbody{display:block}
+.cheat tr{display:grid;grid-template-columns:1fr 54px 60px 46px;column-gap:10px;border-bottom:1px solid var(--line);padding:10px 0}
+.cheat thead tr{align-items:end;border-bottom:1px solid var(--ink);padding:0 0 8px}
+.cheat th,.cheat td,.cheat thead th{border:0;padding:0}
+.cheat thead th{letter-spacing:.03em}
+.cheat th.w{display:none}
+.cheat td.e{--k:3px}.cheat td.m{--k:1.45px}
+.cheat td.w{grid-column:1/-1;max-width:none;padding:6px 0 0}
 .tbl{font-size:14px;line-height:19px}
 .tbl th,.tbl td{padding:9px 6px 9px 0}
 .tbl.kinds{font-size:13px}
-.tbl.kinds thead th{font-size:10px;letter-spacing:.02em}
+.tbl.kinds thead th{font-size:11px;letter-spacing:.02em}
 .loop .back span{white-space:normal;width:90%;text-align:center}
 }
 </style>
@@ -185,7 +194,7 @@ body{font-size:17px;line-height:27px}
 <div class="head">
 <div class="rubric">Эвал <span>•</span> <span>9 моделей · 2 встречи · 7 циклов</span></div>
 <h1>Задача на знания: какую модель брать и что отдать коду</h1>
-<p class="lead">Я прогнал цепочку конспектов встреч на девяти моделях и семь раз её переделал. Код забрал всё проверяемое, модели остался смысл. Вот сколько правок остаётся после каждой.</p>
+<p class="lead">Я прогнал цепочку конспектов встреч на девяти моделях и шесть раз её переделал. Код забрал всё проверяемое, модели остался смысл. Вот сколько правок остаётся после каждой.</p>
 </div>
 <div class="meta">2 октября 2026 · замер и инструкция</div>
 <div class="share"><i></i><i></i></div>
@@ -201,11 +210,11 @@ body{font-size:17px;line-height:27px}
 <p>Шпаргалка и оба чек-листа копируются кнопкой. Читать всё подряд для этого не нужно.</p>
 </aside>
 
-<p class="key"><span class="drop">З</span>адача на знания устроена так: модель читает длинный источник и пишет текст, по которому люди будут действовать. Запись встречи становится конспектом, переписка сводкой, папка документов базой знаний. Ошибка здесь стоит дорого: искажённый смысл или чужие слова, приписанные не тому человеку.</p>
+<p class="key"><span class="drop">З</span>адача на знания устроена так: модель читает длинный источник и пишет текст, по которому люди будут действовать. Запись встречи становится конспектом, переписка сводкой, папка документов базой знаний. Ошибка здесь стоит дорого: искажённый смысл или слова, приписанные не тому человеку.</p>
 <p class="key">Мой вывод после замера: в такой задаче модели остаётся только смысл, всё проверяемое делает код. Тогда дешёвая модель даёт черновик с десятком правок, сильная почти готовый текст.</p>
 
-<p>Замер я называю эвалом: одна и та же цепочка на одних и тех же входах, результат сводится в числа. Вход: две записи Office Hours потока Personal Corp, 70 и 91 минута. Выход цепочки: конспект встречи, главы для видео и описание. Каждая модель прошла четыре прогона, по два на встречу.</p>
-<p>Текст проверяли два судьи. Судья здесь отдельная модель: в чистом контексте она сверяет текст с расшифровкой и перечисляет места, которые поправил бы редактор до показа людям. Каждое такое место я считаю правкой. Судьи из разных семей: Opus 5.5 и Codex 6.1 Sol.</p>
+<p>Замер я называю эвалом: одна и та же цепочка на одних и тех же входах, результат сводится в числа. Вход: две записи Office Hours, созвонов с вопросами участников потока Personal Corp, 70 и 91 минута. Выход цепочки: конспект встречи, главы и описание для видео. Каждая модель прошла четыре прогона, по два на встречу.</p>
+<p>Текст проверяли два судьи. Судья здесь отдельная модель: в чистом контексте она сверяет текст с расшифровкой и перечисляет места, которые поправил бы редактор до показа людям. Каждое такое место я считаю правкой. Судьи из разных семей, то есть от разных компаний: Opus 5.5 и Codex 6.1 Sol.</p>
 
 <section id="shpargalka">
 <div class="sec-h"><h2>Какую модель брать под задачу на знания</h2></div>
@@ -215,17 +224,17 @@ body{font-size:17px;line-height:27px}
 <div class="wide">
 <div class="copyrow" style="margin-top:0"><span class="t">Шпаргалка · версия цепочки после оптимизации</span><button class="copy" type="button" data-copy="cheat-txt">Скопировать</button></div>
 <table class="tbl cheat" aria-label="Какую модель брать под задачу на знания">
-<thead><tr><th scope="col">Модель<br>и подписка</th><th scope="col" class="n">Правок на&nbsp;текст</th><th scope="col" class="n">Минут на&nbsp;встречу</th><th scope="col" class="n">Как есть</th><th scope="col" class="w">Когда брать</th></tr></thead>
+<thead><tr><th scope="col">Модель<br>и подписка</th><th scope="col" class="n">Правок на текст</th><th scope="col" class="n">Минут на встречу</th><th scope="col" class="n">Как есть</th><th scope="col" class="w">Когда брать</th></tr></thead>
 <tbody>
-<tr class="hi"><th scope="row">Codex 6.1 Sol<small>ChatGPT</small></th><td class="n" data-l="правок">4,0</td><td class="n" data-l="минут">4,1</td><td class="n" data-l="как есть">2 из 4</td><td class="w">Текст уйдёт людям после беглой вычитки</td></tr>
-<tr class="hi"><th scope="row">Opus 5.5<small>Claude Max</small></th><td class="n" data-l="правок">4,5</td><td class="n" data-l="минут">3,1</td><td class="n" data-l="как есть">2 из 4</td><td class="w">То же, и быстрее всех из точных</td></tr>
-<tr><th scope="row">Sonnet 5.5<small>Claude Max</small></th><td class="n" data-l="правок">8,0</td><td class="n" data-l="минут">2,7</td><td class="n" data-l="как есть">0 из 4</td><td class="w">Быстрый черновик, который вы вычитаете</td></tr>
-<tr><th scope="row">GLM 5.3<small>Z.ai Coding Plan</small></th><td class="n" data-l="правок">11,8</td><td class="n" data-l="минут">20,7</td><td class="n" data-l="как есть">0 из 4</td><td class="w">Черновик без подписок Claude и ChatGPT, вычитка обязательна</td></tr>
-<tr><th scope="row">GLM 5.3 Flash<small>Z.ai Coding Plan</small></th><td class="n" data-l="правок">12,2</td><td class="n" data-l="минут">21,3</td><td class="n" data-l="как есть">0 из 4</td><td class="w">Как GLM 5.3: в замере разницы почти нет</td></tr>
-<tr><th scope="row">MiMo v2.6 Pro<small>OpenCode Go</small></th><td class="n" data-l="правок">14,2</td><td class="n" data-l="минут">38,3</td><td class="n" data-l="как есть">0 из 4</td><td class="w">Если время не важно. Проверяйте имена участников</td></tr>
-<tr class="up"><th scope="row">DeepSeek v4 Pro<small>OpenCode Go</small></th><td class="n" data-l="правок">15,8</td><td class="n" data-l="минут">15,0</td><td class="n" data-l="как есть">0 из 4</td><td class="w">Черновик. Проверяйте имена участников</td></tr>
-<tr class="up"><th scope="row">DeepSeek v4.1 Flash<small>OpenCode Go</small></th><td class="n" data-l="правок">17,2</td><td class="n" data-l="минут">23,6</td><td class="n" data-l="как есть">0 из 4</td><td class="w">Под эту задачу я бы не брал: после оптимизации стал хуже</td></tr>
-<tr><th scope="row">MiMo v2.6 Flash<small>OpenCode Go</small></th><td class="n" data-l="правок">17,5</td><td class="n" data-l="минут">38,5</td><td class="n" data-l="как есть">0 из 3</td><td class="w">Медленно и много правок</td></tr>
+<tr class="hi"><th scope="row">Codex 6.1 Sol<small>ChatGPT</small></th><td class="n e" style="--v:4.0">4,0</td><td class="n m" style="--v:4.1">4,1</td><td class="n">2 из 4</td><td class="w">Текст уйдёт людям после беглой вычитки</td></tr>
+<tr class="hi"><th scope="row">Opus 5.5<small>Claude Max</small></th><td class="n e" style="--v:4.5">4,5</td><td class="n m" style="--v:3.1">3,1</td><td class="n">2 из 4</td><td class="w">То же, и быстрее всех из точных</td></tr>
+<tr><th scope="row">Sonnet 5.5<small>Claude Max</small></th><td class="n e" style="--v:8.0">8,0</td><td class="n m" style="--v:2.7">2,7</td><td class="n">0 из 4</td><td class="w">Быстрый черновик, который вы вычитаете</td></tr>
+<tr><th scope="row">GLM 5.3<small>Z.ai Coding Plan</small></th><td class="n e" style="--v:11.8">11,8</td><td class="n m" style="--v:20.7">20,7</td><td class="n">0 из 4</td><td class="w">Черновик без подписок Claude и ChatGPT, вычитка обязательна</td></tr>
+<tr><th scope="row">GLM 5.3 Flash<small>Z.ai Coding Plan</small></th><td class="n e" style="--v:12.2">12,2</td><td class="n m" style="--v:21.3">21,3</td><td class="n">0 из 4</td><td class="w">Как GLM 5.3: в замере разницы почти нет</td></tr>
+<tr><th scope="row">MiMo v2.6 Pro<small>OpenCode Go</small></th><td class="n e" style="--v:14.2">14,2</td><td class="n m" style="--v:38.3">38,3</td><td class="n">0 из 4</td><td class="w">Если время не важно. Проверяйте имена участников</td></tr>
+<tr><th scope="row">DeepSeek v4 Pro<small>OpenCode Go</small></th><td class="n e" style="--v:15.8">15,8</td><td class="n m" style="--v:15.0">15,0</td><td class="n">0 из 4</td><td class="w">Черновик. Проверяйте имена участников</td></tr>
+<tr><th scope="row">DeepSeek v4.1 Flash<small>OpenCode Go</small></th><td class="n e" style="--v:17.2">17,2</td><td class="n m" style="--v:23.6">23,6</td><td class="n">0 из 4</td><td class="w">Под эту задачу я бы не брал: после оптимизации стал хуже</td></tr>
+<tr><th scope="row">MiMo v2.6 Flash<small>OpenCode Go</small></th><td class="n e" style="--v:17.5">17,5</td><td class="n m" style="--v:38.5">38,5</td><td class="n">0 из 3</td><td class="w">Медленно и много правок</td></tr>
 </tbody></table>
 <p class="cap">Правок: медиана по прогонам, в каждом прогоне среднее двух судей. Минут: время всей цепочки на одну встречу, медиана. Как есть: прогоны, которые оба судьи пропустили бы без серьёзных правок. У MiMo Flash три прогона из четырёх.</p>
 <pre class="hidden" id="cheat-txt">Какую модель брать под задачу на знания (sereja.tech/zadacha-na-znaniya, замер 02.10.2026)
@@ -239,13 +248,14 @@ MiMo v2.6 Pro (OpenCode Go) | 14,2 | 38,3 | 0 из 4 | если время не 
 DeepSeek v4 Pro (OpenCode Go) | 15,8 | 15,0 | 0 из 4 | черновик; проверяйте имена участников
 DeepSeek v4.1 Flash (OpenCode Go) | 17,2 | 23,6 | 0 из 4 | под эту задачу не брать
 MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и много правок
-Правок: медиана по прогонам, в прогоне среднее двух судей (Opus 5.5 и Codex 6.1 Sol).</pre>
+Правка: место, которое редактор поправил бы до показа людям. Правок: медиана по прогонам, в прогоне среднее двух судей (Opus 5.5 и Codex 6.1 Sol).
+Минут: время всей цепочки на одну встречу, медиана. Как есть: прогоны, которые оба судьи пропустили бы без серьёзных правок.</pre>
 </div>
 
 <article class="body" style="padding-top:0">
 <section id="kod">
-<div class="sec-h"><span class="num">01</span><h2>Код вместо агента срезает вход модели в 15–60 раз</h2></div>
-<p>Первая версия цепочки работала агентом. <code>claude -p</code> сам открывал скиллы, читал расшифровку, писал файлы и перечитывал их. Токенов на вход уходило от 1,2 до 10 млн на один конспект. Токены на вход: всё, что модель прочла за работу. По ним считаются лимиты подписки.</p>
+<div class="sec-h"><span class="num">01</span><h2>Код вместо агента срезает вход модели в 15–63 раза</h2></div>
+<p>Первая версия цепочки работала агентом. <code>claude -p</code> сам открывал скиллы (файлы с инструкциями), читал расшифровку, писал файлы и перечитывал их. Токенов на вход уходило от 1,2 до 10 млн на один конспект. Токены на вход: всё, что модель прочла за работу, по ним считаются лимиты подписки.</p>
 <p>В новой версии модель вызывается без инструментов. Весь вход лежит в одном промпте, ответ приходит текстом. Остальное делает код.</p>
 
 <figure class="ba" aria-label="Цепочка до и после оптимизации">
@@ -272,7 +282,7 @@ MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и м�
 <li><b>Главы.</b> Модель предлагает главы, код ставит время каждой на начало ближайшей реплики.</li>
 <li><b>Сборка.</b> Страницу, описание и служебные файлы собирает код из ответа модели.</li>
 <li><b>Проверки.</b> Форму страницы, словарь и главы проверяет код. Модели уходят только строки, которые проверки не прошли.</li>
-<li><b>Правки критика.</b> Критик присылает фрагмент и замену. Код вставляет замену и снова гоняет проверки. Если правка их ломает, код откатывает текст к версии до критика.</li>
+<li><b>Правки критика.</b> Критик, ещё один вызов модели, вычитывает готовый текст и присылает фрагмент и замену. Код вставляет замену и снова гоняет проверки. Если правка их ломает, код откатывает текст к версии до критика.</li>
 </ul>
 
 <table class="tbl" aria-label="Токены на вход и время, до и после">
@@ -290,21 +300,21 @@ MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и м�
 </tbody></table>
 <p class="cap">Цикл 0 → цикл 6. Медиана по прогонам на один конспект. Без кэша: весь вход минус повторное чтение кэша</p>
 
-<p>У семи моделей из девяти вход упал в 15–63 раза. Крайние: DeepSeek Pro в 105 раз, DeepSeek Flash в 10. Время сократилось у Claude и Codex. У дешёвых моделей оно упирается в провайдера: GLM 5.3 работает около 20 минут и с 2,5 млн токенов на входе, и с 51 тысячей.</p>
+<p>У семи моделей из девяти вход упал в 15–63 раза. Крайние: DeepSeek Pro в 105 раз, DeepSeek Flash в 10. Время сократилось у Claude, Codex и GLM 5.3 Flash. У дешёвых моделей оно упирается в провайдера: GLM 5.3 работает около 20 минут и с 2,5 млн токенов на входе, и с 51 тысячей.</p>
 
 <div class="note">
-<h3>Честная оговорка про кэш</h3>
+<h3>Оговорка про кэш</h3>
 <p>В цикле 0 от 87 до 97% входа было повторным чтением кэша. Кэш: уже прочитанный текст, который провайдер хранит и отдаёт модели повторно, дешевле нового. Агент перечитывал одно и то же, и каждое перечитывание попадало в счётчик.</p>
-<p>Без кэша вход сократился в 1,6–6,5 раза. У DeepSeek Flash он вырос: его критик теперь идёт по частям, 17 вызовов модели вместо 3. Реальная экономия лимитов меньше голой цифры.</p>
+<p>Без кэша вход сократился в 1,6–6,5 раза. У DeepSeek Flash он вырос: его критик теперь идёт по частям, 17 вызовов модели вместо 3. Реальная экономия лимитов меньше, чем показывает весь вход.</p>
 </div>
 </section>
 
 <section id="oshibki">
-<div class="sec-h"><span class="num">02</span><h2>Серьёзных ошибок вдвое меньше, атрибуция почти исчезла</h2></div>
+<div class="sec-h"><span class="num">02</span><h2>Серьёзных ошибок вдвое меньше, атрибуции стало в 3–30 раз меньше</h2></div>
 <p>Атрибуция: ошибка "кто сказал". Опыт одного участника подан как совет программы, мнение одного человека как общее правило. В цикле 0 это был один из двух главных видов правок, рядом с искажением смысла.</p>
 <p>Пример из цикла 0, без подробностей.</p>
-<p class="ex">Участник высказал своё предположение о работе с агентами. В конспекте Opus оно стало советом программы. Мой совет на той встрече был другим: вынести такой процесс в скилл. Оба судьи отметили место как серьёзную правку.</p>
-<p>Ученик, который встречу не видел, унёс бы чужую догадку как правило. Помогли две вещи. Код определяет, какая метка голоса в расшифровке моя, по объёму речи, и пишет это в промпт. Бриф говорит прямо: опыт участника пиши как опыт участника, советом программы он становится, только если это советую я.</p>
+<p class="ex">Участник высказал догадку о работе с агентами. В конспекте Opus оно стало советом программы. Мой совет на той встрече был другим: вынести такой процесс в скилл. Оба судьи отметили место как серьёзную правку.</p>
+<p>Ученик, который встречу не видел, унёс бы чужую догадку как правило. Помогли две вещи. Расшифровка подписывает говорящих метками: код по объёму речи определяет, какая метка моя, и пишет это в промпт. Бриф, инструкция модели в промпте, говорит прямо: опыт участника пиши как опыт участника, советом программы он становится, только если это советую я.</p>
 </section>
 </article>
 
@@ -327,77 +337,77 @@ MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и м�
 
 <article class="body" style="padding-top:0">
 <p>Серьёзных правок стало вдвое меньше у восьми моделей из девяти, у DeepSeek Flash на треть. "Кто сказал" у Claude и Codex почти ноль: 0,1–0,4 на текст. У остальных 1,0–1,7.</p>
-<p>Общее число правок у DeepSeek не упало: выросли правки формы и терминов. И критичных правок стало больше. В цикле 6 судьи отметили 21 критичную правку на всех прогонах, 16 из них про имена и личные подробности участников. Больше всего у DeepSeek Flash и MiMo Pro. Код убирает имена из чата до модели, бриф запрещает их писать. Расшифровку код не чистит, и дешёвые модели переносят личное из неё в конспект.</p>
+<p>Общее число правок у DeepSeek не упало: выросли правки формы и терминов. И критичных правок стало больше. В цикле 6 судьи отметили 21 критичную правку на всех прогонах, 16 из них про имена и личные подробности участников. Больше всего у DeepSeek Flash и MiMo Pro. Код убирает имена из чата встречи до модели, бриф запрещает их писать. Расшифровку код не чистит, и дешёвые модели переносят личное из неё в конспект.</p>
 
 <section id="model">
 <div class="sec-h"><span class="num">03</span><h2>Модель всё ещё решает: 4 правки против 12–18</h2></div>
 <p>После всех циклов разрыв остался. Opus 5.5 и Codex 6.1 Sol дают около 4 правок на текст, половину их прогонов судьи пропустили бы как есть. GLM, MiMo и DeepSeek дают от 12 до 18 правок. Как есть судьи не пропустили ни одного их прогона.</p>
 <figure class="slope">
-<svg viewBox="0 0 520 400" role="img" aria-labelledby="slT slD" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 390 400" role="img" aria-labelledby="slT slD" xmlns="http://www.w3.org/2000/svg">
 <title id="slT">Правок на текст до и после оптимизации, девять моделей</title>
 <desc id="slD">Цикл 0 слева, цикл 6 справа. У семи моделей правок стало меньше, у DeepSeek Flash и DeepSeek Pro больше.</desc>
-<text x="92" y="22" class="hd" text-anchor="middle">ЦИКЛ 0</text>
-<text x="300" y="22" class="hd" text-anchor="middle">ЦИКЛ 6</text>
-<line x1="92" y1="34" x2="92" y2="373" class="ax"/>
-<line x1="300" y1="34" x2="300" y2="373" class="ax"/>
-<line x1="92" y1="186.3" x2="300" y2="300.2" class="ln lo"/>
-<circle cx="92" cy="186.3" r="3.2" class="dt lo"/>
-<circle cx="300" cy="300.2" r="3.2" class="dt lo"/>
-<line x1="92" y1="136.7" x2="300" y2="244.7" class="ln lo"/>
-<circle cx="92" cy="136.7" r="3.2" class="dt lo"/>
-<circle cx="300" cy="244.7" r="3.2" class="dt lo"/>
-<line x1="92" y1="154.2" x2="300" y2="238.9" class="ln lo"/>
-<circle cx="92" cy="154.2" r="3.2" class="dt lo"/>
-<circle cx="300" cy="238.9" r="3.2" class="dt lo"/>
-<line x1="92" y1="142.5" x2="300" y2="209.7" class="ln lo"/>
-<circle cx="92" cy="142.5" r="3.2" class="dt lo"/>
-<circle cx="300" cy="209.7" r="3.2" class="dt lo"/>
-<line x1="92" y1="69.5" x2="300" y2="161.5" class="ln lo"/>
-<circle cx="92" cy="69.5" r="3.2" class="dt lo"/>
-<circle cx="300" cy="161.5" r="3.2" class="dt lo"/>
-<line x1="92" y1="224.3" x2="300" y2="186.3" class="ln up"/>
-<circle cx="92" cy="224.3" r="3.2" class="dt up"/>
-<circle cx="300" cy="186.3" r="3.2" class="dt up"/>
-<line x1="92" y1="230.1" x2="300" y2="165.9" class="ln up"/>
-<circle cx="92" cy="230.1" r="3.2" class="dt up"/>
-<circle cx="300" cy="165.9" r="3.2" class="dt up"/>
-<line x1="92" y1="336.7" x2="300" y2="358.6" class="ln hi"/>
-<circle cx="92" cy="336.7" r="3.2" class="dt hi"/>
-<circle cx="300" cy="358.6" r="3.2" class="dt hi"/>
-<line x1="92" y1="300.2" x2="300" y2="351.3" class="ln hi"/>
-<circle cx="92" cy="300.2" r="3.2" class="dt hi"/>
-<circle cx="300" cy="351.3" r="3.2" class="dt hi"/>
-<text x="80" y="341.7" text-anchor="end" class="v hi">5,5</text>
-<text x="312" y="368.4" class="v hi">4,0</text>
-<text x="358" y="368.4" class="n hi">Codex 6.1 Sol</text>
-<text x="80" y="305.2" text-anchor="end" class="v hi">8,0</text>
-<text x="312" y="351.4" class="v hi">4,5</text>
-<text x="358" y="351.4" class="n hi">Opus 5.5</text>
-<text x="80" y="191.3" text-anchor="end" class="v lo">15,8</text>
-<text x="312" y="305.2" class="v lo">8,0</text>
-<text x="358" y="305.2" class="n lo">Sonnet 5.5</text>
-<text x="80" y="132.5" text-anchor="end" class="v lo">19,2</text>
-<text x="312" y="255.3" class="v lo">11,8</text>
-<text x="358" y="255.3" class="n lo">GLM 5.3</text>
-<text x="80" y="166.5" text-anchor="end" class="v lo">18,0</text>
-<text x="312" y="238.3" class="v lo">12,2</text>
-<text x="358" y="238.3" class="n lo">GLM 5.3 Flash</text>
-<text x="80" y="149.5" text-anchor="end" class="v lo">18,8</text>
-<text x="312" y="214.7" class="v lo">14,2</text>
-<text x="358" y="214.7" class="n lo">MiMo Pro</text>
-<text x="80" y="223.7" text-anchor="end" class="v up">13,2</text>
-<text x="312" y="193.2" class="v up">15,8</text>
-<text x="358" y="193.2" class="n up">DeepSeek Pro</text>
-<text x="80" y="240.7" text-anchor="end" class="v up">12,8</text>
-<text x="312" y="176.2" class="v up">17,2</text>
-<text x="358" y="176.2" class="n up">DeepSeek Flash</text>
-<text x="80" y="74.5" text-anchor="end" class="v lo">23,8</text>
-<text x="312" y="159.2" class="v lo">17,5</text>
-<text x="358" y="159.2" class="n lo">MiMo Flash</text>
+<text x="48" y="22" class="hd" text-anchor="middle">ЦИКЛ 0</text>
+<text x="226" y="22" class="hd" text-anchor="middle">ЦИКЛ 6</text>
+<line x1="48" y1="34" x2="48" y2="373" class="ax"/>
+<line x1="226" y1="34" x2="226" y2="373" class="ax"/>
+<line x1="48" y1="186.3" x2="226" y2="300.2" class="ln lo"/>
+<circle cx="48" cy="186.3" r="3.2" class="dt lo"/>
+<circle cx="226" cy="300.2" r="3.2" class="dt lo"/>
+<line x1="48" y1="136.7" x2="226" y2="244.7" class="ln lo"/>
+<circle cx="48" cy="136.7" r="3.2" class="dt lo"/>
+<circle cx="226" cy="244.7" r="3.2" class="dt lo"/>
+<line x1="48" y1="154.2" x2="226" y2="238.9" class="ln lo"/>
+<circle cx="48" cy="154.2" r="3.2" class="dt lo"/>
+<circle cx="226" cy="238.9" r="3.2" class="dt lo"/>
+<line x1="48" y1="142.5" x2="226" y2="209.7" class="ln lo"/>
+<circle cx="48" cy="142.5" r="3.2" class="dt lo"/>
+<circle cx="226" cy="209.7" r="3.2" class="dt lo"/>
+<line x1="48" y1="69.5" x2="226" y2="161.5" class="ln lo"/>
+<circle cx="48" cy="69.5" r="3.2" class="dt lo"/>
+<circle cx="226" cy="161.5" r="3.2" class="dt lo"/>
+<line x1="48" y1="224.3" x2="226" y2="186.3" class="ln up"/>
+<circle cx="48" cy="224.3" r="3.2" class="dt up"/>
+<circle cx="226" cy="186.3" r="3.2" class="dt up"/>
+<line x1="48" y1="230.1" x2="226" y2="165.9" class="ln up"/>
+<circle cx="48" cy="230.1" r="3.2" class="dt up"/>
+<circle cx="226" cy="165.9" r="3.2" class="dt up"/>
+<line x1="48" y1="336.7" x2="226" y2="358.6" class="ln hi"/>
+<circle cx="48" cy="336.7" r="3.2" class="dt hi"/>
+<circle cx="226" cy="358.6" r="3.2" class="dt hi"/>
+<line x1="48" y1="300.2" x2="226" y2="351.3" class="ln hi"/>
+<circle cx="48" cy="300.2" r="3.2" class="dt hi"/>
+<circle cx="226" cy="351.3" r="3.2" class="dt hi"/>
+<text x="38" y="341.7" text-anchor="end" class="v hi">5,5</text>
+<text x="236" y="368.4" class="v hi">4,0</text>
+<text x="272" y="368.4" class="n hi">Codex 6.1 Sol</text>
+<text x="38" y="305.2" text-anchor="end" class="v hi">8,0</text>
+<text x="236" y="351.4" class="v hi">4,5</text>
+<text x="272" y="351.4" class="n hi">Opus 5.5</text>
+<text x="38" y="191.3" text-anchor="end" class="v lo">15,8</text>
+<text x="236" y="305.2" class="v lo">8,0</text>
+<text x="272" y="305.2" class="n lo">Sonnet 5.5</text>
+<text x="38" y="132.5" text-anchor="end" class="v lo">19,2</text>
+<text x="236" y="255.3" class="v lo">11,8</text>
+<text x="272" y="255.3" class="n lo">GLM 5.3</text>
+<text x="38" y="166.5" text-anchor="end" class="v lo">18,0</text>
+<text x="236" y="238.3" class="v lo">12,2</text>
+<text x="272" y="238.3" class="n lo">GLM 5.3 Flash</text>
+<text x="38" y="149.5" text-anchor="end" class="v lo">18,8</text>
+<text x="236" y="214.7" class="v lo">14,2</text>
+<text x="272" y="214.7" class="n lo">MiMo Pro</text>
+<text x="38" y="223.7" text-anchor="end" class="v up">13,2</text>
+<text x="236" y="193.2" class="v up">15,8</text>
+<text x="272" y="193.2" class="n up">DeepSeek Pro</text>
+<text x="38" y="240.7" text-anchor="end" class="v up">12,8</text>
+<text x="236" y="176.2" class="v up">17,2</text>
+<text x="272" y="176.2" class="n up">DeepSeek Flash</text>
+<text x="38" y="74.5" text-anchor="end" class="v lo">23,8</text>
+<text x="236" y="159.2" class="v lo">17,5</text>
+<text x="272" y="159.2" class="n lo">MiMo Flash</text>
 </svg>
 <figcaption>Правок на текст, медиана по прогонам. Розовым модели, у которых правок стало больше</figcaption>
 </figure>
-<p>Из ошибок по смыслу дешёвые модели чаще всего искажают сказанное: от 3,5 до 5,8 таких правок на текст. У Opus и Codex 0,6–0,9.</p>
+<p>Среди ошибок по смыслу у дешёвых моделей чаще всего искажение сказанного: от 3,5 до 5,8 таких правок на текст. У Opus и Codex 0,6–0,9.</p>
 <p>DeepSeek Flash после оптимизации стал хуже. Правок 12,8 → 17,2, время 11,5 → 23,6 минуты, один прогон из четырёх не прошёл проверки кодом. Он уходит в размышление над всей встречей, поэтому критик для него идёт по частям. У DeepSeek Pro правок тоже больше, 13,2 → 15,8, хотя серьёзных стало меньше.</p>
 
 <div class="note">
@@ -419,10 +429,10 @@ MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и м�
 <p>Схему я взял у Андрея Карпатого: <a href="https://github.com/karpathy/autoresearch">autoresearch</a>, март 2026. Там агент ночью правит код обучения маленькой модели, учит её 5 минут, сверяет метрику и оставляет правку или откатывает. Около 100 опытов за ночь. Я перенёс ту же петлю на цепочку конспектов.</p>
 <ol class="steps">
 <li><b>Заморозьте корпус.</b> Две-три реальные записи или переписки. Между циклами корпус не меняется. У меня две встречи, 70 и 91 минута, расшифровка сделана один раз.</li>
-<li><b>Возьмите двух судей разных семей</b> и один раз напишите им бриф: виды ошибок, серьёзность, оценки, ответ в JSON. Правка брифа судьи пересчитывает все циклы заново.</li>
-<li><b>Сведите всё к одной метрике.</b> У меня критичная правка 10, серьёзная 3, мелкая 1, среднее по судьям. Прогон, где проверки в конце красные, считается провалом. Время и токены решают при равных правках.</li>
+<li><b>Возьмите двух судей разных семей</b> и один раз напишите им бриф: виды ошибок, серьёзность, оценки, ответ в JSON. Поправили бриф судьи: пересчитайте все циклы заново.</li>
+<li><b>Сведите всё к одной метрике.</b> У меня критичная правка весит 10, серьёзная 3, мелкая 1, берётся среднее по судьям. Прогон, где проверки в конце красные, считается провалом. Время и токены решают при равных правках.</li>
 <li><b>Введите правило "оставить или откатить".</b> Правка цепочки остаётся, только если медиана метрики по моделям не ухудшилась и проверки зелёные. Опыты идут на отдельной ветке, в основную попадает итог.</li>
-<li><b>Цель и границы пишет человек.</b> Файл программы: цель, метрика, что заморожено, что можно менять. Исполнитель читает его перед каждым циклом и сам не правит.</li>
+<li><b>Цель и границы напишите сами.</b> Файл программы: цель, метрика, что заморожено, что можно менять. Исполнитель (агент, который правит цепочку) читает этот файл перед каждым циклом и сам его не меняет.</li>
 </ol>
 
 <figure class="loop" aria-label="Петля оставить или откатить">
@@ -444,7 +454,7 @@ MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и м�
 <tr><th scope="row">1</th><td>Один вызов модели без инструментов на шаг, проверяемое в коде, узкое исправление строк, критик с заменами</td><td class="n">24,8</td></tr>
 <tr><th scope="row">2</th><td>Критик по частям, если модель не ответила целиком; приватность и названия в брифе</td><td class="n">19,0</td></tr>
 <tr><th scope="row">3</th><td>Бриф: сохранять степень уверенности сказанного</td><td class="n">15,5</td></tr>
-<tr><th scope="row">4</th><td>Критик всегда по частям. Качество то же, токенов вчетверо больше: откат</td><td class="n">4,8<small>3 модели</small></td></tr>
+<tr class="na"><th scope="row">4</th><td>Критик всегда по частям. Качество то же, токенов вчетверо больше: откат</td><td class="n">4,8<small>3 модели</small></td></tr>
 <tr><th scope="row">5</th><td>Критик снова одним вызовом, для DeepSeek и MiMo Flash сразу по частям</td><td class="n">23,5</td></tr>
 <tr><th scope="row">6</th><td>Код сам переписывает запрещённый стилевой оборот, который модель не убрала за два прохода</td><td class="n">22,5</td></tr>
 </tbody></table>
@@ -470,17 +480,17 @@ MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и м�
 [ ] Выдумка: нет цифр, инструментов и обещаний, которых нет в источнике
 [ ] Термины: названия инструментов, моделей и скиллов записаны верно
 [ ] Чужие данные: нет имён, ников, личных подробностей и ссылок участников
-Серьёзность: критичная даёт читателю ложь или чужие личные данные; серьёзная собьёт его; мелкая просто поправить.</pre>
+Серьёзность: критичная даёт читателю ложь или чужие личные данные; серьёзная собьёт его; мелкую достаточно поправить.</pre>
 </section>
 
 <section id="spotknetes">
 <div class="sec-h"><span class="num">05</span><h2>Где споткнётесь</h2></div>
 <ul class="trips">
-<li><b>Лимиты провайдеров.</b> Z.ai отвечает ошибкой 429 уже на 8 одновременных запросах GLM. Цепочка ждёт и повторяет, но параллель приходится резать: GLM у меня шёл по очереди на модель.</li>
+<li><b>Лимиты провайдеров.</b> Z.ai отвечает ошибкой 429 ("слишком много запросов") уже на 8 одновременных запросах GLM. Цепочка ждёт и повторяет, но параллельность приходится урезать: прогоны одной модели GLM я запускал по одному.</li>
 <li><b>OpenCode грузит процессор.</b> Около половины ядра на процесс. 16 процессов подняли нагрузку сервера до 16 при моей границе 14: рядом работают другие сервисы.</li>
 <li><b>Время дешёвых моделей упирается в провайдера.</b> GLM 5.3 думает около 20 минут на встречу до оптимизации и после. MiMo около 38. Цепочкой это не ускорить.</li>
 <li><b>Разброс по прогонам большой.</b> У Opus метрика в четырёх прогонах цикла 6 от 2 до 16,5. У DeepSeek Flash время от 14 до 97 минут. Решение по одной паре прогонов будет решением по шуму.</li>
-<li><b>Имена участников.</b> Запрет в брифе дешёвые модели нарушают. Проверяйте личные данные в каждом тексте, даже когда остальные проверки зелёные.</li>
+<li><b>Имена участников.</b> Дешёвые модели нарушают запрет из брифа. Проверяйте личные данные в каждом тексте, даже когда остальные проверки зелёные.</li>
 </ul>
 </section>
 
