@@ -41,6 +41,12 @@ enableGitInfo = true
     description = 'Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду.'
     lastmod = '2026-10-01'
 
+  [[params.standalone]]
+    url = 'zadacha-na-znaniya/'
+    title = 'Задача на знания: какую модель брать и что отдать коду'
+    description = 'Девять моделей, две записи встреч, семь циклов оптимизации: что вынести в код, сколько правок остаётся после каждой модели и как повторить замер у себя.'
+    lastmod = '2026-10-02'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'
