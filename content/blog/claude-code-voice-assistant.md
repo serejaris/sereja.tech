@@ -1,7 +1,7 @@
 ---
 title: "Как я сделал голосового ассистента из Claude Code"
 date: 2026-01-24
-description: "Настраиваем TTS hook для Claude Code через Gemini Live API — агент озвучивает свои ответы мягким ASMR-голосом"
+description: "Постоянно пропускал момент, когда Claude Code закончил задачу. Написал TTS hook: daemon держит WebSocket к Gemini Live API, Stop hook озвучивает ответы голосом."
 tags: ["claude code", "tts", "gemini"]
 image: /images/blog/claude-code-voice-assistant-preview.png
 ---

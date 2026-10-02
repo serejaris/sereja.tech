@@ -2,7 +2,7 @@
 title: "UX видео-уроков: что реально работает"
 date: 2026-01-13
 description: "Исследовал best practices для страниц видео-уроков. Что говорит NN/g про таймкоды, почему табы лучше скролла, и как не потерять студента на первых секундах."
-tags: ["ux", "e-learning"]
+tags: ["ux", "e-learning", "вайбкодинг"]
 section: UX
 image: /images/blog/video-lesson-ux-preview.png
 ---

@@ -14,7 +14,7 @@ image: /images/blog/openclaw-vps-6-dollars-preview.png
 
 С тех пор проект переименовали. Clawdbot стал Moltbot, потом OpenClaw. Название менялось, суть — нет. Опенсорсный AI-агент, который запускается на сервере и подключается к мессенджерам.
 
-За это время OpenClaw набрал [больше 150 тысяч звёзд на GitHub](https://github.com/psteinroe/openclaw). Создатель — Peter Steinberger, основатель PSPDFKit. На днях [ушёл в OpenAI](https://steipete.me/posts/2026/openclaw) — строить «агента, которым сможет пользоваться даже моя мама». OpenClaw переходит в фонд и остаётся опенсорсным.
+За это время OpenClaw набрал [больше 150 тысяч звёзд на GitHub](https://github.com/openclaw/openclaw). Создатель — Peter Steinberger, основатель PSPDFKit. На днях [ушёл в OpenAI](https://steipete.me/posts/2026/openclaw) — строить «агента, которым сможет пользоваться даже моя мама». OpenClaw переходит в фонд и остаётся опенсорсным.
 
 Мне стало интересно: получится ли за копейки поднять агента, который реально что-то делает? Решил попробовать.
 
@@ -143,9 +143,9 @@ Contabo — дёшево, но требует верификацию докум�
 - **[TimeWeb](https://timeweb.cloud)** — рубли, 2 ядра / 4 ГБ / 50 ГБ за 1062 ₽/мес
 - **[play2go](https://play2go.cloud)** — рубли, без KYC, от 320 ₽/мес
 - **[Vultr](https://vultr.com)** — крипта через BitPay, есть [гайд по деплою OpenClaw](https://docs.vultr.com/how-to-deploy-openclaw-autonomous-ai-agent-platform)
-- **[SpaceCore](https://spacecore.pro)** — реселлер Contabo, рубли, 4 ядра / 8 ГБ / 150 ГБ за 6 EUR
+- **SpaceCore** — реселлер Contabo, рубли, 4 ядра / 8 ГБ / 150 ГБ за 6 EUR
 - **[Hetzner](https://hetzner.com/cloud)** — немецкий хостинг, 4 ядра / 8 ГБ / 80 ГБ за €5.49/мес. Дата-центры в Германии, Финляндии, США и Сингапуре. Почасовая оплата с месячным потолком
-- **[Cloud.ru](https://cloud.ru/services/virtualniy-server-v-arendu)** — российское облако, от 147 ₽/мес. Рубли, российское юрлицо, полноценная облачная платформа
+- **[Cloud.ru](https://cloud.ru/services/vps-vds)** — российское облако, от 147 ₽/мес. Рубли, российское юрлицо, полноценная облачная платформа
 - **[Zomro](https://zomro.com/vps)** — Польша / Нидерланды / Германия, 4 ядра / 10 ГБ / 70 ГБ NVMe за ~€15/мес. Рубли, крипта, 3 дня бесплатного триала
 - **[Hostkey](https://hostkey.com)** — дата-центры в Европе и США
 - **[FreakHosting](https://freakhosting.com/budget-vps)** — бюджетный VPS, работает с российскими IP

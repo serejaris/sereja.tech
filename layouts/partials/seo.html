@@ -1,40 +1,49 @@
 <!-- SEO -->
+{{ $is404 := eq .Kind "404" }}
+{{/* У about-страницы .Section пуст, поэтому идентифицируем по RelPermalink */}}
+{{ $isAbout := and .IsPage (eq .RelPermalink "/about/") }}
 <meta name="description" content="{{ .Description | default .Site.Params.description }}">
 <meta name="author" content="{{ .Site.Params.author }}">
 {{ with .Keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
-<link rel="canonical" href="{{ .Permalink }}">
+{{ if not $is404 }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
+{{ if $is404 }}<meta name="robots" content="noindex">{{ end }}
 {{ if eq .Kind "taxonomy" }}<meta name="robots" content="noindex, follow">{{ end }}
 {{ if eq .Kind "term" }}<meta name="robots" content="noindex, follow">{{ end }}
 
 <!-- Open Graph -->
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:type" content="{{ if and .IsPage (not $isAbout) }}article{{ else }}website{{ end }}">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:url" content="{{ .Permalink }}">
+{{ if not $is404 }}<meta property="og:url" content="{{ .Permalink }}">{{ end }}
 <meta property="og:site_name" content="{{ .Site.Title }}">
 {{ with .Params.image }}
 <meta property="og:image" content="{{ . | absURL }}">
+{{ else }}
+<meta property="og:image" content="{{ "/images/og-home.png" | absURL }}">
 {{ end }}
-{{ if .IsPage }}
+{{ if and .IsPage (not $isAbout) }}
 <meta property="article:author" content="{{ .Site.Params.author }}">
 <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}">
 {{ with .Params.section }}<meta property="article:section" content="{{ . }}">{{ end }}
 {{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}
 {{ end }}
 
 <!-- Twitter -->
-<meta name="twitter:card" content="{{ if .Params.image }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="{{ .Site.Params.twitter }}">
 <meta name="twitter:creator" content="{{ .Site.Params.twitter }}">
 <meta name="twitter:title" content="{{ .Title }}">
 <meta name="twitter:description" content="{{ .Description | default .Site.Params.description }}">
 {{ with .Params.image }}
 <meta name="twitter:image" content="{{ . | absURL }}">
+{{ else }}
+<meta name="twitter:image" content="{{ "/images/og-home.png" | absURL }}">
 {{ end }}
 
 <!-- JSON-LD -->
-{{ if .IsPage }}
+{{ if and .IsPage (not $isAbout) }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,15 +74,6 @@
   "image": {
     "@type": "ImageObject",
     "url": "{{ . | absURL }}"
-  }{{ end }}{{ with .Params.youtube_id }},
-  "video": {
-    "@type": "VideoObject",
-    "name": "{{ $.Params.video_title | default $.Title }}",
-    "description": "{{ $.Params.video_description | default $.Description }}",
-    "thumbnailUrl": "https://img.youtube.com/vi/{{ . }}/maxresdefault.jpg",
-    "uploadDate": "{{ $.Date.Format "2006-01-02" }}",
-    "contentUrl": "https://www.youtube.com/watch?v={{ . }}",
-    "embedUrl": "https://www.youtube.com/embed/{{ . }}"
   }{{ end }}
 }
 </script>
@@ -157,18 +157,29 @@
   ]
 }
 </script>
+{{ else if $isAbout }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description }}",
+  "url": "{{ .Permalink }}",
+  "inLanguage": "ru-RU"
+}
+</script>
 {{ else if .IsHome }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "{{ .Site.Params.author }}",
-  "jobTitle": "Вайбкодер, строю AI-агентные системы через Claude Code",
+  "jobTitle": "Вайбкодер",
   "url": "{{ .Site.BaseURL }}",
   "sameAs": [{{ range $i, $s := .Site.Params.social }}{{ if $i }}, {{ end }}"{{ $s.url }}"{{ end }}]
 }
 </script>
-{{ else }}
+{{ else if eq .Kind "section" }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

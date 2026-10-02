@@ -1,7 +1,7 @@
 ---
 title: "YouTube-обложки генерирует LLM, не Midjourney"
 date: 2026-02-06
-description: "Как генерировать обложки для видео через HTML-шаблоны, Playwright и YouTube API. Без графических редакторов."
+description: "Каждому уроку обложка, а меняется только заголовок. HTML-шаблон, Playwright для скриншота 1280×720, YouTube API для загрузки. Две команды — обложка на канале."
 tags: ["youtube", "playwright", "claude code"]
 image: "/images/blog/youtube-thumbnails-html-code-preview.png"
 ---

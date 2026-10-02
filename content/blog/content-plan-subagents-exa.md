@@ -1,7 +1,7 @@
 ---
 title: "Контент-план для канала: от одного поста к субагентам"
 date: 2026-02-06
-description: "Завёл AI-канал — сначала писал промпт на каждый пост, потом делегировал серию агенту с Exa MCP."
+description: "AI-канал на автопилоте: style guide в .claude/rules держит голос канала, а субагент с Exa MCP сам ресёрчит серию постов. Один промпт — пять стран."
 tags: ["claude code", "telegram", "субагенты"]
 image: "/images/blog/content-plan-subagents-exa-preview.png"
 ---

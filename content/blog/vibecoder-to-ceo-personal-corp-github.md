@@ -1,7 +1,7 @@
 ---
 title: "Из вайбкодера в CEO: Personal Corp на GitHub"
 date: 2026-02-23
-description: "GitHub Issues — интерфейс управления агентами. Один человек, рой агентов, единый источник правды."
+description: "Три уровня от промпта к Personal Corp: человек с терминалом, менеджер issues, CEO оркестратора. GitHub Issues — командный язык для роя агентов. Кейс issue #74."
 tags: [vibe-coding, github, ai-agents, personal-corp, productivity]
 image: "/images/blog/vibecoder-to-ceo-personal-corp-github-preview.png"
 ---

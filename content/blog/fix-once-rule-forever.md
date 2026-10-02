@@ -1,7 +1,7 @@
 ---
 title: "Правка → Правило: как научить агента не повторять ошибки"
 date: 2026-02-01
-description: "Паттерн для работы с AI-агентами: исправил ошибку — записал правило — больше не повторится. Fix once, remember forever."
+description: "Агент третий раз за неделю забыл обновить index.html. Исправил и записал правило в CLAUDE.md. Через полгода — 50 правил: ошибка превращается в правило навсегда."
 tags: ["claude code", "cursor"]
 image: /images/blog/fix-once-rule-forever-preview.png
 ---

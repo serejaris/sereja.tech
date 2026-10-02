@@ -2,7 +2,7 @@
 title: "zoxide + fzf: как перестать печатать пути в терминале"
 date: 2026-01-15
 description: "Практический гайд по настройке zoxide и fzf для быстрой навигации в терминале. Типичные ошибки, интерактивный выбор директорий, frecency-алгоритм."
-tags: ["zoxide", "fzf", "терминал"]
+tags: ["zoxide", "fzf", "терминал", "cli"]
 section: Терминал
 image: /images/blog/zoxide-fzf-terminal-navigation-preview.png
 ---

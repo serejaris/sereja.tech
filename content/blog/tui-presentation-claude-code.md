@@ -1,7 +1,7 @@
 ---
 title: "TUI-презентация прямо в Claude Code"
 date: 2026-01-25
-description: "Как я сделал презентацию с ASCII-артом внутри терминала — и показываю её не выходя из Claude Code"
+description: "Сделал скилл presentation: 10 слайдов с ASCII-артом и навигацией прямо в Claude Code. Unicode-рамки плывут в шрифтах — финал: figlet-заголовки без рамок."
 tags: ["claude code", "skills"]
 image: /images/blog/tui-presentation-claude-code-preview.png
 ---

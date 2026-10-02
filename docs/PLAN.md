@@ -954,3 +954,136 @@ Restore the known-good pre-M14 search presentation of `/blog/superpowers-brainst
 ### Stop-and-fix rule
 
 If the four restored fields do not match `4f21fa1^`, the M15 donor link changes, or any protected URL, canonical, batch, or unrelated M14 surface changes, stop and reduce the diff to the surgical rollback before pushing.
+
+---
+
+## M17 — Ahrefs broken outgoing links repair
+
+Status: `[x]`
+
+### Goal
+
+Remove the 14 broken or crawler-blocked outgoing targets reported by Ahrefs across eight canonical blog pages without changing their search presentation or URL policy.
+
+### Tasks
+
+- [x] Inspect the Ahrefs `Page has links to broken page` report and capture all eight source pages and 14 targets.
+- [x] Replace moved GitHub, Google, Cloud.ru, Calvin French-Owen, RSM, and A2A destinations with their current canonical URLs.
+- [x] Remove obsolete source-list entries and de-link destinations that intentionally block the Ahrefs crawler.
+- [x] Preserve existing user edits and protected organic-winner fields.
+- [x] Build the site and run the full local SEO helper stack.
+- [x] Confirm the rendered site no longer emits any of the 14 reported targets.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- All eight reported pages render successfully.
+- None of the 14 reported broken or crawler-blocked targets remains as a rendered link.
+- Canonical, sitemap, target-link, ghost-policy, and redirect-source checks pass.
+- Production verification waits for the Git-connected release path and the next Ahrefs crawl.
+
+### Validation commands
+
+```bash
+hugo build
+python3 -m py_compile scripts/seo/url_audit.py
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 -m json.tool scripts/seo/url_policy.json > /dev/null
+git diff --check
+```
+
+### Milestone guardrails
+
+- Keep article titles, descriptions, openings, headings, slugs, and canonicals unchanged.
+- Do not deploy through the local Vercel CLI.
+- Verify production only after the Git-connected release and a fresh Ahrefs crawl.
+
+---
+
+## M18 — Reading Ledger article redesign
+
+Status: `[x]`
+
+### Goal
+
+Apply the selected Cloudflare-inspired Reading Ledger direction to canonical blog article pages, including visible heading permalinks, tags, article navigation, and related content.
+
+### Tasks
+
+- [x] Capture the reference and select a concrete visual target before implementation.
+- [x] Rebuild the article template with author rail, reading column, sticky table of contents, and responsive mobile table of contents.
+- [x] Add visible heading permalinks, copy-link feedback, active TOC state, previous/next navigation, three related articles, and bottom tags.
+- [x] Add a purpose-built cover asset for `/blog/best-practices-code/` and retain the complete article content.
+- [x] Compare source and implementation at the same `936 × 1680` viewport, repair all P2 differences, and record the passing result in `design-qa.md`.
+- [x] Run the Hugo build, rendered-HTML checks, browser smoke, JavaScript syntax check, and full SEO helper stack.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- Article pages preserve one H1, trailing-slash canonicals, sitemap membership, and the intended indexability policy.
+- Every rendered H2 has a visible permalink and the desktop and mobile TOCs resolve to real headings without duplicate IDs.
+- The bottom area exposes canonical previous/next links, exactly three related articles when available, and canonical tag URLs.
+- Desktop and mobile browser checks pass with no horizontal overflow.
+- `design-qa.md` ends with `final result: passed`.
+
+### Validation commands
+
+```bash
+hugo build
+node --check static/article.js
+python3 scripts/seo/url_audit.py summary
+python3 scripts/seo/url_audit.py check-ghosts
+python3 scripts/seo/url_audit.py check-canonical
+python3 scripts/seo/url_audit.py check-sitemap
+python3 scripts/seo/url_audit.py check-target-links
+python3 scripts/seo/url_audit.py check-redirect-sources
+python3 scripts/seo/url_audit.py classify-gsc-backlog research/gsc-live/2026-05-07-gsc-backlog-inventory.json
+git diff --check
+```
+
+### Milestone guardrails
+
+- Preserve the trailing-slash canonical policy and taxonomy `noindex, follow` behavior.
+- Keep protected organic-winner titles, descriptions, openings, and primary headings unchanged.
+- Keep the full article body; visual comparison may not shorten published content to fit the reference viewport.
+- Do not deploy through the local Vercel CLI.
+
+---
+
+## M19 — Editorial Split homepage redesign
+
+Status: `[x]`
+
+### Goal
+
+Apply the selected third homepage concept from the first design set while keeping the homepage driven by current Hugo content and video data.
+
+### Tasks
+
+- [x] Resolve and measure the exact selected visual target at `1487 × 1058`.
+- [x] Rebuild the homepage as a split author/video hero with fresh articles and a curated «Начать отсюда» route.
+- [x] Keep the featured video, latest articles, dates, descriptions, and starting links driven by repository data.
+- [x] Add a responsive single-column layout and verify it at `480 × 844` without horizontal overflow.
+- [x] Exercise the primary blog CTA, canonical internal routes, semantic structure, and browser console.
+- [x] Compare source and implementation at the same viewport, fix the lower-region density mismatch, and record the passing result in `design-qa.md`.
+- [x] Run the Hugo build, full SEO helper stack, route smoke, and `git diff --check`.
+- [x] Record the result in `docs/STATUS.md`.
+
+### Definition of done
+
+- The `1488 × 1058` desktop capture preserves the selected column proportions, `670px` hero, lower split, typography hierarchy, and flat graphite/orange treatment.
+- The homepage has one H1, functional navigation and primary CTA, descriptive video image alt text, and canonical slash links.
+- The mobile document width equals the `480px` viewport width.
+- Hugo and all SEO helper checks pass.
+- `design-qa.md` ends with `final result: passed`.
+
+### Milestone guardrails
+
+- Keep current repository content and the real current YouTube thumbnail instead of hard-coding mock data.
+- Preserve trailing-slash canonicals and existing article-page behavior.
+- Keep the release on the Git-connected Vercel path; no local Vercel deployment.
