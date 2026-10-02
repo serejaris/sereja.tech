@@ -193,16 +193,23 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 .flow .row.s .box{flex-basis:140px;padding:10px 12px}
 .flow .row.s .grp{gap:10px 6px}
 .flow .row.s .f{width:76px}
-.subs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:26px 0 8px}
-.subs figure{margin:0}
-.subs .pr{background:var(--ph);padding:22px 16px;font:500 34px/1 var(--serif);text-align:center}
-.subs .pr span{display:block;font:400 12px/16px var(--sans);color:var(--grey);margin-top:6px}
-.subs figcaption{margin-top:12px;font:400 14px/19px var(--serif)}
-.subs figcaption b{display:block;font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:4px}
-.subs figcaption span{display:block;color:#333}
-.subs figcaption i{display:block;font:400 12px/16px var(--sans);font-style:normal;color:var(--grey);margin-top:6px}
-.subs-note{font:400 13px/18px var(--sans);color:var(--grey);text-align:center;margin:0 0 22px}
-@media (max-width:760px){.subs{grid-template-columns:repeat(2,1fr);gap:16px}}
+.subs{margin:26px 0 10px}
+.sub{display:grid;grid-template-columns:230px 1fr;align-items:center;margin:0 0 16px}
+.sub-l{background:var(--ph);padding:14px 18px;position:relative}
+.sub-l::after{content:"";position:absolute;right:-30px;top:50%;width:30px;border-top:1.4px solid var(--blue)}
+.sub-l b{display:block;font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+.sub-l .pr{display:block;font:500 28px/1.1 var(--serif);margin-top:6px}
+.sub-l .pr em{font:400 12px/16px var(--sans);font-style:normal;color:var(--grey);margin-left:6px}
+.sub-l .tk{display:block;font:400 12px/16px var(--sans);color:var(--grey);margin-top:4px}
+.sub-r{margin-left:30px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.sub-r .m{position:relative;margin-left:22px;border:1px solid var(--ink);background:#fff;padding:5px 12px;font:400 15px/20px var(--serif)}
+.sub-r .m::before{content:"";position:absolute;left:-23px;top:50%;width:22px;border-top:1.4px solid var(--blue)}
+.sub-r .m i{font:500 10px/14px var(--sans);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--pinkt);margin-left:8px}
+.sub-r .m::after{content:"";position:absolute;left:-23px;top:-12px;bottom:-12px;border-left:1.4px solid var(--blue)}
+.sub-r .m:first-child::after{top:50%}
+.sub-r .m:last-child::after{bottom:50%}
+.sub-r .m:only-child::after{display:none}
+@media (max-width:560px){.sub{grid-template-columns:1fr}.sub-l::after{display:none}.sub-r{margin:8px 0 0 18px}}
 .flow figcaption{font:400 13px/18px var(--sans);color:var(--grey);text-align:center}
 @media (max-width:760px){.flow .row{flex-direction:column;align-items:stretch;gap:12px}.flow .ar{align-self:center;transform:rotate(90deg)}.flow .box{flex:none}.flow .grp{justify-content:flex-start}.flow .f.env{width:auto;flex-direction:row;gap:10px;text-align:left}}
 
@@ -260,11 +267,11 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 <section class="sec" id="ponadobilos">
 <div class="sec-h"><span class="num">02</span><h2>Что нам понадобилось</h2></div>
 
-<div class="subs" aria-label="Подписки, на которых шёл замер">
-<figure><div class="pr">$200<span>в месяц</span></div><figcaption><b>Claude Max 20x</b><span>Opus 5.5, Sonnet 5.5. Opus ещё и судья</span><i>19 млн токенов</i></figcaption></figure>
-<figure><div class="pr">Pro<span>в месяц</span></div><figcaption><b>ChatGPT Pro</b><span>Codex 6.1 Sol. Он же второй судья</span><i>11 млн токенов</i></figcaption></figure>
-<figure><div class="pr">$80<span>в месяц</span></div><figcaption><b>Z.ai Coding Plan Pro</b><span>GLM 5.3, GLM 5.3 Flash</span><i>27 млн токенов</i></figcaption></figure>
-<figure><div class="pr">$10<span>в месяц</span></div><figcaption><b>OpenCode Go</b><span>DeepSeek Pro и Flash, MiMo Pro и Flash</span><i>129 млн токенов</i></figcaption></figure>
+<div class="subs" aria-label="Подписки и модели внутри них">
+<div class="sub"><div class="sub-l"><b>Claude Max 20x</b><span class="pr">$200<em>в месяц</em></span><span class="tk">19 млн токенов</span></div><div class="sub-r"><span class="m">Opus 5.5<i>судья</i></span><span class="m">Sonnet 5.5</span></div></div>
+<div class="sub"><div class="sub-l"><b>ChatGPT Pro</b><span class="tk">11 млн токенов</span></div><div class="sub-r"><span class="m">Codex 6.1 Sol<i>судья</i></span></div></div>
+<div class="sub"><div class="sub-l"><b>Z.ai Coding Plan Pro</b><span class="pr">$80<em>в месяц</em></span><span class="tk">27 млн токенов</span></div><div class="sub-r"><span class="m">GLM 5.3</span><span class="m">GLM 5.3 Flash</span></div></div>
+<div class="sub"><div class="sub-l"><b>OpenCode Go</b><span class="pr">$10<em>в месяц</em></span><span class="tk">129 млн токенов</span></div><div class="sub-r"><span class="m">DeepSeek Pro</span><span class="m">DeepSeek Flash</span><span class="m">MiMo Pro</span><span class="m">MiMo Flash</span></div></div>
 </div>
 <p class="subs-note">Девять моделей из четырёх подписок, которые я и так оплачиваю. Токены: сколько текста модели прочитали за все попытки, без работы судей.</p>
 
