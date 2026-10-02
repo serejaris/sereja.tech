@@ -1,7 +1,7 @@
 ---
-title: "Как научить Claude Code управлять твоим Chrome"
+title: "Chrome DevTools MCP для Claude Code: настройка реального Chrome за 3 шага"
 date: 2026-02-20
-description: "Claude Code настройка Chrome DevTools MCP за 3 шага: агент управляет реальным Chrome с залогиненными сервисами."
+description: "Пошаговая настройка Chrome DevTools MCP для Claude Code: агент управляет реальным Chrome с логинами, Search Console и Vercel через debug-порт и `--browserUrl`."
 tags: ["claude code", "mcp", "devtools"]
 section: "Claude Code"
 image: "/images/blog/chrome-devtools-mcp-setup-preview.png"
@@ -23,9 +23,9 @@ sources:
     note: "52+ upvotes, без фикса"
 ---
 
-Claude in Chrome сломан с января 2026, а Playwright MCP запускает чистый браузер без логинов. Chrome DevTools MCP от Google решает обе проблемы: три команды в терминале — и агент ходит по залогиненным сервисам в твоём реальном Chrome.
+Chrome DevTools MCP для Claude Code нужен в тот момент, когда агент должен работать не в чистом Chromium, а в твоём реальном Chrome с логинами, куками и открытыми сервисами. Claude in Chrome сломан с января 2026, а Playwright MCP поднимает пустой браузер без сессий. Chrome DevTools MCP от Google решает обе проблемы: три команды в терминале — и агент ходит по Search Console, Vercel и любым другим залогиненным интерфейсам.
 
-## Проблема: агент слепой в вебе
+## Зачем Claude Code нужен доступ к реальному Chrome
 
 Claude Code живёт в терминале: пишет код, запускает тесты, правит файлы. Но открыть Google Search Console и проверить покрытие индекса — не может.
 
@@ -70,7 +70,7 @@ Claude Code живёт в терминале: пишет код, запуска�
 
 Агент сам решает когда идти в браузер, когда в файл, когда в терминал. Один промпт — все три среды.
 
-## Настройка за 3 шага
+## Как настроить Chrome DevTools MCP для Claude Code
 
 ### Шаг 1: алиас для Chrome с debug-портом
 

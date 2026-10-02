@@ -1,64 +1,77 @@
-# sereja.tech
+# sereja.tech Agent Guide
 
-Персональный блог про вайбкодинг и Claude Code. Hugo + Vercel.
+## Purpose and scope
 
-## Boundaries
+- This repo is a single Hugo blog deployed to Vercel.
+- Default work is article editing, metadata updates, and OG preview generation.
+- Keep instructions operational and verified against the current repo layout.
 
-| | Rule |
-|---|------|
-| ✅ Always | Проверять `hugo server -D` перед коммитом |
-| ⚠️ Ask | Изменения в layouts/, удаление статей |
-| 🚫 Never | Редактировать public/ напрямую, пушить в main без проверки |
+## Canonical paths and services
 
-## Commands
+- `content/blog/` — blog posts.
+- `content/about/` — standalone about-page content.
+- `layouts/` — Hugo templates, SEO partials, and shortcodes.
+- `static/images/blog/` — OG preview images used by post frontmatter.
+- `static/analytics.js`, `static/robots.txt`, `static/llms.txt`, `static/llms-full.txt` — static site assets.
+- `scripts/og-preview/generate.sh` and `scripts/og-preview/template.html` — OG preview generator.
+- `hugo.toml` — site config and permalinks.
+- `vercel.json` and `.github/workflows/` — deployment and automation config.
+- `public/` — generated output only.
 
-| Task | Command |
-|------|---------|
-| Dev | `hugo server -D` |
-| Build | `hugo build` |
-| OG preview | `./scripts/og-preview/generate.sh --title "..." --output static/images/blog/{slug}-preview.png` |
-| Static preview | `python3 -m http.server` |
+## System boundaries
 
-## Architecture
+- Treat the repo as a static site; there is no app server, database, or migration layer here.
+- Vercel deploys the generated Hugo output. Do not treat `public/` as source.
+- Blog permalinks come from `hugo.toml` and resolve to `/blog/:contentbasename`.
 
-| Path | Purpose |
-|------|---------|
-| `content/blog/*.md` | Статьи |
-| `layouts/` | Hugo шаблоны |
-| `static/` | JS, images |
-| `scripts/og-preview/` | OG-превью генератор (HTML → Playwright → PNG 1200×630) |
-| `hugo.toml` | Конфиг Hugo |
-| `index.html` | Legacy главная (вне Hugo) |
+## Safe defaults
 
-## Blog Workflow
+- Prefer editing `content/blog/*.md` for content work.
+- Before content, SEO, or analytics work, check repo issues and GitHub Project `ris © corp` (`gh issue list --repo serejaris/sereja.tech`, `gh project item-list 4 --owner serejaris`) for existing tasks, snapshots, and constraints.
+- For new or updated posts, keep frontmatter explicit: `title`, `date`, `description`, `tags`, `image`.
+- Generate OG images with `./scripts/og-preview/generate.sh`; do not hand-edit PNG files unless asked.
+- Ignore `public/`, `.playwright-mcp/`, and ad hoc screenshots unless the task explicitly targets them.
+- Verify repo reality before documenting paths; do not rely on stale assumptions.
 
-Статьи через skill `blog-post`:
-1. `content/blog/{slug}.md` + frontmatter
-2. OG-превью: `./scripts/og-preview/generate.sh --title "..." [--command "..." --tools "a,b,c" --subtitle "..."] --output static/images/blog/{slug}-preview.png`
-3. `hugo build` → `public/`
+## Allowed actions
 
-Frontmatter: title, date, description, tags, image.
-SEO: title ≤60 chars, description ≤160 chars.
+- Add or update blog posts, frontmatter, links, and copy in content files.
+- Generate or refresh OG preview images under `static/images/blog/`.
+- Update safe static text assets when the task is clearly scoped to them.
+- Run `hugo build` and short-lived `hugo server -D` checks.
 
-OG Preview: всегда генерировать через `scripts/og-preview/generate.sh`. Опции: `--title` (обязательно), `--subtitle`, `--command`, `--tools` (через запятую), `--visual` (эмодзи). Результат: 1200×630 PNG.
+## Confirmation-required actions
 
-Permalinks: `/blog/:filename`. RSS только для blog.
+- Any change under `layouts/`.
+- Changes to `hugo.toml`, `vercel.json`, or `.github/workflows/`.
+- Deleting or renaming posts, changing filenames, or changing published slugs.
+- Adding or changing analytics behavior in `static/analytics.js`.
+- Pushing to a remote, merging, or deleting local user artifacts outside the task scope.
 
-## Testing
+## Forbidden actions
 
-| Check | Command |
-|-------|---------|
-| Dev server | `hugo server -D` → localhost:1313 |
-| Build | `hugo build` (no errors) |
-| Links | Manual check in browser |
+- Never edit `public/` by hand.
+- Never push directly to `main` without explicit confirmation.
+- Never claim success without running the narrowest relevant validation.
+- Never document nonexistent topology; for example, do not reference a root `index.html` unless it is actually present.
 
-## Deployment
+## Validation commands
 
-Vercel: auto-deploy on push to main.
+- Content or metadata change: `hugo build`
+- Local smoke test: `hugo server -D --bind 127.0.0.1 --baseURL http://127.0.0.1:1313`
+- OG preview smoke test: `./scripts/og-preview/generate.sh --title "..." --output /tmp/preview.png`
+- Approved layout or SEO change: `hugo build` plus a browser check on the affected page via local server
 
-## Skills
+## Execution contract
 
-| Skill | Trigger |
-|-------|---------|
-| `blog-post` | "статья", "блог" |
-| `deaify-text` | "убери аишность" |
+- Report which files changed and why.
+- Report which validations actually ran and which were skipped.
+- Keep edits focused; do not clean up unrelated content or generated artifacts.
+- These instructions apply on the next Codex or agent session after the file is saved.
+
+## References
+
+- `README.md`
+- `hugo.toml`
+- `vercel.json`
+- `scripts/og-preview/generate.sh`
