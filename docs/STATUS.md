@@ -292,3 +292,43 @@ curl -s http://127.0.0.1:1313/blog/agent-teams-opus-4-6/ > /dev/null
 - `2026-03-13`: issues `#69`, `#70`, and `#71` were created and added to Project `4`; issue `#32` and `#33` moved to `In review`, issue `#66` moved to `Done`.
 - `2026-03-13`: issue `#69` moved to `Done`; issue `#70` is the next `Ready` follow-up on Project `4`.
 - `2026-03-13`: issue `#70` moved to `Done`; issue `#71` is now `Ready` on Project `4`.
+
+
+## 2026-09-05 — M20 paper design visual plan
+
+- User scope: visual plan first; lesson-guide-writer visual system; first version desktop only.
+- Added `docs/design-plans/2026-09-05-paper/`: standalone `plan.html`, nine prototypes, production before screenshots, after renders, source data, generators and validation notes.
+- Coverage: home, standard article, archive, interactive article excerpt, about, links, tags, tag selection, 404; six additional search/content/prompt/chart states.
+- Adopted assumptions: compare against live production; keep article text and canonical URL policy; prototype the main column at 740 px; lead the home page with articles; show videos as links pending design selection; use title-only prototype search; make the rich article a disclosed excerpt.
+- Playwright passed at 1440 × 900: one H1 and no horizontal overflow across nine prototypes; zero tables; no JavaScript errors; three plan modes; nine page selectors; seven stages; zoom/Escape; embedded navigation; search and empty states; topic filtering/reset; prompt toggle/copy; next chart. Independent review finding in srcdoc History API handled safely and rechecked via HTTP and file://.
+- Skipped: mobile at user request; Hugo/SEO checks because runtime/content/config/templates were unchanged; deployment outside this planning scope.
+- board-sync: skipped (no external tracker update requested for this local design artifact).
+- Next action: choose the visual direction in the artifact, then implement the planned stages. No production design change is marked complete.
+
+
+## 2026-09-05 — M20 owner-feedback correction
+
+- Root cause of misleading «current» comparison: capture forced `color_scheme=light`, while the user's browser uses dark mode. Verified the actual open production tab; recaptured nine pages via CUA with dark mode and measured CSS viewport 1440 × 900.
+- Replaced plan chrome with the lesson-guide-writer paper document, 740 px column, PT Serif/PT Mono, regular TOC, sequential screen pairs. No board, tabs, modal viewer or scripts in the current plan, following the user's more specific correction.
+- Browser comments implemented in isolated mockups: video player restored before homepage articles; standard post cover moved above H1.
+- Updated `build_plan.py`, `build_prototypes.py`, `after-*.html`, 11 before/after captures, manifest, README and evidence in `docs/design-plans/2026-09-05-paper/`.
+- CUA verification: 18 images measured 1440 × 900; one paper column; no broken TOC anchors or horizontal page overflow; video iframe present; article image bottom lies above H1 top. User's existing plan tab reloaded; temporary capture tab closed and viewport override reset. Mobile explicitly skipped. Hugo/SEO/release not applicable to this docs-only revision.
+- `check_plan.py`: image bytes match source files; all local artifact links and anchor targets exist. Earlier M20 board claims describe superseded v1 only.
+
+
+## 2026-09-05 — M20 opening diagram
+
+- Added `transition-diagram.svg` through the diagram-design illustrator role and embedded it via `build_plan.py` immediately after the masthead. Six steps show current site, mockups, author selection, implementation, verification and release.
+- Added a short practical paragraph after the figure and retained the regular TOC below it.
+- CUA verification at CSS viewport 1440 × 900: accessible SVG title/description present; every text label inside the SVG bounds; header → figure → paragraph → TOC; no page overflow. Screenshot: `screens/plan-opening-diagram.png`; evidence: `diagram-validation.json`.
+- `check_plan.py` still passes the 18 source-image comparisons and artifact links. Mobile remains skipped by user request; Hugo/SEO/deploy are outside this documentation-only change.
+
+
+## 2026-09-05 — M20 side-by-side comparison rule
+
+- Owner request recorded in `/Users/ris/.claude/skills/visual-plan/SKILL.md`: two simultaneously visible images, before left and future/verified-after right; equal viewport and scale; compatible with lesson-guide-writer.
+- Updated `build_plan.py` and regenerated `plan.html`: nine wide comparison pairs, paper text column and opening diagram preserved. README refreshed.
+- Skill scenario check: before the edit the reader permitted vertical stacking; after the edit it produced two equal columns, correct planned/implemented labels and no mandatory board/timeline.
+- `check_plan.py` passed: all 18 embedded images match source files and local links resolve. CUA at 1440 × 900 verified all nine image pairs share y-position and dimensions, original images are 1440 × 900, no horizontal overflow. Evidence: `comparison-validation.json`, `screens/plan-side-by-side.jpg`.
+- Restarted the local artifact server after empty responses; opened the updated plan in a fresh tab after the old tab remained on its error document.
+- Mobile skipped by request; Hugo/SEO/deployment skipped for this skill/docs-only change.

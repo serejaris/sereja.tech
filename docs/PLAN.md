@@ -1052,3 +1052,42 @@ Publish a source-backed Russian guide to the first Grok Bot workflow with locali
 - The article is live at `/blog/grok-bot-cloud-agents-guide/` with one H1, seven H2 sections, a self-canonical URL, and valid social preview metadata.
 - The body uses exactly three evidence pillars and one expanded example.
 - The production page and cover asset return `200`, and the Telegram announcement is queued through the standard blog pipeline.
+
+
+---
+
+## M20 — Paper design visual plan
+
+Status: `[x]`
+
+### Scope
+
+Explicit user request on 2026-09-05: prepare a visual plan before site implementation, using the lesson-guide-writer paper visual canon and visual-plan board/timeline. Desktop only for this first version.
+
+### Tasks
+
+- [x] Inventory the current page templates and capture production at 1440 × 900.
+- [x] Create nine isolated HTML page mockups and six additional comparison states.
+- [x] Build a standalone plan with before/after views, working prototype previews, board and timeline.
+- [x] Check desktop rendering, navigation, search states, prompt copying and graph controls.
+- [x] Resolve the independent audit finding in embedded topic filtering.
+- [x] Save the artifact and validation notes in `docs/design-plans/2026-09-05-paper/` and `docs/STATUS.md`.
+
+### Boundary
+
+Deliverable: `docs/design-plans/2026-09-05-paper/plan.html`. Production design implementation and release remain future stages inside the plan. Mobile validation was explicitly deferred by the user. Existing content, templates, analytics and URL policy were not changed.
+
+
+### M20 revision — owner feedback
+
+- [x] Replace the forced-light baseline with dark production captures matching the user's browser; record theme and CSS viewport evidence.
+- [x] Replace the dashboard presentation with the lesson-guide-writer paper document: 740 px column, PT Serif/PT Mono, in-flow TOC and sequential before/after screens.
+- [x] Restore the homepage video block before articles.
+- [x] Position the article cover above its H1.
+- [x] Verify 18 current image references, desktop rendering and navigation; refresh the user's open plan.
+
+The linear paper plan supersedes M20's original board/timeline presentation at the user's explicit request. Desktop-only scope remains in force.
+
+- [x] Add the user-requested opening process diagram after H1/lede and before the TOC; verify accessible SVG and desktop rendering.
+
+- [x] Persist the owner’s web comparison rule in visual-plan and show all nine screenshot pairs side by side: before left, proposed right; verify at 1440 × 900.
