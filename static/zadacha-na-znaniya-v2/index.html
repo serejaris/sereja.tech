@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex, follow">
 <meta property="og:type" content="article"><meta property="og:title" content="Задача на знания: почему модель путает, кто что сказал"><meta property="og:description" content="Гайд: как я проверил девять моделей на конспектах встреч, что отдал программе и какую модель брать."><meta property="og:image" content="https://sereja.tech/zadacha-na-znaniya-v2/img/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/zadacha-na-znaniya-v2/img/og-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
-:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#6f6f6f;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--pinkt:#c4006a;--line:#e3e3e3;--grey:#6f6f6f;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
 --serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -109,8 +109,87 @@ footer .logo{font-size:34px}
   .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
   .diagram .d{display:none}.diagram .m{display:block}
 }
+
+/* замеры из первой версии */
+.tbl{width:100%;border-collapse:collapse;font:400 15px/21px var(--sans);font-variant-numeric:tabular-nums;margin:8px 0 6px}
+.tbl th,.tbl td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.tbl thead th{font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--grey);border-bottom:1px solid var(--ink);padding-top:0}
+.tbl td.n,.tbl th.n{text-align:right}
+.tbl tbody th{font-weight:500}
+.tbl th small,.tbl td small{display:block;font:400 12px/16px var(--sans);color:var(--grey);font-weight:400}
+.tbl i{font-style:normal;color:var(--grey);padding:0 2px}
+.tbl .was{color:var(--grey)}
+.tbl tr.hi th{color:var(--blue)}
+.tbl tr.up th{color:var(--pinkt)}
+.cap{font:400 13px/19px var(--sans);color:var(--grey);margin:8px 0 26px}
+.tbl tr.na th,.tbl tr.na td{color:var(--grey)}
+.wide{width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.cheat td.w{font-size:14px;line-height:20px;max-width:320px;padding-left:24px}
+.cheat th.w{padding-left:24px}
+.cheat td.e{--k:5px}
+.cheat td.m{--k:2.4px}
+.cheat td.e::after,.cheat td.m::after{content:"";display:block;height:4px;width:calc(var(--v) * var(--k));margin:6px 0 2px auto;background:#8a8a8a}
+.cheat tr.hi td.e::after,.cheat tr.hi td.m::after{background:var(--blue)}
+.cheat tr.hi td.e,.cheat tr.hi td.m{font-weight:500}
+.copyrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:30px 0 4px}
+.copyrow .t{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+.copy{font:500 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;background:#fff;color:var(--blue);border:1px solid var(--blue);padding:6px 12px;cursor:pointer;flex:none}
+.copy:hover{background:var(--blue);color:#fff}
+.copy.ok{background:var(--blue);color:#fff}
+pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:#1d1d1d}
+.hidden{display:none}
+.slope{max-width:470px;margin:26px auto 28px}
+.slope svg{width:100%;height:auto;display:block}
+.slope .hd{font:600 13.5px var(--sans);letter-spacing:1.5px;fill:#2d3e9f}
+.slope .ax{stroke:#e3e3e3;stroke-width:1}
+.slope .ln{stroke-width:1.4;fill:none}
+.slope .ln.lo{stroke:#b5b5b5}
+.slope .ln.hi{stroke:#2d3e9f;stroke-width:2.4}
+.slope .ln.up{stroke:#ff1493;stroke-width:2.4}
+.slope .dt.lo{fill:#b5b5b5}
+.slope .dt.hi{fill:#2d3e9f}
+.slope .dt.up{fill:#ff1493}
+.slope text.v,.slope text.n{font:400 14px var(--sans)}
+.slope .v{font-variant-numeric:tabular-nums}
+.slope text.lo{fill:#555}
+.slope text.hi{fill:#2d3e9f;font-weight:600}
+.slope text.up{fill:#c4006a;font-weight:600}
+.slope figcaption{font:400 13px/19px var(--sans);color:var(--grey);margin-top:10px;text-align:center}
+.note{border-left:3px solid var(--blue);background:var(--paper);padding:14px 18px 4px;margin:26px 0;font:400 16px/24px var(--sans)}
+.note h3{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 8px}
+.note p{margin:0 0 12px}
+.note .tbl{font-size:14px;margin:4px 0 10px}
+.note .tbl th,.note .tbl td{border-color:#d8d8d4}
+.pending{border:2px dashed var(--pink);padding:14px 18px;margin:0 0 30px;font:400 16px/24px var(--sans)}
+.pending b{display:block;font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--pinkt);margin-bottom:6px}
+.faq h3{font:500 20px/1.3 var(--serif);margin:28px 0 8px}
+.faq p{font:400 16px/24px var(--sans)}
+.links{list-style:none;padding:0;margin:0}
+.links li{padding:10px 0;border-bottom:1px solid var(--line);font:400 15px/22px var(--sans)}
+.links small{display:block;color:var(--grey);font-size:13px}
+@media (max-width:640px){.cheat,.cheat thead,.cheat tbody{display:block}.cheat tr{display:grid;grid-template-columns:1fr 54px 60px 46px;column-gap:10px;border-bottom:1px solid var(--line);padding:10px 0}.cheat thead tr{align-items:end;border-bottom:1px solid var(--ink);padding:0 0 8px}.cheat th,.cheat td,.cheat thead th{border:0;padding:0}.cheat thead th{letter-spacing:.03em}.cheat th.w{display:none}.cheat td.e{--k:3px}.cheat td.m{--k:1.45px}.cheat td.w{grid-column:1/-1;max-width:none;padding:6px 0 0}.tbl{font-size:14px;line-height:19px}.tbl th,.tbl td{padding:9px 6px 9px 0}.tbl.kinds{font-size:13px}.tbl.kinds thead th{font-size:11px;letter-spacing:.02em}.loop .back span{white-space:normal;width:90%;text-align:center}}
+.links li{border-bottom:0;padding:6px 0}
+.endnote{font:400 17px/1.6 var(--serif);margin:26px 0 0}
+/* было / стало: файлы */
+.flow{margin:34px 0 10px}
+.flow .lbl{font:600 11px/16px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin:0 0 12px}
+.flow .row{display:flex;align-items:center;gap:16px;margin:0 0 30px}
+.flow .grp{display:flex;flex-wrap:wrap;gap:12px 10px;flex:1 1 0;justify-content:center}
+.flow .f{display:flex;flex-direction:column;align-items:center;width:84px;text-align:center;font:400 12px/15px var(--sans);color:#333}
+.flow .f svg{width:30px;height:36px;margin-bottom:6px;flex:none}
+.flow .f.env svg{width:46px;height:34px}
+.flow .f.env{width:150px}
+.flow .ar{font:400 24px/1 var(--sans);color:var(--blue);flex:none}
+.flow .box{border:1.6px solid var(--ink);padding:12px 14px;flex:0 0 190px;font:400 13px/18px var(--sans);background:#fff}
+.flow .box b{display:block;font:500 18px/1.25 var(--serif);margin:8px 0 4px}
+.flow .box.p{border:1px solid var(--blue)}
+.flow .t{display:inline-block;font:500 10px/14px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:1px 6px;background:var(--ink);color:#fff}
+.flow .box.p .t{background:rgba(45,62,159,.08);color:var(--blue);border:1px solid rgba(45,62,159,.4)}
+.flow .again{display:block;color:var(--pinkt);font-size:12px;line-height:16px;margin-top:8px}
+.flow figcaption{font:400 13px/18px var(--sans);color:var(--grey);text-align:center}
+@media (max-width:760px){.flow .row{flex-direction:column;align-items:stretch;gap:12px}.flow .ar{align-self:center;transform:rotate(90deg)}.flow .box{flex:none}.flow .grp{justify-content:flex-start}.flow .f.env{width:auto;flex-direction:row;gap:10px;text-align:left}}
 </style><link rel="canonical" href="https://sereja.tech/zadacha-na-znaniya-v2/"><meta name="author" content="Сережа Рис"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/zadacha-na-znaniya-v2/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Абзац конспекта встречи до и после: модель выдала опыт участника за совет"><meta property="article:published_time" content="2026-10-02T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-02T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="AI-агенты"><meta property="article:tag" content="эвал"><meta property="article:tag" content="выбор модели"><meta property="article:tag" content="конспект встречи"><meta property="article:tag" content="Claude Code"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Задача на знания: почему модель путает, кто что сказал"><meta name="twitter:description" content="Гайд: как я проверил девять моделей на конспектах встреч, что отдал программе и какую модель брать."><meta name="twitter:image:alt" content="Абзац конспекта встречи до и после: модель выдала опыт участника за совет"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Задача на знания: почему модель путает, кто что сказал", "description": "Гайд: почему модель выдаёт чужой опыт за совет, что из работы отдать программе и какую модель брать для конспектов встреч, сводок и протоколов.", "image": "https://sereja.tech/zadacha-na-znaniya-v2/img/og-preview.png", "inLanguage": "ru-RU", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/zadacha-na-znaniya-v2/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["AI-агенты", "эвал", "выбор модели", "конспект встречи", "Claude Code", "autoresearch"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script></head>
-<body class="a" id="top"><div class="draft" role="note"><span>Черновик</span>Цифры до независимой проверки</div><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#primer">Пример</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#primer">Пример</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Модели</span></div><div class="kicker">Как это сделано:</div><h1>Задача на знания</h1><p class="lead">Модель пересказала мою встречу и выдала чужой опыт за мой совет. Гайд о том, почему так выходит и какую модель брать, когда отдаёте ей записи, переписку или документы.</p></div>
+<body class="a" id="top"><div class="draft" role="note"><span>Черновик</span>Цифры до независимой проверки</div><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#primer">Пример</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#faq">Вопросы</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#primer">Пример</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#faq">Вопросы</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Модели</span></div><div class="kicker">Как это сделано:</div><h1>Задача на знания</h1><p class="lead">Модель пересказала мою встречу и выдала чужой опыт за мой совет. Гайд о том, почему так выходит и какую модель брать, когда отдаёте ей записи, переписку или документы.</p></div>
 <div class="meta">2 октября 2026 · гайд обновляется</div>
 <article class="body">
 <figure class="pair" id="primer">
@@ -120,6 +199,8 @@ footer .logo{font-size:34px}
 </figure>
 
 <p class="first"><span class="drop">Э</span>тот кусок взят из конспекта моей встречи с участниками программы. Первый вариант написала недорогая модель MiMo Pro, и она приписала мне чужой совет. Второй написала та же модель после того, как агент за ночь переделал цепочку шагов, по которой она работает. Агент раз за разом запускал девять моделей, звал модели-судей и откатывал то, что не помогало. Я дал задачу, выбрал модели из своих подписок и несколько раз спросил, что значат его цифры.</p>
+
+<p>Почему модель ошиблась. Она не знала, кто из говорящих я. В расшифровке голоса подписаны метками S0, S1, S2, а в задании модели прямо стояло: «метки: это голоса, не имена». Вот она и подала опыт участника как мой совет.</p>
 
 <p>Этот гайд для тех, кто отдаёт модели разбирать записи встреч, переписку или документы. Вы не знаете, какую модель взять и почему она ошибается, а про эвалы не слышали. Здесь мало технических подробностей и много объяснений: какие ошибки модель делает чаще всего, какую работу у неё можно забрать совсем и как проверить модели на своей задаче. В конце короткий ответ, какую модель брать, и шаги, чтобы повторить замер у себя.</p>
 
@@ -134,7 +215,7 @@ footer .logo{font-size:34px}
 
 <p>Чаще всего модель ошибалась одинаково. Она берёт рассказ участника и подаёт его как мой совет. На первом экране как раз такой случай. Участник рассказал, как устроена его база знаний, и в конспекте это стало правилом «храните». Я на встрече говорил обратное, и абзацем ниже модель это честно пересказала. Ученик получил бы два совета, которые спорят друг с другом. Редакторы называют это ошибкой атрибуции: слова одного человека приписаны другому.</p>
 
-<p>Раньше конспект писал агент: программа на основе модели, которая сама открывает файлы, читает инструкции и пишет результат. Это удобно, но дорого и непредсказуемо. Агент по многу раз перечитывал запись встречи и сам решал, что проверять. Какая модель справляется лучше, я знал только по ощущениям.</p>
+<p>Раньше конспект писал агент: программа на основе модели, которая сама открывает файлы, читает инструкции и пишет результат. Это удобно, но дорого и непредсказуемо. Как именно он работал, я покажу ниже. Какая модель справляется лучше, я знал только по ощущениям.</p>
 
 <p>Почему поправить это можно именно сейчас. В марте 2026 года Андрей Карпатый выложил <a href="https://github.com/karpathy/autoresearch">autoresearch</a>. Это агент, который за ночь сам ставит около сотни опытов над обучением маленькой модели. Каждый опыт он меряет одной и той же линейкой. Стало лучше, правка остаётся. Стало хуже, откатывается. Человек правит только один файл с целью и запретами. Тот же приём работает и на обычной офисной задаче вроде пересказа встречи. Для этого хватает подписок на модели и одной ночи.</p>
 
@@ -179,27 +260,45 @@ footer .logo{font-size:34px}
 
 <p><b>Потом линейка.</b> Я вспомнил про autoresearch Карпатого и спросил, не то же ли это самое. Оказалось, та же идея: одна мерка, замороженная проверка и правило «стало хуже, верни как было». Потом спросил, ничего ли, что замер ведёт тот же агент, который улучшает цепочку. Он ведь может «улучшить» результат, подкрутив судью. Поэтому линейку заморозили: записи встреч, инструкцию судей и проверки больше никто не трогает. Цель и правила лежат в одном файле, и правлю его только я.</p>
 
-<p><b>Дальше переделка.</b> Главная мысль простая: модели остаётся только смысл. Всё, что можно проверить без понимания текста, делает обычная программа. Названия инструментов она сверяет со словарём. Время глав ставит на начало ближайшей реплики. Форму страницы проверяет сама. А модель получает запись встречи один раз, целиком, и пишет конспект и главы одним ответом.</p>
+<p><b>Дальше переделка.</b> Главная мысль простая: модели остаётся только смысл. Чтобы было видно, что это значит, покажу, как цепочка работала раньше и как работает теперь.</p>
 
-<figure class="diagram" id="fig-chain"><svg class="d" viewBox="0 0 960 410" role="img" aria-labelledby="fig-chain-title fig-chain-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-chain-title">Цепочка до и после переделки</title><desc id="fig-chain-desc">Было: один шаг, агент сам открывает инструкции и запись, пишет файлы и перечитывает их по многу раз. Стало: шесть шагов змейкой. Первый ряд слева направо: 1 код сверяет названия со словарём; 2 модель пишет конспект и главы, вся запись одним запросом, мой голос подписан программой; 3 код проверяет форму страницы, словарь и время глав. Второй ряд справа налево: 4 модель исправляет только строки, где проверка нашла ошибку; 5 модель-критик присылает фрагмент и замену; 6 код вставляет замену или откатывает текст, если замена ломает проверки. Тонкая синяя рамка: шаг делает программа. Толстая чёрная рамка: шаг делает модель.</desc><defs><marker id="c-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="960" height="410" fill="#ffffff"/>
+<p><b>Как было.</b> Модель получала короткое задание и список адресов файлов, которые нужно прочитать. Два скилла целиком: как писать конспект и правила письма со словарём. Конспект прошлой встречи как образец. Словарь терминов. Расшифровку записи, причём дважды: со временем каждой реплики и абзацами. И чат встречи. Модель работала агентом. Сама открывала каждый файл, читала и сама писала пять файлов: исправленную расшифровку, конспект, главы, заголовок страницы и описание для YouTube.</p>
+
+<p>Это дорого. Агент на каждом шаге заново отправляет модели всё, что уже прочитал. Открыл десятый файл, и модель снова получает первые девять. Так набегало от одного до десяти миллионов токенов на один конспект. Токены: кусочки текста, по ним подписка считает лимит. И отсюда путаница из примера в начале: кто из говорящих я, модель не знала.</p>
+
+<p><b>Как стало.</b> Модель получает одно письмо, где всё уже внутри: задание, короткие правила письма вместо двух скиллов, список слов, которые надо писать иначе, чат и расшифровка. В письме прямо сказано: S0 это Серёжа, остальные участники, а что рассказал участник, пиши как его опыт. Какая метка моя, программа определяет сама: на своих встречах больше всех говорю я.</p>
+
+<p>Модель отвечает обычным текстом из трёх частей: конспект, главы строками «время, название» и описание для YouTube. Файлов она не открывает и не пишет. Остальное делает обычная программа. Правит названия в расшифровке по словарю, ставит время каждой главы на начало настоящей реплики, собирает файлы страницы и проверяет форму. Было «вот адреса, иди читай и делай файлы». Стало «вот всё в одном письме, ответь текстом».</p>
+
+<figure class="flow wide" style="max-width:1000px" aria-label="Как было и как стало: что модель получает и что отдаёт">
+<div class="lbl">Было</div>
+<div class="row"><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>скилл: как писать конспект</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>скилл: правила письма</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>образец: прошлый конспект</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>словарь терминов</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>расшифровка со временем</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>расшифровка абзацами</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>чат встречи</div></div><span class="ar">→</span><div class="box"><span class="t">модель</span><b>Агент</b>сам открывает каждый файл и сам пишет пять файлов<span class="again">↻ на каждом шаге заново получает всё, что уже прочитал</span></div><span class="ar">→</span><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>расшифровка, исправленная</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>конспект</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>главы</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>заголовок страницы</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>описание для YouTube</div></div></div>
+<div class="lbl">Стало</div>
+<div class="row"><div class="grp"><div class="f env"><svg viewBox="0 0 46 34" aria-hidden="true"><rect x="1" y="1" width="44" height="32" fill="#fff" stroke="#2d3e9f" stroke-width="1.6"/><path d="M1 1l22 17L45 1" fill="none" stroke="#2d3e9f" stroke-width="1.6"/></svg>одно письмо: задание, правила, слова для замены, чат, расшифровка</div></div><span class="ar">→</span><div class="box"><span class="t">модель</span><b>Один ответ</b>читает письмо и отвечает текстом из трёх частей</div><span class="ar">→</span><div class="box p"><span class="t">программа</span><b>Сборка и проверка</b>правит названия, ставит время глав, собирает страницу, проверяет</div><span class="ar">→</span><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>конспект</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>главы</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>описание для YouTube</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>расшифровка</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>страница</div></div></div>
+<figcaption>Было: модель сама ходит по файлам. Стало: всё приходит в одном письме, файлы собирает программа</figcaption>
+</figure>
+
+<p>Подробнее новая цепочка выглядит так. Три шага делает модель, три обычная программа.</p>
+
+<figure class="diagram" id="fig-chain"><svg class="d" viewBox="0 0 960 410" role="img" aria-labelledby="fig-chain-title fig-chain-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-chain-title">Цепочка до и после переделки</title><desc id="fig-chain-desc">Было: один шаг, агент сам ходит по файлам и перечитывает всё на каждом шаге. Стало: шесть шагов. 1 программа правит названия по словарю. 2 модель получает одно письмо и знает, где говорю я, и пишет конспект и главы. 3 программа проверяет, все ли разделы на месте и нет ли запрещённых слов. 4 модель правит только строки с ошибкой. 5 вторая модель читает текст и присылает замены. 6 программа вставляет замены, а если они сломали проверку, откатывает текст.</desc><defs><marker id="c-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="960" height="410" fill="#ffffff"/>
 <text x="32" y="22" fill="#555555" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">БЫЛО</text>
-<rect x="32" y="34" width="896" height="74" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="46" y="46" width="47" height="13" fill="#000000"/><text x="69.5" y="55.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="48" y="82" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Агент делает всё сам</text><text x="48" y="99" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">открывает инструкции и запись, пишет файлы, перечитывает их по многу раз</text>
+<rect x="32" y="34" width="896" height="74" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="46" y="46" width="47" height="13" fill="#000000"/><text x="69.5" y="55.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="48" y="82" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Агент делает всё сам</text><text x="48" y="99" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">сам ходит по файлам и перечитывает всё на каждом шаге</text>
 <text x="32" y="150" fill="#555555" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">СТАЛО</text>
 <path d="M 296,209 H 345" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink)"/><path d="M 612,209 H 661" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink)"/><path d="M 796,256 V 299" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink)"/><path d="M 664,349 H 615" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink)"/><path d="M 348,349 H 299" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink)"/>
 <rect x="32" y="162" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="174" width="16" height="13" fill="#2d3e9f"/><text x="54" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">1</text><rect x="68" y="174" width="34" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="85" y="183.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text><text x="48" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Названия по словарю</text><text x="48" y="228" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">инструменты и модели</text><text x="48" y="242" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">пишутся правильно</text>
-<rect x="348" y="162" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="174" width="16" height="13" fill="#2d3e9f"/><text x="370" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">2</text><rect x="384" y="174" width="47" height="13" fill="#000000"/><text x="407.5" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="364" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Конспект и главы</text><text x="364" y="228" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">вся запись одним запросом,</text><text x="364" y="242" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">мой голос подписан программой</text>
-<rect x="664" y="162" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="174" width="16" height="13" fill="#2d3e9f"/><text x="686" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">3</text><rect x="700" y="174" width="34" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="717" y="183.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text><text x="680" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Проверки</text><text x="680" y="228" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">форма страницы, словарь,</text><text x="680" y="242" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">время глав</text>
-<rect x="664" y="302" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="314" width="16" height="13" fill="#2d3e9f"/><text x="686" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">4</text><rect x="700" y="314" width="47" height="13" fill="#000000"/><text x="723.5" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="680" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Исправление</text><text x="680" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">только строки, где проверка</text><text x="680" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">нашла ошибку</text>
-<rect x="348" y="302" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="314" width="16" height="13" fill="#2d3e9f"/><text x="370" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">5</text><rect x="384" y="314" width="47" height="13" fill="#000000"/><text x="407.5" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="364" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Критик</text><text x="364" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">присылает фрагмент</text><text x="364" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">и замену</text>
-<rect x="32" y="302" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="314" width="16" height="13" fill="#2d3e9f"/><text x="54" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">6</text><rect x="68" y="314" width="34" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="85" y="323.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text><text x="48" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Вставка или откат</text><text x="48" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">замена сломала проверки:</text><text x="48" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">текст возвращается</text>
+<rect x="348" y="162" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="174" width="16" height="13" fill="#2d3e9f"/><text x="370" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">2</text><rect x="384" y="174" width="47" height="13" fill="#000000"/><text x="407.5" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="364" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Конспект и главы</text><text x="364" y="228" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">получает одно письмо</text><text x="364" y="242" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">и знает, где говорю я</text>
+<rect x="664" y="162" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="174" width="16" height="13" fill="#2d3e9f"/><text x="686" y="183.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">3</text><rect x="700" y="174" width="34" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="717" y="183.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text><text x="680" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Проверки</text><text x="680" y="228" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">все ли разделы на месте,</text><text x="680" y="242" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">нет ли запрещённых слов</text>
+<rect x="664" y="302" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="314" width="16" height="13" fill="#2d3e9f"/><text x="686" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">4</text><rect x="700" y="314" width="47" height="13" fill="#000000"/><text x="723.5" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="680" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Исправление</text><text x="680" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">модель правит только</text><text x="680" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">строки с ошибкой</text>
+<rect x="348" y="302" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="314" width="16" height="13" fill="#2d3e9f"/><text x="370" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">5</text><rect x="384" y="314" width="47" height="13" fill="#000000"/><text x="407.5" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="364" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Критик</text><text x="364" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">вторая модель читает текст</text><text x="364" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">и присылает замены</text>
+<rect x="32" y="302" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="314" width="16" height="13" fill="#2d3e9f"/><text x="54" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">6</text><rect x="68" y="314" width="34" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="85" y="323.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text><text x="48" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Вставка или откат</text><text x="48" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">программа вставляет замены,</text><text x="48" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">сломали проверку: откат</text>
 </svg><svg class="m" viewBox="0 0 358 944" role="img" aria-labelledby="fig-chain-title fig-chain-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="c-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="358" height="944" fill="#ffffff"/>
 <text x="0" y="16" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">БЫЛО</text>
 <rect x="1" y="26" width="356" height="122" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <rect x="14" y="40" width="62" height="18" fill="#000000"/><text x="45.0" y="53.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
 <text x="14" y="82" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Агент делает всё сам</text>
-<text x="14" y="103" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">открывает инструкции и запись,</text>
-<text x="14" y="121" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">пишет файлы, перечитывает их</text>
-<text x="14" y="139" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">по многу раз</text>
+<text x="14" y="103" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">сам ходит по файлам</text>
+<text x="14" y="121" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">и перечитывает всё</text>
+<text x="14" y="139" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">на каждом шаге</text>
 <text x="0" y="188" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">СТАЛО</text>
 <rect x="1" y="198" width="356" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
 <rect x="14" y="212" width="20" height="18" fill="#2d3e9f"/><text x="24" y="225.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">1</text>
@@ -212,58 +311,191 @@ footer .logo{font-size:34px}
 <rect x="14" y="340" width="20" height="18" fill="#2d3e9f"/><text x="24" y="353.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">2</text>
 <rect x="40" y="340" width="62" height="18" fill="#000000"/><text x="71.0" y="353.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
 <text x="14" y="382" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Конспект и главы</text>
-<text x="14" y="403" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">вся запись одним запросом,</text>
-<text x="14" y="421" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">мой голос подписан программой</text>
+<text x="14" y="403" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">получает одно письмо</text>
+<text x="14" y="421" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">и знает, где говорю я</text>
 <path d="M 179,430 V 451" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
 <rect x="1" y="454" width="356" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
 <rect x="14" y="468" width="20" height="18" fill="#2d3e9f"/><text x="24" y="481.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">3</text>
 <rect x="40" y="468" width="40" height="18" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="60.0" y="481.2" fill="#2d3e9f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text>
 <text x="14" y="510" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Проверки</text>
-<text x="14" y="531" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">форма страницы, словарь,</text>
-<text x="14" y="549" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">время глав</text>
+<text x="14" y="531" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">все ли разделы на месте,</text>
+<text x="14" y="549" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">нет ли запрещённых слов</text>
 <path d="M 179,558 V 579" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
 <rect x="1" y="582" width="356" height="104" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <rect x="14" y="596" width="20" height="18" fill="#2d3e9f"/><text x="24" y="609.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">4</text>
 <rect x="40" y="596" width="62" height="18" fill="#000000"/><text x="71.0" y="609.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
 <text x="14" y="638" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Исправление</text>
-<text x="14" y="659" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">только строки, где проверка</text>
-<text x="14" y="677" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">нашла ошибку</text>
+<text x="14" y="659" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">модель правит только</text>
+<text x="14" y="677" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">строки с ошибкой</text>
 <path d="M 179,686 V 707" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
 <rect x="1" y="710" width="356" height="104" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <rect x="14" y="724" width="20" height="18" fill="#2d3e9f"/><text x="24" y="737.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">5</text>
 <rect x="40" y="724" width="62" height="18" fill="#000000"/><text x="71.0" y="737.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
 <text x="14" y="766" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Критик</text>
-<text x="14" y="787" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">присылает фрагмент</text>
-<text x="14" y="805" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">и замену</text>
+<text x="14" y="787" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">вторая модель читает текст</text>
+<text x="14" y="805" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">и присылает замены</text>
 <path d="M 179,814 V 835" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
 <rect x="1" y="838" width="356" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
 <rect x="14" y="852" width="20" height="18" fill="#2d3e9f"/><text x="24" y="865.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">6</text>
 <rect x="40" y="852" width="40" height="18" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="60.0" y="865.2" fill="#2d3e9f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text>
 <text x="14" y="894" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Вставка или откат</text>
-<text x="14" y="915" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">замена сломала проверки:</text>
-<text x="14" y="933" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">текст возвращается</text></svg><figcaption>Было и стало. Модели остались три шага, и каждый проверяет программа</figcaption></figure>
-
-<p>Программа ещё подсказывает модели, кто есть кто. Распознавание речи помечает голоса безлико: первый, второй, третий. Мой голос программа находит сама: на своих встречах больше всех говорю я. А в инструкции модели появилось правило. Рассказ участника пишется как его опыт. Советом он становится, только если это советую я.</p>
+<text x="14" y="915" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">программа вставляет замены,</text>
+<text x="14" y="933" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">сломали проверку: откат</text></svg><figcaption>Новая цепочка по шагам. Тонкая синяя рамка: шаг делает программа. Толстая чёрная: модель</figcaption></figure>
 
 <p>После модели работают двое проверяющих. Если программа нашла ошибку, модель исправляет только эти строки и больше ничего не трогает. Потом ещё одна модель, критик, вычитывает текст и присылает замены: вот фрагмент, вот как надо. Вставляет их программа. Если замена что-то сломала, текст откатывается к версии до критика.</p>
 
+<p><b>Мои семь циклов.</b> Каждый цикл: одна переделка и тот же замер на всех моделях.</p>
+<table class="tbl" aria-label="Что менялось по циклам">
+<thead><tr><th scope="col">Цикл</th><th scope="col">Что поменял</th><th scope="col" class="n">Медиана метрики</th></tr></thead>
+<tbody>
+<tr><th scope="row">0</th><td>Исходная цепочка: агент сам читает скиллы и пишет файлы</td><td class="n">29,0</td></tr>
+<tr><th scope="row">1</th><td>Один вызов модели без инструментов на шаг, проверяемое в коде, узкое исправление строк, критик с заменами</td><td class="n">24,8</td></tr>
+<tr><th scope="row">2</th><td>Критик по частям, если модель не ответила целиком; приватность и названия в брифе</td><td class="n">19,0</td></tr>
+<tr><th scope="row">3</th><td>Бриф: сохранять степень уверенности сказанного</td><td class="n">15,5</td></tr>
+<tr class="na"><th scope="row">4</th><td>Критик всегда по частям. Качество то же, токенов вчетверо больше: откат</td><td class="n">4,8<small>3 модели</small></td></tr>
+<tr><th scope="row">5</th><td>Критик снова одним вызовом, для DeepSeek и MiMo Flash сразу по частям</td><td class="n">23,5</td></tr>
+<tr><th scope="row">6</th><td>Код сам переписывает запрещённый стилевой оборот, который модель не убрала за два прохода</td><td class="n">22,5</td></tr>
+</tbody></table>
+<p class="cap">Метрика: критичная × 10 + серьёзная × 3 + мелкая, медиана по моделям. Меньше лучше</p>
+
 <p><b>Что показал замер.</b> Сравниваю старую цепочку с той, что сейчас работает на сервере. Ошибка атрибуции стала редкой. У GLM 5.3 таких мест было около восьми на конспект, стало около одного. У Sonnet было шесть, осталось меньше одного.</p>
+
+<div class="wide" style="max-width:860px">
+<table class="tbl kinds" aria-label="Правки по видам, до и после">
+<thead><tr><th scope="col">Модель</th><th scope="col" class="n">Атрибуция</th><th scope="col" class="n">Искажение смысла</th><th scope="col" class="n">Серьёзные</th><th scope="col" class="n">Критичные</th></tr></thead>
+<tbody>
+<tr class="hi"><th scope="row">Codex 6.1 Sol</th><td class="n"><span class="was">1,6</span><i>→</i>0,1</td><td class="n"><span class="was">1,4</span><i>→</i>0,9</td><td class="n"><span class="was">1,5</span><i>→</i>0,6</td><td class="n"><span class="was">0,0</span><i>→</i>0,0</td></tr>
+<tr class="hi"><th scope="row">Opus 5.5</th><td class="n"><span class="was">3,4</span><i>→</i>0,4</td><td class="n"><span class="was">3,0</span><i>→</i>0,6</td><td class="n"><span class="was">3,5</span><i>→</i>0,4</td><td class="n"><span class="was">0,0</span><i>→</i>0,2</td></tr>
+<tr><th scope="row">Sonnet 5.5</th><td class="n"><span class="was">6,4</span><i>→</i>0,2</td><td class="n"><span class="was">6,2</span><i>→</i>3,2</td><td class="n"><span class="was">5,9</span><i>→</i>1,5</td><td class="n"><span class="was">0,0</span><i>→</i>0,1</td></tr>
+<tr><th scope="row">GLM 5.3</th><td class="n"><span class="was">7,9</span><i>→</i>1,1</td><td class="n"><span class="was">6,6</span><i>→</i>4,9</td><td class="n"><span class="was">8,8</span><i>→</i>2,9</td><td class="n"><span class="was">0,2</span><i>→</i>0,5</td></tr>
+<tr><th scope="row">GLM 5.3 Flash</th><td class="n"><span class="was">6,1</span><i>→</i>1,4</td><td class="n"><span class="was">7,2</span><i>→</i>4,8</td><td class="n"><span class="was">7,0</span><i>→</i>2,5</td><td class="n"><span class="was">0,2</span><i>→</i>0,0</td></tr>
+<tr><th scope="row">MiMo Pro</th><td class="n"><span class="was">8,5</span><i>→</i>1,4</td><td class="n"><span class="was">6,9</span><i>→</i>4,6</td><td class="n"><span class="was">9,6</span><i>→</i>3,0</td><td class="n"><span class="was">0,2</span><i>→</i>0,6</td></tr>
+<tr><th scope="row">MiMo Flash</th><td class="n"><span class="was">6,5</span><i>→</i>1,7</td><td class="n"><span class="was">9,6</span><i>→</i>5,8</td><td class="n"><span class="was">9,0</span><i>→</i>4,2</td><td class="n"><span class="was">0,1</span><i>→</i>0,0</td></tr>
+<tr class="up"><th scope="row">DeepSeek Pro</th><td class="n"><span class="was">4,0</span><i>→</i>1,1</td><td class="n"><span class="was">4,6</span><i>→</i>4,2</td><td class="n"><span class="was">6,0</span><i>→</i>2,6</td><td class="n"><span class="was">0,0</span><i>→</i>0,2</td></tr>
+<tr class="up"><th scope="row">DeepSeek Flash</th><td class="n"><span class="was">3,4</span><i>→</i>1,0</td><td class="n"><span class="was">4,2</span><i>→</i>3,5</td><td class="n"><span class="was">5,6</span><i>→</i>3,9</td><td class="n"><span class="was">0,2</span><i>→</i>0,9</td></tr>
+</tbody></table>
+<p class="cap">Цикл 0 → цикл 6. Среднее правок на текст, оба судьи. Серьёзная правка собьёт читателя, критичная даст ему ложь или чужие личные данные</p>
+</div>
 
 <p>Сильные модели стали почти чистыми. Opus и Codex оставляют около четырёх правок на конспект. В половине их конспектов судьи не нашли ни одной серьёзной. Пишут они за три-четыре минуты.</p>
 
 <p>Модель перестала читать запись по кругу. Всего прочитанного стало в десятки раз меньше. Почти всё старое было повторным чтением одного и того же, а повторное чтение подписка считает намного дешевле нового текста. Поэтому настоящий выигрыш скромнее: нового текста модель читает в два-пять раз меньше.</p>
 
+<table class="tbl" aria-label="Токены на вход и время, до и после">
+<thead><tr><th scope="col">Модель</th><th scope="col" class="n">Весь вход,<br>тыс. токенов</th><th scope="col" class="n">Без кэша,<br>тыс. токенов</th><th scope="col" class="n">Минут</th></tr></thead>
+<tbody>
+<tr class="hi"><th scope="row">Codex 6.1 Sol</th><td class="n"><span class="was">1&nbsp;711</span><i>→</i>117<small>в 15 раз</small></td><td class="n"><span class="was">148</span><i>→</i>59</td><td class="n"><span class="was">6,7</span><i>→</i>4,1</td></tr>
+<tr class="hi"><th scope="row">Opus 5.5</th><td class="n"><span class="was">2&nbsp;130</span><i>→</i>79<small>в 27 раз</small></td><td class="n"><span class="was">159</span><i>→</i>79</td><td class="n"><span class="was">4,6</span><i>→</i>3,1</td></tr>
+<tr><th scope="row">Sonnet 5.5</th><td class="n"><span class="was">1&nbsp;207</span><i>→</i>81<small>в 15 раз</small></td><td class="n"><span class="was">155</span><i>→</i>81</td><td class="n"><span class="was">3,7</span><i>→</i>2,7</td></tr>
+<tr><th scope="row">GLM 5.3</th><td class="n"><span class="was">2&nbsp;528</span><i>→</i>51<small>в 50 раз</small></td><td class="n"><span class="was">259</span><i>→</i>51</td><td class="n"><span class="was">20,1</span><i>→</i>20,7</td></tr>
+<tr><th scope="row">GLM 5.3 Flash</th><td class="n"><span class="was">3&nbsp;196</span><i>→</i>51<small>в 63 раза</small></td><td class="n"><span class="was">270</span><i>→</i>51</td><td class="n"><span class="was">29,9</span><i>→</i>21,3</td></tr>
+<tr><th scope="row">MiMo Pro</th><td class="n"><span class="was">7&nbsp;009</span><i>→</i>168<small>в 42 раза</small></td><td class="n"><span class="was">295</span><i>→</i>168</td><td class="n"><span class="was">51,0</span><i>→</i>38,3</td></tr>
+<tr><th scope="row">MiMo Flash</th><td class="n"><span class="was">10&nbsp;025</span><i>→</i>214<small>в 47 раз</small></td><td class="n"><span class="was">346</span><i>→</i>214</td><td class="n"><span class="was">41,2</span><i>→</i>38,5</td></tr>
+<tr class="up"><th scope="row">DeepSeek Pro</th><td class="n"><span class="was">5&nbsp;878</span><i>→</i>56<small>в 105 раз</small></td><td class="n"><span class="was">364</span><i>→</i>56</td><td class="n"><span class="was">15,4</span><i>→</i>15,0</td></tr>
+<tr class="up"><th scope="row">DeepSeek Flash</th><td class="n"><span class="was">4&nbsp;177</span><i>→</i>402<small>в 10 раз</small></td><td class="n"><span class="was">320</span><i>→</i>402</td><td class="n"><span class="was">11,5</span><i>→</i>23,6</td></tr>
+</tbody></table>
+<p class="cap">Цикл 0 → цикл 6. Медиана по прогонам на один конспект. Без кэша: весь вход минус повторное чтение кэша</p>
+
 <p>Недорогие модели подтянулись, но до сильных не дошли. У GLM, MiMo и DeepSeek осталось от 12 до 18 правок на конспект. Чаще всего они слегка сдвигают смысл сказанного. Так что цель «почти любая модель» пока взята наполовину.</p>
+
+<figure class="slope">
+<svg viewBox="0 0 390 400" role="img" aria-labelledby="slT slD" xmlns="http://www.w3.org/2000/svg">
+<title id="slT">Правок на текст до и после оптимизации, девять моделей</title>
+<desc id="slD">Цикл 0 слева, цикл 6 справа. У семи моделей правок стало меньше, у DeepSeek Flash и DeepSeek Pro больше.</desc>
+<text x="48" y="22" class="hd" text-anchor="middle">ЦИКЛ 0</text>
+<text x="226" y="22" class="hd" text-anchor="middle">ЦИКЛ 6</text>
+<line x1="48" y1="34" x2="48" y2="373" class="ax"/>
+<line x1="226" y1="34" x2="226" y2="373" class="ax"/>
+<line x1="48" y1="186.3" x2="226" y2="300.2" class="ln lo"/>
+<circle cx="48" cy="186.3" r="3.2" class="dt lo"/>
+<circle cx="226" cy="300.2" r="3.2" class="dt lo"/>
+<line x1="48" y1="136.7" x2="226" y2="244.7" class="ln lo"/>
+<circle cx="48" cy="136.7" r="3.2" class="dt lo"/>
+<circle cx="226" cy="244.7" r="3.2" class="dt lo"/>
+<line x1="48" y1="154.2" x2="226" y2="238.9" class="ln lo"/>
+<circle cx="48" cy="154.2" r="3.2" class="dt lo"/>
+<circle cx="226" cy="238.9" r="3.2" class="dt lo"/>
+<line x1="48" y1="142.5" x2="226" y2="209.7" class="ln lo"/>
+<circle cx="48" cy="142.5" r="3.2" class="dt lo"/>
+<circle cx="226" cy="209.7" r="3.2" class="dt lo"/>
+<line x1="48" y1="69.5" x2="226" y2="161.5" class="ln lo"/>
+<circle cx="48" cy="69.5" r="3.2" class="dt lo"/>
+<circle cx="226" cy="161.5" r="3.2" class="dt lo"/>
+<line x1="48" y1="224.3" x2="226" y2="186.3" class="ln up"/>
+<circle cx="48" cy="224.3" r="3.2" class="dt up"/>
+<circle cx="226" cy="186.3" r="3.2" class="dt up"/>
+<line x1="48" y1="230.1" x2="226" y2="165.9" class="ln up"/>
+<circle cx="48" cy="230.1" r="3.2" class="dt up"/>
+<circle cx="226" cy="165.9" r="3.2" class="dt up"/>
+<line x1="48" y1="336.7" x2="226" y2="358.6" class="ln hi"/>
+<circle cx="48" cy="336.7" r="3.2" class="dt hi"/>
+<circle cx="226" cy="358.6" r="3.2" class="dt hi"/>
+<line x1="48" y1="300.2" x2="226" y2="351.3" class="ln hi"/>
+<circle cx="48" cy="300.2" r="3.2" class="dt hi"/>
+<circle cx="226" cy="351.3" r="3.2" class="dt hi"/>
+<text x="38" y="341.7" text-anchor="end" class="v hi">5,5</text>
+<text x="236" y="368.4" class="v hi">4,0</text>
+<text x="272" y="368.4" class="n hi">Codex 6.1 Sol</text>
+<text x="38" y="305.2" text-anchor="end" class="v hi">8,0</text>
+<text x="236" y="351.4" class="v hi">4,5</text>
+<text x="272" y="351.4" class="n hi">Opus 5.5</text>
+<text x="38" y="191.3" text-anchor="end" class="v lo">15,8</text>
+<text x="236" y="305.2" class="v lo">8,0</text>
+<text x="272" y="305.2" class="n lo">Sonnet 5.5</text>
+<text x="38" y="132.5" text-anchor="end" class="v lo">19,2</text>
+<text x="236" y="255.3" class="v lo">11,8</text>
+<text x="272" y="255.3" class="n lo">GLM 5.3</text>
+<text x="38" y="166.5" text-anchor="end" class="v lo">18,0</text>
+<text x="236" y="238.3" class="v lo">12,2</text>
+<text x="272" y="238.3" class="n lo">GLM 5.3 Flash</text>
+<text x="38" y="149.5" text-anchor="end" class="v lo">18,8</text>
+<text x="236" y="214.7" class="v lo">14,2</text>
+<text x="272" y="214.7" class="n lo">MiMo Pro</text>
+<text x="38" y="223.7" text-anchor="end" class="v up">13,2</text>
+<text x="236" y="193.2" class="v up">15,8</text>
+<text x="272" y="193.2" class="n up">DeepSeek Pro</text>
+<text x="38" y="240.7" text-anchor="end" class="v up">12,8</text>
+<text x="236" y="176.2" class="v up">17,2</text>
+<text x="272" y="176.2" class="n up">DeepSeek Flash</text>
+<text x="38" y="74.5" text-anchor="end" class="v lo">23,8</text>
+<text x="236" y="159.2" class="v lo">17,5</text>
+<text x="272" y="159.2" class="n lo">MiMo Flash</text>
+</svg>
+<figcaption>Правок на текст, медиана по прогонам. Розовым модели, у которых правок стало больше</figcaption>
+</figure>
 
 <p><b>Какую модель брать.</b> Это выводы на моих двух встречах, на ваших задачах цифры будут другими.</p>
 
-<ul class="need">
-<li><b>Opus 5.5 или Codex 6.1 Sol,</b> если текст уйдёт людям без вычитки. Около четырёх правок и три-четыре минуты на конспект.</li>
-<li><b>Sonnet 5.5,</b> если вычитываете сами. Правок вдвое больше, зато он самый быстрый.</li>
-<li><b>GLM 5.3 Flash,</b> если нужно дешевле. Лучшая из недорогих: около дюжины правок и ни одной критичной. Работает минут двадцать.</li>
-<li><b>MiMo</b> справляется, но медленнее всех, около сорока минут, и правок у неё больше, чем у GLM.</li>
-<li><b>DeepSeek</b> пока не брать. После переделки у обеих версий правок стало больше, а Flash начал делать критичные ошибки.</li>
-</ul>
+<div class="wide" id="shpargalka">
+<div class="copyrow" style="margin-top:0"><span class="t">Шпаргалка · версия цепочки после оптимизации</span><button class="copy" type="button" data-copy="cheat-txt">Скопировать</button></div>
+<table class="tbl cheat" aria-label="Какую модель брать под задачу на знания">
+<thead><tr><th scope="col">Модель<br>и подписка</th><th scope="col" class="n">Правок на текст</th><th scope="col" class="n">Минут на встречу</th><th scope="col" class="n">Как есть</th><th scope="col" class="w">Когда брать</th></tr></thead>
+<tbody>
+<tr class="hi"><th scope="row">Codex 6.1 Sol<small>ChatGPT</small></th><td class="n e" style="--v:4.0">4,0</td><td class="n m" style="--v:4.1">4,1</td><td class="n">2 из 4</td><td class="w">Текст уйдёт людям после беглой вычитки</td></tr>
+<tr class="hi"><th scope="row">Opus 5.5<small>Claude Max</small></th><td class="n e" style="--v:4.5">4,5</td><td class="n m" style="--v:3.1">3,1</td><td class="n">2 из 4</td><td class="w">То же, и быстрее всех из точных</td></tr>
+<tr><th scope="row">Sonnet 5.5<small>Claude Max</small></th><td class="n e" style="--v:8.0">8,0</td><td class="n m" style="--v:2.7">2,7</td><td class="n">0 из 4</td><td class="w">Быстрый черновик, который вы вычитаете</td></tr>
+<tr><th scope="row">GLM 5.3<small>Z.ai Coding Plan</small></th><td class="n e" style="--v:11.8">11,8</td><td class="n m" style="--v:20.7">20,7</td><td class="n">0 из 4</td><td class="w">Черновик без подписок Claude и ChatGPT, вычитка обязательна</td></tr>
+<tr><th scope="row">GLM 5.3 Flash<small>Z.ai Coding Plan</small></th><td class="n e" style="--v:12.2">12,2</td><td class="n m" style="--v:21.3">21,3</td><td class="n">0 из 4</td><td class="w">Как GLM 5.3: в замере разницы почти нет</td></tr>
+<tr><th scope="row">MiMo v2.6 Pro<small>OpenCode Go</small></th><td class="n e" style="--v:14.2">14,2</td><td class="n m" style="--v:38.3">38,3</td><td class="n">0 из 4</td><td class="w">Если время не важно. Проверяйте имена участников</td></tr>
+<tr><th scope="row">DeepSeek v4 Pro<small>OpenCode Go</small></th><td class="n e" style="--v:15.8">15,8</td><td class="n m" style="--v:15.0">15,0</td><td class="n">0 из 4</td><td class="w">Черновик. Проверяйте имена участников</td></tr>
+<tr><th scope="row">DeepSeek v4.1 Flash<small>OpenCode Go</small></th><td class="n e" style="--v:17.2">17,2</td><td class="n m" style="--v:23.6">23,6</td><td class="n">0 из 4</td><td class="w">Под эту задачу я бы не брал: после оптимизации стал хуже</td></tr>
+<tr><th scope="row">MiMo v2.6 Flash<small>OpenCode Go</small></th><td class="n e" style="--v:17.5">17,5</td><td class="n m" style="--v:38.5">38,5</td><td class="n">0 из 3</td><td class="w">Медленно и много правок</td></tr>
+</tbody></table>
+<p class="cap">Правок: медиана по прогонам, в каждом прогоне среднее двух судей. Минут: время всей цепочки на одну встречу, медиана. Как есть: прогоны, которые оба судьи пропустили бы без серьёзных правок. У MiMo Flash три прогона из четырёх.</p>
+<pre class="hidden" id="cheat-txt">Какую модель брать под задачу на знания (sereja.tech/zadacha-na-znaniya, замер 02.10.2026)
+Модель | правок на текст | минут на встречу | как есть | когда брать
+Codex 6.1 Sol (ChatGPT) | 4,0 | 4,1 | 2 из 4 | текст уйдёт людям после беглой вычитки
+Opus 5.5 (Claude Max) | 4,5 | 3,1 | 2 из 4 | то же, и быстрее всех из точных
+Sonnet 5.5 (Claude Max) | 8,0 | 2,7 | 0 из 4 | быстрый черновик, который вы вычитаете
+GLM 5.3 (Z.ai Coding Plan) | 11,8 | 20,7 | 0 из 4 | черновик без подписок Claude и ChatGPT, вычитка обязательна
+GLM 5.3 Flash (Z.ai Coding Plan) | 12,2 | 21,3 | 0 из 4 | как GLM 5.3
+MiMo v2.6 Pro (OpenCode Go) | 14,2 | 38,3 | 0 из 4 | если время не важно; проверяйте имена участников
+DeepSeek v4 Pro (OpenCode Go) | 15,8 | 15,0 | 0 из 4 | черновик; проверяйте имена участников
+DeepSeek v4.1 Flash (OpenCode Go) | 17,2 | 23,6 | 0 из 4 | под эту задачу не брать
+MiMo v2.6 Flash (OpenCode Go) | 17,5 | 38,5 | 0 из 3 | медленно и много правок
+Правка: место, которое редактор поправил бы до показа людям. Правок: медиана по прогонам, в прогоне среднее двух судей (Opus 5.5 и Codex 6.1 Sol).
+Минут: время всей цепочки на одну встречу, медиана. Как есть: прогоны, которые оба судьи пропустили бы без серьёзных правок.</pre>
+</div>
 </section>
 
 <section class="sec" id="principy">
@@ -273,7 +505,8 @@ footer .logo{font-size:34px}
 
 <ol class="principles">
 <li><h3>Модели только смысл</h3><p>Всё, что можно проверить без понимания текста, отдайте программе: названия, даты, время, форму. Модель меньше читает и реже ошибается. Как с бухгалтером: столбик он считает на калькуляторе, а голову тратит на то, чего калькулятор не умеет.</p></li>
-<li><h3>Спрашивайте, кто это сказал</h3><p>Модель охотно превращает рассказ одного человека в общее правило. Скажите ей прямо, чьи слова считаются советом, и проверяйте каждый совет в готовом тексте. Как в протоколе собрания: «Петров предложил» и «решили» записывают разными строками.</p></li>
+<li><h3>Скажите модели, кто есть кто</h3><p>Модель не видит лиц и не узнаёт голоса. Подпишите в задании, кто ведущий, кто участники и чьи слова считаются советом. Как со стенографисткой на совещании: ей заранее дают список, кто есть кто, иначе в протоколе все станут «выступающими».</p></li>
+<li><h3>Спрашивайте, кто это сказал</h3><p>Модель охотно превращает рассказ одного человека в общее правило. Проверяйте каждый совет в готовом тексте: кто его на самом деле дал. Как в протоколе собрания: «Петров предложил» и «решили» записывают разными строками.</p></li>
 <li><h3>Меряйте на своей задаче</h3><p>Рейтинги моделей меряют чужие задачи. Две-три ваши настоящие записи скажут больше, особенно если вы уже знаете, каким должен быть ответ. Как с новым сотрудником: резюме читают, но берут после тестового задания.</p></li>
 <li><h3>Линейку не трогают</h3><p>Записи, инструкцию для судьи и правила подсчёта замораживают до начала замера. Иначе улучшение может оказаться подкрученной линейкой. Как с весами на рынке: гирю между покупателями не подпиливают.</p></li>
 <li><h3>Проверяет чужой</h3><p>Судья из той же семьи, что и автор, может быть к нему мягче. Берите двух судей от разных компаний и смотрите, где они расходятся. Как с аудитом: бухгалтерия саму себя не проверяет.</p></li>
@@ -286,28 +519,50 @@ footer .logo{font-size:34px}
 <p><b>Судья наказывал за то, чего требует сайт.</b> В первом замере судья ставил правку за раздел «Цели урока», хотя без него страница не собирается. Пришлось поправить инструкцию судьи и пересчитать замер. После этого линейку и заморозили.</p>
 <p><b>Одна переделка стоила вчетверо дороже.</b> Критику дали читать текст по частям. Качество осталось прежним, а прочитал он вчетверо больше. Эту переделку откатили.</p>
 <p><b>DeepSeek стал хуже.</b> Та же переделка, что помогла семи моделям, двум версиям DeepSeek навредила: у них выросли ошибки формы и названий. Одна цепочка на все модели не гарантирует, что каждой станет лучше.</p>
-<p><b>Недорогие модели упираются в провайдера.</b> Claude и Codex стали заметно быстрее. Недорогие модели по-прежнему пишут конспект от пятнадцати до сорока минут: они ждут ответа своего сервиса. Z.ai начинает отказывать уже при восьми запросах сразу.</p>
+<p><b>Недорогие модели упираются в провайдера.</b> Claude и Codex стали заметно быстрее. Недорогие модели по-прежнему пишут конспект от пятнадцати до сорока минут: они ждут ответа своего сервиса. Z.ai отвечает ошибкой «слишком много запросов» уже на восьми запросах сразу, так что прогоны одной модели GLM я запускал по одному.</p>
+<p><b>OpenCode грузит процессор.</b> Около половины ядра на процесс. 16 процессов подняли нагрузку сервера до 16 при моей границе 14: рядом работают другие сервисы.</p>
+<p><b>Разброс по прогонам большой.</b> У Opus в четырёх прогонах последнего цикла правок от двух до шестнадцати. Решение по одной паре прогонов будет решением по шуму.</p>
+<p><b>Имена участников.</b> Дешёвые модели нарушают запрет из задания и переносят личное из расшифровки в конспект. Проверяйте личные данные в каждом тексте, даже когда остальные проверки зелёные.</p>
 <p><b>Судьи могли подыгрывать своим.</b> Судили Opus и Codex, и лучшие оценки получили тоже Opus и Codex. Возможно, судья мягче к своей семье. Поэтому все цифры здесь ждут независимой проверки. <!-- TODO-independent-check: заменить следующую фразу итогом независимой проверки -->Итог проверки появится в этом абзаце.</p>
+<div class="note">
+<h3>Оговорка про судей</h3>
+<p>Каждый судья строже к чужим текстам:</p>
+<table class="tbl" aria-label="Правки по судьям">
+<thead><tr><th scope="col">Тексты</th><th scope="col" class="n">Судья Opus</th><th scope="col" class="n">Судья Codex</th></tr></thead>
+<tbody>
+<tr><th scope="row">Opus 5.5</th><td class="n"><b>4,5</b></td><td class="n">3,8</td></tr>
+<tr><th scope="row">Codex 6.1 Sol</th><td class="n">7,0</td><td class="n"><b>2,5</b></td></tr>
+</tbody></table>
+<p>Цикл 6, среднее правок на текст по четырём прогонам. Судья Opus ставит Opus выше Codex, судья Codex наоборот. Независимая проверка идёт.</p>
+</div>
 </section>
 
-<section class="sec" id="povtorit">
-<div class="sec-h"><span class="num">06</span><h2>Как повторить</h2></div>
-<ol class="steps">
-<li><b>Возьмите две-три настоящие записи.</b> Лучше те, что вы уже разбирали руками: тогда видно, каким должен быть ответ.</li>
-<li><b>Назовите ошибки.</b> Выдумка, искажённый смысл, слова, приписанные не тому, потерянная тема. Этот список и будет линейкой.</li>
-<li><b>Позовите двух судей.</b> Две модели от разных компаний сверяют каждый ответ с источником и выписывают правки.</li>
-<li><b>Прогоните несколько моделей по два раза.</b> Одна попытка ничего не доказывает: модель каждый раз пишет по-разному.</li>
-<li><b>Заберите у модели проверяемое.</b> Попросите агента найти шаги, которые может сделать обычная программа, и отдать их ей.</li>
-<li><b>Меняйте по одной вещи.</b> После каждой правки тот же замер. Стало хуже, откат.</li>
-<li><b>Прочитайте результат сами.</b> Первым делом проверьте у каждого совета, кто его дал.</li>
-</ol>
-<p>Цель, линейка и то, что можно менять, у меня лежат в одном файле рядом с замером. В следующий раз агент начнёт с него.</p>
+<section class="sec faq" id="faq">
+<div class="sec-h"><span class="num">06</span><h2>Частые вопросы</h2></div>
+<h3>Подходит ли это для протокола созвона или сводки переписки?</h3>
+<p>Да. Это тот же тип задачи: длинный источник на входе, текст для людей на выходе. Виды ошибок те же. Цифры правок в замере получены только на конспектах встреч.</p>
+<h3>Какую модель брать, если нет подписок Claude и ChatGPT?</h3>
+<p>В замере ближе всех GLM 5.3 по Z.ai Coding Plan: около 12 правок на текст и 20 минут на встречу. Закладывайте вычитку человеком.</p>
+<h3>Зачем два судьи разных семей?</h3>
+<p>Судья мягче к своей семье. Судья Codex нашёл в текстах Codex 2,5 правки на текст, судья Opus в тех же текстах 7,0. Два судьи разных семей гасят часть перекоса.</p>
+<h3>Сколько прогонов нужно на модель?</h3>
+<p>У меня по четыре на модель, по два на каждую встречу. Разброс между прогонами большой, меньше двух на вход я бы не брал.</p>
+</section>
 
-<div class="cta"><p>Этому я учу в Personal Corp: как собрать себе команду агентов, раздать им работу и проверять, что они сделали.</p><a class="btn" href="https://t.me/hashslash_bot?start=pc_blog">Узнать про Personal Corp</a></div>
+<section class="sec" id="ssylki">
+<div class="sec-h"><span class="num">07</span><h2>Ссылки</h2></div>
+<ul class="links">
+<li><a href="https://github.com/karpathy/autoresearch">karpathy/autoresearch</a><small>петля "опыт, метрика, оставить или откатить", первоисточник</small></li>
+<li><a href="https://www.datacamp.com/tutorial/guide-to-autoresearch">Разбор autoresearch на DataCamp</a><small>как устроены три файла и цикл</small></li>
+<li><a href="/kak-rasshifrovat-video-i-audio/">Как расшифровать видео и аудио</a><small>первый шаг той же цепочки: запись в текст</small></li>
+<li><a href="/pelican-na-velosipede/">Пеликан на велосипеде</a><small>другое сравнение моделей: время, токены, как повторить</small></li>
+<li><a href="/kak-agent-vedet-dela/">Как агент ведёт мои дела</a><small>прошлый гайд</small></li>
+</ul>
+<p class="endnote">Цепочки вроде этой и замеры на своих задачах собираем в Personal Corp. <a href="https://t.me/hashslash_bot?start=pc_blog">Подробнее в боте</a>.</p>
 </section>
 
 <section class="sec sources" id="istochniki">
-<div class="tags">Теги: <a href="#primer">конспекты</a>, <a href="#kak">эвал</a>, <a href="#principy">принципы</a>, <a href="#povtorit">выбор модели</a></div>
+<div class="tags">Теги: <a href="#primer">конспекты</a>, <a href="#kak">эвал</a>, <a href="#principy">принципы</a>, <a href="#shpargalka">выбор модели</a></div>
 <p>Замер Карпатого: <a href="https://github.com/karpathy/autoresearch">autoresearch на GitHub</a> и <a href="https://www.datacamp.com/tutorial/guide-to-autoresearch">разбор DataCamp</a>. Модели: <a href="https://www.anthropic.com/claude">Claude</a>, <a href="https://openai.com/codex/">Codex</a>, <a href="https://z.ai">GLM</a>, <a href="https://opencode.ai">OpenCode</a>. Пример на первом экране взят из настоящего конспекта, имён участников в нём нет. Мои реплики агенту слегка отредактированы: убраны опечатки.</p>
 </section>
 
@@ -324,4 +579,12 @@ footer .logo{font-size:34px}
       .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
   }
 })();
-</script></body></html>
+</script><script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+var el=document.getElementById(b.getAttribute('data-copy'));if(!el)return;var t=el.textContent;
+function done(){b.classList.add('ok');b.textContent='Скопировано';setTimeout(function(){b.classList.remove('ok');b.textContent='Скопировать'},1600)}
+try{navigator.clipboard.writeText(t).then(done,function(){viaArea()})}catch(e){viaArea()}
+function viaArea(){try{var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();done()}catch(e){}}
+})});
+</script>
+</body></html>
