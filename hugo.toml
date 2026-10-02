@@ -42,7 +42,7 @@ enableGitInfo = true
     lastmod = '2026-10-01'
 
   [[params.standalone]]
-    url = 'zadacha-na-znaniya/'
+    url = 'kak-proverit-neyroset/'
     title = 'Эвалы: как проверить нейросеть на своей задаче'
     description = 'Гайд: почему модель выдаёт чужой опыт за совет, что из работы отдать программе и какую модель брать для конспектов встреч, сводок и протоколов.'
     lastmod = '2026-10-02'
