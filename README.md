@@ -30,12 +30,13 @@
 
 **Блог про вайбкодинг и Claude Code.**
 
-127 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
+128 статей о разработке с AI-агентами: практические кейсы, автоматизация, многоагентные системы.
 
 ## Последние статьи
 
 | Дата | Статья |
 |------|--------|
+| 2026-10-02 | [Сервер для своих: способы открыть сервис только себе](https://sereja.tech/blog/server-dlya-svoih/) |
 | 2026-10-01 | [Перенос 275 сессий Claude Code на второй аккаунт](https://sereja.tech/blog/claude-code-sessions-between-accounts/) |
 | 2026-09-17 | [TypeSafe выпустила Jev: модель ИИ для выбора действий](https://sereja.tech/blog/typesafe-system-one-jev/) |
 | 2026-09-17 | [Как Jev выбирает действие браузера](https://sereja.tech/blog/jev-voice-browser/) |
@@ -45,7 +46,6 @@
 | 2026-09-05 | [Astra в Codex может помнить длинную задачу](https://sereja.tech/blog/codex-experimental-context-astra/) |
 | 2026-09-03 | [GPT-6 Astra вышла. Кому уже открыли доступ](https://sereja.tech/blog/gpt-6-astra/) |
 | 2026-09-02 | [Обзор Claude Fable 5.1: бенчмарки, отзывы, промптинг](https://sereja.tech/blog/claude-fable-5-1/) |
-| 2026-08-22 | [Повторил забег агентов: 11/18 стало 17/18](https://sereja.tech/blog/ox-alpha-yesterday-vs-today/) |
 [Все статьи →](https://sereja.tech/blog/)
 
 ## Быстрый старт
