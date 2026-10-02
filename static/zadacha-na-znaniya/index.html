@@ -294,12 +294,9 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 
 <p>Работа шла в два хода. Сначала замер старого пайплайна. Потом переделки по одной, и после каждой тот же замер.</p>
 
-<figure class="flow wide eval" style="max-width:1000px" aria-label="Как устроен замер и как по нему решается судьба каждой переделки">
-<div class="lbl">Замер</div>
+<figure class="flow wide eval" style="max-width:1000px" aria-label="Как устроен замер">
 <div class="row"><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><rect x="1" y="5" width="28" height="26" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M12 12v12l9-6z" fill="#2d3e9f"/></svg>две записи встреч</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>образец, выправленный руками</div></div><span class="ar">→</span><div class="box"><span class="t">модель</span><b>Девять моделей</b>каждая пишет конспект каждой встречи, по две попытки</div><span class="ar">→</span><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>36 конспектов</div></div><span class="ar">→</span><div class="box"><span class="t">модель</span><b>Два судьи</b>Opus и Codex читают конспект рядом с записью и выписывают правки</div><span class="ar">→</span><div class="box p"><span class="t">программа</span><b>Одно число</b>правок на конспект у каждой модели</div></div>
-<div class="lbl">Переделка</div>
-<div class="row"><div class="box"><span class="t">агент</span><b>Одна правка</b>пайплайна за раз</div><span class="ar">→</span><div class="box p"><span class="t">программа</span><b>Тот же замер</b>те же записи, те же судьи</div><span class="ar">→</span><div class="box p"><span class="t">правило</span><b>Правок меньше?</b>да: оставить<br>нет или сломались проверки: вернуть как было<span class="again">↻ следующая переделка</span></div></div>
-<figcaption>Записи, образец и судьи заморожены: их не меняет никто, иначе числа нельзя сравнить</figcaption>
+<figcaption>Так замер даёт одно число на модель. После каждой переделки пайплайна его повторяли на тех же записях с теми же судьями</figcaption>
 </figure>
 
 <p><b>Сначала замер.</b> Агент запустил старый пайплайн на всех девяти моделях. Каждая писала конспект обеих встреч по два раза: модель каждый раз пишет по-разному, и одна попытка ничего не доказывает. Потом оба судьи читали каждый конспект рядом с записью и выписывали правки. У каждой правки свой вид: выдумка, искажённый смысл, ошибка атрибуции, неверное название, глава не на своём месте.</p>
