@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex, follow">
 <meta property="og:type" content="article"><meta property="og:title" content="Задача на знания: почему модель путает, кто что сказал"><meta property="og:description" content="Гайд: как я проверил девять моделей на конспектах встреч, что отдал программе и какую модель брать."><meta property="og:image" content="https://sereja.tech/zadacha-na-znaniya/img/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/zadacha-na-znaniya/img/og-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
-:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#6f6f6f;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
 --serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -15,7 +15,7 @@ body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
 a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 a:hover{color:var(--pink)}
 img,video{display:block;max-width:100%}
-.draft{background:#fff0f7;border-bottom:1px solid var(--pink);text-align:center;font:500 12px/18px var(--sans);letter-spacing:.04em;padding:8px 16px;color:#000}
+.draft{background:#fff0f7;text-align:center;font:500 12px/18px var(--sans);letter-spacing:.04em;padding:8px 16px;color:#000}
 .draft span{color:#c4006a;text-transform:uppercase;letter-spacing:.1em;margin-right:8px}
 .mast{text-align:center;padding:54px 16px 0}
 .logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
@@ -47,8 +47,6 @@ footer .tagline{margin-top:10px}footer .site{padding-top:18px}
 h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
 .lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:600px;margin:30px auto 0}
 .meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
-.share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
-.share i{display:block;width:38%;height:1px;background:var(--blue)}
 .body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
 .body p{margin:0 0 22px}
 .drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
@@ -64,20 +62,22 @@ h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-widt
 /* the hero: one real paragraph of a meeting summary, before and after */
 .pair{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .pair .side{margin:0}
-.pair .who{font:600 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 10px}
+.pair .who{font:600 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 10px}
 .pair .bad .who{color:#c4006a}
 .pair .txt{background:var(--paper);padding:22px 26px}
 .pair .txt p{font:300 16px/25px var(--serif);margin:0 0 14px}
 .pair .txt p:last-child{margin:0}
-.pair mark{color:inherit;padding:1px 0}
-.pair mark.err{background:rgba(255,20,147,.16);box-shadow:inset 0 -2px 0 var(--pink)}
-.pair mark.ok{background:rgba(45,62,159,.10);box-shadow:inset 0 -2px 0 var(--blue)}
+.pair mark{color:inherit;padding:0}
+.pair mark{-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.pair mark.err{background:#f8c6df}
+.pair mark.ok{background:#dcdeea}
 .pair .gap{color:var(--grey)}
 .pair .note{font:300 15px/22px var(--serif);margin:12px 0 0}
-.pair figcaption{grid-column:1/-1;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);text-align:center;margin-top:-6px}
-@media (max-width:760px){.pair{grid-template-columns:1fr;gap:22px}.pair .txt{padding:18px 18px}}
+.pair figcaption{grid-column:1/-1;grid-row:1;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);text-align:center;margin-bottom:-8px}
+@media (max-width:760px){.pair{grid-template-columns:1fr;gap:22px}.pair .txt{padding:16px 18px}.pair .txt p{font-size:15px;line-height:23px;margin-bottom:10px}}
 .diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
 .diagram svg{width:100%;height:auto;display:block}
+.diagram .m{display:none;max-width:440px;margin:0 auto}
 .diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
 .steps{list-style:none;counter-reset:st;padding:0;margin:0}
 .steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
@@ -95,9 +95,9 @@ h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-widt
 .principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
 .principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
 .principles p{margin:0}
-.cta{margin:70px 0 0;padding:30px 0 6px;border-top:1px solid var(--pink);text-align:center}
+.cta{margin:70px 0 0;padding:0 0 6px;text-align:center}
 .cta p{font:300 20px/29px var(--serif);margin:0 auto 18px;max-width:560px}
-.cta a.btn{display:inline-block;font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:#fff;background:var(--pink);padding:13px 24px;text-decoration:none}
+.cta a.btn{display:inline-block;font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:#fff;background:#c4006a;padding:13px 24px;text-decoration:none}
 .cta a.btn:hover{background:#000;color:#fff}
 .sources{font-size:13px;line-height:20px;margin-top:70px;padding-top:26px;border-top:1px solid var(--blue)}
 .tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
@@ -107,19 +107,19 @@ footer .logo{font-size:34px}
 @media (max-width:760px){
   .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
   .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
-  .diagram{overflow-x:auto}.diagram svg{min-width:760px}
+  .diagram .d{display:none}.diagram .m{display:block}
 }
 </style><link rel="canonical" href="https://sereja.tech/zadacha-na-znaniya/"><meta name="author" content="Сережа Рис"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/zadacha-na-znaniya/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Абзац конспекта встречи до и после: модель выдала опыт участника за совет"><meta property="article:published_time" content="2026-10-02T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-02T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="AI-агенты"><meta property="article:tag" content="эвал"><meta property="article:tag" content="выбор модели"><meta property="article:tag" content="конспект встречи"><meta property="article:tag" content="Claude Code"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Задача на знания: почему модель путает, кто что сказал"><meta name="twitter:description" content="Гайд: как я проверил девять моделей на конспектах встреч, что отдал программе и какую модель брать."><meta name="twitter:image:alt" content="Абзац конспекта встречи до и после: модель выдала опыт участника за совет"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Задача на знания: почему модель путает, кто что сказал", "description": "Гайд: почему модель выдаёт чужой опыт за совет, что из работы отдать программе и какую модель брать для конспектов встреч, сводок и протоколов.", "image": "https://sereja.tech/zadacha-na-znaniya/img/og-preview.png", "inLanguage": "ru-RU", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/zadacha-na-znaniya/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["AI-агенты", "эвал", "выбор модели", "конспект встречи", "Claude Code", "autoresearch"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script></head>
 <body class="a" id="top"><div class="draft" role="note"><span>Черновик</span>Цифры до независимой проверки</div><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#primer">Пример</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#primer">Пример</a><a href="#chto-eto">Что произошло</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как сделали</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Модели</span></div><div class="kicker">Как это сделано:</div><h1>Задача на знания</h1><p class="lead">Модель пересказала мою встречу и выдала чужой опыт за мой совет. Гайд о том, почему так выходит и какую модель брать, когда отдаёте ей записи, переписку или документы.</p></div>
-<div class="meta">2 октября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
+<div class="meta">2 октября 2026 · гайд обновляется</div>
 <article class="body">
 <figure class="pair" id="primer">
-<div class="side bad"><p class="who">MiMo Pro, до переделки</p><div class="txt"><p><mark class="err">Храните не только первичные данные, но и производные: что не получилось и почему. Тогда агент прочитает историю и не повторит чужую ошибку.</mark></p><p>Факты и производные в одном месте накапливают ошибки: пара неточностей порождает следующие. Операционный опыт (что получалось, что нет) держите в скиллах<span class="gap">…</span></p></div><p class="note">Это рассказ участника о своей базе знаний. Модель подала его как совет программы. Абзацем ниже она же советует обратное.</p></div>
+<div class="side bad"><p class="who">MiMo Pro, до переделки</p><div class="txt"><p><mark class="err">Храните не только первичные данные, но и производные: что не получилось и почему. Тогда агент прочитает историю и не повторит чужую ошибку.</mark></p><p>Факты и производные в одном месте накапливают ошибки: пара неточностей порождает следующие. Операционный опыт (что получалось, что нет) держите в скиллах<span class="gap">…</span></p></div><p class="note">Это рассказ участника о своей базе знаний. Модель подала его как мой совет. Абзацем ниже она же советует обратное.</p></div>
 <div class="side good"><p class="who">Та же MiMo Pro, после</p><div class="txt"><p><mark class="ok">Один из участников потока ведёт вики по методу LLM Wiki.</mark> <span class="gap">…</span> Там же живёт вторичный опыт: что не получилось и каким путём пошли дальше. Серёжа называет это альтернативой с другим подходом.</p><p>У Серёжи был негативный опыт, когда факты и производные лежали в одном месте. Как только он переставал контролировать процесс, ошибки копились как снежный ком. Поэтому операционный опыт он держит в скиллах<span class="gap">…</span></p></div><p class="note">Чьи это слова, видно сразу. Серёжа в конспекте это я.</p></div>
 <figcaption>Кусок конспекта одной встречи. Розовым ошибка «кто сказал»</figcaption>
 </figure>
 
-<p class="first"><span class="drop">Э</span>тот кусок взят из конспекта моей встречи с участниками программы. Слева его написала недорогая модель MiMo Pro, и она приписала мне чужой совет. Справа та же модель после того, как агент за ночь переделал цепочку, по которой она работает. Агент гонял прогоны на девяти моделях, звал судей и откатывал то, что не помогало. Я дал задачу, выбрал модели из своих подписок и несколько раз спросил, что значат его цифры.</p>
+<p class="first"><span class="drop">Э</span>тот кусок взят из конспекта моей встречи с участниками программы. Слева его написала недорогая модель MiMo Pro, и она приписала мне чужой совет. Справа та же модель после того, как агент за ночь переделал цепочку шагов, по которой она работает. Агент раз за разом запускал девять моделей, звал модели-судей и откатывал то, что не помогало. Я дал задачу, выбрал модели из своих подписок и несколько раз спросил, что значат его цифры.</p>
 
 <p>Этот гайд для тех, кто отдаёт модели разбирать записи встреч, переписку или документы. Вы не знаете, какую модель взять и почему она ошибается, а про эвалы не слышали. Здесь мало технических подробностей и много объяснений: какие ошибки модель делает чаще всего, какую работу у неё можно забрать совсем и как проверить модели на своей задаче. В конце короткий ответ, какую модель брать, и шаги, чтобы повторить замер у себя.</p>
 
@@ -128,15 +128,15 @@ footer .logo{font-size:34px}
 <section class="sec" id="chto-eto">
 <div class="sec-h"><span class="num">01</span><h2>Что вообще произошло</h2></div>
 
-<p>У меня есть программа Personal Corp. Раз в неделю я отвечаю на вопросы участников в прямом эфире, это называется Office Hours. Запись потом превращается в страницу: конспект, главы видео, описание. С октября это делает мой сервер сам, без человека. Значит, конспект читают люди, которые встречу не видели, и действуют по нему.</p>
+<p>У меня есть программа Personal Corp. Раз в неделю я отвечаю на вопросы участников в прямом эфире, это называется Office Hours. Запись потом превращается в страницу: конспект, главы видео, описание. С октября это делает мой сервер сам, без человека. А читают конспект люди, которые встречу не видели, и действуют по нему.</p>
 
 <p>Такую работу я называю задачей на знания. Модель читает длинный источник и пишет текст, по которому люди будут действовать. Конспект встречи здесь частный случай. Сюда же протокол созвона, сводка рабочего чата за неделю, выжимка из пачки документов. Ошибки в таких текстах тихие. Смысл чуть сдвинут, или слова одного человека приписаны другому. Читатель этого не заметит: записи у него нет.</p>
 
-<p>Самая частая ошибка у меня оказалась одной и той же. Модель берёт рассказ участника и подаёт его как совет программы. На первом экране как раз такой случай. Участник рассказал, как устроена его база знаний, и в конспекте это стало правилом «храните». Я на встрече говорил обратное, и абзацем ниже модель это честно пересказала. Ученик получил бы два совета, которые спорят друг с другом. Редакторы называют это ошибкой атрибуции, я зову проще: ошибка «кто сказал».</p>
+<p>Чаще всего модель ошибалась одинаково. Она берёт рассказ участника и подаёт его как мой совет. На первом экране как раз такой случай. Участник рассказал, как устроена его база знаний, и в конспекте это стало правилом «храните». Я на встрече говорил обратное, и абзацем ниже модель это честно пересказала. Ученик получил бы два совета, которые спорят друг с другом. Редакторы называют это ошибкой атрибуции, я зову проще: ошибка «кто сказал».</p>
 
 <p>Раньше конспект писал агент: программа на основе модели, которая сама открывает файлы, читает инструкции и пишет результат. Это удобно, но дорого и непредсказуемо. Агент по многу раз перечитывал запись встречи и сам решал, что проверять. Какая модель справляется лучше, я знал только по ощущениям.</p>
 
-<p>Почему это стало можно поправить сейчас. В марте 2026 года Андрей Карпатый выложил <a href="https://github.com/karpathy/autoresearch">autoresearch</a>. Это агент, который за ночь сам ставит около сотни опытов над обучением маленькой модели. Каждый опыт он меряет одной и той же линейкой. Стало лучше, правка остаётся. Стало хуже, откатывается. Человек правит только один файл с целью и запретами. Тот же приём работает и на обычной офисной задаче вроде пересказа встречи. Для этого хватает подписок на модели и одной ночи.</p>
+<p>Почему поправить это можно именно сейчас. В марте 2026 года Андрей Карпатый выложил <a href="https://github.com/karpathy/autoresearch">autoresearch</a>. Это агент, который за ночь сам ставит около сотни опытов над обучением маленькой модели. Каждый опыт он меряет одной и той же линейкой. Стало лучше, правка остаётся. Стало хуже, откатывается. Человек правит только один файл с целью и запретами. Тот же приём работает и на обычной офисной задаче вроде пересказа встречи. Для этого хватает подписок на модели и одной ночи.</p>
 
 <p>Несколько слов, которые встретятся дальше:</p>
 
@@ -156,7 +156,7 @@ footer .logo{font-size:34px}
 
 <ul class="need">
 <li><b>Две настоящие записи.</b> Две встречи Office Hours, час и полтора часа разговора. Плюс один конспект, который я выправил руками: по нему видно, как должно быть.</li>
-<li><b>Девять моделей из моих подписок.</b> Я назвал, что у меня оплачено, агент проверил доступ. Claude Max: Opus 5.5 и Sonnet 5.5. ChatGPT: Codex 6.1 Sol. Z.ai Coding Plan: GLM 5.3 и GLM Flash. OpenCode Go: DeepSeek и MiMo, у каждой версии Pro и Flash.</li>
+<li><b>Девять моделей из моих подписок.</b> Я назвал, что у меня оплачено, агент проверил доступ. Claude Max: Opus 5.5 и Sonnet 5.5. ChatGPT: Codex 6.1 Sol. Z.ai Coding Plan: GLM 5.3 и GLM 5.3 Flash. OpenCode Go: DeepSeek и MiMo, у каждой версии Pro и Flash.</li>
 <li><b>Сервер для прогонов.</b> Недорогие модели шли на моём сервере, по десятку сразу. Агент следил, чтобы замер не мешал соседним сервисам.</li>
 <li><b>Два судьи из разных семей.</b> Opus от Anthropic и Codex от OpenAI. Каждый конспект читали оба, итог считался по двум.</li>
 <li><b>Одна ночь.</b> Агент гонял прогоны до утра, всего их вышло больше двухсот.</li>
@@ -167,21 +167,21 @@ footer .logo{font-size:34px}
 <section class="sec" id="kak">
 <div class="sec-h"><span class="num">03</span><h2>Как мы это сделали</h2></div>
 
-<p>Работа шла в два хода. Сначала замер: как цепочка работает сейчас. Потом переделки по одной, и после каждой тот же замер.</p>
+<p>Работа шла в два хода. Сначала замер: как работает старая цепочка. Потом переделки по одной, и после каждой тот же замер.</p>
 
 <p><b>Сначала замер.</b> Агент прогнал старую цепочку на всех девяти моделях. Каждая писала конспект обеих встреч по два раза: модель каждый раз пишет по-разному, и одна попытка ничего не доказывает. Потом оба судьи читали каждый конспект рядом с записью и выписывали правки. У каждой правки свой вид: выдумка, искажённый смысл, ошибка «кто сказал», неверное название, глава не на своём месте.</p>
 
-<p>Результат меня отрезвил. Из 36 конспектов судьи пропустили бы без серьёзных правок ровно один. Даже у Opus оставалось около восьми мест, которые стоило поправить. Я не понял, что это значит, и спросил:</p>
+<p>Результат меня отрезвил. Из 36 конспектов судьи пропустили бы без серьёзных правок ровно один. Даже у Opus оставалось около восьми мест, которые стоило поправить. В первых цифрах у него было 11. Я не понял, что это значит, и спросил:</p>
 
 <blockquote class="said"><p>Что такое 11 правок для человека?</p><cite>моё сообщение агенту, когда пришли первые цифры</cite></blockquote>
 
 <p>Агент разложил один конспект по строкам. Половина правок в нём была про то, чьи это слова.</p>
 
-<p><b>Потом линейка.</b> Я вспомнил про autoresearch Карпатого и спросил, не то же ли это самое. Оказалось, то же, только строже. Потом спросил, ничего ли, что замер ведёт тот же агент, который улучшает цепочку. Он ведь может «улучшить» результат, подкрутив судью. Поэтому линейку заморозили: записи встреч, инструкцию судей и проверки больше никто не трогает. Цель и правила лежат в одном файле, и правлю его только я.</p>
+<p><b>Потом линейка.</b> Я вспомнил про autoresearch Карпатого и спросил, не то же ли это самое. Оказалось, та же идея: одна мерка, замороженная проверка и правило «стало хуже, верни как было». Потом спросил, ничего ли, что замер ведёт тот же агент, который улучшает цепочку. Он ведь может «улучшить» результат, подкрутив судью. Поэтому линейку заморозили: записи встреч, инструкцию судей и проверки больше никто не трогает. Цель и правила лежат в одном файле, и правлю его только я.</p>
 
 <p><b>Дальше переделка.</b> Главная мысль простая: модели остаётся только смысл. Всё, что можно проверить без понимания текста, делает обычная программа. Названия инструментов она сверяет со словарём. Время глав ставит на начало ближайшей реплики. Форму страницы проверяет сама. А модель получает запись встречи один раз, целиком, и пишет конспект и главы одним ответом.</p>
 
-<figure class="diagram" id="fig-chain"><svg viewBox="0 0 960 470" role="img" aria-labelledby="fig-chain-title fig-chain-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-chain-title">Цепочка до и после переделки</title><desc id="fig-chain-desc">Было: один шаг, агент сам открывает инструкции и запись, пишет файлы и перечитывает их по многу раз. Стало: шесть шагов змейкой. Первый ряд слева направо: 1 код сверяет названия со словарём; 2 модель пишет конспект и главы, вся запись одним запросом, мой голос подписан программой; 3 код проверяет форму страницы, словарь и время глав. Второй ряд справа налево: 4 модель исправляет только строки, где проверка нашла ошибку; 5 модель-критик присылает фрагмент и замену; 6 код вставляет замену или откатывает текст, если замена ломает проверки. Тонкая синяя рамка: шаг делает программа. Толстая чёрная рамка: шаг делает модель.</desc><defs><marker id="c-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="960" height="470" fill="#ffffff"/>
+<figure class="diagram" id="fig-chain"><svg class="d" viewBox="0 0 960 410" role="img" aria-labelledby="fig-chain-title fig-chain-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-chain-title">Цепочка до и после переделки</title><desc id="fig-chain-desc">Было: один шаг, агент сам открывает инструкции и запись, пишет файлы и перечитывает их по многу раз. Стало: шесть шагов змейкой. Первый ряд слева направо: 1 код сверяет названия со словарём; 2 модель пишет конспект и главы, вся запись одним запросом, мой голос подписан программой; 3 код проверяет форму страницы, словарь и время глав. Второй ряд справа налево: 4 модель исправляет только строки, где проверка нашла ошибку; 5 модель-критик присылает фрагмент и замену; 6 код вставляет замену или откатывает текст, если замена ломает проверки. Тонкая синяя рамка: шаг делает программа. Толстая чёрная рамка: шаг делает модель.</desc><defs><marker id="c-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="960" height="410" fill="#ffffff"/>
 <text x="32" y="22" fill="#555555" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">БЫЛО</text>
 <rect x="32" y="34" width="896" height="74" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="46" y="46" width="47" height="13" fill="#000000"/><text x="69.5" y="55.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="48" y="82" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Агент делает всё сам</text><text x="48" y="99" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">открывает инструкции и запись, пишет файлы, перечитывает их по многу раз</text>
 <text x="32" y="150" fill="#555555" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">СТАЛО</text>
@@ -192,17 +192,66 @@ footer .logo{font-size:34px}
 <rect x="664" y="302" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="314" width="16" height="13" fill="#2d3e9f"/><text x="686" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">4</text><rect x="700" y="314" width="47" height="13" fill="#000000"/><text x="723.5" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="680" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Исправление</text><text x="680" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">только строки, где проверка</text><text x="680" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">нашла ошибку</text>
 <rect x="348" y="302" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="314" width="16" height="13" fill="#2d3e9f"/><text x="370" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">5</text><rect x="384" y="314" width="47" height="13" fill="#000000"/><text x="407.5" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text><text x="364" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Критик</text><text x="364" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">присылает фрагмент</text><text x="364" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">и замену</text>
 <rect x="32" y="302" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="314" width="16" height="13" fill="#2d3e9f"/><text x="54" y="323.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">6</text><rect x="68" y="314" width="34" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="85" y="323.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text><text x="48" y="350" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Вставка или откат</text><text x="48" y="368" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">замена сломала проверки:</text><text x="48" y="382" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">текст возвращается</text>
-<text x="32" y="446" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="1.1">ЛЕГЕНДА</text><rect x="100" y="436" width="22" height="13" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="130" y="446" fill="#555555" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">делает программа</text><rect x="250" y="436" width="22" height="13" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="280" y="446" fill="#555555" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">делает модель</text></svg><figcaption>Было и стало. Модели остались три шага, и каждый проверяет программа</figcaption></figure>
+</svg><svg class="m" viewBox="0 0 358 944" role="img" aria-labelledby="fig-chain-title fig-chain-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="c-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="358" height="944" fill="#ffffff"/>
+<text x="0" y="16" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">БЫЛО</text>
+<rect x="1" y="26" width="356" height="122" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<rect x="14" y="40" width="62" height="18" fill="#000000"/><text x="45.0" y="53.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
+<text x="14" y="82" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Агент делает всё сам</text>
+<text x="14" y="103" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">открывает инструкции и запись,</text>
+<text x="14" y="121" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">пишет файлы, перечитывает их</text>
+<text x="14" y="139" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">по многу раз</text>
+<text x="0" y="188" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">СТАЛО</text>
+<rect x="1" y="198" width="356" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<rect x="14" y="212" width="20" height="18" fill="#2d3e9f"/><text x="24" y="225.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">1</text>
+<rect x="40" y="212" width="40" height="18" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="60.0" y="225.2" fill="#2d3e9f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text>
+<text x="14" y="254" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Названия по словарю</text>
+<text x="14" y="275" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">инструменты и модели</text>
+<text x="14" y="293" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">пишутся правильно</text>
+<path d="M 179,302 V 323" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
+<rect x="1" y="326" width="356" height="104" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<rect x="14" y="340" width="20" height="18" fill="#2d3e9f"/><text x="24" y="353.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">2</text>
+<rect x="40" y="340" width="62" height="18" fill="#000000"/><text x="71.0" y="353.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
+<text x="14" y="382" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Конспект и главы</text>
+<text x="14" y="403" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">вся запись одним запросом,</text>
+<text x="14" y="421" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">мой голос подписан программой</text>
+<path d="M 179,430 V 451" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
+<rect x="1" y="454" width="356" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<rect x="14" y="468" width="20" height="18" fill="#2d3e9f"/><text x="24" y="481.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">3</text>
+<rect x="40" y="468" width="40" height="18" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="60.0" y="481.2" fill="#2d3e9f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text>
+<text x="14" y="510" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Проверки</text>
+<text x="14" y="531" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">форма страницы, словарь,</text>
+<text x="14" y="549" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">время глав</text>
+<path d="M 179,558 V 579" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
+<rect x="1" y="582" width="356" height="104" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<rect x="14" y="596" width="20" height="18" fill="#2d3e9f"/><text x="24" y="609.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">4</text>
+<rect x="40" y="596" width="62" height="18" fill="#000000"/><text x="71.0" y="609.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
+<text x="14" y="638" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Исправление</text>
+<text x="14" y="659" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">только строки, где проверка</text>
+<text x="14" y="677" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">нашла ошибку</text>
+<path d="M 179,686 V 707" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
+<rect x="1" y="710" width="356" height="104" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<rect x="14" y="724" width="20" height="18" fill="#2d3e9f"/><text x="24" y="737.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">5</text>
+<rect x="40" y="724" width="62" height="18" fill="#000000"/><text x="71.0" y="737.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">МОДЕЛЬ</text>
+<text x="14" y="766" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Критик</text>
+<text x="14" y="787" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">присылает фрагмент</text>
+<text x="14" y="805" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">и замену</text>
+<path d="M 179,814 V 835" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#c-ink-m)"/>
+<rect x="1" y="838" width="356" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<rect x="14" y="852" width="20" height="18" fill="#2d3e9f"/><text x="24" y="865.2" fill="#ffffff" font-size="12" font-family="Jost, Futura, sans-serif" text-anchor="middle">6</text>
+<rect x="40" y="852" width="40" height="18" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="60.0" y="865.2" fill="#2d3e9f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">КОД</text>
+<text x="14" y="894" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Вставка или откат</text>
+<text x="14" y="915" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">замена сломала проверки:</text>
+<text x="14" y="933" fill="#555555" font-size="13" font-family="Jost, Futura, sans-serif" letter-spacing="0.4">текст возвращается</text></svg><figcaption>Было и стало. Модели остались три шага, и каждый проверяет программа</figcaption></figure>
 
-<p>Программа ещё подсказывает модели, кто есть кто. Распознавание речи помечает голоса безлико: первый, второй, третий. Мой голос программа находит сама: на своих встречах больше всех говорю я. А в инструкции модели появилось правило. Рассказ участника пишется как его опыт, советом программы он становится, только если это советую я.</p>
+<p>Программа ещё подсказывает модели, кто есть кто. Распознавание речи помечает голоса безлико: первый, второй, третий. Мой голос программа находит сама: на своих встречах больше всех говорю я. А в инструкции модели появилось правило. Рассказ участника пишется как его опыт. Советом он становится, только если это советую я.</p>
 
 <p>После модели работают двое проверяющих. Если программа нашла ошибку, модель исправляет только эти строки и больше ничего не трогает. Потом ещё одна модель, критик, вычитывает текст и присылает замены: вот фрагмент, вот как надо. Вставляет их программа. Если замена что-то сломала, текст откатывается к версии до критика.</p>
 
 <p><b>Что показал замер.</b> Сравниваю старую цепочку с той, что сейчас работает на сервере. Ошибка «кто сказал» стала редкой. У GLM таких мест было около восьми на конспект, стало около одного. У Sonnet было шесть, осталось меньше одного.</p>
 
-<p>Сильные модели стали почти чистыми. Opus и Codex оставляют около четырёх правок на конспект. В половине их прогонов судьи не нашли ни одной серьёзной. Пишут они за три-четыре минуты.</p>
+<p>Сильные модели стали почти чистыми. Opus и Codex оставляют около четырёх правок на конспект. В половине их конспектов судьи не нашли ни одной серьёзной. Пишут они за три-четыре минуты.</p>
 
-<p>Модель перестала читать запись по кругу. Всего прочитанного стало в десятки раз меньше. Почти всё старое было повторным чтением одного и того же, поэтому настоящий выигрыш скромнее: обычно в два-пять раз.</p>
+<p>Модель перестала читать запись по кругу. Всего прочитанного стало в десятки раз меньше. Почти всё старое было повторным чтением одного и того же, а повторное чтение подписка считает намного дешевле нового текста. Поэтому настоящий выигрыш скромнее: нового текста модель читает в два-пять раз меньше.</p>
 
 <p>Недорогие модели подтянулись, но до сильных не дошли. У GLM, MiMo и DeepSeek осталось от 12 до 18 правок на конспект. Чаще всего они слегка сдвигают смысл сказанного. Так что цель «почти любая модель» пока взята наполовину.</p>
 
@@ -234,7 +283,7 @@ footer .logo{font-size:34px}
 
 <section class="sec" id="oshibki">
 <div class="sec-h"><span class="num">05</span><h2>На чём мы споткнулись</h2></div>
-<p><b>Судья наказывал за то, чего требует сайт.</b> В первом замере судья снимал баллы за раздел «Цели урока», хотя без него страница не собирается. Пришлось поправить инструкцию судьи и пересчитать замер заново. После этого линейку и заморозили.</p>
+<p><b>Судья наказывал за то, чего требует сайт.</b> В первом замере судья ставил правку за раздел «Цели урока», хотя без него страница не собирается. Пришлось поправить инструкцию судьи и пересчитать замер. После этого линейку и заморозили.</p>
 <p><b>Одна переделка стоила вчетверо дороже.</b> Критику дали читать текст по частям. Качество осталось прежним, а прочитал он вчетверо больше. Эту переделку откатили.</p>
 <p><b>DeepSeek стал хуже.</b> Та же переделка, что помогла семи моделям, двум версиям DeepSeek навредила: у них выросли ошибки формы и названий. Одна цепочка на все модели не гарантирует, что каждой станет лучше.</p>
 <p><b>Недорогие модели упираются в провайдера.</b> Claude и Codex стали заметно быстрее. Недорогие модели по-прежнему пишут конспект от пятнадцати до сорока минут: они ждут ответа своего сервиса. Z.ai начинает отказывать уже при восьми запросах сразу.</p>
@@ -245,12 +294,12 @@ footer .logo{font-size:34px}
 <div class="sec-h"><span class="num">06</span><h2>Как повторить</h2></div>
 <ol class="steps">
 <li><b>Возьмите две-три настоящие записи.</b> Лучше те, что вы уже разбирали руками: тогда видно, каким должен быть ответ.</li>
-<li><b>Назовите ошибки.</b> Выдумка, искажённый смысл, чужие слова не тому, потерянная тема. Этот список и будет линейкой.</li>
+<li><b>Назовите ошибки.</b> Выдумка, искажённый смысл, слова, приписанные не тому, потерянная тема. Этот список и будет линейкой.</li>
 <li><b>Позовите двух судей.</b> Две модели от разных компаний сверяют каждый ответ с источником и выписывают правки.</li>
 <li><b>Прогоните несколько моделей по два раза.</b> Одна попытка ничего не доказывает: модель каждый раз пишет по-разному.</li>
-<li><b>Заберите у модели проверяемое.</b> Попросите агента найти шаги, которые может сделать программа, и вынести их из модели.</li>
+<li><b>Заберите у модели проверяемое.</b> Попросите агента найти шаги, которые может сделать обычная программа, и отдать их ей.</li>
 <li><b>Меняйте по одной вещи.</b> После каждой правки тот же замер. Стало хуже, откат.</li>
-<li><b>Прочитайте результат сами.</b> Первым делом ищите советы, данные от чужого имени.</li>
+<li><b>Прочитайте результат сами.</b> Первым делом проверьте у каждого совета, кто его дал.</li>
 </ol>
 <p>Цель, линейка и то, что можно менять, у меня лежат в одном файле рядом с замером. В следующий раз агент начнёт с него.</p>
 
