@@ -2,6 +2,7 @@
 title: "Сервер для своих: способы открыть сервис только себе"
 date: 2026-10-02
 description: "Дашборд с данными студентов нельзя выставлять в интернет. Как я открываю его по адресу pc.hq и шесть способов сделать так же: от туннеля до Tailscale."
+image: "/images/blog/server-dlya-svoih-preview.png"
 tags: ["сервер", "self-hosted", "tailscale", "caddy", "вайбкодинг"]
 cta: personal_corp
 cta_code: pc_blog
