@@ -210,6 +210,9 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 .sub-r .m:last-child::after{bottom:50%}
 .sub-r .m:only-child::after{display:none}
 @media (max-width:560px){.sub{grid-template-columns:1fr}.sub-l::after{display:none}.sub-r{margin:8px 0 0 18px}}
+.flow.eval .row{justify-content:center}
+.flow.eval .grp{flex:0 1 auto}
+.flow.eval .box{flex:0 1 170px}
 .flow figcaption{font:400 13px/18px var(--sans);color:var(--grey);text-align:center}
 @media (max-width:760px){.flow .row{flex-direction:column;align-items:stretch;gap:12px}.flow .ar{align-self:center;transform:rotate(90deg)}.flow .box{flex:none}.flow .grp{justify-content:flex-start}.flow .f.env{width:auto;flex-direction:row;gap:10px;text-align:left}}
 
@@ -269,7 +272,7 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 
 <div class="subs" aria-label="Подписки и модели внутри них">
 <div class="sub"><div class="sub-l"><b>Claude Max 20x</b><span class="pr">$200<em>в месяц</em></span><span class="tk">19 млн токенов</span></div><div class="sub-r"><span class="m">Opus 5.5<i>судья</i></span><span class="m">Sonnet 5.5</span></div></div>
-<div class="sub"><div class="sub-l"><b>ChatGPT Pro</b><span class="tk">11 млн токенов</span></div><div class="sub-r"><span class="m">Codex 6.1 Sol<i>судья</i></span></div></div>
+<div class="sub"><div class="sub-l"><b>ChatGPT Pro</b><span class="pr">$200<em>в месяц</em></span><span class="tk">11 млн токенов</span></div><div class="sub-r"><span class="m">Codex 6.1 Sol<i>судья</i></span></div></div>
 <div class="sub"><div class="sub-l"><b>Z.ai Coding Plan Pro</b><span class="pr">$80<em>в месяц</em></span><span class="tk">27 млн токенов</span></div><div class="sub-r"><span class="m">GLM 5.3</span><span class="m">GLM 5.3 Flash</span></div></div>
 <div class="sub"><div class="sub-l"><b>OpenCode Go</b><span class="pr">$10<em>в месяц</em></span><span class="tk">129 млн токенов</span></div><div class="sub-r"><span class="m">DeepSeek Pro</span><span class="m">DeepSeek Flash</span><span class="m">MiMo Pro</span><span class="m">MiMo Flash</span></div></div>
 </div>
@@ -287,7 +290,17 @@ pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/
 <section class="sec" id="kak">
 <div class="sec-h"><span class="num">03</span><h2>Как мы это сделали</h2></div>
 
-<p>Работа шла в два хода. Сначала замер: как работает старый пайплайн. Потом переделки по одной, и после каждой тот же замер.</p>
+<p><b>Зачем замер.</b> Без него любая переделка держится на ощущении: прочитал пару конспектов, вроде стало лучше. Модель каждый раз пишет по-разному, и на глаз удачную попытку от улучшения не отличить. Замер, он же эвал из словарика, даёт одно число до переделки. С ним сравнивается каждая следующая версия пайплайна.</p>
+
+<p>Работа шла в два хода. Сначала замер старого пайплайна. Потом переделки по одной, и после каждой тот же замер.</p>
+
+<figure class="flow wide eval" style="max-width:1000px" aria-label="Как устроен замер и как по нему решается судьба каждой переделки">
+<div class="lbl">Замер</div>
+<div class="row"><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><rect x="1" y="5" width="28" height="26" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M12 12v12l9-6z" fill="#2d3e9f"/></svg>две записи встреч</div><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>образец, выправленный руками</div></div><span class="ar">→</span><div class="box"><span class="t">модель</span><b>Девять моделей</b>каждая пишет конспект каждой встречи, по две попытки</div><span class="ar">→</span><div class="grp"><div class="f"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M1 1h19l9 9v25H1z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M20 1v9h9" fill="none" stroke="#000" stroke-width="1.4"/><path d="M6 18h18M6 23h18M6 28h11" stroke="#b5b5b5" stroke-width="1.4"/></svg>36 конспектов</div></div><span class="ar">→</span><div class="box"><span class="t">модель</span><b>Два судьи</b>Opus и Codex читают конспект рядом с записью и выписывают правки</div><span class="ar">→</span><div class="box p"><span class="t">программа</span><b>Одно число</b>правок на конспект у каждой модели</div></div>
+<div class="lbl">Переделка</div>
+<div class="row"><div class="box"><span class="t">агент</span><b>Одна правка</b>пайплайна за раз</div><span class="ar">→</span><div class="box p"><span class="t">программа</span><b>Тот же замер</b>те же записи, те же судьи</div><span class="ar">→</span><div class="box p"><span class="t">правило</span><b>Правок меньше?</b>да: оставить<br>нет или сломались проверки: вернуть как было<span class="again">↻ следующая переделка</span></div></div>
+<figcaption>Записи, образец и судьи заморожены: их не меняет никто, иначе числа нельзя сравнить</figcaption>
+</figure>
 
 <p><b>Сначала замер.</b> Агент запустил старый пайплайн на всех девяти моделях. Каждая писала конспект обеих встреч по два раза: модель каждый раз пишет по-разному, и одна попытка ничего не доказывает. Потом оба судьи читали каждый конспект рядом с записью и выписывали правки. У каждой правки свой вид: выдумка, искажённый смысл, ошибка атрибуции, неверное название, глава не на своём месте.</p>
 
