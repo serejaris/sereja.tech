@@ -197,11 +197,11 @@ footer .logo{font-size:34px}
 </g>
 </svg><figcaption>Один файл правил до и после. Справа правило про цены на виду, остальное переехало туда, где агент найдёт его по делу</figcaption></figure>
 
-<p class="first"><span class="drop">В</span>ы написали агенту правило, а он его не выполняет. Чаще всего дело в длине файла. Агент читает правила целиком в начале каждой работы, и чем больше там текста, тем меньший вес у каждой строки. Об этом прямо пишет Anthropic в документации Claude Code, и то же я видел в своих папках. Сейчас у меня 93 скилла и файлы правил в каждой рабочей папке. С этим вопросом ко мне приходят часто, поэтому я собрал ответ в одном месте.</p>
+<p class="first"><span class="drop">В</span>ы написали агенту правило, а он его не выполняет. Чаще всего дело в длине файла. Агент читает правила целиком в начале каждой работы, и чем больше там текста, тем меньший вес у каждой строки. Об этом прямо пишет Anthropic в <a href="https://code.claude.com/docs/en/best-practices">документации Claude Code</a>, и то же я видел в своих папках. Сейчас у меня 93 скилла и файлы правил в каждой рабочей папке.</p>
 
 <p>Этот гайд для тех, кто работает с агентом в своей папке: Claude Code, Codex, Cursor или похожий. Вы владелец бизнеса или операционщик, и программировать вам не нужно. Здесь нет кода и мало техники. Зато много примеров: как выглядит хороший файл правил, как плохой, что куда переносить. Вы унесёте четыре мерила, по которым проверите свою папку, и фразу, которую можно отдать агенту, чтобы он проверил её сам.</p>
 
-<blockquote class="pull"><p>Раздутый файл правил приводит к&nbsp;тому, что Claude игнорирует ваши настоящие инструкции.</p><cite>Anthropic, документация Claude Code</cite></blockquote>
+<blockquote class="pull"><p>Раздутый файл правил приводит к&nbsp;тому, что Claude игнорирует ваши настоящие инструкции.</p><cite><a href="https://code.claude.com/docs/en/best-practices">Anthropic, документация Claude Code</a></cite></blockquote>
 
 <p>Несколько слов, которые встретятся дальше:</p>
 
@@ -218,15 +218,15 @@ footer .logo{font-size:34px}
 
 <p>У модели ограниченное внимание. Anthropic называет это бюджетом внимания: каждый новый кусок текста немного его расходует.</p>
 
-<blockquote class="said"><p>LLMs have an "attention budget" that they draw on when parsing large volumes of context.</p><p class="ru">У языковых моделей есть «бюджет внимания», и они тратят его, когда разбирают большие объёмы контекста.</p><cite>Anthropic, «Effective context engineering for AI agents», 29 сентября 2025</cite></blockquote>
+<blockquote class="said"><p>LLMs have an "attention budget" that they draw on when parsing large volumes of context.</p><p class="ru">У языковых моделей есть «бюджет внимания», и они тратят его, когда разбирают большие объёмы контекста.</p><cite><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic, «Effective context engineering for AI agents», 29 сентября 2025</a></cite></blockquote>
 
 <p>Отсюда главный совет той же статьи: искать самый маленький набор текста, который сильнее всего влияет на результат. Для файла правил вывод такой: каждая лишняя строка отнимает внимание у нужной.</p>
 
-<p>В документации Claude Code это сказано прямо и даже с диагнозом. Если агент упорно делает то, что вы запретили, скорее всего, файл слишком длинный и правило в нём потерялось:</p>
+<p>В <a href="https://code.claude.com/docs/en/best-practices">документации Claude Code</a> это сказано прямо и даже с диагнозом. Если агент упорно делает то, что вы запретили, скорее всего, файл слишком длинный и правило в нём потерялось:</p>
 
-<blockquote class="said"><p>If Claude keeps doing something you don't want despite having a rule against it, the file is probably too long and the rule is getting lost.</p><p class="ru">Если Claude продолжает делать то, чего вы не хотите, хотя против этого есть правило, файл, вероятно, слишком длинный, и правило в нём теряется.</p><cite>Anthropic, «Best practices for Claude Code»</cite></blockquote>
+<blockquote class="said"><p>If Claude keeps doing something you don't want despite having a rule against it, the file is probably too long and the rule is getting lost.</p><p class="ru">Если Claude продолжает делать то, чего вы не хотите, хотя против этого есть правило, файл, вероятно, слишком длинный, и правило в нём теряется.</p><cite><a href="https://code.claude.com/docs/en/best-practices">Anthropic, «Best practices for Claude Code»</a></cite></blockquote>
 
-<p>Обычная реакция на непослушание: дописать правило ещё раз, капслоком, с пометкой «ВАЖНО». Файл от этого только растёт. Та же документация предупреждает: если выделить много строк, не выделяется ни одна.</p>
+<p>Обычная реакция на непослушание: дописать правило ещё раз, капслоком, с пометкой «ВАЖНО». Файл от этого только растёт. <a href="https://code.claude.com/docs/en/best-practices">Та же документация</a> предупреждает: если выделить много строк, не выделяется ни одна.</p>
 
 <p>То же касается всех агентов. AGENTS.md читают все популярные агенты: Codex, Cursor, GitHub Copilot, а Claude Code читает его сам, если в папке нет CLAUDE.md. Поэтому дальше речь про один файл, и правила для него общие.</p>
 </section>
@@ -278,11 +278,11 @@ footer .logo{font-size:34px}
 </g>
 </svg><figcaption>Чёрные рамки агент читает в каждой работе. Синие открывает, только когда задача их требует</figcaption></figure>
 
-<p>Из этой схемы вытекает всё остальное. То, что в файле правил, стоит внимания в каждой работе, даже если сегодня не нужно. То, что в скилле, ничего не стоит, пока скилл не понадобился. Anthropic называет это постепенным раскрытием и сравнивает с хорошим руководством: сначала оглавление, потом главы, потом приложение.</p>
+<p>Из этой схемы вытекает всё остальное. То, что в файле правил, стоит внимания в каждой работе, даже если сегодня не нужно. То, что в скилле, ничего не стоит, пока скилл не понадобился. Anthropic называет это <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">постепенным раскрытием</a> и сравнивает с хорошим руководством: сначала оглавление, потом главы, потом приложение.</p>
 
-<blockquote class="said"><p>Claude loads them on demand without bloating every conversation.</p><p class="ru">Claude загружает скиллы по требованию и не раздувает ими каждый разговор.</p><cite>Anthropic, «Best practices for Claude Code», про скиллы</cite></blockquote>
+<blockquote class="said"><p>Claude loads them on demand without bloating every conversation.</p><p class="ru">Claude загружает скиллы по требованию и не раздувает ими каждый разговор.</p><cite><a href="https://code.claude.com/docs/en/best-practices">Anthropic, «Best practices for Claude Code», про скиллы</a></cite></blockquote>
 
-<p>OpenAI описывает в документации Codex ту же механику: сначала агент видит имя и описание каждого скилла, полную инструкцию читает, когда решил скилл взять. Значит, вывод один для всех агентов. Процедуры живут в скиллах, а в правилах остаётся маршрут к ним.</p>
+<p>OpenAI описывает в <a href="https://learn.chatgpt.com/docs/build-skills">документации Codex</a> ту же механику: сначала агент видит имя и описание каждого скилла, полную инструкцию читает, когда решил скилл взять. Значит, вывод один для всех агентов. Процедуры живут в скиллах, а в правилах остаётся маршрут к ним.</p>
 </section>
 
 <section class="sec" id="merila">
@@ -297,7 +297,7 @@ footer .logo{font-size:34px}
 <li><h3>Описание скилла отвечает на вопрос «когда меня брать»</h3><p>В нём сказано, что скилл делает и в какой ситуации нужен. Оно короткое и не пересекается с описаниями других скиллов. Как подпись на папке в шкафу: «Договоры с поставщиками, 2026» находят за секунду, а папку «Разное» не открывает никто.</p></li>
 </ol>
 
-<p>Проверка для каждой строки есть прямо в документации Claude Code. Задайте себе вопрос: «Если удалить эту строку, агент ошибётся?» Если нет, строку можно удалять.</p>
+<p>Проверка для каждой строки есть прямо в <a href="https://code.claude.com/docs/en/best-practices">документации Claude Code</a>. Задайте себе вопрос: «Если удалить эту строку, агент ошибётся?» Если нет, строку можно удалять.</p>
 </section>
 
 <section class="sec" id="primer">
@@ -357,15 +357,15 @@ footer .logo{font-size:34px}
 
 <figure class="doc"><pre>description: Пишет пост в Telegram-канал школы по черновику из posts/drafts и подбирает обложку. Брать, когда просят пост, анонс или публикацию в канал.</pre><figcaption><b>Хорошо.</b> Что делает, из чего и в какой ситуации нужен</figcaption></figure>
 
-<p>OpenAI советует то же самое: описание короткое, с ясными границами. Главный сценарий и слова, по которым агент узнает задачу, стоят в самом начале. Ещё одна частая беда: два скилла с похожими описаниями, например «помогает с текстами» и «пишет тексты для соцсетей». Агент не знает, какой выбрать, и берёт любой.</p>
+<p><a href="https://learn.chatgpt.com/docs/build-skills">OpenAI советует</a> то же самое: описание короткое, с ясными границами. Главный сценарий и слова, по которым агент узнает задачу, стоят в самом начале. Ещё одна частая беда: два скилла с похожими описаниями, например «помогает с текстами» и «пишет тексты для соцсетей». Агент не знает, какой выбрать, и берёт любой.</p>
 </section>
 
 <section class="sec" id="dvesti-strok">
 <div class="sec-h"><span class="num">05</span><h2>Откуда взялись 200 строк и 32 КБ</h2></div>
 
-<p>Цифра 200 из документации Claude Code. Anthropic советует держать каждый файл правил короче 200 строк и объясняет почему:</p>
+<p>Цифра 200 из <a href="https://code.claude.com/docs/en/memory">документации Claude Code</a>. Anthropic советует держать каждый файл правил короче 200 строк и объясняет почему:</p>
 
-<blockquote class="said"><p>Longer files consume more context and reduce adherence.</p><p class="ru">Длинные файлы занимают больше контекста и хуже соблюдаются.</p><cite>Anthropic, документация Claude Code, раздел про память</cite></blockquote>
+<blockquote class="said"><p>Longer files consume more context and reduce adherence.</p><p class="ru">Длинные файлы занимают больше контекста и хуже соблюдаются.</p><cite><a href="https://code.claude.com/docs/en/memory">Anthropic, документация Claude Code, раздел про память</a></cite></blockquote>
 
 <p>Там же есть оговорка. Если разнести правила по нескольким файлам и подключить их ссылкой через значок @, это не помогает. Подключённые файлы всё равно загружаются в начале работы целиком. Порядок появляется, а вес остаётся.</p>
 
@@ -383,7 +383,7 @@ footer .logo{font-size:34px}
 
 <p>Codex ставит этому каталогу жёсткий предел. На стартовый список скиллов он отводит 2% окна контекста, а если размер окна неизвестен, 8000 символов. Когда скиллов слишком много, Codex сначала сокращает описания, а потом часть скиллов вообще убирает из списка.</p>
 
-<blockquote class="said"><p>If many skills are installed, Codex shortens skill descriptions first. For large skill sets, Codex may omit some skills from the initial list and show a warning.</p><p class="ru">Если установлено много скиллов, Codex сначала сокращает их описания. При большом наборе он может убрать часть скиллов из стартового списка и показать предупреждение.</p><cite>OpenAI, документация Codex, «Build skills»</cite></blockquote>
+<blockquote class="said"><p>If many skills are installed, Codex shortens skill descriptions first. For large skill sets, Codex may omit some skills from the initial list and show a warning.</p><p class="ru">Если установлено много скиллов, Codex сначала сокращает их описания. При большом наборе он может убрать часть скиллов из стартового списка и показать предупреждение.</p><cite><a href="https://learn.chatgpt.com/docs/build-skills">OpenAI, документация Codex, «Build skills»</a></cite></blockquote>
 
 <p>Сто скиллов с размытыми описаниями это та же простыня, только в другом месте. Скиллы, которыми вы не пользуетесь, стоит удалять. Те, что делают почти одно и то же, стоит сливать в один.</p>
 </section>
@@ -406,7 +406,7 @@ https://github.com/serejaris/personal-corp-os/tree/main/skills/audit-agent-rules
 
 <p>После установки попросите агента проверить правила в папке. Сам скилл устроен по тем же правилам. Его описание отвечает, когда его брать, а шаги агент откроет, только когда вы попросите проверку.</p>
 
-<p>Если агент переспрашивает то, что в файле уже написано, документация Claude Code советует перечитать формулировку: скорее всего, она двусмысленная. А жёсткий запрет лучше ставить в настройках агента. Файл правил агент читает как совет, настройки выполняются всегда.</p>
+<p>Если агент переспрашивает то, что в файле уже написано, <a href="https://code.claude.com/docs/en/best-practices">документация Claude Code</a> советует перечитать формулировку: скорее всего, она двусмысленная. А жёсткий запрет лучше ставить в настройках агента. Файл правил агент читает как совет, настройки выполняются всегда.</p>
 </section>
 
 <section class="sec sources" id="istochniki">
