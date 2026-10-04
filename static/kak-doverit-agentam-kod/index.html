@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-10-04"><title>Как доверить агентам код: pstack Лорен Тан | Сережа Рис</title>
+<meta name="description" content="Как Лорен Тан из core-команды React выпускает тысячи PR в месяц агентами: скиллы pstack, поток PR, рой проверки и что из этого работает в Claude Code.">
+<meta property="og:type" content="article"><meta property="og:title" content="Как доверить агентам код: pstack Лорен Тан"><meta property="og:description" content="Гайд: как устроен поток PR в pstack, где решает человек и что забрать в Claude Code."><meta property="og:image" content="https://sereja.tech/kak-doverit-agentam-kod/img/og_cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/kak-doverit-agentam-kod/img/og_cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(40px,7vw,84px)/1.04 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:600px;margin:30px auto 0}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
+.share i{display:block;width:38%;height:1px;background:var(--blue)}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite,.said cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.pull cite a,.said cite a{color:inherit}
+.said{margin:26px 0 30px;padding:0 0 0 40px}
+.said p{font:300 17px/26px var(--serif);font-style:italic;margin:0}
+.doc{margin:30px 0 34px}
+.doc pre{margin:0;background:var(--paper);padding:22px 26px;font:300 12.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.chat{margin:34px 0 40px}
+.chat .msg{max-width:88%;margin:0 0 16px;padding:14px 18px;font-size:15px;line-height:22px}
+.chat .msg p{margin:0 0 8px}.chat .msg p:last-child{margin:0}
+.chat .me{margin-left:auto;background:var(--blue);color:#fff;max-width:60%}
+.chat .ag{background:var(--paper)}
+.chat .who{display:block;font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;opacity:.7}
+.chat .note{text-align:center;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);margin:4px 0 18px}
+.chat figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:6px}
+.inside{margin:0 0 34px}
+.inside summary{cursor:pointer;font:500 12px/18px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
+.inside pre{margin:12px 0 0;background:var(--paper);padding:18px 22px;font:300 12px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.doc figcaption,.fig figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.fig figcaption a,.film figcaption a,.doc figcaption a{color:inherit}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.fig{margin:60px auto;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.fig img{width:100%}
+.fig.mid{width:min(840px,100vw - 32px)}
+.fig.frame img{border:1px solid #e3e3e3}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram svg.m{display:none}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.film{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.film video{width:100%;background:#f8f9fa;aspect-ratio:16/9}
+.film figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px;text-align:center}
+.gloss{margin:26px 0 30px;border-top:1px solid #e3e3e3}
+.gloss dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding-top:14px}
+.gloss dd{margin:4px 0 0;padding-bottom:14px;border-bottom:1px solid #e3e3e3}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.arc{list-style:none;padding:0;margin:30px 0 34px}
+.arc li{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:0 0 18px}
+.arc .when{font:600 11px/22px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+@media (max-width:560px){.arc li{grid-template-columns:1fr;gap:4px}}
+.principles{list-style:none;counter-reset:pr;padding:0;margin:34px 0 0}
+.principles li{counter-increment:pr;position:relative;padding:0 0 30px 70px}
+.principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
+.principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
+.principles p{margin:0}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 30px}
+.layers div{background:var(--paper);padding:16px 18px 18px}
+.layers h3{font:500 13px/18px var(--sans);text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px}
+.layers p{margin:0;font-size:15px;line-height:22px}
+.claims{margin:30px 0 34px}
+.claims h3{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 16px}
+.claims h3 span{color:var(--grey);font-weight:400}
+.prm{list-style:none;padding:0;margin:0}
+.prm li{display:grid;grid-template-columns:150px 1fr;gap:4px 18px;align-items:center;padding:0 0 14px}
+.prm .when{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+.prm .bar-v{display:flex;align-items:center;gap:10px;font:400 15px/20px var(--sans)}
+.prm .bar-v i{display:block;height:16px;background:var(--blue);flex:none}
+.prm .src{grid-column:2;font:400 12px/16px var(--sans);color:var(--grey)}
+.prm .src a{color:inherit}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 0}
+.stat div{background:var(--paper);padding:16px 18px 18px}
+.stat b{display:block;font:400 30px/1.05 var(--logo);color:var(--ink);margin-bottom:8px}
+.stat p{margin:0;font-size:14px;line-height:20px}
+.stat p a{color:inherit}
+.fig.card{width:min(480px,100vw - 32px)}
+@media (max-width:640px){.layers,.stat{grid-template-columns:1fr;gap:10px}.prm li{grid-template-columns:1fr}.prm .src{grid-column:1}
+  .diagram svg.d{display:none}.diagram svg.m{display:block;min-width:0}.diagram{overflow:visible}}
+code{font:300 14px/1 var(--mono);background:var(--paper);padding:1px 5px}
+.sources{font-size:13px;line-height:20px;margin-top:90px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
+  .diagram{overflow-x:auto}.diagram svg{min-width:760px}
+  .principles li{padding-left:52px}.principles li::before{font-size:32px}
+  .film video{aspect-ratio:4/5;object-fit:cover;object-position:60% 50%}
+  .fig.frame,.fig.term{overflow-x:auto}
+  .fig.frame img,.fig.term img{min-width:760px}
+}
+</style><link rel="canonical" href="https://sereja.tech/kak-doverit-agentam-kod/"><meta name="author" content="Сережа Рис"><meta name="robots" content="index, follow, max-image-preview:large"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/kak-doverit-agentam-kod/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Слайд Лорен Тан: три графика её коммитов круто растут в 2026 году"><meta property="article:published_time" content="2026-10-04T12:00:00-03:00"><meta property="article:modified_time" content="2026-10-04T12:00:00-03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="вайбкодинг"><meta property="article:tag" content="Claude Code"><meta property="article:tag" content="Cursor"><meta property="article:tag" content="AI-агенты"><meta property="article:tag" content="pstack"><meta property="article:tag" content="код-ревью"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Как доверить агентам код: pstack Лорен Тан"><meta name="twitter:description" content="Гайд: как устроен поток PR в pstack, где решает человек и что забрать в Claude Code."><meta name="twitter:image:alt" content="Слайд Лорен Тан: три графика её коммитов круто растут в 2026 году"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Как доверить агентам код: pstack Лорен Тан", "description": "Как Лорен Тан из core-команды React выпускает тысячи PR в месяц агентами: скиллы pstack, поток PR, рой проверки и что из этого работает в Claude Code.", "image": "https://sereja.tech/kak-doverit-agentam-kod/img/og_cover.jpg", "inLanguage": "ru-RU", "datePublished": "2026-10-04", "dateModified": "2026-10-04", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/kak-doverit-agentam-kod/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["вайбкодинг", "Claude Code", "Cursor", "AI-агенты", "pstack", "код-ревью"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script></head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#chto-eto">Что такое pstack</a><a href="#poteto-mode">/poteto-mode</a><a href="#potok">Поток PR</a><a href="#doverie">Доверие</a><a href="#verit">Цифры и критика</a><a href="#claude-code">Claude Code</a><a href="#zabrat">Что забрать</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#chto-eto">Что такое pstack</a><a href="#poteto-mode">/poteto-mode</a><a href="#potok">Поток PR</a><a href="#doverie">Доверие</a><a href="#verit">Цифры и критика</a><a href="#claude-code">Claude Code</a><a href="#zabrat">Что забрать</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Агенты</span></div><div class="kicker">Как это устроено:</div><h1>Как доверить агентам код: pstack Лорен Тан</h1><p class="lead">Лорен Тан из core-команды React, по её подсчёту, выпускает агентами больше двух тысяч PR в месяц и выложила свои скиллы. Гайд о том, как устроен её поток PR, где решает человек и что из этого работает в Claude Code.</p></div>
+<div class="meta">4 октября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
+<article class="body">
+<figure class="film" id="video"><video poster="img/prs.jpg" autoplay muted loop playsinline preload="metadata"><source src="img/prs.mp4" type="video/mp4"></video><figcaption>Слайд из доклада Лорен Тан: «i shipped 5000+ PRs in 6 months». Видео: <a href="https://x.com/poteto/status/2102050467505430555">@poteto в X</a>, 21 сентября</figcaption></figure>
+
+<p class="first"><span class="drop">Л</span>орен Тан в сети подписывается poteto. Она работала с кодом в Meta, Netflix и Cursor, а в core-команде React делает React Compiler. В мае её скиллы для агентов возглавили внутренний рейтинг Cursor, и она открыла их набором pstack. По её подсчёту, с ним выходит 2000–2500 PR в месяц. Код пишут, проверяют и мержат агенты. 4 октября я попросил агента поставить pstack в мой Claude Code и проверить, что работает без Cursor.</p>
+
+<p>Гайд для тех, кто работает с агентом один на один в Claude Code или Cursor. Один PR нескольким агентам вы ещё не отдавали. Команд здесь мало. Больше про устройство: кто пишет код, кто проверяет, когда агент мержит сам и что делает человек. Её цифры идут как её подсчёт, рядом с критикой. В конце то, что можно забрать к себе даже без сотни агентов.</p>
+
+<blockquote class="pull"><p>Скорость без качества меня как цель не интересует.</p><cite>Лорен Тан, <a href="https://github.com/cursor/plugins/blob/main/pstack/README.md">README pstack</a>, перевод</cite></blockquote>
+
+<section class="sec" id="chto-eto">
+<div class="sec-h"><span class="num">01</span><h2>Что такое pstack и откуда он взялся</h2></div>
+
+<p>pstack это 50 скиллов в публичном репозитории Cursor, <a href="https://github.com/cursor/plugins/tree/main/pstack">cursor/plugins</a>. Лорен перенесла туда свои рабочие скиллы. Внутри Cursor главный из них называется /lauren-mode, <a href="https://x.com/poteto/status/2092850569564270826">пишет она сама</a>. Набор появился 23 мая, <a href="https://github.com/cursor/plugins/commits/main/pstack">почти все коммиты</a> в нём её.</p>
+
+<figure class="fig mid frame"><img src="img/gh_readme_top.jpg" alt="Начало README pstack: poteto работала с кодом в Meta, Netflix и Cursor, состоит в core-команде React, делает React Compiler; скорость без качества ей не нужна" loading="lazy"><figcaption>Начало <a href="https://github.com/cursor/plugins/blob/main/pstack/README.md">README pstack</a>: опыт автора и принцип про качество</figcaption></figure>
+
+<p>В те же дни <a href="https://x.com/poteto/article/2058975157503570132">в статье «How I Use Cursor»</a> она показала внутренний рейтинг компании. За неделю её скиллы запустили 9 тысяч раз, почти три четверти запусков сделали агенты. Пересказы <a href="https://www.theneuron.ai/explainer-articles/pstack-explained-lauren-tans-system-for-trustworthy-ai-agents/">The Neuron</a> и <a href="https://x.com/0xCodila/status/2095585552716235180">блогеров</a> округлили это до «10 000 запусков».</p>
+
+<figure class="fig mid frame"><img src="img/leaderboard.jpg" alt="Таблица внутреннего рейтинга Cursor за 7 дней: автор lauren, 38 скиллов, 9 076 запусков, из них 6 757 агентами и 2 319 людьми" loading="lazy"><figcaption>Внутренний рейтинг авторов скиллов в Cursor за неделю. Скриншот: <a href="https://x.com/poteto/article/2058975157503570132">@poteto, статья «How I Use Cursor»</a>, 25 мая</figcaption></figure>
+
+<p>Внутри три слоя.</p>
+
+<div class="layers">
+<div><h3>/poteto-mode</h3><p>Главный скилл с 23 плейбуками.</p></div>
+<div><h3>24 скилла-принципа</h3><p>По одному правилу в каждом: «сначала убери лишнее», «докажи, что работает», «не жди человека».</p></div>
+<div><h3>Рабочие инструменты</h3><p>Для прямого вызова: разбор чужого кода, проверка разными моделями, поиск того, что ещё сломает правка.</p></div>
+</div>
+
+<p>Скилла для планов нет: Лорен <a href="https://github.com/cursor/plugins/blob/main/pstack/README.md">пишет</a>, что в планы не верит и лучшая спецификация для неё это код.</p>
+
+<p>Слова, которые встретятся дальше:</p>
+
+<dl class="gloss">
+<dt>PR и мерж</dt><dd>PR, пулл-реквест: предложенная правка кода, которую смотрят перед тем, как она попадёт в общую версию проекта. Мерж: момент, когда правку вливают. Для меня это граница, после которой чужая ошибка становится общей.</dd>
+<dt>Скилл</dt><dd>Папка с инструкцией для агента, как делать одну работу. Агент читает её сам, когда задача подходит, или по команде через косую черту.</dd>
+<dt>Плейбук</dt><dd>Сценарий на целый тип задачи: починить баг, довести PR до мержа, вести проект несколько дней. Внутри шаги по порядку и правило, что считать готовым.</dd>
+<dt>Субагент</dt><dd>Помощник, которого главный агент запускает на отдельный кусок работы. В pstack у каждого своя роль: писать код, вести PR, проверять.</dd>
+<dt>Рой проверки</dt><dd>Несколько субагентов, которые одновременно проверяют один PR с разных сторон и выносят вердикт. Код они не писали, поэтому защищать им нечего.</dd>
+</dl>
+</section>
+
+<section class="sec" id="poteto-mode">
+<div class="sec-h"><span class="num">02</span><h2>Как работает /poteto-mode</h2></div>
+
+<p>Почти любую задачу Лорен начинает одной командой: /poteto-mode и дальше обычными словами. Пример из её README: «в этом PR скролл съезжает каждые 750 мс, даже когда ничего не происходит. Сначала воспроизведи, потом почини и проверь».</p>
+
+<p>Скилл работает как диспетчер: читает просьбу и выбирает один из 23 плейбуков. Среди них починка бага, новая функция, прототип, присмотр за PR, ночная работа. Шаги плейбука агент дословно копирует в свой список дел. Пропущенный шаг остаётся в списке с причиной, так видно, что сделано и что нет.</p>
+
+<figure class="fig mid frame"><img src="img/readme_playbooks.jpg" alt="Фрагмент README pstack: два примера запроса через /poteto-mode и начало таблицы из двадцати трёх плейбуков" loading="lazy"><figcaption><a href="https://github.com/cursor/plugins/blob/main/pstack/README.md">README pstack</a>: примеры запросов и таблица плейбуков</figcaption></figure>
+
+<p>Поверх плейбуков работает <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/SKILL.md">свод правил</a>. Агент называет принципы, которые повлияли на решение. Если ответ можно увидеть запуском, человека он не спрашивает: делает быстрый прототип и смотрит результат.</p>
+
+<p>Каждое утверждение идёт с пометкой: измерено, выведено или догадка. Обратимую работу агент делает без спроса. Спрашивает только перед необратимым: перезаписью общей истории кода, деплоем, удалением данных, письмами клиентам. Для текста тоже правила: короткие фразы, ни одного длинного тире. У меня так же.</p>
+</section>
+
+<section class="sec" id="potok">
+<div class="sec-h"><span class="num">03</span><h2>Как агенты ведут PR от первой строки до мержа</h2></div>
+
+<p>Самое интересное в pstack: как агенты ведут много PR сразу. Для этого три плейбука: <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/orchestrate.md">orchestrate</a> для проекта на несколько дней, <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-full.md">autopilot-full</a> и <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-stack.md">autopilot-stack</a> для очереди PR. Роли в них одни и те же.</p>
+
+<figure class="diagram" id="fig-flow"><svg class="d" viewBox="0 0 960 600" role="img" aria-labelledby="fig-flow-title fig-flow-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-flow-title">Как в pstack агенты ведут PR и где решает человек</title><desc id="fig-flow-desc">Верхний ряд: человек даёт задачу и выбирает режим full или stack, говорит go и утверждает план; координатор пишет брифы и код не пишет, раздаёт PR владельцам и разбирает очередь; человеку приходят только гейты, то есть необратимые действия и решения о продукте. Второй ряд: на каждый PR свой владелец, он ведёт PR от сборки до готовности: открывает PR, разбирает замечания бота, чистит код, чинит конфликты, обсуждения в ревью и CI. Третий ряд: рой проверки выносит вердикт на каждый раунд, проверяют агенты, которые этот код не писали: живая проверка в приложении обязательна, сравнение с основной веткой, минимум два аудита изменений; зелёный CI только вход, новый пуш отменяет вердикт. Если есть замечания, PR возвращается владельцу на новый раунд. Нижний ряд, два режима: в режиме full владелец мержит сам после чистого вердикта, человек читает коммиты после мержа; в режиме stack агенты не мержат, PR встают в одну цепочку, человек смотрит и вливает её сам.</desc><defs><marker id="f-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="f-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><rect width="960" height="600" fill="#ffffff"/>
+<g fill="none" stroke="#2d3e9f" stroke-width="1.2"><path d="M 296,71 H 345" marker-end="url(#f-ink)"/><path d="M 612,71 H 661" marker-end="url(#f-ink)"/><path d="M 480,118 V 141"/><path d="M 164,141 H 796"/><path d="M 164,141 V 161" marker-end="url(#f-ink)"/><path d="M 480,141 V 161" marker-end="url(#f-ink)"/><path d="M 796,141 V 161" marker-end="url(#f-ink)"/><path d="M 164,268 V 313" marker-end="url(#f-ink)"/><path d="M 480,268 V 313" marker-end="url(#f-ink)"/><path d="M 796,268 V 313" marker-end="url(#f-ink)"/><path d="M 480,434 V 461"/><path d="M 242,461 H 718"/><path d="M 242,461 V 485" marker-end="url(#f-ink)"/><path d="M 718,461 V 485" marker-end="url(#f-ink)"/></g>
+<path d="M 88,316 V 271" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#f-acc)"/><text x="96" y="296" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">ЕСТЬ ЗАМЕЧАНИЯ → НОВЫЙ РАУНД</text>
+<g font-family="Jost, Futura, sans-serif" letter-spacing="0.6">
+<rect x="32" y="24" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="46" y="36" width="50" height="13" fill="#000000"/><text x="71" y="45.5" fill="#ffffff" font-size="8" text-anchor="middle">ЧЕЛОВЕК</text><text x="48" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Даёт задачу и режим</text><text x="48" y="90" fill="#555555" font-size="10.5">full или stack, говорит «go»,</text><text x="48" y="104" fill="#555555" font-size="10.5">утверждает план и дизайн</text>
+<rect x="348" y="24" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="362" y="36" width="72" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="398" y="45.5" fill="#2d3e9f" font-size="8" text-anchor="middle">КООРДИНАТОР</text><text x="364" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Пишет брифы, код не пишет</text><text x="364" y="90" fill="#555555" font-size="10.5">раздаёт PR владельцам,</text><text x="364" y="104" fill="#555555" font-size="10.5">разбирает очередь и решает</text>
+<rect x="664" y="24" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="678" y="36" width="50" height="13" fill="#000000"/><text x="703" y="45.5" fill="#ffffff" font-size="8" text-anchor="middle">ЧЕЛОВЕК</text><text x="680" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Получает только гейты</text><text x="680" y="90" fill="#555555" font-size="10.5">необратимое и решения о продукте;</text><text x="680" y="104" fill="#555555" font-size="10.5">«продолжать ли?» не спрашивают</text>
+<rect x="32" y="164" width="264" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="176" width="86" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="89" y="185.5" fill="#2d3e9f" font-size="8" text-anchor="middle">ВЛАДЕЛЕЦ PR 1</text><text x="48" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Ведёт свой PR до конца</text><text x="48" y="228" fill="#555555" font-size="10.5">сборка, PR готов к ревью,</text><text x="48" y="242" fill="#555555" font-size="10.5">замечания бота, чистка кода,</text><text x="48" y="256" fill="#555555" font-size="10.5">конфликты → обсуждения → CI</text>
+<rect x="348" y="164" width="264" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="362" y="176" width="86" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="405" y="185.5" fill="#2d3e9f" font-size="8" text-anchor="middle">ВЛАДЕЛЕЦ PR 2</text><text x="364" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Ведёт свой PR до конца</text><text x="364" y="228" fill="#555555" font-size="10.5">сборка, PR готов к ревью,</text><text x="364" y="242" fill="#555555" font-size="10.5">замечания бота, чистка кода,</text><text x="364" y="256" fill="#555555" font-size="10.5">конфликты → обсуждения → CI</text>
+<rect x="664" y="164" width="264" height="104" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="176" width="86" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="721" y="185.5" fill="#2d3e9f" font-size="8" text-anchor="middle">ВЛАДЕЛЕЦ PR 3</text><text x="680" y="210" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Ведёт свой PR до конца</text><text x="680" y="228" fill="#555555" font-size="10.5">сборка, PR готов к ревью,</text><text x="680" y="242" fill="#555555" font-size="10.5">замечания бота, чистка кода,</text><text x="680" y="256" fill="#555555" font-size="10.5">конфликты → обсуждения → CI</text>
+<rect x="32" y="316" width="896" height="118" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="328" width="78" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="85" y="337.5" fill="#2d3e9f" font-size="8" text-anchor="middle">РОЙ ПРОВЕРКИ</text><text x="48" y="362" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Вердикт на каждый раунд. Проверяют агенты, которые этот код не писали</text>
+<rect x="48" y="374" width="280" height="30" fill="#2d3e9f" fill-opacity="0.06" stroke="#2d3e9f" stroke-width="0.8"/><text x="188" y="393" fill="#2d3e9f" font-size="10.5" text-anchor="middle">живая проверка в приложении · обязательна</text>
+<rect x="340" y="374" width="280" height="30" fill="#2d3e9f" fill-opacity="0.06" stroke="#2d3e9f" stroke-width="0.8"/><text x="480" y="393" fill="#2d3e9f" font-size="10.5" text-anchor="middle">сравнение с основной веткой</text>
+<rect x="632" y="374" width="280" height="30" fill="#2d3e9f" fill-opacity="0.06" stroke="#2d3e9f" stroke-width="0.8"/><text x="772" y="393" fill="#2d3e9f" font-size="10.5" text-anchor="middle">минимум два аудита изменений</text>
+<text x="48" y="424" fill="#8b8b8b" font-size="10.5">зелёный CI только вход · новый пуш отменяет вердикт</text>
+<rect x="32" y="488" width="420" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="500" width="70" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="81" y="509.5" fill="#2d3e9f" font-size="8" text-anchor="middle">РЕЖИМ FULL</text><text x="48" y="536" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Владелец мержит сам</text><text x="48" y="554" fill="#555555" font-size="10.5">после чистого вердикта роя;</text><text x="48" y="568" fill="#555555" font-size="10.5">человек читает коммиты уже после мержа</text>
+<rect x="508" y="488" width="420" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="522" y="500" width="76" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="560" y="509.5" fill="#2d3e9f" font-size="8" text-anchor="middle">РЕЖИМ STACK</text><rect x="864" y="500" width="50" height="13" fill="#000000"/><text x="889" y="509.5" fill="#ffffff" font-size="8" text-anchor="middle">ЧЕЛОВЕК</text><text x="524" y="536" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif" letter-spacing="0">PR встают в одну цепочку</text><text x="524" y="554" fill="#555555" font-size="10.5">агенты не мержат;</text><text x="524" y="568" fill="#555555" font-size="10.5">человек смотрит цепочку и вливает сам</text>
+</g></svg><svg class="m" viewBox="0 0 358 814" role="img" aria-labelledby="fig-flow-title fig-flow-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="m-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="m-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><g fill="none" stroke="#2d3e9f" stroke-width="1.2"><path d="M 179,89 V 111" marker-end="url(#m-ink)"/><path d="M 179,202 V 220"/><path d="M 81,220 H 272"/><path d="M 81,220 V 236" marker-end="url(#m-ink)"/><path d="M 272,220 V 236" marker-end="url(#m-ink)"/><path d="M 60,379 V 425" marker-end="url(#m-ink)"/><path d="M 179,626 V 652"/><path d="M 86,652 H 272"/><path d="M 86,652 V 673" marker-end="url(#m-ink)"/><path d="M 272,652 V 673" marker-end="url(#m-ink)"/></g><path d="M 118,425 V 382" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#m-acc)"/><text x="126" y="406" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">ЕСТЬ ЗАМЕЧАНИЯ → НОВЫЙ РАУНД</text><g font-family="Jost, Futura, sans-serif" letter-spacing="0.6"><rect x="1" y="1" width="356" height="88" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="13" y="12" width="50" height="13" fill="#000000"/><text x="38.0" y="21.5" fill="#ffffff" font-size="8" text-anchor="middle">ЧЕЛОВЕК</text><text x="14" y="46" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Даёт задачу и режим</text><text x="14" y="64.0" fill="#555555" font-size="10.5">full или stack, говорит «go»,</text><text x="14" y="77.5" fill="#555555" font-size="10.5">утверждает план и дизайн</text><rect x="1" y="114" width="356" height="88" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="13" y="125" width="72" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="49.0" y="134.5" fill="#2d3e9f" font-size="8" text-anchor="middle">КООРДИНАТОР</text><text x="14" y="159" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Пишет брифы, код не пишет</text><text x="14" y="177.0" fill="#555555" font-size="10.5">раздаёт PR владельцам,</text><text x="14" y="190.5" fill="#555555" font-size="10.5">разбирает очередь и решает</text><rect x="9" y="247" width="160" height="132" fill="#ffffff" stroke="#2d3e9f" stroke-width="0.8" stroke-opacity="0.45"/><rect x="5" y="243" width="160" height="132" fill="#ffffff" stroke="#2d3e9f" stroke-width="0.8" stroke-opacity="0.7"/><rect x="1" y="239" width="160" height="132" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="13" y="250" width="104" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="65.0" y="259.5" fill="#2d3e9f" font-size="8" text-anchor="middle">ВЛАДЕЛЕЦ PR 1 · 2 · 3</text><text x="14" y="284" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Ведёт свой PR</text><text x="14" y="301" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">до конца</text><text x="14" y="320.0" fill="#555555" font-size="10.5">сборка, PR готов к ревью,</text><text x="14" y="333.5" fill="#555555" font-size="10.5">замечания бота, чистка</text><text x="14" y="347.0" fill="#555555" font-size="10.5">кода, конфликты →</text><text x="14" y="360.5" fill="#555555" font-size="10.5">обсуждения → CI</text><rect x="187" y="239" width="170" height="140" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="199" y="250" width="50" height="13" fill="#000000"/><text x="224.0" y="259.5" fill="#ffffff" font-size="8" text-anchor="middle">ЧЕЛОВЕК</text><text x="200" y="284" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Получает</text><text x="200" y="301" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">только гейты</text><text x="200" y="320.0" fill="#555555" font-size="10.5">необратимое и решения</text><text x="200" y="333.5" fill="#555555" font-size="10.5">о продукте;</text><text x="200" y="347.0" fill="#555555" font-size="10.5">«продолжать ли?»</text><text x="200" y="360.5" fill="#555555" font-size="10.5">не спрашивают</text><rect x="1" y="428" width="356" height="198" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="13" y="439" width="78" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="52.0" y="448.5" fill="#2d3e9f" font-size="8" text-anchor="middle">РОЙ ПРОВЕРКИ</text><text x="14" y="473" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Вердикт на каждый раунд. Проверяют</text><text x="14" y="490" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">агенты, которые этот код не писали</text><rect x="14" y="500" width="330" height="26" fill="#2d3e9f" fill-opacity="0.06" stroke="#2d3e9f" stroke-width="0.8"/><text x="179" y="517" fill="#2d3e9f" font-size="10.5" text-anchor="middle">живая проверка в приложении · обязательна</text><rect x="14" y="532" width="330" height="26" fill="#2d3e9f" fill-opacity="0.06" stroke="#2d3e9f" stroke-width="0.8"/><text x="179" y="549" fill="#2d3e9f" font-size="10.5" text-anchor="middle">сравнение с основной веткой</text><rect x="14" y="564" width="330" height="26" fill="#2d3e9f" fill-opacity="0.06" stroke="#2d3e9f" stroke-width="0.8"/><text x="179" y="581" fill="#2d3e9f" font-size="10.5" text-anchor="middle">минимум два аудита изменений</text><text x="14" y="612.0" fill="#8b8b8b" font-size="10.5">зелёный CI только вход · новый пуш отменяет вердикт</text><rect x="1" y="676" width="170" height="136" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="13" y="687" width="70" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="48.0" y="696.5" fill="#2d3e9f" font-size="8" text-anchor="middle">РЕЖИМ FULL</text><text x="14" y="721" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">Владелец</text><text x="14" y="738" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">мержит сам</text><text x="14" y="757.0" fill="#555555" font-size="10.5">после чистого вердикта</text><text x="14" y="770.5" fill="#555555" font-size="10.5">роя; человек читает</text><text x="14" y="784.0" fill="#555555" font-size="10.5">коммиты уже</text><text x="14" y="797.5" fill="#555555" font-size="10.5">после мержа</text><rect x="187" y="676" width="170" height="136" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="199" y="687" width="76" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="237.0" y="696.5" fill="#2d3e9f" font-size="8" text-anchor="middle">РЕЖИМ STACK</text><rect x="281" y="687" width="50" height="13" fill="#000000"/><text x="306.0" y="696.5" fill="#ffffff" font-size="8" text-anchor="middle">ЧЕЛОВЕК</text><text x="200" y="721" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">PR встают</text><text x="200" y="738" fill="#000000" font-size="14.5" font-family="Spectral, Georgia, serif" letter-spacing="0">в одну цепочку</text><text x="200" y="757.0" fill="#555555" font-size="10.5">агенты не мержат;</text><text x="200" y="770.5" fill="#555555" font-size="10.5">человек смотрит</text><text x="200" y="784.0" fill="#555555" font-size="10.5">цепочку и вливает сам</text></g></svg><figcaption>Роли в плейбуках autopilot-full и autopilot-stack. Человек стоит в начале и в конце, середину ведут агенты</figcaption></figure>
+
+<p><b>Координатор код не пишет.</b> Так и сказано в плейбуке: программа его, код никогда. Его работа: писать брифы, разбирать очередь завершённых задач и решать. Бриф с пустым обязательным полем он в работу не отдаёт.</p>
+
+<p><b>На каждый PR свой владелец,</b> отдельный агент в облаке Cursor. Примерно через 15 минут после старта он открывает PR сразу готовым к ревью, без черновика. Потом доказывает, что правка работает, разбирает замечания бота-ревьюера и чистит лишнее. Если что-то сломалось, порядок <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/babysit.md">такой</a>: конфликты, потом обсуждения в ревью, потом CI, то есть автоматические тесты на каждую новую версию.</p>
+
+<figure class="fig mid frame"><img src="img/gh_autopilot_full.jpg" alt="Начало плейбука Autopilot-full: You own the verdicts, never the PRs; один владелец ведёт каждый PR от сборки до мержа; ready-PR в течение примерно 15 минут" loading="lazy"><figcaption>Плейбук <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-full.md">autopilot-full</a>: «вердикты твои, PR никогда» и «примерно за 15 минут» владелец открывает PR</figcaption></figure>
+
+<p><b>Вердикт выносит рой.</b> Один из агентов обязательно запускает приложение и сам проходит изменённый путь. Другой сравнивает поведение с основной веткой. Ещё минимум двое читают изменения. Без живой проверки вердикт чистым не считается. Зелёный CI здесь только входной билет. Новый пуш отменяет вердикт, и проверка идёт заново.</p>
+
+<figure class="fig mid frame"><img src="img/gh_orchestrate_ci.jpg" alt="Фрагмент плейбука orchestrate: CI green is an input to a verdict, not a verdict; новый SHA аннулирует строку вердикта" loading="lazy"><figcaption>Плейбук <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/orchestrate.md">orchestrate</a>: «зелёный CI это вход для вердикта, но ещё не вердикт»</figcaption></figure>
+
+<p><b>Дальше два режима.</b> В режиме full владелец мержит сам после чистого вердикта роя. В режиме stack агенты не мержат: проверенные PR встают в одну цепочку, её смотрит и вливает человек. Stack подходит, когда правки связаны или прав на мерж у агентов нет. Главное правило записано в <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/shipping.md">плейбуке shipping</a>.</p>
+
+<figure class="fig mid frame"><img src="img/gh_shipping_safe.jpg" alt="Фрагмент плейбука shipping: Safe means a verdict from an agent that did not write the code" loading="lazy"><figcaption>Плейбук <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/shipping.md">shipping</a>: «безопасно значит вердикт от агента, который не писал этот код»</figcaption></figure>
+
+<p><b>Что остаётся человеку.</b> Выбрать режим и сказать «go»: просьба показать план стартом не считается. Утвердить план и новые дизайны. Ответить на гейты, то есть на необратимые действия и решения о продукте. В плейбуке orchestrate человек заглядывает дважды в день, вопрос «продолжать ли?» до него не доходит. И читать код после мержа, как делает сама Лорен.</p>
+
+<p>Под разные роли разные модели. По умолчанию код пишет Grok 4.7, суждения и тексты достаются Opus 5.5. Сама Лорен <a href="https://x.com/poteto/status/2098645508122394643">в сентябре писала</a>, что координатором ставит Fable, рабочими Grok.</p>
+
+<figure class="fig mid"><img src="img/verification.jpg" alt="Слайд High-quality verification: карта функций приложения плюс командная строка для управления приложением, итог: агент может проверить свою работу сам" loading="lazy"><figcaption>Слайд из доклада: карта функций приложения и командная строка для управления им дают агенту проверить свою работу. Видео: <a href="https://x.com/poteto/status/2102050467505430555">@poteto в X</a></figcaption></figure>
+</section>
+
+<section class="sec" id="doverie">
+<div class="sec-h"><span class="num">04</span><h2>Как она дошла до автомержа</h2></div>
+
+<p>К автомержу Лорен шла по шагам, это видно по её постам.</p>
+
+<ol class="arc">
+<li><span class="when">Май</span><span>Узкое место у агентов это проверка. Запускать параллельно агентов, которым ещё не доверяешь, значит жечь токены и копить мусор в коде. <a href="https://x.com/poteto/article/2058975157503570132">Статья 25 мая</a>.</span></li>
+<li><span class="when">Июнь</span><span>Конвейер «разобрать баг, воспроизвести, починить». Любая стадия может остановить линию, на выходе черновик PR для человека. Её правило: цикл становится автономным, только когда заслужил доверие. <a href="https://x.com/poteto/status/2069824386283319343">Пост 24 июня</a>.</span></li>
+<li><span class="when">Июль</span><span>Вместо одного проверяющего рой. Раньше она запускала одного, потому что дорого. <a href="https://x.com/poteto/status/2082556871358251345">Пост 29 июля</a>.</span></li>
+<li><span class="when">Август</span><span>Три шага (<a href="https://x.com/poteto/status/2084027318113386698">2 августа</a>): переписать кодовую базу, чтобы агенты писали хороший код по умолчанию. Дать им скилл проверки и рой на каждый PR. Включить full autopilot. Агенты сами чинят найденные баги и мержат (<a href="https://x.com/poteto/status/2085885450468909083">8 августа</a>). Коммиты она читает уже после мержа (<a href="https://x.com/poteto/status/2090105948430020818">19 августа</a>).</span></li>
+<li><span class="when">Сентябрь</span><span>«Мои агенты мержат свои PR, люди их не ревьюят» (<a href="https://x.com/poteto/status/2102201638824157449">22 сентября</a>). За месяц до этого она писала, что критичные места кода смотрит человек (<a href="https://x.com/poteto/status/2093624029504745541">29 августа</a>). Единого правила нет, у разных проектов разный уровень доверия.</span></li>
+</ol>
+
+<figure class="fig mid"><img src="img/trust_curve.jpg" alt="Нарисованный от руки график: по вертикали доверие, по горизонтали число агентов от одного до тысяч, кривая растёт и выходит на плато" loading="lazy"><figcaption>График из доклада: доверие к агентам по вертикали, число агентов по горизонтали, от одного до тысяч. Видео: <a href="https://x.com/poteto/status/2102050467505430555">@poteto в X</a></figcaption></figure>
+
+<p>Каждую правку человека она старается сделать ненужной. Лестница <a href="https://x.com/poteto/status/2089067865098113024">из её поста</a>: сначала убрать проблему архитектурой, потом ловить её линтом или тестом, потом записать в скилл. Ревью человеком стоит последним, с припиской ngmi, на сленге «не прокатит».</p>
+</section>
+
+<section class="sec" id="verit">
+<div class="sec-h"><span class="num">05</span><h2>Можно ли этому верить</h2></div>
+
+<p>Все цифры ниже её собственные. Открытого дашборда, по которому их можно пересчитать, нет.</p>
+
+<div class="claims">
+<h3>PR в месяц <span>· её подсчёт</span></h3>
+<ol class="prm">
+<li><span class="when">Июль</span><span class="bar-v"><i style="width:calc((100% - 100px) * .4)"></i><a href="https://x.com/poteto/status/2082371906309849354">почти 1000</a></span><span class="src">за месяц</span></li>
+<li><span class="when">Август</span><span class="bar-v"><i style="width:calc((100% - 100px) * .8)"></i><a href="https://x.com/poteto/status/2094457600259842065">2000</a></span><span class="src">в месяц, в продакшен</span></li>
+<li><span class="when">Сентябрь и октябрь</span><span class="bar-v"><i style="width:calc(100% - 100px)"></i>2500</span><span class="src">«за прошлый месяц» в <a href="https://x.com/poteto/status/2102050467505430555">докладе</a> и в <a href="https://x.com/poteto/status/2106134336705843554">разговоре с Мэттом Пококом</a></span></li>
+</ol>
+<div class="stat">
+<div><b>5000+</b><p>PR за полгода на слайде <a href="https://x.com/poteto/status/2102050467505430555">доклада</a></p></div>
+<div><b>15 млрд</b><p>токенов в день, «наверное, около», <a href="https://x.com/poteto/status/2092884264581013952">пишет она</a></p></div>
+<div><b>80 тыс.</b><p>агентов, почти все облачные, и 1,5 триллиона токенов в её <a href="https://cursor.com/@lauren">профиле в Cursor</a> на 3 октября. За какой срок, со страницы не понять</p></div>
+</div>
+</div>
+
+<figure class="fig card"><img src="img/contrib_graph.jpg" alt="Карточка GitHub: poteto, 4 420 коммитов, третье место среди контрибьюторов, всплеск в 2026 году, в августе 2011 коммитов" loading="lazy"><figcaption>Её карточка контрибьютора из статьи о pstack: 4 420 коммитов, в августе 2011. Скриншот: <a href="https://x.com/poteto/status/2094457600259842065">@poteto в X</a>, 31 августа</figcaption></figure>
+
+<p>Есть нестыковка: 21 сентября «прошлый месяц» это август, а 31 августа она писала про 2000. В той же статье она назвала объём PR метрикой тщеславия. Скептику в X она ответила, что график коммитов снят с общего монорепозитория команды, и добавила: <a href="https://x.com/poteto/status/2094529964997849427">сомневаться полезно</a>. И 2000 PR в месяц выходят в кодовой базе Grok Bot, которую она, <a href="https://x.com/poteto/status/2094229449126629468">по её словам</a>, спроектировала под такую работу.</p>
+
+<p>Критики. Квентин Галлуэдек из Hugging Face <a href="https://x.com/QGallouedec/status/2103647998316056678">считает</a> рамку «2000 PR в месяц» вредной для больших open-source проектов. Мейнтейнеров <a href="https://x.com/QGallouedec/status/2104277817269592501">заливают</a> проверенными PR, которые решают никому не нужные задачи. Марк Лик <a href="https://x.com/MarkLyck/status/2103903079573680220">отвечает</a>, что без ревью метод живёт только в закрытой системе с сильным CI. Ещё один комментатор <a href="https://x.com/Anubhavhing/status/2094384957401837815">пишет</a>, что узкое место просто переезжает в ревью.</p>
+
+<p>Отдельно цена. Лорен сама <a href="https://x.com/poteto/status/2059046010966684134">предупреждала</a>, что много агентов на сильных моделях жгут дорогие токены, а рост расходов <a href="https://x.com/poteto/status/2098822005168763279">трудно посчитать</a>. У одного пользователя на Reddit включённый лимит Cursor <a href="https://www.reddit.com/r/cursor/comments/1wrmig0/killer_combo_cursor_projects_pstack_huge/pcrjaxy/">ушёл до 80% сразу</a>. У другого расход <a href="https://x.com/misha_erm/status/2098819120510726319">вырос с миллионов токенов до миллиардов</a>. В комментариях спрашивают, как при таком потоке устроены <a href="https://x.com/M0gjt/status/2105232699132633260">тестирование</a> и <a href="https://x.com/colin_krist/status/2093773224291221632">аудит безопасности</a>, когда PR одобряют агенты.</p>
+</section>
+
+<section class="sec" id="claude-code">
+<div class="sec-h"><span class="num">06</span><h2>Как поставить pstack в Claude Code и что там не работает</h2></div>
+
+<p>В Cursor pstack ставится командой /add-plugin pstack. В Claude Code такого плагина нет, но скиллы это обычные папки с инструкцией, и Claude Code читает их так же. Поэтому я написал агенту одну фразу.</p>
+
+<figure class="chat" id="fig-install">
+<div class="msg me"><span class="who">Я</span><p>установи пистек на эту систему</p></div>
+<div class="msg ag"><span class="who">Агент, Claude Code</span><p>Скачал pstack, но подключить его в Claude Code не получилось: автоматический режим не разрешил мне менять папки скиллов и агентов. Эту запись обходить не буду, её нужно сделать тебе.</p><p>Что уже готово. Взял из репозитория cursor/plugins только две папки: pstack и cursor-team-kit. Проверил имена: скиллы pstack не совпадают с твоими.</p><p>Чтобы подключить, запусти одну команду. Она создаёт ссылки на скиллы и двух агентов, а занятые имена пропускает.</p><p>Что работать не будет: /setup-pstack пишет правило Cursor, poteto-mode ссылается на инструменты и модели Cursor. Я бы вызывал pstack точечно: /interrogate, /correct, /blast-radius.</p></div>
+<div class="note">я запускаю команду в терминале</div>
+<div class="msg ag"><span class="who">Агент, Claude Code</span><p>pstack подключён: 53 скилла и 2 агента. /poteto-mode пиши в начале сообщения, сам агент его не включит. Добавил pstack и эти ограничения в реестр возможностей.</p></div>
+<figcaption>Как pstack попал в мой Claude Code, 4 октября. Ответы агента сокращены</figcaption>
+</figure>
+
+<p>Скачал и проверил агент сам. Подключать скиллы автоматический режим ему запретил: это правка его собственной конфигурации. Запрет агент обходить не стал, одну команду запустил я. Папка cursor-team-kit нужна ради трёх скиллов, на которые ссылается pstack. Реестр возможностей живёт в моём <a href="https://pc.vibecoding.phd/">штабе</a>: это папка с правилами и знаниями для моих агентов.</p>
+
+<p>Хотите так же, скажите агенту: <b>«поставь pstack из github.com/cursor/plugins в Claude Code»</b>.</p>
+
+<details class="inside"><summary>Что агент сделал внутри</summary><pre>git clone --filter=blob:none --sparse https://github.com/cursor/plugins.git cursor-plugins
+cd cursor-plugins && git sparse-checkout set pstack cursor-team-kit
+
+# эту часть автоматический режим не дал, её запустил я:
+R=~/Documents/GitHub/cursor-plugins
+for d in $R/pstack/skills/*/ $R/cursor-team-kit/skills/{deslop,control-cli,control-ui}/; do
+  b=$(basename $d); [ -e ~/.claude/skills/$b ] || ln -s ${d%/} ~/.claude/skills/$b
+done
+for a in poteto-agent comment-sicko; do
+  [ -e ~/.claude/agents/$a.md ] || ln -s $R/pstack/agents/$a.md ~/.claude/agents/$a.md
+done
+
+# обновление: git -C ~/Documents/GitHub/cursor-plugins pull</pre></details>
+
+<figure class="fig mid term"><img src="img/term_skills.jpg" alt="Терминал: папка скиллов Claude Code, ссылки architect, blast-radius, correct, deslop, how, interrogate, poteto-mode, swarm ведут в cursor-plugins; всего 53 скилла" loading="lazy"><figcaption>Папка скиллов Claude Code после установки: каждый скилл pstack это ссылка на скачанный репозиторий. Скриншот моего терминала</figcaption></figure>
+
+<p>Потом я попросил агента спросить у /poteto-mode, как он выбирает плейбук. Ответ пришёл по правилам pstack: короткие фразы и пометка в конце, откуда знание.</p>
+
+<figure class="fig mid term"><img src="img/term_poteto_mode.jpg" alt="Терминал: запуск /poteto-mode в Claude Code с вопросом, как он выбирает плейбук, и ответ из четырёх абзацев; последний абзац сообщает, что ответ взят из SKILL.md, а файлы плейбуков агент не открывал" loading="lazy"><figcaption>/poteto-mode в Claude Code, 4 октября. Розовым выделен последний абзац: агент сам помечает, на чём основан ответ. Скриншот моего терминала</figcaption></figure>
+
+<p>Что работает иначе, чем в Cursor:</p>
+
+<ul class="need">
+<li><b>/setup-pstack не работает.</b> Он записывает правило для Cursor, какую модель брать на какую роль. Claude Code это правило не читает.</li>
+<li><b>poteto-mode написан под инструменты Cursor.</b> Вопрос человеку там идёт через AskQuestion, субагенты через Task, модели Cursor вроде Grok и GPT. В Claude Code субагенты работают на моделях Claude. Значит, проверка «другой моделью» идёт той же семьёй моделей. Это выведено из текста скиллов, замера у меня нет.</li>
+<li><b>Облака Cursor нет.</b> Облачные агенты, бот-ревьюер Bugbot и хостинг кода Origin это продукты Cursor. Рой из десятков облачных агентов на каждый PR в Claude Code так не собрать.</li>
+<li><b>Правила спорят с моими.</b> poteto-mode разрешает агенту писать в чаты и тикеты без вопроса. У меня он уступает правилам штаба, а там без спроса никому не пишут.</li>
+</ul>
+
+<p>Не я один пробую. Есть неофициальный <a href="https://github.com/michael-denyer/pstack-claude">порт pstack для Claude Code и Codex</a>. Расмус Хьюлсков <a href="https://x.com/RasmusHjulskov/status/2104234821245390929">пишет</a>, что с pstack локально в Claude Code ему работается заметно лучше.</p>
+</section>
+
+<section class="sec" id="zabrat">
+<div class="sec-h"><span class="num">07</span><h2>Что забрать к себе, даже без автопилота</h2></div>
+
+<p>Сотня облачных агентов нужна не всем. Вот пять скиллов, которые я бы взял первыми. Каждый вызывается напрямую, а /interrogate, /correct и /blast-radius агент сам не запустит: их пишут в начале сообщения.</p>
+
+<ul class="need">
+<li><b>/interrogate.</b> Несколько проверяющих пытаются сломать ваши изменения с разных сторон, один строго смотрит качество кода. Один комментатор на Hacker News <a href="https://news.ycombinator.com/item?id=48416366">пишет</a>, что из публичных скиллов пользуется только им.</li>
+<li><b>/correct.</b> Находит ошибки, которые агенты повторяют в проекте, и делает каждую невозможной: архитектурой, типами, линтом, тестом, документацией в последнюю очередь. Каждое новое правило проверяется на настоящей прошлой ошибке.</li>
+<li><b>/blast-radius.</b> Ищет, что ещё может сломать маленькая правка за пределами самих изменений. Главный факт «почему это безопасно» доказывается запуском кода.</li>
+<li><b>/how.</b> Объясняет, как устроена часть проекта, перед тем как её менять.</li>
+<li><b>/swarm.</b> Раздаёт куски задачи параллельным помощникам и собирает один общий отчёт.</li>
+</ul>
+
+<p>Ещё ценнее идеи pstack. Они работают для любой задачи, которую вы отдаёте агенту.</p>
+
+<ol class="principles">
+<li><h3>Проверяет тот, кто не писал</h3><p>Автор правки видит то, что хотел сделать, и пропускает то, что сделал на самом деле. Поэтому вердикт выносит отдельный агент. Как в редакции: после автора текст всегда читает корректор.</p></li>
+<li><h3>Зелёные тесты ещё не вердикт</h3><p>Тесты проверяют то, что в них заложили. Живая проверка в настоящем приложении ловит остальное. Как с машиной: прежде чем подписать акт, на ней проезжают круг.</p></li>
+<li><h3>Факт проверяют запуском</h3><p>Если ответ можно увидеть запуском, агент делает быстрый прототип и решает по результату. Вкус и продукт остаются человеку. Как с пиджаком: размер выясняют примеркой.</p></li>
+<li><h3>Каждое утверждение с пометкой</h3><p>Измерено, выведено или догадка. Так сразу видно, где можно опереться, а где нужно проверить. Как у врача: анализы и подозрения он записывает в разные графы.</p></li>
+<li><h3>Доверие выдают по шагам</h3><p>Сначала агент учится доказывать, что всё работает, потом присылает черновики, потом цепочку на ревью, и только потом мержит сам. Как с новым сотрудником: первые недели он работает рядом с наставником.</p></li>
+<li><h3>Повторная правка становится правилом</h3><p>Если поправили агента второй раз, ошибку закрывают архитектурой, линтом или тестом, текстом в последнюю очередь. Как в подъезде: вместо таблички «не хлопайте дверью» ставят доводчик.</p></li>
+</ol>
+
+<p>В мае Лорен мержила сама и писала, что узкое место это проверка. В сентябре агенты мержат за неё, а сама она <a href="https://x.com/poteto/status/2103254158342254893">пишет</a>, что спит по 8–9 часов. Между этими точками четыре месяца работы над проверкой. Где на этой дуге вы, видно по одному вопросу: что ваш агент вправе смержить ночью, пока вы спите?</p>
+
+<p>Если соберёте свой поток PR на pstack или на своих скиллах, приходите рассказать в <a href="https://t.me/vibecod3rs">чат вайбкодеров</a>. Разборы таких штук выходят в канале <a href="https://t.me/ris_ai">«рис. AI»</a>.</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#potok">агенты</a>, <a href="#chto-eto">pstack</a>, <a href="#doverie">код-ревью</a>, <a href="#claude-code">Claude Code</a></div>
+<p>pstack: <a href="https://github.com/cursor/plugins/tree/main/pstack">репозиторий</a>, <a href="https://github.com/cursor/plugins/blob/main/pstack/README.md">README</a>, <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/SKILL.md">poteto-mode</a>, плейбуки <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/orchestrate.md">orchestrate</a>, <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-full.md">autopilot-full</a>, <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-stack.md">autopilot-stack</a>, <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/babysit.md">babysit</a>, <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/shipping.md">shipping</a>. Лорен Тан: <a href="https://x.com/poteto">@poteto в X</a>, <a href="https://x.com/poteto/article/2058975157503570132">статья «How I Use Cursor»</a>, <a href="https://x.com/poteto/status/2094457600259842065">статья о pstack, часть 1</a>, <a href="https://x.com/poteto/status/2102050467505430555">доклад «how i shipped 2,500 PRs last month»</a>. Пересказ про «10 000 запусков»: <a href="https://www.theneuron.ai/explainer-articles/pstack-explained-lauren-tans-system-for-trustworthy-ai-agents/">The Neuron</a>. Неофициальный порт: <a href="https://github.com/michael-denyer/pstack-claude">pstack-claude</a>. Цифры Лорен приведены по её постам, срез на 4 октября 2026. Цитаты из английских источников даны в моём переводе.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+<script>
+(function(){
+  function playAll(){if(document.hidden)return;document.querySelectorAll('video[autoplay]').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
+  document.addEventListener('visibilitychange',playAll);playAll();
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .gloss,.body .need,.body .arc>li,.body .principles>li')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script></body></html>
