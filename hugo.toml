@@ -43,7 +43,7 @@ enableGitInfo = true
 
   [[params.standalone]]
     url = 'pochemu-agent-ne-slushaetsya-pravil/'
-    title = 'Почему агент не слушается правил: как делать AGENTS.md и скиллы'
+    title = 'Файл правил: как написать его, чтобы агент слушался'
     description = 'Чем длиннее файл правил, тем хуже агент его соблюдает. Как устроить AGENTS.md и скиллы для Claude Code, Codex и Cursor: четыре мерила, примеры и проверка своей папки.'
     lastmod = '2026-10-04'
 
