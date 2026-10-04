@@ -41,6 +41,12 @@ enableGitInfo = true
     description = 'Утром /daily, после разговора /manager, в воскресенье /retro: список дел ведёт агент, а вы только запускаете команду.'
     lastmod = '2026-10-01'
 
+  [[params.standalone]]
+    url = 'pochemu-agent-ne-slushaetsya-pravil/'
+    title = 'Почему агент не слушается правил: как делать AGENTS.md и скиллы'
+    description = 'Чем длиннее файл правил, тем хуже агент его соблюдает. Как устроить AGENTS.md и скиллы для Claude Code, Codex и Cursor: четыре мерила, примеры и проверка своей папки.'
+    lastmod = '2026-10-04'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'

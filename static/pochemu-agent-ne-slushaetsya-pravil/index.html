@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-10-04"><title>Почему агент не слушается правил: как делать AGENTS.md и скиллы | Сережа Рис</title>
+<meta name="description" content="Чем длиннее файл правил, тем хуже агент его соблюдает. Как устроить AGENTS.md и скиллы для Claude Code, Codex и Cursor, чтобы правила работали: четыре мерила, примеры и проверка своей папки.">
+<meta property="og:type" content="article"><meta property="og:title" content="Почему агент не слушается правил"><meta property="og:description" content="Гайд: как делать AGENTS.md и скиллы, чтобы агент соблюдал правила."><meta property="og:image" content="https://sereja.tech/pochemu-agent-ne-slushaetsya-pravil/img/og_cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+/* reveal on scroll, once: the same 1s opacity fade The Blueprint uses */
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:560px;margin:30px auto 0}
+.strip{display:flex;width:100%;height:clamp(110px,14vw,178px);margin:54px 0 0;overflow:hidden}
+.strip img,.strip video{flex:1 1 0;min-width:0;height:100%;object-fit:cover}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
+.share i{display:block;width:38%;height:1px;background:var(--blue)}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite,.said cite,.lyrics cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.said{margin:26px 0 30px;padding:0 0 0 40px}
+.said p{font:300 17px/26px var(--serif);font-style:italic;margin:0}
+.lyrics{margin:30px 0 34px;text-align:center}
+.lyrics p{font:300 19px/30px var(--serif);margin:0}
+.doc{margin:30px 0 34px}
+.doc pre{margin:0;background:var(--paper);padding:22px 26px;font:300 12.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.doc figcaption,.fig figcaption,.loop figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.vert{margin:40px 0 0;padding:28px 0 6px;border-top:1px solid var(--blue)}
+.vert h3{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;color:var(--blue);margin:0 0 18px}
+.vert b{font-weight:500}
+.fig{margin:70px auto;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.fig img{width:100%}
+.loop{margin:70px auto;width:min(420px,100%);text-align:center}
+.loop video{width:100%;background:#000}
+.look{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;width:min(var(--wide),100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:48px 0}
+.look figure{margin:0}
+.look img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--ph)}
+.look figcaption{font:300 12px/15px var(--serif);text-transform:uppercase;letter-spacing:.02em;margin-top:9px}
+/* 2x2 grid whose cells cross-fade through frames on their own, like The Blueprint's animated-jpg grid */
+.flip{position:relative;left:50%;transform:translateX(-50%);width:min(1000px,100vw - 32px);margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.flip .cell{position:relative;aspect-ratio:16/9;background:var(--ph);overflow:hidden}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.flip img.on{opacity:1}
+@media (max-width:640px){.flip{grid-template-columns:1fr;gap:12px}}
+.shop-sec .sec-h{margin-top:110px}
+.shop-sec .sec-h h2{font:200 16px/39px var(--serif)}
+.shop{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.shop figure{margin:0;text-align:center}
+.shop .ph{background:var(--ph);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop .ph img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.shop figcaption{font:200 13px/17px var(--serif);margin-top:12px}
+.shop figcaption span{display:block;color:var(--grey);margin-top:6px;font-size:12px}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.done{margin:36px 0 0}
+.done h4{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin:0 0 12px}
+.done ul{list-style:none;margin:0;padding:0;border-top:1px solid #e3e3e3}
+.done li{padding:9px 0 9px 26px;border-bottom:1px solid #e3e3e3;position:relative;font-size:15px;line-height:22px}
+.done li::before{content:"";position:absolute;left:2px;top:14px;width:11px;height:11px;border:1px solid var(--blue)}
+.steps{list-style:none;counter-reset:st;padding:0;margin:0}
+.steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
+.steps b{font-weight:500}
+.film{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.film video{width:100%;background:#000;aspect-ratio:16/9}
+.film.orig{margin:34px 0 40px}
+.yt{position:relative;aspect-ratio:16/9;background:#000}.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.film figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px;text-align:center}
+.gloss{margin:26px 0 30px;border-top:1px solid #e3e3e3}
+.gloss dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding-top:14px}
+.gloss dd{margin:4px 0 0;padding-bottom:14px;border-bottom:1px solid #e3e3e3}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.principles{list-style:none;counter-reset:pr;padding:0;margin:34px 0 0}
+.principles li{counter-increment:pr;position:relative;padding:0 0 30px 70px}
+.principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
+.principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
+.principles p{margin:0}
+.facts{padding-left:22px}.facts li{margin:0 0 10px}
+.sources{font-size:13px;line-height:20px;margin-top:90px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
+  .look{grid-template-columns:repeat(2,1fr);gap:14px}
+  .shop{grid-template-columns:repeat(2,1fr);gap:16px}
+  .strip img:nth-child(n+4),.strip video:nth-child(n+4){display:none}
+  .diagram{overflow-x:auto}.diagram svg{min-width:760px}
+}
+.doc figcaption b{font-weight:600;color:var(--ink)}
+.doc .copy{margin-top:10px;background:none;border:1px solid var(--blue);color:var(--blue);font:500 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;padding:7px 14px;cursor:pointer}
+.doc .copy:hover{color:var(--pink);border-color:var(--pink)}
+.said .ru{font-style:normal;font-weight:200;margin-top:8px}
+</style><link rel="canonical" href="https://sereja.tech/pochemu-agent-ne-slushaetsya-pravil/"><meta name="author" content="Сережа Рис"><meta name="robots" content="index, follow, max-image-preview:large"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/pochemu-agent-ne-slushaetsya-pravil/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Файл правил на 400 строк, где правило теряется, и файл на 50 строк, где оно на виду"><meta property="article:published_time" content="2026-10-04T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-04T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="AGENTS.md"><meta property="article:tag" content="скиллы"><meta property="article:tag" content="Claude Code"><meta property="article:tag" content="Codex"><meta property="article:tag" content="Cursor"><meta property="article:tag" content="AI-агенты"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Почему агент не слушается правил"><meta name="twitter:description" content="Гайд: как делать AGENTS.md и скиллы, чтобы агент соблюдал правила."><meta name="twitter:image:alt" content="Файл правил на 400 строк, где правило теряется, и файл на 50 строк, где оно на виду"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Почему агент не слушается правил: как делать AGENTS.md и скиллы", "description": "Чем длиннее файл правил, тем хуже агент его соблюдает. Как устроить AGENTS.md и скиллы, чтобы правила работали.", "image": "https://sereja.tech/pochemu-agent-ne-slushaetsya-pravil/img/og_cover.png", "inLanguage": "ru-RU", "datePublished": "2026-10-04", "dateModified": "2026-10-04", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/pochemu-agent-ne-slushaetsya-pravil/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["AGENTS.md", "CLAUDE.md", "скиллы", "Claude Code", "Codex", "Cursor", "AI-агенты"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script></head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#dva-fayla">Два файла</a><a href="#pochemu">Почему</a><a href="#chto-vidit">Что видит агент</a><a href="#merila">Четыре мерила</a><a href="#primer">Было и стало</a><a href="#dvesti-strok">200 строк</a><a href="#katalog">Каталог скиллов</a><a href="#proverit">Как проверить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#dva-fayla">Два файла</a><a href="#pochemu">Почему</a><a href="#chto-vidit">Что видит агент</a><a href="#merila">Четыре мерила</a><a href="#primer">Было и стало</a><a href="#dvesti-strok">200 строк</a><a href="#katalog">Каталог скиллов</a><a href="#proverit">Как проверить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Агенты</span></div><div class="kicker">Как сделать:</div><h1>Почему агент не&nbsp;слушается правил</h1><p class="lead">Чем длиннее файл правил, тем хуже агент его соблюдает. Гайд о том, как устроить AGENTS.md и скиллы, чтобы каждое правило работало.</p></div>
+<div class="meta">4 октября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
+<article class="body">
+
+<figure class="diagram" id="dva-fayla" style="margin-top:0"><svg viewBox="0 0 960 540" role="img" aria-labelledby="fig-hero-title fig-hero-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-hero-title">Один и тот же файл правил до и после</title><desc id="fig-hero-desc">Слева файл правил на 400 строк: процедура публикации поста на 40 шагов, история решений, список клиентов, правила папки с уроками. Посреди них розовая строка «Цены клиентам не называй», её почти не видно. Справа тот же файл на 50 строк: три группы строк, куда идти, границы и постоянное поведение. Правило про цены стоит в границах и сразу заметно. Всё остальное переехало в четыре места: скилл публикации, файл с клиентами, вложенный файл правил папки с уроками и историю изменений git.</desc>
+<defs><marker id="h-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs>
+<rect width="960" height="540" fill="#ffffff"/>
+<text x="40" y="26" fill="#8b8b8b" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="2.5">БЫЛО</text>
+<rect x="40" y="40" width="400" height="460" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+<text x="64" y="76" fill="#000000" font-size="19" font-family="Spectral, Georgia, serif">AGENTS.md</text>
+<text x="416" y="76" fill="#8b8b8b" font-size="11" font-family="Jost, Futura, sans-serif" text-anchor="end">400 строк</text>
+<text x="64" y="104" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">КАК ПУБЛИКОВАТЬ ПОСТ · 40 ШАГОВ</text>
+<g fill="#dedede"><rect x="64" y="114" width="330" height="3"/><rect x="64" y="124" width="290" height="3"/><rect x="64" y="134" width="350" height="3"/><rect x="64" y="144" width="260" height="3"/><rect x="64" y="154" width="320" height="3"/><rect x="64" y="164" width="300" height="3"/></g>
+<text x="64" y="192" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">ИСТОРИЯ РЕШЕНИЙ · С 2024 ГОДА</text>
+<g fill="#dedede"><rect x="64" y="202" width="340" height="3"/><rect x="64" y="212" width="280" height="3"/><rect x="64" y="222" width="310" height="3"/><rect x="64" y="232" width="350" height="3"/><rect x="64" y="242" width="240" height="3"/></g>
+<text x="64" y="270" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">КЛИЕНТЫ И ТАРИФЫ · 80 СТРОК</text>
+<g fill="#dedede"><rect x="64" y="280" width="320" height="3"/><rect x="64" y="290" width="350" height="3"/><rect x="64" y="300" width="270" height="3"/><rect x="64" y="310" width="330" height="3"/><rect x="64" y="320" width="300" height="3"/><rect x="64" y="330" width="345" height="3"/><rect x="64" y="340" width="260" height="3"/></g>
+<text x="64" y="361" fill="#ff1493" font-size="11" font-family="Jost, Futura, sans-serif">Цены клиентам не называй</text>
+<g fill="#dedede"><rect x="64" y="372" width="335" height="3"/><rect x="64" y="382" width="290" height="3"/><rect x="64" y="392" width="320" height="3"/></g>
+<text x="64" y="420" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">ПРАВИЛА ПАПКИ С УРОКАМИ</text>
+<g fill="#dedede"><rect x="64" y="430" width="300" height="3"/><rect x="64" y="440" width="350" height="3"/><rect x="64" y="450" width="280" height="3"/><rect x="64" y="460" width="330" height="3"/><rect x="64" y="470" width="250" height="3"/></g>
+<text x="40" y="526" fill="#ff1493" font-size="11" font-family="Jost, Futura, sans-serif">правило в файле есть, но тонет среди 400 строк</text>
+
+<text x="520" y="26" fill="#8b8b8b" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="2.5">СТАЛО</text>
+<rect x="520" y="40" width="400" height="230" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="544" y="76" fill="#000000" font-size="19" font-family="Spectral, Georgia, serif">AGENTS.md</text>
+<text x="896" y="76" fill="#8b8b8b" font-size="11" font-family="Jost, Futura, sans-serif" text-anchor="end">50 строк</text>
+<text x="544" y="104" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">КУДА ИДТИ</text>
+<text x="544" y="121" fill="#000000" font-size="12.5" font-family="Spectral, Georgia, serif">Пост в канал пиши через скилл telegram-post</text>
+<text x="544" y="137" fill="#000000" font-size="12.5" font-family="Spectral, Georgia, serif">Клиенты и тарифы: clients.md</text>
+<text x="544" y="153" fill="#000000" font-size="12.5" font-family="Spectral, Georgia, serif">Правила уроков: lessons/AGENTS.md</text>
+<text x="544" y="180" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">ГРАНИЦЫ</text>
+<text x="544" y="197" fill="#ff1493" font-size="12.5" font-family="Spectral, Georgia, serif">Цены клиентам не называй</text>
+<text x="544" y="213" fill="#000000" font-size="12.5" font-family="Spectral, Georgia, serif">Таблицу оплат только читай</text>
+<text x="544" y="240" fill="#2d3e9f" font-size="8.5" font-family="Jost, Futura, sans-serif" letter-spacing="1.4">ПОВЕДЕНИЕ</text>
+<text x="544" y="257" fill="#000000" font-size="12.5" font-family="Spectral, Georgia, serif">Отвечай по-русски, клиентам на «ты»</text>
+<path d="M 720,272 V 304" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#h-ink)"/>
+<text x="732" y="294" fill="#8b8b8b" font-size="9" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">агент открывает по маршруту, когда нужно</text>
+<g font-family="Jost, Futura, sans-serif">
+<rect x="520" y="310" width="194" height="84" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<text x="536" y="332" fill="#2d3e9f" font-size="8.5" letter-spacing="1.4">СКИЛЛ</text>
+<text x="536" y="356" fill="#000000" font-size="15" font-family="Spectral, Georgia, serif">telegram-post</text>
+<text x="536" y="377" fill="#555555" font-size="10.5">40 шагов публикации</text>
+<rect x="726" y="310" width="194" height="84" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<text x="742" y="332" fill="#2d3e9f" font-size="8.5" letter-spacing="1.4">ИСТОРИЯ</text>
+<text x="742" y="356" fill="#000000" font-size="15" font-family="Spectral, Georgia, serif">git</text>
+<text x="742" y="377" fill="#555555" font-size="10.5">кто, когда и почему решил</text>
+<rect x="520" y="406" width="194" height="84" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<text x="536" y="428" fill="#2d3e9f" font-size="8.5" letter-spacing="1.4">СПРАВКА</text>
+<text x="536" y="452" fill="#000000" font-size="15" font-family="Spectral, Georgia, serif">clients.md</text>
+<text x="536" y="473" fill="#555555" font-size="10.5">клиенты и тарифы</text>
+<rect x="726" y="406" width="194" height="84" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<text x="742" y="428" fill="#2d3e9f" font-size="8.5" letter-spacing="1.4">ВЛОЖЕННЫЙ ФАЙЛ</text>
+<text x="742" y="452" fill="#000000" font-size="15" font-family="Spectral, Georgia, serif">lessons/AGENTS.md</text>
+<text x="742" y="473" fill="#555555" font-size="10.5">правила одной папки</text>
+</g>
+</svg><figcaption>Один файл правил до и после. Справа правило про цены на виду, остальное переехало туда, где агент найдёт его по делу</figcaption></figure>
+
+<p class="first"><span class="drop">В</span>ы написали агенту правило, а он его не выполняет. Чаще всего дело в длине файла. Агент читает правила целиком в начале каждой работы, и чем больше там текста, тем меньший вес у каждой строки. Об этом прямо пишет Anthropic в документации Claude Code, и то же я видел в своих папках. Сейчас у меня 93 скилла и файлы правил в каждой рабочей папке. С этим вопросом ко мне приходят часто, поэтому я собрал ответ в одном месте.</p>
+
+<p>Этот гайд для тех, кто работает с агентом в своей папке: Claude Code, Codex, Cursor или похожий. Вы владелец бизнеса или операционщик, и программировать вам не нужно. Здесь нет кода и мало техники. Зато много примеров: как выглядит хороший файл правил, как плохой, что куда переносить. Вы унесёте четыре мерила, по которым проверите свою папку, и фразу, которую можно отдать агенту, чтобы он проверил её сам.</p>
+
+<blockquote class="pull"><p>Раздутый файл правил приводит к&nbsp;тому, что Claude игнорирует ваши настоящие инструкции.</p><cite>Anthropic, документация Claude Code</cite></blockquote>
+
+<p>Несколько слов, которые встретятся дальше:</p>
+
+<dl class="gloss">
+<dt>Агент</dt><dd>Программа на основе языковой модели, которая сама выполняет задачу по шагам в вашей папке: читает и пишет файлы, запускает проверки. Claude Code, Codex и Cursor это агенты.</dd>
+<dt>Файл правил, AGENTS.md</dt><dd>Текстовый файл в корне папки. Агент читает его сам в начале каждой работы и держит в голове до конца. У Claude Code тот же файл может называться CLAUDE.md.</dd>
+<dt>Скилл</dt><dd>Папка с инструкцией SKILL.md: как делать одну повторяемую работу. Например, как написать пост в канал или собрать отчёт для клиента.</dd>
+<dt>Описание скилла</dt><dd>Одна-две строки в начале SKILL.md: что скилл делает и когда его брать. По ним агент решает, открывать ли скилл.</dd>
+<dt>Контекст</dt><dd>Всё, что агент держит в голове прямо сейчас: ваши сообщения, файл правил, прочитанные файлы. Объём у контекста конечный.</dd>
+</dl>
+
+<section class="sec" id="pochemu">
+<div class="sec-h"><span class="num">01</span><h2>Почему агент перестаёт слушаться</h2></div>
+
+<p>У модели ограниченное внимание. Anthropic называет это бюджетом внимания: каждый новый кусок текста немного его расходует.</p>
+
+<blockquote class="said"><p>LLMs have an "attention budget" that they draw on when parsing large volumes of context.</p><p class="ru">У языковых моделей есть «бюджет внимания», и они тратят его, когда разбирают большие объёмы контекста.</p><cite>Anthropic, «Effective context engineering for AI agents», 29 сентября 2025</cite></blockquote>
+
+<p>Отсюда главный совет той же статьи: искать самый маленький набор текста, который сильнее всего влияет на результат. Для файла правил вывод такой: каждая лишняя строка отнимает внимание у нужной.</p>
+
+<p>В документации Claude Code это сказано прямо и даже с диагнозом. Если агент упорно делает то, что вы запретили, скорее всего, файл слишком длинный и правило в нём потерялось:</p>
+
+<blockquote class="said"><p>If Claude keeps doing something you don't want despite having a rule against it, the file is probably too long and the rule is getting lost.</p><p class="ru">Если Claude продолжает делать то, чего вы не хотите, хотя против этого есть правило, файл, вероятно, слишком длинный, и правило в нём теряется.</p><cite>Anthropic, «Best practices for Claude Code»</cite></blockquote>
+
+<p>Обычная реакция на непослушание: дописать правило ещё раз, капслоком, с пометкой «ВАЖНО». Файл от этого только растёт. Та же документация предупреждает: если выделить много строк, не выделяется ни одна.</p>
+
+<p>То же касается всех агентов. AGENTS.md читают все популярные агенты: Codex, Cursor, GitHub Copilot, а Claude Code читает его сам, если в папке нет CLAUDE.md. Поэтому дальше речь про один файл, и правила для него общие.</p>
+</section>
+
+<section class="sec" id="chto-vidit">
+<div class="sec-h"><span class="num">02</span><h2>Что агент видит, когда начинает работу</h2></div>
+
+<p>Куда что класть, зависит от того, что агент читает сразу, а что потом. Сразу он читает две вещи. Первая: файл правил целиком, от первой строки до последней. Вторая: по одной строке описания от каждого скилла. Сами скиллы он на старте не открывает.</p>
+
+<p>Потом приходит ваша задача. Агент сверяет её с описаниями скиллов и решает, какой подходит. Только тогда он открывает этот скилл и читает его целиком: шаги, примеры, проверки. Так же с файлами: если в правилах стоит маршрут «клиенты и тарифы лежат в clients.md», агент откроет этот файл, когда понадобится клиент.</p>
+
+<figure class="diagram" id="fig-start"><svg viewBox="0 0 960 400" role="img" aria-labelledby="fig-start-title fig-start-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-start-title">Что агент читает всегда и что по делу</title><desc id="fig-start-desc">Слева то, что агент читает в начале каждой работы: файл правил AGENTS.md целиком и описания всех скиллов, по одной строке на скилл. В центре ваша задача, например «напиши анонс урока в канал». Агент сверяет задачу с описаниями и выбирает скилл telegram-post. Справа то, что он читает только по делу: тело выбранного скилла с шагами и примерами и файлы, на которые ведут маршруты из AGENTS.md.</desc>
+<defs><marker id="s-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs>
+<rect width="960" height="400" fill="#ffffff"/>
+<g font-family="Jost, Futura, sans-serif">
+<text x="32" y="26" fill="#000000" font-size="8.5" letter-spacing="2">ЧИТАЕТ ВСЕГДА, В НАЧАЛЕ КАЖДОЙ РАБОТЫ</text>
+<text x="628" y="26" fill="#2d3e9f" font-size="8.5" letter-spacing="2">ЧИТАЕТ ПО ДЕЛУ, КОГДА НУЖНО</text>
+<rect x="32" y="44" width="300" height="110" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="50" y="80" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">AGENTS.md целиком</text>
+<text x="50" y="102" fill="#555555" font-size="10.5" letter-spacing="0.4">каждая строка, от первой до последней,</text>
+<text x="50" y="117" fill="#555555" font-size="10.5" letter-spacing="0.4">весь разговор</text>
+<rect x="32" y="184" width="300" height="180" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="50" y="220" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Описания скиллов</text>
+<text x="50" y="242" fill="#555555" font-size="10.5" letter-spacing="0.4">по одной строке на скилл</text>
+<text x="50" y="272" fill="#2d3e9f" font-size="10.5">telegram-post: пост в канал школы…</text>
+<text x="50" y="292" fill="#555555" font-size="10.5">client-report: отчёт клиенту за месяц…</text>
+<text x="50" y="312" fill="#555555" font-size="10.5">lesson-plan: план урока по теме…</text>
+<text x="50" y="340" fill="#8b8b8b" font-size="10.5">и так по строке на каждый скилл</text>
+<rect x="390" y="44" width="180" height="110" fill="#f4f4f2" stroke="none"/>
+<text x="406" y="80" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Ваша задача</text>
+<text x="406" y="102" fill="#555555" font-size="10.5" letter-spacing="0.4">«напиши анонс урока</text>
+<text x="406" y="117" fill="#555555" font-size="10.5" letter-spacing="0.4">в канал»</text>
+<rect x="628" y="44" width="300" height="110" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<text x="646" y="80" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Скилл telegram-post</text>
+<text x="646" y="102" fill="#555555" font-size="10.5" letter-spacing="0.4">вся инструкция: шаги, примеры,</text>
+<text x="646" y="117" fill="#555555" font-size="10.5" letter-spacing="0.4">проверки</text>
+<rect x="628" y="184" width="300" height="110" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/>
+<text x="646" y="220" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Файлы по маршрутам</text>
+<text x="646" y="242" fill="#555555" font-size="10.5" letter-spacing="0.4">clients.md, lessons/AGENTS.md:</text>
+<text x="646" y="257" fill="#555555" font-size="10.5" letter-spacing="0.4">то, куда ведут строки правил</text>
+</g>
+<path d="M 332,268 H 360 Q 368,268 368,260 V 140 Q 368,132 376,132 H 387" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink)"/>
+<path d="M 570,99 H 625" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink)"/>
+<path d="M 480,154 V 231 Q 480,239 488,239 H 625" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink)"/>
+<g font-family="Jost, Futura, sans-serif" font-size="9" fill="#8b8b8b" letter-spacing="0.4">
+<text x="376" y="196">сверяет задачу</text><text x="376" y="209">с описаниями</text>
+<text x="598" y="80" text-anchor="middle">выбрал</text><text x="598" y="92" text-anchor="middle">скилл</text>
+<text x="490" y="231">идёт по маршруту</text>
+</g>
+</svg><figcaption>Чёрные рамки агент читает в каждой работе. Синие открывает, только когда задача их требует</figcaption></figure>
+
+<p>Из этой схемы вытекает всё остальное. То, что в файле правил, стоит внимания в каждой работе, даже если сегодня не нужно. То, что в скилле, ничего не стоит, пока скилл не понадобился. Anthropic называет это постепенным раскрытием и сравнивает с хорошим руководством: сначала оглавление, потом главы, потом приложение.</p>
+
+<blockquote class="said"><p>Claude loads them on demand without bloating every conversation.</p><p class="ru">Claude загружает скиллы по требованию и не раздувает ими каждый разговор.</p><cite>Anthropic, «Best practices for Claude Code», про скиллы</cite></blockquote>
+
+<p>OpenAI описывает в документации Codex ту же механику: сначала агент видит имя и описание каждого скилла, полную инструкцию читает, когда решил скилл взять. Значит, вывод один для всех агентов. Процедуры живут в скиллах, а в правилах остаётся маршрут к ним.</p>
+</section>
+
+<section class="sec" id="merila">
+<div class="sec-h"><span class="num">03</span><h2>Как понять, что файлы сделаны хорошо</h2></div>
+
+<p>Я проверяю свои папки по четырём мерилам. Первые три про файл правил, четвёртое про скиллы.</p>
+
+<ol class="principles">
+<li><h3>Каждая строка правил это маршрут, граница или постоянное поведение</h3><p>Маршрут ведёт к файлу или скиллу, граница говорит, чего нельзя, постоянное поведение действует на любую задачу. Остальное переезжает: процедура с шагами в скилл, история решений в git, справка в отдельный файл, правило одной подпапки во вложенный AGENTS.md. Git здесь это история изменений папки, где у каждой правки есть дата и причина. Как памятка новому сотруднику: где что лежит, чего не трогать, как говорить с клиентами. Регламенты всех отделов в неё не вклеивают.</p></li>
+<li><h3>Файл правил до 200 строк</h3><p>Это ориентир Anthropic. У Codex есть и жёсткий предел: 32 КБ на все файлы правил вместе, остальное до агента не доходит. Как инструктаж перед сменой: пять минут слушают все, на сороковой минуте не слушает никто.</p></li>
+<li><h3>AGENTS.md работает навигатором</h3><p>Детали живут в своих файлах и скиллах, а в правилах стоит строка-маршрут к ним. Агент сам откроет нужное, когда до него дойдёт работа. Как табличка на ресепшене: «бухгалтерия на втором этаже». Саму бухгалтерию на ресепшене не держат.</p></li>
+<li><h3>Описание скилла отвечает на вопрос «когда меня брать»</h3><p>В нём сказано, что скилл делает и в какой ситуации нужен. Оно короткое и не пересекается с описаниями других скиллов. Как подпись на папке в шкафу: «Договоры с поставщиками, 2026» находят за секунду, а папку «Разное» не открывает никто.</p></li>
+</ol>
+
+<p>Проверка для каждой строки есть прямо в документации Claude Code. Задайте себе вопрос: «Если удалить эту строку, агент ошибётся?» Если нет, строку можно удалять.</p>
+</section>
+
+<section class="sec" id="primer">
+<div class="sec-h"><span class="num">04</span><h2>Как это выглядит на живом файле</h2></div>
+
+<p>Возьмём выдуманную, но узнаваемую папку: онлайн-школа английского, агент пишет посты, отчёты клиентам и планы уроков. Файл правил рос год. Каждую ошибку агента владелец закрывал новой строкой, каждое решение записывал туда же. Вот кусок такого файла:</p>
+
+<figure class="doc"><pre># Правила
+
+Отвечай по-русски.
+Мы школа английского для взрослых, работаем с 2019 года...
+
+## Как публиковать пост в Telegram
+1. Открой папку posts/drafts и найди последний черновик.
+2. Проверь, что в тексте нет длинных тире.
+3. Подбери обложку 1280×720, шрифт крупный...
+... ещё 37 шагов
+
+## История
+12.03 решили писать клиентам на «вы».
+15.04 передумали: на «ты», кроме корпоративных.
+02.05 Маша попросила не трогать таблицу оплат.
+
+## Клиенты
+ООО «Ромашка»: тариф «Команда», 12 человек, менеджер Ольга...
+... ещё 80 клиентов
+
+## Папка с уроками
+В lessons/ называй файлы так: урок-номер-тема...
+
+<span style="color:var(--pink)">Цены клиентам не называй, отправляй к менеджеру.</span></pre><figcaption><b>Было.</b> Около 400 строк. Важное правило про цены в самом конце</figcaption></figure>
+
+<p>Здесь смешаны четыре разных вида текста. Сорок шагов публикации нужны, только когда пишется пост. История решений нужна человеку, агенту нужен только итог. Список клиентов нужен, когда работа про клиента. Правила про названия файлов нужны только в папке с уроками. При этом всё это агент читает в каждой работе, даже когда вы просите план урока.</p>
+
+<p>Вот тот же файл после разбора:</p>
+
+<figure class="doc"><pre># Школа английского: правила агента
+
+Отвечай по-русски. Клиентам пиши на «ты», корпоративным на «вы».
+
+## Куда идти
+- Пост в Telegram пиши через скилл telegram-post.
+- Отчёт клиенту собирай скиллом client-report.
+- Клиенты и тарифы: clients.md.
+- Правила папки с уроками: lessons/AGENTS.md.
+
+## Границы
+<span style="color:var(--pink)">- Цены клиентам не называй, отправляй к менеджеру.</span>
+- Таблицу оплат только читай.
+- Перед отправкой чего-либо клиенту покажи текст мне.</pre><figcaption><b>Стало.</b> Навигатор: маршруты, границы и поведение. В настоящей папке таких строк набирается 40–60</figcaption></figure>
+
+<p>Ничего не потерялось. Шаги публикации стали скиллом telegram-post. Список клиентов переехал в clients.md. Правила про уроки легли во вложенный файл правил папки lessons, который агент прочитает, когда начнёт там работать. История осталась в git, а в правила попал только её итог: «на “ты”, кроме корпоративных» и «таблицу оплат только читай». Правило про цены поднялось наверх и теперь стоит среди трёх границ, где его нельзя не заметить.</p>
+
+<p>Со скиллами та же история, только место другое. Агент выбирает скилл по описанию. Если описание размытое, агент не узнаёт в нём вашу задачу и молча проходит мимо.</p>
+
+<figure class="doc"><pre>description: Помогает с постами.</pre><figcaption><b>Плохо.</b> Непонятно, какие посты, куда и когда этот скилл брать</figcaption></figure>
+
+<figure class="doc"><pre>description: Пишет пост в Telegram-канал школы по черновику из posts/drafts и подбирает обложку. Брать, когда просят пост, анонс или публикацию в канал.</pre><figcaption><b>Хорошо.</b> Что делает, из чего и в какой ситуации нужен</figcaption></figure>
+
+<p>OpenAI советует то же самое: описание короткое, с ясными границами. Главный сценарий и слова, по которым агент узнает задачу, стоят в самом начале. Ещё одна частая беда: два скилла с похожими описаниями, например «помогает с текстами» и «пишет тексты для соцсетей». Агент не знает, какой выбрать, и берёт любой.</p>
+</section>
+
+<section class="sec" id="dvesti-strok">
+<div class="sec-h"><span class="num">05</span><h2>Откуда взялись 200 строк и 32 КБ</h2></div>
+
+<p>Цифра 200 из документации Claude Code. Anthropic советует держать каждый файл правил короче 200 строк и объясняет почему:</p>
+
+<blockquote class="said"><p>Longer files consume more context and reduce adherence.</p><p class="ru">Длинные файлы занимают больше контекста и хуже соблюдаются.</p><cite>Anthropic, документация Claude Code, раздел про память</cite></blockquote>
+
+<p>Там же есть оговорка. Если разнести правила по нескольким файлам и подключить их ссылкой через значок @, это не помогает. Подключённые файлы всё равно загружаются в начале работы целиком. Порядок появляется, а вес остаётся.</p>
+
+<p>У Codex предел жёстче и считается в байтах. Он склеивает все файлы AGENTS.md от корня проекта до папки, где вы начали работу. Когда набирается 32 КБ, текст дальше не добавляется. Русскому тексту здесь тяжелее: русская буква весит 2 байта, латинская 1. Мой файл правил для папки с уроками занимает 81 строку и весит 14 КБ. Это почти половина бюджета Codex, хотя по строкам до предела Anthropic ещё далеко.</p>
+
+<p>Поэтому 200 строк это потолок. Хороший навигатор для одной папки обычно укладывается в 40–60 строк.</p>
+</section>
+
+<section class="sec" id="katalog">
+<div class="sec-h"><span class="num">06</span><h2>Сколько можно скиллов</h2></div>
+
+<p>Когда процедуры переезжают в скиллы, возникает соблазн завести скилл на всё. Но у каталога тоже есть цена. Описание каждого скилла агент читает в каждой работе, так же как файл правил.</p>
+
+<p>У меня 93 скилла. Их описания на старте занимают около 8,7 тысячи токенов. Токен это кусочек слова: в них агенты считают объём текста.</p>
+
+<p>Codex ставит этому каталогу жёсткий предел. На стартовый список скиллов он отводит 2% окна контекста, а если размер окна неизвестен, 8000 символов. Когда скиллов слишком много, Codex сначала сокращает описания, а потом часть скиллов вообще убирает из списка.</p>
+
+<blockquote class="said"><p>If many skills are installed, Codex shortens skill descriptions first. For large skill sets, Codex may omit some skills from the initial list and show a warning.</p><p class="ru">Если установлено много скиллов, Codex сначала сокращает их описания. При большом наборе он может убрать часть скиллов из стартового списка и показать предупреждение.</p><cite>OpenAI, документация Codex, «Build skills»</cite></blockquote>
+
+<p>Сто скиллов с размытыми описаниями это та же простыня, только в другом месте. Скиллы, которыми вы не пользуетесь, стоит удалять. Те, что делают почти одно и то же, стоит сливать в один.</p>
+</section>
+
+<section class="sec" id="proverit">
+<div class="sec-h"><span class="num">07</span><h2>Как проверить свою папку</h2></div>
+
+<ol class="steps">
+<li><b>Посчитайте строки.</b> Попросите агента: «Сколько строк и килобайт в моём AGENTS.md?» Больше 200 строк или 32 КБ значит, что файл пора разбирать.</li>
+<li><b>Пройдите по строкам с одним вопросом.</b> Если удалить строку, агент ошибётся? Нет, значит удаляйте.</li>
+<li><b>Разложите остальное по местам.</b> Процедура с шагами в скилл, история в git, справка в отдельный файл, правило подпапки во вложенный AGENTS.md. В правилах оставьте маршрут.</li>
+<li><b>Перечитайте описания скиллов.</b> Каждое должно отвечать, что скилл делает и когда его брать. Два похожих описания перепишите или слейте скиллы.</li>
+<li><b>Удалите скиллы, которыми не пользуетесь.</b> Каждый из них занимает место в каждой работе.</li>
+</ol>
+
+<p>Можно не делать это руками. Я собрал скилл audit-agent-rules. Он проверяет папку по тем же четырём мерилам и показывает таблицу «что не так и куда перенести». Файлы он правит только после вашего «да». Вставьте агенту эту фразу:</p>
+
+<figure class="doc" id="fraza"><pre>Установи скилл по ссылке:
+https://github.com/serejaris/personal-corp-os/tree/main/skills/audit-agent-rules</pre><button class="copy" type="button" data-copy="Установи скилл по ссылке: https://github.com/serejaris/personal-corp-os/tree/main/skills/audit-agent-rules">Скопировать</button></figure>
+
+<p>После установки попросите агента проверить правила в папке. Сам скилл устроен по тем же правилам. Его описание отвечает, когда его брать, а шаги агент откроет, только когда вы попросите проверку.</p>
+
+<p>Если агент переспрашивает то, что в файле уже написано, документация Claude Code советует перечитать формулировку: скорее всего, она двусмысленная. А жёсткий запрет лучше ставить в настройках агента. Файл правил агент читает как совет, настройки выполняются всегда.</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#merila">AGENTS.md</a>, <a href="#katalog">скиллы</a>, <a href="#chto-vidit">контекст</a>, <a href="#proverit">проверка</a></div>
+<p>Anthropic: <a href="https://code.claude.com/docs/en/best-practices">Best practices for Claude Code</a>, <a href="https://code.claude.com/docs/en/memory">как Claude Code читает CLAUDE.md и AGENTS.md</a>, <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> (29 сентября 2025), <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Equipping agents for the real world with Agent Skills</a> (16 октября 2025). OpenAI: <a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md">AGENTS.md в Codex</a>, <a href="https://learn.chatgpt.com/docs/build-skills">Build skills</a>. Формат AGENTS.md: <a href="https://agents.md/">agents.md</a>. Скилл для проверки папки: <a href="https://github.com/serejaris/personal-corp-os/tree/main/skills/audit-agent-rules">audit-agent-rules</a>. Как я строю папки для агентов: <a href="https://pc.vibecoding.phd/">Personal Corp</a>. Цитаты переведены мной.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+<script>
+(function(){
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    function done(){b.textContent='Скопировано';setTimeout(function(){b.textContent='Скопировать';},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){});}
+  });});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .gloss,.body .principles>li,.body .steps>li')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script></body></html>
