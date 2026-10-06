@@ -1,0 +1,2210 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Отдел исследований, который помнит всё найденное</title>
+<meta name="description" content="Агент отвечает на вопрос про инструмент или рынок за минуту, а через неделю ответ уже не найти: он остался в закрытом чате. Для таких вопросов есть отдел исследований, папка `corp-research`. Каждый вопрос оставляет в нём файл, и следующий вопрос сначала ищет там, потом в интернете.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fffef9;
+    --ink: #1a1a1a;
+    --muted: #333333;
+    --accent: #33567a;
+    --hairline: rgba(26, 26, 26, .18);
+    --rule: rgba(26, 26, 26, .25);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.62 'PT Serif', Georgia, 'Times New Roman', serif;
+  }
+  .page { max-width: 740px; margin: 0 auto; padding: 72px 22px 64px; counter-reset: fig; }
+
+  .masthead { padding-bottom: 30px; }
+  .kicker {
+    font: 400 11px/1.4 'PT Mono', ui-monospace, monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+  h1 { font-size: 1.9em; line-height: 1.15; font-weight: 400; margin: 0 0 16px; }
+  .lede { font-size: 1.1em; line-height: 1.58; color: var(--muted); margin: 0; }
+  .meta {
+    font: 400 11.5px/1.6 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    margin: 18px 0 0;
+  }
+
+  nav.toc { margin: 26px 0 54px; }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; }
+  nav.toc li { font: 400 12.5px/2.1 'PT Mono', ui-monospace, monospace; }
+  nav.toc a { color: var(--accent); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Понятное оглавление «Что в гайде» (блок <nav class="guide-map"> в README):
+     группы с подписями; если оно есть, обычное оглавление скрыто. */
+  body:has(.guide-map) nav.toc { display: none; }
+  .guide-map { margin: 8px 0 48px; }
+  .guide-map-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 20px; }
+  .gm-group { border: 1px solid var(--rule); border-radius: 6px; padding: 12px 16px 10px; }
+  .gm-title { margin: 0 0 6px !important; font: 600 11.5px/1.4 'PT Mono', ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .gm-item { display: block; padding: 5px 0; text-decoration: none; color: inherit; border-top: 1px dashed var(--rule); }
+  .gm-item:first-of-type { border-top: 0; }
+  .gm-item b { display: block; color: var(--accent); font-weight: 600; font-size: 15.5px; }
+  .gm-item span { display: block; color: var(--muted); font-size: 13.5px; line-height: 1.4; }
+  .gm-item:hover b { text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 760px) { .guide-map-grid { grid-template-columns: 1fr; } }
+
+  section { padding: 44px 0 0; }
+  section:first-of-type { padding-top: 0; }
+  section > .kicker { margin-bottom: 12px; }
+  h2 { font-size: 1.4em; line-height: 1.3; font-weight: 400; margin: 0 0 14px; }
+  h3 { font-size: 1.1em; line-height: 1.35; font-weight: 700; margin: 30px 0 12px; }
+  p { margin: 0 0 1em; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  a:hover { color: var(--ink); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 22px 0 26px;
+    font-size: .94em;
+    line-height: 1.5;
+  }
+  th {
+    text-align: left;
+    font: 400 11.5px/1.4 'PT Mono', ui-monospace, monospace;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  td { padding: 11px 10px; vertical-align: top; }
+  td:first-child {
+    font-family: 'PT Mono', ui-monospace, monospace;
+    font-size: .86em;
+    line-height: 1.5;
+  }
+
+  blockquote {
+    margin: 22px 0;
+    padding: 0;
+    font-size: .96em;
+    color: var(--muted);
+  }
+  blockquote p { margin: 0 0 6px; }
+  blockquote em { font-style: italic; }
+  .quote-source {
+    font: 400 11px/1.6 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+  }
+
+  .when, .trap { font-size: .96em; }
+  .when strong, .trap strong { font-weight: 700; }
+
+  .prompt {
+    margin: 24px 0 26px;
+    background: #16181d;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .prompt-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 16px;
+    background: #23262e;
+  }
+  .prompt-name {
+    font: 400 11.5px/1.4 'PT Mono', ui-monospace, monospace;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #a8b0ba;
+    min-width: 0;
+  }
+  .copy-btn {
+    font: 400 11.5px/1.4 'PT Mono', ui-monospace, monospace;
+    color: #c3c9d1;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 4px;
+    padding: 4px 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover { color: #ffffff; border-color: rgba(255,255,255,.55); }
+  .copy-btn.done { color: #16181d; background: #c3c9d1; border-color: #c3c9d1; }
+  /* Блок кода вне промпт-карточки: в статье 11, с которой снят шаблон, таких
+     блоков нет, и без правила голый <pre> тянул страницу вбок (статья 05:
+     ширина 1608 при окне 1280). Бид pc3-59o.351. */
+  .page section > pre {
+    margin: 0 0 26px;
+    padding: 14px 16px;
+    background: rgba(26, 26, 26, .035);
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .page section > pre code {
+    display: block;
+    font: 400 13px/1.65 'PT Mono', ui-monospace, monospace;
+    color: var(--ink);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+  .prompt pre {
+    margin: 0;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    overflow-x: hidden;
+  }
+  .prompt pre code {
+    display: block;
+    font: 400 13px/1.65 'PT Mono', ui-monospace, monospace;
+    color: #b7bec7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+  .prompt-src {
+    font: 400 11px/1.6 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    margin: -18px 0 26px;
+  }
+  code {
+    font: 400 .86em 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    word-break: break-word;
+  }
+  strong { font-weight: 700; color: var(--ink); }
+
+  ul.plain { list-style: none; margin: 0 0 1em; padding: 0; }
+  ul.plain li { margin: 0 0 10px; }
+
+  figure { margin: 26px 0; width: 114%; max-width: 860px; margin-left: -7%; }
+  figure.diagram { counter-increment: fig; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption {
+    font: 400 11px/1.6 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    margin-top: 10px;
+    text-align: center;
+  }
+  /* Канон lesson-guide-writer: подпись рисунка начинается с «Рис. N.», счётчик
+     ведёт CSS, номер внутри SVG и в тексте README не пишется. */
+  figure.diagram > figcaption::before { content: 'Рис. ' counter(fig) '. '; }
+  /* Схема-страница с состояниями живёт в рамке: её стили и скрипт не текут
+     в страницу статьи (бид pc3-59o.1179). */
+  figure.diagram.interactive iframe {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  /* Заглавная иллюстрация Hairline в шапке (блок <div class="hl-hero"> сразу
+     после лида): фигура рисуется прямо в странице движком hairline-kernel.js,
+     без рамки, ползунка и темы, на цвете бумаги. Пропорцию сцены ставит скрипт
+     фигуры, здесь запасная. */
+  .hl-hero { margin: 8px 0 28px; }
+  .hl-hero .hl-stage {
+    aspect-ratio: 1.6 / 1;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    --hairline-plate: var(--paper);
+  }
+  .hl-caption {
+    font: 400 11px/1.6 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    margin: 10px auto 0;
+    max-width: 560px;
+    text-align: center;
+  }
+  .hl-caption code { font-size: 1em; }
+  .hl-read { display: block; min-height: 1.6em; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .sources { font-size: .96em; }
+  .sources ul { list-style: none; margin: 0 0 1em; padding: 0; }
+  .sources li { margin: 0 0 8px; }
+  .sources .src-name { color: var(--ink); font-weight: 700; }
+  .sources .src-note {
+    font: 400 11px/1.6 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+
+  .terms { margin: 20px 0 26px; border-top: 1px solid var(--rule); }
+  .term { border-bottom: 1px solid var(--hairline); }
+  .term summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding: 13px 34px 13px 0;
+    font-weight: 700;
+  }
+  .term summary::-webkit-details-marker { display: none; }
+  .term summary::after {
+    content: "+";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font: 400 15px/1 'PT Mono', ui-monospace, monospace;
+    color: var(--accent);
+  }
+  .term[open] summary::after { content: "–"; }
+  .term summary:hover { color: var(--accent); }
+  .term-body { padding: 0 0 16px; font-size: .96em; color: var(--muted); }
+  .term-body p:last-child { margin-bottom: 0; }
+
+  /* Карточка кейса: запрос, решение, что сделал отдел, ответ, было и стало.
+     Шире колонки текста, чтобы на экране 1280×720 карточка влезала целиком
+     (слово Риса 06.10.2026: гайд показывается с экрана на эфире). */
+  .case, .wide {
+    width: min(1040px, calc(100vw - 48px));
+    margin: 30px 0 40px calc(50% - min(520px, 50vw - 24px));
+  }
+  .case {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 20px 28px 22px;
+    font-size: 16.5px;
+    line-height: 1.45;
+  }
+  .case p { margin: 0; }
+  .case-label {
+    display: block;
+    font: 400 11px/1.4 'PT Mono', ui-monospace, monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  .case-title { font-size: 1.15em; font-weight: 700; margin: 0 0 14px; }
+  .case-title .case-label { display: inline; margin-right: 10px; }
+  .case-ask { margin: 0 0 16px; }
+  .bubble {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    background: rgba(51, 86, 122, .07);
+    border: 1px solid rgba(51, 86, 122, .35);
+    border-radius: 16px 16px 16px 4px;
+    padding: 10px 18px;
+    font-size: 22px;
+    line-height: 1.36;
+  }
+  .case-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); gap: 0 36px; margin: 0 0 16px; }
+  .case-grid > div > p { margin-bottom: 10px; }
+  .case-chain { list-style: none; margin: 0; padding: 0; }
+  .case-chain li { display: inline; margin: 0; }
+  .case-chain li + li::before { content: " → "; color: var(--accent); font-weight: 700; }
+  .case-lead { font-weight: 700; font-size: 1.08em; margin: 0 0 6px !important; }
+  .case-facts { margin: 0 0 14px; padding: 0; list-style: none; }
+  .case-facts li { margin: 0 0 4px; padding-left: 18px; position: relative; }
+  .case-facts li::before { content: "·"; position: absolute; left: 4px; font-weight: 700; color: var(--accent); }
+  .src {
+    font: 400 12px/1.5 'PT Mono', ui-monospace, monospace;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+  .case table { margin: 4px 0 0; font-size: 16px; }
+  .case td:first-child { font: inherit; }
+  .case td, .case th { padding: 5px 10px 5px 0; }
+  .case td { border-bottom: 1px solid var(--hairline); }
+  .case-shift {
+    border-top: 2px solid var(--ink);
+    padding-top: 12px;
+  }
+  .shift-cols { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0 18px; align-items: stretch; }
+  .shift-arrow { align-self: center; font-size: 28px; color: var(--accent); }
+  .shift-cols > div { font-size: 19px; line-height: 1.45; }
+  .shift-now { font-weight: 700; }
+  .shift-note { margin-top: 10px !important; font-size: 16px; color: var(--muted); }
+  .shift-table td:nth-child(2) { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-table td:nth-child(3) { font-weight: 700; }
+  .shift-table { font-size: 18px !important; }
+  .frames { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 4px 0 0; }
+  .frames figure { width: auto; max-width: none; margin: 0; }
+  .frames img { width: 100%; display: block; border: 1px solid var(--hairline); }
+  .frames figcaption { text-align: left; font-size: 12px; margin-top: 6px; color: var(--ink); }
+
+  /* Неделя релизов: таблица и ряд кадров выпусков (статья 20, слово Риса 06.10.2026). */
+  .week { padding: 16px 28px 20px; }
+  .week-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 18px; margin: 0 0 4px !important; }
+  .week-head .case-label { margin: 0; font-size: 12px; color: var(--ink); }
+  .week-head a { font: 400 12px/1.4 'PT Mono', ui-monospace, monospace; }
+  .case .week-table { margin: 0 0 14px; font-size: 17px; line-height: 1.35; }
+  .week-table th { padding: 6px 12px 6px 0; }
+  .case .week-table td { padding: 6px 12px 6px 0; }
+  .week-table td:first-child { white-space: nowrap; width: 64px; }
+  .week-table td:last-child { white-space: nowrap; width: 1%; }
+  .week-none { color: var(--muted); }
+  .week-shots { display: grid; grid-auto-flow: column; grid-auto-columns: 22%; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; padding-bottom: 8px; }
+  .week-shots a { display: block; text-decoration: none; color: var(--ink); scroll-snap-align: start; }
+  .week-shots img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border: 1px solid var(--hairline); }
+  .week-shots span { display: block; margin-top: 5px; font: 400 12px/1.4 'PT Mono', ui-monospace, monospace; }
+  .week-shots a:hover span { color: var(--accent); text-decoration: underline; }
+
+  /* Две карточки рядом: официальный источник и практик. */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 22px 0 26px; }
+  .pair-card { border: 1px solid var(--rule); border-radius: 6px; padding: 16px 20px; font-size: 16px; line-height: 1.5; }
+  .pair-card p { margin: 0 0 8px; }
+  .pair-card blockquote { margin: 6px 0 10px; padding-left: 12px; border-left: 2px solid var(--rule); font-style: italic; color: var(--ink); }
+  .pair-card .pair-says { font-weight: 700; }
+  .catalog-card { border: 1px solid var(--rule); border-radius: 6px; padding: 18px 22px; margin: 22px 0 26px; }
+  .catalog-card p { margin: 0 0 8px; }
+  .catalog-card .catalog-q { font-size: 1.12em; line-height: 1.45; }
+  .catalog-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; font: 400 13px/1.6 'PT Mono', ui-monospace, monospace; color: var(--muted); }
+  .chip {
+    display: inline-block;
+    font: 400 12px/1.5 'PT Mono', ui-monospace, monospace;
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    padding: 0 6px;
+    margin: 0 4px 4px 0;
+    color: var(--muted);
+  }
+  .answer-line { font-size: 1.12em; line-height: 1.5; border-left: 2px solid var(--accent); padding: 2px 0 2px 16px; margin: 18px 0 22px; }
+  .catalog-line { font: 400 11.5px/1.6 'PT Mono', ui-monospace, monospace; color: var(--muted); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: 8px 0; margin: 16px 0 10px; overflow-wrap: anywhere; }
+
+  /* Лента карточек каталога: прокрутка вбок внутри своей рамки, край следующей
+     карточки виден (слово Риса 06.10.2026, статья 20). */
+  .shelf { margin-top: 22px; margin-bottom: 30px; }
+  .shelf-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 18px; margin: 0 0 10px; }
+  .shelf-head .case-label { margin: 0; }
+  .shelf-nav { display: inline-flex; align-items: center; gap: 8px; }
+  .shelf-hint { font: 400 12px/1.4 'PT Mono', ui-monospace, monospace; color: var(--muted); margin-right: 4px; }
+  .shelf-btn {
+    width: 36px; height: 36px; padding: 0;
+    font: 400 18px/1 'PT Serif', Georgia, serif; color: var(--accent);
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 50%; cursor: pointer;
+  }
+  .shelf-btn:hover:not(:disabled) { border-color: var(--accent); }
+  .shelf-btn:disabled { color: var(--hairline); cursor: default; }
+  .shelf-track {
+    display: flex; gap: 16px; align-items: stretch;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--rule) transparent;
+    padding: 2px 0 12px;
+  }
+  .shelf-track:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+  .rcard {
+    flex: 0 0 316px; scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    border: 1px solid var(--rule); border-radius: 6px; padding: 14px 18px 12px;
+    background: var(--paper); font-size: 15px; line-height: 1.45;
+  }
+  .rcard p { margin: 0; }
+  .rcard-this { border-color: var(--ink); border-width: 1.5px; }
+  .rcard-meta { display: flex; flex-wrap: wrap; gap: 2px 14px; font: 400 12px/1.5 'PT Mono', ui-monospace, monospace; color: var(--muted); margin-bottom: 8px !important; }
+  .rcard-meta span:first-child { color: var(--ink); }
+  .rcard-q { font-size: 17.5px; line-height: 1.4; margin-bottom: 12px !important; }
+  .rcard-a { border-left: 2px solid var(--accent); padding: 1px 0 1px 10px; margin-bottom: 12px !important; }
+  .rcard-tags { margin-top: auto !important; }
+  .rcard-tags .chip { font-size: 11.5px; }
+  .rcard-path { font: 400 11px/1.45 'PT Mono', ui-monospace, monospace; color: var(--muted); border-top: 1px solid var(--hairline); padding-top: 7px; margin-top: 6px !important; overflow-wrap: anywhere; }
+
+  /* Лента каталога: стилизованные карточки, один цвет, мультяшный контур и круглые края (слово Риса 06.10.2026). */
+  .rcard {
+    background: #fff3c4; border: 2px solid var(--ink); border-radius: 22px;
+    box-shadow: 4px 4px 0 var(--ink); padding: 16px 20px 14px;
+  }
+  .rcard-this { background: #ffe58a; border-width: 2px; }
+  .rcard-meta span:first-child { background: var(--ink); color: #fff3c4; border-radius: 999px; padding: 0 8px; }
+  .rcard-q { font-weight: 700; }
+  .rcard-a { border-left: 0; background: #fffef9; border: 1.5px solid var(--ink); border-radius: 14px; padding: 7px 11px; }
+  .rcard-tags .chip { background: #fffef9; border: 1.5px solid var(--ink); border-radius: 999px; padding: 1px 9px; color: var(--ink); }
+  .shelf-track { padding: 4px 6px 16px 2px; }
+  .shelf-btn { border: 2px solid var(--ink); color: var(--ink); background: #fff3c4; box-shadow: 2px 2px 0 var(--ink); }
+  .shelf-btn:disabled { background: var(--paper); box-shadow: none; border-color: var(--hairline); }
+
+  /* Три вопроса владельцев: пример вопроса в рамке чата и ответ агента без опоры. */
+  .asks { margin-top: 18px; margin-bottom: 30px; }
+  .asks-head { margin: 0 0 10px; }
+  .asks-head .case-label { margin: 0; }
+  .asks-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .ask-card { border: 1px solid var(--rule); border-radius: 6px; padding: 14px 18px 12px; display: flex; flex-direction: column; font-size: 15px; line-height: 1.45; }
+  .ask-card p { margin: 0; }
+  .ask-card .bubble.ask-q { display: block; font-size: 18px; line-height: 1.38; padding: 9px 14px; margin: 2px 0 12px; }
+  .ask-a {
+    align-self: flex-end; max-width: 92%;
+    border: 1px dashed var(--rule); border-radius: 14px 14px 4px 14px;
+    padding: 8px 12px; color: rgba(26, 26, 26, .66); margin-bottom: 8px !important;
+  }
+  .ask-who { display: block; font: 400 10.5px/1.4 'PT Mono', ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 2px; }
+  .ask-col { display: flex; flex-direction: column; }
+  .ask-col > .ask-card { flex: 1; }
+  .ask-foot { margin: 6px 0 0 !important; align-self: flex-end; font: 400 11.5px/1.4 'PT Mono', ui-monospace, monospace; color: var(--muted); }
+
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0 14px; align-items: center; border: 1px solid var(--rule); border-radius: 6px; padding: 16px 20px; margin: 22px 0 26px; font-size: 16px; line-height: 1.45; }
+  .flow > div:not(.flow-arrow) { border: 1px solid var(--hairline); border-radius: 4px; padding: 10px 12px; height: 100%; }
+  .flow-arrow { color: var(--accent); font-size: 22px; }
+
+  @media (max-width: 840px) {
+    .case, .wide { width: auto; margin-left: 0; }
+    .case { padding: 18px 18px 20px; font-size: 16px; }
+    .bubble { font-size: 20px; }
+    .case-grid, .pair, .frames { grid-template-columns: 1fr; }
+    .case-grid { gap: 14px 0; }
+    .shift-cols { grid-template-columns: 1fr; }
+    .shift-arrow { transform: rotate(90deg); justify-self: start; margin: 2px 0 2px 8px; }
+    .src { white-space: normal; }
+    .flow { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); justify-self: start; margin-left: 10px; }
+    .week { padding: 14px 16px 16px; }
+    .case .week-table { font-size: 15px; }
+    .week-table td:last-child { white-space: normal; width: auto; }
+    .week-shots { grid-auto-columns: 44%; gap: 12px; }
+    .asks-grid { grid-template-columns: 1fr; gap: 12px; }
+    .rcard { flex-basis: min(316px, 82%); }
+  }
+  @media (max-width: 480px) {
+    .bubble { font-size: 18px; }
+    .shift-cols > div, .shift-table { font-size: 16px !important; }
+  }
+
+  @media (max-width: 840px) {
+    .page { padding: 48px 18px 48px; }
+    body { font-size: 16px; }
+    table { font-size: 13.5px; }
+    th { font-size: 10.5px; }
+    figure { width: 100%; max-width: none; margin-left: 0; }
+  }
+  @media (max-width: 700px) {
+    /* широкая схема не сжимается до нечитаемого: прокрутка внутри своей рамки */
+    figure.diagram { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    figure.diagram svg { min-width: 580px; }
+  }
+  @media (max-width: 480px) {
+    .page { padding: 40px 16px 44px; }
+    h1 { font-size: 1.68em; }
+    table { font-size: 12.5px; }
+    th, td { padding-left: 6px; padding-right: 6px; }
+    td:first-child { font-size: 11px; }
+    figure { margin: 20px 0; }
+    .prompt pre code { font-size: 12.5px; }
+  }
+  @media print {
+    @page { size: A4; margin: 20mm 17mm; }
+    body { background: #ffffff; font-size: 10.5pt; line-height: 1.55; }
+    .page { max-width: none; padding: 0; }
+    a { color: var(--ink); }
+    section + section { padding-top: 26pt; }
+    table { font-size: 9pt; }
+    th { font-size: 8pt; }
+    figure { width: 100%; max-width: none; margin-left: 0; overflow: visible; }
+    figure.diagram svg { min-width: 0; }
+    .prompt { background: #ffffff; border: 1px solid var(--rule); }
+    .prompt-head { background: #f2f1ec; }
+    .prompt-name { color: var(--muted); }
+    .prompt pre code { color: var(--ink); font-size: 9pt; }
+    .copy-btn { display: none; }
+    .term[open] .term-body, .term-body { display: block; }
+    p { orphans: 2; widows: 2; }
+    h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+    figure, tr, pre, .prompt { page-break-inside: avoid; break-inside: avoid; }
+    thead { display: table-header-group; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<header class="masthead">
+  <h1>Отдел исследований, который помнит всё найденное</h1>
+<div class="hl-hero" id="hl-shelf">
+  <div class="hl-stage" role="img" aria-label="Полка каталога отдела исследований: восемь коробок по крупным темам, толщина коробки показывает число отчётов по теме"></div>
+  <script src="assets/hairline-kernel.js"></script>
+  <script src="assets/hero-shelf.js"></script>
+</div>
+  <p class="lede">Агент отвечает на вопрос про инструмент или рынок за минуту, а через неделю ответ уже не найти: он остался в закрытом чате. Для таких вопросов есть отдел исследований, папка <code>corp-research</code>. Каждый вопрос оставляет в нём файл, и следующий вопрос сначала ищет там, потом в интернете.</p>
+      <figure class="diagram" id="fig-overview" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 455" role="img" aria-labelledby="ov-title ov-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="ov-title">Как работает исследование целиком</title>
+  <desc id="ov-desc">KB: concepts/research-loop
+Вопрос перед действием сначала идёт во внутреннее исследование: в свой отдел, в каталог отчётов. Если свежий отчёт есть, ответ приходит сразу, с путём к отчёту и датой. Если свежего отчёта нет, начинается внешнее исследование, ему посвящён урок 3. Инструменты отвечают на вопрос «чем ищем»: Grok, deep research, браузер агента. Они идут в источники, которые отвечают на вопрос «где ищем»: оригиналы (лаборатории, документация, практики), X, Reddit, Telegram и русскоязычные источники под российскую специфику. Результат — отчёт: у каждого факта адрес источника и дата. Отчёт ложится в отдел, и следующий вопрос начинается уже с него. Из отдела берут другие отделы: контент, уроки, ответы клиентам. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла, петля пунктиром.</desc>
+
+  <defs>
+    <marker id="ov-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="ov-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="455" fill="#f8fafc" />
+
+  <!-- Зона внешнего исследования -->
+  <rect x="24" y="250" width="892" height="150" rx="10" fill="#0284c7" fill-opacity="0.05" stroke="#0284c7" stroke-width="1.2" />
+  <text x="300" y="272" fill="#0284c7" font-size="10" letter-spacing="0.12em" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ВНЕШНЕЕ ИССЛЕДОВАНИЕ · УРОК 3</text>
+
+  <!-- Ряд 1: внутреннее исследование -->
+  <rect x="40" y="50" width="200" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="140" y="90" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Вопрос перед действием</text>
+
+  <rect x="320" y="50" width="270" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="455" y="76" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Свой отдел: каталог отчётов</text>
+  <text x="455" y="94" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">внутреннее исследование</text>
+  <text x="455" y="110" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">есть свежий отчёт?</text>
+
+  <rect x="680" y="50" width="230" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="795" y="80" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Ответ сразу</text>
+  <text x="795" y="99" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">с путём к отчёту и датой</text>
+
+  <rect x="680" y="140" width="230" height="60" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="795" y="165" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Другие отделы</text>
+  <text x="795" y="184" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">контент, уроки, ответы клиентам</text>
+
+  <path d="M240 85 H320" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ov-arrow-ink)" />
+  <text x="280" y="78" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">сначала</text>
+
+  <path d="M590 75 H680" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ov-arrow-ink)" />
+  <text x="635" y="68" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">есть</text>
+
+  <path d="M590 100 H627 Q635 100 635 108 V162 Q635 170 643 170 H680" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ov-arrow-ink)" />
+  <text x="629" y="146" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end">берут</text>
+
+  <!-- Нет свежего отчёта: во внешнее -->
+  <path d="M375 120 V190 Q375 198 367 198 H173 Q165 198 165 206 V290" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ov-arrow-ink)" />
+  <text x="270" y="190" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">нет свежего</text>
+
+  <!-- Ряд 2: внешнее исследование -->
+  <rect x="50" y="290" width="230" height="90" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="165" y="318" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Инструменты: чем ищем</text>
+  <text x="165" y="340" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">Grok, deep research,</text>
+  <text x="165" y="356" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">браузер агента</text>
+
+  <rect x="330" y="290" width="330" height="90" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="495" y="316" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Источники: где ищем</text>
+  <text x="495" y="336" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">оригиналы: лаборатории, документация, практики</text>
+  <text x="495" y="352" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">X, Reddit, Telegram</text>
+  <text x="495" y="368" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">русскоязычные под российскую специфику</text>
+
+  <rect x="710" y="290" width="190" height="90" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="805" y="320" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Отчёт</text>
+  <text x="805" y="342" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">факт + адрес источника</text>
+  <text x="805" y="358" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">+ дата источника</text>
+
+  <path d="M280 335 H330" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ov-arrow-ink)" />
+  <path d="M660 335 H710" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ov-arrow-ink)" />
+
+  <!-- Петля: отчёт ложится в отдел -->
+  <path d="M870 290 V240 Q870 232 862 232 H543 Q535 232 535 224 V120" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ov-arrow-accent)" />
+  <text x="702" y="225" fill="#0284c7" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ложится в отдел · следующий вопрос начинается здесь</text>
+
+<!-- Acting roles; surfaces and artifacts remain unmarked. -->
+<text data-role="human" data-label="Вопрос" x="234" y="65" font-size="30" transform="rotate(-10 234 55.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+<text data-role="agent" data-label="Инструменты" x="274" y="305" font-size="30" transform="rotate(8 274 295.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+
+  <!-- Легенда -->
+  <g>
+    <text x="40" y="436" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+    <path d="M116 432 H152" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ov-arrow-accent)" />
+    <text x="160" y="436" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">петля</text>
+  </g>
+</svg>
+        <figcaption>Исследование целиком: сначала свой отдел, внешний поиск только когда свежего отчёта нет, и каждый отчёт ложится обратно в отдел</figcaption>
+      </figure>
+</header>
+
+<nav class="toc" aria-label="Содержание">
+  <ul>
+    <li><a href="#agent-otvechaet-uverenno-no-iz-staryh-zn">Агент отвечает уверенно, но из старых знаний</a></li>
+    <li><a href="#tri-voprosa-k-otdelu-i-chto-pomenyalos-p">Три вопроса к отделу и что поменялось после ответа</a></li>
+    <li><a href="#dva-issledovaniya-vneshnee-i-vnutrennee">Два исследования: внешнее и внутреннее</a></li>
+    <li><a href="#deep-research-glubokiy-poisk-vnutri-serv">Deep research: глубокий поиск внутри сервиса</a></li>
+    <li><a href="#instrumenty-otdela-chem-iskat">Инструменты отдела: чем искать</a></li>
+    <li><a href="#iz-chego-sostoit-otchet-shapka-otvet-dok">Из чего состоит отчёт: шапка, ответ, доказательства</a></li>
+    <li><a href="#shest-ponyatiy-na-kotoryh-derzhitsya-otd">Шесть понятий, на которых держится отдел</a></li>
+    <li><a href="#put-voprosa-ot-vashey-frazy-do-zapisi-v-">Путь вопроса: от вашей фразы до записи в каталоге</a></li>
+    <li><a href="#brif-zadaet-chto-iskat-pyat-liniy-poiska">Бриф задаёт, что искать, пять линий поиска задают, где искать</a></li>
+    <li><a href="#otchet-dlya-chteniya-fayl-dokazatelstv-d">Отчёт для чтения, файл доказательств для проверки цифр</a></li>
+    <li><a href="#katalog-kak-nayti-gotovyy-otchet-do-novo">Каталог: как найти готовый отчёт до нового поиска</a></li>
+    <li><a href="#gde-lezhit-tekuschiy-otvet-i-gde-dokazat">Где лежит текущий ответ и где доказательства на дату</a></li>
+    <li><a href="#shablon-otdela-papki-pravila-skill">Шаблон отдела: папки, правила, скилл</a></li>
+    <li><a href="#itogovaya-proverka">Итоговая проверка</a></li>
+    <li><a href="#smyslovye-istochniki">Смысловые источники</a></li>
+  </ul>
+</nav>
+
+    <section id="intro">
+<div class="guide-map" role="navigation" aria-label="Что в гайде">
+  <p class="guide-map-head"><span class="case-label">Что в гайде</span></p>
+  <div class="guide-map-grid">
+    <div class="gm-group"><p class="gm-title">1 · Зачем отдел</p>
+      <a class="gm-item" href="#week"><b>Что вышло за неделю</b><span>почему исследование это первый шаг работы агента</span></a>
+      <a class="gm-item" href="#agent-otvechaet-uverenno-no-iz-staryh-zn"><b>Агент отвечает из старых знаний</b><span>три вопроса без отдела: уверенно, но без ссылок и дат</span></a>
+      <a class="gm-item" href="#tri-voprosa-k-otdelu-i-chto-pomenyalos-p"><b>Три вопроса к отделу</b><span>что поменялось, когда ответил отдел</span></a>
+    </div>
+    <div class="gm-group"><p class="gm-title">2 · Как и чем искать</p>
+      <a class="gm-item" href="#dva-issledovaniya-vneshnee-i-vnutrennee"><b>Внешнее и внутреннее</b><span>чужой опыт и своё уже найденное; источники</span></a>
+      <a class="gm-item" href="#deep-research-glubokiy-poisk-vnutri-serv"><b>Deep research</b><span>как работает поиск внутри ChatGPT, Claude, Gemini</span></a>
+      <a class="gm-item" href="#instrumenty-otdela-chem-iskat"><b>Инструменты</b><span>поисковики, браузер, агент-поисковик и как подключить</span></a>
+    </div>
+    <div class="gm-group"><p class="gm-title">3 · Как устроен отдел</p>
+      <a class="gm-item" href="#iz-chego-sostoit-otchet-shapka-otvet-dok"><b>Отчёт</b><span>из чего состоит один отчёт</span></a>
+      <a class="gm-item" href="#shest-ponyatiy-na-kotoryh-derzhitsya-otd"><b>Шесть понятий</b><span>заземление, каталог и другие слова отдела</span></a>
+      <a class="gm-item" href="#put-voprosa-ot-vashey-frazy-do-zapisi-v-"><b>Путь вопроса</b><span>девять шагов от фразы до записи в каталоге</span></a>
+      <a class="gm-item" href="#brif-zadaet-chto-iskat-pyat-liniy-poiska"><b>Бриф и линии</b><span>что искать и где искать</span></a>
+      <a class="gm-item" href="#katalog-kak-nayti-gotovyy-otchet-do-novo"><b>Каталог</b><span>как найти готовый отчёт до нового поиска</span></a>
+    </div>
+    <div class="gm-group"><p class="gm-title">4 · Собрать свой</p>
+      <a class="gm-item" href="#shablon-otdela-papki-pravila-skill"><b>Шаблон отдела</b><span>папки, правила и скилл: скопировать агенту</span></a>
+      <a class="gm-item" href="/otdel-issledovaniy/praktika/"><b>Практика</b><span>собрать отдел по шагам и проверить</span></a>
+      <a class="gm-item" href="#itogovaya-proverka"><b>Итоговая проверка</b><span>вопросы к себе после чтения</span></a>
+    </div>
+  </div>
+</div>
+      <p>Каждую неделю выходит что-то сильное и новое, поэтому исследование — первый шаг любой работы агента. Сначала агент берёт готовое из отдела исследований, а то, чего там нет, исследует. Так устроен агент новостных выпусков Нейрочела: новости он берёт из сборщика новостей отдела исследований, а там, где нужно глубже, запускается исследование.</p>
+<div class="case week" id="week">
+  <p class="week-head"><span class="case-label">Последние выпуски, 28 сентября – 6 октября 2026</span><a href="https://t.me/neyrochel_daily">Нейрочел Дейли в Telegram</a></p>
+  <table class="week-table">
+    <thead><tr><th>Новость</th><th>Что вышло</th><th>Выпуск</th></tr></thead>
+    <tbody>
+      <tr><td>с 27.09</td><td>Агенты на Claude Opus 5.5 разбирают игры и склеивают их: Minecraft в Elden Ring, скейт в MW2, открытый Universal Modder</td><td><a href="https://t.me/neyrochel_daily/23">06.10</a></td></tr>
+      <tr><td>04.10</td><td>Ultrafast для GPT-6.1 Sol снова «скоро», /retro Мэтта Покока, открытая Kolibri от Aleph Alpha, тест ThinkingBox от Microsoft</td><td><a href="https://t.me/neyrochel_daily/22">05.10</a></td></tr>
+      <tr><td>02.10</td><td>Claude Frontier Academy, Opus 5.5 и Sonnet 5.5 в Antigravity, гид OpenAI по моделям GPT-6</td><td><a href="https://t.me/neyrochel_daily/21">04.10</a></td></tr>
+      <tr><td>01.10</td><td>Mods в Claude Code, баны Claude за вход через VPN, сброс лимитов Codex, FLUX 3 Image</td><td><a href="https://t.me/neyrochel_daily/20">03.10</a></td></tr>
+      <tr><td>01.10</td><td>Microsoft MAI-Transcribe-2 и MAI-Voice-2.1</td><td class="week-none">только отчёт</td></tr>
+      <tr><td>30.09</td><td>Gemini 4 Argon</td><td><a href="https://t.me/neyrochel_daily/19">02.10</a></td></tr>
+      <tr><td>29.09</td><td>Свой тест: шесть моделей OpenAI и Anthropic рисуют пеликана на велосипеде</td><td><a href="https://t.me/neyrochel_daily/18">30.09</a></td></tr>
+      <tr><td>29.09</td><td>OpenAI DevDay: GPT-6.1 Sol, Codex в облаке, Decisions API</td><td><a href="https://t.me/neyrochel_daily/17">30.09</a></td></tr>
+      <tr><td>28.09</td><td>Claude Sonnet 5.5</td><td><a href="https://t.me/neyrochel_daily/16">28.09</a></td></tr>
+      <tr><td>28.09</td><td>ElevenLabs v4</td><td><a href="https://t.me/neyrochel_daily/15">28.09</a></td></tr>
+    </tbody>
+  </table>
+  <div class="week-shots">
+    <a href="https://t.me/neyrochel_daily/23"><img src="assets/week-game-mashups.jpg" alt="Первый кадр выпуска Нейрочела: «Одна игра внутри другой», Minecraft в Elden Ring, Tarkov в Skyrim."><span>Мешапы игр · выпуск 06.10</span></a>
+    <a href="https://t.me/neyrochel_daily/22"><img src="assets/week-sol-ultrafast.jpg" alt="Первый кадр выпуска Нейрочела 05.10: Sol Ultrafast, /retro, Kolibri, ThinkingBox."><span>Sol Ultrafast и ещё три · выпуск 05.10</span></a>
+    <a href="https://t.me/neyrochel_daily/21"><img src="assets/week-frontier-academy.jpg" alt="Первый кадр выпуска Нейрочела 04.10: новые Claude в Antigravity, гид OpenAI по GPT-6, $100 млн Anthropic на инженеров."><span>Frontier Academy и ещё две · выпуск 04.10</span></a>
+    <a href="https://t.me/neyrochel_daily/20"><img src="assets/week-claude-mods.jpg" alt="Первый кадр выпуска Нейрочела 03.10: моды Claude Code, бан Claude за VPN, лимиты Codex."><span>Mods в Claude Code и ещё три · выпуск 03.10</span></a>
+    <a href="https://t.me/neyrochel_daily/19"><img src="assets/week-gemini-4-argon.jpg" alt="Кадр выпуска Нейрочела: заголовок Gemini 4 Argon."><span>Gemini 4 Argon · выпуск 02.10</span></a>
+    <a href="https://t.me/neyrochel_daily/18"><img src="assets/week-pelicans.jpg" alt="Кадр ролика-сетки Нейрочела: пеликаны на велосипеде от GPT-6 Luna и Claude Sonnet 5.5 со временем и ценой."><span>Тест пеликанов · выпуск 30.09</span></a>
+    <a href="https://t.me/neyrochel_daily/17"><img src="assets/week-openai-devday.jpg" alt="Первый кадр выпуска Нейрочела: заголовок OpenAI DevDay."><span>OpenAI DevDay · выпуск 30.09</span></a>
+    <a href="https://t.me/neyrochel_daily/16"><img src="assets/week-sonnet-5-5.jpg" alt="Первый кадр выпуска Нейрочела: заголовок Claude Sonnet 5.5."><span>Claude Sonnet 5.5 · выпуск 28.09</span></a>
+    <a href="https://t.me/neyrochel_daily/15"><img src="assets/week-eleven-v4.jpg" alt="Кадр выпуска Нейрочела про ElevenLabs v4: ремарка «сухой сарказм» и два персонажа."><span>ElevenLabs v4 · выпуск 28.09</span></a>
+  </div>
+</div>
+      <p><em>За девять дней вышло девять выпусков: шесть про одну тему и три дайджеста по три-четыре новости. Из новинок этих дней только MAI-Transcribe-2 и MAI-Voice-2.1 остались отчётом.</em></p>
+      <figure class="diagram" id="fig-neyrochel" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 510" role="img" aria-labelledby="nc-title nc-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="nc-title">Как исследование становится выпуском Нейрочела</title>
+  <desc id="nc-desc">KB: concepts/research-loop
+Сборщик новостей отдела исследований обходит источники раз в час. Вечером студия выпусков на сервере предлагает темы, тему выбирает владелец, а если он молчит, срабатывает автовыбор. Первый шаг выпуска, выделенный на схеме, это исследование из трёх шагов: сначала каталог отдела, уже исследовано ли это, и свежий отчёт берётся готовым; если ответа нет или он устарел, идёт поиск по первоисточникам, практикам и бенчмаркам; результат пишется отчётом в отдел исследований, файл доказательств лежит рядом, выпуск держит ссылку на отчёт. Дальше сценарий, голос, картинка и рендер берут факты и числа только из отчёта, и в 08:00 выходит пост в @neyrochel_daily. Пунктирная петля от отчёта к каталогу: отчёт остаётся в отделе, и следующие выпуски на ту же тему берут его готовым. Пунктиром вверх: тот же отчёт берут другие отделы, база знаний, уроки и посты. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла.</desc>
+
+  <defs>
+    <marker id="nc-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="nc-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="510" fill="#f8fafc" />
+
+  <!-- Ряд 1: сборщик, выбор темы, другие отделы -->
+  <rect x="40" y="24" width="250" height="80" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="165" y="46" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em" text-anchor="middle">ОТДЕЛ ИССЛЕДОВАНИЙ</text>
+  <text x="165" y="70" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Сборщик новостей</text>
+  <text x="165" y="91" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">источники раз в час</text>
+
+  <rect x="345" y="24" width="250" height="80" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="470" y="46" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em" text-anchor="middle">СТУДИЯ ВЫПУСКОВ · ВЕЧЕР</text>
+  <text x="470" y="70" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Выбор темы</text>
+  <text x="470" y="91" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">владелец или автовыбор</text>
+
+  <rect x="650" y="24" width="250" height="80" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="5 4" />
+  <text x="775" y="46" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em" text-anchor="middle">ТОТ ЖЕ ОТЧЁТ</text>
+  <text x="775" y="70" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Другие отделы</text>
+  <text x="775" y="91" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">база знаний, уроки, посты</text>
+
+  <path d="M290 64 H345" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+  <text x="317" y="56" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">темы</text>
+
+  <path d="M470 104 V152" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+
+  <!-- Ряд 2: исследование, первый шаг выпуска -->
+  <rect x="40" y="152" width="860" height="160" rx="8" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="2" />
+  <text x="60" y="180" fill="#0284c7" font-size="15" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Исследование — первый шаг выпуска</text>
+
+  <rect x="60" y="200" width="240" height="90" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="180" y="227" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">1 · Каталог отдела</text>
+  <text x="180" y="250" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">уже исследовано?</text>
+  <text x="180" y="268" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">свежее — берём</text>
+
+  <rect x="350" y="200" width="240" height="90" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="470" y="227" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">2 · Поиск</text>
+  <text x="470" y="250" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">первоисточники,</text>
+  <text x="470" y="268" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">практики, бенчмарки</text>
+
+  <rect x="640" y="200" width="240" height="90" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.6" />
+  <text x="760" y="227" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">3 · Отчёт в отдел</text>
+  <text x="760" y="250" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">доказательства рядом,</text>
+  <text x="760" y="268" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">выпуск держит ссылку</text>
+
+  <path d="M300 245 H350" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#nc-arrow-accent)" />
+  <text x="325" y="237" fill="#0284c7" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">нет</text>
+  <path d="M590 245 H640" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#nc-arrow-accent)" />
+
+  <!-- Отчёт возвращается в каталог: следующие выпуски берут готовое -->
+  <path d="M720 200 V190 H140 V198" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#nc-arrow-accent)" />
+  <rect x="410" y="182" width="240" height="16" fill="#eef6fb" />
+  <text x="530" y="194" fill="#0284c7" font-size="11.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">следующие выпуски берут готовое</text>
+
+  <!-- Отчёт берут другие отделы -->
+  <path d="M800 200 V104" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#nc-arrow-accent)" />
+  <text x="810" y="138" fill="#0284c7" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">берут отчёт</text>
+
+  <!-- Отчёт в ряд производства -->
+  <path d="M760 290 V328 Q760 336 752 336 H123 Q115 336 115 344 V372" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+  <rect x="300" y="326" width="340" height="20" fill="#f8fafc" />
+  <text x="470" y="340" fill="#1c4e80" font-size="12" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">факты и числа только из отчёта</text>
+
+  <!-- Ряд 3: производство выпуска -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+    <rect x="40" y="372" width="150" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+    <text x="115" y="402" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Сценарий</text>
+    <text x="115" y="424" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">текст ролика</text>
+
+    <rect x="217" y="372" width="150" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+    <text x="292" y="402" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Голос</text>
+    <text x="292" y="424" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">диалог героев</text>
+
+    <rect x="395" y="372" width="150" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+    <text x="470" y="402" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Картинка</text>
+    <text x="470" y="424" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">кадры и скрины</text>
+
+    <rect x="573" y="372" width="150" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+    <text x="648" y="402" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Рендер</text>
+    <text x="648" y="424" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">сборка ролика</text>
+
+    <rect x="750" y="372" width="150" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+    <text x="825" y="402" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Пост в 08:00</text>
+    <text x="825" y="424" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">@neyrochel_daily</text>
+  </g>
+
+  <path d="M190 409 H217" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+  <path d="M367 409 H395" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+  <path d="M545 409 H573" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+  <path d="M723 409 H750" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#nc-arrow-ink)" />
+
+  <!-- Знаки действующих лиц -->
+<text data-role="agent" data-label="Сборщик новостей" x="284" y="39" font-size="30" transform="rotate(8 284 29.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+<text data-role="human" data-label="Выбор темы" x="589" y="39" font-size="30" transform="rotate(-10 589 29.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+<text data-role="agent" data-label="Исследование" x="894" y="167" font-size="30" transform="rotate(8 894 157.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+
+  <!-- Легенда -->
+  <g font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-size="10.5" fill="#64748b">
+    <path d="M40 487 H70" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" />
+    <text x="78" y="491">тот же отчёт берут другие отделы</text>
+  </g>
+</svg>
+        <figcaption>Как исследование становится выпуском Нейрочела: каталог, поиск, отчёт в отдел, из отчёта сценарий, голос, картинка и пост; следующие выпуски берут отчёт готовым</figcaption>
+      </figure>
+      <p>Такой файл называется отчётом: ответ на один вопрос, источники и дата сбора. На 6 октября 2026 года отчётов в отделе 751.</p>
+      <p>Сквозной пример статьи: настоящий отчёт про инструменты вайбкодеров.</p>
+      <p><em>Сначала что бывает с ответами агента без отдела.</em></p>
+    </section>
+    <section id="agent-otvechaet-uverenno-no-iz-staryh-zn">
+      <h2>Агент отвечает уверенно, но из старых знаний</h2>
+
+      <p>Три вопроса, которые задают агенту владельцы и руководители.</p>
+<div class="wide asks" id="asks">
+  <p class="asks-head"><span class="case-label">Пример: так эти вопросы могли бы набрать агенту, и так он отвечает без отдела</span></p>
+  <div class="asks-grid">
+    <div class="ask-col"><div class="ask-card">
+      <span class="case-label">Типография, 20 человек</span>
+      <p class="bubble ask-q">как типографии нашего размера, человек 20, внедряют ИИ в работу команды? что у них реально сработало?</p>
+      <p class="ask-a"><span class="ask-who">Агент</span>Обычно начинают с автоматизации рутины: заявки, документооборот, ответы клиентам. Важно начать с пилота и обучить сотрудников.</p>
+    </div><p class="ask-foot">ссылок нет · дат нет</p></div>
+    <div class="ask-col"><div class="ask-card">
+      <span class="case-label">Компания, нормативная документация</span>
+      <p class="bubble ask-q">разбери ГОСТы на нашу продукцию: какие требования к нам применимы и как это проверять?</p>
+      <p class="ask-a"><span class="ask-who">Агент</span>Ключевые разделы стандарта: общие положения, требования к качеству, методы контроля. Рекомендую свериться с актуальной редакцией.</p>
+    </div><p class="ask-foot">ссылок нет · дат нет</p></div>
+    <div class="ask-col"><div class="ask-card">
+      <span class="case-label">Консультант малого бизнеса</span>
+      <p class="bubble ask-q">какие ИИ-инструменты уже используют небольшие кафе и сколько это стоит?</p>
+      <p class="ask-a"><span class="ask-who">Агент</span>Кафе используют чат-ботов для бронирования, генерацию меню и ответов на отзывы, прогноз закупок. Стоимость зависит от сервиса.</p>
+    </div><p class="ask-foot">ссылок нет · дат нет</p></div>
+  </div>
+</div>
+      <p>Собственник типографии спрашивает, как компании его размера внедрили ИИ. Агент отвечает общими словами из своих знаний, а через месяц на тот же вопрос отвечает иначе. Что сработало у людей на этой неделе, он не знает.</p>
+      <p>Руководитель компании просит разобрать ГОСТы. Как другие компании собирают для этого рабочую обвязку, модель не знает. В X и на Reddit этого тоже не будет: ГОСТ — российская специфика, и опыт практиков лежит в русскоязычных источниках. Качество ответа здесь зависит от того, где искать.</p>
+      <p>Консультант для малого бизнеса спрашивает, какие ИИ-инструменты уже используют небольшие кафе и сколько это стоит. Ответ модели устарел на полгода, а свежий опыт есть только в сообществах.</p>
+      <p>Во всех трёх случаях агент отвечает уверенно, но какой ответ верный, понять нельзя: ни ссылок, ни дат. Найденное не копится, и каждый вопрос стоит как первый.</p>
+      <p>Отдел исследований хранит найденное на диске, в папке с тремя вещами: правилами для агента, каталогом и отчётами по месяцам. Новый чат в этой папке берёт контекст с диска, память прошлой сессии ему не нужна.</p>
+      <p>Главное правило отдела: в любой неясной ситуации агент сначала открывает каталог. Свежий отчёт отвечает на вопрос сам. Новый поиск идёт, когда ответа нет или он неполный, противоречивый либо устарел. Это тот же исследовательский цикл из статьи о research под решение, собранный в отдел на всю компанию.</p>
+      <p><em>Как это работает, видно по трём вопросам к отделу.</em></p>
+    </section>
+
+    <section id="tri-voprosa-k-otdelu-i-chto-pomenyalos-p">
+      <h2>Три вопроса к отделу и что поменялось после ответа</h2>
+
+      <p>Вопросы пришли в сентябре и октябре 2026 года: про рекламу, про ролик и про внедрение агентов в небольшой компании.</p>
+<div class="case" id="case-ads">
+  <p class="case-title"><span class="case-label">Кейс 1</span>Сколько брать за рекламу</p>
+  <div class="case-ask">
+    <span class="case-label">Запрос агенту, 27 сентября 2026, в разговоре о рекламе</span>
+    <p class="bubble">проведи внешний рисеч плз по ценам и сколько я могу брать</p>
+  </div>
+  <div class="case-grid">
+    <div>
+      <span class="case-label">Решение</span>
+      <p>Какую цену называть рекламодателям за пост в Telegram-канале, закреп в чате и интеграцию на YouTube.</p>
+      <span class="case-label">Что сделал отдел</span>
+      <ol class="case-chain">
+        <li>каталог: свежего отчёта нет</li>
+        <li>биржи и агентства Telegram-рекламы, площадки вакансий, свои охваты и 72 входящих запроса</li>
+        <li>около 60 внешних источников</li>
+      </ol>
+    </div>
+    <div>
+  <span class="case-label">Ответ</span>
+  <p class="case-lead">Цены в чате в рынке, YouTube продавался дёшево, слабое место в ответах на запросы.</p>
+  <ul class="case-facts">
+    <li>Закреп в чате за 30, 60 и 100 USD на 1, 3 и 7 дней стоит столько же, сколько вакансия в IT-канале и на Хабр Карьере. <span class="src">биржи и площадки вакансий, сентябрь 2026</span></li>
+    <li>Интеграция на YouTube «от 20 000 ₽» занижена примерно в 1,6 раза к медиане просмотров за 90 дней. <span class="src">статистика канала, 26.09.2026</span></li>
+    <li>С мая пришло 72 запроса, оплачено 0. На 47 не ответили ни разу, цену не назвали ни одному рекламодателю. <span class="src">входящие запросы, 27.09.2026</span></li>
+  </ul>
+    </div>
+  </div>
+  <div class="case-shift">
+    <span class="case-label">Было → стало</span>
+    <table class="shift-table">
+      <tr><td>Интеграция в ролик или стрим</td><td>от 20 000 ₽</td><td>30 000 ₽</td></tr>
+      <tr><td>Отдельный обучающий ролик</td><td>от 50 000 ₽</td><td>от 75 000 ₽</td></tr>
+      <tr><td>Пост в Telegram-канале</td><td>цены не было</td><td>120 USD</td></tr>
+      <tr><td>Закреп в чате на 1, 3, 7 дней</td><td>30, 60, 100 USD</td><td>без изменений</td></tr>
+    </table>
+    <p class="shift-note">Прайс и медиакит для рекламодателей приняли в тот же день. Прайс действует до 31 декабря 2026 года.</p>
+  </div>
+</div>
+<div class="case" id="case-video">
+  <p class="case-title"><span class="case-label">Кейс 2</span>Чем чужая копия ролика лучше оригинала</p>
+  <div class="case-ask">
+    <span class="case-label">Запрос агенту, 5 октября 2026</span>
+    <p class="bubble">там был чувак который скопировал мой ролик […] и он улучшил мою версию […] проведи рисеч как сейчас принято покадрово разбирать например ролики ля оценки. как мниумм из того что я заметил это лчше сделаны субтитры например</p>
+  </div>
+  <div class="case-grid">
+    <div>
+      <span class="case-label">Решение</span>
+      <p>По какому порядку сравнить ролик Нейрочела с копией и что из копии взять себе, начиная с субтитров.</p>
+      <span class="case-label">Что сделал отдел</span>
+      <ol class="case-chain">
+        <li>каталог: порядка разбора нет</li>
+        <li>Netflix, BBC, площадки, практики в X и на Reddit</li>
+        <li>105 утверждений со 100 ссылок</li>
+      </ol>
+    </div>
+    <div>
+  <span class="case-label">Ответ</span>
+  <p class="case-lead">Код режет ролик на планы и считает, модель смотрит только пары кадров, человек решает с телефона.</p>
+  <ul class="case-facts">
+    <li>Не больше 17 знаков в секунду и 42 знаков в строке. <span class="src">Netflix, правила для русского, 19.12.2025</span></li>
+    <li>Не больше двух строк на странице субтитров. <span class="src">Netflix, 07.10.2022</span></li>
+    <li>В вертикальном ролике до трёх строк. <span class="src">BBC, правила субтитров</span></li>
+  </ul>
+    </div>
+  </div>
+  <div class="case-shift">
+    <span class="case-label">Было → стало</span>
+    <div class="frames">
+      <figure>
+        <img src="assets/case-video-own.jpg" alt="Кадр ролика Нейрочела: субтитр в четыре строки внизу кадра.">
+        <figcaption>Ролик Нейрочела: страница субтитров в четыре строки</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/case-video-copy.jpg" alt="Кадр копии: субтитр в две строки, ещё не прозвучавшие слова приглушены.">
+        <figcaption>Копия: две строки, ещё не сказанные слова приглушены</figcaption>
+      </figure>
+    </div>
+    <p class="shift-note">Через несколько часов в сборке роликов: до двух строк в горизонтальном ролике и трёх в вертикальном, проверка считает знаки в секунду.</p>
+  </div>
+</div>
+<div class="case" id="case-adoption">
+  <p class="case-title"><span class="case-label">Кейс 3</span>Как компании на 10–50 человек внедряют агентов</p>
+  <div class="case-ask">
+    <span class="case-label">Запрос агенту, 5 октября 2026</span>
+    <p class="bubble">Как небольшие компании на 10–50 человек (типография, агентство, небольшое производство) в 2026 году внедряют ИИ-агентов в работу команды? Собери опыт практиков за последние два месяца: что сработало, что нет. У каждого факта укажи источник.</p>
+  </div>
+  <div class="case-grid">
+    <div>
+      <span class="case-label">Решение</span>
+      <p>С чего владельцу небольшой компании начать: что отдать агенту, что оставить людям.</p>
+      <span class="case-label">Что сделал отдел</span>
+      <ol class="case-chain">
+        <li>каталог: про малые компании отчёта нет</li>
+        <li>два прогона поиска: vc.ru, Хабр, отраслевые издания, опросы</li>
+        <li>30 ссылок, все открыты, 3 выброшены</li>
+      </ol>
+    </div>
+    <div>
+  <span class="case-label">Ответ</span>
+  <p class="case-lead">Начинают с одной скучной задачи, которую легко проверить, а необратимое подтверждает человек.</p>
+  <ul class="case-facts">
+    <li>Оптовик на 30 человек: за 12 рабочих дней агент закрыл 235 задач, менеджеры перестали перепечатывать заказы с почты. <span class="src">Хабр, 23.09.2026</span></li>
+    <li>Агентство дизайна: 4 месяца ИИ-обзвона, 200 000 ₽, ни одного клиента. Наняли двух живых менеджеров. <span class="src">Т-Банк Секреты, 05.08.2026</span></li>
+    <li>Типографии отдают ИИ подготовку к продажам и встречам, расчёт остаётся сметчикам. <span class="src">Printing Impressions, 15.09.2026</span></li>
+  </ul>
+    </div>
+  </div>
+  <div class="case-shift">
+    <span class="case-label">Было → стало</span>
+    <div class="shift-cols">
+      <div>Общий ответ модели без ссылок и дат. Два прогона одного вопроса приносят разные источники: из 30 ссылок общих две.</div>
+      <div class="shift-arrow">→</div>
+      <div class="shift-now">Отчёт в отделе: 27 фактов со ссылкой и датой. Кейс, который оказался выдуманной историей, выброшен. Записано, чего не нашли: российской типографии с цифрами.</div>
+    </div>
+    <p class="shift-note">Решения по отчёту ещё нет: он ждёт владельца, который будет внедрять.</p>
+  </div>
+</div>
+      <p><em>В каждом кейсе отдел сначала открывал каталог и только потом искал в интернете. Это два разных исследования.</em></p>
+    </section>
+
+    <section id="dva-issledovaniya-vneshnee-i-vnutrennee">
+      <h2>Два исследования: внешнее и внутреннее</h2>
+
+      <p>Исследование делится на два процесса.</p>
+      <p>Внешнее исследование приносит то, чего в вашей системе ещё нет. Агент или сервис идёт в интернет: в документацию, в X, на Reddit, в deep research. Урок 3 про внешнее исследование.</p>
+      <p>Оно нужно, чтобы увидеть чужой опыт. Всё меняется быстро, а знания модели устаревают с даты её обучения. Что вышло на этой неделе и как этим уже пользуются люди, модель из головы не знает.</p>
+      <p>Сильнее всего внешнее исследование работает, когда свои процессы уже описаны: правила отделов, пайплайны, сервер. Тогда найденное за неделю сразу пробуется на своём процессе, а удачная проба становится новым шагом, который дальше работает фоном.</p>
+      <figure class="diagram" id="fig-amplify" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 470" role="img" aria-labelledby="am-title am-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="am-title">Внешнее исследование усиливает описанные процессы</title>
+  <desc id="am-desc">KB: concepts/research-loop
+Основа слева: описанные процессы, то есть правила отделов, пайплайны и сервер. От неё цикл: внешнее исследование находит, что вышло нового и как это делают другие; эксперимент пробует найденное на своём процессе; удачный эксперимент становится новым шагом в пайплайне, описанным и работающим фоном. После нового шага развилка: разовое остаётся шагом в пайплайне, и база растёт; то, что вошло в привычку и повторяется постоянно, становится новым отделом со своей папкой, правилами и каталогом, и отдел пополняет основу. Ниже пример от 6 октября 2026 года: пересборка чужого вертикального рилса в свой ролик собрана в пайплайн примерно за четыре часа, потому что студия видео и сервер уже были описаны. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла.</desc>
+
+  <defs>
+    <marker id="am-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="am-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="470" fill="#f8fafc" />
+
+  <!-- Основа -->
+  <rect x="40" y="40" width="200" height="150" rx="8" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="2" />
+  <text x="140" y="68" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em" text-anchor="middle">ОСНОВА</text>
+  <text x="140" y="96" fill="#1e293b" font-size="15" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Описанные</text>
+  <text x="140" y="116" fill="#1e293b" font-size="15" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">процессы</text>
+  <text x="140" y="144" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">правила отделов,</text>
+  <text x="140" y="162" fill="#64748b" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">пайплайны, сервер</text>
+
+  <!-- Цикл -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+    <rect x="290" y="75" width="180" height="80" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+    <text x="380" y="106" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Внешнее исследование</text>
+    <text x="380" y="128" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">что вышло, как делают</text>
+    <text x="380" y="144" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">другие</text>
+
+    <rect x="510" y="75" width="180" height="80" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+    <text x="600" y="106" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Эксперимент</text>
+    <text x="600" y="128" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">проба на своём</text>
+    <text x="600" y="144" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">процессе</text>
+
+    <rect x="730" y="75" width="170" height="80" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+    <text x="815" y="106" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">Новый шаг</text>
+    <text x="815" y="128" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">описан, работает</text>
+    <text x="815" y="144" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">фоном</text>
+  </g>
+
+  <path d="M240 115 H290" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#am-arrow-ink)" />
+  <path d="M470 115 H510" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#am-arrow-ink)" />
+  <path d="M690 115 H730" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#am-arrow-ink)" />
+
+  <!-- Развилка после нового шага -->
+  <path d="M815 155 V200" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <circle cx="815" cy="200" r="4" fill="#1c4e80" />
+
+  <!-- Разовое: шаг остаётся в пайплайне, база растёт -->
+  <path d="M815 200 H188 Q180 200 180 192 V194" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#am-arrow-accent)" />
+  <rect x="330" y="191" width="320" height="18" fill="#f8fafc" />
+  <text x="490" y="204" fill="#0284c7" font-size="12" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">разовое: шаг в пайплайне, база растёт</text>
+
+  <!-- Вошло в привычку: становится отделом -->
+  <path d="M815 200 V240" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#am-arrow-ink)" />
+  <text x="805" y="226" fill="#1c4e80" font-size="12" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end">вошло в привычку</text>
+
+  <rect x="705" y="240" width="220" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="815" y="268" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Новый отдел</text>
+  <text x="815" y="290" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">папка, правила, каталог</text>
+
+  <path d="M705 275 H108 Q100 275 100 267 V194" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#am-arrow-ink)" />
+  <rect x="300" y="266" width="300" height="18" fill="#f8fafc" />
+  <text x="450" y="279" fill="#1c4e80" font-size="12" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">отдел пополняет основу</text>
+
+  <!-- Пример -->
+  <rect x="40" y="334" width="860" height="110" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="5 4" />
+  <text x="60" y="360" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ПРИМЕР · 6 ОКТЯБРЯ 2026</text>
+  <text x="60" y="386" fill="#1e293b" font-size="15" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Пересборка вертикальных рилсов</text>
+  <g font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-size="12.5" fill="#475569">
+    <text x="60" y="410">ссылка на чужой рилс → разбор по сценам → голос и графика → свой ролик</text>
+    <text x="60" y="430">около четырёх часов до пайплайна: студия видео и сервер уже были описаны</text>
+  </g>
+
+  <!-- Знаки действующих лиц -->
+<text data-role="agent" data-label="Внешнее исследование" x="464" y="90" font-size="30" transform="rotate(8 464 80.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+<text data-role="human" data-label="Эксперимент" x="684" y="90" font-size="30" transform="rotate(-10 684 80.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+</svg>
+        <figcaption>Внешнее исследование усиливает описанные процессы: найденное становится шагом, привычка становится отделом</figcaption>
+      </figure>
+      <p>Пример: пайплайн пересборки вертикальных рилсов. На входе ссылка на чужой рилс, агент разбирает его по сценам, собирает голос и графику и выдаёт свой ролик. Рабочий пайплайн собрали примерно за четыре часа: студия видео и сервер уже были описаны.</p>
+      <p>Для внешнего поиска нужны два слова. Источники отвечают на вопрос «где ищем»: веб, X, Reddit, архив Telegram. Инструменты отвечают на вопрос «чем ищем»: Grok, deep research в ChatGPT, браузер агента.</p>
+      <p>Лучшие источники базовые: лаборатории и авторы, которые сами создают контент. Указывайте оригинал: в пересказе обычно теряется суть и добавляется что-то от автора пересказа.</p>
+      <p>Инструменты различаются по скорости. Агент, запущенный локально, за то же время делает два-три поисковых запроса, а агент внутри веб-версии ChatGPT успевает прочитать сотни сайтов. Поиск дорог по времени и вниманию, а найденного много. Поэтому результаты копятся в своей копилке знаний: один раз найденное не ищется заново.</p>
+      <p>Внутреннее исследование ищет в том, что у вас уже есть: в прошлых отчётах, своих файлах, архиве переписок. В <code>corp-research</code> это каталог отдела и архив Telegram.</p>
+      <p>Отдел нужен обоим процессам. Он хранит результаты внешнего поиска, и из него берут другие отделы: контент, уроки, ответы клиентам. Вызвать отдел можно из его папки или фразой в любом другом отделе, её подхватит скилл.</p>
+      <p><em>Самый доступный инструмент внешнего исследования уже встроен в ChatGPT, Claude и Gemini: это deep research.</em></p>
+    </section>
+
+    <section id="deep-research-glubokiy-poisk-vnutri-serv">
+      <h2>Deep research: глубокий поиск внутри сервиса</h2>
+
+      <p>Deep research — режим внутри ChatGPT, Claude и Gemini, в котором модель работает как агент: разбивает вопрос на подвопросы, ходит по источникам и собирает отчёт со ссылками. Один прогон идёт 5–30 минут в фоне: запустили, ушли, получили уведомление.</p>
+      <p>У всех трёх сервисов он идёт в четыре одинаковых шага:</p>
+      <ol>
+        <li><strong>Уточнение цели.</strong> Перед запуском сервис спрашивает, что именно нужно, какие источники и в каком виде.</li>
+        <li><strong>План.</strong> Вопрос разбивается на 10–50 подвопросов.</li>
+        <li><strong>Поиск, разбор, следующий поиск.</strong> Сервис идёт по подвопросам и на каждом шаге решает, что копать дальше.</li>
+        <li><strong>Отчёт.</strong> В конце отчёт с цитатами и ссылками, привязанными к местам в тексте.</li>
+      </ol>
+      <figure class="diagram" id="fig-deep-research" data-kb="concepts/deep-research">
+<svg viewBox="0 0 940 360" role="img" aria-labelledby="dr-title dr-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dr-title">Как работает deep research</title>
+  <desc id="dr-desc">KB: concepts/deep-research
+Человек задаёт вопрос. Дальше внутри сервиса, 5–30 минут в фоне, четыре шага. Уточнение цели: сервис спрашивает, что именно нужно; в ChatGPT без этого шага поиск не начнётся. План: вопрос разбивается на 10–50 подвопросов; Gemini даёт поправить план до запуска. Поиск и разбор: сервис идёт по подвопросам и решает, что копать дальше, а найдя противоречие, ищет ещё; Claude раздаёт подвопросы параллельным исполнителям. Отчёт с цитатами и ссылками остаётся в чате сервиса. Пунктиром: отчёт сохраняют файлом в отдел исследований, и он попадает в каталог. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла.</desc>
+
+  <defs>
+    <marker id="dr-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="dr-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="360" fill="#f8fafc" />
+
+  <!-- Внутри сервиса -->
+  <rect x="204" y="24" width="706" height="200" rx="8" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="2" />
+  <text x="222" y="210" fill="#0284c7" font-size="13" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Внутри сервиса · 5–30 минут в фоне</text>
+
+  <!-- Вопрос -->
+  <rect x="40" y="76" width="140" height="80" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="110" y="108" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Вопрос</text>
+  <text x="110" y="130" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">один, глубокий</text>
+
+  <!-- Четыре шага -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+    <rect x="222" y="76" width="150" height="80" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+    <text x="297" y="104" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">1 · Уточнение</text>
+    <text x="297" y="126" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">что нужно, какие</text>
+    <text x="297" y="142" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">источники</text>
+
+    <rect x="397" y="76" width="150" height="80" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+    <text x="472" y="104" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">2 · План</text>
+    <text x="472" y="126" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">10–50</text>
+    <text x="472" y="142" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">подвопросов</text>
+
+    <rect x="572" y="76" width="150" height="80" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+    <text x="647" y="104" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">3 · Поиск и разбор</text>
+    <text x="647" y="126" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">решает, что</text>
+    <text x="647" y="142" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">копать дальше</text>
+
+    <rect x="747" y="76" width="150" height="80" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.6" />
+    <text x="822" y="104" fill="#1e293b" font-size="14" font-weight="600" text-anchor="middle">4 · Отчёт</text>
+    <text x="822" y="126" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">цитаты и ссылки,</text>
+    <text x="822" y="142" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">лежит в чате</text>
+  </g>
+
+  <path d="M180 116 H222" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#dr-arrow-ink)" />
+  <path d="M372 116 H397" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#dr-arrow-accent)" />
+  <path d="M547 116 H572" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#dr-arrow-accent)" />
+  <path d="M722 116 H747" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#dr-arrow-accent)" />
+
+  <!-- Петля поиска -->
+  <path d="M692 76 V60 Q692 52 684 52 H610 Q602 52 602 60 V74" fill="none" stroke="#0284c7" stroke-width="1.4" marker-end="url(#dr-arrow-accent)" />
+  <text x="647" y="44" fill="#0284c7" font-size="11.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">противоречие: ищет ещё</text>
+
+  <!-- Особенности сервисов -->
+  <g font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-size="11" fill="#475569" text-anchor="middle">
+    <text x="297" y="176">ChatGPT: без этого</text>
+    <text x="297" y="191">шага не начнёт</text>
+    <text x="472" y="176">Gemini: план можно</text>
+    <text x="472" y="191">поправить до запуска</text>
+    <text x="647" y="176">Claude: подвопросы</text>
+    <text x="647" y="191">параллельно</text>
+  </g>
+
+  <!-- В отдел исследований -->
+  <path d="M822 156 V262" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#dr-arrow-accent)" />
+  <rect x="832" y="232" width="100" height="16" fill="#f8fafc" />
+  <text x="834" y="244" fill="#0284c7" font-size="11.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">сохранить</text>
+
+  <rect x="672" y="262" width="228" height="72" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="786" y="291" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Отдел исследований</text>
+  <text x="786" y="313" fill="#64748b" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">файл и строка в каталоге</text>
+
+  <!-- Знаки действующих лиц -->
+<text data-role="human" data-label="Вопрос" x="174" y="91" font-size="30" transform="rotate(-10 174 81.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+<text data-role="agent" data-label="Внутри сервиса" x="904" y="39" font-size="30" transform="rotate(8 904 29.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+</svg>
+        <figcaption>Как работает deep research: вопрос, затем внутри сервиса уточнение, план, поиск с разбором и отчёт; чтобы вернуться к отчёту, его сохраняют в отдел исследований</figcaption>
+      </figure>
+      <p>Различия сервисов:</p>
+      <ul>
+        <li><strong>ChatGPT Deep Research</strong> обязательно задаёт уточняющий вопрос и умеет ограничить список сайтов.</li>
+        <li><strong>Claude Research</strong> раздаёт подвопросы параллельным исполнителям и быстрее справляется с широкими темами.</li>
+        <li><strong>Gemini Deep Research</strong> даёт поправить план до запуска и строит графики.</li>
+      </ul>
+      <p>Deep research подходит для разового вопроса с большой глубиной: разобраться в нише, сравнить инструменты, исследовать конкурентов. Для регулярных дайджестов по расписанию и для ответа за секунды он не подходит: в первом случае нужен свой конвейер, во втором обычный поиск.</p>
+      <p>Отчёт deep research живёт в чате сервиса. Чтобы к нему вернуться и отдать другим отделам, его сохраняют файлом в отдел исследований.</p>
+      <p><em>Deep research один из инструментов отдела. Остальные и то, когда их брать, ниже.</em></p>
+    </section>
+
+    <section id="instrumenty-otdela-chem-iskat">
+      <h2>Инструменты отдела: чем искать</h2>
+
+      <p>У каждого инструмента своя сильная сторона, и агенту в правилах отдела стоит назвать, чем пользоваться. Цены и условия на 6 октября 2026 года.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Инструмент</th>
+            <th>Зачем</th>
+            <th>Альтернативы</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Поиск агента</td>
+            <td>быстрый вопрос: «что вышло», «сколько стоит». Это встроенный поиск харнеса. Claude Code отдаёт только заголовки и ссылки, страницу агент читает отдельно и получает пересказ страницы, который делает отдельный вызов модели. В Codex живой поиск включается флагом <code>--search</code></td>
+            <td>поисковик для агентов, например Exa: отдаёт сам текст страниц</td>
+          </tr>
+          <tr>
+            <td>Deep research</td>
+            <td>разовый глубокий вопрос, сотни сайтов за прогон</td>
+            <td>ChatGPT, Claude, Gemini: у всех свой режим</td>
+          </tr>
+          <tr>
+            <td>Поисковик для агентов, Exa</td>
+            <td>много источников сразу и текст страниц вместо ссылок: выдержки под вопрос или страница целиком, до 100 результатов, можно требовать свежую загрузку. Бесплатно $10 в месяц</td>
+            <td>Tavily (1000 кредитов в месяц бесплатно), Brave Search ($5 в месяц бесплатно), Perplexity API (платно, $5 за 1000 запросов)</td>
+          </tr>
+          <tr>
+            <td>Браузер для агента</td>
+            <td>позволяет агенту пользоваться браузером: страницы под входом, кабинеты, ленты, всё, что надо кликать и прокручивать</td>
+            <td>Claude in Chrome видит ваши входы; Playwright MCP работает в своём профиле; Chrome DevTools MCP может подключиться к вашему Chrome</td>
+          </tr>
+          <tr>
+            <td>Агент-поисковик</td>
+            <td>отдельный агент со своей подпиской, которому основной агент отдаёт поиск</td>
+            <td>то, на что уже есть подписка: Grok, Antigravity, GLM</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Всё, что видит браузер с вашими входами, увидит и агент. Для исследований лучше отдельный профиль браузера.</p>
+      <p>X в <code>corp-research</code> переходит на браузер: агенту доступен отдельный компьютер со своим браузером, и через него он читает ленту и посты. Способы для X пока исследуются, поэтому в правилах отдела этот шаг меняется чаще других.</p>
+      <p>Для таких задач у агента отдельные компьютеры, и у каждого своя роль. На Mac соцсети и WhatsApp: агент читает их по расписанию раз в час. На Windows банк через российский VPN и ЭЦП для управления ИП. У каждого компьютера свой VPN и свои сессии, поэтому входы не смешиваются.</p>
+      <figure class="diagram" id="fig-agent-computers" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 660" role="img" aria-labelledby="ac-title ac-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="ac-title">Отдельные компьютеры для агента</title>
+  <desc id="ac-desc">KB: concepts/research-loop
+Фото рабочего стола в точечной печати: ноутбук Mac на подставке и ноутбук Windows. Mac для соцсетей и WhatsApp: агент читает их по расписанию раз в час. Windows для банка: банк через российский VPN и ЭЦП для управления ИП. На каждом компьютере свой VPN и свои сессии, входы не смешиваются. Агент обозначен эмодзи 🤖 на углу карточки.</desc>
+  <rect x="0" y="0" width="940" height="660" fill="#fffef9" />
+  <image href="assets/agent-computers-dither.png" x="20" y="16" width="560" height="628" />
+  <rect x="620" y="70" width="300" height="140" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.4" />
+  <text x="638" y="94" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">КОМПЬЮТЕР 1</text>
+  <text x="638" y="116" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Mac: соцсети</text>
+  <text x="638" y="142" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">соцсети и WhatsApp</text>
+  <text x="638" y="162" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">агент читает по расписанию,</text>
+  <text x="638" y="182" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">раз в час</text>
+  <text x="638" y="202" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">свой VPN и свои сессии</text>
+  <rect x="620" y="380" width="300" height="120" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.4" />
+  <text x="638" y="404" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">КОМПЬЮТЕР 2</text>
+  <text x="638" y="426" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Windows: банк</text>
+  <text x="638" y="452" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">банк через российский VPN</text>
+  <text x="638" y="472" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ЭЦП для управления ИП</text>
+  <text x="638" y="492" fill="#475569" font-size="12.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">свой VPN и свои сессии</text>
+  <circle cx="110" cy="126" r="6" fill="#0284c7" />
+  <path d="M116 126 H600 V120 H620" fill="none" stroke="#0284c7" stroke-width="1.4" />
+  <circle cx="400" cy="456" r="6" fill="#0284c7" />
+  <path d="M406 456 H600 V440 H620" fill="none" stroke="#0284c7" stroke-width="1.4" />
+  <text x="620" y="560" fill="#1c4e80" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">у каждого свой VPN и сессии:</text>
+  <text x="620" y="580" fill="#1c4e80" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">входы не смешиваются</text>
+<text data-role="agent" data-label="Mac" x="914" y="85" font-size="30" transform="rotate(8 914 75.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+<text data-role="agent" data-label="Windows" x="914" y="395" font-size="30" transform="rotate(8 914 385.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+</svg>
+        <figcaption>Отдельные компьютеры для агента: Mac для соцсетей и WhatsApp, Windows для банка и ЭЦП; у каждого свой VPN и свои сессии</figcaption>
+      </figure>
+      <h3>Промпт агенту: подключи поисковик и браузер</h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-name">подключи поисковик и браузер</span>
+          <button class="copy-btn" type="button">Скопировать</button>
+        </div>
+        <pre><code>Подключи к Claude Code поисковик для агентов и браузер. Вот команды из документации на 6 октября 2026:
+
+- Exa: claude plugin install exa@claude-plugins-official
+- Tavily: claude mcp add tavily-remote-mcp --transport http https://mcp.tavily.com/mcp/
+- Perplexity: claude mcp add --transport http perplexity https://api.perplexity.ai/mcp
+- Playwright: claude mcp add playwright npx @playwright/mcp@latest
+- Claude in Chrome: поставь расширение Claude из Chrome Web Store, потом запусти claude --chrome
+
+Поставь Exa и Playwright. Проверь, что оба видны в /mcp. Потом сделай один поиск через Exa и покажи, что он отдаёт текст страниц.</code></pre>
+      </div>
+      <p>Подписка на основного агента, например Claude, ограничена, а поиск съедает её быстрее всего: десятки запросов и страниц на один вопрос. Поэтому в <code>corp-research</code> основной агент работает оркестратором: пишет бриф и запускает исследование, а ищет отдельный агент-поисковик. Им становится то, на что уже есть подписка. Сейчас это Grok CLI; когда его подписка закончится, роль перейдёт к Antigravity или GLM. Правила отдела от этого не меняются, меняется только исполнитель поиска.</p>
+      <p>Фраза для этого короткая: «проведи рисеч через grok cli и сохрани в отдел исследований».</p>
+      <p><em>Дальше один настоящий отчёт отдела, от шапки до строки в каталоге.</em></p>
+    </section>
+
+    <section id="iz-chego-sostoit-otchet-shapka-otvet-dok">
+      <h2>Из чего состоит отчёт: шапка, ответ, доказательства</h2>
+
+      <p>Отчёт про вайбкодеров собран 2 октября 2026 года. Вопрос: что сейчас популярно у вайбкодеров, от агентов и подписок до доступа из России.</p>
+      <p>Вверху файла шапка: вопрос, дата, тип, проект и теги. Тег это короткая метка, по которой отчёт находится в каталоге. В каталоге отчёт выглядит так.</p>
+<div class="wide shelf" id="catalog-shelf">
+  <div class="shelf-head">
+    <span class="case-label">Карточки в каталоге: первая про этот отчёт, дальше соседи</span>
+    <span class="shelf-nav"><span class="shelf-hint">8 отчётов, листайте</span><button type="button" class="shelf-btn" data-dir="-1" aria-label="Предыдущие карточки">←</button><button type="button" class="shelf-btn" data-dir="1" aria-label="Следующие карточки">→</button></span>
+  </div>
+  <div class="shelf-track" tabindex="0" aria-label="Карточки отчётов из каталога, прокрутка вбок">
+    <div class="rcard rcard-this">
+      <p class="rcard-meta"><span>2 октября 2026</span><span>тип: market</span><span>проект: school</span></p>
+      <p class="rcard-q">Что популярно у вайбкодеров и людей, работающих с AI-агентами, на начало октября 2026 по всем фронтам, что растёт и падает, что работает и оплачивается из РФ?</p>
+      <p class="rcard-a">Ежедневная связка у практиков — Codex и Claude Code одновременно, переключаются по лимиту.</p>
+      <p class="rcard-tags"><span class="chip">vibecoding</span><span class="chip">subscriptions</span><span class="chip">codex</span><span class="chip">claude-code</span><span class="chip">cursor</span><span class="chip">antigravity</span><span class="chip">+20</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>5 октября 2026</span><span>тип: market</span><span>проект: personal-corp</span></p>
+      <p class="rcard-q">Как небольшие компании на 10–50 человек (типография, агентство, небольшое производство) в 2026 году внедряют ИИ-агентов в работу команды: что сработало, что нет, по опыту практиков за последние два месяца?</p>
+      <p class="rcard-a">Начинают с одной скучной повторяющейся задачи, результат которой легко проверить.</p>
+      <p class="rcard-tags"><span class="chip">ai-adoption</span><span class="chip">ai-agents</span><span class="chip">small-business</span><span class="chip">human-in-the-loop</span><span class="chip">printing</span><span class="chip">agencies</span><span class="chip">+3</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>27 сентября 2026</span><span>тип: market</span><span>проект: general</span></p>
+      <p class="rcard-q">Сколько founder'у брать за размещения в Telegram-канале @ris_ai, чате @vibecod3rs и на YouTube @serejaris (пост, вакансия, упоминание на стриме, интеграция, отдельный tutorial), какие рыночные данные это подтверждают или опровергают и когда брать процент вместо фикса?</p>
+      <p class="rcard-a">С мая пришло 72 запроса, оплачено 0.</p>
+      <p class="rcard-tags"><span class="chip">advertising</span><span class="chip">ad-pricing</span><span class="chip">media-monetization</span><span class="chip">pricing</span><span class="chip">benchmarks</span><span class="chip">telegram</span><span class="chip">+7</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>5 октября 2026</span><span>тип: video</span><span>проект: personal-corp</span></p>
+      <p class="rcard-q">Как сейчас принято покадрово разбирать короткие ролики для оценки качества и сравнения двух версий, и какой протокол взять для разбора ролика Нейрочела против чужой улучшенной копии (сначала субтитры)</p>
+      <p class="rcard-a">Покадровый разбор короткого ролика в 2026 году собирают из трёх слоёв, и каждый делает своё.</p>
+      <p class="rcard-tags"><span class="chip">corp-news</span><span class="chip">neyrochel-daily</span><span class="chip">video-research</span><span class="chip">short-video</span><span class="chip">shorts</span><span class="chip">captions</span><span class="chip">+7</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>28 сентября 2026</span><span>тип: tech</span><span>проект: general</span></p>
+      <p class="rcard-q">Что Anthropic выпустила в Claude Sonnet 5.5 28.09.2026: цена, скорость, доступ и чем модель отличается от предшественника?</p>
+      <p class="rcard-a">Цена токена как у Sonnet 5: $2 вход, $10 выход, $0.20 чтение кэша за 1M.</p>
+      <p class="rcard-tags"><span class="chip">sonnet-5-5</span><span class="chip">anthropic</span><span class="chip">models</span><span class="chip">ai-releases</span><span class="chip">neyrochel</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>3 октября 2026</span><span>тип: tech</span><span>проект: general</span></p>
+      <p class="rcard-q">Что такое mods в Claude Code, с какой версии они работают, как их поставить и выключить, где они не работают, чем рискует пользователь и какие mods сторонние авторы показали в первые дни?</p>
+      <p class="rcard-a">Mods Anthropic представила 1 октября: небольшие функции на TypeScript или JavaScript, которые срабатывают до, после или вместо события Claude Code.</p>
+      <p class="rcard-tags"><span class="chip">claude-code</span><span class="chip">claude-code-mods</span><span class="chip">anthropic</span><span class="chip">agent-harness</span><span class="chip">neyrochel</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>5 октября 2026</span><span>тип: tech</span><span>проект: general</span></p>
+      <p class="rcard-q">Что меняется в приложении Gemini с 9 октября 2026, какие модели остаются без подписки и на каждом плане и что одновременно меняется в Antigravity?</p>
+      <p class="rcard-a">Вывод студии: после 9 октября дешевле всего Pro даёт AI Pro за $19.99.</p>
+      <p class="rcard-tags"><span class="chip">gemini</span><span class="chip">google</span><span class="chip">pricing</span><span class="chip">free-tier</span><span class="chip">neyrochel</span></p>
+    </div>
+    <div class="rcard">
+      <p class="rcard-meta"><span>5 октября 2026</span><span>тип: content</span><span>проект: personal-corp</span></p>
+      <p class="rcard-q">Как направлять модель, которая пишет сценарий ролика Нейрочела (диалог ведущей и робота о новостях ИИ для вайбкодеров), и как превращать правки владельца в знание, а не в жёсткие правила?</p>
+      <p class="rcard-tags"><span class="chip">prompting</span><span class="chip">context-engineering</span><span class="chip">system-prompt</span><span class="chip">agent-rules</span><span class="chip">few-shot</span><span class="chip">series-bible</span><span class="chip">+9</span></p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var shelf = document.getElementById('catalog-shelf');
+      if (!shelf) return;
+      var track = shelf.querySelector('.shelf-track');
+      var btns = shelf.querySelectorAll('.shelf-btn');
+      function step() { var c = track.querySelector('.rcard'); return c ? c.getBoundingClientRect().width + 16 : 300; }
+      function sync() {
+        var max = track.scrollWidth - track.clientWidth - 2;
+        btns[0].disabled = track.scrollLeft <= 2;
+        btns[1].disabled = track.scrollLeft >= max;
+        shelf.classList.toggle('at-end', track.scrollLeft >= max);
+      }
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: step() * Number(b.dataset.dir), behavior: 'smooth' }); });
+      });
+      track.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
+    })();
+  </script>
+</div>
+      <p>Под шапкой девять разделов: бриф, короткий ответ, границы, официальное, пресса, реакции практиков, сообщество в Telegram, ограничения и незакрытые вопросы. Строка из короткого ответа про подписки OpenAI:</p>
+<div class="answer-line">Подписки: OpenAI ввела <strong>Pro 500</strong> и вернула <strong>Pro 200</strong> с меньшим объёмом; сообщество читает это как урезание вдвое <span class="chip">c5</span><span class="chip">c6</span><span class="chip">c50</span><span class="chip">c71</span><span class="chip">c72</span><span class="chip">c99</span>. Множитель 10x есть только у пользователей и прессы, в официальных постах его нет.</div>
+      <p>В отчёте эти номера стоят в квадратных скобках и ведут в файл доказательств. Там у каждого номера записаны источник, дата, цитата и линия поиска, которая его нашла.</p>
+<div class="pair">
+  <div class="pair-card">
+    <span class="case-label">c6 · Официально</span>
+    <p><strong>OpenAI в X</strong>, 29.09.2026</p>
+    <blockquote>We’re also reopening Pro 200 subscriptions […] We are also committing to not reintroducing the 5hr limit so that you can fully use your weekly usage when you want.</blockquote>
+    <p class="pair-says">Pro 200 снова продаётся, пятичасового лимита не будет. Множитель 10x не назван.</p>
+  </div>
+  <div class="pair-card">
+    <span class="case-label">c71 · Практик</span>
+    <p><strong>Комментарий на Hacker News</strong>, 29.09.2026</p>
+    <blockquote>Pro 200: 10x usage, $200 (previously was 20x usage, $200)</blockquote>
+    <p class="pair-says">Pro 200 даёт 10x, раньше было 20x. Это расчёт пользователя.</p>
+  </div>
+</div>
+      <p>Цифру «10x» дал практик, поэтому отчёт пишет её как слова пользователей.</p>
+      <p>Последний след отчёта это строка в каталоге:</p>
+<div class="catalog-line">2026-10-02 — Что популярно у вайбкодеров в начале октября 2026: агенты, модели, подписки, MCP, медиа, голос, деплой и доступ из РФ · vibecoding · subscriptions · codex · claude-code · cursor · antigravity · orca · opencode · hermes · kimi-code · qwen-code · qoder · glm · deepseek · grok · gemini · devin · chatgpt · claude · mcp · skills · image-generation · video-generation · stt · deploy · russia-access</div>
+      <p>Одна строка попадает в 24 раздела каталога: раздел типа «рынок», раздел проекта «школа» и 22 раздела по тегам.</p>
+    </section>
+
+    <section id="shest-ponyatiy-na-kotoryh-derzhitsya-otd">
+      <h2>Шесть понятий, на которых держится отдел</h2>
+
+      <div class="glossary">
+        <details class="term">
+          <summary>Заземление</summary>
+          <div class="term-body">
+            <p>Заземление (grounding) — правило, на котором держится отчёт. Всё найденное сначала утверждение. Факт это проверенное утверждение: у него есть цитата и ссылка на источник. Утверждение без цитаты помечено «непроверено» и уходит в незакрытые вопросы.</p>
+          </div>
+        </details>
+        <details class="term">
+          <summary>Отчёт</summary>
+          <div class="term-body">
+            <p>Файл с ответом на один вопрос на одну дату, как отчёт про вайбкодеров выше. Лежит в папке месяца. Вверху шапка, внутри источники, факты и вывод.</p>
+          </div>
+        </details>
+        <details class="term">
+          <summary>Файл доказательств</summary>
+          <div class="term-body">
+            <p>Спутник отчёта с тем же именем и расширением <code>.evidence.json</code>. Каждое утверждение отчёта лежит в нём отдельной записью: ссылка, дата источника, слой и линия поиска.</p>
+          </div>
+        </details>
+        <details class="term">
+          <summary>Линия поиска</summary>
+          <div class="term-body">
+            <p>Один прогон поиска со своей задачей. Линий пять: четыре сессии Grok и архив Telegram.</p>
+          </div>
+        </details>
+        <details class="term">
+          <summary>Реестр источников</summary>
+          <div class="term-body">
+            <p>Файл <code>sources.md</code> в скилле отдела с подсказками, где искать: аккаунты X, сабреддиты, чаты Telegram, блоги, документация вендоров. Поиск начинает с этих источников и идёт шире.</p>
+          </div>
+        </details>
+        <details class="term">
+          <summary>Каталог</summary>
+          <div class="term-body">
+            <p>Файл <code>INDEX.md</code>, оглавление всех отчётов по типу, по проекту и по тегу. Его собирает скрипт из шапок отчётов.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="put-voprosa-ot-vashey-frazy-do-zapisi-v-">
+      <h2>Путь вопроса: от вашей фразы до записи в каталоге</h2>
+
+      <p>Исследование запускается фразой из любой папки: «исследуй X», «что выпустили», «нужен отчёт». Фразу подхватывает скилл <code>corp-research</code>, и дальше путь у всех вопросов одинаковый.</p>
+      <figure class="diagram" id="fig-path" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 630" role="img" aria-labelledby="rp-title rp-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="rp-title">Путь отчёта про вайбкодеров через отдел исследований</title>
+  <desc id="rp-desc">KB: concepts/research-loop
+Сквозной прогон настоящего отчёта от 2 октября 2026 года. Владелец спрашивает, что популярно у вайбкодеров в начале октября. Каталог INDEX.md находит 14 смежных отчётов, свежего ответа на весь вопрос в нём нет. Пишется бриф: решение о тир-листе подписок, окно свежести с 1 сентября. Исполнитель ведёт пять линий поиска. Полосы показывают, сколько утверждений дала каждая линия: grok-web 19 и ещё 14 вторым прогоном grok-web-media, grok-x-demo 20, grok-x-critique 10, grok-reddit-hn 24, telegram 12, у Telegram адрес это чат и дата. Всего 99 утверждений в отчёте, ещё 15 находок ушли в незакрытые вопросы. Результат: отчёт 2026-10/vibecoding-tools-popularity-october-2026.md, рядом файл доказательств с 99 записями c1–c99, и одна строка в каталоге, собранная из шапки и показанная в 24 разделах INDEX.md. Пунктирная петля: новая строка каталога становится местом, где начинается следующий вопрос. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла.</desc>
+
+  <defs>
+    <marker id="rp-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+    <marker id="rp-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="630" fill="#f8fafc" />
+
+  <!-- Петля: строка каталога -> следующий вопрос -->
+  <path d="M900 503 H914 Q922 503 922 495 V38 Q922 30 914 30 H478 Q470 30 470 38 V52" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#rp-arrow-accent)" />
+  <text x="696" y="22" fill="#0284c7" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">новая строка: следующий вопрос начинается здесь</text>
+
+  <!-- Ряд 1: вопрос, каталог, бриф -->
+  <rect x="40" y="52" width="240" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="160" y="78" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Вопрос владельца</text>
+  <text x="160" y="98" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">что популярно у вайбкодеров</text>
+  <text x="160" y="114" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в начале октября 2026</text>
+
+  <rect x="350" y="52" width="240" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="470" y="78" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Каталог INDEX.md</text>
+  <text x="470" y="98" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">14 смежных отчётов</text>
+  <text x="470" y="114" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">свежего ответа нет</text>
+
+  <rect x="660" y="52" width="240" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="780" y="78" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Бриф и задача</text>
+  <text x="780" y="98" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">решение: тир-лист подписок</text>
+  <text x="780" y="114" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">свежие факты с 01.09.2026</text>
+
+  <path d="M280 89 H350" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+  <text x="315" y="81" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">сначала</text>
+  <path d="M590 89 H660" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+  <text x="625" y="81" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">искать</text>
+
+  <path d="M780 126 V176" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+
+  <!-- Ряд 2: исполнитель и линии -->
+  <rect x="40" y="176" width="860" height="240" rx="8" fill="rgba(28,78,128,0.03)" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="60" y="202" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Исполнитель: пять линий поиска</text>
+  <text x="60" y="220" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">утверждений от каждой линии</text>
+
+  <text x="60" y="252" fill="#0f172a" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-web</text>
+  <rect x="200" y="240" width="190" height="16" fill="#0284c7" />
+  <rect x="390" y="240" width="140" height="16" fill="#0284c7" fill-opacity="0.3" stroke="#0284c7" stroke-width="1" />
+  <text x="540" y="252" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">19 + 14 grok-web-media</text>
+
+  <text x="60" y="284" fill="#0f172a" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-x-demo</text>
+  <rect x="200" y="272" width="200" height="16" fill="#0284c7" />
+  <text x="410" y="284" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">20</text>
+
+  <text x="60" y="316" fill="#0f172a" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-x-critique</text>
+  <rect x="200" y="304" width="100" height="16" fill="#0284c7" />
+  <text x="310" y="316" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">10</text>
+
+  <text x="60" y="348" fill="#0f172a" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-reddit-hn</text>
+  <rect x="200" y="336" width="240" height="16" fill="#0284c7" />
+  <text x="450" y="348" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">24</text>
+
+  <text x="60" y="380" fill="#0f172a" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">telegram</text>
+  <rect x="200" y="368" width="120" height="16" fill="#0284c7" />
+  <text x="330" y="380" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">12 · адрес: чат и дата</text>
+
+  <path d="M710 196 V396" fill="none" stroke="#1c4e80" stroke-opacity="0.25" stroke-width="1" />
+  <text x="805" y="276" fill="#0284c7" font-size="40" font-weight="700" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">99</text>
+  <text x="805" y="298" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">утверждений</text>
+  <text x="805" y="314" fill="#475569" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в отчёте</text>
+  <text x="805" y="354" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ещё 15 находок</text>
+  <text x="805" y="370" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в незакрытых вопросах</text>
+
+  <path d="M160 416 V466" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+  <path d="M470 416 V466" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+
+  <!-- Ряд 3: файлы -->
+  <rect x="40" y="466" width="240" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="160" y="490" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Отчёт</text>
+  <text x="160" y="510" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">2026-10/vibecoding-tools-</text>
+  <text x="160" y="526" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">popularity-october-2026.md</text>
+
+  <rect x="350" y="466" width="240" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="470" y="490" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Файл доказательств</text>
+  <text x="470" y="510" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">.evidence.json</text>
+  <text x="470" y="526" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">99 записей c1…c99</text>
+
+  <rect x="660" y="466" width="240" height="74" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="780" y="490" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Строка каталога</text>
+  <text x="780" y="510" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">одна строка из шапки</text>
+  <text x="780" y="526" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">в 24 разделах INDEX.md</text>
+
+  <path d="M280 503 H350" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+  <text x="315" y="495" fill="#475569" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">[cN]</text>
+
+  <path d="M160 540 V556 Q160 564 168 564 H772 Q780 564 780 556 V540" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#rp-arrow-ink)" />
+  <text x="470" y="582" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">скрипт собирает строку из шапки отчёта</text>
+
+<!-- Acting roles; surfaces and artifacts remain unmarked. -->
+<text data-role="human" data-label="Вопрос" x="274" y="67" font-size="30" transform="rotate(-10 274 57.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+<text data-role="agent" data-label="Исполнитель" x="894" y="191" font-size="30" transform="rotate(8 894 181.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+
+  <!-- Легенда -->
+  <g>
+    <text x="40" y="616" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+    <path d="M116 612 H152" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#rp-arrow-accent)" />
+    <text x="160" y="616" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">петля</text>
+    <rect x="234" y="604" width="22" height="12" fill="#0284c7" fill-opacity="0.3" stroke="#0284c7" stroke-width="1" />
+    <text x="264" y="616" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">второй веб-прогон</text>
+  </g>
+</svg>
+        <figcaption>Путь отчёта про вайбкодеров: каталог, бриф, пять линий, 99 утверждений и одна строка каталога</figcaption>
+      </figure>
+      <p>Новая строка каталога работает на следующий вопрос: спросят про подписки OpenAI, и ответ найдётся на первом шаге. Чем дольше работает отдел, тем чаще вопрос закрывается без поиска.</p>
+      <p><em>Внутри путь делится на девять шагов.</em></p>
+      <h3>Девять шагов одного исследования</h3>
+      <figure class="diagram" id="fig-path-steps" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 400" role="img" aria-labelledby="ps-title ps-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="ps-title">Девять шагов исследования: кто что делает</title>
+  <desc id="ps-desc">KB: concepts/research-loop
+Три дорожки: сессия отдела, исполнитель-субагент и скрипты. Сессия: 1 сверка с каталогом, свежий отчёт берётся готовым, и тогда ответ уходит сразу; 2 бриф из пяти частей; 3 задача в beads, у отчёта про вайбкодеров номер cr-w05.21; 4 нанимает исполнителя и отдаёт ему бриф. Исполнитель: 5 пять линий поиска и отбор, в отчёт про вайбкодеров вошло 99 утверждений; 6 отчёт и файл доказательств в папку месяца; 7 до пяти тегов из словаря. Скрипты: 8 пересобирают INDEX.md и экспорт каталога, отчёт уходит на GitHub. Сессия: 9 ответ с путём к отчёту и отбором. Агент обозначен эмодзи 🤖 на углу узла.</desc>
+  <defs>
+    <marker id="ps-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1c4e80" /></marker>
+    <marker id="ps-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0284c7" /></marker>
+  </defs>
+  <rect x="0" y="0" width="940" height="400" fill="#f8fafc" />
+  <rect x="24" y="40" width="892" height="110" rx="8" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="1.2" />
+  <text x="40" y="142" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">СЕССИЯ ОТДЕЛА</text>
+  <rect x="24" y="160" width="892" height="110" rx="8" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="1.2" />
+  <text x="40" y="262" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ИСПОЛНИТЕЛЬ-СУБАГЕНТ</text>
+  <rect x="24" y="280" width="892" height="100" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2" />
+  <text x="40" y="372" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">СКРИПТЫ</text>
+  <rect x="40" y="74" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="94.0" y="97" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">1 · Каталог</text>
+  <text x="94.0" y="116" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">свежий? берём</text>
+  <rect x="164" y="74" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="218.0" y="97" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">2 · Бриф</text>
+  <text x="218.0" y="116" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">пять частей</text>
+  <rect x="288" y="74" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="342.0" y="97" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">3 · Задача</text>
+  <text x="342.0" y="116" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">beads, cr-w05.21</text>
+  <rect x="412" y="74" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="466.0" y="97" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">4 · Наём</text>
+  <text x="466.0" y="116" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">исполнителя</text>
+  <rect x="536" y="194" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="590.0" y="217" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">5 · Пять линий</text>
+  <text x="590.0" y="236" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">99 утверждений</text>
+  <rect x="660" y="194" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="714.0" y="217" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">6 · Отчёт</text>
+  <text x="714.0" y="236" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">+ доказательства</text>
+  <rect x="784" y="194" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="838.0" y="217" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">7 · Теги</text>
+  <text x="838.0" y="236" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">до пяти, словарь</text>
+  <rect x="784" y="296" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="838.0" y="319" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">8 · Каталог</text>
+  <text x="838.0" y="338" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">INDEX.md, GitHub</text>
+  <rect x="784" y="74" width="108" height="56" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="838.0" y="97" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">9 · Ответ</text>
+  <text x="838.0" y="116" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">путь и отбор</text>
+  <path d="M148 102 H164" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M272 102 H288" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M396 102 H412" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M644 222 H660" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M768 222 H784" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M466.0 130 V222 H536" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M838.0 250 V296" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M892 324 H904 V102 H892" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ps-arrow-ink)" />
+  <path d="M94.0 74 V58 H838.0 V74" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ps-arrow-accent)" />
+  <rect x="330" y="50" width="280" height="16" fill="#eef6fb" />
+  <text x="470" y="62" fill="#0284c7" font-size="11.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">свежий отчёт есть: ответ сразу</text>
+<text data-role="agent" data-label="Сессия отдела" x="142" y="77" font-size="30" transform="rotate(8 142 67)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+<text data-role="agent" data-label="Исполнитель" x="638" y="197" font-size="30" transform="rotate(8 638 187)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+</svg>
+        <figcaption>Девять шагов исследования по исполнителям: сессия отдела сверяет каталог, пишет бриф и нанимает исполнителя; исполнитель ищет, пишет отчёт и ставит теги; скрипты пересобирают каталог; сессия отвечает путём к отчёту</figcaption>
+      </figure>
+      <ol>
+        <li><strong>Сверка с каталогом.</strong> Сессия ищет ключевое слово в каталоге. Свежий отчёт для новостей это отчёт того же дня, для инструментов моложе месяца. Если такой есть, ответ берётся из него, и исследование не начинается. По вайбкодерам каталог нашёл 14 смежных отчётов, но ответа на весь вопрос среди них не было.</li>
+        <li><strong>Бриф.</strong> Фраза разворачивается в бриф из пяти частей, о нём следующий раздел.</li>
+        <li><strong>Задача.</strong> Под исследование заводится задача в графе задач отдела на beads.</li>
+        <li><strong>Исполнитель.</strong> Сессия нанимает отдельного субагента и отдаёт ему бриф. Владельцу сразу уходит «запустил» с брифом в пять строк.</li>
+        <li><strong>Пять линий и отбор.</strong> Исполнитель ищет и отбирает утверждения для отчёта. По вайбкодерам вошло 99 утверждений, ещё 15 утверждений без подтверждения ушли в незакрытые вопросы.</li>
+        <li><strong>Отчёт и файл доказательств.</strong> Оба файла ложатся в папку месяца, здесь это <code>2026-10/</code>.</li>
+        <li><strong>Теги.</strong> Исполнитель берёт до пяти тегов из словаря отдела. У инструментов и моделей тег совпадает с именем карточки в базе знаний.</li>
+        <li><strong>Каталог и публикация.</strong> Скрипты пересобирают каталог, отчёт уходит на GitHub. Задача закрывается с путём к отчёту.</li>
+        <li><strong>Ответ.</strong> Вызвавшая сессия получает путь к отчёту, короткий отбор и незакрытые вопросы.</li>
+      </ol>
+      <p><em>Самый важный шаг после каталога это бриф: от него зависит, что принесут линии поиска.</em></p>
+    </section>
+
+    <section id="brif-zadaet-chto-iskat-pyat-liniy-poiska">
+      <h2>Бриф задаёт, что искать, пять линий поиска задают, где искать</h2>
+
+      <p>Просьба «исследуй рынок» без критериев возвращает обзор, который не ложится ни в одно решение. Поэтому фраза владельца до поиска превращается в бриф из пяти частей.</p>
+      <ol>
+        <li><strong>Вопрос и решение.</strong> Что нужно узнать и какое решение на это опирается.</li>
+        <li><strong>Потребитель.</strong> Кто возьмёт результат: выпуск новостей, урок, база знаний, и в какой папке.</li>
+        <li><strong>Окно свежести.</strong> С какой даты источники считаются свежими.</li>
+        <li><strong>Критерии отбора.</strong> Что войдёт в короткий отбор и какие поля будут у каждого пункта.</li>
+        <li><strong>Смежные отчёты.</strong> Пути к тому, что каталог уже нашёл по теме.</li>
+      </ol>
+      <p>В отчёте про вайбкодеров бриф стоит первым разделом. Решение названо прямо: отметки «рекомендую, подходит, не советую» в тир-листе подписок для блога и состав страницы рекомендуемых инструментов для учеников. Окно свежести: сигналы с 1 сентября, цены на 2 октября 2026 года.</p>
+      <figure class="diagram" id="fig-brief-lines" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 400" role="img" aria-labelledby="br-title br-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="br-title">Бриф решает, что искать, линии решают, где</title>
+  <desc id="br-desc">KB: concepts/research-loop
+Фраза владельца вроде «исследуй рынок» до поиска превращается в бриф из пяти частей: вопрос и решение, потребитель, окно свежести, критерии отбора, смежные отчёты. Бриф уходит в пять линий поиска: grok-web ищет первоисточники и цены, grok-x-demo официальные посты и демо в X, grok-x-critique критику в X, grok-reddit-hn реакции на Reddit и Hacker News, telegram архив чатов из реестра. Найденное проходит отбор по четырём правилам: у утверждения есть адрес и линия, старое уходит в ограничения, расхождения линий идут в противоречия, цифры о продукте только из официального слоя. Результат — отчёт. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла.</desc>
+  <defs>
+    <marker id="br-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1c4e80" /></marker>
+    <marker id="br-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0284c7" /></marker>
+  </defs>
+  <rect x="0" y="0" width="940" height="400" fill="#f8fafc" />
+  <rect x="40" y="164" width="140" height="72" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="110" y="192" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Фраза</text>
+  <text x="110" y="214" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">«исследуй рынок»</text>
+  <text x="212" y="48" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">БРИФ · ЧТО ИСКАТЬ</text>
+  <rect x="212" y="58" width="216" height="290" rx="8" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="2" />
+  <rect x="226" y="72" width="188" height="44" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
+  <text x="238" y="91" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">1 · Вопрос и решение</text>
+  <text x="238" y="107" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">на что опирается</text>
+  <rect x="226" y="126" width="188" height="44" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
+  <text x="238" y="145" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">2 · Потребитель</text>
+  <text x="238" y="161" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">кто возьмёт, куда</text>
+  <rect x="226" y="180" width="188" height="44" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
+  <text x="238" y="199" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">3 · Окно свежести</text>
+  <text x="238" y="215" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">с какой даты</text>
+  <rect x="226" y="234" width="188" height="44" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
+  <text x="238" y="253" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">4 · Критерии отбора</text>
+  <text x="238" y="269" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">что и с какими полями</text>
+  <rect x="226" y="288" width="188" height="44" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1" />
+  <text x="238" y="307" fill="#1e293b" font-size="13" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">5 · Смежные отчёты</text>
+  <text x="238" y="323" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">что уже найдено</text>
+  <path d="M180 200 H212" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <text x="476" y="48" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ЛИНИИ · ГДЕ ИСКАТЬ</text>
+  <path d="M428 203 H452" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M452 94 V310" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M452 94 H476" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <rect x="476" y="72" width="190" height="44" rx="5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="488" y="91" fill="#1e293b" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-web</text>
+  <text x="488" y="107" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">первоисточники, цены</text>
+  <path d="M666 94 H690" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M452 148 H476" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <rect x="476" y="126" width="190" height="44" rx="5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="488" y="145" fill="#1e293b" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-x-demo</text>
+  <text x="488" y="161" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">посты и демо в X</text>
+  <path d="M666 148 H690" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M452 202 H476" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <rect x="476" y="180" width="190" height="44" rx="5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="488" y="199" fill="#1e293b" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-x-critique</text>
+  <text x="488" y="215" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">критика в X</text>
+  <path d="M666 202 H690" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M452 256 H476" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <rect x="476" y="234" width="190" height="44" rx="5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="488" y="253" fill="#1e293b" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">grok-reddit-hn</text>
+  <text x="488" y="269" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">Reddit и Hacker News</text>
+  <path d="M666 256 H690" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M452 310 H476" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <rect x="476" y="288" width="190" height="44" rx="5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="488" y="307" fill="#1e293b" font-size="12.5" font-weight="700" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">telegram</text>
+  <text x="488" y="323" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">архив чатов</text>
+  <path d="M666 310 H690" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M690 94 V310" fill="none" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M690 160 H716" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <text x="716" y="48" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ОТБОР · ЧЕТЫРЕ ПРАВИЛА</text>
+  <rect x="716" y="58" width="190" height="190" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="730" y="82" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">есть адрес и линия</text>
+  <text x="730" y="98" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">→ иначе в незакрытые</text>
+  <text x="730" y="124" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">старше окна</text>
+  <text x="730" y="140" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">→ в ограничения</text>
+  <text x="730" y="166" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">линии разошлись</text>
+  <text x="730" y="182" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">→ в противоречия</text>
+  <text x="730" y="208" fill="#1e293b" font-size="12.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">цены и лимиты</text>
+  <text x="730" y="224" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">→ только официальные</text>
+  <path d="M811 248 V290" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#br-arrow-ink)" />
+  <rect x="716" y="290" width="190" height="58" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.6" />
+  <text x="811" y="315" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Отчёт</text>
+  <text x="811" y="335" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">99 утверждений</text>
+  <text x="476" y="380" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">вернула только адреса → линия перезапускается</text>
+<text data-role="human" data-label="Фраза" x="174" y="167" font-size="30" transform="rotate(-10 174 157.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+<text data-role="agent" data-label="Линии" x="660" y="64" font-size="30" transform="rotate(8 660 54.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+</svg>
+        <figcaption>Бриф из пяти частей решает, что искать; пять линий решают, где; отбор по четырём правилам решает, что попадёт в отчёт</figcaption>
+      </figure>
+      <p>Дальше исполнитель ведёт пять линий. Каждая ищет своё.</p>
+      <ol>
+        <li><strong><code>grok-web</code>.</strong> Первоисточники: блог, документация, журнал изменений, цены. Пресса.</li>
+        <li><strong><code>grok-x-demo</code>.</strong> Официальные посты и демо в X.</li>
+        <li><strong><code>grok-x-critique</code>.</strong> Критика в X: баги, сравнения не в пользу, скрытые ограничения.</li>
+        <li><strong><code>grok-reddit-hn</code>.</strong> Reddit и Hacker News: реакции разработчиков, первые пробы, споры.</li>
+        <li><strong><code>telegram</code>.</strong> Архив чатов из реестра источников.</li>
+      </ol>
+      <p>Из найденного исполнитель отбирает утверждения по четырём правилам.</p>
+      <ol>
+        <li>У утверждения есть ссылка и известна линия, которая его дала. Без ссылки утверждение уходит в незакрытые вопросы.</li>
+        <li>Источник старше окна свежести идёт в ограничения.</li>
+        <li>Если две линии разошлись, оба варианта попадают в противоречия, каждый со своей линией.</li>
+        <li>Цифры о продукте, то есть цены, лимиты и бенчмарки, берутся только из официального слоя. Цифра практика идёт в отчёт как его слова.</li>
+      </ol>
+      <p>Если источник предлагает вставить в инструмент промпт или настройку, отчёт хранит этот текст дословно, на языке оригинала, с автором, ссылкой и датой.</p>
+      <p><em>Чаще всего на этом шаге ошибаются в раскладке линий.</em></p>
+      <h3>Типичная ошибка: одна линия поиска на широкий вопрос</h3>
+      <p><strong>Почему ломает:</strong> одна веб-линия на широкий бриф уходит вглубь первых тем и проходит последние по верхам. <strong>Было:</strong> в отчёте про вайбкодеров одна линия <code>grok-web</code> искала сразу агентов, модели, MCP, медиа, голос и деплой, и по последним трём ответ вышел поверхностным. <strong>Стало:</strong> широкий бриф делится на два веб-прогона, агенты с моделями отдельно от медиа, голоса и деплоя. Второй прогон, <code>grok-web-media</code>, дал 14 утверждений из 99.</p>
+      <p><em>Все 99 утверждений ложатся в два файла: отчёт и файл доказательств.</em></p>
+    </section>
+
+    <section id="otchet-dlya-chteniya-fayl-dokazatelstv-d">
+      <h2>Отчёт для чтения, файл доказательств для проверки цифр</h2>
+
+      <p>Через месяц вы берёте цифру из отчёта в пост и не можете сказать, откуда она: в отчёте она стоит посреди абзаца, рядом с выводами. Эту задачу решает файл доказательств. Отчёт пишется для того, кто читает ответ целиком, файл доказательств для автора ролика, статьи, урока или карточки, которому нужен отдельный факт.</p>
+      <figure class="diagram" id="fig-evidence" data-kb="concepts/grounding">
+<svg viewBox="0 0 940 490" role="img" aria-labelledby="ev-title ev-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="ev-title">Отчёт и запись в файле доказательств</title>
+  <desc id="ev-desc">KB: concepts/grounding
+Две карточки рядом. Слева отчёт .md: шапка с обязательными полями title, date, type, tags, project, status и необязательным question; ниже каркас из девяти разделов: бриф, короткий ответ и отбор, границы отчёта, официальное, пресса, реакции практиков, сообщество в Telegram, ограничения и противоречия, незакрытые вопросы. Разделы с четвёртого по седьмой выделены. Справа одна запись утверждения в файле .evidence.json: claim, утверждение одной фразой; url, адрес, у Telegram null; source, издание или автор, у Telegram чат; source_date, дата источника; layer, слой источника; caveat, оговорка доступности или null; quote, дословная цитата или null; found_by, линия поиска. Обязательны claim, url, layer и found_by; у Telegram вместо адреса обязательны чат и дата в source и source_date. У layer четыре значения: official, press, practitioner, community. Стрелка от выделенных разделов к записи: каждое утверждение разделов 4–7 имеет запись. Заполненная точка означает обязательное поле, пустая необязательное.</desc>
+
+  <defs>
+    <marker id="ev-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="940" height="490" fill="#f8fafc" />
+
+  <!-- Карточка: отчёт -->
+  <rect x="30" y="30" width="370" height="394" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="46" y="42" width="40" height="14" rx="2" fill="rgba(28,78,128,0.06)" stroke="rgba(28,78,128,0.40)" stroke-width="0.8" />
+  <text x="66" y="52.5" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">ФАЙЛ</text>
+  <text x="46" y="80" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Отчёт .md</text>
+
+  <text x="46" y="106" fill="#64748b" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ШАПКА</text>
+  <circle cx="52" cy="122" r="3.5" fill="#1c4e80" />
+  <text x="62" y="126" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">title</text>
+  <circle cx="52" cy="142" r="3.5" fill="#1c4e80" />
+  <text x="62" y="146" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">date</text>
+  <circle cx="52" cy="162" r="3.5" fill="#1c4e80" />
+  <text x="62" y="166" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">type</text>
+  <circle cx="52" cy="182" r="3.5" fill="#1c4e80" />
+  <text x="62" y="186" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">tags</text>
+  <circle cx="212" cy="122" r="3.5" fill="#1c4e80" />
+  <text x="222" y="126" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">project</text>
+  <circle cx="212" cy="142" r="3.5" fill="#1c4e80" />
+  <text x="222" y="146" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">status</text>
+  <circle cx="212" cy="162" r="3.5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="222" y="166" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">question</text>
+
+  <text x="46" y="218" fill="#64748b" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">КАРКАС · ДЕВЯТЬ РАЗДЕЛОВ</text>
+  <rect x="40" y="286" width="350" height="80" rx="4" fill="rgba(2,132,199,0.06)" />
+  <rect x="40" y="286" width="3" height="80" fill="#0284c7" />
+  <text x="52" y="244" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">1</text>
+  <text x="70" y="244" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Бриф</text>
+  <text x="52" y="264" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">2</text>
+  <text x="70" y="264" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Короткий ответ и отбор</text>
+  <text x="52" y="284" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">3</text>
+  <text x="70" y="284" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Границы отчёта</text>
+  <text x="52" y="304" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">4</text>
+  <text x="70" y="304" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Официальное</text>
+  <text x="52" y="324" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">5</text>
+  <text x="70" y="324" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Пресса</text>
+  <text x="52" y="344" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">6</text>
+  <text x="70" y="344" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Реакции практиков</text>
+  <text x="52" y="364" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">7</text>
+  <text x="70" y="364" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Сообщество в Telegram</text>
+  <text x="52" y="388" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">8</text>
+  <text x="70" y="388" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Ограничения и противоречия</text>
+  <text x="52" y="408" fill="#64748b" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">9</text>
+  <text x="70" y="408" fill="#1e293b" font-size="12" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Незакрытые вопросы</text>
+
+  <!-- Связь -->
+  <path d="M400 326 H540" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#ev-arrow-ink)" />
+  <text x="470" y="288" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">каждое утверждение</text>
+  <text x="470" y="302" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">разделов 4–7</text>
+  <text x="470" y="316" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">имеет запись</text>
+
+  <!-- Карточка: запись утверждения -->
+  <rect x="540" y="30" width="370" height="394" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="556" y="42" width="54" height="14" rx="2" fill="rgba(28,78,128,0.06)" stroke="rgba(28,78,128,0.40)" stroke-width="0.8" />
+  <text x="583" y="52.5" fill="#1c4e80" font-size="8.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">ЗАПИСЬ</text>
+  <text x="556" y="80" fill="#1e293b" font-size="14" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">Утверждение в .evidence.json</text>
+
+  <circle cx="564" cy="108" r="3.5" fill="#1c4e80" />
+  <text x="576" y="112" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">claim</text>
+  <text x="680" y="112" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">утверждение одной фразой</text>
+  <circle cx="564" cy="136" r="3.5" fill="#1c4e80" />
+  <text x="576" y="140" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">url</text>
+  <text x="680" y="140" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">адрес; у telegram null</text>
+  <circle cx="564" cy="164" r="3.5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="576" y="168" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">source</text>
+  <text x="680" y="168" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">издание, автор; у telegram чат</text>
+  <circle cx="564" cy="192" r="3.5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="576" y="196" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">source_date</text>
+  <text x="680" y="196" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">дата; у telegram вместо url</text>
+  <circle cx="564" cy="220" r="3.5" fill="#1c4e80" />
+  <text x="576" y="224" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">layer</text>
+  <text x="680" y="224" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">слой источника, значения ниже</text>
+  <circle cx="564" cy="248" r="3.5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="576" y="252" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">caveat</text>
+  <text x="680" y="252" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">превью, регион, тариф или null</text>
+  <circle cx="564" cy="276" r="3.5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="576" y="280" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">quote</text>
+  <text x="680" y="280" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">дословная цитата или null</text>
+  <circle cx="564" cy="304" r="3.5" fill="#1c4e80" />
+  <text x="576" y="308" fill="#0f172a" font-size="12" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">found_by</text>
+  <text x="680" y="308" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">линия поиска</text>
+
+  <text x="556" y="346" fill="#64748b" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЗНАЧЕНИЯ LAYER</text>
+  <rect x="556" y="358" width="70" height="20" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.40)" stroke-width="0.8" />
+  <text x="591" y="372" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">official</text>
+  <rect x="634" y="358" width="50" height="20" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.40)" stroke-width="0.8" />
+  <text x="659" y="372" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">press</text>
+  <rect x="692" y="358" width="98" height="20" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.40)" stroke-width="0.8" />
+  <text x="741" y="372" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">practitioner</text>
+  <rect x="798" y="358" width="78" height="20" rx="3" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.40)" stroke-width="0.8" />
+  <text x="837" y="372" fill="#0284c7" font-size="11" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">community</text>
+
+  <!-- Легенда -->
+  <text x="30" y="464" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+  <circle cx="112" cy="460" r="3.5" fill="#1c4e80" />
+  <text x="122" y="464" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">обязательное поле</text>
+  <circle cx="272" cy="460" r="3.5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="282" y="464" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">необязательное</text>
+</svg>
+        <figcaption>Отчёт держит смысл, файл доказательств держит ссылку и линию каждого утверждения из разделов с источниками</figcaption>
+      </figure>
+      <p>Из такой пары утверждение берётся без пересказа. Автор ролика или урока открывает запись, видит ссылку, дату и слой и решает, годится ли утверждение. Это заземление ответа в источнике, разложенное по полям.</p>
+      <p>Ссылка есть всегда, проверка у того, кто публикует.</p>
+      <h3>Типичная ошибка: слова практика в посте как проверенный факт</h3>
+      <p><strong>Почему ломает:</strong> файл доказательств говорит, где утверждение нашли, и цифра практика может оказаться пересказом пересказа. <strong>Было:</strong> цифра из файла доказательств идёт в пост как проверенный факт. <strong>Стало:</strong> перед публикацией цифра сверяется с официальным источником по её ссылке. Так «10x» из записи <code>c71</code> в пост как факт не попадает: в официальной записи <code>c6</code> множителя нет.</p>
+      <p><em>Дальше важно, чтобы следующий вопрос нашёл готовый отчёт.</em></p>
+    </section>
+
+    <section id="katalog-kak-nayti-gotovyy-otchet-do-novo">
+      <h2>Каталог: как найти готовый отчёт до нового поиска</h2>
+
+      <p>Семьсот пятьдесят один отчёт без входа превращается в склад, где старое дольше найти, чем поискать заново. Вход в отдел это каталог <code>INDEX.md</code> с тремя разрезами.</p>
+      <ol>
+        <li><strong>По типу.</strong> Конкуренты, рынок, технологии, видео, контент.</li>
+        <li><strong>По проекту.</strong> Школа, Personal Corp, блог, общее.</li>
+        <li><strong>По тегу.</strong> Тег попадает в каталог, когда у него от двух отчётов. На 6 октября таких тегов 368.</li>
+      </ol>
+      <p>Маршрут один для человека и агента: тег в каталоге, список отчётов по ней, нужные файлы. Руками каталог не правят: он пересобирается из шапок и поэтому не расходится с отчётами.</p>
+      <p>На 6 октября тег <code>claude-code</code> стоит у 100 отчётов и связывает их с карточкой Claude Code, об этом следующий раздел.</p>
+      <p>Вторая петля отдела это реестр источников. Каждое исследование ставит источнику дату последней пользы и дописывает новые полезные источники. Реестр завели 29 сентября 2026 года, за неделю он вырос до 27 тем, от распознавания речи до обучения контент-команд ритейла.</p>
+      <p>Без вопроса в отдел тоже приходят материалы: закладки X, разборы видео и новости, каждый своим скиллом.</p>
+      <p><em>Через теги каталог связан с базой знаний школы: там те же инструменты описаны по-другому.</em></p>
+    </section>
+
+    <section id="gde-lezhit-tekuschiy-otvet-i-gde-dokazat">
+      <h2>Где лежит текущий ответ и где доказательства на дату</h2>
+
+      <p>Одни и те же инструменты и модели описаны в двух местах: в отчётах отдела и в карточках базы знаний школы. Отчёт фиксирует, что было видно на дату, и не переписывается. Карточка держит один текущий ответ и переписывается, когда он устарел. Ключ связи это имя: тег отчёта совпадает с именем файла карточки. Так у каждого вопроса один источник истины: текущий ответ в карточке, доказательства на дату в отчёте.</p>
+      <figure class="diagram" id="fig-kb" data-kb="concepts/source-of-truth">
+<svg viewBox="0 0 920 500" role="img" aria-labelledby="kb-title kb-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="kb-title">Как отчёт доезжает до карточки базы знаний</title>
+  <desc id="kb-desc">KB: concepts/source-of-truth
+Две зоны-репозитория, все связи односторонние. Слева corp-research: отчёт на дату, который не переписывается, попадает в kb-feed.json, экспорт каталога. Справа teach-vibecoding: sync_research.py ночью в 05:10 читает фид и переводит теги в имена карточек; ключ связи: тег отчёта равен имени карточки. Скрипт пишет в карточку базы знаний блок «Из ресёрча» и ставит в очередь карточки, у которых исследование новее самой карточки. Агент kb-from-research берёт очередь: наблюдаемый факт применяет в карточку сам, а смысловое изменение оформляет предложением, которое Владелец подтверждает в чате. Человек обозначен эмодзи 🧑, агент эмодзи 🤖 на углу узла.</desc>
+
+  <defs>
+    <marker id="kb-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1c4e80" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="920" height="500" fill="#f8fafc" />
+
+  <!-- Зоны -->
+  <rect x="20" y="30" width="230" height="410" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.14)" stroke-width="0.8" />
+  <text x="36" y="52" fill="rgba(15,23,42,0.55)" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">CORP-RESEARCH</text>
+  <rect x="290" y="30" width="610" height="410" rx="8" fill="rgba(15,23,42,0.02)" stroke="rgba(15,23,42,0.14)" stroke-width="0.8" />
+  <text x="306" y="52" fill="rgba(15,23,42,0.55)" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">TEACH-VIBECODING</text>
+
+  <!-- corp-research -->
+  <rect x="40" y="200" width="190" height="60" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="135" y="226" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Отчёт на дату</text>
+  <text x="135" y="244" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">не переписывается</text>
+
+  <rect x="40" y="340" width="190" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="135" y="370" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">kb-feed.json</text>
+  <text x="135" y="388" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">экспорт каталога</text>
+
+  <path d="M135 260 V340" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+
+  <!-- Ключ между зонами -->
+  <path d="M230 375 H340" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+  <rect x="238" y="383" width="94" height="30" fill="#f8fafc" />
+  <text x="285" y="395" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">тег отчёта =</text>
+  <text x="285" y="409" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">имя карточки</text>
+
+  <!-- teach-vibecoding -->
+  <rect x="340" y="340" width="220" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="450" y="362" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">sync_research.py</text>
+  <text x="450" y="381" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">ночью в 05:10</text>
+  <text x="450" y="396" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">тег → имя карточки</text>
+
+  <rect x="340" y="200" width="220" height="60" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="450" y="226" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Карточка базы знаний</text>
+  <text x="450" y="244" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">блок «Из ресёрча»</text>
+
+  <rect x="690" y="340" width="190" height="70" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="785" y="370" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Очередь карточек</text>
+  <text x="785" y="388" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">исследование новее</text>
+
+  <rect x="690" y="200" width="190" height="60" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="785" y="226" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">kb-from-research</text>
+  <text x="785" y="244" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">смысловой этап</text>
+
+  <rect x="690" y="70" width="190" height="60" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="785" y="96" fill="#1e293b" font-size="13.5" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" text-anchor="middle">Владелец</text>
+  <text x="785" y="114" fill="#64748b" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">подтверждает в чате</text>
+
+  <!-- Связи -->
+  <path d="M450 340 V260" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+  <path d="M560 375 H690" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+  <path d="M785 340 V260" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+  <path d="M690 230 H560" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+  <text x="625" y="221" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="middle">факт применяет сам</text>
+  <path d="M785 200 V130" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+  <text x="777" y="161" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end">смысловое изменение</text>
+  <text x="777" y="175" fill="#475569" font-size="10.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" text-anchor="end">→ предложение</text>
+
+<!-- Acting roles; surfaces and artifacts remain unmarked. -->
+<text data-role="human" data-label="Владелец" x="874" y="85" font-size="30" transform="rotate(-10 874 75.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🧑</text>
+<text data-role="agent" data-label="kb-from-research" x="874" y="215" font-size="30" transform="rotate(8 874 205.0)" text-anchor="middle" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" aria-hidden="true">🤖</text>
+
+  <!-- Легенда -->
+  <g>
+    <text x="20" y="478" fill="#475569" font-size="9" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.14em">ЛЕГЕНДА</text>
+    <path d="M96 474 H132" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#kb-arrow-ink)" />
+    <text x="140" y="478" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">поток данных</text>
+  </g>
+</svg>
+        <figcaption>Поток идёт в одну сторону: база знаний забирает экспорт каталога сама, факты вносит сама, смысловые правки предлагает владельцу</figcaption>
+      </figure>
+      <p>База знаний ночью забирает экспорт каталога, и в карточку встаёт блок «Из ресёрча» со свежими отчётами по её тегу, как в карточке Claude Code. Наблюдаемые факты, то есть цену, лимиты, версию и доступность, скилл базы знаний вносит в карточку сам. Смысловое изменение уходит владельцу на подтверждение.</p>
+      <p>Отчёты берут не только карточки базы знаний. 4 октября отдел разобрал, как разработчица из Cursor ведёт набором скиллов pstack большой поток пулреквестов, то есть заявок на правку кода. Из этого отчёта собран выпуск Нейрочела без нового пересказа.</p>
+<div class="flow" id="reuse-pstack">
+  <div><span class="case-label">Отчёт, 4 октября</span>Плейбуки pstack по одному: когда запускается, какие шаги, где нужен человек</div>
+  <div class="flow-arrow">→</div>
+  <div><span class="case-label">Выпуск</span>Утверждения отчёта взяты как есть, свои проверки перед публикацией добавлены отдельно</div>
+  <div class="flow-arrow">→</div>
+  <div><span class="case-label">Нейрочел</span>Статья и два ролика, горизонтальный и вертикальный</div>
+</div>
+    </section>
+
+    <section id="shablon-otdela-papki-pravila-skill">
+      <h2>Шаблон отдела: папки, правила, скилл</h2>
+
+      <p>Свой отдел исследований собирается из трёх частей: папки с файлами, правил для агента и скилла, который зовёт отдел из любой другой папки. Пошаговая сборка с проверкой лежит в практике <a href="/otdel-issledovaniy/praktika/">«Соберите свой отдел исследований»</a>.</p>
+      <h3>Папки и файлы</h3>
+      <p>Отдел живёт в папке <code>corp-research</code> рядом с папкой штаба.</p>
+      <figure class="diagram" id="fig-dept-folders" data-kb="concepts/research-loop">
+<svg viewBox="0 0 940 440" role="img" aria-labelledby="df-title df-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="df-title">Шаблон отдела исследований: папки и файлы</title>
+  <desc id="df-desc">KB: concepts/research-loop
+В вашей папке с отделами на одном уровне лежат две папки: штаб hq и отдел исследований corp-research. В правилах штаба AGENTS.md есть карта отделов со строкой про отдел исследований, от неё стрелка ведёт в папку отдела. Внутри отдела: AGENTS.md, правила отдела; INDEX.md, каталог, строка на отчёт; tags.md, словарь тегов; папки месяцев 2026-10 и дальше с отчётами, файл на вопрос; в отчёте шапка с датой, вопросом и тегами, ответ и факты с цитатой, ссылкой и датой. Ниже общая папка скиллов харнеса со скиллом research: он виден из любой папки и ведёт в отдел.</desc>
+  <defs>
+    <marker id="df-arrow-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1c4e80" /></marker>
+    <marker id="df-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0284c7" /></marker>
+  </defs>
+  <rect x="0" y="0" width="940" height="440" fill="#f8fafc" />
+  <rect x="20" y="16" width="900" height="312" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="6 4" />
+  <text x="36" y="38" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ВАША ПАПКА С ОТДЕЛАМИ · ДВЕ ПАПКИ НА ОДНОМ УРОВНЕ</text>
+  <path d="M40 66 V58 Q40 52 46 52 H104 Q110 52 112 58 L114 66" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <rect x="40" y="66" width="240" height="248" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="56" y="94" fill="#1e293b" font-size="16" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">hq/</text>
+  <text x="56" y="114" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ШТАБ</text>
+  <rect x="56" y="130" width="208" height="84" rx="5" fill="#ffffff" stroke="#1c4e80" stroke-width="1.4" />
+  <path d="M68 142 H81 L86 147 V164 H68 Z" fill="#ffffff" stroke="#1c4e80" stroke-width="1.3" />
+  <path d="M81 142 V147 H86" fill="none" stroke="#1c4e80" stroke-width="1.3" />
+  <path d="M72 151 H82" stroke="#1c4e80" stroke-width="1" />
+  <path d="M72 155 H82" stroke="#1c4e80" stroke-width="1" />
+  <path d="M72 159 H82" stroke="#1c4e80" stroke-width="1" />
+  <text x="96" y="158" fill="#1e293b" font-size="13" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">AGENTS.md</text>
+  <text x="96" y="176" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">правила штаба,</text>
+  <text x="96" y="192" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">карта отделов:</text>
+  <text x="68" y="206" fill="#0284c7" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">строка про исследования</text>
+  <rect x="56" y="226" width="208" height="36" rx="5" fill="#f8fafc" stroke="#cbd5e1" />
+  <path d="M68 233 H81 L86 238 V255 H68 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" />
+  <path d="M81 233 V238 H86" fill="none" stroke="#94a3b8" stroke-width="1.3" />
+  <path d="M72 242 H82" stroke="#94a3b8" stroke-width="1" />
+  <path d="M72 246 H82" stroke="#94a3b8" stroke-width="1" />
+  <path d="M72 250 H82" stroke="#94a3b8" stroke-width="1" />
+  <text x="96" y="249" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">me.md · о вас</text>
+  <text x="56" y="290" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">и другие отделы …</text>
+  <path d="M264 172 H338" fill="none" stroke="#1c4e80" stroke-width="1.4" marker-end="url(#df-arrow-ink)" />
+  <path d="M340 66 V58 Q340 52 346 52 H446 Q452 52 454 58 L456 66" fill="#e6f2f9" stroke="#0284c7" stroke-width="2" />
+  <rect x="340" y="66" width="560" height="248" rx="6" fill="#0284c7" fill-opacity="0.06" stroke="#0284c7" stroke-width="2" />
+  <text x="356" y="94" fill="#0284c7" font-size="16" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">corp-research/</text>
+  <text x="356" y="114" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ОТДЕЛ ИССЛЕДОВАНИЙ</text>
+  <rect x="356" y="128" width="250" height="52" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <path d="M368 140 H381 L386 145 V162 H368 Z" fill="#ffffff" stroke="#0284c7" stroke-width="1.3" />
+  <path d="M381 140 V145 H386" fill="none" stroke="#0284c7" stroke-width="1.3" />
+  <path d="M372 149 H382" stroke="#0284c7" stroke-width="1" />
+  <path d="M372 153 H382" stroke="#0284c7" stroke-width="1" />
+  <path d="M372 157 H382" stroke="#0284c7" stroke-width="1" />
+  <text x="396" y="150" fill="#1e293b" font-size="13" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">AGENTS.md</text>
+  <text x="396" y="168" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">правила отдела</text>
+  <rect x="356" y="188" width="250" height="52" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="370" y="210" fill="#1e293b" font-size="13" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">tags.md</text>
+  <text x="370" y="228" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">словарь тегов, 5–10</text>
+  <rect x="356" y="248" width="250" height="56" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="4 3" />
+  <text x="370" y="266" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">в отчёте: дата, вопрос, теги,</text>
+  <text x="370" y="282" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ответ, факты с цитатой,</text>
+  <text x="370" y="298" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ссылкой и датой</text>
+  <rect x="624" y="128" width="260" height="52" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1.6" />
+  <text x="638" y="150" fill="#1e293b" font-size="13" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">INDEX.md</text>
+  <text x="638" y="168" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">каталог: строка на отчёт</text>
+  <rect x="624" y="188" width="260" height="116" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" />
+  <text x="638" y="210" fill="#1e293b" font-size="13" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">2026-10/</text>
+  <text x="722" y="210" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">отчёты месяца</text>
+  <rect x="638" y="222" width="232" height="26" rx="4" fill="#f8fafc" stroke="#cbd5e1" />
+  <text x="650" y="239" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">ai-print-shops.md</text>
+  <rect x="638" y="254" width="232" height="26" rx="4" fill="#f8fafc" stroke="#cbd5e1" />
+  <text x="650" y="271" fill="#475569" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">crm-prices.md</text>
+  <text x="638" y="298" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">2026-11/ …</text>
+  <rect x="340" y="364" width="300" height="62" rx="6" fill="#ffffff" stroke="#1c4e80" stroke-width="1.2" />
+  <text x="356" y="382" fill="#64748b" font-size="10" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" letter-spacing="0.06em">ОБЩАЯ ПАПКА СКИЛЛОВ</text>
+  <text x="356" y="402" fill="#1e293b" font-size="14" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">research/</text>
+  <text x="450" y="402" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">скилл отдела,</text>
+  <text x="356" y="418" fill="#64748b" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace">виден из любой папки</text>
+  <path d="M490 364 V318" fill="none" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#df-arrow-accent)" />
+  <text x="500" y="348" fill="#0284c7" font-size="11.5" font-family="'PT Mono', Menlo, Monaco, Consolas, monospace" font-weight="700">ведёт в отдел</text>
+</svg>
+        <figcaption>Шаблон отдела исследований: штаб и отдел лежат рядом, на одном уровне; карта отделов в правилах штаба ведёт в отдел, внутри отдела правила, каталог, словарь тегов и отчёты по месяцам; скилл из общей папки ведёт в отдел из любого места</figcaption>
+      </figure>
+      <p>Правила лежат в <code>AGENTS.md</code> в папке отдела. Агент читает их при каждом запуске в этой папке.</p>
+      <h3>Промпт агенту: правила отдела исследований</h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-name">правила отдела исследований</span>
+          <button class="copy-btn" type="button">Скопировать</button>
+        </div>
+        <pre><code>Создай AGENTS.md в папке corp-research. Вот его текст:
+
+---
+
+# Отдел исследований
+
+Общие правила и карта отделов лежат в штабе: ../hq/AGENTS.md.
+
+Отдел ищет чужой опыт и сохраняет найденное в отчёты. На эти отчёты опираются другие отделы.
+
+## Правила
+
+1. Каждый вопрос начинай с каталога INDEX.md. Есть отчёт моложе месяца: отвечай по нему, дай путь к файлу и факты с цитатой, ссылкой и датой.
+2. Отчёта нет или он устарел: ищи снаружи, поиском агента или через deep research, как сказано в вопросе.
+3. Источник это оригинал: сайт и документация сервиса, статья или доклад самого практика, издание с автором. Пересказы помогают найти оригинал. Российскую специфику ищи в русскоязычных источниках.
+4. Факт это проверенное утверждение: у него есть дословная цитата со страницы оригинала, ссылка на эту страницу и дата. Утверждение без цитаты помечай «непроверено» и в ответ не бери.
+5. Отчёт сохраняй файлом в папку месяца, например 2026-10/. Имя файла латиницей через дефис, например ai-print-shops.md. В шапке: дата, вопрос, зачем его задали, теги из tags.md. Дальше короткий ответ, факты с цитатами, выводы и то, что найти не удалось.
+6. Тем же шагом добавь строку в INDEX.md: дата, название, путь, теги, вопрос. Новые строки сверху.
+7. Теги бери из словаря tags.md. Нужен новый тег: добавь его в словарь вместе с отчётом.
+8. Другие отделы берут отчёт по пути к файлу и к себе не копируют.</code></pre>
+      </div>
+      <p>Скилл это инструкция, которую агент подхватывает по фразе. Скилл отдела исследований лежит в общей папке скиллов харнеса, у Claude Code это <code>~/.claude/skills/</code>. Тогда фраза «исследуй…» работает в любом отделе: в продажах, в контенте, в штабе.</p>
+      <h3>Промпт агенту: скилл отдела исследований</h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-name">скилл отдела исследований</span>
+          <button class="copy-btn" type="button">Скопировать</button>
+        </div>
+        <pre><code>Создай скилл research в общей папке скиллов, у Claude Code это ~/.claude/skills/. Вот его текст:
+
+---
+name: research
+description: Зовёт отдел исследований из любой папки. Фразы: «исследуй», «проведи рисеч», «что мы уже исследовали», «возьми отчёт из отдела исследований».
+---
+
+1. Открой правила отдела ../corp-research/AGENTS.md и работай по ним.
+2. Найди тему в каталоге ../corp-research/INDEX.md. Есть свежий отчёт: ответь путём к файлу и фактами с цитатой, ссылкой и датой.
+3. Отчёта нет или он устарел: проведи внешний поиск, сохрани отчёт в папку месяца в отделе и добавь строку в INDEX.md.
+4. Верни в отдел, откуда тебя позвали, путь к отчёту и короткий ответ. Письмо, пост или записку по отчёту этот отдел делает сам.</code></pre>
+      </div>
+    </section>
+
+    <section id="itogovaya-proverka">
+      <h2>Итоговая проверка</h2>
+
+      <ul>
+        <li>Вы показываете на рис. 1, на каком шаге вопрос закрывается без нового поиска.</li>
+        <li>Вы называете, какую часть вопроса ищет каждая из пяти линий <code>corp-research</code>.</li>
+        <li>По номеру в квадратных скобках отчёта вы находите запись в файле доказательств и называете её слой и линию.</li>
+        <li>Вы объясняете, почему каталог <code>corp-research</code> пересобирается из шапок отчётов и руками не правится.</li>
+        <li>Для одного инструмента вы показываете, где в <code>corp-research</code> лежит текущий ответ и где доказательства на дату.</li>
+        <li>Вы объясняете, какие изменения ночная цепочка вносит в карточку сама и какие несёт владельцу на подтверждение.</li>
+      </ul>
+    </section>
+
+    <section id="smyslovye-istochniki">
+      <h2>Смысловые источники</h2>
+
+      <ul>
+        <li>Отдел <code>corp-research</code> на основной версии, 5 октября 2026 года: правила для агента <code>AGENTS.md</code>, словарь <code>CONTEXT.md</code>, каталог <code>INDEX.md</code>, скилл <code>.agents/skills/corp-research/</code> с правилами исполнителя <code>executor.md</code>, реестром <code>sources.md</code> и граблями <code>gotchas.md</code>.</li>
+        <li>Решения отдела: ADR 0003 о границе отчёта и карточки базы знаний, ADR 0004 о файле доказательств, ADR 0005 о сборщике новостей, ADR 0007 о снятой линии проверки.</li>
+        <li>Отчёт <code>2026-10/vibecoding-tools-popularity-october-2026.md</code> и его файл доказательств на основной версии <code>corp-research</code>, 6 октября 2026 года: шапка, строка раздела 2, записи <code>c6</code> и <code>c71</code>, раскладка 99 утверждений по линиям, строка каталога.</li>
+        <li>Кейсы на основной версии <code>corp-research</code>, 6 октября 2026 года: отчёт о ценах на рекламу от 27 сентября и прайс в карточке продукта <code>hq/products/media-monetization.md</code>; отчёт о покадровом разборе ролика от 5 октября, правило 4а и проверка субтитров в <code>corp-news</code>, кадры из ролика Нейрочела и копии; отчёт о внедрении агентов в компаниях на 10–50 человек от 5 октября и его файл доказательств; отчёт о плейбуках pstack от 4 октября.</li>
+        <li>Ночная цепочка базы знаний школы: описание <code>ops/kb-research-sync/README.md</code> и скилл <code>kb-from-research</code> в репозитории <code>teach-vibecoding</code>.</li>
+        <li>Research под решение: приёмы одного запроса, второе мнение, дайджест по расписанию.</li>
+        <li>Сырьё в контекст: четыре слоя данных и цитаты вместо пересказа.</li>
+        <li>Иллюстрация в шапке сделана по правилам Hairline (Lucas Marques, MIT): полка каталога по разделу тегов <code>INDEX.md</code> на 6 октября 2026 года.</li>
+        <li>Исследовательский цикл, глубокий поиск, заземление, источник истины, слои знаний.</li>
+      </ul>
+    </section>
+
+
+</div>
+
+<script>
+(function () {
+  // --- Схема-страница в рамке подгоняется под свою высоту ---
+  // Высота в атрибуте это запасной вариант: на узкой колонке содержимое
+  // переносится и становится выше (бид pc3-59o.1179).
+  var frames = document.querySelectorAll('figure.diagram.interactive iframe');
+  var fit = function (frame) {
+    try {
+      var doc = frame.contentDocument;
+      if (!doc || !doc.body) return;
+      frame.style.height = '';   // сначала вернуть высоту из атрибута, иначе
+      frame.style.height = doc.documentElement.scrollHeight + 'px';  // не сожмётся
+    } catch (e) { /* чужой источник: остаётся высота из атрибута */ }
+  };
+  frames.forEach(function (frame) {
+    frame.addEventListener('load', function () { fit(frame); });
+    fit(frame);
+  });
+  window.addEventListener('resize', function () {
+    frames.forEach(fit);
+  });
+
+  // --- Копирование промптов ---
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.prompt');
+      var code = card ? card.querySelector('pre code') : null;
+      if (!code) return;
+      var text = code.innerText;
+
+      var ok = function () {
+        var prev = btn.textContent;
+        btn.textContent = 'Скопировано';
+        btn.classList.add('done');
+        setTimeout(function () {
+          btn.textContent = prev;
+          btn.classList.remove('done');
+        }, 1800);
+      };
+
+      var fallback = function () {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); ok(); } catch (e) { btn.textContent = 'Выделите текст'; }
+        document.body.removeChild(ta);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
