@@ -542,7 +542,7 @@
 <nav class="toc" aria-label="Содержание">
   <ul>
     <li><a href="#shablon-kak-ustroen-otdel-issledovaniy">Шаблон: как устроен отдел исследований</a></li>
-    <li><a href="#sborka-odnoy-frazoy">Сборка одной фразой</a></li>
+    <li><a href="#ustanovka-cherez-corp-new">Установка через corp-new</a></li>
     <li><a href="#frazy-dlya-raboty">Фразы для работы</a></li>
     <li><a href="#proverka">Проверка</a></li>
     <li><a href="#smyslovye-istochniki">Смысловые источники</a></li>
@@ -588,28 +588,59 @@
       </div>
     </section>
 
-    <section id="sborka-odnoy-frazoy">
-      <h2>Сборка одной фразой</h2>
+    <section id="ustanovka-cherez-corp-new">
+      <h2>Установка через corp-new</h2>
 
-      <p>Откройте агента в папке штаба и отправьте фразу, как на уроке 2, только с шаблоном внутри. Скилл <code>/grill-me</code> задаёт вопросы по одному и к каждому предлагает свой вариант ответа. Отвечайте коротко: какие темы у вашего дела, чем вы ищете. Если с урока 2 стоит скилл <code>corp-new</code>, агент создаст им папку и свяжет её со штабом.</p>
-      <h3>Промпт агенту: сборка отдела через grill-me</h3>
+      <p>Отдел ставится в два шага. Скилл <code>corp-new</code> создаёт папку отдела и связывает её со штабом. Скилл <code>/grill-me</code> заполняет правила отдела по шаблону.</p>
+      <p><strong>Шаг 1. Плагин Personal Corp OS.</strong> Если он стоит с урока 2, шаг пропустите. В нём скиллы <code>corp-new</code> и <code>hq</code>. Исходник: <a href="https://github.com/serejaris/personal-corp-os/tree/main/skills/corp-new">github.com/serejaris/personal-corp-os</a>.</p>
+      <h3>Промпт агенту: поставь плагин Personal Corp OS</h3>
       <div class="prompt">
         <div class="prompt-head">
-          <span class="prompt-name">сборка отдела через grill-me</span>
+          <span class="prompt-name">поставь плагин Personal Corp OS</span>
           <button class="copy-btn" type="button">Скопировать</button>
         </div>
-        <pre><code>/grill-me я хочу сделать отдел исследований. Вот как он устроен:
+        <pre><code>Поставь плагин Personal Corp OS из GitHub. Команды для Claude Code:
+
+claude plugin marketplace add serejaris/personal-corp-os
+claude plugin install personal-corp-os@personal-corp-os
+
+Для Codex:
+
+codex plugin marketplace add serejaris/personal-corp-os
+codex plugin add personal-corp-os@personal-corp-os
+
+После установки проверь, что скилл corp-new виден в списке скиллов.</code></pre>
+      </div>
+      <p>После установки откройте новое окно агента в папке штаба.</p>
+      <p><strong>Шаг 2. Папка отдела.</strong> <code>corp-new</code> сам находит штаб и создаёт рядом с ним папку <code>corp-research</code>. Внутри правила <code>AGENTS.md</code>, папка задач <code>tasks/</code> и папка скиллов. Он же дописывает строку про отдел в карту отделов штаба, а в правила отдела ставит ссылку на штаб. Правила за вас он не пишет: оставляет пустые места под назначение отдела. Скилл запускается только командой.</p>
+      <h3>Промпт агенту: создай отдел через corp-new</h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-name">создай отдел через corp-new</span>
+          <button class="copy-btn" type="button">Скопировать</button>
+        </div>
+        <pre><code>/corp-new создай отдел исследований, папка corp-research</code></pre>
+      </div>
+      <p>Агент ответит таблицей ✓/✗ по шагам. Все строки должны быть ✓, в том числе «отдел ссылается на штаб» и «штаб ссылается на отдел».</p>
+      <p><strong>Шаг 3. Правила по шаблону.</strong> Теперь пустые места заполняются шаблоном отдела. <code>/grill-me</code> задаёт вопросы по одному и к каждому предлагает свой вариант ответа. Отвечайте коротко: какие темы у вашего дела, чем вы ищете.</p>
+      <h3>Промпт агенту: заполни правила через grill-me</h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-name">заполни правила через grill-me</span>
+          <button class="copy-btn" type="button">Скопировать</button>
+        </div>
+        <pre><code>/grill-me заполни правила отдела corp-research по этому шаблону. Добавь в отдел каталог INDEX.md, словарь тегов tags.md и папку текущего месяца. Вот шаблон:
 
 [вставьте шаблон]</code></pre>
       </div>
-      <p>Если скилла <code>grill-me</code> нет, отправьте ту же фразу без него. Папку, файлы и строку в карте отделов штаба агент соберёт по шаблону.</p>
-      <h3>Промпт агенту: сборка отдела без скилла</h3>
+      <p>Если плагин не ставится, отправьте агенту в папке штаба одну фразу. Папку, файлы и строку в карте отделов штаба он соберёт по шаблону сам.</p>
+      <h3>Промпт агенту: сборка отдела без скиллов</h3>
       <div class="prompt">
         <div class="prompt-head">
-          <span class="prompt-name">сборка отдела без скилла</span>
+          <span class="prompt-name">сборка отдела без скиллов</span>
           <button class="copy-btn" type="button">Скопировать</button>
         </div>
-        <pre><code>сделай отдел исследований рядом со штабом. Вот как он устроен:
+        <pre><code>сделай отдел исследований corp-research рядом со штабом и добавь его в карту отделов штаба. Вот как он устроен:
 
 [вставьте шаблон]</code></pre>
       </div>
@@ -681,7 +712,7 @@
 
       <ul>
         <li>Устройство отдела: правила <code>corp-research</code> на 6 октября 2026 года и решение по уроку 3 потока PC3 от 6 октября 2026 года, гайд <a href="/otdel-issledovaniy/">20</a>.</li>
-        <li>Фраза сборки: запрос <code>/grill-me</code> со скиллом <code>corp-new</code>, которым на лайве урока 2 потока PC3 29 сентября 2026 года создавали отдел обучения, из Zoom-чата урока.</li>
+        <li>Установка: скилл <a href="https://github.com/serejaris/personal-corp-os/tree/main/skills/corp-new">corp-new</a> и раздел Install плагина <a href="https://github.com/serejaris/personal-corp-os">personal-corp-os</a> на 6 октября 2026 года; запрос <code>/grill-me</code> со скиллом <code>corp-new</code> на лайве урока 2 потока PC3 29 сентября 2026 года, из Zoom-чата урока.</li>
         <li>Примеры фраз: реплики голосом из сессий Claude Code, июль–октябрь 2026 года, дословно; имя в последнем примере заменено на «[автора]».</li>
       </ul>
     </section>
