@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-10-02"><title>Безопасность: как проверить свой сервис на дыры | Сережа Рис</title>
+<meta name="description" content="Гайд: закрытая база, второй аккаунт, секреты в браузере, ревью по перечню и постоянный гейт. Как за вечер закрыть самые дешёвые дыры вайбкодинг-сервиса.">
+<meta property="og:type" content="article"><meta property="og:title" content="Безопасность: как проверить свой сервис на дыры"><meta property="og:description" content="Гайд: пять практик на один вечер и постоянный гейт после него. Без обещания «теперь вы защищены»."><meta property="og:image" content="https://sereja.tech/kak-proverit-servis-na-dyry/img/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/kak-proverit-servis-na-dyry/img/og-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--pinkt:#c4006a;--line:#e3e3e3;--grey:#6f6f6f;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(40px,6.4vw,74px)/1.04 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:600px;margin:30px auto 0}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.pair{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.pair .side{margin:0}
+.pair .who{font:600 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 10px}
+.pair .bad .who{color:#c4006a}
+.pair .txt{background:var(--paper);padding:22px 26px}
+.pair .txt p{font:300 16px/25px var(--serif);margin:0 0 14px}
+.pair .txt p:last-child{margin:0}
+.pair .txt p.req{font:400 13.5px/21px var(--mono);color:#1d1d1d}
+.pair mark{color:inherit;padding:0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.pair mark.err{background:#f8c6df}
+.pair mark.ok{background:#dcdeea}
+.pair .note{font:300 15px/22px var(--serif);margin:12px 0 0}
+.pair figcaption{grid-column:1/-1;grid-row:1;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);text-align:center;margin-bottom:-8px}
+@media (max-width:760px){.pair{grid-template-columns:1fr;gap:22px}.pair .txt{padding:16px 18px}.pair .txt p{font-size:15px;line-height:23px;margin-bottom:10px}}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram .m{display:none;max-width:440px;margin:0 auto}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.steps{list-style:none;counter-reset:st;padding:0;margin:0}
+.steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
+.steps b{font-weight:500}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.how{list-style:none;padding:0;margin:14px 0 24px}
+.how li{padding:0 0 10px 22px;position:relative;font:400 16px/24px var(--serif)}
+.how li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:1px;background:var(--grey)}
+.how b{font-weight:500}
+.practice{margin:56px 0 0}
+.practice>h3{font:300 26px/1.2 var(--serif);margin:0 0 6px}
+.practice>.err{font:400 15px/22px var(--sans);color:var(--grey);margin:0 0 18px}
+.sources{font-size:13px;line-height:20px;margin-top:70px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}
+  .diagram .d{display:none}.diagram .m{display:block}
+}
+.tbl{width:100%;border-collapse:collapse;font:400 15px/21px var(--sans);font-variant-numeric:tabular-nums;margin:8px 0 6px}
+.tbl th,.tbl td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.tbl thead th{font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--grey);border-bottom:1px solid var(--ink);padding-top:0}
+.tbl tbody th{font-weight:500}
+.tbl th small,.tbl td small{display:block;font:400 12px/16px var(--sans);color:var(--grey);font-weight:400}
+.cap{font:400 13px/19px var(--sans);color:var(--grey);margin:8px 0 26px}
+.wide{width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.copyrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:30px 0 4px}
+.copyrow .t{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+.copy{font:500 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;background:#fff;color:var(--blue);border:1px solid var(--blue);padding:6px 12px;cursor:pointer;flex:none}
+.copy:hover{background:var(--blue);color:#fff}
+.copy.ok{background:var(--blue);color:#fff}
+pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:#1d1d1d}
+.hidden{display:none}
+.note{border-left:3px solid var(--blue);background:var(--paper);padding:14px 18px 4px;margin:26px 0;font:400 16px/24px var(--sans)}
+.note h3{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 8px}
+.note p{margin:0 0 12px}
+.faq h3{font:500 20px/1.3 var(--serif);margin:28px 0 8px}
+.faq p{font:400 16px/24px var(--sans)}
+.links{list-style:none;padding:0;margin:0}
+.links li{padding:6px 0;border-bottom:0;font:400 15px/22px var(--sans)}
+.links small{display:block;color:var(--grey);font-size:13px}
+.endnote{font:400 17px/1.6 var(--serif);margin:26px 0 0}
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:26px 0 10px}
+.gal figure{margin:0}
+.gal .ph{background:var(--ph);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center}
+.gal .ph svg{width:58%;height:auto}
+.gal figcaption{margin-top:12px;font:400 14px/19px var(--serif)}
+.gal figcaption b{display:block;font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:4px}
+.gal figcaption span{display:block;color:#333}
+@media (max-width:760px){.gal{grid-template-columns:repeat(2,1fr);gap:16px}}
+</style><link rel="canonical" href="https://sereja.tech/kak-proverit-servis-na-dyry/"><meta name="author" content="Сережа Рис"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/kak-proverit-servis-na-dyry/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Один и тот же запрос к базе: до правила на таблице пришли все записи, после — отказ"><meta property="article:published_time" content="2026-10-02T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-02T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="безопасность"><meta property="article:tag" content="вайбкодинг"><meta property="article:tag" content="Supabase"><meta property="article:tag" content="аудит"><meta property="article:tag" content="агенты"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Безопасность: как проверить свой сервис на дыры"><meta name="twitter:description" content="Гайд: пять практик на один вечер и постоянный гейт после него. Без обещания «теперь вы защищены»."><meta name="twitter:image:alt" content="Один и тот же запрос к базе: до правила на таблице пришли все записи, после — отказ"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Безопасность: как проверить свой сервис на дыры", "description": "Гайд: закрытая база, второй аккаунт, секреты в браузере, ревью по перечню и постоянный гейт. Как за вечер закрыть самые дешёвые дыры вайбкодинг-сервиса.", "image": "https://sereja.tech/kak-proverit-servis-na-dyry/img/og-preview.png", "inLanguage": "ru-RU", "datePublished": "2026-10-02", "dateModified": "2026-10-02", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/kak-proverit-servis-na-dyry/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["безопасность", "вайбкодинг", "Supabase", "аудит", "агенты", "OWASP"]}</script><script defer src="/analytics.js"></script></head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#primer">Пример</a><a href="#povod">Повод</a><a href="#praktiki">Практики</a><a href="#geit">Гейт</a><a href="#gotovo">Приёмка</a><a href="#faq">Вопросы</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#primer">Пример</a><a href="#povod">Повод</a><a href="#praktiki">Практики</a><a href="#geit">Гейт</a><a href="#gotovo">Приёмка</a><a href="#faq">Вопросы</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Безопасность</span></div><div class="kicker">Безопасность:</div><h1>Как проверить свой сервис на дыры</h1><p class="lead">Сервис собран, ссылка разослана, люди оставляют в нём свои телефоны и записи. Дальше начинается тихая тревога владельца. Гайд о том, как её выключить: список, который заканчивается.</p></div>
+<div class="meta">2 октября 2026 · гайд обновляется</div>
+<article class="body">
+<figure class="pair" id="primer">
+<div class="side bad"><p class="who">Типичная ошибка: защита включена на главной таблице и забыта на соседних</p><div class="txt"><p class="req">GET /rest/v1/profiles?select=*</p><p>Ответ базы: 200, пришло <mark class="err">412 записей — телефоны и заметки всех пользователей</mark>. Запрос отправлен из браузера, без пароля от базы, вторым аккаунтом.</p></div><p class="note">Браузер показывает то, что ему велели показать. База отвечает любому, кто обратился к ней напрямую по адресу.</p></div>
+<div class="side good"><p class="who">Правило написано на каждой таблице</p><div class="txt"><p class="req">GET /rest/v1/profiles?select=*</p><p>Ответ базы: <mark class="ok">отказ, ноль строк</mark>. Построчная защита на таблице говорит, что второй аккаунт видит только свои записи.</p></div><p class="note">Починка этой дыры в сервисе Moltbook заняла два выражения на языке базы. Снаружи ушли 1,5 миллиона токенов.</p></div>
+<figcaption>Один и тот же запрос к живой базе. Разница между колонками — одно условие, записанное на самой таблице</figcaption>
+</figure>
+
+<p class="first"><span class="drop">В</span>ремя от времени вы прогоняете код через агента с вопросом про уязвимости. Каждое обновление модели даёт повод прогнать ещё раз, ролики на эту тему смотрятся с интересом. Одного не хватает: списка, который заканчивается, и признака, по которому можно сказать «на сегодня закрыто». Проверка по наитию имеет свойство расширяться бесконечно и при этом пропускать ровно то, что ломает такие сервисы чаще всего.</p>
+
+<p>Ниже пять практик на один вечер и один постоянный гейт после него. Обещание сознательно скромное: после прохождения сервис становится предсказуемым и теряет самые дешёвые для взлома дыры. Слов «теперь вы защищены» здесь не будет ни в одной секции. Порядок практик задан тем, что ломается чаще: OWASP Top 10 в редакции 2025 года ставит на первое место нарушение контроля доступа, на второе ошибки конфигурации.</p>
+
+<p>Материал обкатан на живом сервисе: на менторской сессии мы прошли по этому списку сервис моего ученика, собранный агентом и уже принимающий записи реальных клиентов. Список закончился, находок было 58 — двенадцать серьёзных, двадцать шесть средних, двадцать мелких. Каждая стала задачей с датой, а вопрос «делать ли ещё что-то» получил письменный ответ вместо тревоги.</p>
+
+<blockquote class="pull"><p>Слова «теперь вы защищены» здесь не будет ни в одной секции.</p><cite>обещание гайда — сознательно скромное</cite></blockquote>
+
+<section class="sec" id="povod">
+<div class="sec-h"><span class="num">01</span><h2>Повод для беспокойства измерен</h2></div>
+
+<p>Veracode в отчёте GenAI Code Security за 2026 год показывает две цифры рядом. Синтаксическая корректность сгенерированного кода превышает 95%, а доля безопасных решений держится около 55%. То есть примерно в 45% случаев при наличии выбора берётся небезопасный вариант. Escape.tech в октябре 2025 просканировала более 5 600 приложений, собранных на платформах вайбкодинга: 2 038 критичных уязвимостей, более 400 утёкших ключей, 175 случаев открытых персональных данных. Выборка перекошена в сторону одной платформы, поэтому переносить проценты на весь вайбкодинг честно нельзя, но порядок проблемы виден.</p>
+
+<div class="wide">
+<table class="tbl" aria-label="Что случилось с реальными сервисами">
+<thead><tr><th scope="col">Сервис и дата</th><th scope="col">Что произошло</th><th scope="col">Чем кончилось</th></tr></thead>
+<tbody>
+<tr><th scope="row">Lovable<small>май 2025, CVE-2025-48757</small></th><td>Приложения выпускались с базой без построчной защиты, критичность 9,3 из 10. Посторонний читал и писал любые таблицы обычным запросом</td><td>Больше 170 живых приложений с открытой базой. Платформа не выпустила исправление: исправлять пришлось каждому владельцу у себя</td></tr>
+<tr><th scope="row">Moltbook<small>январь 2026</small></th><td>Ключ приложения нашли в коде страницы за минуты, построчная защита не была включена нигде</td><td>Наружу ушли примерно 1,5 миллиона токенов доступа и 35 тысяч почтовых адресов. Починка — два выражения на языке базы</td></tr>
+<tr><th scope="row">Tea App<small>июль 2025</small></th><td>72 тысячи фотографий, включая снимки документов, лежали в забытом хранилище прошлой версии продукта</td><td>Хранилищем никто не пользовался, поэтому его никто не проверял. Данные, которые вы не собрали и вовремя удалили, не участвуют ни в одной утечке</td></tr>
+<tr><th scope="row">EnrichLead<small>март 2025</small></th><td>Соло-основатель публично гордился продуктом без единой строки кода руками. Оплата проверялась в браузере, лимита на частоту запросов не было</td><td>Через два дня сервис разобрали, ещё через неделю закрыли. Случай подтверждается постом самого основателя: показательная история, не доказательство</td></tr>
+</tbody></table>
+<p class="cap">Все четыре случая укладываются в две первые категории OWASP Top 10:2025 — нарушение контроля доступа и ошибки конфигурации</p>
+</div>
+
+<p>Клиент открывает вашу страницу записи и видит только свою карточку. Ощущение безопасности рождается именно здесь и почти всегда обманывает. Защита опубликованного продукта живёт в четырёх слоях, и большинство дыр возникает из-за путаницы между ними.</p>
+
+<figure class="diagram">
+<svg class="d" viewBox="0 0 960 400" role="img" aria-labelledby="fig-layers-title fig-layers-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-layers-title">Четыре слоя, где живёт защита</title><desc id="fig-layers-desc">Четыре слоя сверху вниз: браузер посетителя, сервер и API, база данных, сами данные. Розовая стрелка показывает прямой запрос постороннего в обход страницы — сразу в базу, минуя браузер и сервер.</desc><defs><marker id="s-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="s-pink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ff1493"/></marker></defs><rect width="960" height="400" fill="#ffffff"/>
+<rect x="120" y="28" width="712" height="74" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="136" y="58" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Браузер посетителя</text><text x="136" y="78" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">кнопки, скрытые разделы, проверки оплаты — всё видно и всё меняется руками</text>
+<rect x="120" y="122" width="712" height="74" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="136" y="152" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Сервер и API</text><text x="136" y="172" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">проверка «кто спрашивает» и «чьё это», лимит частоты — решение имеет силу только здесь</text>
+<rect x="120" y="216" width="712" height="74" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="136" y="246" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">База данных</text><text x="136" y="266" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">отвечает всем, кто спросил напрямую, если правило не написано</text>
+<rect x="120" y="310" width="712" height="74" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="136" y="340" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Сами данные</text><text x="136" y="360" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">телефоны, записи, файлы, хранилища прошлых версий — чего не собрали, то не утечёт</text>
+<path d="M 476,102 V 116" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink)"/>
+<path d="M 476,196 V 210" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink)"/>
+<path d="M 476,290 V 304" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink)"/>
+<circle cx="36" cy="56" r="13" fill="none" stroke="#000000" stroke-width="1.4"/><circle cx="36" cy="50" r="5" fill="none" stroke="#000000" stroke-width="1.4"/><path d="M24 76c3-7 21-7 24 0" fill="none" stroke="#000000" stroke-width="1.4"/>
+<path d="M 52,60 C 96,60 96,253 114,253" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#s-pink)"/>
+<text x="60" y="150" fill="#c4006a" font-size="10" font-family="Jost, Futura, sans-serif" letter-spacing="0.8" transform="rotate(90 60 150)">прямой запрос в обход страницы</text>
+</svg><svg class="m" viewBox="0 0 358 700" role="img" aria-labelledby="fig-layers-title fig-layers-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="s-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="s-pink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ff1493"/></marker></defs><rect width="358" height="700" fill="#ffffff"/>
+<circle cx="30" cy="26" r="12" fill="none" stroke="#000000" stroke-width="1.4"/><circle cx="30" cy="21" r="4.5" fill="none" stroke="#000000" stroke-width="1.4"/><path d="M19 44c3-6 19-6 22 0" fill="none" stroke="#000000" stroke-width="1.4"/>
+<path d="M 42,34 C 90,40 40,330 86,388" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#s-pink-m)"/>
+<rect x="90" y="140" width="256" height="90" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="104" y="172" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Браузер посетителя</text><text x="104" y="192" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">всё видно и всё меняется</text><text x="104" y="209" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">руками посетителя</text>
+<path d="M 218,230 V 248" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink-m)"/>
+<rect x="90" y="258" width="256" height="90" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="104" y="290" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Сервер и API</text><text x="104" y="310" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">«кто спрашивает» и «чьё это»</text><text x="104" y="327" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">решение имеет силу только здесь</text>
+<path d="M 218,348 V 366" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink-m)"/>
+<rect x="90" y="376" width="256" height="90" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="104" y="408" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">База данных</text><text x="104" y="428" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">отвечает всем, кто спросил</text><text x="104" y="445" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">напрямую, если нет правила</text>
+<path d="M 218,466 V 484" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#s-ink-m)"/>
+<rect x="90" y="494" width="256" height="90" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="104" y="526" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Сами данные</text><text x="104" y="546" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">чего не собрали, то не утечёт</text>
+<text x="120" y="640" fill="#c4006a" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">розовая стрелка: посторонний стучится</text><text x="120" y="660" fill="#c4006a" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">в базу напрямую, минуя страницу</text>
+</svg><figcaption>Четыре слоя, где живёт защита опубликованного продукта. Розовая стрелка — главный сюжет: посторонний не ходит через вашу страницу</figcaption></figure>
+
+<p>Слова, которые встретятся дальше:</p>
+
+<div class="gal">
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><g fill="#fff" stroke="#000" stroke-width="1.4"><rect x="20" y="34" width="80" height="96"/></g><path d="M20 54h80M20 76h80M20 98h80" stroke="#b5b5b5" stroke-width="1.4"/><path d="M20 98h80" stroke="#2d3e9f" stroke-width="3"/><path d="M52 34v-8a8 8 0 0 1 16 0v8" fill="none" stroke="#2d3e9f" stroke-width="2.4"/><circle cx="60" cy="26" r="7" fill="none" stroke="#2d3e9f" stroke-width="2.4"/></svg></div><figcaption><b>Построчная защита</b><span>Условие, записанное на самой таблице: какие строки вернуть тому, кто спрашивает. В Supabase — Row Level Security. Правило пишется на каждую таблицу отдельно.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><circle cx="60" cy="92" r="26" fill="none" stroke="#000" stroke-width="1.6"/><circle cx="60" cy="92" r="10" fill="none" stroke="#000" stroke-width="1.6"/><path d="M60 66V34M60 34h24M84 34v12" fill="none" stroke="#000" stroke-width="1.6"/><path d="M84 46l18 6-2 6-18-6z" fill="#2d3e9f" stroke="none"/></svg></div><figcaption><b>Публичный ключ</b><span>Ключ приложения, который лежит в браузере по замыслу, и его видит каждый посетитель. anon или publishable. Безопасен, пока каждая таблица закрыта правилом.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><circle cx="46" cy="100" r="24" fill="none" stroke="#000" stroke-width="1.6"/><circle cx="46" cy="100" r="9" fill="none" stroke="#000" stroke-width="1.6"/><path d="M46 76V40M46 40h30M76 40v16" fill="none" stroke="#000" stroke-width="1.6"/><path d="M82 30l22 38H60z" fill="none" stroke="#ff1493" stroke-width="2"/><path d="M82 44v10" stroke="#ff1493" stroke-width="2.4"/><circle cx="82" cy="60" r="1.6" fill="#ff1493"/></svg></div><figcaption><b>Служебный ключ</b><span>service_role: обходит построчную защиту целиком. Место — только серверная часть и переменные окружения. Браузер, репозиторий и чат с агентом его видеть не должны.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><g fill="#fff" stroke="#000" stroke-width="1.4"><rect x="18" y="46" width="34" height="46"/><rect x="68" y="46" width="34" height="46"/></g><path d="M26 60h18M26 72h18M26 84h12" stroke="#b5b5b5" stroke-width="1.4"/><path d="M76 60h18M76 72h18M76 84h12" stroke="#b5b5b5" stroke-width="1.4"/><rect x="68" y="46" width="34" height="46" fill="none" stroke="#ff1493" stroke-width="2"/><path d="M60 130c14-8 30-8 44 0" fill="none" stroke="#2d3e9f" stroke-width="1.8"/><path d="M104 127l4 4-5 3" fill="none" stroke="#2d3e9f" stroke-width="1.8"/><text x="85" y="118" font-size="9" text-anchor="middle" fill="#c4006a" font-family="Jost, sans-serif" letter-spacing="1">?id=1042</text></svg></div><figcaption><b>Чужая запись</b><span>IDOR: обращение к чужому объекту по его номеру. Открыли свою запись, подставили соседний номер в адрес — и смотрите, что ответит сервер. Проверяется вторым аккаунтом.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><path d="M28 22v116" stroke="#000" stroke-width="1.6"/><rect x="28" y="64" width="64" height="10" fill="#2d3e9f" transform="rotate(-38 28 74)"/><circle cx="96" cy="98" r="16" fill="none" stroke="#000" stroke-width="1.6"/><path d="M89 98l5 5 9-11" fill="none" stroke="#2d3e9f" stroke-width="2.4"/><path d="M20 46h8M20 74h8M20 102h8" stroke="#b5b5b5" stroke-width="1.4"/></svg></div><figcaption><b>Гейт</b><span>Проверка перед действием: план, одобрение, сверка. Ревью безопасности висит на каждой заявке на слияние — пропустить его можно только вместе с заявкой.</span></figcaption></figure>
+</div>
+</section>
+
+<section class="sec" id="praktiki">
+<div class="sec-h"><span class="num">02</span><h2>Пять практик на один вечер</h2></div>
+
+<ol class="steps">
+<li><b>Закрытая база.</b> Построчная защита на каждой таблице, служебный ключ только на сервере, старые хранилища — списком с решением.</li>
+<li><b>Второй аккаунт.</b> Чужой номер в адресе под тест-аккаунтом; сервер обязан вернуть отказ. Единственный шаг, который автоматика не заменяет.</li>
+<li><b>Секреты, видимые из браузера.</b> Поиск по сборке страницы и истории репозитория; отзыв ключа идёт раньше чистки истории.</li>
+<li><b>Ревью по перечню.</b> Один фиксированный список категорий вместо «посмотри уязвимости»; находки сортируются по доступности постороннему.</li>
+<li><b>Гейт.</b> Ревью на каждой заявке на слияние, предупреждения зависимостей сами, календарь из трёх строк. Разобран отдельной секцией ниже.</li>
+</ol>
+
+<div class="practice">
+<h3>Практика 1. Закрытая база: посторонний не читает чужие записи</h3>
+<p class="err">Типичная ошибка: приложение опубликовано, публичный ключ в коде страницы, защита включена на главной таблице заказов — и забыта на таблицах профилей и отзывов</p>
+<p>Пока условие не написано, таблица открыта всем, у кого есть публичный ключ приложения. Сделать прямой запрос умеет любой человек с браузером и десятью минутами свободного времени.</p>
+<ul class="how">
+<li><b>Таблица без правила открыта по умолчанию.</b> Условие доступа появляется только тогда, когда его написали.</li>
+<li><b>Служебный ключ проходит мимо всех правил.</b> В Supabase это service_role: место — серверная часть и переменные окружения.</li>
+<li><b>Правило пишется на каждую таблицу отдельно.</b> Одна забытая таблица открывает свои строки полностью.</li>
+<li><b>Платформа сама показывает список дыр.</b> Security Advisor в панели Supabase перечисляет таблицы без защиты, раз в неделю приходит письмо с той же сводкой.</li>
+<li><b>Объём хранения проверяется вместе с доступом.</b> Старые копии и хранилище прошлой версии живут дольше памяти о них.</li>
+</ul>
+<div class="copyrow"><span class="t">Промпт агенту · инвентаризация доступа к базе</span><button class="copy" type="button" data-copy="p1">Скопировать</button></div>
+<pre class="list" id="p1">Мой сервис [ВСТАВИТЬ_НАЗВАНИЕ] работает на [ВСТАВИТЬ_ПЛАТФОРМУ_БАЗЫ, например Supabase] и уже принимает данные реальных пользователей.
+
+Проведи инвентаризацию доступа к базе. Ничего не меняй.
+
+1. Перечисли таблицы, которые сервис отдаёт наружу через API. По каждой назови файл, из которого ты её взял: файл миграции, описание схемы, настройка проекта. Таблицы, которых нет в файлах, не придумывай: вынеси их в список «посмотреть в панели».
+2. По каждой скажи: включена ли построчная защита, какие политики написаны, какие роли под них попадают. Имя каждой политики выпиши целиком.
+3. Для каждой незакрытой таблицы объясни обычными словами, что именно увидит посторонний человек без логина: какие поля, чьи записи, сколько строк.
+4. Найди все места, где используется служебный ключ, который обходит правила. По каждому месту верни строку вида «путь к файлу : номер строки : имя переменной : сервер или браузер». Отдельно перечисли файлы, попадающие в сборку страницы, и скажи прямо, встречается ли служебный ключ хотя бы в одном из них. Само значение ключа в чат не выводи ни при каких условиях, достаточно имени переменной.
+5. Верни таблицу «таблица — защита — что видит посторонний — насколько срочно» и предложи порядок закрытия. Правки покажи мне на согласование, применять их я скажу отдельно.</pre>
+<p><b>Готово, когда:</b> список таблиц, отдаваемых наружу, записан файлом, и напротив каждой строки стоит имя политики; Security Advisor показывает ноль таблиц без защиты; служебного ключа нет ни в одном файле сборки и репозитория; по каждому старому хранилищу принято письменное решение — оставить или удалить.</p>
+</div>
+
+<div class="practice">
+<h3>Практика 2. Проверка вторым аккаунтом: чужая запись и чужой счёт</h3>
+<p class="err">Типичная ошибка: платный раздел скрыт в браузере, а адрес выдачи данных отвечает всем вошедшим одинаково — независимо от оплаты и владения записью</p>
+<p>Автоматика хорошо ищёт то, у чего есть узнаваемый образец: открытый ключ, известная дырявая библиотека. Хуже всего она ловит другое: сервис исправно проверяет, что вы вошли, и забывает проверить, что запись действительно ваша. Cobalt в отчёте AI and Pentesting Pulse за 2026 год приводит цифру: 78% опрошенных команд ловят пропуски автоматических проверок, и хуже всего автоматика справляется как раз с чужим доступом к чужому объекту. Доля команд, полагающихся только на автоматику, за год упала с 29% до 9%. Опрошены крупные компании — проценты читаются как направление.</p>
+
+<figure class="diagram">
+<svg class="d" viewBox="0 0 960 430" role="img" aria-labelledby="fig-idor-title fig-idor-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-idor-title">Проверка чужой записи вторым аккаунтом</title><desc id="fig-idor-desc">Пять участников: аккаунт A, браузер, сервер, база, аккаунт B. Аккаунт A создаёт запись и получает её номер; аккаунт B открывает адрес записи A напрямую; сервер обращается к базе; два исхода: данные вернулись — провал, отказ в доступе — норма.</desc><defs><marker id="i-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="i-pink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ff1493"/></marker></defs><rect width="960" height="430" fill="#ffffff"/>
+<g font-family="Jost, Futura, sans-serif" font-size="10" letter-spacing="1" fill="#555555" text-anchor="middle">
+<text x="120" y="46">АККАУНТ A</text><text x="360" y="46">БРАУЗЕР</text><text x="600" y="46">СЕРВЕР</text><text x="840" y="46">БАЗА</text><text x="120" y="288">АККАУНТ B</text>
+</g>
+<g fill="none" stroke="#000000" stroke-width="1.4">
+<circle cx="120" cy="92" r="13"/><circle cx="120" cy="87" r="5"/><path d="M108 112c3-7 21-7 24 0"/>
+<rect x="336" y="76" width="48" height="34"/><path d="M336 76l24 18 24-18"/>
+<rect x="576" y="76" width="48" height="34"/><path d="M590 93h20M600 83v20"/>
+<ellipse cx="840" cy="93" rx="26" ry="17"/><path d="M824 93h32M840 77v32"/>
+<circle cx="120" cy="334" r="13"/><circle cx="120" cy="329" r="5"/><path d="M108 354c3-7 21-7 24 0"/>
+</g>
+<path d="M 140,96 H 330" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#i-ink)"/>
+<text x="235" y="88" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">1 · создал запись, в адресе номер</text>
+<path d="M 388,96 H 570" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#i-ink)"/>
+<text x="479" y="88" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">2 · открыл свою страницу</text>
+<path d="M 628,96 H 808" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#i-ink)"/>
+<text x="718" y="88" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">3 · сервер спросил базу</text>
+<path d="M 132,320 C 320,320 420,120 572,102" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#i-pink)"/>
+<text x="380" y="316" font-family="Jost, Futura, sans-serif" font-size="10" fill="#c4006a" text-anchor="middle">4 · аккаунт B подставил чужой номер в адрес</text>
+<path d="M 628,110 C 700,140 760,120 812,104" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#i-pink)"/>
+<rect x="480" y="370" width="200" height="44" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="580" y="390" font-family="Spectral, Georgia, serif" font-size="15" fill="#000000" text-anchor="middle">Что ответит сервер?</text>
+<text x="580" y="407" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">ответ браузера значения не имеет</text>
+<text x="270" y="395" font-family="Spectral, Georgia, serif" font-size="14" fill="#c4006a" text-anchor="middle">данные вернулись — провал</text>
+<text x="800" y="395" font-family="Spectral, Georgia, serif" font-size="14" fill="#2d3e9f" text-anchor="middle">отказ в доступе — норма</text>
+<path d="M 540,392 H 380" fill="none" stroke="#c4006a" stroke-width="1.2" stroke-dasharray="4 4"/>
+<path d="M 620,392 H 690" fill="none" stroke="#2d3e9f" stroke-width="1.2" stroke-dasharray="4 4"/>
+</svg><svg class="m" viewBox="0 0 358 860" role="img" aria-labelledby="fig-idor-title fig-idor-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="i-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="i-pink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ff1493"/></marker></defs><rect width="358" height="860" fill="#ffffff"/>
+<g font-family="Jost, Futura, sans-serif" font-size="11" letter-spacing="1" fill="#555555" text-anchor="middle">
+<text x="179" y="20">АККАУНТ A</text><text x="179" y="210">БРАУЗЕР</text><text x="179" y="400">СЕРВЕР</text><text x="179" y="590">БАЗА</text><text x="179" y="740">АККАУНТ B</text>
+</g>
+<g fill="none" stroke="#000000" stroke-width="1.4">
+<circle cx="179" cy="60" r="14"/><circle cx="179" cy="55" r="5.5"/><path d="M166 82c3-8 23-8 26 0"/>
+<rect x="155" y="240" width="48" height="34"/><path d="M155 240l24 18 24-18"/>
+<rect x="155" y="430" width="48" height="34"/><path d="M169 447h20M179 437v20"/>
+<ellipse cx="179" cy="620" rx="28" ry="18"/><path d="M162 620h34M179 603v34"/>
+<circle cx="179" cy="780" r="14"/><circle cx="179" cy="775" r="5.5"/><path d="M166 802c3-8 23-8 26 0"/>
+</g>
+<path d="M 179,96 V 232" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#i-ink-m)"/>
+<path d="M 179,286 V 422" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#i-ink-m)"/>
+<path d="M 179,476 V 592" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#i-ink-m)"/>
+<path d="M 179,764 C 179,700 179,690 179,662" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#i-pink-m)"/>
+<text x="179" y="845" font-family="Spectral, Georgia, serif" font-size="13" fill="#2d3e9f" text-anchor="middle">отказ — норма · данные вернулись — провал</text>
+</svg><figcaption>Проверка чужой записи вторым аккаунтом. Правильный ответ приходит от сервера: ответ браузера значения не имеет</figcaption></figure>
+
+<p>Рядом живут две ошибки в других обличьях: проверка оплаты сделана в браузере, и сервер не ограничивает частоту запросов. Если ваш сервис ходит в платный сервис моделей от имени пользователя, посторонний может обращаться к нему без остановки и оставить вам счёт — отраслевое название denial of wallet. Ограничение частоты закрывает и перебор чужих номеров, и этот счёт.</p>
+<div class="copyrow"><span class="t">Промпт агенту · разбор контроля доступа</span><button class="copy" type="button" data-copy="p2">Скопировать</button></div>
+<pre class="list" id="p2">Разбери контроль доступа в моём сервисе [ВСТАВИТЬ_НАЗВАНИЕ]. Сервис собран на [ВСТАВИТЬ_СТЕК, например Next.js на Vercel и база Supabase], публичный адрес [ВСТАВИТЬ_АДРЕС_САЙТА]. Ничего не меняй, собери отчёт.
+
+1. Перечисли все адреса и запросы, где в параметрах есть номер объекта пользователя: запись, заказ, профиль, файл, сообщение. По каждому назови путь к файлу и номер строки, где адрес объявлен.
+2. По каждому покажи строку кода, которая проверяет, что объект принадлежит спрашивающему. Если такой строки нет, напиши это прямо.
+3. Найди проверки прав и проверки оплаты, которые выполняются только в браузере, и покажи, есть ли у каждой серверная пара.
+4. Перечисли адреса, обращающиеся к платным сервисам и моделям, и скажи, где стоит ограничение частоты запросов, а где его нет.
+5. Собери сценарий ручной проверки вторым аккаунтом ровно из трёх шагов. Для каждого шага дай готовую строку, которую я вставлю в адресную строку браузера: полный адрес моего сервиса вместе с номером объекта, взятым из моих же данных, без сокращений. Рядом с каждым адресом напиши, под каким аккаунтом его открывать, что я должен увидеть при исправном сервисе и что будет означать провал.
+6. Верни таблицу «адрес — файл и строка — проверка владельца — проверка оплаты — ограничение частоты — риск». Правки покажи отдельным списком на согласование и жди моего слова.</pre>
+<p><b>Готово, когда:</b> второй аккаунт заведён, три адреса из сценария открыты под ним, и на каждом сервис вернул отказ; по каждому платному действию названа серверная строка, которая проверяет оплату; после серии повторов сервис отвечает отказом.</p>
+</div>
+
+<div class="practice">
+<h3>Практика 3. Секреты в опубликованном продукте</h3>
+<p class="err">Типичная ошибка: ключ сервиса вынесли в переменную с приставкой публичности, потому что «иначе фронтенд не видит», и сервис заработал с первого раза</p>
+<p>Во фреймворках вроде Next.js переменная с приставкой NEXT_PUBLIC_ попадает в код страницы намеренно: слово public в её имени означает буквально «значение станет публичным». В Moltbook ключ базы нашли в коде страницы за минуты именно так. Вторая половина практики — история репозитория: даже убранный из текущей версии ключ старые версии помнят навсегда.</p>
+<p>Порядок действий обратен интуиции: сначала отзыв и замена ключа, только потом чистка истории. Ключ, о котором знает посторонний, перестаёт быть опасным в момент отзыва; удаление строки из файла этот момент не приближает. Для служебного ключа, который обходит правила базы, отзыв обязателен даже при сомнении: его утечка равна выдаче всей базы.</p>
+<div class="copyrow"><span class="t">Промпт агенту · секреты, видимые постороннему</span><button class="copy" type="button" data-copy="p3">Скопировать</button></div>
+<pre class="list" id="p3">Проверь, какие секреты моего сервиса [ВСТАВИТЬ_НАЗВАНИЕ] могут быть видны постороннему человеку.
+
+1. Перечисли все переменные окружения с приставкой публичности [ВСТАВИТЬ_ПРИСТАВКУ, например NEXT_PUBLIC_]. По каждой напиши, зачем она в браузере и что произойдёт, если её узнает посторонний.
+2. Проверь собранный код страниц на присутствие значений, похожих на ключи и токены, по образцам: [ВСТАВИТЬ_ОБРАЗЦЫ, например для Supabase и Stripe это sb_secret_, sb_publishable_, eyJ, sk_live_, sk_test_].
+3. Проверь полную историю репозитория теми же образцами и скажи, встречались ли похожие значения когда-либо.
+4. По каждой находке верни строку «путь к файлу : номер строки : имя переменной : какой сервис открывает : что отозвать первым». Если находок нет, так и напиши, а список образцов, по которым ты искал, покажи мне на согласование.
+
+Значения найденных секретов в чат не выводи ни при каких условиях. Достаточно имени переменной, файла и строки. Ничего не меняй сам: верни отчёт и порядок действий, я подтвержу каждый шаг.</pre>
+<p><b>Готово, когда:</b> у каждой публичной переменной записано обоснование; поиск по сборке и по всей истории репозитория пуст; каждый найденный ранее ключ отозван и заменён — удаления строки из файла для этого мало.</p>
+</div>
+
+<div class="practice">
+<h3>Практика 4. Официальное ревью: список вместо наития</h3>
+<p class="err">Типичная ошибка: «прогони код на уязвимости» в свободной формулировке; отчёты каждый раз про разное, сравнить два прогона невозможно</p>
+<p>Замена наитию появилась 6 августа 2025 года: Anthropic встроила в Claude Code команду /security-review с фиксированным перечнем категорий — внедрение команд в запросы к базе, выполнение чужого кода на странице, ошибки проверки входа, обработка данных, состояние зависимостей. Одна особенность: команда смотрит изменения текущей ветки и молчит о проблемах, которые были в коде до них. Для давно опубликованного сервиса первый полный проход делается промптом с тем же перечнем, а команда встаёт гейтом на новые изменения.</p>
+<p>Здесь важно развести две проверки. Ревью качества отвечает на вопрос «насколько этот код удобно развивать», ревью безопасности — «что здесь сделает посторонний». Пройденное ревью качества о безопасности не говорит ничего, и обратное верно. Находки сортируются по одному вопросу: что может сделать посторонний без логина — это идёт первым; дальше доступное любому вошедшему; правки, требующие прав администратора, ждут очереди.</p>
+<p>Зависимости входят в тот же прогон отдельным блоком. У одного из моих студентов на сервере поселился майнер, приехавший через уязвимость в подключённой библиотеке; предупреждение об этой уязвимости лежало в репозитории заранее. Уязвимость CVE-2025-29927 в Next.js позволяла подделкой заголовка пропустить весь слой промежуточной проверки; безопасны версии от 15.2.3, 14.2.25, 13.5.9 и 12.3.5.</p>
+<div class="copyrow"><span class="t">Промпт агенту · проход по перечню категорий</span><button class="copy" type="button" data-copy="p4">Скопировать</button></div>
+<pre class="list" id="p4">Пройди по всему коду моего сервиса [ВСТАВИТЬ_НАЗВАНИЕ] тем же перечнем категорий, что берёт команда /security-review, и разбери находки. Ничего не меняй.
+
+Категории: внедрение команд в запросы к базе; выполнение чужого кода на странице; ошибки проверки входа и прав; небезопасная обработка данных пользователей; секреты в коде; состояние зависимостей; подробности внутренней ошибки в ответе наружу.
+
+1. По каждой находке верни строку «путь к файлу : номер строки : категория : что сделает посторонний : сколько шагов ему нужно».
+2. Разложи все находки по трём корзинам: доступно постороннему без логина; доступно любому зарегистрированному; требует прав администратора.
+3. Отдельным блоком проверь зависимости: библиотеки с известными уязвимостями и версия фреймворка [ВСТАВИТЬ_ФРЕЙМВОРК_И_ВЕРСИЮ]. Номер версии возьми из файла зависимостей и назови этот файл, по памяти версию не указывай.
+4. Отметь находки, которые считаешь ложной тревогой, и объясни по каждой, почему.
+5. Верни план правок по порядку срочности и покажи его мне на согласование. Ничего не меняй, пока я не скажу «выполняй» по конкретному пункту.
+
+Значения найденных секретов в чат не выводи, достаточно имени переменной, файла и строки.</pre>
+<p><b>Готово, когда:</b> полный проход сделан и отчёт сохранён файлом с датой; каждая находка лежит в одной из трёх корзин; доступное без логина закрыто или стало задачей с датой; версия фреймворка выписана из файла зависимостей и сверена со списком безопасных.</p>
+</div>
+</section>
+
+<section class="sec" id="geit">
+<div class="sec-h"><span class="num">03</span><h2>Гейт вместо разового вечера</h2></div>
+
+<p>Разовый аудит устаревает с первым же изменением. Ответ на вопрос «делать ли что-то ещё» звучит так: часть проверок переводится в автоматический режим и происходит без вашего участия, а на вашу долю остаётся короткий календарь.</p>
+<p>Автоматически работают три вещи. GitHub Action claude-code-security-review прогоняет ревью на каждой заявке на слияние и оставляет замечания прямо в строках изменённого кода. Dependabot присылает предупреждения о новых уязвимостях зависимостей по мере их публикации. Письмо Security Advisors от Supabase раз в неделю приносит сводку по таблицам.</p>
+<p>Ручной календарь короткий. Раз в неделю — просмотр пришедших предупреждений. Раз в месяц — обновление зависимостей. Раз в квартал — ревизия доступов и настоящее восстановление резервной копии, потому что копия, которую ни разу не восстанавливали, копией считается условно.</p>
+
+<figure class="diagram">
+<svg class="d" viewBox="0 0 960 330" role="img" aria-labelledby="fig-gate-title fig-gate-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-gate-title">Цикл гейта безопасности вокруг репозитория</title><desc id="fig-gate-desc">Изменение кода ведёт в заявку на слияние, заявка — в автоматическое ревью безопасности. Есть находки — правка по замечаниям и снова ревью. Нет находок — слияние и релиз. Из релиза две петли: календарь и события.</desc><defs><marker id="g-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="960" height="330" fill="#ffffff"/>
+<rect x="32" y="60" width="180" height="70" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="122" y="88" font-family="Spectral, Georgia, serif" font-size="15.5" fill="#000000" text-anchor="middle">Изменение кода</text><text x="122" y="106" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">руками или агентом</text>
+<rect x="280" y="60" width="180" height="70" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="370" y="88" font-family="Spectral, Georgia, serif" font-size="15.5" fill="#000000" text-anchor="middle">Заявка на слияние</text><text x="370" y="106" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">без заявки в код не попасть</text>
+<rect x="528" y="60" width="180" height="70" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="618" y="82" font-family="Spectral, Georgia, serif" font-size="15.5" fill="#000000" text-anchor="middle">Авторевью</text><text x="618" y="99" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">Action по перечню категорий,</text><text x="618" y="113" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">замечания в строках кода</text>
+<path d="M 212,95 H 272" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<path d="M 460,95 H 520" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<rect x="776" y="60" width="160" height="70" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="856" y="88" font-family="Spectral, Georgia, serif" font-size="15.5" fill="#000000" text-anchor="middle">Слияние и релиз</text><text x="856" y="106" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555" text-anchor="middle">находок нет</text>
+<path d="M 708,95 H 768" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<rect x="528" y="200" width="180" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="618" y="224" font-family="Spectral, Georgia, serif" font-size="14.5" fill="#000000" text-anchor="middle">Правка по замечаниям</text><text x="618" y="241" font-family="Jost, Futura, sans-serif" font-size="10" fill="#c4006a" text-anchor="middle">находки есть — и по кругу</text>
+<path d="M 628,130 V 196" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<path d="M 528,230 C 470,230 470,160 474,132" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<text x="120" y="215" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">петля «календарь»:</text>
+<text x="120" y="231" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">неделя — предупреждения,</text>
+<text x="120" y="247" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">месяц — зависимости,</text>
+<text x="120" y="263" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">квартал — доступы и копия</text>
+<path d="M 32,239 C 20,239 20,95 28,95" fill="none" stroke="#2d3e9f" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#g-ink)"/>
+<text x="776" y="215" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">петля «событие»:</text>
+<text x="776" y="231" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">новый адрес с данными, платежи,</text>
+<text x="776" y="247" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">смена модели агента, крупный клиент —</text>
+<text x="776" y="263" font-family="Jost, Futura, sans-serif" font-size="10" fill="#555555">практики 1 и 2 в тот же день</text>
+<path d="M 928,239 C 942,239 942,95 932,95" fill="none" stroke="#2d3e9f" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#g-ink)"/>
+</svg><svg class="m" viewBox="0 0 358 760" role="img" aria-labelledby="fig-gate-title fig-gate-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="g-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="358" height="760" fill="#ffffff"/>
+<rect x="60" y="20" width="238" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="179" y="44" font-family="Spectral, Georgia, serif" font-size="16" fill="#000000" text-anchor="middle">Изменение кода</text><text x="179" y="62" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">руками или агентом</text>
+<path d="M 179,80 V 106" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<rect x="60" y="112" width="238" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="179" y="136" font-family="Spectral, Georgia, serif" font-size="16" fill="#000000" text-anchor="middle">Заявка на слияние</text><text x="179" y="154" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">без заявки в код не попасть</text>
+<path d="M 179,172 V 198" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<rect x="60" y="204" width="238" height="74" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="179" y="228" font-family="Spectral, Georgia, serif" font-size="16" fill="#000000" text-anchor="middle">Авторевью</text><text x="179" y="246" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">Action по перечню категорий,</text><text x="179" y="261" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">замечания в строках кода</text>
+<rect x="60" y="330" width="238" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="179" y="354" font-family="Spectral, Georgia, serif" font-size="15" fill="#000000" text-anchor="middle">Правка по замечаниям</text><text x="179" y="372" font-family="Jost, Futura, sans-serif" font-size="11" fill="#c4006a" text-anchor="middle">находки есть — и по кругу</text>
+<path d="M 179,278 V 324" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<path d="M 60,360 C 20,360 20,241 54,241" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<rect x="60" y="450" width="238" height="60" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="179" y="474" font-family="Spectral, Georgia, serif" font-size="16" fill="#000000" text-anchor="middle">Слияние и релиз</text><text x="179" y="492" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">находок нет</text>
+<path d="M 179,390 V 444" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<path d="M 298,480 C 340,480 340,50 302,50" fill="none" stroke="#2d3e9f" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#g-ink-m)"/>
+<text x="179" y="560" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">петля «календарь»: неделя — предупреждения, месяц — зависимости,</text>
+<text x="179" y="578" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">квартал — доступы и восстановление копии</text>
+<text x="179" y="616" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">петля «событие»: новый адрес с данными, платежи, смена модели</text>
+<text x="179" y="634" font-family="Jost, Futura, sans-serif" font-size="11" fill="#555555" text-anchor="middle">агента, крупный клиент — практики 1 и 2 в тот же день</text>
+</svg><figcaption>Цикл гейта вокруг репозитория. Проверка привязана к изменению: пропустить её можно только вместе с заявкой</figcaption></figure>
+
+<p>Кроме календаря есть события. Это позиция автора, не отраслевой стандарт: новый адрес, отдающий данные пользователей; подключение платежей; смена модели у агента, который пишет код; первый крупный клиент, читающий ваш ответ на вопросы про безопасность. Событие из этого списка означает повторение практик 1 и 2 в тот же день.</p>
+<p>Отдельно готовится план на плохой день. Он пишется заранее и лежит одним файлом, потому что в момент утечки времени на сочинение порядка действий не будет.</p>
+<div class="copyrow"><span class="t">Шаблон · план на плохой день</span><button class="copy" type="button" data-copy="p5">Скопировать</button></div>
+<pre class="list" id="p5">Признак происшествия: [ЧТО Я УВИДЕЛ, например письмо о найденном ключе]
+
+Первый час:
+1. Отозвать и заменить ключи: [СПИСОК_КЛЮЧЕЙ_И_ГДЕ_ОТЗЫВАТЬ]
+2. Закрыть дыру или временно отключить затронутый адрес: [ЧТО ИМЕННО]
+3. Зафиксировать время обнаружения и первые действия письменно.
+
+Первый день:
+4. Оценить объём: чьи данные, какие поля, сколько записей.
+5. Проверить журналы доступа за период: [ГДЕ ЛЕЖАТ ЖУРНАЛЫ]
+6. Решить вопрос уведомления пострадавших: [КТО ГОТОВИТ ТЕКСТ]
+7. Хронология одним файлом: что, когда, чьим решением; что меняем в гейте.
+
+Кому звоню: [ЮРИСТ], [ТЕХНИЧЕСКАЯ_ПОМОЩЬ], [ВЛАДЕЛЕЦ_ДАННЫХ]</pre>
+<div class="copyrow"><span class="t">Промпт агенту · настройка постоянной проверки</span><button class="copy" type="button" data-copy="p6">Скопировать</button></div>
+<pre class="list" id="p6">Настрой постоянную проверку безопасности для репозитория [ВСТАВИТЬ_ВЛАДЕЛЕЦ]/[ВСТАВИТЬ_ИМЯ_РЕПОЗИТОРИЯ].
+
+1. Подготовь файл настройки для GitHub Action anthropics/claude-code-security-review так, чтобы он запускался на каждой заявке на слияние и оставлял замечания в строках изменённого кода. Верни целиком: путь к файлу и его текст. Отдельной строкой назови имя секрета с ключом доступа к модели и дай шаги, которыми я положу этот секрет через интерфейс GitHub.
+2. Проверь, включён ли Dependabot и приходят ли предупреждения о зависимостях; если нет, дай шаги включения через интерфейс.
+3. Собери мне календарь из трёх строк: что я смотрю раз в неделю, раз в месяц и раз в квартал. Каждую строку начинай с глагола и заканчивай адресом страницы, которую я для этого открываю.
+4. Составь список событий, после которых я повторяю проверку базы и проверку вторым аккаунтом в тот же день.
+
+Секреты репозитория в чат не выводи, работай только с именами. Настройки покажи мне на согласование до применения.</pre>
+<p><b>Готово, когда:</b> файл настройки Action лежит в репозитории и на пробной заявке проверка отработала; Dependabot включён; календарь из трёх строк лежит файлом и недельная строка выполнена хотя бы раз с отметкой даты; копия развёрнута в проверочной среде хотя бы один раз; в плане на плохой день не осталось ни одного места для подстановки.</p>
+</section>
+
+<section class="sec" id="gotovo">
+<div class="sec-h"><span class="num">04</span><h2>Приёмка: готово, когда</h2></div>
+
+<p>Полностью пройденный контур выглядит так. Копируется одним куском — это и есть тот список, который заканчивается.</p>
+
+<div class="wide">
+<div class="copyrow" style="margin-top:0"><span class="t">Шпаргалка · итоговая приёмка</span><button class="copy" type="button" data-copy="cheat-txt">Скопировать</button></div>
+<table class="tbl" aria-label="Итоговая приёмка навыка">
+<thead><tr><th scope="col">Практика</th><th scope="col">Готово, когда</th></tr></thead>
+<tbody>
+<tr><th scope="row">1. Закрытая база</th><td>каждая таблица, отдаваемая наружу, закрыта правилом доступа; служебный ключ отсутствует в браузере, репозитории и переписке с агентом</td></tr>
+<tr><th scope="row">2. Второй аккаунт</th><td>ручная проверка выполнена и вернула отказ; каждое платное действие проверяется на сервере; обращения к платным сервисам ограничены по частоте</td></tr>
+<tr><th scope="row">3. Секреты</th><td>публичные переменные перечислены с обоснованием, поиск по истории репозитория чист, найденные ранее ключи отозваны</td></tr>
+<tr><th scope="row">4. Ревью по перечню</th><td>полный проход сделан, находки разложены по доступности постороннему, доступное без логина закрыто или стало задачей с датой</td></tr>
+<tr><th scope="row">5. Гейт</th><td>автоматическое ревью висит на заявках, предупреждения приходят сами, календарь из трёх строк работает, план на плохой день написан</td></tr>
+</tbody></table>
+<p class="cap">Пройденный список не делает сервис неуязвимым. Он даёт предсказуемость: письменный ответ на «достаточно ли того, что я делаю» и самые дешёвые дыры, закрытые раньше, чем их найдёт посторонний</p>
+<pre class="hidden" id="cheat-txt">Итоговая приёмка: безопасность вайбкодинг-сервиса (sereja.tech/kak-proverit-servis-na-dyry, 02.10.2026)
+1 Закрытая база | каждая таблица наружу закрыта правилом; служебного ключа нет в браузере, репозитории и переписке с агентом
+2 Второй аккаунт | проверка вернула отказ; оплата проверяется на сервере; обращения к платным сервисам ограничены по частоте
+3 Секреты | публичные переменные с обоснованием; история репозитория чиста; найденные ключи отозваны
+4 Ревью по перечню | полный проход с отчётом; находки по корзинам доступности; доступное без логина закрыто
+5 Гейт | авторевью на заявках; предупреждения приходят сами; календарь из трёх строк; план на плохой день написан
+Живой специалист нужен, если: через вас идут платежи; храните документы, медицинские или финансовые данные; приходит крупный клиент со своим вопросником; утечка означает конец бизнеса.</pre>
+</div>
+
+<p>В отдельных случаях нужен живой специалист по проверке защищённости: через вас идут платежи; вы храните документы, медицинские или финансовые данные; приходит первый крупный клиент со своим вопросником; утечка означает конец бизнеса.</p>
+</section>
+
+<section class="sec faq" id="faq">
+<div class="sec-h"><span class="num">05</span><h2>Частые вопросы</h2></div>
+<h3>У меня не Supabase — гайд не про меня?</h3>
+<p>Про любой сервис, где база отвечает по публичному ключу из браузера. Названия меняются, механика та же: правило на таблице, служебный ключ на сервере, чужая запись проверяется руками.</p>
+<h3>Пользователей пока нет. Делать сейчас?</h3>
+<p>Правила пишутся до первой ссылки: после публикации чинить дороже, а первая утечка не спрашивает, сколько у вас записей.</p>
+<h3>Агент сам всё проверит?</h3>
+<p>По фиксированному перечню — да. Чужую запись проверяет второй аккаунт руками. Официальная оговорка Anthropic звучит честно: команда дополняет ручную проверку и не заменяет её.</p>
+<h3>Прошёл ревью качества кода — я защищён?</h3>
+<p>Нет. Ревью качества отвечает на вопрос «насколько этот код удобно развивать», ревью безопасности — «что здесь сделает посторонний». Это разные проверки, и одна другую не покрывает.</p>
+<h3>Что с юридической стороной утечки?</h3>
+<p>GDPR требует уведомления надзорного органа в течение 72 часов и не делает исключений по размеру бизнеса. В России ответственность выросла с 30 мая 2025 года: градация штрафов по масштабу, за повторные случаи — оборотные штрафы с потолком в 500 миллионов рублей. Цифры из вторичных источников: перед решениями сверяйте с текстом закона или юристом.</p>
+</section>
+
+<section class="sec" id="ssylki">
+<div class="sec-h"><span class="num">06</span><h2>Ссылки</h2></div>
+<ul class="links">
+<li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security">Supabase — Row Level Security</a><small>первоисточник по построчной защите таблиц</small></li>
+<li><a href="https://owasp.org/Top10/">OWASP Top 10:2025</a><small>категория A01 задаёт порядок практик и сценарий проверки вторым аккаунтом</small></li>
+<li><a href="https://code.claude.com/docs/en/security">Anthropic — Claude Code Security</a><small>права агента и оговорка о дополняющем характере ревью</small></li>
+<li><a href="https://github.com/anthropics/claude-code-security-review">claude-code-security-review</a><small>исходный текст проверки и образец файла настроек под свой продукт</small></li>
+<li><a href="https://www.businesswire.com/news/home/20260625230212/en/78-of-Security-Teams-Experience-Critical-False-Negatives-From-Automated-Scanning-Tools-as-AI-Struggles-to-Detect-and-Resolve-Vulnerabilities">Cobalt — AI and Pentesting Pulse 2026</a><small>78% пропусков у автоматики; доля «только автоматика» с 29% до 9%</small></li>
+<li><a href="https://github.com/gitleaks/gitleaks">gitleaks</a><small>сканер секретов: образцы ключей и поиск по всей истории репозитория</small></li>
+<li><a href="/kak-proverit-neyroset/">Как проверить нейросеть на своей задаче</a><small>соседний гайд серии: эвал моделей на своей задаче</small></li>
+<li><a href="/kak-agent-vedet-dela/">Как агент ведёт мои дела</a><small>другой гайд серии</small></li>
+</ul>
+<p class="endnote">Промпты и гейты из этого гайда работают в Personal Corp. <a href="https://t.me/hashslash_bot?start=pc_blog">Подробнее в боте</a>.</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#primer">безопасность</a>, <a href="#praktiki">практики</a>, <a href="#geit">гейт</a>, <a href="#gotovo">приёмка</a></div>
+<p>Цифры: Veracode GenAI Code Security 2026; скан Escape.tech, октябрь 2025. Случаи: CVE-2025-48757 (Lovable), Moltbook, Tea App, EnrichLead, CVE-2025-29927 (Next.js). Промпты собраны по официальной документации Supabase, Anthropic и сканера gitleaks; в потоках они пока не обкатаны, первый прогон каждого стоит читать глазами. Сервис ученика в примерах не назван, его данные не использованы; запрос на первом экране — реконструкция механики, а не лог его базы.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+<script>
+(function(){
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .gal figure,.body .need,.body .steps>li,.body .practice')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script><script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+var el=document.getElementById(b.getAttribute('data-copy'));if(!el)return;var t=el.textContent;
+function done(){b.classList.add('ok');b.textContent='Скопировано';setTimeout(function(){b.classList.remove('ok');b.textContent='Скопировать'},1600)}
+try{navigator.clipboard.writeText(t).then(done,function(){viaArea()})}catch(e){viaArea()}
+function viaArea(){try{var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();done()}catch(e){}}
+})});
+</script>
+</body></html>

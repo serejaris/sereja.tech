@@ -9,6 +9,10 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "redirects": [
+    { "source": "/zadacha-na-znaniya-v1", "destination": "/kak-proverit-neyroset/", "permanent": true },
+    { "source": "/zadacha-na-znaniya-v1/", "destination": "/kak-proverit-neyroset/", "permanent": true },
+    { "source": "/zadacha-na-znaniya-v2", "destination": "/kak-proverit-neyroset/", "permanent": true },
+    { "source": "/zadacha-na-znaniya-v2/", "destination": "/kak-proverit-neyroset/", "permanent": true },
     { "source": "/stack", "destination": "https://tech.sereja.tech/", "permanent": true },
     { "source": "/stack/", "destination": "https://tech.sereja.tech/", "permanent": true },
     { "source": "/bench", "destination": "https://bench.sereja.tech/", "permanent": true },

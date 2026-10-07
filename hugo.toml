@@ -59,6 +59,18 @@ enableGitInfo = true
     description = 'Гайд: один оригинал скилла и симлинки в Claude Code, Codex, opencode, Copilot, Cursor и Gemini CLI, где схема спотыкается и какие менеджеры скиллов уже есть'
     lastmod = '2026-10-04'
 
+  [[params.standalone]]
+    url = 'kak-proverit-neyroset/'
+    title = 'Эвалы: как проверить нейросеть на своей задаче'
+    description = 'Гайд: почему модель выдаёт чужой опыт за совет, что из работы отдать программе и какую модель брать для конспектов встреч, сводок и протоколов.'
+    lastmod = '2026-10-02'
+
+  [[params.standalone]]
+    url = 'kak-proverit-servis-na-dyry/'
+    title = 'Безопасность: как проверить свой сервис на дыры'
+    description = 'Гайд: закрытая база, второй аккаунт, секреты в браузере, ревью по перечню и постоянный гейт. Как за вечер закрыть самые дешёвые дыры вайбкодинг-сервиса.'
+    lastmod = '2026-10-02'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'
