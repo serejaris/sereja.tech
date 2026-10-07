@@ -53,6 +53,12 @@ enableGitInfo = true
     description = 'Гайд: как Лорен Тан ведёт PR агентами в pstack, где решает человек и что из этого работает в Claude Code'
     lastmod = '2026-10-04'
 
+  [[params.standalone]]
+    url = 'kak-derzhat-odni-skilly-vo-vseh-agentah/'
+    title = 'Как держать одни скиллы во всех агентах'
+    description = 'Гайд: один оригинал скилла и симлинки в Claude Code, Codex, opencode, Copilot, Cursor и Gemini CLI, где схема спотыкается и какие менеджеры скиллов уже есть'
+    lastmod = '2026-10-04'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'

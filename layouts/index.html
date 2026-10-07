@@ -41,20 +41,15 @@
 </section>
 
 <section>
-  <h2 class="eyebrow">Популярное <span class="count">— выбор автора</span></h2>
-  <div class="cards">
-    {{ range .Site.Data.featured.featured }}
-    {{ with $.Site.GetPage (printf "/blog/%s" .) }}
-    <a class="card" href="{{ .Permalink }}">
-      {{ with .Params.image }}<img src="{{ . }}" alt="" loading="lazy">{{ end }}
-      <span class="card-body">
-        <span class="card-title">{{ .Title }}</span>
-        <span class="date">{{ partial "fdate.html" (dict "date" .Date) }}</span>
-      </span>
-    </a>
+  <h2 class="eyebrow">Гайды <span class="count">— кейс и как повторить</span></h2>
+  <ul class="posts">
+    {{ range sort .Site.Params.standalone "lastmod" "desc" }}
+    <li>
+      <span class="date">{{ partial "fdate.html" (dict "date" (time.AsTime .lastmod)) }}</span>
+      <a href="/{{ .url }}">{{ .title }}</a>
+    </li>
     {{ end }}
-    {{ end }}
-  </div>
+  </ul>
 </section>
 
 <section>
