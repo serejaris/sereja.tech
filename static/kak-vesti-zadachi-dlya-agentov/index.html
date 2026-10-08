@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-10-08"><title>Задачи для агентов: файлы, GitHub и граф | Сережа Рис</title>
+<meta name="description" content="Гайд: где живёт задача для агента, когда переносить задачи из файлов в GitHub, как дробить работу, как агент берёт задачу сам и зачем граф задач на бидах.">
+<meta property="og:type" content="article"><meta property="og:title" content="Задачи для агентов: файлы, GitHub и граф"><meta property="og:description" content="Гайд: ответы на самые частые вопросы студентов про задачи для агентов. Где живёт задача, когда переезжать и как не терять статус."><meta property="og:image" content="https://sereja.tech/kak-vesti-zadachi-dlya-agentov/img/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/kak-vesti-zadachi-dlya-agentov/img/og-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--pinkt:#c4006a;--line:#e3e3e3;--grey:#6f6f6f;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(40px,6.4vw,74px)/1.04 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:600px;margin:30px auto 0}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.body h3{font:500 20px/1.3 var(--serif);margin:36px 0 12px}
+.trio{margin:0 auto 56px;width:min(1100px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.trio .side{margin:0;position:relative}
+.trio .side+.side::before{content:"→";position:absolute;left:-20px;top:92px;font:400 18px/1 var(--sans);color:var(--blue)}
+.trio .who{font:600 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:0 0 10px}
+.trio .txt{background:var(--paper);padding:20px 22px}
+.trio .txt p{font:300 16px/24px var(--serif);margin:0 0 12px}
+.trio .txt p:last-child{margin:0}
+.trio .txt p.req{font:400 13px/20px var(--mono);color:#1d1d1d}
+.trio .txt b{font-weight:500}
+.trio mark{color:inherit;padding:0;background:#dcdeea;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.trio .note{font:300 15px/22px var(--serif);margin:12px 0 0}
+.trio figcaption{grid-column:1/-1;grid-row:1;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);text-align:center;margin-bottom:-8px}
+@media (min-width:861px) and (max-width:1000px){.trio .txt p.req{min-height:40px}}
+@media (max-width:860px){.trio{grid-template-columns:1fr;gap:22px}.trio .txt{padding:16px 18px}.trio .side+.side::before{content:none}}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram .m{display:none;max-width:440px;margin:0 auto}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.steps{list-style:none;counter-reset:st;padding:0;margin:0}
+.steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
+.steps b{font-weight:500}
+.body p b{font-weight:500}
+.princ{margin:30px 0 0}
+.princ h3{margin:30px 0 8px}
+.princ p{margin:0 0 10px}
+.princ .like{font:400 15px/22px var(--sans);color:var(--grey)}
+.sources{font-size:13px;line-height:20px;margin-top:70px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}
+  .diagram .d{display:none}.diagram .m{display:block}
+}
+.tbl{width:100%;border-collapse:collapse;font:400 15px/21px var(--sans);font-variant-numeric:tabular-nums;margin:8px 0 6px}
+.tbl th,.tbl td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.tbl thead th{font:400 11px/15px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--grey);border-bottom:1px solid var(--ink);padding-top:0}
+.tbl tbody th{font-weight:500}
+.tbl th small,.tbl td small{display:block;font:400 12px/16px var(--sans);color:var(--grey);font-weight:400}
+@media (max-width:640px){
+  .tbl{font-size:14px;line-height:20px}
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl th,.tbl td{display:block;width:100%}
+  .tbl tr{padding:14px 0 12px;border-bottom:1px solid var(--line)}
+  .tbl tbody th{border:0;padding:0 0 6px;font-size:18px;line-height:24px}
+  .tbl td{border:0;padding:3px 0;display:grid;grid-template-columns:104px 1fr;gap:10px}
+  .tbl td::before{content:attr(data-l);font:400 11px/20px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--grey)}
+}
+.cap{font:400 13px/19px var(--sans);color:var(--grey);margin:8px 0 26px}
+.wide{width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.copyrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:30px 0 4px}
+.copyrow .t{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+.copy{font:500 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.08em;background:#fff;color:var(--blue);border:1px solid var(--blue);padding:6px 12px;cursor:pointer;flex:none}
+.copy:hover{background:var(--blue);color:#fff}
+.copy.ok{background:var(--blue);color:#fff}
+pre.list{margin:0 0 8px;background:var(--paper);padding:16px 18px;font:400 14px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:#1d1d1d}
+.faq h3{font:500 20px/1.3 var(--serif);margin:28px 0 8px}
+.faq p{font:400 16px/24px var(--sans)}
+.links{list-style:none;padding:0;margin:0}
+.links li{padding:6px 0;border-bottom:0;font:400 15px/22px var(--sans)}
+.links small{display:block;color:var(--grey);font-size:13px}
+.endnote{font:400 17px/1.6 var(--serif);margin:26px 0 0}
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:26px 0 10px}
+.gal figure{margin:0}
+.gal .ph{background:var(--ph);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center}
+.gal .ph svg{width:58%;height:auto}
+.gal figcaption{margin-top:12px;font:400 14px/19px var(--serif)}
+.gal figcaption b{display:block;font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:4px}
+.gal figcaption span{display:block;color:#333}
+@media (max-width:760px){.gal{grid-template-columns:repeat(2,1fr);gap:16px}}
+</style><link rel="canonical" href="https://sereja.tech/kak-vesti-zadachi-dlya-agentov/"><meta name="author" content="Сережа Рис"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/kak-vesti-zadachi-dlya-agentov/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Одна задача на трёх ступенях: файл в папке отдела, issue на GitHub и бид в графе задач"><meta property="article:published_time" content="2026-10-08T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-08T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="задачи"><meta property="article:tag" content="агенты"><meta property="article:tag" content="GitHub Issues"><meta property="article:tag" content="beads"><meta property="article:tag" content="Personal Corp"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Задачи для агентов: файлы, GitHub и граф"><meta name="twitter:description" content="Гайд: ответы на самые частые вопросы студентов про задачи для агентов. Где живёт задача, когда переезжать и как не терять статус."><meta name="twitter:image:alt" content="Одна задача на трёх ступенях: файл в папке отдела, issue на GitHub и бид в графе задач"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Задачи для агентов: файлы, GitHub и граф", "description": "Гайд: где живёт задача для агента, когда переносить задачи из файлов в GitHub, как дробить работу, как агент берёт задачу сам и зачем граф задач на бидах.", "image": "https://sereja.tech/kak-vesti-zadachi-dlya-agentov/img/og-preview.png", "inLanguage": "ru-RU", "datePublished": "2026-10-08", "dateModified": "2026-10-08", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/kak-vesti-zadachi-dlya-agentov/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["задачи", "агенты", "GitHub Issues", "GitHub Projects", "beads", "Personal Corp", "Claude Code", "Codex"]}</script><script defer src="/analytics.js"></script></head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#primer">Пример</a><a href="#gde">Где живёт</a><a href="#stupeni">Ступени</a><a href="#drobit">Как дробить</a><a href="#beret">Как берёт</a><a href="#sotni">Сотни задач</a><a href="#graf">Граф</a><a href="#perehod">Переход</a><a href="#principy">Принципы</a><a href="#faq">Вопросы</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#primer">Пример</a><a href="#gde">Где живёт</a><a href="#stupeni">Ступени</a><a href="#drobit">Как дробить</a><a href="#beret">Как берёт</a><a href="#sotni">Сотни задач</a><a href="#graf">Граф</a><a href="#perehod">Переход</a><a href="#principy">Принципы</a><a href="#faq">Вопросы</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Задачи</span></div><div class="kicker">Задачи:</div><h1>Как вести задачи для агентов</h1><p class="lead">Задачи уже лежат файлами в папке отдела. Дальше вопросы: когда их переносить, куда и как агенту самому брать следующую. Гайд отвечает на те, что чаще всего звучат в моих потоках.</p></div>
+<div class="meta">8 октября 2026 · гайд обновляется</div>
+<article class="body">
+
+<figure class="trio" id="primer">
+<div class="side"><p class="who">Ступень 1 · файл в папке отдела</p><div class="txt"><p class="req">tasks/pismo-klientu.md</p><p><b>Письмо клиенту с итогами встречи</b></p><p>Статус: в работе. Следующий шаг: поправить обращение в первой строке.</p></div><p class="note">Видит агент, открытый в этой папке на этом компьютере.</p></div>
+<div class="side"><p class="who">Ступень 2 · issue на GitHub</p><div class="txt"><p class="req">#14 · открыта · эпик «Клиент»</p><p><b>Письмо клиенту с итогами встречи</b></p><p>Комментарий агента: черновик готов, <mark>ждёт правки обращения</mark>.</p></div><p class="note">Видит любой агент из любой папки. И вы с телефона.</p></div>
+<div class="side"><p class="who">Ступень 3 · бид в графе задач</p><div class="txt"><p class="req">ждала: «Расшифровать встречу» ✓</p><p><b>Письмо клиенту с итогами встречи</b></p><p><mark>Готова к работе</mark>: всё, чего она ждала, уже сделано.</p></div><p class="note">Агент сам находит её среди готовых и берёт.</p></div>
+<figcaption>Одна и та же задача на трёх ступенях. Меняется место, где она лежит, и кто её видит</figcaption>
+</figure>
+
+<p class="first"><span class="drop">З</span>адачи для агентов я сначала держал в файлах, потом в GitHub, а теперь держу в графе задач. Переезжал каждый раз по одной причине: старое место переставало держать работу. Файлы не видели агенты из других папок. GitHub перестал выдерживать команду агентов, которая работает круглые сутки. Из моей системы здесь только то, о чём спрашивают студенты моих потоков. Я собрал больше сотни таких вопросов, и повторяются они почти дословно.</p>
+
+<p>Гайд для тех, у кого задачи уже лежат файлами в папке отдела: по файлу на задачу, со статусом и следующим шагом. GitHub вы открывали разве что по ссылке. Команд здесь почти нет, объяснений много. Вы унесёте правило, где живёт задача, и признаки, что пора на следующую ступень. А ещё промпт, который переносит задачи в GitHub за один заход.</p>
+
+<p>Слова, которые встретятся дальше:</p>
+
+<div class="gal">
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><rect x="28" y="30" width="64" height="88" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M38 50h44M38 64h44M38 78h30" stroke="#b5b5b5" stroke-width="1.4"/><path d="M38 100l6 6 12-14" fill="none" stroke="#2d3e9f" stroke-width="2.4"/></svg></div><figcaption><b>Задача</b><span>Файл или карточка: какой нужен результат, где остановились, какой следующий шаг. По ней новый агент продолжает работу без пересказа.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><path d="M24 52h28l6 8h38v58H24z" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M60 96c10-14 30-14 40 0" fill="none" stroke="#2d3e9f" stroke-width="1.8"/><path d="M96 90l5 6-7 3" fill="none" stroke="#2d3e9f" stroke-width="1.8"/></svg></div><figcaption><b>Репозиторий</b><span>Папка с вашего компьютера, у которой есть копия на GitHub. У каждого репозитория свой список задач.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><circle cx="60" cy="72" r="26" fill="none" stroke="#000" stroke-width="1.6"/><circle cx="60" cy="72" r="6" fill="#2d3e9f"/><text x="60" y="124" font-size="16" text-anchor="middle" fill="#2d3e9f" font-family="IBM Plex Mono, monospace">#14</text></svg></div><figcaption><b>Issue</b><span>Задача внутри репозитория на GitHub. У неё есть номер, ссылка и комментарии. Её видит любой агент и вы с телефона.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><rect x="16" y="40" width="88" height="80" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M45 40v80M75 40v80" stroke="#b5b5b5" stroke-width="1.4"/><rect x="21" y="50" width="19" height="12" fill="#dcdeea"/><rect x="21" y="68" width="19" height="12" fill="#dcdeea"/><rect x="51" y="50" width="19" height="12" fill="#2d3e9f"/><rect x="81" y="50" width="19" height="12" fill="#dcdeea"/></svg></div><figcaption><b>Доска</b><span>Экран, который собирает задачи из разных репозиториев. В GitHub это Projects. Сами задачи остаются в своих репозиториях, доска их только показывает.</span></figcaption></figure>
+<figure><div class="ph"><svg viewBox="0 0 120 160" aria-hidden="true"><rect x="34" y="28" width="52" height="26" fill="#fff" stroke="#2d3e9f" stroke-width="2"/><path d="M60 54v14M30 68h60M30 68v14M60 68v14M90 68v14" fill="none" stroke="#000" stroke-width="1.4"/><rect x="18" y="82" width="24" height="18" fill="#fff" stroke="#000" stroke-width="1.4"/><rect x="48" y="82" width="24" height="18" fill="#fff" stroke="#000" stroke-width="1.4"/><rect x="78" y="82" width="24" height="18" fill="#fff" stroke="#000" stroke-width="1.4"/></svg></div><figcaption><b>Эпик</b><span>Большая задача, у которой есть подзадачи. Задача без эпика теряется, поэтому у каждой есть родитель.</span></figcaption></figure>
+</div>
+
+<section class="sec" id="gde">
+<div class="sec-h"><span class="num">01</span><h2>Где живёт задача?</h2></div>
+
+<p>Это самый частый вопрос во всех потоках. Задачи лежат в штабе или в каждом проекте? Почему статус в штабе один, а в проекте другой?</p>
+
+<p>Правило такое: задача живёт в отделе, который отвечает за её результат. Письмо клиенту живёт в отделе продаж. Конспект урока живёт в отделе обучения.</p>
+
+<p>Штаб: это папка с правилами, где агент узнаёт всё про мою работу. Задачи штаб у себя не хранит. В его правилах по строке на каждый отдел: где лежат задачи этого отдела. По этим строкам агент утром собирает дела из всех отделов в один список.</p>
+
+<p>Есть третий вид папки: сайт, бот, учебная платформа. Туда сдают работу. Своих задач там нет. Агент делает правку на сайте, а ссылка на правку возвращается в задачу отдела. Отличить отдел от такой папки помогает один вопрос: что пропадёт, если её завтра удалить. Пропал сайт, значит пропал продукт. Пропал отдел, значит пропала память о том, что делается и зачем.</p>
+
+<figure class="diagram">
+<svg class="d" viewBox="0 0 960 410" role="img" aria-labelledby="fig-where-title fig-where-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-where-title">Где живёт задача</title><desc id="fig-where-desc">Сверху штаб: он знает, где лежат задачи каждого отдела, и утром собирает их в один список. Посередине два отдела, продаж и обучения, в них живут задачи. Внизу сайт и бот: туда сдают работу, своих задач у них нет. Синяя стрелка из отдела вниз означает, что работа делается в сайте или боте. Розовая стрелка обратно означает, что ссылка на результат возвращается в задачу отдела.</desc><defs><marker id="w-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="w-pink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ff1493"/></marker></defs><rect width="960" height="410" fill="#ffffff"/>
+<rect x="300" y="20" width="360" height="82" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="318" y="50" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Штаб</text><text x="318" y="72" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">правила: где лежат задачи каждого отдела</text><text x="318" y="89" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">утром собирает дела в один список</text>
+<path d="M 400,102 C 400,130 290,132 290,160" fill="none" stroke="#2d3e9f" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#w-ink)"/>
+<path d="M 560,102 C 560,130 670,132 670,160" fill="none" stroke="#2d3e9f" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#w-ink)"/>
+<rect x="120" y="166" width="340" height="88" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="138" y="196" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Отдел продаж</text><text x="138" y="218" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">здесь живут его задачи:</text><text x="138" y="235" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">письмо клиенту, договор, отчёт</text>
+<rect x="500" y="166" width="340" height="88" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="518" y="196" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Отдел обучения</text><text x="518" y="218" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">здесь живут его задачи:</text><text x="518" y="235" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">конспект урока, домашка, запись</text>
+<path d="M 240,254 V 318" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#w-ink)"/>
+<path d="M 330,318 V 260" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#w-pink)"/>
+<text x="232" y="292" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" text-anchor="end">делает работу</text>
+<text x="340" y="292" fill="#c4006a" font-size="10.5" font-family="Jost, Futura, sans-serif">ссылка на результат</text>
+<path d="M 620,254 V 318" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#w-ink)"/>
+<path d="M 710,318 V 260" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#w-pink)"/>
+<text x="612" y="292" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" text-anchor="end">делает работу</text>
+<text x="720" y="292" fill="#c4006a" font-size="10.5" font-family="Jost, Futura, sans-serif">ссылка на результат</text>
+<rect x="120" y="324" width="340" height="68" fill="#ffffff" stroke="#000000" stroke-width="1"/><text x="138" y="352" fill="#000000" font-size="16" font-family="Spectral, Georgia, serif">Сайт</text><text x="138" y="373" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">сюда сдают работу, своих задач нет</text>
+<rect x="500" y="324" width="340" height="68" fill="#ffffff" stroke="#000000" stroke-width="1"/><text x="518" y="352" fill="#000000" font-size="16" font-family="Spectral, Georgia, serif">Бот</text><text x="518" y="373" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="0.5">сюда сдают работу, своих задач нет</text>
+</svg><svg class="m" viewBox="0 0 358 450" role="img" aria-labelledby="fig-where-title fig-where-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="w-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="w-pink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ff1493"/></marker></defs><rect width="358" height="450" fill="#ffffff"/>
+<rect x="30" y="16" width="298" height="96" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><text x="46" y="46" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Штаб</text><text x="46" y="70" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">знает, где лежат задачи отделов,</text><text x="46" y="88" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">утром собирает их в один список</text>
+<path d="M 179,112 V 164" fill="none" stroke="#2d3e9f" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#w-ink-m)"/>
+<rect x="30" y="170" width="298" height="96" fill="#ffffff" stroke="#2d3e9f" stroke-width="2"/><text x="46" y="200" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Отдел продаж</text><text x="46" y="224" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">здесь живут его задачи:</text><text x="46" y="242" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">письмо клиенту, договор</text>
+<path d="M 130,266 V 330" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#w-ink-m)"/>
+<path d="M 206,330 V 272" fill="none" stroke="#ff1493" stroke-width="2" marker-end="url(#w-pink-m)"/>
+<text x="122" y="304" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" text-anchor="end">делает работу</text>
+<text x="214" y="304" fill="#c4006a" font-size="11" font-family="Jost, Futura, sans-serif">ссылка на результат</text>
+<rect x="30" y="336" width="298" height="84" fill="#ffffff" stroke="#000000" stroke-width="1"/><text x="46" y="366" fill="#000000" font-size="18" font-family="Spectral, Georgia, serif">Сайт или бот</text><text x="46" y="390" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">сюда сдают работу,</text><text x="46" y="407" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">своих задач нет</text>
+</svg><figcaption>Задача живёт в отделе. Штаб знает, где её искать. Сайт и бот принимают работу, а ссылка на результат возвращается в задачу</figcaption></figure>
+
+<p>Дубли появляются, когда одна задача записана в двух местах. Статус обновили в одном, а читают из другого. Лечится это одним источником: у задачи одно место, всё остальное на него ссылается. Доска, сводка дня и отчёт только показывают задачу. При переезде старый файл остаётся и становится указателем: «задача переехала, вот ссылка».</p>
+</section>
+
+<section class="sec" id="stupeni">
+<div class="sec-h"><span class="num">02</span><h2>Когда файлов становится мало?</h2></div>
+
+<p>У задач три ступени. Я прошёл все три и советую не прыгать через ступень. Повод подняться выше один: нынешняя ступень начала мешать работе.</p>
+
+<div class="wide">
+<table class="tbl" aria-label="Три ступени задач">
+<thead><tr><th scope="col">Ступень</th><th scope="col">Где лежит задача</th><th scope="col">Хватает, пока</th><th scope="col">Пора выше, когда</th></tr></thead>
+<tbody>
+<tr><th scope="row">Файлы</th><td data-l="Где лежит задача">папка с задачами в отделе, по файлу на задачу</td><td data-l="Хватает, пока">агент один и вы работаете за одним компьютером</td><td data-l="Пора выше, когда">задачу нужно увидеть с телефона или из другого агента; задачи начали дублироваться и терять статус</td></tr>
+<tr><th scope="row">GitHub</th><td data-l="Где лежит задача">issue в репозитории отдела, доска поверх всех отделов</td><td data-l="Хватает, пока">задачи заводите вы и пара агентов</td><td data-l="Пора выше, когда">агенты сами заводят и разбирают задачи круглые сутки, и GitHub упирается в лимиты</td></tr>
+<tr><th scope="row">Граф</th><td data-l="Где лежит задача">бид в графе отдела, в GitHub уходят только важные эпики</td><td data-l="Хватает, пока">работает команда агентов, вы принимаете результат</td><td data-l="Пора выше, когда">выше пока ничего нет</td></tr>
+</tbody></table>
+<p class="cap">Раньше времени новая ступень добавит настройку и не добавит порядка. На маленькой работе один агент с хорошей задачей обгоняет любую систему</p>
+</div>
+
+<p>Названия в GitHub путают, но для задач хватит трёх: репозиторий, issues и доска. Ветки и слияния нужны для правок кода, это другая тема.</p>
+
+<h3>Обязательно ли GitHub?</h3>
+
+<p>Нет. Подойдёт любой сервис, который хранит задачи вне вашего компьютера: Notion, Linear, Trello, Яндекс Трекер, Битрикс. Если компания уже живёт в Linear, оставайтесь в Linear. Формат задачи переедет, если поменять пару строк в скилле. В инструменты я советую не влюбляться.</p>
+
+<p>Я выбрал GitHub по трём причинам. Он бесплатный. Задачи лежат рядом с файлами отдела, которые и так там хранятся. Агенты умеют с ним работать без настройки, а ChatGPT после разового подключения видит задачи с телефона. Ограничение одно: у GitHub есть лимиты на число запросов. Человеку с парой агентов их обычно хватает. Команде агентов, которая работает круглые сутки, уже нет.</p>
+</section>
+
+<section class="sec" id="drobit">
+<div class="sec-h"><span class="num">03</span><h2>Как дробить работу на задачи?</h2></div>
+
+<p>Это второй по частоте вопрос. Задачи выходят то слишком общими, то слишком мелкими.</p>
+
+<p>Начните с проверки. Задача: это работа, результат которой можно проверить. Если проверку не сформулировать, это мелкая правка. Её агент делает сразу, без задачи.</p>
+
+<p>В хорошей задаче четыре вещи. Заголовок начинается с глагола: «Отправить клиенту письмо с итогами встречи». Один ответственный: «все вместе» значит никто. Признак готовности, который видно глазами: «письмо ушло, в нём три договорённости со встречи». И ссылка на результат, которая появляется при закрытии.</p>
+
+<p>Если шаг нельзя проверить, режьте его ещё раз. Если первый этап большого проекта не даётся за неделю, он слишком велик. Большая работа становится эпиком, части становятся подзадачами.</p>
+
+<p>Мельчить тоже не надо. Модель тянет задачу целиком, если дать её целиком. Дробят ради вашего контроля: где посмотреть результат и где передать работу другому агенту. Двадцать мелких шагов внутри одной задачи агент разложит сам.</p>
+
+<p>Подробная карточка с контекстом и критериями кажется тяжёлой. Так и есть: такая подробность нужна агенту. Поэтому заводит и заполняет карточку агент, вы проверяете результат.</p>
+
+<div class="copyrow"><span class="t">Промпт агенту · разложить работу на задачи</span><button class="copy" type="button" data-copy="p1">Скопировать</button></div>
+<pre class="list" id="p1">Возьми [ПРОЕКТ ИЛИ ЦЕЛЬ] и разложи на задачи.
+
+У каждой задачи четыре поля: заголовок с глаголом, кто ведёт, признак готовности, куда ляжет результат.
+
+Если шаг нельзя проверить, разбей его ещё раз. Мелкие правки без проверки задачами не делай.
+
+Свяжи все задачи с одним эпиком. Покажи мне список до того, как что-то создавать.</pre>
+</section>
+
+<section class="sec" id="beret">
+<div class="sec-h"><span class="num">04</span><h2>Как агент берёт задачу и не теряет её?</h2></div>
+
+<p>Агент ничего не помнит между разговорами. Он знает только то, что записано в задаче. Поэтому всё держится на двух моментах: в начале агент читает задачу, в конце записывает в неё.</p>
+
+<p><b>Начало.</b> Проще всего назвать задачу: «возьми задачу про письмо клиенту» или номер issue. Можно и без названия: агент сам смотрит открытые задачи отдела и берёт верхнюю по приоритету. Приоритеты вы пишете в правилах отдела.</p>
+
+<p><b>Конец.</b> Прежде чем закрыть разговор, агент записывает в задачу, что сделано, где остановились и какой следующий шаг. У меня это делает скилл manager, он подробно разобран в гайде <a href="/kak-agent-vedet-dela/">«Как агент ведёт мои дела»</a>. Новый разговор открывает задачу и продолжает с того же места. Из другой папки, с другой моделью, хоть с телефона.</p>
+
+<p>Статусы расходятся, когда запись пропускают. Правило: если агент не записал в задачу, этого не было. В чате «готово», в задаче пусто, значит не сделано. Сам по себе агент ничего не записывает, поэтому запись стоит в конце каждого разговора. Задача закрывается только со ссылкой на результат.</p>
+
+<p>Новые задачи агент тоже заводит сам. У меня в правилах написано: любое обещание из разговора сразу становится задачей с номером. Так исчезают «мы вроде договаривались».</p>
+
+<blockquote class="pull"><p>Если агент не записал в задачу, этого не было.</p><cite>правило, на котором держатся статусы</cite></blockquote>
+</section>
+
+<section class="sec" id="sotni">
+<div class="sec-h"><span class="num">05</span><h2>Что делать, когда задач сотни?</h2></div>
+
+<p>У студентов очередь дорастала до сотни, двухсот и четырёхсот задач. Все выглядят одинаково важными, и агент присылает весь список.</p>
+
+<p>Утром я спрашиваю агента «что у меня на сегодня». Он собирает короткий список по приоритетам из правил: что горит и что ждёт моего решения. Остальное ниже, одной строкой. Саму очередь я глазами не читаю и доску почти не открываю.</p>
+
+<p>Порядок в длинной очереди держат три вещи. Каждая задача висит под эпиком, поэтому четыреста задач читаются как десяток целей. В правилах написано, что важнее: у меня это деньги, люди и публикации. Раз в неделю скилл retro разбирает неделю и спрашивает, что из застрявшего снять, упростить или продолжить.</p>
+
+<p>Сроки ставьте для себя и людей вокруг. Агент сроков не чувствует: для него задача либо готова к работе, либо чего-то ждёт.</p>
+</section>
+
+<section class="sec" id="graf">
+<div class="sec-h"><span class="num">06</span><h2>Зачем граф, если есть GitHub?</h2></div>
+
+<p>9 сентября моя команда агентов перестала вести задачи в GitHub. Агенты заводят и разбирают задачи круглые сутки, и GitHub перестал выдерживать этот поток запросов. 2 октября я записал решение: задачи живут в графе, GitHub остаётся витриной.</p>
+
+<p>Граф задач: это база, где у задачи кроме статуса есть связи. «Письмо клиенту» ждёт задачу «Расшифровать встречу». Пока встреча не расшифрована, письмо не готово к работе. Агент спрашивает граф, что готово, и получает задачи, у которых всё нужное уже сделано. Бид: это одна задача в таком графе. Сам инструмент называется <a href="https://beads.gascity.com/">beads</a>, он бесплатный и с открытым кодом.</p>
+
+<figure class="diagram">
+<svg class="d" viewBox="0 0 960 150" role="img" aria-labelledby="fig-graph-title fig-graph-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-graph-title">Задачи в графе</title><desc id="fig-graph-desc">Три задачи слева направо. Расшифровать встречу: закрыта. Написать письмо клиенту: готова к работе, потому что задача, которую она ждала, закрыта. Отправить письмо: ждёт письма. Стрелки показывают, какая задача открывает следующую.</desc><defs><marker id="g-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="960" height="150" fill="#ffffff"/>
+<rect x="30" y="50" width="250" height="84" fill="#ffffff" stroke="#b5b5b5" stroke-width="1.4"/><text x="48" y="82" fill="#6f6f6f" font-size="16" font-family="Spectral, Georgia, serif">Расшифровать встречу</text><text x="48" y="108" fill="#6f6f6f" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="1">✓ ЗАКРЫТА</text>
+<path d="M 280,92 H 347" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<text x="315" y="84" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" text-anchor="middle" letter-spacing="0.3">открывает</text>
+<rect x="355" y="50" width="250" height="84" fill="#ffffff" stroke="#2d3e9f" stroke-width="2.4"/><text x="373" y="82" fill="#000000" font-size="16" font-family="Spectral, Georgia, serif">Написать письмо клиенту</text><text x="373" y="108" fill="#2d3e9f" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="1">ГОТОВА К РАБОТЕ</text>
+<path d="M 605,92 H 672" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+<text x="640" y="84" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" text-anchor="middle" letter-spacing="0.3">открывает</text>
+<rect x="680" y="50" width="250" height="84" fill="#ffffff" stroke="#000000" stroke-width="1.2"/><text x="698" y="82" fill="#000000" font-size="16" font-family="Spectral, Georgia, serif">Отправить письмо</text><text x="698" y="108" fill="#555555" font-size="11" font-family="Jost, Futura, sans-serif" letter-spacing="1">ЖДЁТ ПИСЬМА</text>
+<text x="480" y="24" fill="#2d3e9f" font-size="11" font-family="Jost, Futura, sans-serif" text-anchor="middle" letter-spacing="0.5">агент спрашивает граф: что готово к работе?</text>
+<path d="M 480,31 V 44" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink)"/>
+</svg><svg class="m" viewBox="0 0 358 380" role="img" aria-labelledby="fig-graph-title fig-graph-desc" xmlns="http://www.w3.org/2000/svg"><defs><marker id="g-ink-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker></defs><rect width="358" height="380" fill="#ffffff"/>
+<rect x="30" y="16" width="298" height="80" fill="#ffffff" stroke="#b5b5b5" stroke-width="1.4"/><text x="46" y="48" fill="#6f6f6f" font-size="17" font-family="Spectral, Georgia, serif">Расшифровать встречу</text><text x="46" y="74" fill="#6f6f6f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="1">✓ ЗАКРЫТА</text>
+<path d="M 179,96 V 144" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<text x="189" y="125" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">открывает</text>
+<rect x="30" y="150" width="298" height="80" fill="#ffffff" stroke="#2d3e9f" stroke-width="2.4"/><text x="46" y="182" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Написать письмо клиенту</text><text x="46" y="208" fill="#2d3e9f" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="1">ГОТОВА К РАБОТЕ</text>
+<path d="M 179,230 V 278" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#g-ink-m)"/>
+<text x="189" y="259" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif">открывает</text>
+<rect x="30" y="284" width="298" height="80" fill="#ffffff" stroke="#000000" stroke-width="1.2"/><text x="46" y="316" fill="#000000" font-size="17" font-family="Spectral, Georgia, serif">Отправить письмо</text><text x="46" y="342" fill="#555555" font-size="12" font-family="Jost, Futura, sans-serif" letter-spacing="1">ЖДЁТ ПИСЬМА</text>
+</svg><figcaption>Граф отвечает на вопрос «что можно брать прямо сейчас». Готова та задача, у которой всё, чего она ждала, уже закрыто</figcaption></figure>
+
+<p>У каждого отдела свой граф. Штаб собирает сводный вид всех графов, эту часть я сейчас достраиваю. В GitHub уходят только важные эпики: про неделю, деньги, людей и публикации. Работа идёт в графе. В GitHub я смотрю общую картину.</p>
+
+<p>Нужен ли граф вам сейчас? Скорее нет. Он окупается, когда задачи заводят и разбирают агенты, а вы только принимаете работу. Начните с GitHub. Правило «задача живёт в отделе» переживёт и следующий переезд: в графе оно то же самое.</p>
+</section>
+
+<section class="sec" id="perehod">
+<div class="sec-h"><span class="num">07</span><h2>Как перейти с файлов на GitHub</h2></div>
+
+<ol class="steps">
+<li><b>Заведите репозиторий для отдела.</b> Попросите агента: «Опубликуй эту папку в приватный репозиторий на моём GitHub».</li>
+<li><b>Перенесите открытые задачи.</b> Промпт ниже делает из каждой открытой задачи issue, а старые файлы превращает в указатели.</li>
+<li><b>Запишите в правила отдела, где живут задачи.</b> Задачи живут в issues этого репозитория, новые заводятся там же. Промпт делает и это.</li>
+<li><b>Соберите доску, если отделов больше одного.</b> Попросите агента завести одну доску в GitHub Projects и добавить в неё открытые задачи всех отделов.</li>
+<li><b>Проверьте в новом разговоре.</b> Спросите агента «что у меня на сегодня». Ответил по issues, значит переезд закончен.</li>
+</ol>
+
+<div class="copyrow"><span class="t">Промпт агенту · перенести задачи в GitHub Issues</span><button class="copy" type="button" data-copy="p2">Скопировать</button></div>
+<pre class="list" id="p2">Перенеси открытые задачи этого отдела в GitHub Issues текущего репозитория.
+
+Прочитай AGENTS.md и все файлы в tasks/, кроме шаблона. Открытыми считай задачи со статусом «новая», «в работе», «на приёмке» или «заблокирована». Закрытые не переноси.
+
+Для каждой открытой задачи создай одну issue. Сохрани результат, состояние, контекст, решения, следующий шаг и ссылку на результат.
+
+Старые файлы не удаляй. Преврати каждый в указатель: ссылка на issue и пометка, что состояние здесь больше не обновляется.
+
+Допиши в AGENTS.md правило: открытые задачи отдела живут в issues этого репозитория; новая задача заводится там же; перед работой агент читает issue и комментарии, после работы записывает состояние и следующий шаг; задача закрывается со ссылкой на результат.
+
+Проверь, что второго места для задач не осталось. Верни таблицу «файл → issue».</pre>
+</section>
+
+<section class="sec" id="principy">
+<div class="sec-h"><span class="num">08</span><h2>Какие принципы работают везде</h2></div>
+
+<p>Файлы, GitHub или граф: эти правила не меняются при переезде и работают для любой задачи, которую вы отдаёте агенту.</p>
+
+<div class="princ">
+<h3>У задачи одно место</h3>
+<p>Всё остальное ссылается на это место: доска, сводка дня, отчёт. Второе место для той же задачи рано или поздно разойдётся с первым.</p>
+<p class="like">Как с семейным календарём: стоит завести второй, и кто-нибудь пропустит дантиста.</p>
+
+<h3>Нет записи, значит нет работы</h3>
+<p>Агент знает только то, что записано в задаче. Сказанное в чате исчезает вместе с закрытой вкладкой.</p>
+<p class="like">Как на стройке: сделано то, что прораб записал в журнал работ.</p>
+
+<h3>Задачу закрывает ссылка</h3>
+<p>Задача закрывается ссылкой на результат: файл, пост, отправленное письмо. Слово «готово» без ссылки ничего не закрывает.</p>
+<p class="like">Как с курьером: заказ закрыт, когда есть фото пакета у двери.</p>
+
+<h3>У каждой задачи есть родитель</h3>
+<p>Каждая задача висит под целью. Тогда сотня задач читается как пять целей, и видно, зачем нужна каждая.</p>
+<p class="like">Как чек в папке расходов: без папки через месяц не вспомнить, за что платили.</p>
+
+<h3>Выше по ступени, когда нынешняя мешает</h3>
+<p>Новое место для задач добавляет настройку и привычки. Переезжайте, когда старое место перестало держать работу.</p>
+<p class="like">Как со складом: его не арендуют под одну коробку.</p>
+</div>
+</section>
+
+<section class="sec faq" id="faq">
+<div class="sec-h"><span class="num">09</span><h2>Коротко о частых вопросах</h2></div>
+<h3>Контекст задачи хранится в issue?</h3>
+<p>Да. Описание и комментарии: это и есть память задачи. Следующий разговор читает их и продолжает с того же места.</p>
+<h3>Нужен ли GitHub отделу, где тексты и картинки?</h3>
+<p>Не обязательно. Если работа отдела живёт в другом сервисе, задачи можно держать там же. Важнее, чтобы место было одно.</p>
+<h3>Как смотреть задачи с телефона?</h3>
+<p>Подключите GitHub к ChatGPT. После разовой настройки он отвечает «что у меня на сегодня» по вашим issues.</p>
+<h3>Заводить задачу задним числом, если работа уже сделана?</h3>
+<p>Да. Заведите её под нужным эпиком и сразу закройте ссылкой на результат. Так работа не выпадет из картины недели.</p>
+<h3>Скилл manager запускать в каждом разговоре или только в штабе?</h3>
+<p>В конце каждого разговора, где двигалась задача, в папке её отдела. Штаб сам задач не хранит, ему записывать нечего.</p>
+</section>
+
+<section class="sec" id="final">
+<p class="endnote">Пока писался этот гайд, мой собственный manager ещё записывал состояние в GitHub, хотя задачи уже переехали в граф. Его перевод на граф стоит у меня отдельной задачей, с эпиком и ссылкой. Решение о переезде записывается за один день. Скиллы и привычки догоняют его по одному, и гайд будет обновляться вместе с ними.</p>
+</section>
+
+<section class="sec" id="ssylki">
+<div class="sec-h"><span class="num">10</span><h2>Ссылки</h2></div>
+<ul class="links">
+<li><a href="/kak-agent-vedet-dela/">Как агент ведёт мои дела: daily, manager, retro</a><small>соседний гайд: как агент собирает план дня и записывает состояние задач</small></li>
+<li><a href="https://sereja.tech/blog/why-agents-need-tasks/">Зачем агентам задачи, если им можно просто написать словами</a><small>слой задач для команды агентов: штаб, роли, путь одной задачи</small></li>
+<li><a href="https://sereja.tech/blog/github-projects-ai-agent-memory/">GitHub Projects как память агента</a><small>доска поверх задач многих репозиториев</small></li>
+<li><a href="https://sereja.tech/blog/tracking-tasks-agent-multi-repo/">Задачи агента в нескольких репозиториях</a><small>как задача проходит через несколько папок</small></li>
+<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues">GitHub Docs: issues</a><small>первоисточник по задачам в репозитории</small></li>
+<li><a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects">GitHub Docs: Projects</a><small>первоисточник по доскам</small></li>
+<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues">GitHub Docs: подзадачи</a><small>как связать эпик и подзадачи</small></li>
+<li><a href="https://beads.gascity.com/">beads</a><small>граф задач для агентов; исходный код: <a href="https://github.com/gastownhall/beads">github.com/gastownhall/beads</a></small></li>
+<li><a href="https://github.com/serejaris/personal-corp-os">personal-corp-os</a><small>открытые скиллы daily, manager и retro</small></li>
+</ul>
+<p class="endnote">Штаб, отделы и задачи мы собираем руками в Personal Corp. <a href="https://t.me/hashslash_bot?start=pc_blog">Подробнее в боте</a>.</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#gde">задачи</a>, <a href="#stupeni">GitHub</a>, <a href="#graf">граф задач</a>, <a href="#principy">принципы</a></div>
+<p>Ответы я собрал из своих уроков, эфиров и разборов с января по октябрь 2026 года. Это потоки Personal Corp, Кружка вайбкодинга, AI Native и AI Mindset. Вопросы студентов пересказаны без имён. Задача на первом экране учебная, её же мы разбирали на втором уроке третьего потока Personal Corp. Решение о графе задач записано 2 октября 2026 года.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+<script>
+(function(){
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .gal figure,.body .steps>li,.body .princ h3')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script><script>
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+var el=document.getElementById(b.getAttribute('data-copy'));if(!el)return;var t=el.textContent;
+function done(){b.classList.add('ok');b.textContent='Скопировано';setTimeout(function(){b.classList.remove('ok');b.textContent='Скопировать'},1600)}
+try{navigator.clipboard.writeText(t).then(done,function(){viaArea()})}catch(e){viaArea()}
+function viaArea(){try{var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();done()}catch(e){}}
+})});
+</script>
+</body></html>
