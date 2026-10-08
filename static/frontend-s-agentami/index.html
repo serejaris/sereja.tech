@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-10-08"><title>Фронтенд с агентами: одни компоненты вместо зоопарка | Сережа Рис</title>
+<meta name="description" content="Гайд: как агенты нарастили в LMS пятнадцать разных кнопок и как вернуть порядок: один набор компонентов, Storybook по правилам и проверка глазами.">
+<meta property="og:type" content="article"><meta property="og:title" content="Фронтенд с агентами: одни компоненты вместо зоопарка"><meta property="og:description" content="Гайд: как агенты нарастили в LMS пятнадцать разных кнопок и как вернуть порядок: один набор компонентов, Storybook по правилам и проверка глазами."><meta property="og:image" content="https://sereja.tech/frontend-s-agentami/img/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/frontend-s-agentami/img/og-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+/* reveal on scroll, once: the same 1s opacity fade The Blueprint uses */
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:560px;margin:30px auto 0}
+.strip{display:flex;width:100%;height:clamp(110px,14vw,178px);margin:54px 0 0;overflow:hidden}
+.strip img,.strip video{flex:1 1 0;min-width:0;height:100%;object-fit:cover}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
+.share i{display:block;width:38%;height:1px;background:var(--blue)}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite,.said cite,.lyrics cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.said{margin:26px 0 30px;padding:0 0 0 40px}
+.said p{font:300 17px/26px var(--serif);font-style:italic;margin:0}
+.lyrics{margin:30px 0 34px;text-align:center}
+.lyrics p{font:300 19px/30px var(--serif);margin:0}
+.doc{margin:30px 0 34px}
+.doc pre{margin:0;background:var(--paper);padding:22px 26px;font:300 12.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.doc figcaption,.fig figcaption,.loop figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.vert{margin:40px 0 0;padding:28px 0 6px;border-top:1px solid var(--blue)}
+.vert h3{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;color:var(--blue);margin:0 0 18px}
+.vert b{font-weight:500}
+.fig{margin:70px auto;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.fig img{width:100%}
+.loop{margin:70px auto;width:min(420px,100%);text-align:center}
+.loop video{width:100%;background:#000}
+.look{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;width:min(var(--wide),100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:48px 0}
+.look figure{margin:0}
+.look img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--ph)}
+.look figcaption{font:300 12px/15px var(--serif);text-transform:uppercase;letter-spacing:.02em;margin-top:9px}
+/* 2x2 grid whose cells cross-fade through frames on their own, like The Blueprint's animated-jpg grid */
+.flip{position:relative;left:50%;transform:translateX(-50%);width:min(1000px,100vw - 32px);margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.flip .cell{position:relative;aspect-ratio:16/9;background:var(--ph);overflow:hidden}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.flip img.on{opacity:1}
+@media (max-width:640px){.flip{grid-template-columns:1fr;gap:12px}}
+.shop-sec .sec-h{margin-top:110px}
+.shop-sec .sec-h h2{font:200 16px/39px var(--serif)}
+.shop{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.shop figure{margin:0;text-align:center}
+.shop .ph{background:var(--ph);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop .ph img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.shop figcaption{font:200 13px/17px var(--serif);margin-top:12px}
+.shop figcaption span{display:block;color:var(--grey);margin-top:6px;font-size:12px}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.done{margin:36px 0 0}
+.done h4{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin:0 0 12px}
+.done ul{list-style:none;margin:0;padding:0;border-top:1px solid #e3e3e3}
+.done li{padding:9px 0 9px 26px;border-bottom:1px solid #e3e3e3;position:relative;font-size:15px;line-height:22px}
+.done li::before{content:"";position:absolute;left:2px;top:14px;width:11px;height:11px;border:1px solid var(--blue)}
+.steps{list-style:none;counter-reset:st;padding:0;margin:0}
+.steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
+.steps b{font-weight:500}
+.film{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.film video{width:100%;background:#000;aspect-ratio:16/9}
+.film.orig{margin:34px 0 40px}
+.yt{position:relative;aspect-ratio:16/9;background:#000}.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.film figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px;text-align:center}
+.gloss{margin:26px 0 30px;border-top:1px solid #e3e3e3}
+.gloss dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding-top:14px}
+.gloss dd{margin:4px 0 0;padding-bottom:14px;border-bottom:1px solid #e3e3e3}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.principles{list-style:none;counter-reset:pr;padding:0;margin:34px 0 0}
+.principles li{counter-increment:pr;position:relative;padding:0 0 30px 70px}
+.principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
+.principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
+.principles p{margin:0}
+.facts{padding-left:22px}.facts li{margin:0 0 10px}
+.sources{font-size:13px;line-height:20px;margin-top:90px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
+  .look{grid-template-columns:repeat(2,1fr);gap:14px}
+  .shop{grid-template-columns:repeat(2,1fr);gap:16px}
+  .strip img:nth-child(n+4),.strip video:nth-child(n+4){display:none}
+  .diagram{overflow-x:auto}.diagram svg{min-width:760px}
+}
+</style><link rel="canonical" href="https://sereja.tech/frontend-s-agentami/"><meta name="author" content="Сережа Рис"><meta name="robots" content="index, follow, max-image-preview:large"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/frontend-s-agentami/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Одни компоненты вместо зоопарка"><meta property="article:published_time" content="2026-10-08T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-08T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="вайбкодинг"><meta property="article:tag" content="Claude Code"><meta property="article:tag" content="AI-агенты"><meta property="article:tag" content="фронтенд"><meta property="article:tag" content="Storybook"><meta property="article:tag" content="дизайн-система"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Фронтенд с агентами: одни компоненты вместо зоопарка"><meta name="twitter:description" content="Гайд: как агенты нарастили в LMS пятнадцать разных кнопок и как вернуть порядок: один набор компонентов, Storybook по правилам и проверка глазами."><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Фронтенд с агентами: одни компоненты вместо зоопарка", "description": "Гайд: как агенты нарастили в LMS пятнадцать разных кнопок и как вернуть порядок: один набор компонентов, Storybook по правилам и проверка глазами.", "image": "https://sereja.tech/frontend-s-agentami/img/og-preview.png", "inLanguage": "ru-RU", "datePublished": "2026-10-08", "dateModified": "2026-10-08", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/frontend-s-agentami/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["вайбкодинг", "Claude Code", "AI-агенты", "фронтенд", "Storybook", "дизайн-система"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script></head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#zoopark">Зоопарк</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как навели порядок</a><a href="#storybook">Storybook</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#zoopark">Зоопарк</a><a href="#ponadobilos">Что понадобилось</a><a href="#kak">Как навели порядок</a><a href="#storybook">Storybook</a><a href="#principy">Принципы</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Фронтенд</span></div><div class="kicker">Как это сделано:</div><h1>Одни компоненты вместо зоопарка</h1><p class="lead">Агенты за две недели нарисовали в моей учебной платформе пятнадцать разных кнопок. Гайд о том, как навести порядок во фронтенде и держать его вместе с агентами.</p></div>
+<div class="meta">8 октября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
+<article class="body">
+
+<figure class="fig" id="do-posle"><div class="flip" style="margin:0"><div class="cell"><img class="on" src="img/zoo-knopki.jpg" alt="Было: пятнадцать разных кнопок, плашек и меток на одной платформе: разная высота, рамки, шрифты и цвета" loading="eager"></div><div class="cell"><img class="on" src="img/storybook-button.jpg" alt="Стало: страница кнопки в Storybook: одна кнопка, три варианта по важности, таблица когда какой брать" loading="eager"></div></div><figcaption>Было: кнопки, плашки и метки одной платформы, под каждой подписан свой класс в коде. Стало: одна кнопка, три варианта по важности, так она выглядит в Storybook</figcaption></figure>
+
+<p class="first"><span class="drop">Р</span>ечь про LMS, учебную платформу моих курсов. Здесь ученики Personal Corp смотрят уроки, читают конспекты и сдают домашки. В сентябре я подключил её репозиторий к Claude Design, нейросети Anthropic, которая рисует макеты интерфейса, и попросил переделать страницу потока и урок. Claude Design нарисовал пять вариантов, я выбрал один, а агенты в Claude Code за день перенесли макет в код. Дальше каждый новый экран агенты дорисовывали сами. Через две недели в интерфейсе жило пятнадцать видов кнопок. Порядок наводили тоже агенты: исполнители на Sonnet 5.5 делали работу, критик на Opus 5.5 искал дубли. Я решал, что остаётся, и смотрел результат глазами.</p>
+
+<p>Этот гайд для тех, кто собирает интерфейс с агентами и ни разу не заводил дизайн-систему. Кода здесь мало, объяснений много. Откуда берётся зоопарк, как его разобрать и как сделать, чтобы он не вырос снова. Принципы подойдут для любого фронтенда, не только для LMS.</p>
+
+<dl class="gloss">
+<dt>Компонент</dt><dd>Кусок интерфейса, который пишут один раз и ставят везде: кнопка, карточка, строка списка. Поменял компонент, и он поменялся на всех экранах.</dd>
+<dt>Вариант</dt><dd>Версия компонента для другой роли. Например, главная кнопка и тихая. Вариант задают в самом компоненте, а не на месте, где кнопку поставили.</dd>
+<dt>Токен</dt><dd>Значение внешнего вида, у которого есть имя: цвет, отступ, размер шрифта. В коде пишут не «#137636», а имя токена. Поменял токен, поменялось везде.</dd>
+<dt>Storybook</dt><dd>Витрина компонентов. Каждый показан отдельно, во всех состояниях и с описанием. По ней сверяются и люди, и агенты.</dd>
+<dt>Эталон</dt><dd>Набор снимков страниц, с которым сравнивают результат. Если эталон кривой, сравнение подтверждает кривизну.</dd>
+</dl>
+
+<section class="sec" id="zoopark">
+<div class="sec-h"><span class="num">01</span><h2>Откуда берётся зоопарк</h2></div>
+
+<p>Агент пишет экран так, будто он первый. Ему нужна кнопка, и он её рисует: высоту, рамку, шрифт. На следующем экране другой агент рисует свою. Каждая по отдельности выглядит нормально. Вместе получается зоопарк.</p>
+
+<p>Масштаб показала опись. Её делал агент: прошёл все экраны и выписал каждую кнопку, карточку и подпись, где она лежит и чем отличается от соседей. Нашлось пятнадцать видов кнопок с высотой от 37 до 50 пикселей. Двадцать один вид карточек и двенадцать разных отступов внутри них. Все стили лежали в одном файле: 168 классов, то есть именованных наборов стилей, и ни одного общего компонента.</p>
+
+<figure class="fig"><img src="img/zoo-kartochki.jpg" alt="Двадцать один вид карточек и панелей с разными отступами и радиусами" loading="lazy"><figcaption>Карточки и панели из той же описи. Двенадцать разных отступов внутри</figcaption></figure>
+
+<p>Правило при этом было. В инструкции для агентов стояло: кнопки брать только из готовой библиотеки. Новые экраны его тихо обходили, и ничто этого не замечало. Агенту неоткуда было узнать, что кнопка уже есть.</p>
+</section>
+
+<section class="sec" id="ponadobilos">
+<div class="sec-h"><span class="num">02</span><h2>Что понадобилось</h2></div>
+
+<ul class="need">
+<li><b>Репозиторий и стенд.</b> Фронтенд на React, Vite и Tailwind. Стенд: копия платформы на моём компьютере, где любую страницу можно открыть под тестовым учеником.</li>
+<li><b>Claude Code.</b> Исполнители на Sonnet 5.5 переводили страницы, критик на Opus 5.5 только читал код и искал дубли. Работа шла фоном, по несколько агентов сразу.</li>
+<li><b>Storybook.</b> Витрина компонентов, версия 10.6. В готовое приложение её поставил один агент за один заход.</li>
+<li><b>Скриншоты.</b> Все страницы на двух ширинах, 1280 и 375 пикселей, до правок и после.</li>
+<li><b>Свежие факты.</b> Перед работой агент-исследователь проверил по первоисточникам, как сейчас устроены Claude Design и Storybook. Память агента тут подводит: инструменты меняются каждый месяц.</li>
+<li><b>Человек на решения.</b> Что сливается во что, где меняется вид, какой цвет у главного действия. Двадцать решений по описи и ещё около двадцати по ходу работы. На каждое хватало короткого ответа в чате.</li>
+<li><b>Около полутора суток.</b> От описи до починки эталона.</li>
+</ul>
+</section>
+
+<section class="sec" id="kak">
+<div class="sec-h"><span class="num">03</span><h2>Как мы навели порядок</h2></div>
+
+<p>Работа шла шестью шагами. На трёх из них решал или смотрел человек.</p>
+
+<figure class="diagram" id="fig-poryadok"><svg viewBox="0 0 960 330" role="img" aria-labelledby="fig-poryadok-title fig-poryadok-desc" xmlns="http://www.w3.org/2000/svg"><title id="fig-poryadok-title">Как агенты навели порядок во фронтенде и где решает человек</title><desc id="fig-poryadok-desc">Шесть шагов змейкой в два ряда. Первый ряд слева направо: 1 опись интерфейса, все кнопки, карточки и строки; 2 решения человека, что сливается и где меняется вид; 3 токены и компоненты, 26 компонентов с историями. Второй ряд справа налево: 4 перевод страниц тремя агентами параллельно; 5 сверка и критик, скриншоты и поиск дублей; 6 починка эталона, одна форма блока в любом состоянии. Над шагами подписано, кто их делает: опись и набор по одному агенту, перевод три агента, критик на Opus 5.5, решения и починку эталона я. Шаги 2, 5 и 6 отмечены как проверка человеком. От шага 5 обратно к шагу 4 идёт петля правок.</desc><defs><marker id="q-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="q-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><rect width="960" height="330" fill="#ffffff"/>
+<path d="M 296,71 H 345" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#q-ink)"/><path d="M 612,71 H 661" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#q-ink)"/><path d="M 796,118 V 161" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#q-ink)"/><path d="M 664,211 H 615" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#q-ink)"/><path d="M 348,211 H 299" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#q-ink)"/>
+<path d="M 480,258 V 276 Q 480,284 488,284 H 788 Q 796,284 796,276 V 261" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#q-acc)"/><rect x="615" y="277" width="44.8" height="14" fill="#ffffff"/><text x="637.4" y="287" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">правки</text>
+<rect x="32" y="24" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="36" width="16" height="13" fill="#2d3e9f"/><text x="54" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">1</text><rect x="68" y="36" width="50" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="93" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">1 АГЕНТ</text><text x="48" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Опись интерфейса</text><text x="48" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">все кнопки, карточки, строки:</text><text x="48" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">где лежат, чем отличаются</text>
+<rect x="348" y="24" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="36" width="16" height="13" fill="#2d3e9f"/><text x="370" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">2</text><rect x="384" y="36" width="18" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="393" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">Я</text><rect x="544.5" y="36" width="53.5" height="13" fill="#000000"/><text x="571.2" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ПРОВЕРКА</text><text x="364" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Решения человека</text><text x="364" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">что сливается во что,</text><text x="364" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">где меняется вид</text>
+<rect x="664" y="24" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="36" width="16" height="13" fill="#2d3e9f"/><text x="686" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">3</text><rect x="700" y="36" width="50" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="725" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">1 АГЕНТ</text><text x="680" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Токены и компоненты</text><text x="680" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">26 компонентов,</text><text x="680" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">у каждого истории в Storybook</text>
+<rect x="664" y="164" width="264" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="678" y="176" width="16" height="13" fill="#2d3e9f"/><text x="686" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">4</text><rect x="700" y="176" width="56" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="728" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">3 АГЕНТА</text><text x="680" y="212" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Перевод страниц</text><text x="680" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">поток, урок и кейсы</text><text x="680" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">параллельно</text>
+<rect x="348" y="164" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="362" y="176" width="16" height="13" fill="#2d3e9f"/><text x="370" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">5</text><rect x="384" y="176" width="54" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="411" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">OPUS 5.5</text><rect x="544.5" y="176" width="53.5" height="13" fill="#000000"/><text x="571.2" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ПРОВЕРКА</text><text x="364" y="212" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Сверка и критик</text><text x="364" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">скриншоты до и после,</text><text x="364" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">поиск дублей</text>
+<rect x="32" y="164" width="264" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="46" y="176" width="16" height="13" fill="#2d3e9f"/><text x="54" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" text-anchor="middle">6</text><rect x="68" y="176" width="18" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.4" stroke-width="0.8"/><text x="77" y="185.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">Я</text><rect x="228.5" y="176" width="53.5" height="13" fill="#000000"/><text x="255.2" y="185.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ПРОВЕРКА</text><text x="48" y="212" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Починка эталона</text><text x="48" y="230" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">одна форма блока</text><text x="48" y="244" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">в любом состоянии</text>
+<text x="32" y="316" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="1.1">ЛЕГЕНДА</text><rect x="106" y="306" width="22" height="13" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="136" y="316" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">работают агенты</text><rect x="226" y="306" width="22" height="13" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="254" y="306" width="53.5" height="13" fill="#000000"/><text x="280.7" y="315.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ПРОВЕРКА</text><text x="315" y="316" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">решает или смотрит человек</text></svg><figcaption>Правки после сверки возвращаются в перевод страниц</figcaption></figure>
+
+<p><b>Опись.</b> Первый агент только читал код. Он выписал каждую кнопку, карточку, метку и строку списка, снял их размеры в браузере и разложил по семействам. Отдельно он показал, где похожие варианты сольются и вид поменяется. Эту часть надо решать до работы, а не после.</p>
+
+<p><b>Решения.</b> Я прошёл двадцать пунктов описи. Большинство агент предлагал принять как есть. Спорным был цвет: зелёный я оставил только для «сделано» и «сейчас», а номера целей и кейсов стали чёрными.</p>
+
+<p><b>Набор.</b> Отдельный агент вынес токены в свой файл и собрал из них компоненты. Каждый сразу получил истории в Storybook, то есть свою страницу на витрине. Пока страницы не трогали, все скриншоты совпадали с прежними до пикселя.</p>
+
+<p><b>Перевод страниц.</b> Три агента работали одновременно, каждый в своей копии репозитория: страница потока, урок, кейсы. Блоки страниц они вынесли в отдельные компоненты, тоже с историями. Самым сложным был урок: его конспект делит код с прошлым потоком, и тот должен был остаться пиксель в пиксель. Остался.</p>
+
+<figure class="fig"><img src="img/potok-do-posle.jpg" alt="Страница потока до и после: тот же макет, выровненные заголовки, отступы и кнопки" loading="lazy"><figcaption>Страница потока до и после. Макет тот же, выровнены заголовки, отступы и кнопки</figcaption></figure>
+
+<p><b>Сверка и критик.</b> Сначала агенты собрали работу трёх агентов вместе и сравнили все страницы со снимками до правок. Потом я позвал критика на Opus. Он ничего не правил, только искал дубли. Нашёл карточку состояния вроде «нужен доступ» или «урок ещё закрыт»: её собрали вручную девять раз, и абзац текста, заданный тринадцатью разными классами. В старом файле стилей из 168 классов осталось 41.</p>
+
+<p><b>Починка эталона.</b> Самый полезный шаг случился последним, и сделал его я, а не агент. Я открыл урок и увидел, что шапка меню шагов на разных шагах разная. Подробности ниже, в разделе «На чём мы споткнулись».</p>
+</section>
+
+<section class="sec" id="storybook">
+<div class="sec-h"><span class="num">04</span><h2>Как правильно оформить Storybook</h2></div>
+
+<p>Первый Storybook у нас вышел свалкой. У одной кнопки было семнадцать историй: «Primary Large», «Outline Small», «Hover», «Focus». Я попросил агента сверить его с официальной документацией. Вот что она советует.</p>
+
+<ul class="need">
+<li><b>Одна история, одна идея.</b> Над каждой историей написано, зачем её брать, а не что на ней видно. Это прямо советует <a href="https://storybook.js.org/docs/ai/best-practices">документация Storybook про работу с агентами</a>: агент получает этот текст как пример использования.</li>
+<li><b>Первой идёт Playground.</b> В ней все свойства компонента переключаются на панели Controls. Размеры и цвета смотрят там, отдельные истории для них не нужны.</li>
+<li><b>Понятная полка.</b> Введение, основа с цветами и шрифтами, компоненты, блоки страниц, страницы целиком. Так советует страница <a href="https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy">о названиях и иерархии</a>.</li>
+<li><b>Длинное название.</b> Для блоков с текстом есть история с самым длинным реальным названием. Она показывает, что блок не разваливается.</li>
+<li><b>Официальная инструкция для агента.</b> Команда <code>npx storybook skills write-story</code> выдаёт агенту правила написания историй прямо под ваш проект.</li>
+</ul>
+
+<figure class="loop"><img src="img/storybook-polka.jpg" alt="Боковая панель Storybook: введение, основа с цветами, шрифтами и отступами, компоненты; у кнопки первой идёт Playground, дальше по истории на идею" loading="lazy" style="margin:0 auto"><figcaption>Полка нашего Storybook: введение, основа, компоненты. У кнопки первой идёт Playground</figcaption></figure>
+
+<p>Кнопку после этого пришлось пересобрать ещё раз. Агенты сделали «Скачать» и «Скопировать» отдельными компонентами, хотя это одна и та же кнопка с разным поведением. Варианты я назвал по важности, как принято в <a href="https://carbondesignsystem.com/components/button/usage/">IBM Carbon</a> и <a href="https://m2.material.io/develop/web/components/buttons/">Material</a>:</p>
+
+<ul class="need">
+<li><b>primary.</b> Залитая чёрная, одно главное действие на экране: «Открыть урок →», «Дальше».</li>
+<li><b>secondary.</b> С рамкой, обычное действие рядом с главным: «Скачать .md», «Скопировать».</li>
+<li><b>tertiary.</b> Текст без рамки, тихое действие: «Показать ответ», «Скрыть шаги».</li>
+</ul>
+
+<p>Красной кнопки нет. По правилам Carbon и <a href="https://ux.redhat.com/elements/button/guidelines/">Red Hat</a> красный бывает только у разрушительных действий вроде удаления, а у нас таких нет.</p>
+</section>
+
+<section class="sec" id="principy">
+<div class="sec-h"><span class="num">05</span><h2>Какие принципы мы использовали</h2></div>
+
+<p>LMS тут повод. Ниже то, что работает для любого интерфейса, который вы строите с агентами.</p>
+
+<ol class="principles">
+<li><h3>Одна кнопка, варианты по важности</h3><p>Вид кнопки отвечает на вопрос «насколько это важно», а не «что она делает». Главная одна, остальные тише. Как в газете: на полосе один главный заголовок, остальные мельче.</p></li>
+<li><h3>Вид отдельно от поведения</h3><p>Скачивать, копировать или открывать умеет одна и та же кнопка. Поведение живёт рядом, кнопка его просто получает. Как выключатель: корпус у всех одинаковый, а провода ведут к разным лампам.</p></li>
+<li><h3>Сначала токен, потом вариант, потом разовая правка</h3><p>Если что-то должно поменяться везде, меняют токен. Не хватает вида, добавляют вариант в компонент, а правку прямо на месте оставляют для единичных случаев. Как с одеждой: сначала размер, потом фасон, и только в крайнем случае подшивают по месту.</p></li>
+<li><h3>Агент сначала смотрит, что уже есть</h3><p>Перед любым экраном агент открывает витрину и берёт готовое. Без этого он честно рисует новое. Как на кухне: прежде чем бежать в магазин, открой холодильник.</p></li>
+<li><h3>Сравнивай блок с самим собой</h3><p>Сверка с прошлым снимком доказывает только, что ничего не изменилось, и кривой блок она тоже подтвердит. Поставь рядом один блок в разных состояниях: с коротким и длинным текстом, на узком и широком экране. Как часы: сверять с соседскими бесполезно, если они спешат так же.</p></li>
+<li><h3>Чини образец, а не ставь сторожей</h3><p>Нашёл дефект: исправь сам компонент и сними новый эталон. Новые правила и проверки вокруг кривого образца только прячут проблему. Как с лекалом у портного: кривое лекало даёт кривые платья, сколько контролёров ни ставь.</p></li>
+<li><h3>Факты из первоисточника</h3><p>Инструменты для агентов меняются каждый месяц, и память агента отстаёт. Перед решением проверь документацию с датой и цитатой. Как с расписанием поездов: смотрят табло, а не вспоминают прошлый год.</p></li>
+</ol>
+</section>
+
+<section class="sec" id="oshibki">
+<div class="sec-h"><span class="num">06</span><h2>На чём мы споткнулись</h2></div>
+<p><b>Сверка молчала про кривую шапку.</b> Шапка меню шагов урока на шаге «Цели» была высотой 36 пикселей, а на шаге «Смотреть» 60: длинное название выталкивало кнопку на вторую строку. Этот дефект был и до нас. Сверка с прошлым снимком его подтверждала, а склейки «до и после» показывали шаг, где всё выглядело аккуратно. Нашёл я глазами. Теперь каждый блок сравнивается сам с собой: короткое и длинное название, все состояния, две ширины.</p>
+<figure class="fig"><img src="img/shapka-shagov.jpg" alt="Шапка меню шагов на шести шагах урока: сверху разная высота и разные полоски, снизу одна форма" loading="lazy"><figcaption>Шапка меню шагов на всех шагах урока. В каждой паре сверху до починки, снизу после</figcaption></figure>
+<p><b>Кнопки поделились по действиям.</b> Агенты завели «Скачать» и «Скопировать» отдельными компонентами. Вид у них был один, но набор снова начал расти. Вернули одну кнопку, а поведение вынесли отдельно.</p>
+<p><b>Я отвечал по памяти.</b> Дважды я уверенно рассказал, как Claude Design передаёт макет в код, и дважды ошибся. Помогло только исследование по первоисточникам, с датами и цитатами.</p>
+<p><b>Работу влили в общий код посреди проверки.</b> Пока один агент проверял работу, другая сессия Claude Code уже влила её в основную версию кода и удалила рабочую папку. Проверку пришлось перенаправить на то, что реально лежит в основной версии.</p>
+</section>
+
+<section class="sec" id="povtorit">
+<div class="sec-h"><span class="num">07</span><h2>Как повторить</h2></div>
+<ol class="steps">
+<li><b>Попросите опись.</b> Агент проходит все экраны и выписывает каждую кнопку, карточку и подпись: где лежит и чем отличается от соседей.</li>
+<li><b>Примите решения сами.</b> Что сливается и где поменяется вид. Это быстро, и это ваша работа, а не агента.</li>
+<li><b>Заведите токены и набор.</b> Одна кнопка с вариантами по важности, поведение отдельно, у каждого компонента истории.</li>
+<li><b>Поставьте Storybook руками.</b> По <a href="https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy">документации</a> и команде <code>npx storybook skills write-story</code>, без мастера установки, который переписывает настройки проекта.</li>
+<li><b>Переводите страницы по частям.</b> Каждый агент берёт свою область и сверяет её со скриншотами.</li>
+<li><b>Позовите критика.</b> Отдельный агент ничего не правит, только ищет дубли и обходы набора.</li>
+<li><b>Сравните каждый блок с самим собой.</b> Короткое и длинное название, все состояния, обе ширины.</li>
+<li><b>Запишите агенту одно правило.</b> Перед любым новым экраном открыть витрину: <code>npx storybook tools docs list</code>.</li>
+</ol>
+<p>Зоопарк вырос не потому, что агенты плохие. Каждый аккуратно делал свой экран. Не было общего места, где видно, что уже есть. Storybook и стал этим местом: теперь агент начинает работу с витрины, а не с чистого листа. А я, когда вижу новую кнопку, первым делом спрашиваю, какой у неё вариант.</p>
+<p>Как собирать свою корпорацию агентов, которые делают такую работу, разбираем на <a href="https://pc.vibecoding.phd/">Personal Corp</a>. Новые разборы выходят в канале <a href="https://t.me/ris_ai">«рис. AI»</a>.</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#storybook">Storybook</a>, <a href="#principy">дизайн-система</a>, <a href="#kak">агенты</a>, <a href="#zoopark">фронтенд</a></div>
+<p>Storybook: <a href="https://storybook.js.org/docs/ai/best-practices">работа с агентами</a>, <a href="https://storybook.js.org/docs/ai">Storybook и AI</a>, <a href="https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy">названия и иерархия</a>, <a href="https://storybook.js.org/docs/configure/story-layout">раскладка историй</a>, <a href="https://storybook.js.org/docs/writing-docs/autodocs">автодокументация</a>, <a href="https://storybook.js.org/blog/structuring-your-storybook/">как устроить Storybook</a>.</p>
+<p>Повторы стилей: <a href="https://tailwindcss.com/docs/styling-with-utility-classes">Tailwind</a>, <a href="https://github.com/shadcn-ui/ui/blob/main/skills/shadcn/customization.md">скилл shadcn о настройке компонентов</a>, <a href="https://ui.shadcn.com/docs/theming">токены в shadcn</a>.</p>
+<p>Кнопки: <a href="https://carbondesignsystem.com/components/button/usage/">IBM Carbon</a>, <a href="https://m2.material.io/develop/web/components/buttons/">Material</a>, <a href="https://ux.redhat.com/elements/button/guidelines/">Red Hat</a>, <a href="https://www.octopus.design/latest/patterns/content-guidelines/buttons-eq58eZPb">Octopus</a>.</p>
+<p>Claude: <a href="https://support.claude.com/en/articles/14604397-set-up-your-design-system-in-claude-design">дизайн-система в Claude Design</a>, <a href="https://code.claude.com/docs/en/commands">команды /design и /design-sync</a>, <a href="https://code.claude.com/docs/en/best-practices">как писать инструкции для Claude Code</a>.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+
+<script>
+(function(){
+  function playAll(){if(document.hidden)return;document.querySelectorAll('video[autoplay]').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
+  document.addEventListener('visibilitychange',playAll);playAll();
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast')||document.querySelector('.hero');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  document.querySelectorAll('.flip .cell').forEach(function(c,k){
+    var imgs=c.querySelectorAll('img'),i=0;
+    setTimeout(function(){setInterval(function(){if(document.hidden)return;imgs[i].classList.remove('on');i=(i+1)%imgs.length;imgs[i].classList.add('on');
+      var nx=imgs[(i+1)%imgs.length];if(nx.loading==='lazy')nx.loading='eager';},2400);},k*600);
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .look,.body .flip,.body .ph,.body .shop>*,.body .gloss,.body .need,.body .principles>li,.body .steps>li')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script></body></html>
