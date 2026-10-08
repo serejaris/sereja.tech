@@ -71,12 +71,6 @@ enableGitInfo = true
     description = 'Гайд: закрытая база, второй аккаунт, секреты в браузере, ревью по перечню и постоянный гейт. Как за вечер закрыть самые дешёвые дыры вайбкодинг-сервиса.'
     lastmod = '2026-10-02'
 
-  [[params.standalone]]
-    url = 'kak-vesti-zadachi-dlya-agentov/'
-    title = 'Задачи для агентов: файлы, GitHub и граф'
-    description = 'Гайд: где живёт задача для агента, когда переносить задачи из файлов в GitHub, как дробить работу, как агент берёт задачу сам и зачем граф задач на бидах.'
-    lastmod = '2026-10-08'
-
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'
