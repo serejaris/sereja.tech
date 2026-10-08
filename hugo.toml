@@ -72,6 +72,12 @@ enableGitInfo = true
     lastmod = '2026-10-02'
 
   [[params.standalone]]
+    url = 'kak-vesti-zadachi-dlya-agentov/'
+    title = 'Задачи для агентов: файлы, GitHub и граф'
+    description = 'Гайд: три ступени задач для агентов: файлы, GitHub и граф. Что даёт каждая, когда пора подниматься выше и как её завести.'
+    lastmod = '2026-10-08'
+
+  [[params.standalone]]
     url = 'frontend-s-agentami/'
     title = 'Дизайн-система для агентов: как держать интерфейс в одном стиле'
     description = 'Гайд: как агенты нарастили в LMS пятнадцать разных кнопок и как вернуть порядок: один набор компонентов, Storybook по правилам и проверка глазами.'
