@@ -83,6 +83,12 @@ enableGitInfo = true
     description = 'Гайд: как агенты нарастили в LMS пятнадцать разных кнопок и как вернуть порядок: один набор компонентов, Storybook по правилам и проверка глазами.'
     lastmod = '2026-10-08'
 
+  [[params.standalone]]
+    url = 'bukvitsa-personal-corp/'
+    title = 'Буквица потока Personal Corp 3'
+    description = 'Поток Personal Corp 3 в виде иллюминированной буквицы: главные темы потока нарисованы в ячейках буквы и раскрашиваются по мере чтения.'
+    lastmod = '2026-10-09'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'

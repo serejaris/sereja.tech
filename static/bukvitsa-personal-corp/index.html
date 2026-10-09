@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Буквица Personal Corp 3</title>
+<meta name="description" content="Поток Personal Corp 3 в виде иллюминированной буквицы: главные темы потока нарисованы в ячейках буквы и раскрашиваются по мере чтения.">
+<link rel="canonical" href="https://sereja.tech/bukvitsa-personal-corp/">
+<meta name="author" content="Сережа Рис">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Буквица потока Personal Corp 3">
+<meta property="og:description" content="Поток Personal Corp 3 в виде иллюминированной буквицы: главные темы потока нарисованы в ячейках буквы и раскрашиваются по мере чтения.">
+<meta property="og:url" content="https://sereja.tech/bukvitsa-personal-corp/">
+<meta property="og:site_name" content="Сережа Рис">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://sereja.tech/bukvitsa-personal-corp/img/og-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Буква C из слова CORP: сцены первой части потока в ячейках буквы и заметки к ним">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@riiiiiiiiss">
+<meta name="twitter:creator" content="@riiiiiiiiss">
+<meta name="twitter:title" content="Буквица потока Personal Corp 3">
+<meta name="twitter:description" content="Поток Personal Corp 3 в виде иллюминированной буквицы: главные темы потока нарисованы в ячейках буквы и раскрашиваются по мере чтения.">
+<meta name="twitter:image" content="https://sereja.tech/bukvitsa-personal-corp/img/og-preview.png">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%2324508f'/%3E%3Ctext x='16' y='25' font-size='24' text-anchor='middle' fill='%23f1d27a' font-family='serif' font-weight='700'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Ruslan+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="engine/style.css">
+</head>
+<body>
+<!-- золотой градиент с лёгким блеском: на него ссылаются ячейки и орнамент -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="pc-gold" x1="0" y1="0" x2="1" y2="0.55" spreadMethod="reflect">
+      <stop offset="0" stop-color="#9a6d12"/>
+      <stop offset="0.28" stop-color="#e2b84a"/>
+      <stop offset="0.46" stop-color="#fff0b0"/>
+      <stop offset="0.62" stop-color="#d4a23a"/>
+      <stop offset="1" stop-color="#8f650f"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-0.7 0;0.7 0;-0.7 0" dur="7s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="app" id="app" data-mode="read" data-view="plate">
+  <header class="topbar">
+    <a class="brand" href="./" id="brand">Буквица · Personal Corp 3</a>
+    <div class="seg letters" role="group" aria-label="Вариант буквицы" id="seg-letters">
+      <span class="lbl">буква</span>
+      <button type="button" data-bukva="CORP" aria-pressed="false" title="Слово CORP: каждая буква отвечает за свою часть потока">CORP</button>
+      <button type="button" data-bukva="C" aria-pressed="false" title="Одна буква C со всеми сценами">C</button>
+      <button type="button" data-bukva="O" aria-pressed="false" title="Одна буква O со всеми сценами">O</button>
+      <button type="button" data-bukva="R" aria-pressed="false" title="Одна буква R со всеми сценами">R</button>
+      <button type="button" data-bukva="P" aria-pressed="false" title="Одна буква P со всеми сценами">P</button>
+    </div>
+    <div class="seg" role="group" aria-label="Вид страницы" id="seg-view">
+      <button type="button" data-view="folio" aria-pressed="false" title="Страница рукописи: текст слева, буква справа">Фолио</button>
+      <button type="button" data-view="plate" aria-pressed="false" title="Вклейка: буква с заметками на полях и панель чтения">Вклейка</button>
+    </div>
+    <div class="seg" role="group" aria-label="Режим" id="seg-mode">
+      <button type="button" data-mode="read" aria-pressed="false">Читать</button>
+      <button type="button" data-mode="look" aria-pressed="false">Смотреть</button>
+    </div>
+  </header>
+
+  <div class="layout" id="layout">
+    <main class="stage" id="stage">
+      <div class="notes notes-l" id="notes-l" aria-label="Заметки на полях слева"></div>
+      <div class="plate-wrap" id="plate-wrap"></div>
+      <div class="notes notes-r" id="notes-r" aria-label="Заметки на полях справа"></div>
+    </main>
+    <aside class="panel" id="panel" aria-label="Панель чтения"></aside>
+    <svg class="overlay" id="overlay" aria-hidden="true"></svg>
+  </div>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+
+<dialog class="lightbox" id="lightbox" aria-label="Сцена"></dialog>
+
+<noscript><p class="noscript">Буквица работает на JavaScript: без него картинки не собрать. Включите скрипты и обновите страницу.</p></noscript>
+
+<script src="data/program.js"></script>
+<script src="engine/glyphs.js"></script>
+<script src="engine/ornament.js"></script>
+<script src="engine/plate.js"></script>
+<script src="engine/app.js"></script>
+</body>
+</html>
