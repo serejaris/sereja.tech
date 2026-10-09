@@ -73,7 +73,7 @@ enableGitInfo = true
 
   [[params.standalone]]
     url = 'kak-vesti-zadachi-dlya-agentov/'
-    title = 'Задачи для агентов: файлы, GitHub и граф'
+    title = 'Три ступени задач для агентов: файлы, GitHub и граф'
     description = 'Гайд: три ступени задач для агентов: файлы, GitHub и граф. Что даёт каждая, когда пора подниматься выше и как её завести.'
     lastmod = '2026-10-08'
 
