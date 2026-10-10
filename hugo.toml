@@ -89,6 +89,12 @@ enableGitInfo = true
     description = 'Поток Personal Corp 3 в виде иллюминированной буквицы: главные темы потока нарисованы в ячейках буквы и раскрашиваются по мере чтения.'
     lastmod = '2026-10-09'
 
+  [[params.standalone]]
+    url = 'kak-nauchit-agentov-prohodit-starcraft/'
+    title = 'Как научить агентов проходить StarCraft'
+    description = 'Гайд: как агенты в Claude Code проходят кампанию оригинального StarCraft в видимом окне без читов: мост к игре, разбор через Ghidra, три победы. Гайд обновляется'
+    lastmod = '2026-10-10'
+
   # Social links for JSON-LD sameAs
   [[params.social]]
     name = 'twitter'

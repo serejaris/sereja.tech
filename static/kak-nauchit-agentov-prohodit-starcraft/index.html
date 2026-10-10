@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="updated" content="2026-10-10"><title>Как научить агентов проходить StarCraft | Сережа Рис</title>
+<meta name="description" content="Как агенты в Claude Code учатся проходить оригинальный StarCraft без читов: мост к игре, разбор через Ghidra, победы в трёх миссиях.">
+<meta property="og:type" content="article"><meta property="og:title" content="Как научить агентов проходить StarCraft"><meta property="og:description" content="Гайд: как агенты в Claude Code проходят кампанию оригинального StarCraft в видимом окне, без читов. Мост, разбор игры, три победы."><meta property="og:image" content="https://sereja.tech/kak-nauchit-agentov-prohodit-starcraft/img/og_cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://sereja.tech/kak-nauchit-agentov-prohodit-starcraft/img/og_cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,800;1,200;1,300&family=Jost:wght@400;500;600&family=Poiret+One&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+:root{--ink:#000;--blue:#2d3e9f;--pink:#ff1493;--grey:#8b8b8b;--paper:#f4f4f2;--ph:#efefef;--col:720px;--wide:1000px;
+--serif:"Spectral",Georgia,serif;--sans:"Jost","Futura","Century Gothic",sans-serif;--logo:"Poiret One","Jost",sans-serif;--mono:"IBM Plex Mono",Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:200 16px/24px var(--serif)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+img,video{display:block;max-width:100%}
+.mast{text-align:center;padding:54px 16px 0}
+.logo{font:400 60px/1 var(--logo);letter-spacing:.08em;color:var(--pink);text-decoration:none;display:inline-block}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding:30px 16px 0}
+.nav a,.bar a{font:400 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--blue);text-decoration:none}
+.nav a:hover,.bar a:hover{color:var(--pink);text-decoration:underline}
+.bar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:22px;padding:12px 24px;
+  transform:translateY(-100%);transition:transform .35s ease;box-shadow:0 1px 0 rgba(45,62,159,.12)}
+.bar.on{transform:none}
+.tagline{font:600 9px/12px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:14px;color:var(--ink)}
+.site{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;padding:26px 16px 0}
+.site a,.barlinks a{font:500 13px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+.site a:hover,.barlinks a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.nav.toc{padding-top:14px;gap:4px 18px}
+.nav.toc a{font-size:11px;color:var(--grey)}
+.nav.toc a:hover{color:var(--pink)}
+/* reveal on scroll, once: the same 1s opacity fade The Blueprint uses */
+.rv{opacity:0;transition:opacity 1s}.rv.in{opacity:1}@media print{.rv{opacity:1}}
+.barlinks{display:flex;gap:16px;margin-left:auto;padding-left:18px}
+footer .tagline{margin-top:10px}footer .site{padding-top:18px}
+@media (max-width:1000px){.barlinks{display:none}}
+.bar .mark{font:400 26px/1 var(--logo);color:var(--pink);text-decoration:none;margin-right:10px}
+.bar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap}
+.head{text-align:center;padding:64px 16px 0}
+.rubric{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.rubric span{font-weight:400}
+.kicker{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin-top:52px}
+h1{font:800 clamp(46px,8.2vw,95px)/1.02 var(--serif);margin:14px auto 0;max-width:1100px;letter-spacing:-.005em}
+.lead{font:200 clamp(19px,2.1vw,25px)/1.25 var(--serif);max-width:560px;margin:30px auto 0}
+.strip{display:flex;width:100%;height:clamp(110px,14vw,178px);margin:54px 0 0;overflow:hidden}
+.strip img,.strip video{flex:1 1 0;min-width:0;height:100%;object-fit:cover}
+.meta{text-align:center;margin:40px auto 0;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.share{display:flex;justify-content:space-between;max-width:840px;margin:34px auto 0;padding:0 16px}
+.share i{display:block;width:38%;height:1px;background:var(--blue)}
+.body{max-width:var(--col);margin:0 auto;padding:70px 16px 40px}
+.body p{margin:0 0 22px}
+.drop{float:left;font:500 55px/44px var(--serif);margin:4px 10px 0 0}
+.pull{margin:44px 0 44px 120px;max-width:480px}
+.pull p{font:300 22px/30px var(--serif);margin:0}
+.pull cite,.said cite,.lyrics cite{display:block;font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--grey);font-style:normal;margin-top:12px}
+.said{margin:26px 0 30px;padding:0 0 0 40px}
+.said p{font:300 17px/26px var(--serif);font-style:italic;margin:0}
+.lyrics{margin:30px 0 34px;text-align:center}
+.lyrics p{font:300 19px/30px var(--serif);margin:0}
+.doc{margin:30px 0 34px}
+.doc pre{margin:0;background:var(--paper);padding:22px 26px;font:300 12.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#1d1d1d}
+.doc figcaption,.fig figcaption,.loop figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.sec{margin-top:40px}
+.sec-h{text-align:center;margin:84px 0 38px}
+.sec-h .num{display:block;font:600 8px/10px var(--sans);letter-spacing:5px;margin-bottom:14px}
+.sec-h h2{font:300 clamp(26px,3.2vw,34px)/1.15 var(--serif);margin:0}
+.vert{margin:40px 0 0;padding:28px 0 6px;border-top:1px solid var(--blue)}
+.vert h3{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;color:var(--blue);margin:0 0 18px}
+.vert b{font-weight:500}
+.fig{margin:70px auto;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.fig img{width:100%}
+.loop{margin:70px auto;width:min(420px,100%);text-align:center}
+.loop video{width:100%;background:#000}
+.look{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;width:min(var(--wide),100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:48px 0}
+.look figure{margin:0}
+.look img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--ph)}
+.look figcaption{font:300 12px/15px var(--serif);text-transform:uppercase;letter-spacing:.02em;margin-top:9px}
+/* 2x2 grid whose cells cross-fade through frames on their own, like The Blueprint's animated-jpg grid */
+.flip{position:relative;left:50%;transform:translateX(-50%);width:min(1000px,100vw - 32px);margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.flip .cell{position:relative;aspect-ratio:16/9;background:var(--ph);overflow:hidden}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.flip img.on{opacity:1}
+@media (max-width:640px){.flip{grid-template-columns:1fr;gap:12px}}
+.shop-sec .sec-h{margin-top:110px}
+.shop-sec .sec-h h2{font:200 16px/39px var(--serif)}
+.shop{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;width:min(1180px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.shop figure{margin:0;text-align:center}
+.shop .ph{background:var(--ph);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop .ph img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.shop figcaption{font:200 13px/17px var(--serif);margin-top:12px}
+.shop figcaption span{display:block;color:var(--grey);margin-top:6px;font-size:12px}
+.diagram{margin:48px 0 40px;width:min(960px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:12px;text-align:center}
+.done{margin:36px 0 0}
+.done h4{font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;margin:0 0 12px}
+.done ul{list-style:none;margin:0;padding:0;border-top:1px solid #e3e3e3}
+.done li{padding:9px 0 9px 26px;border-bottom:1px solid #e3e3e3;position:relative;font-size:15px;line-height:22px}
+.done li::before{content:"";position:absolute;left:2px;top:14px;width:11px;height:11px;border:1px solid var(--blue)}
+.steps{list-style:none;counter-reset:st;padding:0;margin:0}
+.steps li{counter-increment:st;position:relative;padding:0 0 18px 58px}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-4px;font:400 30px/1 var(--logo);color:var(--blue)}
+.steps b{font-weight:500}
+.film{margin:0 auto 56px;width:min(1000px,100vw - 32px);position:relative;left:50%;transform:translateX(-50%)}
+.film video{width:100%;background:#000;aspect-ratio:16/9}
+.film.orig{margin:34px 0 40px}
+.yt{position:relative;aspect-ratio:16/9;background:#000}.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.film figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px;text-align:center}
+.gloss{margin:26px 0 30px;border-top:1px solid #e3e3e3}
+.gloss dt{font:600 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding-top:14px}
+.gloss dd{margin:4px 0 0;padding-bottom:14px;border-bottom:1px solid #e3e3e3}
+.need{list-style:none;padding:0;margin:26px 0}
+.need li{padding:0 0 14px 22px;position:relative}
+.need li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1px;background:var(--blue)}
+.need b,.body p b{font-weight:500}
+.principles{list-style:none;counter-reset:pr;padding:0;margin:34px 0 0}
+.principles li{counter-increment:pr;position:relative;padding:0 0 30px 70px}
+.principles li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:-6px;font:400 42px/1 var(--logo);color:var(--blue)}
+.principles h3{font:400 21px/1.25 var(--serif);margin:0 0 8px}
+.principles p{margin:0}
+.facts{padding-left:22px}.facts li{margin:0 0 10px}
+.sources{font-size:13px;line-height:20px;margin-top:90px;padding-top:26px;border-top:1px solid var(--blue)}
+.tags{font:400 11px/16px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:16px}
+.tags a{text-decoration:none}
+footer{text-align:center;padding:60px 16px 70px}
+footer .logo{font-size:34px}
+@media (max-width:760px){
+  .mast{padding-top:30px}.logo{font-size:42px}.nav{gap:6px 14px}
+  .pull{margin:34px 0 34px 24px}.said{padding-left:18px}
+  .look{grid-template-columns:repeat(2,1fr);gap:14px}
+  .shop{grid-template-columns:repeat(2,1fr);gap:16px}
+  .strip img:nth-child(n+4),.strip video:nth-child(n+4){display:none}
+  .diagram{overflow-x:auto}.diagram svg{min-width:760px}
+}
+
+.pic{margin:44px auto;width:min(642px,100%)}
+.pic img{width:100%;height:auto;background:#000}
+.pic.hero{margin:0 auto 56px}
+@media (min-width:700px) and (min-resolution:2dppx){.pic img{image-rendering:pixelated}}
+.pic figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+.pic.hero figcaption{text-align:center}
+.shots{display:grid;gap:18px;width:min(var(--wide),100vw - 32px);position:relative;left:50%;transform:translateX(-50%);margin:44px 0}
+.shots.two{grid-template-columns:1fr 1fr}
+.shots figure{margin:0}
+.shots img{width:100%;height:auto;background:#000}
+.shots figcaption{font:400 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-top:10px}
+@media (max-width:640px){.shots.two{grid-template-columns:1fr;gap:26px}}
+.evid{font:400 12px/18px var(--sans);letter-spacing:.02em;color:var(--grey);margin:-10px 0 30px}
+.body .steps{margin-bottom:30px}
+.tblwrap{margin:34px 0 36px;overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font:300 15px/21px var(--serif)}
+.tbl caption{caption-side:top;text-align:left;font:600 8px/10px var(--sans);text-transform:uppercase;letter-spacing:5px;color:var(--ink);padding:0 0 14px}
+.tbl th{text-align:left;font:600 10px/14px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);padding:0 14px 8px 0;border-bottom:1px solid #e3e3e3}
+.tbl td:first-child{width:36%}
+.tbl td{padding:10px 14px 10px 0;border-bottom:1px solid #e3e3e3;vertical-align:top}
+.tbl td:last-child,.tbl th:last-child{white-space:nowrap;padding-right:0;color:var(--blue)}
+.tbl td:last-child{font:400 12px/21px var(--sans);letter-spacing:.06em}
+@media (max-width:640px){.tbl{font-size:14px;line-height:20px}.tbl td,.tbl th{padding-right:10px}}
+</style><link rel="canonical" href="https://sereja.tech/kak-nauchit-agentov-prohodit-starcraft/"><meta name="author" content="Сережа Рис"><meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#ffffff"><link rel="alternate" type="application/rss+xml" href="https://sereja.tech/blog/index.xml" title="Блог"><meta property="og:url" content="https://sereja.tech/kak-nauchit-agentov-prohodit-starcraft/"><meta property="og:site_name" content="Сережа Рис"><meta property="og:locale" content="ru_RU"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Экран «Victory!» первой миссии оригинального StarCraft"><meta property="article:published_time" content="2026-10-10T12:00:00+03:00"><meta property="article:modified_time" content="2026-10-10T12:00:00+03:00"><meta property="article:author" content="Сережа Рис"><meta property="article:section" content="Гайды"><meta property="article:tag" content="вайбкодинг"><meta property="article:tag" content="Claude Code"><meta property="article:tag" content="AI-агенты"><meta property="article:tag" content="StarCraft"><meta property="article:tag" content="BWAPI"><meta property="article:tag" content="Ghidra"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@riiiiiiiiss"><meta name="twitter:creator" content="@riiiiiiiiss"><meta name="twitter:title" content="Как научить агентов проходить StarCraft"><meta name="twitter:description" content="Гайд: как агенты в Claude Code проходят кампанию оригинального StarCraft в видимом окне, без читов. Мост, разбор игры, три победы."><meta name="twitter:image:alt" content="Экран «Victory!» первой миссии оригинального StarCraft"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Как научить агентов проходить StarCraft", "description": "Как агенты в Claude Code учатся проходить оригинальный StarCraft без читов: мост к игре, разбор через Ghidra, победы в трёх миссиях.", "image": "https://sereja.tech/kak-nauchit-agentov-prohodit-starcraft/img/og_cover.jpg", "inLanguage": "ru-RU", "datePublished": "2026-10-10", "dateModified": "2026-10-10", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://sereja.tech/kak-nauchit-agentov-prohodit-starcraft/"}, "author": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/", "sameAs": ["https://t.me/ris_ai", "https://www.youtube.com/@serejaris", "https://x.com/riiiiiiiiss", "https://github.com/serejaris"]}, "publisher": {"@type": "Person", "name": "Сережа Рис", "url": "https://sereja.tech/"}, "keywords": ["вайбкодинг", "Claude Code", "AI-агенты", "StarCraft", "BWAPI", "Ghidra"]}</script><script defer src="/_vercel/insights/script.js"></script><script defer src="/analytics.js"></script></head>
+<body class="a" id="top"><div class="bar" id="bar"><a class="mark" href="https://sereja.tech/">СР</a><nav class=""><a href="#victory">Победа</a><a href="#pravila">Правила</a><a href="#zapusk">Запуск</a><a href="#kampaniya">Кампания</a><a href="#most">Мост</a><a href="#proverka">Проверка победы</a><a href="#missii">Миссии</a><a href="#orkestr">Оркестр</a><a href="#principy">Принципы</a><a href="#oshibki">Ошибки</a><a href="#povtorit">Как повторить</a></nav><nav class="barlinks"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></div><header class="mast"><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav><nav class="nav toc"><a href="#victory">Победа</a><a href="#pravila">Правила</a><a href="#zapusk">Запуск</a><a href="#kampaniya">Кампания</a><a href="#most">Мост</a><a href="#proverka">Проверка победы</a><a href="#missii">Миссии</a><a href="#orkestr">Оркестр</a><a href="#principy">Принципы</a><a href="#oshibki">Ошибки</a><a href="#povtorit">Как повторить</a></nav></header><div class="head"><div class="rubric">Гайды <span>•</span> <span>Игры</span></div><div class="kicker">Как это устроено:</div><h1>Как научить агентов проходить StarCraft</h1><p class="lead">Три миссии оригинальной кампании StarCraft агенты прошли в видимом окне без читов. Гайд о том, как это устроено, где решает человек и как повторить. Кампания не закончена, гайд обновляется.</p></div>
+<div class="meta">10 октября 2026 · гайд обновляется</div><div class="share"><i></i><i></i></div>
+<article class="body">
+<figure class="pic hero" id="victory"><img src="img/victory-wasteland.png" width="642" height="501" alt="Экран «Victory!» после первой миссии оригинального StarCraft: время 04:41, счёт 2113 против 575" fetchpriority="high"><figcaption>Экран «Victory!» первой миссии, 4 минуты 41 секунда. Победу взяла программа на Python</figcaption></figure>
+
+<p class="first"><span class="drop">П</span>ервую победу в оригинальной кампании StarCraft взяла небольшая программа на Python. В ней записаны правила вроде «добывай минералы, построй казарму, обучи десять морпехов». Правила писали агенты Claude Code, а игра шла в видимом окне на сервере. Я поставил цель и достал диск с игрой. Главный агент раздавал задачи. Исполнители запускали игру, разбирали её устройство и писали программу. Сейчас пройдены три миссии первого эпизода, четвёртая в работе. Вся работа заняла около десяти часов одного сеанса.</p>
+
+<p>Гайд для тех, кто знает StarCraft или хотя бы видел его. Программу к игре вы не подключали и про разбор готовых программ не слышали. Технических подробностей здесь мало, объяснений много. Я расскажу, как мы запустили игру, как программа её видит, как мы проверяем победу и что ломалось по дороге. Принципы в конце пригодятся для любой игры и любой задачи, которую вы отдаёте агентам.</p>
+
+<blockquote class="pull"><p>Ты главный мозг и стратег всего и&nbsp;вся. Цель: пройти кампанию.</p><cite>Мои слова главному агенту в первые минуты работы</cite></blockquote>
+
+<dl class="gloss">
+<dt>Кампания</dt><dd>Сюжетные миссии игры. В оригинальном StarCraft три эпизода: терраны, зерги и протоссы. Мы идём по порядку и начали с терранов.</dd>
+<dt>Оркестратор</dt><dd>Главный агент. Раздаёт задачи другим агентам, принимает результат и записывает его в репозиторий. Сам он не играет и игру не разбирает.</dd>
+<dt>BWAPI</dt><dd>Открытая библиотека, через которую программа видит игру и отдаёт ей команды, как игрок мышью. На ней сообщество строит программы-игроки для StarCraft.</dd>
+<dt>Мост</dt><dd>Маленькая программа на Java, которая стоит между игрой и нашей программой-игроком. Она пересказывает программе, что видно на карте, и передаёт игре её команды.</dd>
+<dt>Программа-игрок</dt><dd>Скрипт на Python, который получает от моста описание карты и отвечает командами. В наших рабочих файлах она называется политикой.</dd>
+</dl>
+
+<section class="sec" id="pravila">
+<div class="sec-h"><span class="num">01</span><h2>Зачем это и по каким правилам играть</h2></div>
+<p>Началось с моей фразы про оригинальный StarCraft: «научиться им играть». Программы-игроки для StarCraft давно бьются друг с другом на турнирах вроде <a href="https://www.sscaitournament.com/index.php?action=tutorial">SSCAIT</a>. Описания, как такая программа проходит сюжетные миссии, мы не нашли. Один из разработчиков BWAPI пишет в <a href="https://github.com/bwapi/bwapi/issues/717">обсуждении</a>, что кампания с ними работала всегда. Проверять пришлось самим.</p>
+<p>На моём Mac уже стоял современный StarCraft Remastered. Программы-игроки с ним не работают, сообщество сидит на старой версии 1.16.1. Её архив лежит на <a href="https://davechurchill.ca/starcraft/resources/">сайте Дейва Чёрчилла</a>. По словам сообщества, Blizzard разрешила раздавать его для ИИ. Remastered мы не трогали.</p>
+<p>До первого запуска мы записали в файл правил условия честной игры:</p>
+<ul class="need">
+<li><b>Окно игры видно.</b> Его можно смотреть в браузере, и все скриншоты сняты с него.</li>
+<li><b>Туман войны включён.</b> Программа знает только то, что видит игрок.</li>
+<li><b>Читов нет.</b> Коды на ресурсы и карту запрещены, ввод человека не подменяется, сохранения не подделываются.</li>
+<li><b>Миссия засчитана по экрану.</b> Считается только родной экран игры «Victory!» в её окне.</li>
+<li><b>Не пройдено значит не сказано.</b> Если победы нет на экране, мы её не объявляем.</li>
+</ul>
+<figure class="pic"><img src="img/wasteland-fog.png" width="642" height="501" alt="Первая миссия: несколько морпехов на карте, края карты закрыты туманом войны" loading="lazy"><figcaption>Первая миссия. Тёмные края карты закрыты туманом войны, и программа их не видит</figcaption></figure>
+</section>
+
+<section class="sec" id="zapusk">
+<div class="sec-h"><span class="num">02</span><h2>Где запустить старую игру, если она падает</h2></div>
+<p>StarCraft 1.16.1 написан для 32-битной Windows. На других системах такие игры запускает Wine: программа, которая подменяет собой Windows. На моём Mac с процессором M1 игра и её загрузчик падали. Мы пробовали две версии Wine и до главного меню так и не дошли.</p>
+<p>Исследователь нашёл причину. Это известная ошибка Wine на Mac с Apple Silicon, <a href="https://bugs.winehq.org/show_bug.cgi?id=60034">номер 60034</a>. Исправление есть, но его надо вручную вшивать в сборку Wine. Оркестратор пошёл в обход и перенёс игру на сервер с обычным процессором x86.</p>
+<p>На сервере игре выделили контейнер: отдельную изолированную систему, у нас это Ubuntu 24.04. Первая попытка на Debian с Wine 10 тоже упала, на <a href="https://bugs.winehq.org/show_bug.cgi?id=57758">другой известной ошибке</a>. Wine 9 игру запустил. Ей нужен экран 640 на 480 с 256 цветами, поэтому она живёт в отдельном виртуальном окне. Экран у контейнера тоже виртуальный, а смотрю я его в браузере через защищённый туннель.</p>
+<figure class="pic"><img src="img/main-menu.png" width="642" height="501" alt="Главное меню StarCraft в окне Wine, в правом нижнем углу надпись Version 1.16.1" loading="lazy"><figcaption>Главное меню на сервере. В правом нижнем углу «Version 1.16.1»</figcaption></figure>
+</section>
+
+<section class="sec" id="kampaniya">
+<div class="sec-h"><span class="num">03</span><h2>Откуда взять кампанию</h2></div>
+<p>В архиве с сайта Чёрчилла есть только сетевая игра и карты. Файл кампании там пустышка на три мегабайта. Без данных кампании сюжетные миссии не запустить.</p>
+<p>Агентам я дал образ своего диска с оригинальным StarCraft: «вот тут у меня игра лежит». Кампания на нём спрятана в установщике INSTALL.EXE. Он и есть тот архив данных, который ищет игра. Старая <a href="https://web.archive.org/web/20100124212037/http://us.blizzard.com/support/article.xml?locale=en_US&amp;articleId=21149">заметка Blizzard</a> к патчу 1.15.2 советует положить его в папку игры под именем StarCraft.mpq. Мы так и сделали, и игра сама предложила эпизод «Rebel Yell».</p>
+<div class="shots two">
+<figure><img src="img/campaign-select.png" width="642" height="501" alt="Выбор эпизода: Zerg, Terran и Protoss, внизу кнопки Load Saved, Play Custom, Load Replay" loading="lazy"><figcaption>Выбор эпизода. Мы начинаем с терранов</figcaption></figure>
+<figure><img src="img/terran-intro.png" width="642" height="501" alt="Вводный текст кампании терранов Rebel Yell на чёрном фоне" loading="lazy"><figcaption>Вводный текст кампании «Rebel Yell»</figcaption></figure>
+</div>
+<p>Первой в кампании идёт обучающая миссия. Мы пропустили её кнопкой Skip Tutorial, которую игра предлагает сама. Дальше идёт «Wasteland», первая настоящая миссия. Дополнение Brood War ждёт полного образа второго диска: у меня пока только его часть.</p>
+<div class="shots two">
+<figure><img src="img/tutorial-skip.png" width="642" height="501" alt="Брифинг обучающей миссии с кнопкой Skip Tutorial внизу" loading="lazy"><figcaption>Брифинг обучения. Внизу кнопка Skip Tutorial</figcaption></figure>
+<figure><img src="img/wasteland-briefing.png" width="642" height="501" alt="Брифинг миссии Wasteland: цели найти Рэйнора, построить казарму, обучить десять морпехов" loading="lazy"><figcaption>Брифинг «Wasteland»: найти Рэйнора, построить казарму, обучить десять морпехов</figcaption></figure>
+</div>
+</section>
+
+<section class="sec" id="most">
+<div class="sec-h"><span class="num">04</span><h2>Как программа видит игру и командует</h2></div>
+<p>Сама игра команды от программ не принимает. Это умеет BWAPI: она встраивается в запущенную игру, показывает программе, что происходит, и передаёт юнитам её приказы. К BWAPI подключается наш мост на Java. Он запускается рядом с игрой под тем же Wine. Программа-игрок на Python живёт отдельно и говорит с мостом короткими текстовыми сообщениями.</p>
+
+<figure class="diagram" id="fig-path"><svg viewBox="0 0 960 366" role="img" aria-labelledby="fig-path-t fig-path-d" xmlns="http://www.w3.org/2000/svg"><title id="fig-path-t">Путь от игры к программе-игроку и проверка победы</title><desc id="fig-path-d">Путь данных слева направо. Первый блок: игра StarCraft 1.16.1 с библиотекой BWAPI, на сервере в Wine, туман войны включён. Второй блок: мост на Java, пересказывает картину и передаёт команды игре. Третий блок: программа-игрок на Python с правилами добывать, строить, обучать и атаковать. От игры к мосту идёт то, что видит игрок, от моста к программе наблюдение, обратно команды и приказы. Под игрой стоит судья победы: он читает из игры экран Victory, ячейку победы в памяти и файл игрока без права записи. Рядом скрипт меню: он нажимает кнопки в окне игры на брифингах и экранах итогов, как мышь человека.</desc><defs><marker id="p-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="p-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><rect width="960" height="366" fill="#ffffff"/><path d="M 264,58 H 361" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 596,58 H 693" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 695,94 H 599" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 363,94 H 267" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><rect x="271.0" y="42" width="86.0" height="14" fill="#ffffff"/><text x="314" y="52" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">что видит игрок</text><rect x="616.0" y="42" width="60.0" height="14" fill="#ffffff"/><text x="646" y="52" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">наблюдение</text><rect x="623.8" y="96" width="44.4" height="14" fill="#ffffff"/><text x="646" y="106" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">команды</text><rect x="291.8" y="96" width="44.4" height="14" fill="#ffffff"/><text x="314" y="106" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">приказы</text><rect x="32" y="24" width="232" height="100" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="36" width="11.4" height="13" fill="#2d3e9f"/><text x="51.7" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">1</text><rect x="63.4" y="36" width="30.6" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="78.7" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ИГРА</text><text x="48" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">StarCraft 1.16.1 и BWAPI</text><text x="48" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">на сервере, в Wine, в окне</text><text x="48" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">туман войны включён</text><rect x="364" y="24" width="232" height="100" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="378" y="36" width="11.4" height="13" fill="#2d3e9f"/><text x="383.7" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">2</text><rect x="395.4" y="36" width="30.6" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="410.7" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">JAVA</text><text x="380" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Мост</text><text x="380" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">пересказывает картину и</text><text x="380" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">передаёт команды игре</text><rect x="696" y="24" width="232" height="100" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="710" y="36" width="11.4" height="13" fill="#2d3e9f"/><text x="715.7" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">3</text><rect x="727.4" y="36" width="43.4" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="749.1" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">PYTHON</text><text x="712" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Программа-игрок</text><text x="712" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">правила: добывать, строить,</text><text x="712" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">обучать, атаковать</text><path d="M 148.0,124 V 211" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><rect x="84.2" y="150" width="127.6" height="14" fill="#ffffff"/><text x="148.0" y="160" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">читают без права записи</text><rect x="32" y="214" width="232" height="100" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="193.8" y="226" width="56.2" height="13" fill="#000000"/><text x="221.9" y="235.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ПРОВЕРКА</text><text x="48" y="262" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Судья победы</text><text x="48" y="280" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">экран «Victory!»,</text><text x="48" y="294" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">ячейка победы в памяти,</text><text x="48" y="308" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">файл игрока</text><path d="M 480.0,214 V 190 H 224 V 127" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><rect x="364" y="214" width="232" height="100" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="378" y="226" width="43.4" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="399.7" y="235.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">СКРИПТ</text><text x="380" y="262" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Скрипт меню</text><text x="380" y="280" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">жмёт кнопки на брифингах</text><text x="380" y="294" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">и экранах итогов, как мышь</text><text x="32" y="358" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="1.1">ЛЕГЕНДА</text><rect x="106" y="348" width="22" height="13" fill="#fff" stroke="#000000" stroke-width="1.6"/><text x="136" y="358" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">проверка</text><path d="M 199,354.5 H 225" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><text x="233" y="358" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">чтение и ввод вне программы-игрока</text></svg><figcaption>Игра отдаёт мосту то, что видит игрок. Победу проверяет судья отдельно от программы-игрока</figcaption></figure>
+
+<p>Каждые несколько кадров мост отправляет наблюдение: свои юниты, видимые враги, минералы и газ. Программа отвечает списком команд: отправить рабочих добывать, построить склад, атаковать. BWAPI проверяет, что команда допустима, и результат приходит в следующем наблюдении.</p>
+<p>Честность держит сам мост. Чужие подвижные юниты вне поля зрения в наблюдение не попадают. Здания и ресурсы передаются, только если игрок их уже видел. Настройка, которая открывает всю карту, выключена. Мышь человека внутри игры отключена, как принято у программ-игроков.</p>
+
+<figure class="pic"><img src="img/bridge-first-text.png" width="642" height="501" alt="Миссия Wasteland, в левом верхнем углу строка StarCraft agent: Spike client, frame 285 и my units 12 minerals 40" loading="lazy"><figcaption>Первая строка, которую мост нарисовал поверх живой миссии. Так мы проверили, что связь работает</figcaption></figure>
+
+<p>С брифингами, экранами итогов и меню программа-игрок не работает. Там кнопки нажимает отдельный скрипт, который двигает мышь так же, как человек. Тексты заданий BWAPI не отдаёт, поэтому цели миссии оператор окна читал в диалоге на экране.</p>
+<figure class="pic"><img src="img/mission-objectives.png" width="642" height="501" alt="Диалог Mission Objectives миссии Wasteland: найти Рэйнора, построить казарму, обучить десять морпехов" loading="lazy"><figcaption>Диалог целей. Тексты заданий мост не видит, их читают с экрана</figcaption></figure>
+
+<p>Играет список правил на Python, и агенты пишут его миссию за миссией. Языковая модель во время матча в игру не вмешивается. Поверх игры мост печатает строку «Policy: our Python rules (not LLM)», чтобы это было видно на каждом скриншоте. Мосту всё равно, кто ему отвечает. Языковую модель можно поставить на место правил, но мы этого пока не пробовали.</p>
+<figure class="pic"><img src="img/policy-hud.png" width="642" height="501" alt="Ход миссии Wasteland: морпехи у казармы, вверху строки моста со словами our Python policy, not LLM и счётчиком морпехов" loading="lazy"><figcaption>Ход первой миссии. Мост пишет вверху, что делает программа: восемь морпехов, пять рабочих, одна казарма</figcaption></figure>
+</section>
+
+<section class="sec" id="proverka">
+<div class="sec-h"><span class="num">05</span><h2>Как понять, что миссия пройдена</h2></div>
+<p>Слову программы-игрока «я победила» верить нельзя. BWAPI тоже не знает, как устроено условие победы: оно записано скриптом внутри карты, и выполняет его сам StarCraft. Нам нужно было узнать, где игра записывает итог миссии.</p>
+<p>Для этого мы завели разборщика. Он работает с <a href="https://github.com/morluto/rea">REA</a>, переходником между агентом и Ghidra. Ghidra бесплатно разбирает готовые программы: показывает, что делает файл игры, когда исходного кода нет. Агент спрашивает, что делает кусок кода по такому-то адресу. В ответ приходит объяснение с оговорками и номером улики. Нужные адреса подсказало сообщество: они открыто лежат у BWAPI и OpenBW. REA сверил их с настоящим файлом игры, и роли кусков совпали.</p>
+<p>Разборщик игру не запускал, он читал файл на отдельной машине. Запросов было больше полусотни, каждый около двух минут. Разбор мы ограничили этой задачей и не публикуем из игры ни строчки кода.</p>
+<p>Вот как StarCraft ведёт счёт победам. Скрипт карты выполняет действие Victory, и игра пишет число 3 во временную записку для этого игрока. Записку регулярно стирают, полагаться на неё нельзя. Судья игры копирует результат в постоянную таблицу из восьми ячеек, по одной на игрока. Тройка в ячейке значит победу, двойка поражение. Нашу ячейку мы только читаем из памяти игры. Программе-игроку эти данные не достаются: они нужны для проверки.</p>
+<p class="evid">Запись H3 в журнале REA, номера улик ev_7fcd1d9c, ev_963219cd, ev_424feb17. Журнал лежит в моём закрытом репозитории</p>
+
+<div class="tblwrap"><table class="tbl">
+<caption>Что мы спросили у Ghidra через REA и что узнали</caption>
+<thead><tr><th>Вопрос</th><th>Что нашли</th><th>Запись</th></tr></thead>
+<tbody>
+<tr><td>Где игра хранит победу и поражение</td><td>Постоянная таблица из восьми ячеек. 3&nbsp;победа, 2&nbsp;поражение</td><td>H3</td></tr>
+<tr><td>Что игра делает после победы</td><td>Экран итогов, потом меню кампании и брифинг следующей миссии</td><td>H5, H8</td></tr>
+<tr><td>Как игра помнит прогресс</td><td>Файл игрока хранит самую дальнюю открытую миссию каждой расы</td><td>H9</td></tr>
+<tr><td>Куда уходят команды</td><td>Все приказы проходят через одну очередь. BWAPI встаёт перед ней и глушит мышь человека</td><td>H2</td></tr>
+<tr><td>Как враг выбирает сценарий</td><td>Сценарий врага запускает сама карта по короткому коду</td><td>H4</td></tr>
+</tbody></table></div>
+
+<p>Победу мы подтверждаем тремя способами:</p>
+<ol class="steps">
+<li><b>Экран.</b> В окне игры стоит «Victory!», время и счёт.</li>
+<li><b>Память.</b> Ячейка нашего игрока равна 3, а игра переключилась с миссии на экраны итогов.</li>
+<li><b>Файл игрока.</b> После нажатия Ok файл записал, что открыта следующая миссия, и её брифинг открылся сам.</li>
+</ol>
+<figure class="pic"><img src="img/backwater-briefing.png" width="642" height="501" alt="Брифинг второй миссии Backwater Station: уничтожить заражение, Рэйнор должен выжить" loading="lazy"><figcaption>После Ok игра сама открыла брифинг второй миссии. Это третье подтверждение победы</figcaption></figure>
+<p>Остались две оговорки. Экран итогов сам не закрывается: два снимка с промежутком в 23 секунды одинаковы. Поэтому кнопку Ok нажимает скрипт, как человек. Кнопка Save Replay на этом экране серая: кампания не пишет реплей, запись матча. Реплей пишет BWAPI, но до конца его воспроизвести не вышло: он встаёт на паузе. Реплеи в зачёт пока не идут.</p>
+<p>Один раз игра повела себя не так, как предсказал разбор. По коду после победы должен был включиться один режим, а включился другой. Мы записали это в журнал как вопрос и ничего не подгоняли.</p>
+</section>
+
+<section class="sec" id="missii">
+<div class="sec-h"><span class="num">06</span><h2>Что уже пройдено</h2></div>
+<p>Три миссии первого эпизода за терранов. Каждую выиграла наша программа-игрок в чистом запуске: свежая игра, одна программа без перезапусков, экран «Victory!» в окне. Кнопки меню и брифингов нажимал скрипт, но играла программа.</p>
+
+<div class="vert"><h3>Wasteland</h3>
+<p>Цели: найти Рэйнора, построить казарму, обучить десять морпехов. Программа отправила рабочих добывать, построила склад и казарму и стала выпускать морпехов. Рэйнор перешёл под наше управление в первые секунды. Как это устроено в скрипте карты, мы не выяснили.</p>
+<p>Первый запуск тоже закончился победой, но программу в нём перезапускали руками. Пока её не было, зерги убили четыре из пяти рабочих. Мы эту победу не засчитали. Второй запуск, чистый, прошёл за 4 минуты 41 секунду.</p>
+<figure class="pic"><img src="img/victory-wasteland-run1.png" width="642" height="501" alt="Экран Victory первого запуска Wasteland: время 08:56, счёт 2427 против 2125" loading="lazy"><figcaption>Победа первого запуска, 8 минут 56 секунд. Не засчитана: программу перезапускали руками</figcaption></figure>
+</div>
+
+<div class="vert"><h3>Backwater Station</h3>
+<p>Цели: уничтожить заражённый командный центр, Рэйнор должен выжить. Программа собрала шестнадцать морпехов и повела их к границе исследованной карты на северо-восток. У зергов на пути отряд потерял около тринадцати бойцов. Центр нашли и разрушили. Рэйнора программа держала у базы. Победа с первой попытки, на экране итогов 10 минут 29 секунд. Между второй и третьей миссиями игра сама показывает ролик на полторы минуты.</p>
+<div class="shots two">
+<figure><img src="img/backwater-fight.png" width="642" height="501" alt="Морпехи у зергов во второй миссии, вверху строки моста с состоянием программы" loading="lazy"><figcaption>Отряд идёт на северо-восток через зергов</figcaption></figure>
+<figure><img src="img/victory-backwater.png" width="642" height="501" alt="Экран Victory второй миссии: время 10:29, счёт 11244 против 4275" loading="lazy"><figcaption>«Victory!» второй миссии</figcaption></figure>
+</div>
+</div>
+
+<div class="vert"><h3>Desperate Alliance</h3>
+<p>Цель: продержаться тридцать минут. Программа поставила два поста у стартовых бункеров и стала достраивать вокруг них бункеры и башни. Морпехи делились поровну, по четверо заходили внутрь, рабочие чинили. Враг почти не показывался. За две минуты до конца таймера на западный пост пришла волна с воздуха и с земли. Бойцов осталось 51 из 82, зданий мы не потеряли ни одного. Газ в этой миссии не добывали, огнемётчиков и медиков не использовали.</p>
+<div class="shots two">
+<figure><img src="img/desperate-bunkers.png" width="642" height="501" alt="Много морпехов и бункеров у базы в третьей миссии" loading="lazy"><figcaption>Оборона у базы в третьей миссии</figcaption></figure>
+<figure><img src="img/victory-desperate.png" width="642" height="501" alt="Экран Victory третьей миссии: время 27:05, счёт 40825 против 36149" loading="lazy"><figcaption>«Victory!» третьей миссии. На экране 27 минут реального времени, таймер миссии отсчитал 30 игровых</figcaption></figure>
+</div>
+</div>
+
+<div class="vert"><h3>Jacobs Installation</h3>
+<p>Цель: забрать диски с данными из сети Конфедерации, Рэйнор должен выжить. Четвёртая миссия пока не поддалась. В первой попытке отряд метался по карте в поисках цели. Во второй застрял у маяка. Правила для этой миссии пишутся заново.</p>
+<figure class="pic"><img src="img/jacobs-briefing.png" width="642" height="501" alt="Брифинг миссии Jacobs Installation: цели забрать диски с данными и сохранить Рэйнора" loading="lazy"><figcaption>Брифинг четвёртой миссии</figcaption></figure>
+</div>
+
+<p>Перед каждой миссией агент сохраняет игру через её обычное меню. Если программа проиграет, мы начнём с этой точки. Чужие файлы сохранений для этого не нужны.</p>
+<figure class="pic"><img src="img/save-dialog.png" width="642" height="501" alt="Диалог сохранения игры с названием jacobs-start и списком прежних сохранений" loading="lazy"><figcaption>Сохранение перед четвёртой миссией: «jacobs-start» в списке под сохранениями первых трёх миссий</figcaption></figure>
+</section>
+
+<section class="sec" id="orkestr">
+<div class="sec-h"><span class="num">07</span><h2>Кто за что отвечает</h2></div>
+<p>Всю работу ведёт оркестр: человек и несколько агентов с разными ролями. У каждого свой участок, и пересекаться они не должны.</p>
+
+<figure class="diagram" id="fig-orch"><svg viewBox="0 0 960 470" role="img" aria-labelledby="fig-orch-t fig-orch-d" xmlns="http://www.w3.org/2000/svg"><title id="fig-orch-t">Как устроен оркестр: кто за что отвечает</title><desc id="fig-orch-d">Схема оркестра в три ряда. Первый ряд: я ставлю цель оркестратору, оркестратор отдаёт результат в репозиторий отдела. Я отмечен как решение человека: цель, диск с игрой, разрешение скачать архив игры. Оркестратор работает на Opus 5.5, раздаёт задачи и принимает результат. Второй ряд, куда оркестратор раздаёт задачи: оператор окна на Sonnet 5.5 владеет окном и вводом, разборщик на Sonnet 5.5 с REA читает файл игры и приносит улики, исследователь на GLM 5.3 Flash и Exa ищет чужой опыт. Третий ряд: оператор окна работает с игрой в окне на сервере, разборщик с файлом игры только на чтение, исследователь с открытыми источниками.</desc><defs><marker id="p-ink" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2d3e9f"/></marker><marker id="p-acc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#000000"/></marker></defs><rect width="960" height="470" fill="#ffffff"/><path d="M 264,71 H 361" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><rect x="299.6" y="54" width="28.8" height="14" fill="#ffffff"/><text x="314" y="64" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">цель</text><path d="M 596,71 H 693" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><rect x="618.6" y="54" width="54.8" height="14" fill="#ffffff"/><text x="646" y="64" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">результат</text><rect x="32" y="24" width="232" height="94" fill="#ffffff" stroke="#000000" stroke-width="1.6"/><rect x="200.2" y="36" width="49.8" height="13" fill="#000000"/><text x="225.1" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">ЧЕЛОВЕК</text><text x="48" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Я</text><text x="48" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">цель, диск с игрой, разрешение</text><text x="48" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">скачать архив игры</text><rect x="364" y="24" width="232" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="378" y="36" width="11.4" height="13" fill="#2d3e9f"/><text x="383.7" y="45.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">1</text><rect x="395.4" y="36" width="56.2" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="423.5" y="45.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">OPUS 5.5</text><text x="380" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Оркестратор</text><text x="380" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">раздаёт задачи, принимает</text><text x="380" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">результат, записывает</text><rect x="696" y="24" width="232" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="712" y="72" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Репозиторий отдела</text><text x="712" y="90" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">правила, задачи, скриншоты,</text><text x="712" y="104" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">журнал находок</text><path d="M 480.0,118 V 142" fill="none" stroke="#2d3e9f" stroke-width="1.2"/><path d="M 148.0,142 H 812.0" fill="none" stroke="#2d3e9f" stroke-width="1.2"/><path d="M 148.0,142 V 167" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 480.0,142 V 167" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><path d="M 812.0,142 V 167" fill="none" stroke="#2d3e9f" stroke-width="1.2" marker-end="url(#p-ink)"/><rect x="496.4" y="128" width="39.2" height="14" fill="#ffffff"/><text x="516.0" y="138" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">задачи</text><rect x="32" y="170" width="232" height="108" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="46" y="182" width="11.4" height="13" fill="#2d3e9f"/><text x="51.7" y="191.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">2</text><rect x="63.4" y="182" width="69.0" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="97.9" y="191.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">SONNET 5.5</text><text x="48" y="218" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Оператор окна</text><text x="48" y="236" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">один владелец окна и ввода:</text><text x="48" y="250" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">запуск, скриншоты, мост,</text><text x="48" y="264" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">программа-игрок</text><rect x="364" y="170" width="232" height="108" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="378" y="182" width="11.4" height="13" fill="#2d3e9f"/><text x="383.7" y="191.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">3</text><rect x="395.4" y="182" width="107.4" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="449.1" y="191.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">SONNET 5.5 · REA</text><text x="380" y="218" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Разборщик</text><text x="380" y="236" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">читает файл игры, не запуская её,</text><text x="380" y="250" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">и приносит улики</text><rect x="696" y="170" width="232" height="108" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><rect x="710" y="182" width="11.4" height="13" fill="#2d3e9f"/><text x="715.7" y="191.5" fill="#ffffff" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">4</text><rect x="727.4" y="182" width="126.6" height="13" fill="#2d3e9f" fill-opacity="0.08" stroke="#2d3e9f" stroke-opacity="0.40" stroke-width="0.8"/><text x="790.7" y="191.5" fill="#2d3e9f" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">GLM 5.3 FLASH · EXA</text><text x="712" y="218" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Исследователь</text><text x="712" y="236" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">ищет чужой опыт: ошибки Wine,</text><text x="712" y="250" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">цели миссий, где взять кампанию</text><path d="M 148.0,278 V 319" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><path d="M 480.0,278 V 319" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><path d="M 812.0,278 V 319" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><rect x="118.0" y="294" width="60.0" height="14" fill="#ffffff"/><text x="148.0" y="304" fill="#8b8b8b" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6" text-anchor="middle">работает с</text><rect x="32" y="322" width="232" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="48" y="370" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Игра в окне на сервере</text><text x="48" y="388" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">Wine, виртуальный экран,</text><text x="48" y="402" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">вид в браузере</text><rect x="364" y="322" width="232" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="380" y="370" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Файл игры</text><text x="380" y="388" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">только чтение, игра при</text><text x="380" y="402" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">разборе не запущена</text><rect x="696" y="322" width="232" height="94" fill="#ffffff" stroke="#2d3e9f" stroke-width="1"/><text x="712" y="370" fill="#000000" font-size="15.5" font-family="Spectral, Georgia, serif">Открытые источники</text><text x="712" y="388" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">вики, форумы, трекеры ошибок,</text><text x="712" y="402" fill="#555555" font-size="10.5" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">документация</text><text x="32" y="458" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="1.1">ЛЕГЕНДА</text><rect x="106" y="448" width="22" height="13" fill="#fff" stroke="#000000" stroke-width="1.6"/><text x="136" y="458" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">решает человек</text><path d="M 226,454.5 H 252" fill="none" stroke="#000000" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p-acc)"/><text x="260" y="458" fill="#555555" font-size="8" font-family="Jost, Futura, sans-serif" letter-spacing="0.6">работа с материалом</text></svg><figcaption>Человек ставит цель, оркестратор раздаёт задачи трём исполнителям, у каждого свой материал</figcaption></figure>
+
+<ul class="need">
+<li><b>Я.</b> Цель, диск с игрой и разрешение скачать архив игры. Остальные загрузки согласует оркестратор: адрес и размер названы заранее.</li>
+<li><b>Оркестратор.</b> Claude Code с Opus 5.5. Раздаёт задачи, принимает результат и записывает его в репозиторий. Исполнители сами ничего в репозиторий не пишут.</li>
+<li><b>Оператор окна.</b> Агент на Sonnet 5.5. Он один владеет окном игры и вводом: Wine, запуск, скриншоты, мост, программа-игрок. Два агента с мышью в одном окне быстро испортили бы друг другу ход.</li>
+<li><b>Разборщик.</b> Агент на Sonnet 5.5 с REA. Читает файл игры, но игру не запускает. Его вывод принимается только с уликой: адрес, контрольная сумма файла, номер улики.</li>
+<li><b>Исследователь.</b> Ищет чужой опыт в открытых источниках через модель GLM 5.3 Flash и поисковик Exa. Он нашёл ошибку Wine, способ достать кампанию с диска и цели миссий на вики. Глубокие исследования через ChatGPT и Grok стоят в очереди: браузер к сессии пока не подключён.</li>
+</ul>
+<p>Каждое утверждение исполнитель помечает одним из четырёх слов: измерено, подтверждено источником, предположение, неизвестно. Так в журнале видно, где факт, а где догадка.</p>
+</section>
+
+<section class="sec" id="principy">
+<div class="sec-h"><span class="num">08</span><h2>Какие принципы пригодятся вам</h2></div>
+<p>Игра тут скорее повод. Ниже то, что работает для любой задачи, которую вы отдаёте агентам.</p>
+
+<ol class="principles">
+<li><h3>Правила честности пишутся до первого запуска</h3><p>Когда результат уже получен, спорить о правилах поздно. Поэтому победу и запреты записывают заранее. Как с настольной игрой: правила договаривают до первого хода.</p></li>
+<li><h3>Результат проверяет посторонний</h3><p>Победу подтверждают признаки, на которые исполнитель повлиять не может. Когда их несколько и они независимы, одна ошибка не пройдёт. Как судья на матче: игрок не засчитывает себе гол.</p></li>
+<li><h3>У общего ресурса один владелец</h3><p>Окном игры и мышью управляет один агент. Остальные просят его о снимке или нажатии. Как на кухне: у плиты один шеф, иначе двое одновременно посолят суп.</p></li>
+<li><h3>Исполнитель приносит доказательство</h3><p>Вместо «получилось» агент приносит скриншот, адрес в коде или запись журнала. Вывод без следа проверить нельзя. Как курьер приносит накладную с подписью: слово «доставил» без неё не считается.</p></li>
+<li><h3>Сохраняйтесь до рискованного шага</h3><p>Перед каждой миссией делается сохранение, и поражение стоит одну попытку. Откатиться дешевле, чем разбираться, что сломалось. Как фотографируют проводку перед ремонтом: потом пригодится.</p></li>
+<li><h3>Журнал хранит и провалы</h3><p>Неудачная попытка записывается вместе с текстом ошибки, и в следующий раз её не повторяют. Что не получилось, остаётся данными. Как бортовой журнал самолёта: туда пишут каждую неисправность.</p></li>
+</ol>
+</section>
+
+<section class="sec" id="oshibki">
+<div class="sec-h"><span class="num">09</span><h2>На чём мы споткнулись</h2></div>
+<p><b>Мост подключался только из меню.</b> Похоже, во время миссии канал связи с игрой занят, и мост не может подключиться. Почему так под Wine, точно не знаем, это пока гипотеза. Теперь мост запускается до загрузки миссии.</p>
+<p><b>Мост падал на второй миссии подряд.</b> Когда несколько миссий шли в одной запущенной игре, он сыпал ошибками. Теперь на каждую миссию запускается свежая игра.</p>
+<p><b>Деньги уходили на морпехов.</b> Рабочие заказывали склады и казармы без запаса минералов. Пока рабочий шёл к месту, минералы уходили на бойцов. Часть построек заказывалась дважды. Теперь программа откладывает минералы под заказанную постройку.</p>
+<p><b>Повторный приказ игра отклоняет.</b> Двадцать один раз программа велела одному морпеху атаковать ту же цель, и BWAPI отказала. Теперь программа не повторяет команду.</p>
+<p><b>Экран итогов не закрывается сам.</b> Разбор предупреждал, что экран итогов может закрыть BWAPI. На деле он стоит, пока не нажмут кнопку. Для проверки это удобно: победа остаётся на экране.</p>
+</section>
+
+<section class="sec" id="povtorit">
+<div class="sec-h"><span class="num">10</span><h2>Как повторить</h2></div>
+<ol class="steps">
+<li><b>Проверьте, есть ли у вашей игры библиотека для программ-игроков.</b> У StarCraft это BWAPI. Без неё программе нечем подключиться к игре.</li>
+<li><b>Запишите правила честности.</b> Окно видно, туман включён, читов нет, победа только по экрану игры.</li>
+<li><b>Найдите машину, где игра запускается.</b> Если Mac не тянет, возьмите обычный сервер с виртуальным экраном.</li>
+<li><b>Используйте свой диск.</b> Законная копия игры нужна вам самим. Чужую кампанию не качайте.</li>
+<li><b>Начните со скриншота.</b> Добейтесь, чтобы в окне открылось главное меню, и снимите его. Потом добавляйте остальное.</li>
+<li><b>Назначьте одного владельца окна.</b> Остальные агенты только просят его о снимках и вводе.</li>
+<li><b>Заведите разборщика для вопросов про устройство игры.</b> Требуйте от него улику к каждому ответу. Разбор не должен выходить за лицензию игры.</li>
+<li><b>Пишите программу-игрока по одной миссии.</b> Сохраняйтесь перед каждой, а победу проверяйте тремя способами.</li>
+</ol>
+<p>В третьей миссии враг долго не показывался. Программа почти полчаса строила бункеры и ждала. Волна пришла за две минуты до конца таймера, и бункеры её удержали. В четвёртой миссии отсидеться на базе не выйдет: за дисками с данными надо идти по карте. Первые две попытки там не удались. Гайд обновляется, и четвёртая миссия появится здесь, когда на экране встанет «Victory!».</p>
+</section>
+
+<section class="sec sources" id="istochniki">
+<div class="tags">Теги: <a href="#most">мост</a>, <a href="#proverka">разбор</a>, <a href="#orkestr">оркестр</a>, <a href="#principy">принципы</a></div>
+<p>Подход и сообщество: <a href="https://www.sscaitournament.com/index.php?action=tutorial">руководство SSCAIT</a>, <a href="https://github.com/bwapi/bwapi">BWAPI</a>, <a href="https://github.com/JavaBWAPI/JBWAPI">JBWAPI</a>, <a href="https://github.com/bwapi/bwapi/issues/717">обсуждение про кампанию</a>. Архив версии 1.16.1: <a href="https://davechurchill.ca/starcraft/resources/">ресурсы Дейва Чёрчилла</a>. Диск и INSTALL.EXE: <a href="https://web.archive.org/web/20100124212037/http://us.blizzard.com/support/article.xml?locale=en_US&amp;articleId=21149">заметка Blizzard о патче 1.15.2</a>. Ошибки Wine: <a href="https://bugs.winehq.org/show_bug.cgi?id=60034">60034</a> и <a href="https://bugs.winehq.org/show_bug.cgi?id=57758">57758</a>. Разбор: <a href="https://github.com/morluto/rea">REA</a>, <a href="https://ghidra-sre.org/">Ghidra</a>, открытый движок <a href="https://github.com/OpenBW/openbw">OpenBW</a>. Цели миссий: <a href="https://starcraft.fandom.com/wiki/Wasteland_(mission)">вики StarCraft</a>. Субагенты и оркестровка: <a href="https://code.claude.com/docs/en/sub-agents">документация Claude Code</a>. Мои слова главному агенту слегка отредактированы: убраны опечатки, тире заменено двоеточием.</p>
+<p>Сам проект живёт в моих каналах: <a href="https://t.me/ris_ai">канал «рис. AI»</a>, <a href="https://www.youtube.com/@serejaris">YouTube</a> и <a href="https://t.me/vibecod3rs">чат вайбкодеров</a>.</p>
+</section>
+
+</article>
+<footer><a class="logo" href="https://sereja.tech/">СЕРЁЖА РИС</a><div class="tagline">Вайбкодинг · AI · агенты</div><nav class="site"><a href="https://sereja.tech/">Сайт</a><a href="https://sereja.tech/blog/">Блог</a><a href="https://t.me/ris_ai">Telegram</a><a href="https://www.youtube.com/@serejaris">YouTube</a><a href="https://t.me/vibecod3rs">Чат вайбкодеров</a></nav></footer>
+<script>
+(function(){
+  function playAll(){if(document.hidden)return;document.querySelectorAll('video[autoplay]').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
+  document.addEventListener('visibilitychange',playAll);playAll();
+  var bar=document.getElementById('bar'),mark=document.querySelector('.mast')||document.querySelector('.hero');
+  function onScroll(){var h=mark?mark.getBoundingClientRect().bottom:200;bar.classList.toggle('on',h<0);}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  document.querySelectorAll('.flip .cell').forEach(function(c,k){
+    var imgs=c.querySelectorAll('img'),i=0;
+    setTimeout(function(){setInterval(function(){if(document.hidden)return;imgs[i].classList.remove('on');i=(i+1)%imgs.length;imgs[i].classList.add('on');
+      var nx=imgs[(i+1)%imgs.length];if(nx.loading==='lazy')nx.loading='eager';},2400);},k*600);
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.body .sec-h,.body figure,.body blockquote,.body .shots,.body .tblwrap,.body .look,.body .flip,.body .ph,.body .shop>*,.body .gloss,.body .need,.body .principles>li,.body .steps>li')
+      .forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');io.observe(el);});
+  }
+})();
+</script></body></html>
